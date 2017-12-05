@@ -53,4 +53,9 @@ public class BoardController {
 
         model.addAttribute(service.readBoard(bno));
     }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.GET)
+    public void modify(BoardVO board,RedirectAttributes rttr) throws Exception{
+
+    }
 }
