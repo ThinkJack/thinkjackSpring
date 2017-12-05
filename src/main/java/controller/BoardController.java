@@ -33,10 +33,12 @@ public class BoardController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerPOST(BoardVO board, RedirectAttributes rttr) throws Exception{
 
+        System.out.println(board);
+
         service.insertBoard(board);
 
         rttr.addFlashAttribute("msg","success");
-        return "redirect:/board/list";
+        return "redirect:/freeBoard/list";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)

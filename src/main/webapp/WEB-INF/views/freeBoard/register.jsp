@@ -16,24 +16,24 @@
         <div class="form-group">
             <label>Title</label>
             <input type="text"
-                   name='title'
+                   name='boardTitle'
                    class="form-control"
                    placeholder="Enter Title">
         </div>
         <div class="form-group">
             <label>Content</label>
-            <textarea class="form-control" name="content" rows="3"
+            <textarea class="form-control" name="boardContent" rows="3"
                       placeholder="Enter ..."></textarea>
         </div>
         <div class="form-group">
             <label>Writer</label>
-            <input type="text" name="writer"
+            <input type="text" name="boardWriter"
                    class="form-control" placeholder="Enter Writer">
         </div>
 
         <div class="form-group">
             <label>Category</label>
-            <input type="text" name="categoryname" value="free"
+            <input type="text" name="boardCategoryName" value="free"
                    class="form-control" placeholder="Enter Writer" readonly>
         </div>
 

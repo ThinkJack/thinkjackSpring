@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import persistence.BoardDAO;
+import service.BoardService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class BoardTest {
     @Inject
     private BoardDAO dao;
 
+    @Inject
+    private BoardService boardService;
+
     @Before
     public void BeforeTest() throws Exception{
         System.out.println("Before create Board");
@@ -28,7 +32,7 @@ public class BoardTest {
         vo.setBoardTitle("첫번째 제목");
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
-        dao.createBoard(vo);
+        boardService.insertBoard(vo);
     }
 
     @After
@@ -36,7 +40,7 @@ public class BoardTest {
         System.out.println("After Truncate BoardTable");
 
 
-        dao.trancate();
+//        dao.trancate();
     }
 
 

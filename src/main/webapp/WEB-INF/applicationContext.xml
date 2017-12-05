@@ -21,9 +21,8 @@
 
         <property name="url"
                   value="jdbc:mysql://127.0.0.1:3306/tj?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8"></property>
-
         <property name="username" value="tj"></property>
-        <property name="password" value="Eldwkr1234"></property>
+        <property name="password" value="1234"></property>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
