@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.BoardService;
+import sun.misc.Request;
 
 import javax.inject.Inject;
 
@@ -55,7 +56,28 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
-    public void modify(BoardVO board,RedirectAttributes rttr) throws Exception{
+    public void modify(int bno,Model model) throws Exception{
 
+        model.addAttribute(service.readBoard(bno));
+
+    }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+
+
+        service.updateBoard(board);
+        rttr.addFlashAttribute("msg", "SUCCESS");
+
+        return "redirect:/freeBoard/list";
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
+        service.deleteBoard(bno);
+
+        rttr.addFlashAttribute("msg", "SUCCESS");
+
+        return "redirect:/freeBoard/list";
     }
 }
