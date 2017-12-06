@@ -17,5 +17,5 @@ public interface BoardService {
     public void deleteBoard(int bno)throws Exception;
 
     public List<BoardVO> readCategoryBoard(String categoryname) throws Exception;
-
+   
 }
