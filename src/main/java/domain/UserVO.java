@@ -7,7 +7,7 @@ public class UserVO {
 	private String userPassword;
 	private int userState;
 
-
+ 
 	public String getUserEmail() {
 		return userEmail;
 	}
