@@ -26,6 +26,6 @@ public class MybatisTest {
         }catch(Exception e) {
             e.printStackTrace();
         }
-    }
+    } 
 
 }

@@ -162,6 +162,4 @@ public class BoardTest {
     public void Test7() throws Exception{
 
     }
-
-
 }
