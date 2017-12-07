@@ -10,23 +10,47 @@
     </insert>
 
     <select id="selectAll" resultType="BoardVO">
-        SELECT board_id boardId, board_title boardTitle, board_content boardContent, (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter, board_regdate boardRegdate, board_viewcnt boardViewcnt, (SELECT category_name from tbl_board_category WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName
+        SELECT board_id boardId,
+               board_title boardTitle,
+               board_content boardContent,
+               (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter,
+               board_regdate boardRegdate,
+               board_viewcnt boardViewcnt,
+               (SELECT category_name from tbl_board_category WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+               board_likecnt boardLikecnt
         FROM tbl_board WHERE tbl_board.board_id > 0
         ORDER  BY tbl_board.board_id DESC , board_regdate DESC
     </select>
 
     <select id="selectCategoryBoard" resultType="BoardVO">
-         SELECT board_id boardId, board_title boardTitle, board_content boardContent, (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter, board_regdate boardRegdate, board_viewcnt boardViewcnt
+         SELECT
+          board_id boardId,
+          board_title boardTitle,
+          board_content boardContent,
+          (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter,
+          board_regdate boardRegdate,
+          board_viewcnt boardViewcnt,
+          board_likecnt boardLikecnt
         FROM tbl_board WHERE tbl_board.board_id > 0 AND board_category_id = (SELECT board_category_id FROM tbl_board_category where category_name = #{categoryName})
         ORDER  BY tbl_board.board_id DESC , board_regdate DESC
     </select>
 
     <select id="select" resultType="BoardVO">
-        SELECT  board_id boardId, board_title boardTitle, board_content boardContent, (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter, board_regdate boardRegdate, board_viewcnt boardViewcnt, board_category_id  boardCategoryId FROM tbl_board WHERE board_id = #{boardId}
+        SELECT  board_id boardId,
+        board_title boardTitle,
+        board_content boardContent,
+        (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter,
+        board_regdate boardRegdate,
+        board_viewcnt boardViewcnt,
+        board_category_id  boardCategoryId,
+        board_likecnt boardLikecnt
+        FROM tbl_board WHERE board_id = #{boardId}
     </select>
 
     <update id="update">
-        update tbl_board set board_title =#{boardTitle}, board_content =#{boardContent}
+        update tbl_board set
+        board_title =#{boardTitle},
+        board_content =#{boardContent}
         where tbl_board.board_id = #{boardId}
     </update>
 
@@ -34,8 +58,10 @@
         delete from tbl_board where board_id = #{boardId}
     </delete>
 
-    <update id="boardLike">
-        UPDATE tbl_board SET board_likecnt = (SELECT COUNT FROM tbl_board_like WHERE tbl_board_like.board_id = tbl_board.board_id) WHERE board_id = #{boardId}
+    <update id="updateBoardLike">
+        UPDATE tbl_board SET
+        board_likecnt = (SELECT COUNT FROM tbl_board_like WHERE tbl_board_like.board_id = tbl_board.board_id)
+        WHERE board_id = #{boardId}
     </update>
 
     <insert id="createBoardLike">
@@ -47,7 +73,7 @@
         DELETE FROM tbl_board_like WHERE board_id = #{boardId} AND user_id = #{userId}
     </insert>
     
-    <select id="existLike">
+    <select id="selectLike">
         SELECT COUNT FROM tbl_board_like WHERE board_id = #{boardId} AND user_id = #{userId}
     </select>
 

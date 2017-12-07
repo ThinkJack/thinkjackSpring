@@ -157,5 +157,11 @@ public class BoardTest {
         System.out.println(Arrays.toString(list2.toArray()));
     }
 
+    // 게시판에 like 추가
+    @Test
+    public void Test7() throws Exception{
+
+    }
+
 
 }
