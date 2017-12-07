@@ -21,4 +21,28 @@
     </bean>
 
     <context:component-scan base-package="controller" />
+
+
+    <bean id="authInterceptor" class="interceptor.AuthInterceptor"></bean>
+    
+    <bean id="loginInterceptor" class="interceptor.LoginInterceptor"></bean>
+	<beans:interceptors>
+		<beans:interceptor>
+			<beans:mapping path="/user/loginPost"/>
+			<ref bean="loginInterceptor"/>
+		</beans:interceptor>
+
+        <beans:interceptor>
+            <beans:mapping path="/freeBoard/list"/>
+            <ref bean="authInterceptor"/>
+        </beans:interceptor>
+
+	</beans:interceptors>
+    
+    
+    
 </beans>
+
+    
+       
+    
