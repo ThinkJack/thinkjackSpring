@@ -10,9 +10,14 @@
 <head>
     <title>Read</title>
 </head>
-<script src =""></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
+
+<form role="form">
+    <input type="hidden" name ='boardId' value="${boardVO.boardId}">
+</form>
 <div class="box-body">
+
     <div class="form-group">
         <label >Title</label>
         <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
@@ -32,7 +37,7 @@
 <div class="box-footer">
     <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
     <button type="submit" class="btn btn-danger removeBtn" >REMOVE</button>
-    <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
+    <button type="submit" class="btn btn-primary goListBtn" >GO LIST</button>
 </div>
 <script>
     $(document).ready(function () {

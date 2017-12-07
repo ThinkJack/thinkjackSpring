@@ -50,22 +50,21 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
-    public void read(@RequestParam("bno") int bno, Model model) throws Exception {
+    public void read(@RequestParam("boardId") int boardId, Model model) throws Exception {
 
-        model.addAttribute(service.readBoard(bno));
+        model.addAttribute(service.readBoard(boardId));
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
-    public void modify(int bno,Model model) throws Exception{
-
-        model.addAttribute(service.readBoard(bno));
+    public void modify(int boardId,Model model) throws Exception{
+        System.out.println(boardId+"get");
+        model.addAttribute(service.readBoard(boardId));
 
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
-
-
+        System.out.println(board+"Post");
         service.updateBoard(board);
         rttr.addFlashAttribute("msg", "SUCCESS");
 
@@ -73,8 +72,8 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
-        service.deleteBoard(bno);
+    public String remove(@RequestParam("boardId") int boardId, RedirectAttributes rttr) throws Exception {
+        service.deleteBoard(boardId);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 

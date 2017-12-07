@@ -14,6 +14,12 @@
 <form role="form" method="post" id = "registerForm">
     <div class="box-body">
         <div class="form-group">
+            <div class="form-group">
+                <label >boardId</label>
+                <input type="text"
+                       name='boardId' class="form-control"
+                       value="${boardVO.boardId}">
+            </div>
             <label>Title</label>
             <input type="text"
                    name='boardTitle'
