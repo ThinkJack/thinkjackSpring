@@ -14,7 +14,7 @@
 
     <!--side navbar 연결 (black 부분 이름 변경으로 색변경 가능)-->
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-    <title>Cumunity</title>
+    <title>Thinkjack</title>
 
     <!--css파일 연결부분-->
     <link href="/resources/dist/css/common.css" rel="stylesheet">
@@ -41,7 +41,7 @@
         <div class="w3-bar w3-border">
             <a href="#" class="w3-bar-item w3-button ">Home</a>
             <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
-            <a href="#" class="w3-bar-item w3-button w3-light-grey">QNA</a>
+            <a href="#" class="w3-bar-item w3-button ">QNA</a>
             <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
         </div>
     </div>
