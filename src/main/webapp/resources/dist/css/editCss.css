@@ -1,0 +1,68 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 3.5rem;
+    background-color: #000000;
+    margin-bottom: 60px; /* Margin bottom by footer height */
+    height:100%;
+}
+
+.navbar-dark{
+    background-color: #000000;
+}
+
+.col{
+    display: block;
+    padding: 0px;
+}
+
+#codeHtml,#codeCss,#codeJavaScript {
+    border: 5px solid #000000;
+    background-color: #fff;
+    padding: 0px;
+}
+
+iframe{
+    background-color: #fff;
+    border: 5px solid #000000;
+    height: 430px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* Set the fixed height of the footer here */
+    background-color: #000000;
+}
+
+.container {
+    width: auto;
+    padding: 0 15px;
+}
+
+.borderColLine{
+    background-color: #343a40;
+    width:4px;
+    /* height: 4px; */
+}
+
+.borderRowLine{
+    background-color: #343a40;
+    height:4px;
+}
+
+p{
+    padding:10px;
+}
+
+li{
+    padding-left: 15px;
+}
+
+.btn-outline-dark{
+    color: #fff;
+}
