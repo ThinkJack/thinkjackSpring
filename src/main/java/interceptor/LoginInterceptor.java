@@ -31,6 +31,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			logger.info("new login success");
 			session.setAttribute(LOGIN, userVO);
 			//response.sendRedirect("/");
+
+			System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
 
 		}

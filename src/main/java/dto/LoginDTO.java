@@ -4,6 +4,8 @@ public class LoginDTO {
 	private String userEmail;
 	private String userPassword;
 	private boolean useCookies;
+	private String userSocialId;
+	private String userName;
 
 	public String getUserEmail() {
 		return userEmail;
@@ -29,12 +31,30 @@ public class LoginDTO {
 		this.useCookies = useCookies;
 	}
 
+	public String getUserSocialId() {
+		return userSocialId;
+	}
+
+	public void setUserSocialId(String userSocialId) {
+		this.userSocialId = userSocialId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public String toString() {
 		return "LoginDTO{" +
 				"userEmail='" + userEmail + '\'' +
 				", userPassword='" + userPassword + '\'' +
 				", useCookies=" + useCookies +
+				", userSocialId='" + userSocialId + '\'' +
+				", userName='" + userName + '\'' +
 				'}';
 	}
 }

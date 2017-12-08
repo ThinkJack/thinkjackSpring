@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void regist(UserVO user) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(user);
+		//System.out.println(user);
 		dao.insertUser(user);
 		
 	}
@@ -27,10 +27,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service dto: "+dto);
+		//System.out.println("service dto: "+dto);
 		return dao.login(dto);
 	}
-	
-	
 
+	@Override
+	public void modifyUser(UserVO user) throws Exception {
+		dao.updateUser(user);
+
+	}
+
+	@Override
+	public UserVO naverLogin(LoginDTO dto) throws Exception {
+		return dao.login(dto);
+	}
 }
