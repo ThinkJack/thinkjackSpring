@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.replyMapper">
+<!--//생성(insert)-->
+   <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
+    <insert id="insert" >
+        insert into tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
+        VALUES (#{boardId},#{replyText}),(SELECT reply_id FROM tbl_reply WHERE user_name = #{replyWirter}))
+    </insert>
+<!-- 조회(select)-->
+
+
+<!-- 댓글 전체 목록(select)-->
+
+<!--정정(update)-->
+
+<!--삭제(delete)-->
+
+</mapper>
