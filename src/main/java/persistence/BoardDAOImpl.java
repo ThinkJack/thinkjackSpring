@@ -1,5 +1,6 @@
 package persistence;
 
+import domain.BoardLikeVO;
 import domain.BoardVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public class BoardDAOImpl implements BoardDAO {
     final String namespace = "mapper.boardMapper";
 
     @Override
-    public void createBoard(BoardVO vo) throws Exception {
+    public void insertBoard(BoardVO vo) throws Exception {
 
         session.insert(namespace+".insert",vo);
     }
@@ -47,5 +48,21 @@ public class BoardDAOImpl implements BoardDAO {
     public List<BoardVO> readCategoryBoard(String categoryname)throws Exception {
         return session.selectList(namespace+".selectCategoryBoard" , categoryname);
     }
+
+    @Override
+    public void insertBoardLike(BoardLikeVO vo) throws Exception {
+        session.insert(namespace+".createBoardLike",vo);
+    }
+
+    @Override
+    public void deleteBoardLike(BoardLikeVO vo) throws Exception {
+        session.delete(namespace+".deleteBoardLike",vo);
+    }
+
+    @Override
+    public void updateBoardLike(int boardId) throws Exception {
+        session.update(namespace+".updateBoardLike",boardId);
+    }
+
 
 }

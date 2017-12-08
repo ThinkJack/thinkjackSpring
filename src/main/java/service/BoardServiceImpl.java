@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void insertBoard(BoardVO vo) throws Exception {
-        dao.createBoard(vo) ;
+        dao.insertBoard(vo);
     }
 
     @Override

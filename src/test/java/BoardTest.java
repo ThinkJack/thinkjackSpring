@@ -1,3 +1,4 @@
+import domain.BoardLikeVO;
 import domain.BoardVO;
 import org.junit.After;
 import org.junit.Before;
@@ -54,7 +55,7 @@ public class BoardTest {
         vo.setBoardTitle("새로운 제목");
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
-        dao.createBoard(vo);
+        dao.insertBoard(vo);
 
         List<BoardVO> boardList = dao.readAllBoard();
 
@@ -104,7 +105,7 @@ public class BoardTest {
         vo.setBoardTitle("새로운 제목");
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
-        dao.createBoard(vo);
+        dao.insertBoard(vo);
         System.out.println(dao.readAllBoard().size());
         List<BoardVO> boardList = dao.readAllBoard();
 
@@ -127,8 +128,8 @@ public class BoardTest {
         vo.setBoardTitle("새로운 제목");
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
-        dao.createBoard(vo);  dao.createBoard(vo);  dao.createBoard(vo);
-        dao.createBoard(vo);  dao.createBoard(vo);  dao.createBoard(vo);
+        dao.insertBoard(vo);  dao.insertBoard(vo);  dao.insertBoard(vo);
+        dao.insertBoard(vo);  dao.insertBoard(vo);  dao.insertBoard(vo);
 
         List<BoardVO> list = dao.readAllBoard();
 
@@ -147,8 +148,8 @@ public class BoardTest {
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
 
-        dao.createBoard(vo);  dao.createBoard(vo);  dao.createBoard(vo);
-        dao.createBoard(vo);  dao.createBoard(vo);  dao.createBoard(vo);
+        dao.insertBoard(vo);  dao.insertBoard(vo);  dao.insertBoard(vo);
+        dao.insertBoard(vo);  dao.insertBoard(vo);  dao.insertBoard(vo);
 
         List<BoardVO> list = dao.readCategoryBoard("free");
         List<BoardVO> list2 = dao.readCategoryBoard("QnA");
@@ -157,9 +158,36 @@ public class BoardTest {
         System.out.println(Arrays.toString(list2.toArray()));
     }
 
-    // 게시판에 like 추가
+    // 게시판에 좋아요 하기
     @Test
     public void Test7() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
 
+        vo.setBoardId(1);
+        vo.setUserId(1);
+
+        dao.insertBoardLike(vo);
+
+        dao.updateBoardLike(vo.getBoardId());
+
+        System.out.println(dao.readBoard(vo.getBoardId()));
     }
+
+    //게시판에 좋아요 취소하기
+    @Test
+    public void Test8() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
+
+        vo.setBoardId(1);
+        vo.setUserId(1);
+
+        dao.deleteBoardLike(vo);
+
+        dao.updateBoardLike(vo.getBoardId());
+
+        System.out.println(dao.readBoard(vo.getBoardId()));
+    }
+
+
+
 }
