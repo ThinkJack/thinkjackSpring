@@ -1,5 +1,6 @@
 package service;
 
+import domain.BoardLikeVO;
 import domain.BoardVO;
 import org.springframework.stereotype.Service;
 import persistence.BoardDAO;
@@ -43,5 +44,17 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardVO> readCategoryBoard(String categoryname) throws Exception {
         return dao.readCategoryBoard(categoryname);
+    }
+
+    @Override
+    public void insertBoardLike(BoardLikeVO vo) throws Exception {
+        dao.insertBoardLike(vo);
+        dao.updateBoardLike(vo.getBoardId());
+    }
+
+    @Override
+    public void deleteBoardLike(BoardLikeVO vo) throws Exception {
+        dao.deleteBoardLike(vo);
+        dao.updateBoardLike(vo.getBoardId());
     }
 }

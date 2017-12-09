@@ -188,6 +188,32 @@ public class BoardTest {
         System.out.println(dao.readBoard(vo.getBoardId()));
     }
 
+    // 게시판에 좋아요 하기
+    @Test
+    public void Test9() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
+
+        vo.setBoardId(1);
+        vo.setUserId(1);
+
+        boardService.insertBoardLike(vo);
+
+        System.out.println(dao.readBoard(vo.getBoardId()));
+    }
+
+    //게시판에 좋아요 취소하기
+    @Test
+    public void Test10() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
+
+        vo.setBoardId(1);
+        vo.setUserId(1);
+
+        boardService.deleteBoardLike(vo);
+
+        System.out.println(dao.readBoard(vo.getBoardId()));
+    }
+
 
 
 }

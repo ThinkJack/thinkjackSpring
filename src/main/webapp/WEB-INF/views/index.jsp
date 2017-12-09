@@ -60,6 +60,8 @@ ${serverTime}
             { no:16,  name : "서사모아", capital : "아피아", region:"oceania", konglish:"tjtkahdk" }
         ]
     }
+    ;
+    console.log(model);
 
     var clist = new Vue({
         el : "#exmaple",

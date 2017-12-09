@@ -1,7 +1,12 @@
 package controller;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.oracle.javafx.jmx.json.JSONException;
 import domain.BoardVO;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,8 @@ import service.BoardService;
 import sun.misc.Request;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/freeBoard/*")
@@ -42,11 +49,32 @@ public class BoardController {
         return "redirect:/freeBoard/list";
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET, headers="Accept=application/json")
     public void listAll(Model model) throws Exception {
 
         logger.info("show all list......................");
-        model.addAttribute("list", service.listAllBoard());
+
+        List<BoardVO> boardVOS = service.listAllBoard();
+
+
+        JSONObject listObj = new JSONObject();
+        JSONArray list = new JSONArray();
+        for(int i = 0 ; i < boardVOS.size() ; i++) {
+
+            JSONObject vo = new JSONObject();
+
+            vo.put("boardId",boardVOS.get(i).getBoardId());
+            vo.put("boardTitle",boardVOS.get(i).getBoardTitle());
+            vo.put("boardWriter",boardVOS.get(i).getBoardWriter());
+            vo.put("boardViewcnt",boardVOS.get(i).getBoardViewcnt());
+            vo.put("boardLikecnt",boardVOS.get(i).getBoardLikecnt());
+
+            list.add(i,vo);
+        }
+        listObj.put("BoardVO",list);
+
+
+        model.addAttribute("list",listObj);
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
