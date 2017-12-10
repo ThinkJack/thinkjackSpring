@@ -4,18 +4,12 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
 <jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
-    <!-- Top menu on small screens -->
-    <header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-16">
-        <span class="w3-left w3-padding">THINK JACK</span>
-        <a href="javascript:void(0)" class="w3-right w3-button w3-black" onclick="w3_open()">☰</a>
-    </header>
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
+
 
     <!--내용-->
     <div class="w3-container w3-dark w3-center w3-text-light-grey w3-padding-32" id="about">
         <!--메뉴 bar-->
-        <div class="w3-content w3-justify" style="max-width:600px">
+        <div class="w3-content w3-justify" ">
             <hr class="w3-opacity">
             <h4 class="w3-padding-16">자신의 코드를 올려주세요</h4>
             <div class="w3-row-padding" style="margin:0 -32px">
@@ -67,18 +61,17 @@
     <!--pagination-->
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-4 w3-center">
             <div class="pagination">
                 <a href="#">&laquo;</a>
                 <a href="#">1</a>
                 <a class="active" href="#">2</a>
                 <a href="#">3</a>
                 <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
                 <a href="#">&raquo;</a>
             </div>
         </div>
+        <div class="col-4"></div>
     </div>
 
     <script>

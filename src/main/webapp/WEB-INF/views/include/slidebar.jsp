@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-bar-block  w3-black w3-animate-left w3-text-grey w3-collapse w3-top w3-center" style="z-index:3;width:300px;font-weight:bold" id="mySidebar"><br>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
         <!--로고 -->
         <h3 class="w3-padding-64 w3-center">
                 <img src="/resources/images/logo.png" style="width:80px" >
