@@ -26,16 +26,18 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active">
                 <div>
-                    <!-- 좋아요 버튼 -->
-                    <a  href="javascript:;" class="btn btn-outline-dark">
-                        <img src="/resources/images/like1.png">
+                <!-- 좋아요 버튼 -->
+                    <a class="btn btn-outline-dark" href="javascript:;" >
+                        <img src="/resources/images/like1.png" id="like"> Like
                     </a>
                 </div>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#Setting">
-                    <img src="/resources/images/setting.png"> Setting
-                </a>
+                <div>
+                    <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#Setting">
+                        <img src="/resources/images/setting.png"> Setting
+                    </a>
+                </div>
             </li>
             <li class="nav-item active">
                 <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#ChangeView">
