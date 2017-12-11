@@ -19,5 +19,10 @@
 <link rel="stylesheet" href="/resources/codemirror/addon/hint/show-hint.css">
 <!-- addon\dialog -->
 <link rel="stylesheet" href="/resources/codemirror/addon/dialog/dialog.css">
+<!--tern-->
+<link rel="stylesheet" href="/resources/codemirror/addon/tern/tern.css">
+<!--Search-->
+<link rel="stylesheet" href="/resources/codemirror/addon/search/matchesonscrollbar.css">
+
 
 <link href="/resources/dist/css/editCss.css" rel="stylesheet">
