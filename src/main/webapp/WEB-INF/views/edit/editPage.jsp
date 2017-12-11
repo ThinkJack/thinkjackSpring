@@ -73,43 +73,7 @@
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
     <script>
-        var delay;
-        var allEditValue;//html, javascript, css 모두 합친 문자열
-        //------------------------------------------------------------------------레이아웃 조정
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------코드 실시간 적용
-        codeHtml.on("change", function () {
-            clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(updatePreview, 300);
-        });
-        codeJavaScript.on("change", function () {
-            clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(updatePreview, 300);
-        });
-        codeCss.on("change", function () {
-            clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(updatePreview, 300);
-        });
-        //------------------------------------------------------------------------
-        //------------------------------------------------------------------------미리보기 기능
-        function updatePreview() {
 
-            var previewFrame = document.getElementById('resultView');
-            //iframe의 document객체 받아오기
-            var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
-
-            preview.open();
-
-            preview.write(
-                "<style>" + codeCss.getValue() + "</style>" +
-                "<script>" + codeJavaScript.getValue() + "<\/script>" +
-                codeHtml.getValue());
-            preview.close();
-        }
-
-        $("#like").click(function () {
-            console.log("나와라");
-        });
     </script>
 </body>
 </html>
