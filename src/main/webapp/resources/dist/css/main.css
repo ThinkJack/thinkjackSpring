@@ -8,24 +8,13 @@ body {
     padding-bottom: 3rem;
 
 }
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
 .w3-third img{margin-bottom: -6px; opacity: 0.8; cursor: pointer}
 .w3-third img:hover{opacity: 1}
 
 /* About thinkjack
 -------------------------------------------------- */
-.col-md-6{
-    height: 300px;bootstrap.css
-bootstrap-grid.css
-bootstrap-reboot.css
-}
-#about1{
-    background-color: #00cc00;  margin-left:50%;
-}
 
-#about2{
-    background-color: #00cc00;  margin-right:50%;
-}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -44,7 +33,7 @@ bootstrap-reboot.css
 /* Declare heights because of positioning of img element */
 .carousel-item {
     height: 32rem;
-    background-color: #99cc66;
+    background-color: #014c8c;
 }
 .carousel-item > img {
     position: absolute;

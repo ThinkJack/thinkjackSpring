@@ -98,17 +98,20 @@
                             </iframe>
 
                         </div>
-
                         <!--pagination-->
-                        <div class="pagination">
-                            <a href="#">&laquo;</a>
-                            <a href="#">1</a>
-                            <a class="active" href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">&raquo;</a>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-4 w3-center">
+                                <div class="pagination">
+                                    <a href="#">&laquo;</a>
+                                    <a href="#">1</a>
+                                    <a class="active" href="#">2</a>
+                                    <a href="#">3</a>
+                                    <a href="#">4</a>
+                                    <a href="#">&raquo;</a>
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
                         </div>
                     </div>
                 </div>
