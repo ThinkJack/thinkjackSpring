@@ -42,11 +42,22 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public void updateUser(UserVO vo) throws Exception {
-		session.insert(namespace+".updateUser",vo);
+		session.update(namespace+".updateUser",vo);
 	}
 
 	@Override
 	public void deleteUser(UserVO vo) throws Exception {
 
+	}
+
+	@Override
+	public void naverInsertUser(LoginDTO dto) throws Exception {
+		System.out.println("naverInsertUser "+dto);
+		session.insert(namespace+".naverInsertUser",dto);
+	}
+
+	@Override
+	public UserVO naverReadUser(LoginDTO dto) throws Exception {
+		return session.selectOne(namespace+".naverReadUser",dto);
 	}
 }

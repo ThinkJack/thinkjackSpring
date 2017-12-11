@@ -17,6 +17,8 @@
      
      </div>
   </form>
-  
+  <div>
+  <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+  </div>
   </body>
 </html>

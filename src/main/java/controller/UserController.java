@@ -114,21 +114,27 @@ public class UserController {
 	@Inject
 	private JsonStringParse jsonparse;
 
+//	@RequestMapping(value="/naverLogin", method = RequestMethod.GET)
+//	public void loginGet(HttpSession session) {
+//
+//	}
+
 	@RequestMapping(value="/naverLogin", method = RequestMethod.GET)
 	public ModelAndView login(HttpSession session) {
 		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String naverAuthUrl = naverLoginBo.getAuthorizationUrl(session);
-		System.out.println("controller 호출");
+		System.out.println("naverLogin controller 호출");
+		//System.out.println();
 		return new ModelAndView("user/naverLogin", "url", naverAuthUrl);
 	}
 
 	@RequestMapping(value="/callback",method = RequestMethod.GET)
 	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		System.out.println("/callback 진입 토튼 발급 전 ");
+	/*	System.out.println("/callback 진입 토튼 발급 전 ");
 		System.out.println("session : "+session);
 		System.out.println("state : "+state);
-		System.out.println("code : "+code);
+		System.out.println("code : "+code);*/
 
 		OAuth2AccessToken oauthToken = naverLoginBo.getAccessToken(session, code, state);
 
@@ -139,24 +145,35 @@ public class UserController {
 		JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
 
 		String userSocialId = jsonparse.JsonToString(jsonobj, "id");
-		String name = jsonparse.JsonToString(jsonobj, "name");
+		String name = jsonparse.JsonToString(jsonobj, "nickname");
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
-		vo.setUserSocialId(userSocialId);
-		vo.setUserName(name);
+		dto.setUserSocialId(userSocialId);
+		dto.setUserName(name);
 
-		System.out.println(name);
+//		System.out.println("======================JSON 파싱값================");
+//		System.out.println("name: "+name);
+//		System.out.println("id: "+userSocialId );
+//		System.out.println("UserVO "+vo);
+//		System.out.println("UserVO "+dto);
 		try {
 			vo = service.naverLogin(dto);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
-		session.setAttribute("login",dto);
-		return new ModelAndView("naverSuccess", "result", dto);
+		//소셜아이디로 uid를 찾는 로직 추가 해야함
+		System.out.println("UserVO "+vo);
+		session.setAttribute("login",vo);
+		return new ModelAndView("redirect:/freeBoard/list", "result", vo);
 	}
 
+
+//	@RequestMapping(value = "/naverSuccess", method = RequestMethod.GET)
+//	public void naverSuccess (HttpSession session, UserVO user,Model model) throws Exception{
+//
+//	}
 }

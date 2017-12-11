@@ -17,7 +17,7 @@ public class NaverLoginBo {
 
     private final static String CLIENT_ID = "kZCaMLW0PXwWWwQ91Ix3";
     private final static String CLIENT_SECRET = "37SUxgAJzd";
-    private final static String REDIRECT_URI = "http://localhost/user/callback";
+    private final static String REDIRECT_URI = "http://localhost:8080/user/callback";
     private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
@@ -44,10 +44,15 @@ public class NaverLoginBo {
     /* 네아로 Callback 처리 및 AccessToken 획득 Method */
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
             System.out.println("getAccessToken 진입");
+
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
+//        System.out.println("========들어오는 값 ==========");
+//        System.out.println("session : "+session);
+//
+//
         String sessionState = getSession(session);
-        System.out.println("sessionState: "+sessionState);
-        System.out.println("state: "+state);
+//        System.out.println("sessionState: "+sessionState);
+//        System.out.println("state: "+state);
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()

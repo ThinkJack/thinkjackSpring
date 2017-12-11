@@ -39,6 +39,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO naverLogin(LoginDTO dto) throws Exception {
-		return dao.login(dto);
+		UserVO vo =new UserVO();
+		vo=dao.naverReadUser(dto);
+//		if(vo==null){}
+//		int id=vo.getUserId();
+//		System.out.println("naverLogin userId :"+id);
+		if(vo==null){
+		try{
+		dao.naverInsertUser(dto);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}}
+		return dao.naverReadUser(dto);
 	}
 }
