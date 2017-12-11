@@ -37,8 +37,11 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 });
 
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 var codeCss = CodeMirror(document.getElementById("codeCss"), {
     mode: "css",
     lineNumbers: true,
