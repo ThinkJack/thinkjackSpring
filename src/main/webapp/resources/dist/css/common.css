@@ -42,3 +42,6 @@ div.panel {
 }
 
 .pagination a:hover:not(.active) {background-color: #99cc66;}
+
+/*slidebar*/
+.w3-sidebar {width: 120px;background: #222;}

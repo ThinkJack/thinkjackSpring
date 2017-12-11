@@ -10,10 +10,6 @@
     <!--w3schools-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-
-
-    <!--side navbar 연결 (black 부분 이름 변경으로 색변경 가능)-->
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <title>Thinkjack</title>
 
     <!--css파일 연결부분-->
@@ -34,21 +30,30 @@
 </head>
 
 <!--배경색 변경가능 (class 이름 변경으로 색상 선택 가능)-->
-<body class="w3-black w3-content " style="max-width:1600px">
-<!--center navbar-->
-<header class="w3-panel w3-center w3-opacity" >
-    <div class="w3-padding-64">
-        <div class="w3-bar w3-border">
-            <a href="#" class="w3-bar-item w3-button ">Home</a>
-            <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
-            <a href="#" class="w3-bar-item w3-button ">QNA</a>
-            <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
+<%--총 넓이 2600--%>
+<body class="w3-white w3-content " style="max-width:2600px">
+
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <button href="">로그인</button>
+            <!--로그인 했을때-->
+            <!--<button href="">로그인</button>-->
+            <!--<button href="" style="padding-left:10px;">버튼2</button>-->
         </div>
     </div>
-    <div style="float:right;position:relative;top:-180px;right:24.5%;">
-        <button href="">로그인</button>
-        <!--로그인 했을때-->
-        <!--<button href="">로그인</button>-->
-        <!--<button href="" style="padding-left:10px;">버튼2</button>-->
-    </div>
-</header>
+
+
+    <!--center navbar-->
+    <header class="w3-panel w3-center w3-opacity" >
+        <div class="w3-padding-64">
+            <div class="w3-bar w3-border">
+                <a href="#" class="w3-bar-item w3-button ">Home</a>
+                <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
+                <a href="#" class="w3-bar-item w3-button ">QNA</a>
+                <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
+                <a href="#" class="w3-bar-item w3-button "> Editor</a>
+            </div>
+        </div>
+
+    </header>
