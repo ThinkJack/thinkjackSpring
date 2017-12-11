@@ -23,7 +23,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     pasteLinesPerSelection: true,
     tabindex: 2,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true,
+    styleActiveLine: true
 
 
     // cursorScrollMargin: 5,
@@ -59,7 +59,7 @@ var codeCss = CodeMirror(document.getElementById("codeCss"), {
     pasteLinesPerSelection: true,
     tabindex: 2,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true,
+    styleActiveLine: true
 });
 
 
@@ -86,7 +86,7 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     tabindex: 2,
     autoCloseTags: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true,
+    styleActiveLine: true
 
 });
 
@@ -234,6 +234,7 @@ function updatePreview() {
     var previewFrame = document.getElementById('resultView');
     //iframe의 document객체 받아오기
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+
 
     preview.open();
 
