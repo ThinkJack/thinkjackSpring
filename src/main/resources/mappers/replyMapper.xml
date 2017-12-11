@@ -4,33 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.replyMapper">
-    <!--//생성(insert)-->
-    <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
-    <!--<insert id="insert">-->
-        <!--insert into tbl_reply (board_id, reply_text, reply_wirter)-->
-        <!--VALUES (#{boardId}, #{replyText},(SELECT user_id FROM tbl_user WHERE user_name = #{replyWirter}))-->
-    <!--</insert>-->
 
-    <!--&lt;!&ndash; 조회(select)&ndash;&gt;-->
-    <!--<select id="select" resultType="ReplyVO">-->
-        <!--SELECT-->
-        <!--reply_id replyId,-->
-        <!--board_id boardId,-->
-        <!--reply_text replyText,-->
-            <!--(SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWriter,-->
-            <!--reply_parent replyParent,-->
-            <!--reply_regdate replyRegdate,-->
-            <!--reply_update replyUpdate,-->
-            <!--reply_likecnt replyLikecnt-->
-        <!--FROM tbl_reply WHERE board_id=#{boardId}-->
-        <!--order by reply_id;-->
-    <!--</select>-->
+    <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
+    <insert id="insert">
+        insert into tbl_reply (board_id, reply_text, reply_wirter)
+        VALUES (#{boardId}, #{replyText},(SELECT user_id FROM tbl_user WHERE user_name = #{replyWirter}))
+    </insert>
+
+    <!-- 조회(select)-->
+    <select id="select" resultType="ReplyVO">
+        SELECT
+            reply_id replyId,
+            board_id boardId,
+            reply_text replyText,
+            (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWriter,
+            reply_parent replyParent,
+            reply_regdate replyRegdate,
+            reply_update replyUpdate,
+            reply_likecnt replyLikecnt
+        FROM tbl_reply WHERE board_id=#{boardId}
+        order by reply_id;
+    </select>
 
     <!--정정(update)-->
     <update id="update" >
         UPDATE tbl_reply
         SET
-        reply_text = #{replyText}
+            reply_text = #{replyText}
         WHERE reply_id = #{replyId}
     </update>
 
@@ -41,20 +41,19 @@
 
     <!--대댓글 생성(insert)-->
     <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
-    <insert id="insert">
+    <insert id="insert2">
         insert into tbl_reply (board_id, reply_text, reply_wirter,reply_parent)
         VALUES (#{boardId}, #{replyText},(SELECT user_id FROM tbl_user WHERE user_name = #{replyWirter}),#{replyParent})
     </insert>
 
-
     <!-- 대댓글 조회(select)-->
-    <select id="select" resultType="ReplyVO">
+    <select id="select2" resultType="ReplyVO">
         <!--선택한다모든 댓글아이디,-->
         SELECT
         reply_id replyId,
         board_id boardId,
         reply_text replyText,
-        (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWriter,
+        (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWirter,
         reply_parent replyParent,
         reply_regdate replyRegdate,
         reply_update replyUpdate,
@@ -64,8 +63,19 @@
         order by reply_id;
     </select>
 
+    <!--대댓글 수정-->
+    <update id="update2" >
+        UPDATE  tbl_reply
+        SET
+            reply_text =#{replyText}
+        WHERE reply_parent = #{replyParent};
+    </update>
 
-
+    <!--대댓글 삭제-->
+    <delete id="delete2" >
+        DELETE FROM  tbl_reply
+        WHERE reply_parent = #{replyParent};
+    </delete>
 
 </mapper>
 

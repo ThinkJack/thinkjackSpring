@@ -21,22 +21,19 @@ public class ReplyDAOTest {
     public void testCreate() throws Exception {
 
         ReplyVO reply = new ReplyVO();
-
-        reply.setBoardId(1);
-        reply.setReplyText("test댓글 입니다");
-        reply.setReplyWirter("user1");
+        reply.setBoardId(2);
+        reply.setReplyText("test댓글2 입니다");
+        /*존재한 User_name 이어야 한다*/
+        reply.setReplyWirter("user02");
         dao.createReply(reply);
-
     }
 
     @Test
     public void testRead() throws Exception {
 
         ReplyVO reply = new ReplyVO();
-        List<ReplyVO> replyVOList = dao.readReply(1);
-
+        List<ReplyVO> replyVOList = dao.readReply(2);
         reply=replyVOList.get(0);
-
         System.out.println(reply);
     }
 
@@ -44,15 +41,15 @@ public class ReplyDAOTest {
     public void testUpdate() throws Exception {
 
         ReplyVO reply = new ReplyVO();
-        reply.setBoardId(1);
-        reply.setReplyText("수정합니다");
+        reply.setBoardId(2);
+        reply.setReplyText("2번째 Test");
         dao.updateReply(reply);
     }
 
     @Test
     public void testDelete() throws Exception{
-
-        dao.deleteReply(2);
+    /*replyId 확인*/
+        dao.deleteReply(6);
     }
 
 
@@ -64,7 +61,7 @@ public class ReplyDAOTest {
         reply.setBoardId(1);
         reply.setReplyParent(1);
         reply.setReplyText("대댓글");
-        reply.setReplyWirter("user00");
+        reply.setReplyWirter("user02");
         dao.createReply(reply);
     }
 
@@ -73,12 +70,23 @@ public class ReplyDAOTest {
 
         //대댓글 목록 읽어오기
 
-        ReplyVO reply = new ReplyVO();
-        List<ReplyVO> replyVOList = dao.readReply(1);
-        reply=replyVOList.get(0);
-
+        ReplyVO rereply = new ReplyVO();
+        List<ReplyVO> rereplyVOList = dao.reReadReply(3);
+        rereply=rereplyVOList.get(0);
         System.out.println(rereply);
     }
 
+    @Test
+    public void test3() throws Exception{
+        ReplyVO reply = new ReplyVO();
+        reply.setReplyParent(1);
+        reply.setReplyText("대댓글 수정");
+        dao.updateReply(reply);
+    }
 
+    @Test
+    public void test4() throws Exception{
+        dao.reDeleteReply(1);
+
+    }
 }
