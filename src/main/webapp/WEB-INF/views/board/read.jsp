@@ -1,67 +1,72 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwak
-  Date: 2017. 12. 6.
-  Time: PM 2:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Read</title>
-</head>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<body>
 
-<form role="form">
-    <input type="hidden" name ='boardId' value="${boardVO.boardId}">
-</form>
-<div class="box-body">
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-    <div class="form-group">
-        <label >Title</label>
-        <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
-               readonly="readonly">
+<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+
+        <form role="form">
+            <input type="hidden" name='category' value="${category}">
+            <input type='hidden' name='page' value="${cri.page}">
+            <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
+            <input type='hidden' name='searchType' value="${cri.searchType}">
+            <input type='hidden' name='keyword' value="${cri.keyword}">
+        </form>
+        <div class="box-body">
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
+                       readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea type="text" name='content' class="form-control" rows="20"
+                          readonly="readonly">${boardVO.boardContent}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Writer</label>
+                <input type="text" name='writer' class="form-control" value="${boardVO.boardWriter}"
+                       readonly="readonly">
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
+            <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+            <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label >Content</label>
-        <textarea type="text" name='content' class="form-control" rows = "3"
-                  readonly="readonly">${boardVO.boardContent}</textarea>
-    </div>
-    <div class="form-group">
-        <label>Writer</label>
-        <input type="text" name='writer' class="form-control" value="${boardVO.boardWriter}"
-               readonly="readonly">
-    </div>
-</div>
-<div class="box-footer">
-    <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-    <button type="submit" class="btn btn-danger removeBtn" >REMOVE</button>
-    <button type="submit" class="btn btn-primary goListBtn" >GO LIST</button>
+    <div class="col-3"></div>
 </div>
 <script>
     $(document).ready(function () {
         var formObj = $("form[role='form']");
+        var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
         console.log(formObj);
 
         $(".modifyBtn").on("click", function () {
-            formObj.attr("action","/freeBoard/modify");
-            formObj.attr("method","get");
+            formObj.attr("action", "/board/modify");
+            formObj.attr("method", "get");
+            formObj.append(boardid);
             formObj.submit();
         });
 
         $(".removeBtn").on("click", function () {
-            formObj.attr("action","/freeBoard/remove");
+            formObj.attr("action", "/board/remove");
+            formObj.append(boardid);
             formObj.submit();
         });
 
         $(".goListBtn").on("click", function () {
-            formObj.attr("method","get");
-            formObj.attr("action","/freeBoard/list");
+            formObj.attr("method", "get");
+            formObj.attr("action", "/board/list");
+
             formObj.submit();
         })
     })
 </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

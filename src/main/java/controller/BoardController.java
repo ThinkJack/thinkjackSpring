@@ -54,10 +54,13 @@ public class BoardController {
         pageMaker.setTotalCount(service.searchCount(cri,category));
 
         model.addAttribute("pageMaker", pageMaker);
+
+        model.addAttribute("category", category);
     }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     public void read(@RequestParam("boardId") int boardId, Model model,
+                     @ModelAttribute("cri") SearchCriteria cri,
                      @ModelAttribute("category") String category) throws Exception {
 
         model.addAttribute(service.readBoard(boardId,category));

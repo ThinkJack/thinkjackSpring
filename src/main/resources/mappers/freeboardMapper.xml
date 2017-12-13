@@ -124,7 +124,9 @@
         <![CDATA[
   select count(board_id)
   from tbl_board
-  where board_id > 0
+  where board_id > 0 AND (SELECT category_name
+                         FROM tbl_board_category
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free'
         ]]>
         <include refid="searchOption"></include>
     </select>
@@ -140,13 +142,13 @@
       WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
      board_regdate                                                        boardRegdate,
      board_viewcnt                                                        boardViewcnt,
-     (SELECT category_name
-      FROM tbl_board_category
-      WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+
      board_likecnt                                                        boardLikecnt
  from
    tbl_board
- where board_id > 0
+ where board_id > 0 AND (SELECT category_name
+                         FROM tbl_board_category
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free'
  order by board_id desc, board_regdate desc
  limit #{pageStart}, #{perPageNum}
  ]]>

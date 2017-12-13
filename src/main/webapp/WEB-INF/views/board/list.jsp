@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
 
@@ -12,6 +14,8 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
+        <h1 style="text-align: center;"> ${category} 게시판</h1>
+        <hr>
         <table class="table">
             <tr>
                 <th style="width:10px;">boardId</th>
@@ -24,10 +28,10 @@
             <c:forEach items="${list}" var="boardVO">
                 <tr>
                     <td>${boardVO.boardId}</td>
-                    <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}'>
+                    <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
                             ${boardVO.boardTitle}</a> </td>
                     <td>${boardVO.boardWriter}</td>
-                    <td><fmt:formatDate pattern="yyyy-mm-dd HH:mm"
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
                                         value="${boardVO.boardRegdate}"/></td>
                     <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
                     <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
@@ -45,7 +49,7 @@
                 <c:forEach begin="${pageMaker.startPage}"
                            end = "${pageMaker.endPage}" var="idx">
                     <li <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
-                        <a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+                        <a href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
                     </li	>
                 </c:forEach>
 

@@ -32,6 +32,20 @@ public class BoardTest {
         vo.setBoardTitle("첫번째 제목");
         vo.setBoardWriter("user00");
         boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");  boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");
+        boardService.insertBoard(vo,"qna");  boardService.insertBoard(vo,"qna");  boardService.insertBoard(vo,"qna");  boardService.insertBoard(vo,"qna");
+
     }
 
     @Test
@@ -44,7 +58,7 @@ public class BoardTest {
 
         pageMaker.setCri(cri);
 
-        System.out.println(dao.searchCount(null,"qna"));
+        System.out.println(dao.searchCount(cri,"qna"));
 
     }
 
