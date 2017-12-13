@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.BoardMapper_notice">
+    <insert id="create">
+        INSERT INTO tbl_board (board_title, board_content, board_writer, board_category_id)
+        VALUES (#{boardTitle}, #{boardContent}, (SELECT user_id
+        FROM tbl_user
+        WHERE user_name = #{boardWriter}), (SELECT category_id
+        FROM tbl_board_category
+        WHERE category_name =
+        'notice'))
+    </insert>
+
+    <select id="read" resultType="BoardVO">
+        SELECT
+        board_id                                                             boardId,
+        board_title                                                          boardTitle,
+        board_content                                                        boardContent,
+        (SELECT user_name
+        FROM tbl_user
+        WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+        board_regdate                                                        boardRegdate,
+        board_viewcnt                                                        boardViewcnt,
+        board_likecnt                                                        boardLikecnt
+        FROM tbl_board
+        WHERE board_id = #{boardId}
+    </select>
+
+    <update id="update">
+        UPDATE tbl_board
+        SET
+        board_title   = #{boardTitle},
+        board_content = #{boardContent}
+        WHERE tbl_board.board_id = #{boardId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE board_id = #{boardId}
+    </delete>
+
+    <select id="readPage" resultType="BoardVO">
+        <![CDATA[
+        SELECT
+            board_id                                                             boardId,
+            board_title                                                          boardTitle,
+            board_content                                                        boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+            board_regdate                                                        boardRegdate,
+            board_viewcnt                                                        boardViewcnt,
+            board_likecnt                                                        boardLikecnt
+        FROM
+            tbl_board
+        WHERE tbl_board.board_id > 0 AND (SELECT category_name
+                                          FROM tbl_board_category
+                                          WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'notice'
+        ORDER BY board_id DESC , board_regdate DESC
+        LIMIT #{page}, 10
+        ]]>
+    </select>
+
+
+
+    <sql id="searchOption">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and board_title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'c'.toString()">
+                and board_content like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'w'.toString()">
+                and board_writer like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'tc'.toString()">
+                and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="searchType == 'cw'.toString()">
+                and ( board_content like CONCAT('%', #{keyword}, '%') OR board_writer like CONCAT('%', #{keyword}, '%'))
+            </if>
+            <if test="searchType == 'tcw'.toString()">
+                and ( board_itle like CONCAT('%', #{keyword}, '%')
+                OR
+                board_content like CONCAT('%', #{keyword}, '%')
+                OR
+                board_writer like CONCAT('%', #{keyword}, '%'))
+            </if>
+        </if>
+    </sql>
+
+    <select id="search" resultType="BoardVO">
+        <![CDATA[
+  select
+            board_id                                                             boardId,
+            board_title                                                          boardTitle,
+            board_content                                                        boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+            board_regdate                                                        boardRegdate,
+            board_viewcnt                                                        boardViewcnt,
+            (SELECT category_name
+             FROM tbl_board_category
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+            board_likecnt                                                        boardLikecnt
+  from tbl_board
+  where board_id > 0 AND (SELECT category_name
+             FROM tbl_board_category
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'notice'
+        ]]>
+
+        <include refid="searchOption"></include>
+
+        <![CDATA[
+  order by board_id desc
+  limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+
+    <select id="searchCount" resultType="int">
+        <![CDATA[
+  select count(board_id)
+  from tbl_board
+  where board_id > 0 AND (SELECT category_name
+                         FROM tbl_board_category
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='notice'
+        ]]>
+        <include refid="searchOption"></include>
+    </select>
+
+    <select id="criteria" resultType="BoardVO">
+        <![CDATA[
+        select
+            board_id                                                             boardId,
+            board_title                                                          boardTitle,
+            board_content                                                        boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+            board_regdate                                                        boardRegdate,
+            board_viewcnt                                                        boardViewcnt,
+            board_likecnt                                                        boardLikecnt
+        from
+            tbl_board
+        where board_id > 0 (SELECT category_name
+        FROM tbl_board_category
+        WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='notice'
+        order by board_id desc, board_regdate desc
+        limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+</mapper>
