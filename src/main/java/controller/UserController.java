@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
 import common.JsonStringParse;
@@ -137,7 +138,7 @@ public class UserController {
 		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String naverAuthUrl = naverLoginBo.getAuthorizationUrl(session);
 		System.out.println("naverLogin controller 호출");
-		//System.out.println();
+		System.out.println(naverAuthUrl);
 		return new ModelAndView("user/naverLogin", "url", naverAuthUrl);
 	}
 
@@ -259,9 +260,71 @@ public class UserController {
         return "redirect:/freeBoard/list";
     }
 
-//======================================facebook login ==================================================
+//======================================github login ==================================================
 
 
+	private GithubLoginBo githubLoginBo;
+	private String githubapiResult = null;
+
+	/* githubLoginBO */
+
+	@Inject
+	private void setGithubLoginBo(GithubLoginBo githubLoginBo) {
+		this.githubLoginBo = githubLoginBo;
+	}
+
+	@RequestMapping(value="/githubLogin", method = RequestMethod.GET)
+	public ModelAndView githublogin(HttpSession session) {
+		/* github 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
+		String githubAuthUrl = githubLoginBo.getAuthorizationUrl(session);
+		System.out.println("github Login controller 호출");
+		System.out.println(githubAuthUrl);
+		return new ModelAndView("user/githubLogin", "url", githubAuthUrl);
+	}
+
+	@RequestMapping(value="/githubcallback",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView githubcallback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
+		System.out.println("/callback 진입 토튼 발급 전 ");
+		System.out.println("session : "+session);
+		System.out.println("state : "+state);
+		System.out.println("code : "+code);
+
+		OAuth2AccessToken oauthToken = githubLoginBo.getAccessToken(session, code, state);
+
+		System.out.println("github oauthToken 값: "+oauthToken);
+		githubapiResult = githubLoginBo.getUserProfile(oauthToken);
+		System.out.println(githubapiResult);
+
+		JSONObject jsonobj = jsonparse.stringToJson(githubapiResult, "response");
+
+		String userSocialId = jsonparse.JsonToString(jsonobj, "id");
+		String name = jsonparse.JsonToString(jsonobj, "nickname");
+
+		UserVO vo =new UserVO();
+		LoginDTO dto = new LoginDTO();
+		dto.setUserEmail("github");
+		dto.setUserSocialId("git"+userSocialId);
+		dto.setUserName(name);
+
+//		System.out.println("======================JSON 파싱값================");
+//		System.out.println("name: "+name);
+//		System.out.println("id: "+userSocialId );
+//		System.out.println("UserVO "+vo);
+//		System.out.println("UserVO "+dto);
+		try {
+			vo = service.naverLogin(dto);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//소셜아이디로 uid를 찾는 로직 추가 해야함
+		System.out.println("UserVO "+vo);
+		session.setAttribute("login",vo);
+		return new ModelAndView("redirect:/freeBoard/list", "result", vo);
+	}
 
 
 

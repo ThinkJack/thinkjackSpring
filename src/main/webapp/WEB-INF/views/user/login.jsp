@@ -20,13 +20,8 @@
   <div>
   <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
   </div>
-  <div id="google_id_login" style="text-align:center"><a href="/user/googleLogin"><img width="230" src="${pageContext.request.contextPath}/resources/img/btn_google_signin_dark_normal_web@2x.png"/></a></div>
+  <div id="google_id_login"><a href="/user/googleLogin"><img width="230" src="https://techsneak.com/wp-content/uploads/2017/01/login-google.png"/></a></div>
   <div>
-
-      <fb:login-button
-              scope="public_profile,email"
-              onlogin="checkLoginState();">페이스북
-      </fb:login-button>
 
   </div>
   </body>
