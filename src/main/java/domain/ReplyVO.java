@@ -1,7 +1,5 @@
 package domain;
 
-import java.security.Timestamp;
-
 public class ReplyVO {
 
 	private Integer replyId;
@@ -14,8 +12,10 @@ public class ReplyVO {
 //	유저 ID
 	private Integer replyParent;
 //	대댓글에 필요한 부분
-	private Integer replyLikecnt;
+	private Integer replyLikeCnt;
 //좋아요수
+	private int replyState;
+	//삭제부분 0,1
 
 
 	public Integer getReplyId() {
@@ -58,12 +58,20 @@ public class ReplyVO {
 		this.replyParent = replyParent;
 	}
 
-	public Integer getReplyLikecnt() {
-		return replyLikecnt;
+	public Integer getReplyLikeCnt() {
+		return replyLikeCnt;
 	}
 
-	public void setReplyLikecnt(Integer replyLikecnt) {
-		this.replyLikecnt = replyLikecnt;
+	public void setReplyLikeCnt(Integer replyLikeCnt) {
+		this.replyLikeCnt = replyLikeCnt;
+	}
+
+	public int getReplyState() {
+		return replyState;
+	}
+
+	public void setReplyState(int replyState) {
+		this.replyState = replyState;
 	}
 
 	@Override
@@ -74,7 +82,8 @@ public class ReplyVO {
 				", replyText='" + replyText + '\'' +
 				", replyWirter='" + replyWirter + '\'' +
 				", replyParent=" + replyParent +
-				", replyLikecnt=" + replyLikecnt +
+				", replyLikeCnt=" + replyLikeCnt +
+				", replyState=" + replyState +
 				'}';
 	}
 }
