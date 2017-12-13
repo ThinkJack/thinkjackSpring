@@ -16,7 +16,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 
 
     private void saveDest(HttpServletRequest req){
-
+        System.out.println("AuthInterceptor saveDest 진입");
         String uri = req.getRequestURI();
 
         String query = req.getQueryString();

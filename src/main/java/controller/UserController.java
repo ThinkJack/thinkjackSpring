@@ -11,6 +11,19 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
 import common.JsonStringParse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -149,7 +162,8 @@ public class UserController {
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
-		dto.setUserSocialId(userSocialId);
+		dto.setUserEmail("naver");
+		dto.setUserSocialId("n"+userSocialId);
 		dto.setUserName(name);
 
 //		System.out.println("======================JSON 파싱값================");
@@ -176,4 +190,80 @@ public class UserController {
 //	public void naverSuccess (HttpSession session, UserVO user,Model model) throws Exception{
 //
 //	}
+
+    //google 로그인 컨트롤러
+
+	/* GoogleLogin */
+	@Inject
+	private GoogleConnectionFactory googleConnectionFactory;
+	@Inject
+	private OAuth2Parameters googleOAuth2Parameters;
+
+
+
+	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
+    public String doGoogleSignInActionPage(HttpServletResponse response, Model model) throws Exception{
+        OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+
+//		googleOAuth2Parameters.setRedirectUri("http://localhost:8080/user/googleLogincallback");
+        String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+        System.out.println("/user/googleLogincallback, url : " + url);
+        model.addAttribute("url",url);
+
+        return "user/googleLogin";
+
+    }
+
+
+    @RequestMapping(value = "/googleLogincallback")
+    public String doSessionAssignActionPage(HttpServletRequest request)throws Exception{
+        System.out.println("/user/googleLogincallback");
+        String code = request.getParameter("code");
+
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),
+				null);
+
+		String accessToken = accessGrant.getAccessToken();
+		Long expireTime = accessGrant.getExpireTime();
+		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+			accessToken = accessGrant.getRefreshToken();
+			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+		}
+		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
+
+		PlusOperations plusOperations = google.plusOperations();
+		Person person = plusOperations.getGoogleProfile();
+
+		//System.out.println("UserVO 전");
+
+        LoginDTO dto = new LoginDTO();
+
+
+        System.out.println(person.getDisplayName());
+        dto.setUserEmail("google");
+        dto.setUserName(person.getDisplayName());
+        dto.setUserSocialId("g"+person.getId());
+        HttpSession session = request.getSession();
+		System.out.println("controller dto: "+dto);
+
+		UserVO vo = new UserVO();
+        vo = service.googleLogin(dto);
+
+
+
+        session.setAttribute("login", vo );
+
+		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
+        return "redirect:/freeBoard/list";
+    }
+
+//======================================facebook login ==================================================
+
+
+
+
+
+
 }

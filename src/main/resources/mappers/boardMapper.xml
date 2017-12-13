@@ -72,11 +72,10 @@
     <insert id="deleteBoardLike">
         DELETE FROM tbl_board_like WHERE board_id = #{boardId} AND user_id = #{userId}
     </insert>
-    
+
     <select id="selectLike">
         SELECT COUNT FROM tbl_board_like WHERE board_id = #{boardId} AND user_id = #{userId}
     </select>
-
 
 
 </mapper>

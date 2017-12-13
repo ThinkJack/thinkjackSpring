@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		
+		System.out.println("postHandle 진입");
 		HttpSession session = request.getSession();
 
 		ModelMap modelMap = modelAndView.getModelMap();
@@ -32,8 +32,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			session.setAttribute(LOGIN, userVO);
 			//response.sendRedirect("/");
 
-			System.out.println(userVO);
+			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
+
+			System.out.println("postHandle dest: "+dest);
 
 		}
 	}
@@ -43,6 +45,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
+
+		System.out.println("preHandle 진입");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) != null) {
