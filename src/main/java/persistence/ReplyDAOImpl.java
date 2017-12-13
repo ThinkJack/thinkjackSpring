@@ -1,11 +1,15 @@
 package persistence;
 
+import domain.Criteria;
+import domain.ReplyLikeVO;
 import domain.ReplyVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Repository
@@ -38,9 +42,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 
     //삭제(delete)
     @Override
-    public void deleteReply(Integer replyId) throws Exception {
-
-        session.delete(namespace + ".delete", replyId);
+    public void deleteReply(int replyId) throws Exception {
+        session.update(namespace + ".delete", replyId);
     }
     //대댓글 입력
     @Override
@@ -55,14 +58,43 @@ public class ReplyDAOImpl implements ReplyDAO {
         return session.selectList(namespace + ".select2", replyId);
     }
 
+
     @Override
-    public void reUpdateReply(ReplyVO vo) throws Exception {
-        session.update(namespace + ".update2", vo);
+    public List<ReplyVO> listPage(Integer boardId, Criteria cri)throws Exception {
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("boardId", boardId);
+        paramMap.put("cri", cri);
+
+        return session.selectList(namespace + ".listPage", paramMap);
     }
 
-    //대댁글 삭제
+    //페이징 처리
     @Override
-    public void reDeleteReply(Integer replyParent) throws Exception {
-        session.delete(namespace+".delete2",replyParent);
+    public int count(Integer boardId) throws Exception{
+
+        return session.selectOne(namespace+".count",boardId);
+    }
+
+
+    @Override
+    public void createReplyLikeCnt(ReplyLikeVO vo) throws Exception {
+        session.insert(namespace+".createReplyLikeCnt",vo);
+    }
+
+    @Override
+    public void updateReplyLikeCnt(int reply_id) throws Exception {
+        session.update(namespace+".updateReplyLikeCnt",reply_id);
+    }
+
+    @Override
+    public void updateReplyLikeCnt2(int reply_id) throws Exception {
+        session.update(namespace+".updateReplyLikeCnt2",reply_id);
+    }
+
+    @Override
+    public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception {
+        session.delete(namespace+".deleteReplyLikeCnt",vo);
     }
 }
+

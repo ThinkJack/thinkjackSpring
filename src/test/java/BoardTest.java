@@ -51,7 +51,7 @@ public class BoardTest {
         BoardVO vo = new BoardVO();
 
         vo.setBoardContent("새로운 본문");
-        vo.setBoardTitle("새로운 제목");
+        vo.setBoardTitle("새로운 제목2");
         vo.setBoardWriter("user00");
         vo.setBoardCategoryName("free");
         dao.createBoard(vo);

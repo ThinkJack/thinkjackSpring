@@ -23,10 +23,11 @@
             reply_update replyUpdate,
             reply_likecnt replyLikecnt
         FROM tbl_reply WHERE board_id=#{boardId}
-        order by reply_id;
+        order by reply_id DESC
     </select>
 
     <!--정정(update)-->
+    <!--대댓글 수정-->
     <update id="update" >
         UPDATE tbl_reply
         SET
@@ -35,15 +36,17 @@
     </update>
 
     <!--삭제(delete)-->
-    <delete id="delete" >
-        DELETE FROM tbl_reply WHERE reply_id = #{replyId}
-    </delete>
+    <update id="delete" >
+/*replyState =0,1입력*/
+        update tbl_reply  set reply_state = 0 WHERE reply_id= #{replyId}
+    </update>
+
 
     <!--대댓글 생성(insert)-->
     <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
     <insert id="insert2">
-        insert into tbl_reply (board_id, reply_text, reply_wirter,reply_parent)
-        VALUES (#{boardId}, #{replyText},(SELECT user_id FROM tbl_user WHERE user_name = #{replyWirter}),#{replyParent})
+        insert into tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
+        VALUES (#{boardId}, #{replyText},(SELECT user_id FROM tbl_user WHERE user_name = #{replyWirter}),#{replyParent});
     </insert>
 
     <!-- 대댓글 조회(select)-->
@@ -63,19 +66,46 @@
         order by reply_id;
     </select>
 
-    <!--대댓글 수정-->
-    <update id="update2" >
-        UPDATE  tbl_reply
-        SET
-            reply_text =#{replyText}
-        WHERE reply_parent = #{replyParent};
+    <!--게시판 번호에서 댓글 목록 범위 지정-->
+    <select id="listPage" resultType="ReplyVO">
+        SELECT
+            reply_id replyId,
+            board_id boardId,
+            reply_text replyText,
+            (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWirter,
+            reply_parent replyParent,
+            reply_regdate replyRegdate,
+            reply_update replyUpdate,
+            reply_likecnt replyLikecnt
+        FROM tbl_reply
+        WHERE board_id = #{boardId}
+        order by reply_id DESC
+        limit #{cri.pageStart},#{cri.perPageNum};
+    </select>
+
+    <!--게시판 글번호에 해당하는 댓글 수를 찾음-->
+    <select id="count" resultType="int">
+        select count(board_id) from tbl_reply WHERE board_id =#{boardId}
+    </select>
+
+    <!--댓글id와 userid값이 추가된다-->
+    <insert id="createReplyLikeCnt">
+        INSERT INTO tbl_reply_like(reply_id, user_id) VALUES ((SELECT reply_id FROM tbl_reply WHERE reply_id=#{replyId}),(SELECT user_id FROM tbl_user WHERE user_id=#{userId}));
+    </insert>
+
+    <update id="updateReplyLikeCnt">
+        update tbl_reply  set reply_likecnt =reply_likecnt+1 where reply_id =#{replyId};
     </update>
 
-    <!--대댓글 삭제-->
-    <delete id="delete2" >
-        DELETE FROM  tbl_reply
-        WHERE reply_parent = #{replyParent};
+    <update id="updateReplyLikeCnt2">
+        update tbl_reply  set reply_likecnt =reply_likecnt-1 where reply_id =#{replyId};
+    </update>
+
+    <delete id="deleteReplyLikeCnt">
+        /*update한다 tbl_reoly_의 하트 숫자를 증가시키게*/
+        DELETE FROM tbl_reply_like Where reply_id=#{replyId} AND user_id=#{userId};
     </delete>
+
 
 </mapper>
 
