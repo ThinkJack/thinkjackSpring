@@ -12,7 +12,7 @@
 
     <context:component-scan base-package="persistence" />
     <context:component-scan base-package="service"></context:component-scan>
-
+    <context:component-scan base-package="common" />
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -34,4 +34,38 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
     </bean>
+
+    <!-- google Class Bean설정 추가 -->
+    <!-- 클라이언트ID와 보안비밀 세팅 -->
+    <bean id="googleConnectionFactory"
+          class="org.springframework.social.google.connect.GoogleConnectionFactory">
+        <constructor-arg
+                value="252378785627-6v1tgs1kjie4ofmstgour5m6egi24hmi.apps.googleusercontent.com" />
+        <constructor-arg value="J6V3TJYTIexszG_1G71ZfgwR" />
+    </bean>
+    <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+    <bean id="googleOAuth2Parameters"
+          class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope"
+                  value="https://www.googleapis.com/auth/plus.login" />
+        <property name="redirectUri"
+                  value="http://localhost:8080/user/googleLogincallback" />
+    </bean>
+
+    <context:property-placeholder location="classpath:/application.properties" />
+
+    <bean id = "connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+        <property name = "connectionFactories">
+            <bean class = "org.springframework.social.facebook.connect.FacebookConnectionFactory">
+                <constructor-arg value = "${spring.social.facebook.appId}"/>
+                <constructor-arg value = "${spring.social.facebook.appSecret}"/>
+
+            </bean>
+        </property>
+    </bean>
+    <bean id = "inMemoryConnectionRepository" class = "org.springframework.social.connect.mem.InMemoryConnectionRepository">
+        <constructor-arg ref=  "connectionFactoryLocator"/>
+    </bean>
+
+
 </beans>

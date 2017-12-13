@@ -17,6 +17,12 @@
      
      </div>
   </form>
-  
+  <div>
+  <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+  </div>
+  <div id="google_id_login"><a href="/user/googleLogin"><img width="230" src="https://techsneak.com/wp-content/uploads/2017/01/login-google.png"/></a></div>
+  <div>
+
+  </div>
   </body>
 </html>
