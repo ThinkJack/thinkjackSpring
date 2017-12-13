@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.BoardService;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/board/*")
