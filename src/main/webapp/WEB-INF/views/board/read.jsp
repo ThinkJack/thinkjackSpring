@@ -8,7 +8,7 @@
     <div class="col-3"></div>
     <div class="col-6">
 
-        <form role="form">
+        <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
             <input type='hidden' name='perPageNum' value="${cri.perPageNum}">

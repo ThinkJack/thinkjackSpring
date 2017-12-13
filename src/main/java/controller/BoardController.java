@@ -25,7 +25,8 @@ public class BoardController {
 
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
-    public void registerGET(BoardVO board, Model model) throws Exception {
+    public void registerGET(BoardVO board, Model model,
+                            @ModelAttribute("category") String category) throws Exception {
 
         logger.info("register GET ...........");
     }
@@ -38,7 +39,7 @@ public class BoardController {
         service.insertBoard(board,category);
 
         rttr.addFlashAttribute("msg","success");
-        return "redirect:/freeBoard/list";
+        return "redirect:/board/list?category="+category;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -77,11 +78,14 @@ public class BoardController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modifyPOST(BoardVO board, RedirectAttributes rttr,
                              @ModelAttribute("category") String category) throws Exception {
+
         System.out.println(board+"Post");
+
         service.updateBoard(board,category);
+
         rttr.addFlashAttribute("msg", "SUCCESS");
 
-        return "redirect:/freeBoard/list";
+        return "redirect:/board/list?category="+category;
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -89,8 +93,10 @@ public class BoardController {
                          @ModelAttribute("category") String category) throws Exception {
         service.deleteBoard(boardId,category);
 
+        System.out.println(category);
+
         rttr.addFlashAttribute("msg", "SUCCESS");
 
-        return "redirect:/freeBoard/list";
+        return "redirect:/board/list?category="+category;
     }
 }

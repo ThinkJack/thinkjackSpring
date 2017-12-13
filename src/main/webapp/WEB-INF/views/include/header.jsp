@@ -49,9 +49,9 @@
         <div class="w3-padding-64">
             <div class="w3-bar w3-border">
                 <a href="#" class="w3-bar-item w3-button ">Home</a>
-                <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
-                <a href="#" class="w3-bar-item w3-button ">QNA</a>
-                <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
+                <a href="/board/list?category=free" class="w3-bar-item w3-button ">Cummunity</a>
+                <a href="/board/list?category=qna" class="w3-bar-item w3-button ">QNA</a>
+                <a href="/board/list?category=notice" class="w3-bar-item w3-button "> Release Notes</a>
                 <a href="#" class="w3-bar-item w3-button "> Editor</a>
             </div>
         </div>
