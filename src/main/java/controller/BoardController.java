@@ -4,6 +4,7 @@ package controller;
 import domain.BoardVO;
 import domain.PageMaker;
 import domain.SearchCriteria;
+import domain.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.BoardService;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/board/*")
@@ -64,6 +66,8 @@ public class BoardController {
                      @ModelAttribute("cri") SearchCriteria cri,
                      @ModelAttribute("category") String category) throws Exception {
 
+        service.increaseViewcnt(boardId,category);
+
         model.addAttribute(service.readBoard(boardId,category));
     }
 
@@ -99,4 +103,6 @@ public class BoardController {
 
         return "redirect:/board/list?category="+category;
     }
+
+
 }

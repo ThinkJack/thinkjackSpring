@@ -75,7 +75,12 @@ public class BoardDAOImpl implements BoardDAO {
     @Override
     public int countPaging(Criteria cri,String category) throws Exception {
 
-        return session.selectOne(board+category + ".", cri);
+        return session.selectOne(board+category , cri);
+    }
+
+    @Override
+    public void increaseViewcnt(int boardId,String category ) throws Exception {
+        session.update(board+category + ".increaseViewcnt", boardId);
     }
 
     @Override
@@ -92,6 +97,8 @@ public class BoardDAOImpl implements BoardDAO {
     public void updateBoardLike(int boardId) throws Exception {
         session.update(boardLike+".updateBoardLike",boardId);
     }
+
+
 
 
 }

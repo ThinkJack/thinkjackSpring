@@ -17,6 +17,10 @@
         </form>
         <div class="box-body">
 
+            <div style="text-align: right;">
+                <span class="heart" style="text-align: right;  font-size: 40px;" >♥</span>
+
+            </div>
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
@@ -66,7 +70,35 @@
             formObj.attr("action", "/board/list");
 
             formObj.submit();
-        })
+        });
+
+        var heart = true;
+        $(".heart").on("click", function () {
+
+            if(heart) {
+                $(this).html("♡");
+                heart = !heart;
+            }else {
+                $(this).html("♥");
+                heart = !heart;
+            }
+
+            $.ajax({
+                url:'/board/read',
+                type:'POST',
+                data: heart,
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType : "json",
+
+                success:function(data){
+                    alert("좋아요 주셧습니다!");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown){
+
+                    alert('실패!' );
+                }
+            });
+        });
     })
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

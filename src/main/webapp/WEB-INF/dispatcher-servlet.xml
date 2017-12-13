@@ -33,7 +33,7 @@
 		</beans:interceptor>
 
         <beans:interceptor>
-            <beans:mapping path="/freeBoard/list"/>
+            <beans:mapping path="/board/list"/>
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 

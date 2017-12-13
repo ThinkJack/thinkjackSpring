@@ -57,4 +57,9 @@ public class BoardServiceImpl implements BoardService {
     public int searchCount(SearchCriteria cri, String category) throws Exception {
         return dao.searchCount(cri, category);
     }
+
+    @Override
+    public void increaseViewcnt(int boardId, String category) throws Exception {
+        dao.increaseViewcnt(boardId,category);
+    }
 }

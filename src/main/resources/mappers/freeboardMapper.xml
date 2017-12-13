@@ -153,4 +153,8 @@
  limit #{pageStart}, #{perPageNum}
  ]]>
     </select>
+
+    <update id="increaseViewcnt">
+        UPDATE tbl_board SET board_viewcnt = board_viewcnt + 1 WHERE board_id = #{boardId}
+    </update>
 </mapper>
