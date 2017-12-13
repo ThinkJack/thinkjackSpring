@@ -10,9 +10,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="/resources/dist/js/tether.min.js"></script>
-<%--<script src="/resources/dist/js/bootstrap.js"></script>--%>
-<%--<script src="https://unpkg.com/vue"></script>--%>
-
+<script src="/resources/dist/js/bootstrap.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://nightcatsama.github.io/vue-slider-component/dist/index.js"></script>
 
 <!-- codemirror 기본 -->
 <script src="/resources/codemirror/lib/codemirror.js"></script>

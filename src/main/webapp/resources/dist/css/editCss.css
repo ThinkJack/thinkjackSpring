@@ -5,37 +5,81 @@ html {
 
 body {
     background-color: #000000;
-    height:100%;
+    height: 100%;
 }
 
-iframe{
+iframe {
     background-color: #fff;
     border: 5px solid #000000;
-    height: 547px;
-}
-p{
-    padding:10px;
+    height: 568px;
 }
 
-li{
+p {
+    padding: 10px;
+}
+
+li {
     padding-left: 15px;
 }
 
+textarea {
+    background: none;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: white;
+    font-size: 15px;
+    resize: none;
+    overflow: hidden;
+    display: block;
+}
 
+p.code-name {
+    margin: 0px;
+}
+
+div.command-line {
+    border: 3px solid #343a40;
+}
+
+span.arrow {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+}
+
+.row{
+    width: 100%;
+    margin: 0px;
+}
 .main {
     padding-top: 65px;
 }
 
-.content_row  {
+.edit-console-view{
+    width: 100%;
+    height: 187px;
+    color: #fff;
+    overflow: auto;
+}
+.console-log{
+    padding: 0px;
+    margin: 0px;
+}
+
+.container-fluid{
+    padding:0px;
+}
+.content_row {
     margin: 0px !important;
 }
 
-
-.navbar-dark{
+.navbar-dark {
     background-color: #000000;
 }
 
-.col{
+.col {
     display: block;
     padding: 0px;
 }
@@ -44,31 +88,42 @@ li{
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 50px; /* Set the fixed height of the footer here */
-    background-color: #000000;
+    height: 48px; /* Set the fixed height of the footer here */
+    background-color: #343a40;
 }
 
-.borderColLine{
+.borderColLine {
     background-color: #343a40;
-    width:5px;
+    width: 5px;
     cursor: col-resize;
 }
 
-.borderRowLine{
+.borderRowLine {
     background-color: #343a40;
-    height:5px;
+    height: 5px;
     cursor: row-resize;
 }
 
-
-.btn-outline-dark{
+.btn-outline-dark {
     color: #fff;
 }
 
+.tab-pane {
+    padding-top: 30px;
+}
 
-#codeHtml,#codeCss,#codeJavaScript {
+.tab-size {
+    padding-bottom: 0px;
+}
+
+li.nav-item.active.run {
+    visibility: hidden;
+}
+
+#codeHtml, #codeCss, #codeJavaScript {
     border: 5px solid #000000;
     background-color: #fff;
     padding: 0px;
+    overflow: auto;
 }
 

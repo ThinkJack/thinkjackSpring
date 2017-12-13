@@ -8,23 +8,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- footer 영역 버튼 -->
 <footer class="footer">
-    <nav class="navbar fixed-bottom navbar-expand navbar-dark">
+    <nav class="navbar fixed-bottom navbar-expand">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#Setting">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting" id="console-button">
                     Console
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#Setting">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting">
                     Comments
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#Setting">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting">
                     Shortcuts
                 </a>
             </li>
         </ul>
     </nav>
 </footer>
+
+</body>
+</html>

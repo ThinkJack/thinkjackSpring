@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- ChangeView Modal -->
-<div class="modal fade" id="ChangeView" tabindex="-1" role="dialog" aria-labelledby="ChangeViewLabel" aria-hidden="true">
+<div class="modal fade" id="changeView" tabindex="-1" role="dialog" aria-labelledby="ChangeViewLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
