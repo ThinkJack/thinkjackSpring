@@ -5,16 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/edit/*")
+@RequestMapping("/editpage/*")
 public class EditController {
 
-    @RequestMapping(value = "/editPage", method = RequestMethod.GET)
-    void editView(){
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public String editView(){
 
-    }
-
-    @RequestMapping(value = "/unitTest" ,method = RequestMethod.GET)
-    void unitTest(){
-        
+        return "edit/editPage";
     }
 }
