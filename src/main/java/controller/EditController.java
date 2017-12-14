@@ -11,6 +11,6 @@ public class EditController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public String editView(){
 
-        return "edit/editPage2";
+        return "edit/editPage";
     }
 }
