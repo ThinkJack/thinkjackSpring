@@ -23,3 +23,13 @@
 <link rel="stylesheet" href="/resources/codemirror/addon/dialog/dialog.css">
 
 <link rel="stylesheet" href="/resources/dist/css/editCss.css">
+
+<!--folding-->
+<link rel="stylesheet" href="/resources/codemirror/addon/fold/foldgutter.css" />
+
+<link rel="stylesheet" href="/resources/codemirror/lib/codemirror.css"/>
+<!--folding-->
+<link rel="stylesheet" href="/resources/codemirror/addon/fold/foldgutter.css"/>
+<!-- autocomplete -->
+<link rel="stylesheet" href="/resources/codemirror/addon/hint/show-hint.css">
+<!-- addon\dialog :good looking input dialogs -->
