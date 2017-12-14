@@ -8,11 +8,6 @@ body {
     height: 100%;
 }
 
-iframe {
-    background-color: #fff;
-    border: 5px solid #000000;
-    height: 568px;
-}
 
 p {
     padding: 10px;
@@ -22,17 +17,6 @@ li {
     padding-left: 15px;
 }
 
-textarea {
-    background: none;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    color: white;
-    font-size: 15px;
-    resize: none;
-    overflow: hidden;
-    display: block;
-}
 
 p.code-name {
     margin: 0px;
@@ -46,7 +30,8 @@ span.arrow {
     color: white;
     padding-left: 10px;
     padding-right: 10px;
-    display: block;
+    display: inline;
+    vertical-align: top;
 }
 
 .row{
@@ -54,7 +39,7 @@ span.arrow {
     margin: 0px;
 }
 .main {
-    padding-top: 65px;
+    padding-top: 56px;
 }
 
 .edit-console-view{
@@ -70,9 +55,6 @@ span.arrow {
 
 .container-fluid{
     padding:0px;
-}
-.content_row {
-    margin: 0px !important;
 }
 
 .navbar-dark {
@@ -92,17 +74,30 @@ span.arrow {
     background-color: #343a40;
 }
 
-.borderColLine {
+.boarderLine{
+    background-color: #343a40;
+    height: 5px;
+}
+
+.resize-code {
     background-color: #343a40;
     width: 5px;
     cursor: col-resize;
 }
 
-.borderRowLine {
+.resize-view {
     background-color: #343a40;
     height: 5px;
     cursor: row-resize;
 }
+
+.resize-console{
+    background-color: #343a40;
+    height: 5px;
+    cursor: row-resize;
+}
+
+
 
 .btn-outline-dark {
     color: #fff;
@@ -120,6 +115,10 @@ li.nav-item.active.run {
     visibility: hidden;
 }
 
+p.err{
+    color: red;
+}
+
 #codeHtml, #codeCss, #codeJavaScript {
     border: 5px solid #000000;
     background-color: #fff;
@@ -127,6 +126,37 @@ li.nav-item.active.run {
     overflow: auto;
 }
 
+.main_view .iframe_body{
+    height: calc(100% - 474px);
+    background-color: #fff;
+    border: 1px solid #000;
+}
+.main_view .console_body {
+    position: absolute;
+    bottom: 44px;
+    background-color: #000;
+}
+.main_view .command-line {
+    padding: 5px;
+}
+.main_view .command-line input{
+    background: none;
+    color: #fff;
+    font-size: 15px;
+    resize: none;
+    overflow: hidden;
+    vertical-align: middle;
+    width: calc(100% - 36px);
+    border: 1px solid #d3d3d3;
+}
+.main_view .command-line input:focus {
+    outline: none;
+}
+
+.btn_active {
+    background-color: #606060;
+    color: #fff;
+}
 
 .CodeMirror {
     border-top: 1px solid #888;
