@@ -50,9 +50,7 @@
 <script src="/resources/codemirror/addon/hint/css-hint.js"></script>
 <script src="/resources/codemirror/addon/hint/javascript-hint.js"></script>
 <script src="/resources/codemirror/addon/hint/xml-hint.js"></script>
-<!--foldcode -->
-<script src="/resources/codemirror/addon/fold/foldcode.js"></script>
-<script src="/resources/codemirror/addon/fold/foldgutter.js"></script>
+
 <!-- addon\comment -->
 <script src="/resources/codemirror/addon/comment/comment.js"></script>
 <script src="/resources/codemirror/addon/comment/continuecomment.js"></script>
@@ -67,4 +65,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 <!--mode && emmet import-->
 <script src="/resources/dist/js/codeEdit.js"></script>
-
