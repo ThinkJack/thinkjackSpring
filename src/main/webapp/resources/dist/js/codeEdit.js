@@ -15,7 +15,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true }, // 같은단어강조
     extraKeys: { "Ctrl-Space": "autocomplete" },
     indentUnit: 2,
-    // indentWithTabs: true,
+    indentWithTabs: true,
     electricChars: true,
     resetSelectionOnContextMenu: false,
     smartIndent: true,
@@ -23,8 +23,21 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     pasteLinesPerSelection: true,
     tabindex: 2,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true
 
+    // closeTagEnabled: false,
+    // closeTagIndent: false,
+    extraKeys: {
+        "'>'": function (cm) { cm.closeTag(cm, '>'); },
+        "'/'": function (cm) { cm.closeTag(cm, '/'); },
+        "Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }
+    },
+
+    wordWrap: true,
+    autoCloseTags: true,
+
+    lineWrapping: true,            //Folding
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
 
     // cursorScrollMargin: 5,
     // dragDrop:true,
@@ -35,6 +48,9 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     // adNew: true,
 
 });
+// codeHtml.foldCode(CodeMirror.Pos(0, 0));
+// codeHtml.foldCode(CodeMirror.Pos(34, 0));
+
 
 var codeCss = CodeMirror(document.getElementById("codeCss"), {
     mode: "css",
@@ -52,17 +68,20 @@ var codeCss = CodeMirror(document.getElementById("codeCss"), {
     electricChars: true,
     resetSelectionOnContextMenu: false,
     smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true
+
+    // lineWrapping: true,            //Folding
+    // extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+    // foldGutter: true,
+    // gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+
 });
+// editor_html.foldCode(CodeMirror.Pos(0, 0));
+// editor_html.foldCode(CodeMirror.Pos(34, 0));
 
 
 var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     mode: "javascript",
-    profile: 'xhtml',
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
@@ -71,23 +90,45 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     tabSize: 4,                  // 탭키 간격
     lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },   // 같은단어강조
-    // extraKeys: { ".": "autocomplete" },
+    extraKeys: { ".": "autocomplete" },
     extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
     indentUnit: 2,                //들여쓰기
-    indentWithTabs: true,
+    indentWithTabs: false,
     electricChars: true,         //중괄호 정렬
     resetSelectionOnContextMenu: false,
     smartIndent: true,
     lineWiseCopyCut: true,
     pasteLinesPerSelection: true,
     tabindex: 2,
-    autoCloseTags: true,
+    autoCloseBrackets: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    styleActiveLine: true
 
+    lineWrapping: true,           //Folding
+    extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+});
+// codeJavaScript.foldCode(CodeMirror.Pos(13, 0));
+
+
+var codePython = CodeMirror(document.getElementById("codePython"), {
+    mode: "python",
+    lineNumbers: true,
+    extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
 });
 
-//break point
+var codeMarkdown = CodeMirror(document.getElementById("codePython"), {
+    mode: "markdown",
+    lineNumbers: true,
+    lineWrapping: true,
+    extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+});
+
+
 function makeMarker() {
     var marker = document.createElement("div");
     marker.style.color = "#822";
@@ -96,25 +137,31 @@ function makeMarker() {
 }
 
 
+
 var delay;
-//var allEditValue;//html, javascript, css 모두 합친 문자열
+// var allEditValue;//html, javascript, css 모두 합친 문자열
 //------------------------------------------------------코드 자동 적용 기능
+
 codeHtml.on("change", function () {
     clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-    delay = setTimeout(updatePreview, 0);
+    delay = setTimeout(updatePreview, 300);
 });
-
-codeCss.on("change", function () {
-    clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-    delay = setTimeout(updatePreview, 0);
-});
-
 codeJavaScript.on("change", function () {
     clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-    delay = setTimeout(updatePreview, 0);
+    delay = setTimeout(updatePreview, 300);
+});
+codeCss.on("change", function () {
+    clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
+    delay = setTimeout(updatePreview, 300);
 });
 
-// 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
+////emmet plug-in
+// Inlet(codeHtml)
+//emmetCodeMirror(codeJavaScript)
+// emmetCodeMirror(codeCss)
+// emmetCodeMirror(codeJavaScript)
+
+
 var ExcludedIntelliSenseTriggerKeys =
     {
         "8": "backspace",
@@ -138,6 +185,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "45": "insert",
         "46": "delete",
         "48": ")",
+        "57": "(",
         "91": "left window key",
         "92": "right window key",
         "93": "select",
@@ -166,28 +214,28 @@ var ExcludedIntelliSenseTriggerKeys =
         "190": "period",
         "191": "slash",
         "192": "graveaccent",
+        "219": "{",
         "220": "backslash",
         "221": "}",
         "222": "quote"
-    };
+    }
 
-//키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
-        var scope={};
-        var preventList=['StyleFix', 'PrefixFree', 'Html2Jade','alert'];
-        for(var i in window){
-            if(preventList.indexOf(i)===-1){
-                scope[i]=window[i]
+        var scope = {};
+        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+        for (var i in window) {
+            if (preventList.indexOf(i) === -1) {
+                scope[i] = window[i]
             }
         }
-        CodeMirror.commands.autocomplete(cm,null, {completeSingle: false,globalScope:scope});
+        CodeMirror.commands.autocomplete(cm, null, { completeSingle: false, globalScope: scope });
     }
 });
 
 //번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
-codeHtml.on("gutterClick", function(cm, n) {
+codeHtml.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
@@ -196,51 +244,125 @@ codeHtml.on("gutterClick", function(cm, n) {
 codeCss.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
-        var scope={};
-        var preventList=['StyleFix', 'PrefixFree', 'Html2Jade','alert'];
-        for(var i in window){
-            if(preventList.indexOf(i)===-1){
-                scope[i]=window[i]
+        var scope = {};
+        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+        for (var i in window) {
+            if (preventList.indexOf(i) === -1) {
+                scope[i] = window[i]
             }
         }
-        CodeMirror.commands.autocomplete(cm,null, {completeSingle: false,globalScope:scope});
+        CodeMirror.commands.autocomplete(cm, null, { completeSingle: false, globalScope: scope });
     }
+});
+codeCss.on("gutterClick", function (cm, n) {
+    var info = cm.lineInfo(n);
+    cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
 
 codeJavaScript.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
-        var scope={};
-        var preventList=['StyleFix', 'PrefixFree', 'Html2Jade','alert'];
-        for(var i in window){
-            if(preventList.indexOf(i)===-1){
-                scope[i]=window[i]
+        var scope = {};
+        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+        for (var i in window) {
+            if (preventList.indexOf(i) === -1) {
+                scope[i] = window[i]
             }
         }
-        CodeMirror.commands.autocomplete(cm,null, {completeSingle: false,globalScope:scope});
+        CodeMirror.commands.autocomplete(cm, null, { completeSingle: false, globalScope: scope });
     }
+});
+codeJavaScript.on("gutterClick", function (cm, n) {
+    var info = cm.lineInfo(n);
+    cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
 
+//--Folding function
+// var Folding = function () {
+// var te = document.getElementById("Folding");
+// var sc = document.getElementById("codeJavascript");
+// te.value = (sc.textContent || sc.innerText || sc.innerHTML).replace(/^\s*/, "");
+// sc.innerHTML = "";
+// var te_html = document.getElementById("codeHtml");
+// te_html.value = document.documentElement.innerHTML;
+// var te_python = document.getElementById("codePython");
+// var te_markdown = document.getElementById("codeMarkdown");
+// te_markdown.value = "# Foo\n## Bar\n\nblah blah\n\n## Baz\n\nblah blah\n\n# Quux\n\nblah blah\n"
 
-//------------------------------------------------------------------------
-//------------------------------------------------------미리보기 기능
+// window.editor = CodeMirror.fromTextArea(te, {
+//   mode: "javascript",
+//   lineNumbers: true,
+//   lineWrapping: true,
+//   extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+//   foldGutter: true,
+//   gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+// });
+// editor.foldCode(CodeMirror.Pos(13, 0));
+
+// window.editor_html = CodeMirror.fromTextArea(te_html, {
+//   mode: "text/html",
+//   lineNumbers: true,
+//   lineWrapping: true,
+//   extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+//   foldGutter: true,
+//   gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+// });
+// editor_html.foldCode(CodeMirror.Pos(0, 0));
+// editor_html.foldCode(CodeMirror.Pos(34, 0));
+
+// window.editor_python = CodeMirror.fromTextArea(te_python, {
+//     mode: "python",
+//     lineNumbers: true,
+//     extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+//     foldGutter: true,
+//     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+// });
+
+// window.editor_markdown = CodeMirror.fromTextArea(te_markdown, {
+//     mode: "markdown",
+//     lineNumbers: true,
+//     lineWrapping: true,
+//     extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+//     foldGutter: true,
+//     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+//     });
+// };
+
+
+
+//-----미리보기 기능
 function updatePreview() {
 
     var previewFrame = document.getElementById('resultView');
     //iframe의 document객체 받아오기
     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
 
-
     preview.open();
-
     preview.write(
-        codeHtml.getValue(),
-        "<style>" + codeCss.getValue() + "</style>",
-        "<\script>" + codeJavaScript.getValue() + "<\/script>"
+        codeHtml.getValue()
+        ,
+        "<style>"+codeCss.getValue()+"</style>",
+        "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
+
+    // var myDiv1 = document.getElementById("codeHtml");
+    // var myDiv2 = document.getElementById("codeCss");
+    // var myDiv3 = document.getElementById("codeJavaScript");
+
+    // preview.
+
+    // myDiv1.innerHTML = "<b>Content of 1st DIV</b>";
+    // myDiv2.innerHTML = "<i>Content of second DIV element</i>";
+
+
+
+
     preview.close();
-
-
 }
+// setTimeout(updatePreview, 300);
+
+codeHtml.foldCode(CodeMirror.Pos(0, 0));
+codeHtml.foldCode(CodeMirror.Pos(34, 0));
+codeJavaScript.foldCode(CodeMirror.Pos(13, 0));

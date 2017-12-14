@@ -42,7 +42,9 @@
 <script src="/resources/codemirror/addon/hint/css-hint.js"></script>
 <script src="/resources/codemirror/addon/hint/javascript-hint.js"></script>
 <script src="/resources/codemirror/addon/hint/xml-hint.js"></script>
-
+<!--foldcode -->
+<script src="/resources/codemirror/addon/fold/foldcode.js"></script>
+<script src="/resources/codemirror/addon/fold/foldgutter.js"></script>
 <!-- addon\comment -->
 <script src="/resources/codemirror/addon/comment/comment.js"></script>
 <script src="/resources/codemirror/addon/comment/continuecomment.js"></script>

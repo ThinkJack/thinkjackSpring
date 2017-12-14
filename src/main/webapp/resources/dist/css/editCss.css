@@ -12,6 +12,7 @@ iframe {
     background-color: #fff;
     border: 5px solid #000000;
     height: 568px;
+
 }
 
 p {
@@ -92,17 +93,30 @@ span.arrow {
     background-color: #343a40;
 }
 
-.borderColLine {
+.boarderLine{
+    background-color: #343a40;
+    height: 5px;
+}
+
+.resize-code {
     background-color: #343a40;
     width: 5px;
     cursor: col-resize;
 }
 
-.borderRowLine {
+.resize-view {
     background-color: #343a40;
     height: 5px;
     cursor: row-resize;
 }
+
+.resize-console{
+    background-color: #343a40;
+    height: 5px;
+    cursor: row-resize;
+}
+
+
 
 .btn-outline-dark {
     color: #fff;
@@ -118,6 +132,10 @@ span.arrow {
 
 li.nav-item.active.run {
     visibility: hidden;
+}
+
+p.err{
+    color: red;
 }
 
 #codeHtml, #codeCss, #codeJavaScript {
