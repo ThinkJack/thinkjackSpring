@@ -30,6 +30,18 @@
 
     <link rel="stylesheet" href="/resources/dist/css/editCss.css">
 
+    <!--folding-->
+    <link rel="stylesheet" href="/resources/codemirror/addon/fold/foldgutter.css" />
+    <link rel="stylesheet" href="css/editCss.css">
+
+    <link rel="stylesheet" href="/resources/codemirror/lib/codemirror.css"/>
+    <!--folding-->
+    <link rel="stylesheet" href="/resources/codemirror/addon/fold/foldgutter.css"/>
+    <!-- autocomplete -->
+    <link rel="stylesheet" href="/resources/codemirror/addon/hint/show-hint.css">
+    <!-- addon\dialog :good looking input dialogs -->
+
+
 </head>
 <body>
 <!-- header 메뉴바 -->
@@ -37,7 +49,8 @@
 
     <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:20px;"></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -58,8 +71,8 @@
             </li>
             <li class="nav-item active">
                 <div>
-                <!-- 좋아요 버튼 -->
-                    <a class="btn btn-outline-dark" href="javascript:likebt();" >
+                    <!-- 좋아요 버튼 -->
+                    <a class="btn btn-outline-dark" href="javascript:likebt();">
                         <img src="/resources/images/like1.png" id="likebt"> Like
                     </a>
                 </div>

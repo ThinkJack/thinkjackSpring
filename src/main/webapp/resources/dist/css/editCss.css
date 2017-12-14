@@ -127,3 +127,15 @@ li.nav-item.active.run {
     overflow: auto;
 }
 
+
+.CodeMirror {
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+}
+
+/* 같은단어강조 */
+.cm-matchhighlight {background-color: #64837e; color: #ffffff !important;}
+
+/*!* 괄호강조 *!*/
+.CodeMirror-matchingbracket { background-color: #4dc0ad; color: #000000 !important; }
+
