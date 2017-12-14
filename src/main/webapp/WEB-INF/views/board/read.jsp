@@ -18,7 +18,7 @@
         <div class="box-body">
 
             <div style="text-align: right;">
-                <span class="heart" style="text-align: right;  font-size: 40px;" >♥</span>
+                <button class="heart"  value="true" style="text-align: right;  font-size: 40px;" >♥</button>
 
             </div>
             <div class="form-group">
@@ -72,30 +72,20 @@
             formObj.submit();
         });
 
-        var heart = true;
+
         $(".heart").on("click", function () {
 
-            if(heart) {
-                $(this).html("♡");
-                heart = !heart;
-            }else {
-                $(this).html("♥");
-                heart = !heart;
-            }
+            var heart = $(this);
 
+            var heartval = $(this).val();
+            var sendData = {'boardId' : '${boardVO.boardId}','heart' : heartval};
             $.ajax({
-                url:'/board/read',
-                type:'POST',
-                data: heart,
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                dataType : "json",
-
-                success:function(data){
-                    alert("좋아요 주셧습니다!");
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown){
-
-                    alert('실패!' );
+                url :'/board/heart',
+                type :'POST',
+                data : sendData,
+                success : function(data){
+                    heart.val(data);
+                    alert(data);
                 }
             });
         });
