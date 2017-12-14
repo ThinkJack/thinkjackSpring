@@ -27,4 +27,6 @@ public interface BoardService {
 
     public void  increaseViewcnt(int boardId , String category ) throws Exception;
 
+    public int getBoardLike(BoardLikeVO vo) throws Exception;
+
 }

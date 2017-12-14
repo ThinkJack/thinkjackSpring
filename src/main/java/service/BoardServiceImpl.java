@@ -62,4 +62,9 @@ public class BoardServiceImpl implements BoardService {
     public void increaseViewcnt(int boardId, String category) throws Exception {
         dao.increaseViewcnt(boardId,category);
     }
+
+    @Override
+    public  int getBoardLike(BoardLikeVO vo) throws Exception {
+        return dao.getBoardLike(vo);
+    }
 }

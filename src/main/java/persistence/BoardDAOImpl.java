@@ -84,6 +84,11 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
     @Override
+    public int getBoardLike(BoardLikeVO vo) throws Exception {
+        return session.selectOne(boardLike+".getBoardLike",vo);
+    }
+
+    @Override
     public void insertBoardLike(BoardLikeVO vo) throws Exception {
         session.insert(boardLike+".createBoardLike",vo);
     }

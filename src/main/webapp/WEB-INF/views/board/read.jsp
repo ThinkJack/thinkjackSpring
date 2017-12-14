@@ -18,7 +18,9 @@
         <div class="box-body">
 
             <div style="text-align: right;">
-                <button class="heart"  value="true" style="text-align: right;  font-size: 40px;" >♥</button>
+                <a class="btn btn-outline-dark heart">
+                    <img id="heart" src="">
+                </a>
 
             </div>
             <div class="form-group">
@@ -47,10 +49,27 @@
 </div>
 <script>
     $(document).ready(function () {
+
+        var heartval = ${heart};
+
+        console.log(heartval);
+
+        if(heartval>0) {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like2.png");
+            $(".heart").prop('name',heartval)
+        }
+        else {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like1.png");
+            $(".heart").prop('name',heartval)
+        }
+
         var formObj = $("form[role='form']");
         var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
-        console.log(formObj);
+
+
 
         $(".modifyBtn").on("click", function () {
             formObj.attr("action", "/board/modify");
@@ -75,20 +94,29 @@
 
         $(".heart").on("click", function () {
 
-            var heart = $(this);
+            var that = $(".heart");
 
-            var heartval = $(this).val();
-            var sendData = {'boardId' : '${boardVO.boardId}','heart' : heartval};
+            var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
             $.ajax({
                 url :'/board/heart',
                 type :'POST',
                 data : sendData,
                 success : function(data){
-                    heart.val(data);
-                    alert(data);
+                    that.prop('name',data);
+                    if(data==1) {
+                        $('#heart').prop("src","/resources/images/like2.png");
+                    }
+                    else{
+                        $('#heart').prop("src","/resources/images/like1.png");
+                    }
+
+
                 }
             });
         });
+
+
+
     })
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

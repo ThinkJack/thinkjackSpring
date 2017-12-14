@@ -61,11 +61,23 @@ public class BoardController {
     @RequestMapping(value = "/read", method = RequestMethod.GET)
     public void read(@RequestParam("boardId") int boardId, Model model,
                      @ModelAttribute("cri") SearchCriteria cri,
-                     @ModelAttribute("category") String category) throws Exception {
+                     @ModelAttribute("category") String category,
+                     HttpServletRequest httpRequest) throws Exception {
 
         service.increaseViewcnt(boardId, category);
 
         model.addAttribute(service.readBoard(boardId, category));
+
+        int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
+
+        BoardLikeVO vo = new BoardLikeVO();
+        vo.setBoardId(boardId);
+        vo.setUserId(userid);
+
+        int boardlike = service.getBoardLike(vo);
+        System.out.println(boardlike);
+
+        model.addAttribute("heart",boardlike);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -103,8 +115,9 @@ public class BoardController {
 
     @ResponseBody
     @RequestMapping(value = "/heart", method = RequestMethod.POST, produces = "application/json")
-    public boolean heart(HttpServletRequest httpRequest) throws Exception {
-        boolean heart = Boolean.parseBoolean(httpRequest.getParameter("heart"));
+    public int heart(HttpServletRequest httpRequest) throws Exception {
+
+        int heart = Integer.parseInt(httpRequest.getParameter("heart"));
         int boardId = Integer.parseInt(httpRequest.getParameter("boardId"));
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
@@ -113,7 +126,17 @@ public class BoardController {
         boardLikeVO.setBoardId(boardId);
         boardLikeVO.setUserId(userid);
 
-        return !heart;
+        System.out.println(heart);
+
+        if(heart >= 1) {
+            service.deleteBoardLike(boardLikeVO);
+            heart=0;
+        } else {
+            service.insertBoardLike(boardLikeVO);
+            heart=1;
+        }
+
+        return heart;
     }
 
 
