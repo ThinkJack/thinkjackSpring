@@ -26,6 +26,10 @@
     <bean id="authInterceptor" class="interceptor.AuthInterceptor"></bean>
     
     <bean id="loginInterceptor" class="interceptor.LoginInterceptor"></bean>
+
+    <bean id="naverLoginBo" class="naver.NaverLoginBo"></bean>
+
+    <bean id="githubLoginBo" class="github.GithubLoginBo"></bean>
 	<beans:interceptors>
 		<beans:interceptor>
 			<beans:mapping path="/user/loginPost"/>

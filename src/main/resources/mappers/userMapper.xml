@@ -5,15 +5,15 @@
 
 <mapper namespace="mapper.UserMapper">
 
-<insert id = "insertUser">
+    <insert id="insertUser">
 insert into tbl_user (user_email, user_password, user_name)
 values(#{userEmail}, #{userPassword}, #{userName})
 </insert>
 
-<select id="login" resultType="UserVO">
+    <select id="login" resultType="UserVO">
 
 select user_email userEmail,
-        user_password userPassword,
+        user_id userId,
         user_name userName
 from tbl_user
   where user_email = #{userEmail}
@@ -22,5 +22,40 @@ from tbl_user
 
 </select>
 
+    <select id="readUser" resultType="UserVO">
+
+select user_id userId,
+        user_email userEmail,
+        user_name userName,
+        user_social_id userSocialId
+        from tbl_user
+        where user_id = #{userId}
+</select>
+
+    <update id="updateUser">
+    update tbl_user SET
+    user_name =#{userName},
+    user_password = #{userPassword}
+    where user_id = #{userId}
+</update>
+    <update id="deleteUser">
+    update tbl_user SET
+    user_state = '1'
+    where user_id = #{userId}
+
+</update>
+
+    <insert id="naverInsertUser">
+        insert into tbl_user (user_email,user_social_id, user_name)
+        values(#{userEmail},#{userSocialId}, #{userName})
+</insert>
+
+    <select id="naverReadUser" resultType="UserVO">
+
+        select user_id userId,
+        user_name userName
+        from tbl_user
+        where user_social_id = #{userSocialId}
+</select>
 
 </mapper>
