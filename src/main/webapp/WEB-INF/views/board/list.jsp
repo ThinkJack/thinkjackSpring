@@ -13,8 +13,39 @@
 </style>
 <div class="row">
     <div class="col-3"></div>
+
     <div class="col-6">
         <h1 style="text-align: center;"> ${category} 게시판</h1>
+            <select name="searchType">
+                <option value="n"
+                        <c:out value="${cri.searchType == null?'selected':''}"/> >
+                    ---</option>
+                <option value="t"
+                        <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
+                    Title</option>
+                <option value="c"
+                        <c:out value="${cri.searchType eq 'c'?'selected':''}"/> >
+                    Content</option>
+                <option value="w"
+                        <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
+                    Writer</option>
+                <option value="tc"
+                        <c:out value="${cri.searchType eq 'tc'?'selected':''}"/> >
+                    Title OR Content</option>
+                <option value="cw"
+                        <c:out value="${cri.searchType eq 'cw'?'selected':''}"/> >
+                    Content OR Writer</option>
+                <option value="tcw"
+                        <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/> >
+                    Title OR Content OR Writer</option>
+            </select>
+
+            <input type="text" name="keyword" id="keywordInput"
+                   value="${cri.keyword}">
+
+            <button id="searchBtn">Search</button>
+            <button id="newBtn">new Board</button>
+
         <hr>
         <table class="table">
             <tr>
@@ -68,6 +99,29 @@
 </div>
 
 <script>
+    $(document).ready(
+        function () {
+            console.log("ggg");
+            $('#searchBtn').on(
+                "click",
+                function (event) {
+                    self.location = "list"
+                        +'${pageMaker.makeQuery(1)}'
+                        +"&searchType="
+                        +$("select option:selected").val()
+                        +"&keyword=" + encodeURIComponent($('#keywordInput').val())
+                        +"&category=" + '${category}';
+                }
+            );
+
+            $('#newBtn').on(
+                "click",
+                function (evt) {
+                    self.location = "register?category="+'${category}';
+                }
+            );
+        }
+    );
 
 </script>
 
