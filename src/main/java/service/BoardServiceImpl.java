@@ -1,6 +1,8 @@
 package service;
 
+import domain.BoardLikeVO;
 import domain.BoardVO;
+import domain.SearchCriteria;
 import org.springframework.stereotype.Service;
 import persistence.BoardDAO;
 
@@ -15,33 +17,44 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public void insertBoard(BoardVO vo) throws Exception {
-        dao.insertBoard(vo);
+    public void insertBoard(BoardVO vo, String category) throws Exception {
+        dao.insertBoard(vo,category);
     }
 
     @Override
-    public BoardVO readBoard(int bno) throws Exception {
-        return dao.readBoard(bno);
+    public BoardVO readBoard(int boardId, String category) throws Exception {
+        return dao.readBoard(boardId,category);
     }
 
     @Override
-    public List<BoardVO> listAllBoard() throws Exception {
-        return dao.readAllBoard();
+    public void updateBoard(BoardVO vo, String category) throws Exception {
+        dao.updateBoard(vo,category);
     }
 
     @Override
-    public void updateBoard(BoardVO vo) throws Exception {
-        dao.updateBoard(vo);
-
+    public void deleteBoard(int boardId, String category) throws Exception {
+        dao.deleteBoard(boardId,category);
     }
 
     @Override
-    public void deleteBoard(int bno) throws Exception {
-        dao.deleteBoard(bno);
+    public void insertBoardLike(BoardLikeVO vo) throws Exception {
+        dao.insertBoardLike(vo);
+        dao.updateBoardLike(vo.getBoardId());
     }
 
     @Override
-    public List<BoardVO> readCategoryBoard(String categoryname) throws Exception {
-        return dao.readCategoryBoard(categoryname);
+    public void deleteBoardLike(BoardLikeVO vo) throws Exception {
+        dao.deleteBoardLike(vo);
+        dao.updateBoardLike(vo.getBoardId());
+    }
+
+    @Override
+    public List<BoardVO> searchCriteria(SearchCriteria cri, String category) throws Exception {
+        return dao.search(cri,category);
+    }
+
+    @Override
+    public int searchCount(SearchCriteria cri, String category) throws Exception {
+        return dao.searchCount(cri, category);
     }
 }

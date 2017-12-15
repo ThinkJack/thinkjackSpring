@@ -42,4 +42,24 @@ public class ReplyDAOImpl implements ReplyDAO {
 
         session.delete(namespace+".delete",replyId);
     }
+
+    @Override
+    public void reCreateReply(ReplyVO vo) throws Exception {
+
+    }
+
+    @Override
+    public List<ReplyVO> reReadReply(Integer replyId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void reUpdateReply(ReplyVO vo) throws Exception {
+
+    }
+
+    @Override
+    public void reDeleteReply(Integer replyParent) throws Exception {
+
+    }
 }

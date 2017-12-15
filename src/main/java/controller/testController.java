@@ -89,11 +89,11 @@ public class testController {
         return "redirect:/freeBoard/list";
     }
 
-    @RequestMapping(value = "/intro", method = RequestMethod.GET)
-    public void intro(Model model) throws Exception {
-
-        model.addAttribute("list", service.listAllBoard());
-    }
+//    @RequestMapping(value = "/intro", method = RequestMethod.GET)
+//    public void intro(Model model) throws Exception {
+//
+//        model.addAttribute("list", service.listAllBoard());
+//    }
 
 
 }

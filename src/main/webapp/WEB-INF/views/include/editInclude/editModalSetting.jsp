@@ -118,3 +118,12 @@
         </div>
     </div>
 </div>
+
+<%--<script>--%>
+    <%--$(document).ready(function(){--%>
+        <%--$("button").click(function(){--%>
+             <%--alert($("#w3s").attr("href"));--%>
+            <%--alert($("#gridRadios1").attr("name"))--%>
+        <%--});--%>
+    <%--});--%>
+<%--</script>--%>

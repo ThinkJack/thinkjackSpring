@@ -2,6 +2,8 @@ package persistence;
 
 import domain.BoardLikeVO;
 import domain.BoardVO;
+import domain.Criteria;
+import domain.SearchCriteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -14,54 +16,81 @@ public class BoardDAOImpl implements BoardDAO {
     @Inject
     private SqlSession session;
 
-    final String namespace = "mapper.boardMapper";
+    final String board = "mapper.BoardMapper_";
+
+    final String boardLike = "mapper.boardLikeMapper";
 
     @Override
-    public void insertBoard(BoardVO vo) throws Exception {
+    public void insertBoard(BoardVO vo,String category) throws Exception {
 
-        session.insert(namespace+".insert",vo);
+
+        session.insert(board+category+".create",vo);
     }
 
     @Override
-    public BoardVO readBoard(int bno) throws Exception {
-        return session.selectOne(namespace+".select",bno);
+    public BoardVO readBoard(int bno,String category) throws Exception {
+
+        return session.selectOne(board+category+".read",bno);
     }
 
     @Override
-    public List<BoardVO> readAllBoard() throws Exception {
+    public void updateBoard(BoardVO vo,String category) throws Exception {
 
-        return session.selectList(namespace+".selectAll");
+        session.update(board+category+".update",vo);
     }
 
     @Override
-    public void updateBoard(BoardVO vo) throws Exception {
-        session.update(namespace+".update",vo);
-    }
+    public void deleteBoard(int bno,String category) throws Exception {
 
-    @Override
-    public void deleteBoard(int bno) throws Exception {
-        session.delete(namespace+".delete",bno);
+        session.delete(board+category+".delete",bno);
 
     }
 
     @Override
-    public List<BoardVO> readCategoryBoard(String categoryname)throws Exception {
-        return session.selectList(namespace+".selectCategoryBoard" , categoryname);
+    public List<BoardVO> listPage(int page,String category) throws Exception {
+
+
+        if (page <= 0) {
+            page = 1;
+        }
+
+        page = (page - 1) * 10;
+
+        return session.selectList(board+category + ".readPage", page);
+    }
+
+    @Override
+    public List<BoardVO> search(SearchCriteria cri,String category) throws Exception {
+
+
+        return session.selectList(board+category + ".search", cri);
+    }
+
+    @Override
+    public int searchCount(SearchCriteria cri,String category) throws Exception {
+
+        return session.selectOne(board+category + ".searchCount", cri);
+    }
+
+    @Override
+    public int countPaging(Criteria cri,String category) throws Exception {
+
+        return session.selectOne(board+category + ".", cri);
     }
 
     @Override
     public void insertBoardLike(BoardLikeVO vo) throws Exception {
-        session.insert(namespace+".createBoardLike",vo);
+        session.insert(boardLike+".createBoardLike",vo);
     }
 
     @Override
     public void deleteBoardLike(BoardLikeVO vo) throws Exception {
-        session.delete(namespace+".deleteBoardLike",vo);
+        session.delete(boardLike+".deleteBoardLike",vo);
     }
 
     @Override
     public void updateBoardLike(int boardId) throws Exception {
-        session.update(namespace+".updateBoardLike",boardId);
+        session.update(boardLike+".updateBoardLike",boardId);
     }
 
 
