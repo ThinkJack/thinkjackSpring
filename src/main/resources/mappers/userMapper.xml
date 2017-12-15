@@ -40,7 +40,7 @@ select user_id userId,
 </update>
     <update id="deleteUser">
     update tbl_user SET
-    user_state = '1'
+    user_state = '2'
     where user_id = #{userId}
 
 </update>
@@ -58,4 +58,14 @@ select user_id userId,
         where user_social_id = #{userSocialId}
 </select>
 
+    <update id="createAuthKey">
+       update tbl_user set user_auth_code = #{userAuthCode} where user_email = #{userEmail}
+    </update>
+
+<update id="userAuth">
+update tbl_user SET
+user_state = '1'
+where user_email = #{userEmail}
+
+</update>
 </mapper>

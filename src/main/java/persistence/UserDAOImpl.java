@@ -24,7 +24,21 @@ public class UserDAOImpl implements UserDAO{
 		session.insert(namespace+".insertUser",vo);
 	}
 
+	@Override
+	public void createAuthKey(String userEmail, String userAuthCode) throws Exception {
+		UserVO vo = new UserVO();
+		vo.setUserAuthCode(userAuthCode);
+		vo.setUserEmail(userEmail);
 
+		session.selectOne(namespace + ".createAuthKey", vo);
+	}
+
+	@Override
+	public void userAuth(String userEmail) throws Exception {
+
+		System.out.println("userEmail"+userEmail);
+		session.update(namespace + ".userAuth", userEmail);
+	}
 
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {

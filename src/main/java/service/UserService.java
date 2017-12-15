@@ -16,4 +16,6 @@ public interface UserService {
 	public UserVO googleLogin(LoginDTO dto) throws Exception;
 
 	public UserVO onAuthenticationBinding(LoginDTO dto, User facebookUser) throws Exception;
+
+	public void userAuth(String userEmail) throws Exception;
 }

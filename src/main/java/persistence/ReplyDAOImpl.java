@@ -42,4 +42,5 @@ public class ReplyDAOImpl implements ReplyDAO {
 
         session.delete(namespace+".delete",replyId);
     }
+
 }

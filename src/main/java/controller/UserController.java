@@ -12,6 +12,8 @@ import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
 import common.JsonStringParse;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -36,6 +38,7 @@ import domain.UserVO;
 import dto.LoginDTO;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import service.UserService;
 
@@ -57,9 +60,20 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String RegisterPost(UserVO user,Model model) throws Exception{
+	public String RegisterPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
 		service.regist(user);
-		return "redirect:/freeBoard/list";
+        rttr.addFlashAttribute("authmsg" , "가입시 사용한 이메일로 인증해주 3");
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
+	public String emailConfirm(String userEmail, Model model) throws Exception { // 이메일인증
+		System.out.println(userEmail);
+		service.userAuth(userEmail);
+		model.addAttribute("userEmail", userEmail);
+
+		return "/user/emailConfirm";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -104,9 +118,8 @@ public class UserController {
 
 
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET)
-	public String ModifyUserGet(UserVO user,Model model) throws Exception{
-		service.modifyUser(user);
-		return "redirect:/";
+	public void ModifyUserGet(UserVO user,Model model) throws Exception{
+
 	}
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
 	public String ModifyUserPost(UserVO user,Model model) throws Exception{
@@ -183,7 +196,7 @@ public class UserController {
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
-		return new ModelAndView("redirect:/freeBoard/list", "result", vo);
+		return new ModelAndView("redirect:/", "result", vo);
 	}
 
 
@@ -285,21 +298,34 @@ public class UserController {
 	@RequestMapping(value="/githubcallback",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView githubcallback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		System.out.println("/callback 진입 토튼 발급 전 ");
-		System.out.println("session : "+session);
-		System.out.println("state : "+state);
-		System.out.println("code : "+code);
+//		System.out.println("/callback 진입 토튼 발급 전 ");
+//		System.out.println("session : "+session);
+//		System.out.println("state : "+state);
+//		System.out.println("code : "+code);
 
+		//토큰 생성
 		OAuth2AccessToken oauthToken = githubLoginBo.getAccessToken(session, code, state);
 
-		System.out.println("github oauthToken 값: "+oauthToken);
+		//System.out.println("github oauthToken 값: "+oauthToken);
 		githubapiResult = githubLoginBo.getUserProfile(oauthToken);
-		System.out.println(githubapiResult);
+		//System.out.println(githubapiResult);
 
-		JSONObject jsonobj = jsonparse.stringToJson(githubapiResult, "response");
+		//JSON 형식을 parsing 하기 위한 준비
+		Object obj = null;
+		JSONParser parser = new JSONParser();
+		try {
+			obj = parser.parse(githubapiResult);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//JSON 객체 생성
+		JSONObject jsonobj = (JSONObject) obj;
 
-		String userSocialId = jsonparse.JsonToString(jsonobj, "id");
-		String name = jsonparse.JsonToString(jsonobj, "nickname");
+		//System.out.println(jsonobj);
+		String name = (String) jsonparse.JsonToString(jsonobj, "login");
+		String userSocialId = (String) (jsonparse.JsonToString(jsonobj, "id")+"");
+
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
@@ -323,7 +349,7 @@ public class UserController {
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
-		return new ModelAndView("redirect:/freeBoard/list", "result", vo);
+		return new ModelAndView("redirect:/board/list?category=free", "result", vo);
 	}
 
 

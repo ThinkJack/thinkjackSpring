@@ -14,8 +14,8 @@ import java.util.UUID;
 
 public class GithubLoginBo {
 
-    private final static String CLIENT_ID = "a6b8d2b790d818e653f2";
-    private final static String CLIENT_SECRET = "4d3e121449ccbcca18474f2f51f3a4082cd3ef3d";
+    private final static String CLIENT_ID = "Iv1.d11c8995c83edf61";
+    private final static String CLIENT_SECRET = "7aa4e65bdaeecc188e1a583db33ffc09c4eb59be";
     private final static String REDIRECT_URI = "http://localhost:8080/user/githubcallback";
     private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
@@ -63,7 +63,7 @@ public class GithubLoginBo {
 
             /* Scribe에서 제공하는 AccessToken 획득 기능으로 git Access Token을 획득 */
             System.out.println("세션 검증 완료 ");
-            System.out.println("oauthService :"+oauthService.getAccessToken(code));
+           // System.out.println("oauthService :"+oauthService.getAccessToken(code));
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
             System.out.println("토큰 저장 완료 ");
             return accessToken;

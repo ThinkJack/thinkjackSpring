@@ -37,7 +37,9 @@
 		</beans:interceptor>
 
         <beans:interceptor>
-            <beans:mapping path="/freeBoard/*"/>
+            <beans:mapping path="/board/*"/>
+            <beans:mapping path="/user/modify"/>
+            <beans:mapping path="/user/delete"/>
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 

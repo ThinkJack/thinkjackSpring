@@ -14,8 +14,8 @@
 
 <h1>첫번째 회원가입</h1>
 <form action = "/user/register" method="post">
-	email<input type = "userEmail" name = "email"><br>
-	password<input type = "userPassword" name = "password"><br>
+	email<input type = "text" name = "userEmail"><br>
+	password<input type = "password" name = "userPassword"><br>
 	name<input type = "text" name = "userName"><br>
 	<input type = "submit" value = "회원가입">
 </form>
