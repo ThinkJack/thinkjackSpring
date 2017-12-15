@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item active">
                 <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#changeView">
-                    <img src="/resources/images/view.png"> Change View
+                    <img src="/resources/images/browser-visualization.png"> Change View
                 </a>
             </li>
         </ul>

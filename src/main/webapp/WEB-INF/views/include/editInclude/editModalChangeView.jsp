@@ -28,17 +28,6 @@
                         <img src="/resources/images/right-panel.png">
                     </a>
                 </div>
-                <%--<div class="row">--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/left-panel.png">--%>
-                    <%--</a>--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/top-panel.png">--%>
-                    <%--</a>--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/right-panel.png">--%>
-                    <%--</a>--%>
-                <%--</div>--%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

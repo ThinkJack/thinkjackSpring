@@ -29,12 +29,12 @@
                 </div>
                 <div class="resize-code" id="resize-code-1"></div>
                 <div class="build col" id="cssBuild">
-                    <div class="col"><p class="h4 text-white code-name">Css</p></div>
+                    <div class="col"><p class="h4 text-white code-name">CSS</p></div>
                     <div class="col" id="codeCss"></div>
                 </div>
                 <div class="resize-code" id="resize-code-2"></div>
                 <div class="build col" id="jsBuild">
-                    <div class="col"><p class="h4 text-white code-name">JavaScript</p></div>
+                    <div class="col"><p class="h4 text-white code-name">JS</p></div>
                     <div class="col" id="codeJavaScript"></div>
                 </div>
 
@@ -67,6 +67,7 @@
     <!--modal 창-->
     <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
     <jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
+    <jsp:include page="../include/editInclude/editModalCommant.jsp" flush="false"/>
     <!--footer-->
     <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 
@@ -119,7 +120,7 @@
             $("#command-line").keyup(function (e) {
                 if (e.keyCode === 13) {
                     var commandLineValue = this.value;
-                    //console.log() 입력시 문자열 작업
+                    //console.log() 입력시 문자열 작업(정규식)
                     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
                     var temp = commandLineValue.match(reg);
 
@@ -131,7 +132,6 @@
                         temp[i] = temp[i].replace("')", "");
                         temp[i] = temp[i].replace("\")", "");
                     }
-                    //------------------------------------------------
 
                     try{
                         editConsoleView.innerHTML += "<p class='console-log'> > " + commandLineValue + "</p>";
@@ -142,7 +142,6 @@
                         }
                         editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> <· " + eval(commandLineValue) + "</p>"
                     }catch(err){
-//                    alert(err.message);
                         editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> <· " + "Uncaught " + err.name + " : " + err.message + "</p>"
                     }finally {
                         this.value = "";
@@ -178,24 +177,13 @@
             window.outerWidth;
         });
         //--------------------
-        //resize관련 function
-        var drag_x1 = false;
-        $(function() {
-            $("#resize-code-1").on({
-                mousedown: function(event) {
-                    drag_x1 = event.offsetX;
-                }
-            })
-        })
 
-        $(window).resize(function (){
-            // width값을 가져오기
-            var width_size = window.outerWidth;
-            var height_size = window.outerHeight;
+//        commant-modal 관련 script
 
-            // 800 이하인지 if문으로 확인
-            console.log(width_size + " * " + height_size);
-        })
+        jQuery("#commant-save").click(function() {
+            this.style = "display: none;";
+            document.getElementById("commant-modify").style = "display: inline-block;";
+        });
     </script>
 </body>
 </html>

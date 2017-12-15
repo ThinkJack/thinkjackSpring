@@ -55,7 +55,7 @@
 <script src="/resources/codemirror/addon/comment/comment.js"></script>
 <script src="/resources/codemirror/addon/comment/continuecomment.js"></script>
 <!-- addon\dialog -->
-<script src="/resourcesaddon/dialog/dialog.js"></script>
+<script src="/resources/codemirror/addon/dialog/dialog.js"></script>
 <script src="/resources/codemirror/addon/search/search.js"></script>
 <script src="/resources/codemirror/addon/search/searchcursor.js"></script>
 <script src="/resources/codemirror/addon/search/jump-to-line.js"></script>
@@ -64,4 +64,4 @@
 <!-- <script src="/resources/codemirror/addon/tern/worker.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 <!--mode && emmet import-->
-<script src="/resources/dist/js/codeEdit.js"></script>
+<script src="/resources/dist/js/editPage/codeEdit.js"></script>
