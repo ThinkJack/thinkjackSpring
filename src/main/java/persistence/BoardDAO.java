@@ -32,5 +32,8 @@ public interface BoardDAO {
 
     public void updateBoardLike(int boardId)throws Exception;
 
+    public void increaseViewcnt(int boardId,String category) throws Exception;
+
+    public int getBoardLike(BoardLikeVO vo) throws Exception;
 
 }

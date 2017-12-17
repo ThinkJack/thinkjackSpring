@@ -25,4 +25,8 @@
         WHERE board_id = #{boardId}
     </select>
 
+    <select id="getBoardLike" resultType="int">
+        SELECT COUNT(board_like_id) FROM tbl_board_like WHERE board_id = #{boardId} AND user_id = #{userId}
+    </select>
+
 </mapper>

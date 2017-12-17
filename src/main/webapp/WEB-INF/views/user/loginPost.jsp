@@ -5,7 +5,7 @@
   <body>
   
 <script type="text/javascript">
-self.location = "/freeBoard/list"
+self.location = "/board/list?category=free"
 </script>
   
   </body>

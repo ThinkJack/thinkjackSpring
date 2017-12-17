@@ -8,7 +8,7 @@
     <div class="col-3"></div>
     <div class="col-6">
 
-        <form role="form">
+        <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
             <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -17,6 +17,12 @@
         </form>
         <div class="box-body">
 
+            <div style="text-align: right;">
+                <a class="btn btn-outline-dark heart">
+                    <img id="heart" src="">
+                </a>
+
+            </div>
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
@@ -34,8 +40,10 @@
             </div>
         </div>
         <div class="box-footer">
+            <c:if test="${login.userName == boardVO.boardWriter}">
             <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
             <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+            </c:if>
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
     </div>
@@ -43,10 +51,25 @@
 </div>
 <script>
     $(document).ready(function () {
+
+        var heartval = ${heart};
+
+        if(heartval>0) {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like2.png");
+            $(".heart").prop('name',heartval)
+        }
+        else {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like1.png");
+            $(".heart").prop('name',heartval)
+        }
+
         var formObj = $("form[role='form']");
         var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
-        console.log(formObj);
+
+
 
         $(".modifyBtn").on("click", function () {
             formObj.attr("action", "/board/modify");
@@ -66,7 +89,34 @@
             formObj.attr("action", "/board/list");
 
             formObj.submit();
-        })
+        });
+
+
+        $(".heart").on("click", function () {
+
+            var that = $(".heart");
+
+            var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
+            $.ajax({
+                url :'/board/heart',
+                type :'POST',
+                data : sendData,
+                success : function(data){
+                    that.prop('name',data);
+                    if(data==1) {
+                        $('#heart').prop("src","/resources/images/like2.png");
+                    }
+                    else{
+                        $('#heart').prop("src","/resources/images/like1.png");
+                    }
+
+
+                }
+            });
+        });
+
+
+
     })
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

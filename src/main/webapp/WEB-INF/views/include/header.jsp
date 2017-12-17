@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!--아이콘-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -49,9 +48,9 @@
         <div class="w3-padding-64">
             <div class="w3-bar w3-border">
                 <a href="#" class="w3-bar-item w3-button ">Home</a>
-                <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
-                <a href="#" class="w3-bar-item w3-button ">QNA</a>
-                <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
+                <a href="/board/list?category=free" class="w3-bar-item w3-button ">Cummunity</a>
+                <a href="/board/list?category=qna" class="w3-bar-item w3-button ">QNA</a>
+                <a href="/board/list?category=notice" class="w3-bar-item w3-button "> Release Notes</a>
                 <a href="#" class="w3-bar-item w3-button "> Editor</a>
             </div>
         </div>

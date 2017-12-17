@@ -1,4 +1,3 @@
-import domain.ReplyLikeVO;
 import domain.ReplyVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,7 +5,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import persistence.ReplyDAO;
-import service.ReplyService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -20,7 +18,6 @@ public class ReplyDAOTest {
     private ReplyDAO dao;
 
     @Inject
-    private ReplyService service;
     //    댓글을 추가
     @Test
     public void testCreate() throws Exception {
@@ -48,11 +45,9 @@ public class ReplyDAOTest {
     public void testRead() throws Exception {
 
         ReplyVO reply = new ReplyVO();
-        List<ReplyVO> replyVOList = dao.readReply(1);
 //        모든리스트를 가져온다
 //        System.out.println(replyVOList);
 //        0번째 댓글 가져온다
-        reply=replyVOList.get(0);
         System.out.println(reply);
     }
     //삭제(댓글)
@@ -101,42 +96,5 @@ public class ReplyDAOTest {
 
     }
 
-//좋아요
-    @Test
-    public void testCreate2() throws Exception {
-
-        ReplyLikeVO replyLike = new ReplyLikeVO();
-        replyLike.setReplyId(1);
-        replyLike.setUserId(1);
-        dao.createReplyLikeCnt(replyLike);
-    }
-
-    @Test
-    public void testDelete2() throws Exception{
-
-        ReplyLikeVO replyLike = new ReplyLikeVO();
-        replyLike.setReplyId(1);
-        replyLike.setUserId(1);
-        dao.deleteReplyLikeCnt(replyLike);
-
-    }
-    //좋아요 생성 test
-    @Test
-    public void testLikeCreate() throws  Exception{
-
-        ReplyLikeVO replyLike = new ReplyLikeVO();
-        replyLike.setReplyId(2);
-        replyLike.setUserId(4);
-        service.insertReplyLike(replyLike);
-    }
-
-    @Test
-    public void testLikeDelete()throws  Exception{
-
-        ReplyLikeVO replyLike = new ReplyLikeVO();
-        replyLike.setReplyId(2);
-        replyLike.setUserId(4);
-        service.deleteReplyLike(replyLike);
-    }
 
 }
