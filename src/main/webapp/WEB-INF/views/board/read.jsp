@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <c:if test="${login.userName}==${boardVO.boardWriter}">
+            <c:if test="${login.userName == boardVO.boardWriter}">
             <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
             <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
             </c:if>
