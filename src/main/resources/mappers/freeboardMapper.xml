@@ -26,7 +26,7 @@
             board_viewcnt                                                        boardViewcnt,
             board_likecnt                                                        boardLikecnt
         FROM tbl_board
-        WHERE board_id = #{boardId}
+        WHERE board_id = #{boardId} AND board_status = 1
     </select>
 
     <update id="update">
@@ -37,10 +37,12 @@
         WHERE tbl_board.board_id = #{boardId}
     </update>
 
-    <delete id="delete">
-        DELETE FROM tbl_board
-        WHERE board_id = #{boardId}
-    </delete>
+    <update id="delete">
+        UPDATE tbl_board
+        SET
+        board_status = 0
+        WHERE tbl_board.board_id = #{boardId}
+    </update>
 
     <select id="readPage" resultType="BoardVO">
         <![CDATA[
@@ -59,6 +61,7 @@
         WHERE tbl_board.board_id > 0 AND (SELECT category_name
                                           FROM tbl_board_category
                                           WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'free'
+             AND board_status = 1
         ORDER BY board_id DESC , board_regdate DESC
         LIMIT #{page}, 10
         ]]>
@@ -108,7 +111,7 @@
   from tbl_board
   where board_id > 0 AND (SELECT category_name
              FROM tbl_board_category
-             WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'free'
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'free' AND board_status = 1
         ]]>
 
         <include refid="searchOption"></include>
@@ -126,7 +129,7 @@
   from tbl_board
   where board_id > 0 AND (SELECT category_name
                          FROM tbl_board_category
-                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free'
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free' AND board_status = 1
         ]]>
         <include refid="searchOption"></include>
     </select>
@@ -148,7 +151,7 @@
    tbl_board
  where board_id > 0 AND (SELECT category_name
                          FROM tbl_board_category
-                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free'
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free' AND board_status = 1
  order by board_id desc, board_regdate desc
  limit #{pageStart}, #{perPageNum}
  ]]>
