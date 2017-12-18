@@ -40,8 +40,8 @@
     <bean id="googleConnectionFactory"
           class="org.springframework.social.google.connect.GoogleConnectionFactory">
         <constructor-arg
-                value="252378785627-6v1tgs1kjie4ofmstgour5m6egi24hmi.apps.googleusercontent.com" />
-        <constructor-arg value="J6V3TJYTIexszG_1G71ZfgwR" />
+                value="${spring.social.google.appId}" />
+        <constructor-arg value="${spring.social.google.appSecret}" />
     </bean>
     <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
     <bean id="googleOAuth2Parameters"
@@ -71,8 +71,8 @@
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
-        <property name="username" value="testmailsender1122@gmail.com" />
-        <property name="password" value="!qaz@wsx" />
+        <property name="username" value="${spring.email.google.Id}" />
+        <property name="password" value="${spring.email.google.Secret}" />
 
 
         <!-- email 요청시는 SMTP -->

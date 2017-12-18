@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
@@ -83,7 +84,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
-		
+
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {
@@ -91,9 +92,22 @@ public class UserController {
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+		System.out.println(vo);
 
-		
 	}
+
+	@RequestMapping(value = "/loginPost", method = RequestMethod.GET)
+	public void loginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
+		session.setAttribute("dest","/");
+	}
+
+	@RequestMapping(value = "/socialLoginPost", method = RequestMethod.GET)
+	public void socialLoginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
+
+	}
+
+
+
 
 	@RequestMapping (value="/logout",method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
@@ -115,7 +129,23 @@ public class UserController {
 		}
 		return "user/logout";
 	}
+	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
+	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
 
+	}
+
+	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.POST)
+	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model) throws Exception{
+		UserVO vo = service.login(dto);
+		if(vo == null) {
+			return "user/modifyAuthCheck";
+		}
+		//System.out.println("usercontroller vo =" +vo);
+		model.addAttribute("userVO",vo);
+
+		return "user/modifyUser";
+
+	}
 
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET)
 	public void ModifyUserGet(UserVO user,Model model) throws Exception{
@@ -156,7 +186,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/callback",method = RequestMethod.GET)
-	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session,Model model) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 	/*	System.out.println("/callback 진입 토튼 발급 전 ");
 		System.out.println("session : "+session);
@@ -191,12 +221,15 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
 
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
-		System.out.println("UserVO "+vo);
-		session.setAttribute("login",vo);
-		return new ModelAndView("redirect:/", "result", vo);
+
+		session.setAttribute("login", vo );
+
+
+		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
 
 
@@ -230,7 +263,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/googleLogincallback")
-    public String doSessionAssignActionPage(HttpServletRequest request)throws Exception{
+    public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
         System.out.println("/user/googleLogincallback");
         String code = request.getParameter("code");
 
@@ -268,9 +301,9 @@ public class UserController {
 
 
         session.setAttribute("login", vo );
-
+		model.addAttribute("userVO",vo);
 		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
-        return "redirect:/freeBoard/list";
+        return "redirect:/user/socialLoginPost";
     }
 
 //======================================github login ==================================================
@@ -296,7 +329,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/githubcallback",method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView githubcallback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+	public ModelAndView githubcallback(@RequestParam String code, @RequestParam String state, HttpSession session,Model model) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 //		System.out.println("/callback 진입 토튼 발급 전 ");
 //		System.out.println("session : "+session);
@@ -349,7 +382,8 @@ public class UserController {
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
-		return new ModelAndView("redirect:/board/list?category=free", "result", vo);
+		model.addAttribute("userVO",vo);
+		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
 
 

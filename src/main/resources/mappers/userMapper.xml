@@ -18,7 +18,7 @@ select user_email userEmail,
 from tbl_user
   where user_email = #{userEmail}
  and user_password = #{userPassword}
-
+ and user_state = 1
 
 </select>
 
