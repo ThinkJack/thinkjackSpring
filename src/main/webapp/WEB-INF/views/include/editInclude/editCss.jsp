@@ -32,4 +32,6 @@
 <link rel="stylesheet" href="/resources/codemirror/addon/fold/foldgutter.css"/>
 <!-- autocomplete -->
 <link rel="stylesheet" href="/resources/codemirror/addon/hint/show-hint.css">
-<!-- addon\dialog :good looking input dialogs -->
+<!-- full screen -->
+<link rel="stylesheet" href="/resources/codemirror/addon/display/fullscreen.css">
+

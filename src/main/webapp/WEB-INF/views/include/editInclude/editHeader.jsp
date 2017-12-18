@@ -50,6 +50,14 @@
                     <img src="/resources/images/view.png"> Change View
                 </a>
             </li>
+
         </ul>
     </div>
+    <br>
+    <div>
+        <!--autoFormatSelection & commentSelection-->
+        <%--<input type="button" onclick="autoFormatSelection()" value="autoFormatSelection">--%>
+        <%--<input type="button" onclick="commentSelection(true)" value="commentSelection">--%>
+    </div>
+
 </nav>

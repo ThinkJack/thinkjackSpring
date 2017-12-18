@@ -104,7 +104,7 @@
                         <div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="autoPreview"> ENABLED
+                                    <input class="form-check-input" type="checkbox" id="autoPreview" checked > ENABLED
                                 </label>
                             </div>
                         </div>
