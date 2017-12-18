@@ -156,7 +156,33 @@ public class UserController {
 		service.modifyUser(user);
 		return "redirect:/";
 	}
+	@RequestMapping (value="/deleteUser",method = RequestMethod.GET)
+	public String deleteUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		Object obj = session.getAttribute("login");
+		System.out.println("obj"+obj);
 
+
+		UserVO vo = (UserVO)obj;
+
+		service.deleteUser(vo);
+		System.out.println("회원 탈퇴");
+
+		if(obj !=null){
+			vo=(UserVO) obj;
+
+			session.removeAttribute("login");
+			session.invalidate();
+
+			Cookie loginCookie = WebUtils.getCookie(request,"loginCookie");
+			if(loginCookie !=null){
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+
+			}
+		}
+		return "redirect:/";
+	}
 
 
 	//Login Api======================================================================
@@ -379,7 +405,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 
-		//소셜아이디로 uid를 찾는 로직 추가 해야함
+
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
 		model.addAttribute("userVO",vo);

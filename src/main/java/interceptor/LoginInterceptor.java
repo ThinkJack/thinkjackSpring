@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import sun.awt.AWTAccessor;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	
@@ -26,7 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object userVO = modelMap.get("userVO");
-		System.out.println("userVo"+userVO);
+		//System.out.println("userVo"+userVO);
 		if(userVO != null) {
 			
 			logger.info("new login success");
@@ -35,8 +34,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
+			if(dest=="/user/login"){
+				session.setAttribute("dest","/");
+			}
 			System.out.println("postHandle dest: "+dest);
 
+		}else{
+			session.setAttribute("dest","/user/login");
 		}
 	}
 
@@ -48,7 +52,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 		System.out.println("Logininterceptor preHandle 진입");
 		HttpSession session = request.getSession();
-		System.out.println("LOGIN :"+session.getAttribute(LOGIN));
+		//System.out.println("LOGIN :"+session.getAttribute(LOGIN));
 		if(session.getAttribute(LOGIN) != null) {
 			logger.info("clear login data before");
 			session.removeAttribute(LOGIN);

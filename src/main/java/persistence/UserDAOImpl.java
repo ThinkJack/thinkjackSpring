@@ -62,7 +62,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public void deleteUser(UserVO vo) throws Exception {
-
+		session.update(namespace+".deleteUser",vo);
 	}
 
 	@Override

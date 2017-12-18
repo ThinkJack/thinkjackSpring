@@ -4,8 +4,8 @@ import javax.inject.Inject;
 
 import common.MailHandler;
 import common.TempKey;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
 import domain.UserVO;
@@ -62,6 +62,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void deleteUser(UserVO user) throws Exception {
+		System.out.println(user);
+		dao.deleteUser(user);
+	}
+
+	@Override
 	public UserVO naverLogin(LoginDTO dto) throws Exception {
 
 		UserVO vo =new UserVO();
@@ -92,25 +98,6 @@ public class UserServiceImpl implements UserService {
         return dao.naverReadUser(dto);
     }
 		//facebook login 관련
-	@Override
-	public UserVO onAuthenticationBinding(LoginDTO dto, User facebookUser) throws Exception {
-		// TODO Auto-generated method stub
-		dto.setUserSocialId(facebookUser.getId());
-		dto.setUserEmail(facebookUser.getEmail());
-		dto.setUserName(facebookUser.getName());
 
-//	dao.insertUser(user);
-		UserVO vo =new UserVO();
-		 vo=dao.naverReadUser(dto);
-		System.out.println(dao.naverReadUser(dto));
-
-		if((vo.getUserSocialId())==null) {
-			dao.naverInsertUser(dto);
-		}
-
-		System.out.println(dto.toString());
-		return dao.naverReadUser(dto);
-
-	}
 
 }
