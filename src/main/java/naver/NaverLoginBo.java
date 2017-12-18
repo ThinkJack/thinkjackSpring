@@ -6,6 +6,7 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
+import common.PrivateKey;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -15,12 +16,14 @@ import javax.servlet.http.HttpSession;
 
 public class NaverLoginBo {
 
-    private final static String CLIENT_ID = "kZCaMLW0PXwWWwQ91Ix3";
-    private final static String CLIENT_SECRET = "37SUxgAJzd";
-    private final static String REDIRECT_URI = "http://localhost:8080/user/callback";
-    private final static String SESSION_STATE = "oauth_state";
+    PrivateKey key=new PrivateKey();
+
+    private final String CLIENT_ID = key.getNavClientId();
+    private final String CLIENT_SECRET = key.getNavClientSecret();
+    private final String REDIRECT_URI = key.getNavRedirectUri();
+    private final String SESSION_STATE = key.getNavSessionState();
     /* 프로필 조회 API URL */
-    private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
+    private final String PROFILE_API_URL = key.getNavProfileApiUrl();
 
     /* 네아로 인증 URL 생성 Method */
     public String getAuthorizationUrl(HttpSession session) {
