@@ -15,8 +15,8 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#commant-modal">
-                    Comment
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal">
+                    Reply
                 </a>
             </li>
             <li class="nav-item active">

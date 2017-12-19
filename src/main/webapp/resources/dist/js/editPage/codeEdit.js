@@ -287,6 +287,8 @@ function updatePreview() {
         "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
     preview.close();
+
+    consoleView(codeJavaScript.getValue());
 }
 //Folding
 // codeHtml.foldCode(CodeMirror.Pos(0, 0));

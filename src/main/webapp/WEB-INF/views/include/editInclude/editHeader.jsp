@@ -9,17 +9,28 @@
 <!-- header 메뉴바 -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
 
-    <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:20px;"></a>
+    <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:30px;"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto page_info">
             <li class="nav-item active">
                 <!--href="" 는 현재 패이지 reload해줌 -->
-                <a class="nav-link" href="">name <span class="sr-only">(current)</span></a>
+                <div class="page_title_view" id="page-title-view">
+                    <a class="page_title">
+                        <span id="page-title">Title</span>
+                    </a>
+                    <img class="pencil" id="pencil" src="/resources/images/pencil.png">
+                </div>
+                <div class="page_title_text"  id="page-title-text">
+                    <input type="text" name="page-title" id="page-title-input" value=""/>
+                </div>
+                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="page-user-id">Name</span></div>
+            </li>
+            <li class="nav-item">
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

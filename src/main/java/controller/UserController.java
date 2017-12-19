@@ -51,7 +51,6 @@ public class UserController {
 	
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
-
       
     }
 	

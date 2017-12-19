@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -33,9 +34,20 @@ li {
     padding-left: 15px;
 }
 
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 650px;
+    }
+}
+
+.col-2 {
+    max-width: 13.666667%;
+}
+
 .row h4 {
     margin: 0px;
 }
+
 p.code-name {
     margin: 0px;
 }
@@ -52,37 +64,69 @@ span.arrow {
     vertical-align: top;
 }
 
-.row{
+.row {
     width: 100%;
     margin: 0px;
 }
+
 .main {
-    padding-top: 56px;
+    padding-top: 70px;
 }
 
-.edit-console-view{
+.edit-console-view {
     width: 100%;
     height: 187px;
     color: #fff;
     overflow: auto;
 }
-.console-log{
+
+.console-log {
     padding: 0px;
     margin: 0px;
 }
 
-.container-fluid{
-    padding:0px;
+.container-fluid, .page_title {
+    padding: 0px;
+}
+
+.pencil {
+    width: 25px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.page_info {
+    color: #fff;
+}
+
+.page_title {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.page_title_text {
+    display: none;
+}
+
+.page_title:hover {
+    color: #d6d6d6;
+    text-decoration: none;
+}
+
+.setting_info {
+    width: 100%;
 }
 
 .navbar-dark {
     background-color: #000000;
 }
 
-.col {
+.col, .col-4{
     display: block;
     padding: 0px;
 }
+
 
 .footer {
     position: absolute;
@@ -90,32 +134,38 @@ span.arrow {
     width: 100%;
     height: 48px; /* Set the fixed height of the footer here */
     background-color: #343a40;
+    z-index: 5;
 }
 
-.boarderLine{
+.boarderLine {
     background-color: #343a40;
     height: 5px;
 }
 
-.resize-code {
+.layout-ch {
+    max-width: 5px;
+}
+
+.resize_code {
     background-color: #343a40;
-    width: 5px;
     cursor: col-resize;
 }
 
-.resize-view {
+.resize_view {
     background-color: #343a40;
     height: 5px;
     cursor: row-resize;
 }
 
-.resize-console{
+.resize-console {
     background-color: #343a40;
     height: 5px;
     cursor: row-resize;
 }
 
-
+.btn {
+    cursor: pointer;
+}
 
 .btn-outline-dark {
     color: #fff;
@@ -133,7 +183,7 @@ li.nav-item.active.run {
     visibility: hidden;
 }
 
-p.err{
+p.err {
     color: red;
 }
 
@@ -144,20 +194,23 @@ p.err{
     overflow: auto;
 }
 
-.main_view .iframe_body{
+.main_view .iframe_body {
     height: calc(100% - 474px);
     background-color: #fff;
     border: 1px solid #000;
 }
+
 .main_view .console_body {
     position: absolute;
     bottom: 44px;
     background-color: #000;
 }
+
 .main_view .command-line {
     padding: 5px;
 }
-.main_view .command-line input{
+
+.main_view .command-line input {
     background: none;
     color: #fff;
     font-size: 15px;
@@ -167,6 +220,7 @@ p.err{
     width: calc(100% - 36px);
     border: 1px solid #d3d3d3;
 }
+
 .main_view .command-line input:focus {
     outline: none;
 }
@@ -176,47 +230,120 @@ p.err{
     color: #fff;
 }
 
-.user_img{
-    width:50px;
+.user_img {
+    width: 55px;
 }
 
-.no_padding{
+.no_padding {
     padding: 0px;
 }
 
-.count-img-view {
+.count_img_view {
     height: 60px;
     align-items: center;
 }
 
-.count-img-view-inner {
-    padding-left: calc(50% - 44px);
+.count_img_view_inner {
+    padding-left: calc(50% - 72px);
 }
 
-.commant {
-    margin: 30px;
-    height: 20%;
+.regdate {
+    margin-left: 10px;
 }
 
-.commant-view {
-    display: none;
-}
-
-.commant-textarea {
+.comment_view {
+    height: 10%;
     overflow-x: hidden;
 }
-.commant-modify{
-    display: none;
+
+.reply_post {
+    margin-top: 20px;
 }
 
+.reply_btn, .reply_content {
+    margin-top: 10px;
+}
+
+.reply_content {
+    height: 62.774px;
+}
+
+.reply_list_view {
+    margin-top: 30px;
+    max-height: 267.760px;
+    overflow: auto;
+}
+
+.reply_list {
+    margin-top: 30px;
+}
+
+.reply_user_name {
+    font-size: 21px;
+}
+
+.reply_user_data_view > * {
+    margin-right: 10px;
+}
+
+.comment {
+    overflow-x: hidden;
+
+}
 .CodeMirror {
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
 }
 
 /* 같은단어강조 */
-.cm-matchhighlight {background-color: #64837e; color: #ffffff !important;}
+.cm-matchhighlight {
+    background-color: #64837e;
+    color: #ffffff !important;
+}
 
 /*!* 괄호강조 *!*/
-.CodeMirror-matchingbracket { background-color: #4dc0ad; color: #000000 !important; }
+.CodeMirror-matchingbracket {
+    background-color: #4dc0ad;
+    color: #000000 !important;
+}
 
+/*animation단*/
+/* -----------------------------------------
+  =Default css to make the demo more pretty
+-------------------------------------------- */
+.row.reply_list.load_view {
+    margin-bottom: 30px;
+    margin-left: calc(50% - 20.142px);
+}
+
+.line {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #4b9cdb;
+}
+
+.load .line:nth-last-child(1) {
+    animation: loadingC .6s .1s linear infinite;
+}
+
+.load .line:nth-last-child(2) {
+    animation: loadingC .6s .2s linear infinite;
+}
+
+.load .line:nth-last-child(3) {
+    animation: loadingC .6s .3s linear infinite;
+}
+
+@keyframes loadingC {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(0, 15px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
