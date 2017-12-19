@@ -103,9 +103,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String authenticate(String str) throws Exception {
 		System.out.println("인증 중");
-		int state;
+
 		UserVO vo = dao.authenticate(str);
-		state = vo.getUserState();
+
 		if(vo == null) {
 			return "T";
 		}else if(vo.getUserState() == 0){

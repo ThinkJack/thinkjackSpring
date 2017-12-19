@@ -14,11 +14,9 @@ import org.json.simple.JSONObject;
 import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.ConnectionRepository;
+
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
 import org.springframework.social.google.api.plus.Person;
@@ -42,7 +40,7 @@ import service.UserService;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.Date;
+
 
 @Controller
 @RequestMapping("/user/*")
@@ -68,13 +66,11 @@ public class UserController {
 
 	@RequestMapping(value = "/authenticate" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody
-	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String email, Model model)throws Exception {
+	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String userEmail, Model model)throws Exception {
 
-		String msg = service.authenticate(email);
+		String msg = service.authenticate(userEmail);
 		System.out.println(msg);
 		String responseMsg;
-
-
 		if(msg == "T") {
 			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
 		}else if(msg == "F"){
@@ -85,10 +81,8 @@ public class UserController {
 
 
 		URLEncoder.encode(responseMsg , "UTF-8");
-
-
 //	model.addAttribute("msg", service.authenticate(email));
-		System.out.println(email);
+		System.out.println(userEmail);
 		return responseMsg;
 
 	}
