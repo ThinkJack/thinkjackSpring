@@ -327,9 +327,7 @@ function updatePreview() {
              // +
              // "<style>" + codeCss.getValue() + "</style>" +
              // "<script>" + codeJavaScript.getValue() + "<\/script>";
-
-
-
+        consoleView(codeJavaScript.getValue());
 
         preview.close();
 
