@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 @Controller
 @RequestMapping("/board/*")
+
 public class BoardController {
 
     private static final Logger logger = LoggerFactory.getLogger(BoardController.class);

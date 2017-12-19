@@ -6,11 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%--<%--%>
+<%--response.setHeader("Cache-Control","no-cache");--%>
+<%--response.setHeader("Pragma","no-cache");--%>
+<%--response.setDateHeader("Expires",0);--%>
+<%--%>--%>
+
+
 <html>
 <head>
     <title>EditPage</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%--<meta http-equiv="Cache-Control" content="no-cache"/>--%>
+    <%--<meta http-equiv="Expires" content="0"/>--%>
+    <%--<meta http-equiv="Pragma" content="no-cache"/>--%>
+
+
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
 <body>
@@ -129,28 +143,97 @@
             }
         };
 
-        //Setting Behavior부분 함수
-        $(function () {//----------------------------code tabsize 변경
-            $("#tab-size").change(function () {
-                codeHtml.tabSize = this.value;
-                codeCss.tabSize = this.value;
-                codeJavaScript.tabSize = this.value;
-                console.log(codeHtml.tabSize);
-            });
-        });
+    //Setting Behavior부분 함수
+    $(function () {//---------------------------- tab-size 변경시
+        $("#tab-size").change(function () {
+            // alert(111);
+            var st = $(":input:radio[name=gridRadios]:checked").val();
+            var sp = this.value;
+            if (st === "option1") {
 
-        $(function () {
-            $("#autoPreview").click(function () {
-                var runstyle = document.getElementById("run");
-                if (this.checked) {
-                    runstyle.style = "visibility: visible;"
-                } else {
-                    runstyle.style = "visibility: hidden;"
-                }
-            });
+                codeHtml.setOption("extraKeys", {
+                    Tab: function (cm) {
+                        var spaces = Array(cm.getOption("indentUnit") +
+                            parseInt(sp)).join(" ");
+                        cm.replaceSelection(spaces);
+                    }
+                });
+            } else if (st === "option2") {
+
+                // $("#gridRadios1").prop("checked", true);
+                codeHtml.setOption("tabSize", this.value);
+                codeCss.setOption("tabSize", this.value);
+                codeJavaScript.setOption("tabSize", this.value);
+            }
         });
-        // command line  enter 입력시 이벤트
-        //    var makeConsole = new Console();
+    });
+
+    //Setting Behavior부분 함수
+    $(function () {//---------------------------- option button 변경시
+        $('input[type=radio][name=gridRadios]').change(function () {
+            alert(222);
+
+            //현재 리스트박스의 탭사이즈 값 가져오기.
+            var e = document.getElementById("tab-size");
+            var strUser = e.options[e.selectedIndex].value;
+
+            // var sp = this.value;
+            if (this.value === "option1") {
+                // alert('a');
+
+                codeHtml.setOption("extraKeys", {
+                    Tab: function (cm) {
+                        var spaces = Array(cm.getOption("indentUnit") +
+                            parseInt(strUser)).join(" ");
+                        cm.replaceSelection(spaces);
+                    }
+                });
+            } else if (this.value === "option2") { // have to: option1 갖다오면 백탭안됨
+                // alert('b');
+                // codeHtml.setOption("indentWithTabs", true);
+                codeHtml.setOption("tabSize", strUser);
+                codeCss.setOption("tabSize", strUser);
+                codeJavaScript.setOption("tabSize", strUser);
+                console.log(strUser);
+
+            }
+        });
+    });
+
+    $(function () { //--자동저장
+        if ($('#autoSave').is(':checked')) {
+            // alert(1);
+        } else {
+            // alert(2);
+        }
+    });
+
+    $(function () {
+        if ($('#autoPreview').is(':checked')) {//첫 로딩시 상태
+        } else {
+            var runstyle = document.getElementById("run");
+            runstyle.style = "visibility: visible;"
+        }
+
+        $("#autoPreview").click(function () { //클릭시 상태
+            var runstyle = document.getElementById("run");
+            if (this.checked) {
+                runstyle.style = "visibility: hidden;"
+            } else {
+                runstyle.style = "visibility: visible;"
+            }
+        });
+    });
+
+
+    $(function () {
+        $("#run").click(function () { // run button 실행
+            updatePreview();
+        });
+    });
+
+    // command line  enter 입력시 이벤트
+    //    var makeConsole = new Console();
 
         $(function () {
             $("#command-line").keyup(function (e) {

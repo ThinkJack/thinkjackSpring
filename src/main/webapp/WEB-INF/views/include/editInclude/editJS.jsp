@@ -63,5 +63,12 @@
 <script src="/resources/codemirror/addon/tern/tern.js"></script>
 <!-- <script src="/resources/codemirror/addon/tern/worker.js"></script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<!--full screen>-->
+<%--<script src="/resources/codemirror/codebox/addon/display/fullscreen.js"></script>--%>
+<!--Formatting-->
+<script src="/resources/codemirror/lib/util/formatting.js"></script>
+<%--<script src="/codebox/js/lib/beautify.js"></script>--%>
+<%--<script src="/resources/codemirror/js/lib/beautify-css.js"></script>--%>
+
 <!--mode && emmet import-->
 <script src="/resources/dist/js/editPage/codeEdit.js"></script>
