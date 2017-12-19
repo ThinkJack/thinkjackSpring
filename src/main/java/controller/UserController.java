@@ -51,14 +51,16 @@ public class UserController {
 	
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
-
+		System.out.println("register GET 진입");
       
     }
 	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String RegisterPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
-		service.regist(user);
+    	System.out.println("regesterPost 진입 ");
+
+    	service.regist(user);
         rttr.addFlashAttribute("authmsg" , "가입시 사용한 이메일로 인증해주 3");
 
 		return "redirect:/";
@@ -69,7 +71,7 @@ public class UserController {
 	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String userEmail, Model model)throws Exception {
 
 		String msg = service.authenticate(userEmail);
-		System.out.println(msg);
+		System.out.println("/authenticate 진입"+msg);
 		String responseMsg;
 		if(msg == "T") {
 			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
@@ -83,6 +85,7 @@ public class UserController {
 		URLEncoder.encode(responseMsg , "UTF-8");
 //	model.addAttribute("msg", service.authenticate(email));
 		System.out.println(userEmail);
+		System.out.println(responseMsg);
 		return responseMsg;
 
 	}

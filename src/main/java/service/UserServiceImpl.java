@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("인증 중");
 
 		UserVO vo = dao.authenticate(str);
-
+		System.out.println("dao vo:"+vo);
 		if(vo == null) {
 			return "T";
 		}else if(vo.getUserState() == 0){
