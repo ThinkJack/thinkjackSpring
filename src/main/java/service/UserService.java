@@ -18,4 +18,6 @@ public interface UserService {
 	public void userAuth(String userEmail) throws Exception;
 
 	public void deleteUser(UserVO user) throws Exception;
+
+	public String authenticate(String str) throws Exception;
 }

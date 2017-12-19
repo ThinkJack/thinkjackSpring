@@ -30,20 +30,18 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import domain.BoardVO;
 import domain.UserVO;
 import dto.LoginDTO;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import service.UserService;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
 
 @Controller
@@ -66,6 +64,33 @@ public class UserController {
         rttr.addFlashAttribute("authmsg" , "가입시 사용한 이메일로 인증해주 3");
 
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/authenticate" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	public @ResponseBody
+	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String email, Model model)throws Exception {
+
+		String msg = service.authenticate(email);
+		System.out.println(msg);
+		String responseMsg;
+
+
+		if(msg == "T") {
+			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
+		}else if(msg == "F"){
+			responseMsg = "{\"msg\":\""+"인증 대기중인 이메일 입니다. 인증해주세요."+"\"}";
+		}else{
+			responseMsg = "{\"msg\":\""+"사용이 불가한 이메일 입니다."+"\"}";
+		}
+
+
+		URLEncoder.encode(responseMsg , "UTF-8");
+
+
+//	model.addAttribute("msg", service.authenticate(email));
+		System.out.println(email);
+		return responseMsg;
+
 	}
 
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)

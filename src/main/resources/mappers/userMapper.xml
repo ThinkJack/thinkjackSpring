@@ -10,6 +10,10 @@ insert into tbl_user (user_email, user_password, user_name)
 values(#{userEmail}, #{userPassword}, #{userName})
 </insert>
 
+<select id = "checkdupl" resultType = "UserVO">
+    select user_id,user_state from tbl_user where user_email = #{userEmail}
+</select>
+
     <select id="login" resultType="UserVO">
 
 select user_email userEmail,

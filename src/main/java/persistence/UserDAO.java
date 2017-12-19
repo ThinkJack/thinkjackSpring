@@ -21,4 +21,6 @@ public interface UserDAO {
 	public void createAuthKey(String userEmail, String userAuthCode) throws Exception;
 
 	public void userAuth(String userEmail) throws Exception;
+
+	public UserVO authenticate(String str) throws Exception;
 }

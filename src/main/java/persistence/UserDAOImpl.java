@@ -25,6 +25,13 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
+	public UserVO authenticate(String str) throws Exception {
+
+		System.out.println("dao");
+		return session.selectOne(namespace+".checkdupl", str);
+	}
+
+	@Override
 	public void createAuthKey(String userEmail, String userAuthCode) throws Exception {
 		UserVO vo = new UserVO();
 		vo.setUserAuthCode(userAuthCode);
