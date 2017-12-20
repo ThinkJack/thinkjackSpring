@@ -8,8 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/edit/*")
 public class EditController {
 
+    //----------------------------------------------------------------------src 부분
     @RequestMapping(value = "/editPage", method = RequestMethod.GET)
-    public void editView(){
+    public void editView() {
+    }
+
+    @RequestMapping(value = "/srcSave", method = RequestMethod.POST)
+    public void srcSave(){
 
     }
+
+    //----------------------------------------------------------------------
+
+
+
+    //----------------------------------------------------------------------reply 부분
+    //----------------------------------------------------------------------
 }

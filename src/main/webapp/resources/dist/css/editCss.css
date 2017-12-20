@@ -71,6 +71,10 @@ span.arrow {
 
 .main {
     padding-top: 70px;
+    /*height: 100%*/
+}
+.main_ch {
+    /*height: calc(100% - 174px);*/
 }
 
 .edit-console-view {
@@ -146,6 +150,13 @@ span.arrow {
     max-width: 5px;
 }
 
+.code_layout {
+    flex-basis: initial;
+    flex-grow: 0;
+    width: 33.1%;
+    min-width: calc(33.1% - 348px);
+}
+
 .resize_code {
     background-color: #343a40;
     cursor: col-resize;
@@ -194,8 +205,12 @@ p.err {
     overflow: auto;
 }
 
+.iframeWrapper iframe{
+    pointer-events: none; /* let any clicks go trough me */
+}
+
 .main_view .iframe_body {
-    height: calc(100% - 474px);
+    height: calc(100% - 488px);
     background-color: #fff;
     border: 1px solid #000;
 }
@@ -293,6 +308,7 @@ p.err {
 .CodeMirror {
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
+    height: calc(100% - 753px);
 }
 
 /* 같은단어강조 */
