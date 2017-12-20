@@ -113,7 +113,7 @@
         <div class="media well">
             <div class="media-body">
                 <%--댓글 등록하는 아이디(--%>
-                <input type="text" name='writer' class="form-control" value="${boardVO.boardWriter}"  readonly="readonly">
+                <input type="text" name='writer' class="form-control" id="register" value="${boardVO.boardWriter}"  readonly="readonly">
                 <%--댓글 입력 부분--%>
                 <div class="form-group">
                     <textarea class="form-control" rows="3" id="newReplyText">댓글 입력하세요</textarea>
@@ -152,14 +152,16 @@
                     <span class="time">
                            {{prettifyDate replyRegdate}}
 
-                    </span>
-                    {{#if replyParent}}
+                          {{#if replyParent}}
                     <span class="badge">대댓글</span>
 
                     {{else}}
                     <span class="badge">댓글</span>
 
                     {{/if}}
+
+                    </span>
+
 
                     <div class="btn heart">
                         <input type ="text" id ="replyId2" name = "replyId" value = '${replyId}' style = "display : none">
@@ -174,7 +176,7 @@
                     </div>
                     <%--likeCnt부분--%>
                     <div class="media-body" id="comentReply" >
-                        <h3 class="timeline-header"><strong>{{replyId}}</strong>{{replyWirter}}</h3>
+                        <h3 class="timeline-header"><div>{{replyId}}</div>{{replyWirter}}</h3>
                         <input type="text" name='title' class="timeline-body" value={{replyText}} readonly="readonly">
                         <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
                     </div>
@@ -242,10 +244,12 @@
             //1.댓글등록부분
             $("#addBtn").on("click", function () {
                 //각각의 id값을 받아온다
+
                 var replyTextObj = $("#newReplyText");
                 //내용입력 comment
                 var replyText = replyTextObj.val();
-                console.log(replyText + "뭐니");
+                var replyer = $("#register").val();
+
                 $.ajax({
                     type: 'post',
                     url: '/replies/',
@@ -255,7 +259,7 @@
                     },
                     dataType: 'text',
                     //문자를 객체로 바꿈
-                    data: JSON.stringify({boardId: boardId, replyText: replyText}),
+                    data: JSON.stringify({boardId: boardId, replyText: replyText,replyWirter:replyer}),
                     success: function (result) {
                         if (result == 'SUCCESS') {
                             alert("등록");
