@@ -17,19 +17,20 @@ public class ReplyDAOImpl implements ReplyDAO {
 
     @Inject
     private SqlSession session;
-
     final String namespace = "mapper.replyMapper";
 
 
     //생성(insert)
     @Override
     public void createReply(ReplyVO vo) throws Exception {
+
         session.insert(namespace + ".insert", vo);
     }
     //댓글 전체 목록(select)
 
     @Override
     public List<ReplyVO> readReply(Integer boardId) throws Exception {
+
         return session.selectList(namespace + ".select", boardId);
     }
 
@@ -54,7 +55,6 @@ public class ReplyDAOImpl implements ReplyDAO {
     //대댓글 찾기
     @Override
     public List<ReplyVO> reReadReply(Integer replyId) throws Exception {
-
         return session.selectList(namespace + ".select2", replyId);
     }
 
@@ -65,7 +65,6 @@ public class ReplyDAOImpl implements ReplyDAO {
 
         paramMap.put("boardId", boardId);
         paramMap.put("cri", cri);
-
         return session.selectList(namespace + ".listPage", paramMap);
     }
 
@@ -88,8 +87,9 @@ public class ReplyDAOImpl implements ReplyDAO {
     }
 
     @Override
-    public void updateReplyLikeCnt2(int reply_id) throws Exception {
-        session.update(namespace+".updateReplyLikeCnt2",reply_id);
+    public Integer readLike(ReplyLikeVO vo) throws Exception {
+
+        return session.selectOne(namespace + ".heart", vo);
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface ReplyService {
     //정정(update)
     public void updateReply(ReplyVO vo) throws Exception;
     //삭제(delete)
-    public void deleteReply(Integer replyId) throws Exception;
+    public void deleteReply(int replyId) throws Exception;
 
 
     //생성(insert)
@@ -34,7 +34,8 @@ public interface ReplyService {
     public void insertReplyLike(ReplyLikeVO vo) throws  Exception;
     //좋아요 업데이트
     public void deleteReplyLike(ReplyLikeVO vo) throws  Exception;
-
+   // 좋아요 버튼
+    public Integer readLike(ReplyLikeVO vo)  throws Exception;
 
 
 

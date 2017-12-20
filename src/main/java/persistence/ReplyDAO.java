@@ -23,7 +23,6 @@ public interface ReplyDAO {
     public List<ReplyVO> reReadReply(Integer replyId) throws  Exception;
 
 
-
     //페이지
     public List<ReplyVO> listPage(Integer boardId, Criteria cri) throws  Exception;
     //페이지 처리를 하기위해서 count작성
@@ -35,7 +34,9 @@ public interface ReplyDAO {
     //   reply_likecnt가 +1 ,-1 되되록
     public void updateReplyLikeCnt(int reply_id) throws Exception;
 
-    public void updateReplyLikeCnt2(int reply_id) throws Exception;
+    //좋아요 목록(select)
+    public Integer readLike(ReplyLikeVO vo) throws  Exception;
+
 
     public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception;
 
