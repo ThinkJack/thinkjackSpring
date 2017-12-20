@@ -171,7 +171,7 @@
     //Setting Behavior부분 함수
     $(function () {//---------------------------- option button 변경시
         $('input[type=radio][name=gridRadios]').change(function () {
-            alert(222);
+            // alert(222);
 
             //현재 리스트박스의 탭사이즈 값 가져오기.
             var e = document.getElementById("tab-size");
