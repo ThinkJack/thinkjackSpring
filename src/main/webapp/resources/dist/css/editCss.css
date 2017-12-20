@@ -1,0 +1,171 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: #000000;
+    height: 100%;
+}
+
+
+p {
+    padding: 10px;
+}
+
+li {
+    padding-left: 15px;
+}
+
+
+p.code-name {
+    margin: 0px;
+}
+
+div.command-line {
+    border: 3px solid #343a40;
+}
+
+span.arrow {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline;
+    vertical-align: top;
+}
+
+.row{
+    width: 100%;
+    margin: 0px;
+}
+.main {
+    padding-top: 56px;
+}
+
+.edit-console-view{
+    width: 100%;
+    height: 187px;
+    color: #fff;
+    overflow: auto;
+}
+.console-log{
+    padding: 0px;
+    margin: 0px;
+}
+
+.container-fluid{
+    padding:0px;
+}
+
+.navbar-dark {
+    background-color: #000000;
+}
+
+.col {
+    display: block;
+    padding: 0px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 48px; /* Set the fixed height of the footer here */
+    background-color: #343a40;
+}
+
+.boarderLine{
+    background-color: #343a40;
+    height: 5px;
+}
+
+.resize-code {
+    background-color: #343a40;
+    width: 5px;
+    cursor: col-resize;
+}
+
+.resize-view {
+    background-color: #343a40;
+    height: 5px;
+    cursor: row-resize;
+}
+
+.resize-console{
+    background-color: #343a40;
+    height: 5px;
+    cursor: row-resize;
+}
+
+
+
+.btn-outline-dark {
+    color: #fff;
+}
+
+.tab-pane {
+    padding-top: 30px;
+}
+
+.tab-size {
+    padding-bottom: 0px;
+}
+
+li.nav-item.active.run {
+    visibility: hidden;
+}
+
+p.err{
+    color: red;
+}
+
+#codeHtml, #codeCss, #codeJavaScript {
+    border: 5px solid #000000;
+    background-color: #fff;
+    padding: 0px;
+    overflow: auto;
+}
+
+.main_view .iframe_body{
+    height: calc(100% - 474px);
+    background-color: #fff;
+    border: 1px solid #000;
+}
+.main_view .console_body {
+    position: absolute;
+    bottom: 44px;
+    background-color: #000;
+}
+.main_view .command-line {
+    padding: 5px;
+}
+.main_view .command-line input{
+    background: none;
+    color: #fff;
+    font-size: 15px;
+    resize: none;
+    overflow: hidden;
+    vertical-align: middle;
+    width: calc(100% - 36px);
+    border: 1px solid #d3d3d3;
+}
+.main_view .command-line input:focus {
+    outline: none;
+}
+
+.btn_active {
+    background-color: #606060;
+    color: #fff;
+}
+
+.CodeMirror {
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+}
+
+/* 같은단어강조 */
+.cm-matchhighlight {background-color: #64837e; color: #ffffff !important;}
+
+/*!* 괄호강조 *!*/
+.CodeMirror-matchingbracket { background-color: #4dc0ad; color: #000000 !important; }
+
