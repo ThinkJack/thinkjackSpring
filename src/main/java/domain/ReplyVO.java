@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 public class ReplyVO {
 
 	private Integer replyId;
@@ -10,6 +12,12 @@ public class ReplyVO {
 //	댓글 내용
 	private String replyWirter;
 //	유저 ID
+
+	//	날짜부분
+	private Date replyRegdate;
+	private Date replyUpdate;
+
+
 	private Integer replyParent;
 //	대댓글에 필요한 부분
 	private Integer replyLikeCnt;
@@ -50,6 +58,22 @@ public class ReplyVO {
 		this.replyWirter = replyWirter;
 	}
 
+	public Date getReplyRegdate() {
+		return replyRegdate;
+	}
+
+	public void setReplyRegdate(Date replyRegdate) {
+		this.replyRegdate = replyRegdate;
+	}
+
+	public Date getReplyUpdate() {
+		return replyUpdate;
+	}
+
+	public void setReplyUpdate(Date replyUpdate) {
+		this.replyUpdate = replyUpdate;
+	}
+
 	public Integer getReplyParent() {
 		return replyParent;
 	}
@@ -81,6 +105,8 @@ public class ReplyVO {
 				", boardId=" + boardId +
 				", replyText='" + replyText + '\'' +
 				", replyWirter='" + replyWirter + '\'' +
+				", replyRegdate=" + replyRegdate +
+				", replyUpdate=" + replyUpdate +
 				", replyParent=" + replyParent +
 				", replyLikeCnt=" + replyLikeCnt +
 				", replyState=" + replyState +

@@ -16,6 +16,7 @@
 
     <select id="read" resultType="BoardVO">
         SELECT
+
             board_id                                                             boardId,
             board_title                                                          boardTitle,
             board_content                                                        boardContent,

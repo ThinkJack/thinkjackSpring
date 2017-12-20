@@ -47,11 +47,12 @@
     <header class="w3-panel w3-center w3-opacity" >
         <div class="w3-padding-64">
             <div class="w3-bar w3-border">
-                <a href="#" class="w3-bar-item w3-button ">Home</a>
+                <a href="/main" class="w3-bar-item w3-button ">Home</a>
                 <a href="/board/list?category=free" class="w3-bar-item w3-button ">Cummunity</a>
                 <a href="/board/list?category=qna" class="w3-bar-item w3-button ">QNA</a>
                 <a href="/board/list?category=notice" class="w3-bar-item w3-button "> Release Notes</a>
-                <a href="#" class="w3-bar-item w3-button "> Editor</a>
+                <a href="/edit/editPage" class="w3-bar-item w3-button "> Editor</a>
+                <a href="/edit/unitTest" class="w3-bar-item w3-button "> UnitTest</a>
             </div>
         </div>
 
