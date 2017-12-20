@@ -41,5 +41,13 @@ public interface ReplyDAO {
     public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception;
 
 
+    //생성(insert)
+    public void reCreateReply(ReplyVO vo) throws Exception;
+    //댓글 전체 목록(select)
+    public List<ReplyVO> reReadReply(Integer replyId) throws  Exception;
+    //대댓글 정정(update)
+    public void reUpdateReply(ReplyVO vo) throws Exception;
+    //대댓글 삭제(deledte)
+    public void reDeleteReply(Integer replyParent) throws Exception;
 }
 

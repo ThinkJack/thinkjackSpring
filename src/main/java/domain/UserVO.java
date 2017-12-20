@@ -1,12 +1,21 @@
 package domain;
 
 public class UserVO {
-	
+
+	private int userId;
 	private String userEmail;
 	private String userName;
 	private String userPassword;
 	private int userState;
+	private String userSocialId;
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getUserEmail() {
 		return userEmail;
@@ -40,13 +49,23 @@ public class UserVO {
 		this.userState = userState;
 	}
 
+	public String getUserSocialId() {
+		return userSocialId;
+	}
+
+	public void setUserSocialId(String userSocialId) {
+		this.userSocialId = userSocialId;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO{" +
-				"userEmail='" + userEmail + '\'' +
+				"userId=" + userId +
+				", userEmail='" + userEmail + '\'' +
 				", userName='" + userName + '\'' +
 				", userPassword='" + userPassword + '\'' +
 				", userState=" + userState +
+				", userSocialId='" + userSocialId + '\'' +
 				'}';
 	}
 }

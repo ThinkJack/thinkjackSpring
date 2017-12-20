@@ -96,5 +96,25 @@ public class ReplyDAOImpl implements ReplyDAO {
     public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception {
         session.delete(namespace+".deleteReplyLikeCnt",vo);
     }
+
+    @Override
+    public void reCreateReply(ReplyVO vo) throws Exception {
+
+    }
+
+    @Override
+    public List<ReplyVO> reReadReply(Integer replyId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void reUpdateReply(ReplyVO vo) throws Exception {
+
+    }
+
+    @Override
+    public void reDeleteReply(Integer replyParent) throws Exception {
+
+    }
 }
 

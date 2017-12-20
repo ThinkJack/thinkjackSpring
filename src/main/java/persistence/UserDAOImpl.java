@@ -30,11 +30,34 @@ public class UserDAOImpl implements UserDAO{
 	public UserVO login(LoginDTO dto) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("userDAO dto: "+dto);
+		//System.out.println("userDAO dto: "+dto);
 		return session.selectOne(namespace+".login",dto);
 			
 	}
-	
-	
 
+	@Override
+	public UserVO read(UserVO vo) throws Exception {
+		return session.selectOne(namespace+".readUser",vo);
+	}
+
+	@Override
+	public void updateUser(UserVO vo) throws Exception {
+		session.update(namespace+".updateUser",vo);
+	}
+
+	@Override
+	public void deleteUser(UserVO vo) throws Exception {
+
+	}
+
+	@Override
+	public void naverInsertUser(LoginDTO dto) throws Exception {
+		System.out.println("naverInsertUser "+dto);
+		session.insert(namespace+".naverInsertUser",dto);
+	}
+
+	@Override
+	public UserVO naverReadUser(LoginDTO dto) throws Exception {
+		return session.selectOne(namespace+".naverReadUser",dto);
+	}
 }

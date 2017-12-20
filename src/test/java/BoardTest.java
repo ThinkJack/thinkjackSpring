@@ -62,6 +62,16 @@ public class BoardTest {
 
     }
 
+    @Test
+    public void Test2() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
+        vo.setBoardId(124);
+        vo.setUserId(1);
+
+        System.out.println(dao.getBoardLike(vo));
+        dao.deleteBoardLike(vo);
+    }
+
 
 
 

@@ -77,7 +77,8 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
-        <form role="form">
+
+        <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
             <input type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -86,6 +87,12 @@
         </form>
         <div class="box-body">
 
+            <div style="text-align: right;">
+                <a class="btn btn-outline-dark heart">
+                    <img id="heart" src="">
+                </a>
+
+            </div>
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
@@ -103,13 +110,13 @@
             </div>
         </div>
         <div class="box-footer">
+            <c:if test="${login.userName == boardVO.boardWriter}">
             <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
             <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+            </c:if>
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
-
-
-        <%--댓글 등록 부분 --%>
+<%--댓글 등록 부분 --%>
         <div class="media well">
             <div class="media-body">
                 <%--댓글 등록하는 아이디(--%>
@@ -170,10 +177,7 @@
                             Like
                         </div>
                         <div class="boxcoracao">
-                            <span class="coracao"> </span>
-                        </div>
-
-                    </div>
+                            <span class="coracao"> </span>    </div></div>
                     <%--likeCnt부분--%>
                     <div class="media-body" id="comentReply" >
                         <h3 class="timeline-header"><div>{{replyId}}</div>{{replyWirter}}</h3>
@@ -185,10 +189,7 @@
 
             {{/each}}
         </script>
-
-        <div class="col-3"></div>
-
-        <div id='modifyModal' class="modal modal-primary fade" role="dialog">
+    <div class="col-3"></div><div id='modifyModal' class="modal modal-primary fade" role="dialog">
             <%--modal-title--%>
             <div class ='modal-dialog'>
                 <div class="modal-dialog">
@@ -208,31 +209,72 @@
                     </div>
                 </div>
             </div>
+</div>
+<script>
+    $(document).ready(function () {
+var heartval = ${heart};
 
-        </div>
-        <script>
-            $(document).ready(function () {
-                var formObj = $("form[role='form']");
-                var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
+        if(heartval>0) {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like2.png");
+            $(".heart").prop('name',heartval)
+        }
+        else {
+            console.log(heartval);
+            $("#heart").prop("src", "/resources/images/like1.png");
+            $(".heart").prop('name',heartval)
+        }        var formObj = $("form[role='form']");
+        var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
-                console.log(formObj);
+        $(".modifyBtn").on("click", function () {
+            formObj.attr("action", "/board/modify");
+            formObj.attr("method", "get");
+            formObj.append(boardid);
+            formObj.submit();
+        });
 
-                $(".modifyBtn").on("click", function () {
-                    formObj.attr("action", "/board/modify");
-                    formObj.attr("method", "get");
-                    formObj.append(boardid);
-                    formObj.submit();
-                });
+        $(".removeBtn").on("click", function () {
+            formObj.attr("action", "/board/remove");
+            formObj.append(boardid);
+            formObj.submit();
+        });
 
-                $(".removeBtn").on("click", function () {
-                    formObj.attr("action", "/board/remove");
-                    formObj.append(boardid);
-                    formObj.submit();
-                });
+        $(".goListBtn").on("click", function () {
+            formObj.attr("method", "get");
+            formObj.attr("action", "/board/list");
 
-                $(".goListBtn").on("click", function () {
-                    formObj.attr("method", "get");
-                    formObj.attr("action", "/board/list");
+            formObj.submit();
+        });
+
+
+        $(".heart").on("click", function () {
+
+            var that = $(".heart");
+
+            var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
+            $.ajax({
+                url :'/board/heart',
+                type :'POST',
+                data : sendData,
+                success : function(data){
+                    that.prop('name',data);
+                    if(data==1) {
+                        $('#heart').prop("src","/resources/images/like2.png");
+                    }
+                    else{
+                        $('#heart').prop("src","/resources/images/like1.png");
+                    }
+
+
+                }
+            });
+        });
+
+
+
+    })
+</script>
+
 
                     formObj.submit();
                 });
@@ -534,5 +576,5 @@
 
         </script>
 
-
+        <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
 <%--<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>--%>
