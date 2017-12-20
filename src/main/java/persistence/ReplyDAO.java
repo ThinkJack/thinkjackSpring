@@ -1,10 +1,10 @@
 package persistence;
 
-import domain.Criteria;
-import domain.ReplyLikeVO;
-import domain.ReplyVO;
+        import domain.Criteria;
+        import domain.ReplyLikeVO;
+        import domain.ReplyVO;
 
-import java.util.List;
+        import java.util.List;
 
 public interface ReplyDAO {
     //생성(insert)
@@ -37,17 +37,7 @@ public interface ReplyDAO {
     //좋아요 목록(select)
     public Integer readLike(ReplyLikeVO vo) throws  Exception;
 
-
     public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception;
 
-
-    //생성(insert)
-    public void reCreateReply(ReplyVO vo) throws Exception;
-    //댓글 전체 목록(select)
-    public List<ReplyVO> reReadReply(Integer replyId) throws  Exception;
-    //대댓글 정정(update)
-    public void reUpdateReply(ReplyVO vo) throws Exception;
-    //대댓글 삭제(deledte)
-    public void reDeleteReply(Integer replyParent) throws Exception;
 }
 

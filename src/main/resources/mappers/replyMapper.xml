@@ -97,7 +97,7 @@
     <select id="count" resultType="int">
         SELECT count(*)
         FROM tbl_reply
-        WHERE board_id = #{boardId}
+        WHERE board_id = #{boardId}  AND reply_state = 1
     </select>
 
 
@@ -114,7 +114,7 @@
         SET reply_likecnt = (SELECT count(reply_like_id)
                              FROM tbl_reply_like
                              WHERE tbl_reply_like.reply_id = #{replyId})
-        WHERE reply_id = #{replyId};
+        WHERE reply_id = #{replyId}
     </update>
 
 

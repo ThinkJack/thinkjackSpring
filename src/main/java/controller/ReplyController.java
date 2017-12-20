@@ -84,34 +84,33 @@ public class ReplyController {
         return entity;
     }
 
-
-    //좋아요
+//좋아요 부분
     @ResponseBody
-    @RequestMapping(value="/heart}",method=RequestMethod.POST,produces = "aplication/json")
-    public String heart(@PathVariable("replyId") Integer replyId,@PathVariable("userId") Integer userId,Model mode, HttpSession session, UserVO userVO) throws Exception {
-/*        this.replyId = replyId;//   대댓글 찾기
-        this.userId = userId;
-        this.mode = mode;
-        this.session = session;
-        this.userVO = userVO;*/
-//            public  int heart (@RequestBody ReplyLikeVO vo)throws Exception{
-        //  replyId,uerID의 값을 전달
-//
-//        int likeCheck = service.readLike(userNo, ReplyNo);
-//
-//        model.addAttribute("replyId",replyId);
-//        model.addAttribute("UserId",userId);
+    @RequestMapping(value = "/heart", method = RequestMethod.POST, produces = "application/json")
+    public int heart(HttpServletRequest httpRequest) throws Exception {
 
-        userVO = (UserVO) session.getAttribute("login");
+        int heart = Integer.parseInt(httpRequest.getParameter("heart"));
+        int boardId = Integer.parseInt(httpRequest.getParameter("replyId"));
+        int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
+        ReplyLikeVO ReplyLikeVO = new ReplyLikeVO();
 
-//        if(likeCheck == 0) {
-//0보다크면 delete,uodate return 0
-            //0 insety, uodate return1
-//        }
+        ReplyLikeVO.setReplyId(boardId);
+        ReplyLikeVO.setUserId(userid);
 
-        return "/heart";
+        System.out.println(heart);
+
+        if (heart >= 1) {
+            service.deleteReplyLike(ReplyLikeVO);
+            heart = 0;
+        } else {
+            service.insertReplyLike(ReplyLikeVO);
+            heart = 1;
+        }
+
+        return heart;
     }
+
 
 
     //수정

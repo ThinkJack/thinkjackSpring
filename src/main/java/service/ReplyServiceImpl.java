@@ -91,31 +91,4 @@ public class ReplyServiceImpl implements ReplyService {
          return dao.readLike(vo);
     }
 
-
-//    @Override
-//    public int heart(Integer replyId, Integer userId) throws Exception {
-//        //유저 아이디를 받아서 유저의 댓글목록을 리스트에 저장
-//
-//        List<ReplyLikeVO> list=dao.readLike(userId);
-        // 그 리스트에서 받아온 replyID와 같은지 확인
-
-//
-//        //replyId와 userId로 replyLikeId값을 찾음
-//        if () {
-//
-//
-//        }
-//        //만약 likecnt=0이면 서비싀으 insert,update작동
-//        return 1;
-//    }else
-//
-//    {
-//        //조건문 만약 likecnt=1 이면 서비스의   delete,update작동
-//        return 0;
-
-
-
-
-
-
 }

@@ -111,12 +111,12 @@
         </div>
         <div class="box-footer">
             <c:if test="${login.userName == boardVO.boardWriter}">
-            <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-            <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+                <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
+                <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
             </c:if>
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
-<%--댓글 등록 부분 --%>
+        <%--댓글 등록 부분 --%>
         <div class="media well">
             <div class="media-body">
                 <%--댓글 등록하는 아이디(--%>
@@ -168,17 +168,17 @@
                     {{/if}}
 
                     </span>
-
-
-                    <div class="btn heart">
-                        <input type ="text" id ="replyId2" name = "replyId" value = '${replyId}' style = "display : none">
-                        <input type = "text" id ="userId2" name = "userId" value = '${userId}' style = "display :none">
+                    <div class="btn reHeart">
                         <div class='textbtn'>
                             Like
                         </div>
-                        <div class="boxcoracao">
-                            <span class="coracao"> </span>    </div></div>
-                    <%--likeCnt부분--%>
+
+                        <div style="text-align: right;">
+                            <a class="btn btn-outline-dark reHeart">
+                                <img id="reHeart" src="">
+                            </a>
+                        </div>
+                    </div>>
                     <div class="media-body" id="comentReply" >
                         <h3 class="timeline-header"><div>{{replyId}}</div>{{replyWirter}}</h3>
                         <input type="text" name='title' class="timeline-body" value={{replyText}} readonly="readonly">
@@ -186,100 +186,94 @@
                     </div>
                 </div>
             </li>
-
             {{/each}}
         </script>
-    <div class="col-3"></div><div id='modifyModal' class="modal modal-primary fade" role="dialog">
-            <%--modal-title--%>
-            <div class ='modal-dialog'>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"></h4>
-                        </div>
-                        <div class="modal-body" data-replyId>
-                            <p><input type="text" id="replyText" class="form-control"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button"  class="btn btn-info" id="replyModBtn">Modify</button>
-                            <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+        <div class="col-3"></div><div id='modifyModal' class="modal modal-primary fade" role="dialog">
+        <%--modal-title--%>
+        <div class ='modal-dialog'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body" data-replyId>
+                        <p><input type="text" id="replyText" class="form-control"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-info" id="replyModBtn">Modify</button>
+                        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-</div>
-<script>
-    $(document).ready(function () {
-var heartval = ${heart};
+        </div>
+    </div>
+        <script>
+            $(document).ready(function () {
+                var heartval = ${heart};
 
-        if(heartval>0) {
-            console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like2.png");
-            $(".heart").prop('name',heartval)
-        }
-        else {
-            console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like1.png");
-            $(".heart").prop('name',heartval)
-        }        var formObj = $("form[role='form']");
-        var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
-
-        $(".modifyBtn").on("click", function () {
-            formObj.attr("action", "/board/modify");
-            formObj.attr("method", "get");
-            formObj.append(boardid);
-            formObj.submit();
-        });
-
-        $(".removeBtn").on("click", function () {
-            formObj.attr("action", "/board/remove");
-            formObj.append(boardid);
-            formObj.submit();
-        });
-
-        $(".goListBtn").on("click", function () {
-            formObj.attr("method", "get");
-            formObj.attr("action", "/board/list");
-
-            formObj.submit();
-        });
-
-
-        $(".heart").on("click", function () {
-
-            var that = $(".heart");
-
-            var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
-            $.ajax({
-                url :'/board/heart',
-                type :'POST',
-                data : sendData,
-                success : function(data){
-                    that.prop('name',data);
-                    if(data==1) {
-                        $('#heart').prop("src","/resources/images/like2.png");
-                    }
-                    else{
-                        $('#heart').prop("src","/resources/images/like1.png");
-                    }
-
-
+                if(heartval>0) {
+                    console.log(heartval);
+                    $("#heart").prop("src", "/resources/images/like2.png");
+                    $(".heart").prop('name',heartval)
                 }
-            });
-        });
+                else {
+                    console.log(heartval);
+                    $("#heart").prop("src", "/resources/images/like1.png");
+                    $(".heart").prop('name',heartval)
+                }        var formObj = $("form[role='form']");
+                var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
+                $(".modifyBtn").on("click", function () {
+                    formObj.attr("action", "/board/modify");
+                    formObj.attr("method", "get");
+                    formObj.append(boardid);
+                    formObj.submit();
+                });
 
+                $(".removeBtn").on("click", function () {
+                    formObj.attr("action", "/board/remove");
+                    formObj.append(boardid);
+                    formObj.submit();
+                });
 
-    })
-</script>
-
+                $(".goListBtn").on("click", function () {
+                    formObj.attr("method", "get");
+                    formObj.attr("action", "/board/list");
 
                     formObj.submit();
                 });
-            });
+
+
+                $(".reHeartt").on("click", function () {
+
+                    var that = $(".reHeart");
+
+                    var sendData = {'replyId' : '${replyVO.replyId}','heart' : that.prop('name')};
+                    $.ajax({
+                        url :'/board/heart',
+                        type :'POST',
+                        data : sendData,
+                        success : function(data){
+                            that.prop('name',data);
+                            if(data==1) {
+                                $('#heart').prop("src","/resources/images/like2.png");
+                            }
+                            else{
+                                $('#heart').prop("src","/resources/images/like1.png");
+                            }
+
+
+                        }
+                    });
+                });
+
+
+
+            })
         </script>
+
 
         <script>
 
@@ -471,11 +465,6 @@ var heartval = ${heart};
 
             });
 
-            // $(".heart ").click(function(){
-            //      $('.boxcoracao .coracao', this).toggleClass("ativo")
-            //
-            //  });
-
             //대댓글 목록 부분
             function listReply2(){
                 $.ajax({
@@ -498,8 +487,6 @@ var heartval = ${heart};
                 });
             }
 
-            //reply parent >0 이면 화면에 나타나게 한다.
-            //  $("div:hidden").show();
             $("#reAddBtn").click(function () {
                 //reply 같으면 div창이 나타나게
                 //div에는 reply아이디값을 값이
@@ -530,45 +517,22 @@ var heartval = ${heart};
 
         </script>
         <script>
+            //댓글부분
             //좋아요 버튼
-            $("#heart").click(function() {
-                var userId = $(this).siblings("#userId").val();
-                var replyId = $(this).siblings("#replyId").val();
+            $("#reHeart").click(function() {
+                var reHeartVal = ${heart};
 
-                $.ajax({
-                    type: 'post',
-                    url: '/replies/heart/' + replyId + userId,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-HTTP-Method-Override": "POST"
-                    },
-                    data: JSON.stringify({"replyId": replyId, "userId": usesrId}),
-                    dataType: 'text',
-                    success: function (result) {
-
-                        alert("하트");
-
-                        if (result == '1') {
-                            //하트버튼의 값을 받아서 text에 저징
-                            var text = $("#heart").text();
-
-                            if (jsonData3.isFavorite) {
-                                $("#heart").text("♥");
-                            }
-                            else if (text == "♥") {
-                                $("#heart").text("♡");
-                            }
-                            // getPage("/replies/"+boardId+"/"+replyPage);
-                        }
-                    }
-
-                })
-
-            })
-            $("#heart").change(function() {
-
-
-                replyId.style.display = "none";
+                if(reHeartVal>0) {
+                    console.log(heartval);
+                    $("#reHeart").prop("src", "/resources/images/like2.png");
+                    $(".reHeart").prop('name',reHeartVal)
+                }
+                else {
+                    console.log(reHeartVal);
+                    $("#reHeart").prop("src", "/resources/images/like1.png");
+                    $(".reHeart").prop('name',reHeartVal)
+                }        var formObj = $("form[role='form']");
+                var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
             });
 
