@@ -34,20 +34,20 @@
     <!-- main 코드 작성 페이지 -->
     <main role="main" class="main" id="code-main">
 
-        <div class="row container-fluid">
+        <div class="row container-fluid main_ch">
             <div class="row boarderLine"></div>
             <div class="row layout" id="layout1">
-                <div class="build col" id="htmlBuild">
+                <div class="build col code_layout" id="htmlBuild">
                     <div class="col"><p class="h4 text-white code-name">HTML</p></div>
                     <div class="col" id="codeHtml"></div>
                 </div>
-                <div class="col resize_code layout-ch" id="resize-code-1"></div>
-                <div class="build col" id="cssBuild">
+                <div class="col resize_code layout-ch" id="resize-code-1" ></div>
+                <div class="build col code_layout" id="cssBuild">
                     <div class="col"><p class="h4 text-white code-name">CSS</p></div>
                     <div class="col" id="codeCss"></div>
                 </div>
                 <div class="col resize_code layout-ch" id="resize-code-2"></div>
-                <div class="build col" id="jsBuild">
+                <div class="build col code_layout" id="jsBuild">
                     <div class="col"><p class="h4 text-white code-name">JS</p></div>
                     <div class="col" id="codeJavaScript"></div>
                 </div>
@@ -55,7 +55,7 @@
             <div class="row resize_view" id="resize-view"></div>
             <%--결과창--%>
             <div class="row main_view layout" id="layout2">
-                <div class="row iframe_body" id="iframe-body">
+                <div class="row iframe_body iframeWrapper" id="iframe-body">
                     <iframe class="col" id="resultView"></iframe>
                 </div>
                 <div class="row console_body">
@@ -89,17 +89,31 @@
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
     <script>
-        //상수 선언
-        const sideLayout = true, topLayout = false; // side에 left, right 둘다 포함 된다.
         //변수선언
         var imgPath = "/resources/images/";
         //---------console관련 변수
         var editConsoleView = document.getElementById("edit-console-view");
         var editConsole = document.getElementById("edit-console");
         var commandLine = document.getElementById("command-line-view");
-        var windowHeight;
-        var layoutMode = topLayout;
 
+        var htmlBuild = document.getElementById("htmlBuild");
+        var cssBuild = document.getElementById("cssBuild");
+        var jsBuild = document.getElementById("jsBuild");
+        var codeMLayout = document.getElementsByClassName("CodeMirror");
+
+        var codeMain = document.getElementById("code-main");
+        var resizeView = document.getElementById("resize-view");
+        var iframeBody = document.getElementById("iframe-body");
+        var layout1 = document.getElementById("layout1");
+        var layout2 = document.getElementById("layout2");
+        var resizeCode1 = document.getElementById("resize-code-1");
+        var resizeCode2 = document.getElementById("resize-code-2");
+        var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
+        var codeLayout = document.getElementsByClassName("code_layout");
+
+        var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
+        var layoutMode = 0; //0 - top, 1 - left 2 - right
+        var dragging = false;
 
         //editHeader.jsp script
         //pencil 클릭시 input text 보이기
@@ -297,36 +311,24 @@
         $(function () {
             editConsole.style.display = "none";
             commandLine.style.display = "none";
-            windowHeight = window.outerHeight;
+
         });
         //--------------------
 
         //창 크기조절 관련
         $(function () {
             $(window).resize(function () {
-                if (layoutMode) {
-                    console.log(document.getElementById("code-main").style.height);
-                }
                 //            창크기 width 제한
                 if (this.outerWidth <= 450) {
                     this.outerWidth = 450;
                 }
-
-                windowHeight = window.outerHeight;
             });
         });
 
 
         //layout 관련 script
         $(function () {
-            var codeMain = document.getElementById("code-main");
-            var resizeView = document.getElementById("resize-view");
-            var iframeBody = document.getElementById("iframe-body");
-            var layout1 = document.getElementById("layout1");
-            var layout2 = document.getElementById("layout2");
-            var resizeCode1 = document.getElementById("resize-code-1");
-            var resizeCode2 = document.getElementById("resize-code-2");
-            var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
+
 
             $("#left-layout").click(function () {
                 codeMain.style = "height: calc(100% - 9px);";
@@ -340,10 +342,12 @@
                 resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
 
                 for(i in codeMirrorLayout) {
-                    codeMirrorLayout[i].style = "height: 246px";
+                    codeMirrorLayout[i].style = "height: calc(30% - 52px);";
                 }
 
-                layoutMode = sideLayout;
+                for(i in codeLayout){
+                    codeLayout[i].style = "width: 100%;";
+                }
             });
 
             $("#top-layout").click(function () {
@@ -361,7 +365,9 @@
                     codeMirrorLayout[i].style = "height: 300px";
                 }
 
-                layoutMode = topLayout;
+                for(i in codeLayout){
+                    codeLayout[i].style = "width: 33.1%;";
+                }
             });
 
             $("#right-layout").click(function () {
@@ -376,14 +382,103 @@
                 resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
 
                 for(i in codeMirrorLayout){
-                    codeMirrorLayout[i].style = "height: 246px";
+                    codeMirrorLayout[i].style = "height: calc(30% - 52px);";
                 }
 
-
-
-                layoutMode = sideLayout;
+                for(i in codeLayout){
+                    codeLayout[i].style = "width: 100%;";
+                }
             });
         });
+
+
+        //화면 영역 조절관련 function
+        jQuery("#resize-code-1").mousedown(function(e) {
+            e.preventDefault();
+            dragging = true;
+            var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
+
+            $(window).mousemove(function (e) {
+
+                hcl = startP - e.pageX;
+
+                console.log(cssBuild.offsetWidth);
+                if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
+
+                }else{
+                    htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
+                    cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
+                }
+
+            });
+        });
+
+        jQuery("#resize-code-2").mousedown(function(e) {
+            e.preventDefault();
+            dragging = true;
+            var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
+
+            $(window).mousemove(function (e) {
+
+                cjl = startP - e.pageX;
+
+                if (-350 < cjl && cjl < 350) {
+                    cssBuild.style = "width: calc(33.1% - " + cjl + "px);";
+                    jsBuild.style = "width: calc(33.1% + " + cjl + "px);";
+                }
+
+            });
+        });
+
+        jQuery("#resize-view").mousedown(function(e) {
+            e.preventDefault();
+            dragging = true;
+            var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
+
+            $(window).mousemove(function (e) {
+                cifl = startP - e.pageY;
+//                if (-350 < cifl && cifl < 350) {
+                for(i in codeMLayout){
+                    codeMLayout[i].style = "height: calc(100% - " + (753 + cifl)+ "px);";
+                }
+
+                iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
+            });
+
+            $('.iframeWrapper').mousemove(function (e) {
+                cifl = startP - e.pageY;
+                for(i in codeMLayout){
+                    codeMLayout[i].style = "height: calc(100% - " + (753 + cifl)+ "px);";
+                }
+
+                iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
+            });
+        });
+
+        jQuery(window).mouseup(function (e) {
+            $(window).unbind('mousemove');
+            $('.iframeWrapper').unbind('mousemove');
+            dragging = false;
+        });
+
+        jQuery('.iframeWrapper').mouseup(function(e) {
+            $(window).unbind('mousemove');
+            $('.iframeWrapper').unbind('mousemove');
+            dragging = false;
+        })
+
+//        $('.iframeWrapper').on('mouseup', function (e) {
+//            dragging = false;
+//        });
+
+//        jQuery(function ($) { // DOM ready
+//
+//            $('.iframeWrapper').on('mousemove', function(e) {
+//                e.preventDefault();
+//                alert('test');
+//            });
+//
+//        });
     </script>
 </body>
 </html>
