@@ -161,16 +161,12 @@ public class ReplyController {
             @PathVariable("boardId") Integer boarId,
             @PathVariable("page") Integer page) {
 
-
-
-
-
         //화면으로 전달되는 Map데이터
         ResponseEntity<Map<String, Object>> entity = null;
         try {
             Criteria cri = new Criteria();
             cri.setPage(page);
-            System.out.println(page+"페이징 처리");
+            System.out.println(page+"페이징 처리?????");
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(cri);
 
@@ -181,11 +177,11 @@ public class ReplyController {
 
             int replyCount = service.count(boarId);
             pageMaker.setTotalCount(replyCount);
-
+            System.out.println(replyCount+"페이징 처리2");
             map.put("pageMaker", pageMaker);
 
             entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.MULTI_STATUS.OK);
-
+            System.out.println(entity+"페이징 처리3");
         } catch (Exception e) {
             e.printStackTrace();
             entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);

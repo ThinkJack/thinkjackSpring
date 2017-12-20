@@ -135,7 +135,10 @@
             </li>
             <%--페이지네이션 부분--%>
             <div class ='text-center'>
-                <ul id="pagination" class="pagination pagination-sm no-margin"></ul>
+
+                <ul id="pagination" class="pagination">
+                </ul>
+
             </div>
         </ul>
 
@@ -143,15 +146,24 @@
         <script id="template" type="text/x-handlebars-template">
             {{#each .}}
             <li class ="replyLi" data-replyId={{replyId}}>
+
                 <div class="timeline-item media well">
                     <%--3.날짜부분--%>
                     <span class="time">
                            {{prettifyDate replyRegdate}}
+
                     </span>
+                    {{#if replyParent}}
+                    <span class="badge">대댓글</span>
+
+                    {{else}}
+                    <span class="badge">댓글</span>
+
+                    {{/if}}
 
                     <div class="btn heart">
-                        <input type ="text" id = "replyId" name = "replyId" value = '${replyId}' style = "display : none">
-                        <input type = "text" id = "userId" name = "userId" value = '${userId}' style = "display :none">
+                        <input type ="text" id ="replyId2" name = "replyId" value = '${replyId}' style = "display : none">
+                        <input type = "text" id ="userId2" name = "userId" value = '${userId}' style = "display :none">
                         <div class='textbtn'>
                             Like
                         </div>
@@ -159,64 +171,18 @@
                             <span class="coracao"> </span>
                         </div>
 
-
-
                     </div>
                     <%--likeCnt부분--%>
                     <div class="media-body" id="comentReply" >
-                        <h3 class="timeline-header"><strong>{{replyId}}</strong>{{replyWirter}}</h3> {{#if replyParent}}<span class="badge">대댓글</span>{{else}}<span class="badge">댓글</span>{{/if}}
+                        <h3 class="timeline-header"><strong>{{replyId}}</strong>{{replyWirter}}</h3>
                         <input type="text" name='title' class="timeline-body" value={{replyText}} readonly="readonly">
                         <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
-                        <%--2.대댓글 입력창--%>
-                        <div class="form-group">
-                            <%--로그인 상태에서 대댓글 입력--%>
-                            <h3 class="timeline-header">{{replyWirter}}</h3>
-                            <input type="text" name='title' class="form-control" value="대댓글 입력부분">
-                            <%--대댓글 등록부분--%>
-                            <button type="button" class="btn btn-danger" id="newReReplyText" >등록 </button>
-
-
-                        </div>
                     </div>
                 </div>
             </li>
+
             {{/each}}
         </script>
-
-
-        <%--<script id="template"  type="text/x-handlebars-template">--%>
-            <%--{{#each .}}--%>
-          <%----%>
-
-                <%--<div class="media mt-3 well" id="reComentReply" >&lt;%&ndash;style="display:none"&ndash;%&gt;--%>
-                    <%--<a class="pr-3" href="#">--%>
-                        <%--&lt;%&ndash;날짜부분&ndash;%&gt;--%>
-                        <%--<span class="time">{{prettifyDate replyRegdate}}</span>--%>
-                    <%--</a>--%>
-                    <%--<div class="media-body">--%>
-                        <%--<h3 class="timeline-header"><strong>{{replyId}}</strong>{{replyWirter}}</h3>--%>
-                        <%--<div class="form-group">--%>
-                            <%--&lt;%&ndash;입력완료된 대댓글&ndash;%&gt;--%>
-                            <%--<input type="text" name='title' class="form-control" value={{replyText}} readonly="readonly">--%>
-                            <%--&lt;%&ndash;수정버튼 내용수정&ndash;%&gt;--%>
-                            <%--<button class="btn btn-primary btn-xs" data-toggle="modal" data target="#modifyModal2">Modify</button>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</li>--%>
-            <%--{{/each}}--%>
-        <%--</script>--%>
-        <%--<script>--%>
-            <%--var source = $("#reReply").html();--%>
-            <%--var template = Handlebars.compile(source);--%>
-            <%--var data=[--%>
-                <%----%>
-
-            <%--]--%>
-        <%--</script>--%>
-
-
-
 
         <div class="col-3"></div>
 
@@ -389,7 +355,7 @@
             function getPage(pageInfo){
                 $.getJSON(pageInfo,function (data) {
                     console.log("pageMaker?:"+data.pageMaker);
-                    printData(data.list,$("#repliesDiv"),$('#template'), $('#template2'));
+                    printData(data.list,$("#repliesDiv"),$('#template'));
                     printPaging(data.pageMaker ,$(".pagination"));
 
                     $("#modifyModal").modal('hide');
@@ -565,4 +531,4 @@
         </script>
 
 
-<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
+<%--<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>--%>
