@@ -31,13 +31,13 @@
       <!--메인 이미지 왼쪽-->
       <img src="/resources/images/slide1.jpg" style="width:100%" alt="Image">
       <!--editor로 가는 버튼-->
-      <button href="#" >Editor</button>
+      <a href="/edit/editPage" >Editor</a>
     </div>
     <div class="col-6">
       <!--메인 이미지 오른쪽-->
       <img src="/resources/images/slide1.jpg"  style="width:100%" alt="Image">
       <!--Home으로 가는 버튼-->
-      <button href="#">Main</button>
+      <a href="/main">Main</a>
     </div>
   </div>
 </div>
