@@ -68,7 +68,7 @@
             <div class="col">
                 <div class="build col" id="jsBuild">
                     <div class="col"><p class="h4 text-white code-name">JS</p></div>
-                    <div class="col" id="codeJavaScript"></div>
+                    <div class="col" id="codeUnitTest"></div>
                 </div>
             </div>
             <div class="col resize_code layout-ch" ></div>

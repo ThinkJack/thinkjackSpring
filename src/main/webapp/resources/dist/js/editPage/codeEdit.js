@@ -124,6 +124,44 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
+
+var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
+    mode: "javascript",
+    lineNumbers: true,
+    scrollbarStyle: "simple",    // 스크롤바 스타일
+    keyMap: "sublime",           // 키맵
+    matchBrackets: true,         // 괄호강조
+    theme: "dracula",            // 테마
+    tabSize: 4,                  // 탭키 간격
+    lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
+    highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
+    // extraKeys: { ".": "autocomplete" },
+    // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
+    indentUnit: 2,                //들여쓰기
+    // indentWithTabs: false,
+    electricChars: true,         //중괄호 정렬
+    resetSelectionOnContextMenu: false,
+    smartIndent: true,
+    lineWiseCopyCut: true,
+    pasteLinesPerSelection: true,
+    tabindex: 2,
+    styleActiveLine: true,
+
+    wordWrap: true,
+    autoCloseBrackets: true,
+    // gutters: ["CodeMirror-linenumbers", "breakpoints"],
+
+    lineWrapping: true,           //Folding
+    extraKeys: {
+        "Ctrl-Space": "autocomplete",
+        "Ctrl-Q": function (cm) {
+            cm.foldCode(cm.getCursor());
+        },
+        "Shift-Tab": autoFormatSelection
+    },
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
+});
 // editor.foldCode(CodeMirror.Pos(13, 0));
 
 var codePython = CodeMirror(document.getElementById("codePython"), {
@@ -180,6 +218,10 @@ function makeMarker() {
         if ($('#autoPreview').is(':checked')) {
             clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
             delay = setTimeout(updatePreview, 0);}
+    });
+
+    codeUnitTest.on("change", function () {
+        consoleView(codeUnitTest.getValue());
     });
 
 
@@ -298,7 +340,24 @@ codeJavaScript.on("keyup", function (cm, event) {
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
     }
 });
+codeUnitTest.on("keyup", function (cm, event) {
+    if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
+        var scope = {};
+        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+        for (var i in window) {
+            if (preventList.indexOf(i) === -1) {
+                scope[i] = window[i]
+            }
+        }
+        CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
+    }
+});
 codeJavaScript.on("gutterClick", function (cm, n) {
+    var info = cm.lineInfo(n);
+    cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
+});
+codeUnitTest.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
@@ -357,6 +416,9 @@ function getSelectedRange1() {
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
+function getSelectedRange3() {
+    return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+}
 
 //--shift+tab
 function autoFormatSelection() {
@@ -366,6 +428,8 @@ function autoFormatSelection() {
     codeCss.autoFormatRange(range1.from, range1.to);
     var range2 = getSelectedRange2();
     codeJavaScript.autoFormatRange(range2.from, range2.to);
+    var range3 = getSelectedRange2();
+    codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
 //--ctrl+/
 // function commentSelection(isComment) {
