@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import common.TempKey;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -48,7 +49,6 @@ public class UserController {
 	@Inject
 	private UserService service;
 
-	
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
 		System.out.println("register GET 진입");
@@ -252,11 +252,15 @@ public class UserController {
 		String userSocialId = jsonparse.JsonToString(jsonobj, "id");
 		String name = jsonparse.JsonToString(jsonobj, "nickname");
 
+
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
+		TempKey TK = new TempKey();
+
+
 		dto.setUserEmail("naver");
 		dto.setUserSocialId("n"+userSocialId);
-		dto.setUserName(name);
+		dto.setUserName(name+"#"+TK.generateNumber(5));
 
 //		System.out.println("======================JSON 파싱값================");
 //		System.out.println("name: "+name);
@@ -334,11 +338,11 @@ public class UserController {
 		//System.out.println("UserVO 전");
 
         LoginDTO dto = new LoginDTO();
-
+		TempKey TK = new TempKey();
 
         System.out.println(person.getDisplayName());
         dto.setUserEmail("google");
-        dto.setUserName(person.getDisplayName());
+        dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
 		System.out.println("controller dto: "+dto);
@@ -410,9 +414,11 @@ public class UserController {
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
+		TempKey TK = new TempKey();
+
 		dto.setUserEmail("github");
 		dto.setUserSocialId("git"+userSocialId);
-		dto.setUserName(name);
+		dto.setUserName(name+"#"+TK.generateNumber(5));
 
 //		System.out.println("======================JSON 파싱값================");
 //		System.out.println("name: "+name);
