@@ -37,7 +37,11 @@ public class MailHandler {
         messageHelper.addInline(contentId, dataSource);
     }
     public void send() {
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

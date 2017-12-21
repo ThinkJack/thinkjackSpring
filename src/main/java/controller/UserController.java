@@ -74,7 +74,7 @@ public class UserController {
 		System.out.println("/authenticate 진입"+msg);
 		String responseMsg;
 		if(msg == "T") {
-			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
+			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\",\"chk\":\""+"T"+"\"}";
 		}else if(msg == "F"){
 			responseMsg = "{\"msg\":\""+"인증 대기중인 이메일 입니다. 인증해주세요."+"\"}";
 		}else{
@@ -83,7 +83,7 @@ public class UserController {
 
 
 		URLEncoder.encode(responseMsg , "UTF-8");
-//	model.addAttribute("msg", service.authenticate(email));
+
 		System.out.println(userEmail);
 		System.out.println(responseMsg);
 		return responseMsg;
