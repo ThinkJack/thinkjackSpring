@@ -7,10 +7,10 @@
 
     <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
     <insert id="insert">
-        INSERT INTO tbl_reply (board_id, reply_text, reply_wirter)
+        INSERT INTO tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
         VALUES (#{boardId}, #{replyText}, (SELECT user_id
                                            FROM tbl_user
-                                           WHERE user_name = #{replyWirter}))
+                                           WHERE user_name = #{replyWirter}), #{replyParent});
     </insert>
 
     <!-- 조회(select)-->
@@ -25,10 +25,11 @@
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,
-            reply_likecnt                                     replyLikecnt
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
         FROM tbl_reply
-        WHERE board_id = #{boardId} AND reply_state = 1
-        ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent)
+        WHERE board_id = #{boardId}
+        ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
     </select>
 
     <!--정정(update)-->
@@ -45,34 +46,9 @@
         UPDATE tbl_reply
         SET reply_state = 0
         WHERE reply_id = #{replyId}
+
+
     </update>
-
-
-    <!--대댓글 생성(insert)-->
-    <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
-    <insert id="insert2">
-        INSERT INTO tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
-        VALUES (#{boardId}, #{replyText}, (SELECT user_id
-                                           FROM tbl_user
-                                           WHERE user_name = #{replyWirter}), #{replyParent});
-    </insert>
-
-    <!-- 대댓글 조회(select)-->
-    <select id="select2" resultType="ReplyVO">
-        <!--선택한다모든 댓글아이디,-->
-        SELECT
-        reply_id replyId,
-        board_id boardId,
-        reply_text replyText,
-        (SELECT user_name FROM tbl_user WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWirter,
-        reply_regdate replyRegdate,
-        reply_update replyUpdate,
-        reply_parent replyParent,
-        reply_likecnt replyLikecnt
-        FROM tbl_reply WHERE reply_parent=#{replyId} AND reply_state = 1
-        ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent)
-
-    </select>
 
     <!--게시판 번호에서 댓글 목록 범위 지정-->
     <select id="listPage" resultType="ReplyVO">
@@ -86,9 +62,10 @@
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,
-            reply_likecnt                                     replyLikecnt
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
         FROM tbl_reply
-        WHERE board_id = #{boardId} AND reply_state = 1
+        WHERE board_id = #{boardId}
         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent)
         LIMIT #{cri.pageStart}, #{cri.perPageNum};
     </select>
@@ -97,16 +74,14 @@
     <select id="count" resultType="int">
         SELECT count(*)
         FROM tbl_reply
-        WHERE board_id = #{boardId}  AND reply_state = 1
+        WHERE board_id = #{boardId}
     </select>
-
 
 
     <!--댓글id와 userid값이 추가된다-->
     <insert id="createReplyLikeCnt">
-        INSERT INTO tbl_reply_like (reply_id, user_id) VALUES ( #{replyId}, #{userId});
+        INSERT INTO tbl_reply_like (reply_id, user_id) VALUES (#{replyId}, #{userId});
     </insert>
-
 
 
     <update id="updateReplyLikeCnt">
@@ -129,7 +104,7 @@
     <select id="heart" resultType="int">
         SELECT count(*)
         FROM tbl_reply
-        WHERE reply_id = #{replyId} and user_id = #{userId}
+        WHERE reply_id = #{replyId} AND user_id = #{userId}
     </select>
 
 

@@ -1,4 +1,5 @@
 import domain.ReplyLikeVO;
+import domain.ReplyVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,6 +17,38 @@ public class ReplyDAOTest {
 
     @Inject
     private ReplyDAO dao;
+
+    @Inject
+    private ReplyService service;
+
+
+    @Test
+    public void testCreate() throws Exception {
+
+        ReplyVO reply = new ReplyVO();
+        reply.setBoardId(1);
+        reply.setReplyText("testh");
+        /*존재한 User_name 이어야 한다*/
+        reply.setReplyWirter("user00");
+        dao.createReply(reply);
+    }
+
+
+
+    //댓글 찾기
+    @Test
+    public void testRead() throws Exception {
+
+        ReplyVO reply = new ReplyVO();
+        List<ReplyVO> replyVOList = dao.readReply(1);
+//        모든리스트를 가져온다
+//        System.out.println(replyVOList);
+//        0번째 댓글 가져온다
+        reply=replyVOList.get(0);
+        System.out.println(reply);
+
+
+    }
 
 }
 //    @Inject
@@ -42,18 +75,7 @@ public class ReplyDAOTest {
 //        dao.updateReply(reply);
 //    }
 //
-//    //댓글 찾기
-//    @Test
-//    public void testRead() throws Exception {
-//
-//        ReplyVO reply = new ReplyVO();
-//        List<ReplyVO> replyVOList = dao.readReply(1);
-////        모든리스트를 가져온다
-////        System.out.println(replyVOList);
-////        0번째 댓글 가져온다
-//        reply=replyVOList.get(0);
-//        System.out.println(reply);
-//    }
+
 //    //삭제(댓글)
 //    @Test
 //    public void testDelete() throws Exception{

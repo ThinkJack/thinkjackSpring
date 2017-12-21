@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-
 <jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
 
 
@@ -74,6 +73,21 @@
 
     .btn{ transition: background-color 0.2s ease;}
 </style>
+<style>
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        background-color: #e5eecc;
+        border: solid 1px #c3c3c3;
+    }
+
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+</style>
+
+
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
@@ -86,12 +100,10 @@
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
         <div class="box-body">
-
             <div style="text-align: right;">
                 <a class="btn btn-outline-dark heart">
                     <img id="heart" src="">
                 </a>
-
             </div>
             <div class="form-group">
                 <label>Title</label>
@@ -120,24 +132,21 @@
         <div class="media well">
             <div class="media-body">
                 <%--댓글 등록하는 아이디(--%>
-                <input type="text" name='writer' class="form-control" id="register" value="${boardVO.boardWriter}"  readonly="readonly">
+                <input type="text" name='writer' class="form-control register" value="${boardVO.boardWriter}"  readonly="readonly">
                 <%--댓글 입력 부분--%>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" id="newReplyText">댓글 입력하세요</textarea>
+                    <textarea class="form-control newReplyText" rows="3" >댓글 입력하세요</textarea>
                     <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                    <button type="button" type="submit" class="btn btn-danger" id="addBtn" >등록 </button>
+                    <button type="button"  class="btn btn-info addBtn" >등록 </button>
                 </div>
             </div>
         </div>
 
         <%--입력된 댓글 목록 나타나는 부분--%>
         <ul class="replies"></ul>
-        <form role="form2">
-            <input type="hidden" name='replyLikeCnt' value="${replyVO.replyLikeCnt}">
-        </form>
         <ul class="timeline">
             <%--버튼을 클릭하면 댓글목록이 나온다--%>
-            <li class = "time-label" id="repliesDiv" >
+            <li class = "time-label repliesDiv"  >
                 <button type="button" class=""> Replies List </button>
             </li>
             <%--페이지네이션 부분--%>
@@ -145,146 +154,168 @@
 
                 <ul id="pagination" class="pagination">
                 </ul>
-
             </div>
         </ul>
 
-        <%--댓글 반복문 부분--%>
-        <script id="template" type="text/x-handlebars-template">
-            {{#each .}}
-            <li class ="replyLi" data-replyId={{replyId}}>
+    </div>
+    <div class="col-3"></div>
+</div>
+<%--댓글 반복문 부분--%>
+<script class="template" type="text/x-handlebars-template">
+    {{#each .}}
+    <li class ="replyLi" data-replyId={{replyId}}>
 
-                <div class="timeline-item media well">
-                    <%--3.날짜부분--%>
-                    <span class="time">
+        <div class="timeline-item media well">
+            <%--3.날짜부분--%>
+            <span class="time">
                            {{prettifyDate replyRegdate}}
-
+                    <%-- 조건문으로 parent값 있는것을 구분한다--%>
                           {{#if replyParent}}
                     <span class="badge">대댓글</span>
-
                     {{else}}
                     <span class="badge">댓글</span>
+                    {{/if}}
+                    </span>
+            <%--하트 버튼(좋아요)--%>
+            <div style="text-align: right;">
+                <a class="reHeart btn btn-outline-dark">
+                    <img id="reHeart" src="">
+                </a>
+            </div>
 
+            <div class="media-body" id="comentReply" >
+                <input type="hidden" name='title' class="replyId"  value={{replyId}} readonly="readonly">
+                <input type="hidden" name='title' class="replyParent"  value={{replyId}} readonly="readonly">
+                <%--replyId와 replyWirter 나타나는 부분--%>
+                    {{#if replyState}}
+                    <h3 class="timeline-header"><div>{{replyId}}</div>{{replyWirter}}</h3>
+
+                    <%--<input type="text" name='title' class=" timeline-body " value={{replyText}} readonly="readonly">--%>
+                    <input type="text" name='title' class="replyIn"  value={{replyText}} readonly="readonly">
+                    {{else}}
+                    <h3 class="timeline-header">{{replyId}}</h3>
+                    <input type="text" name='title' class="timeline-body" value="삭제된 댓글입니다." readonly="readonly">
                     {{/if}}
 
-                    </span>
-                    <div class="btn reHeart">
-                        <div class='textbtn'>
-                            Like
-                        </div>
+                <button type="button" class="btn btn-info btn-lg timeline" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
+            </div>
 
-                        <div style="text-align: right;">
-                            <a class="btn btn-outline-dark reHeart">
-                                <img id="reHeart" src="">
-                            </a>
-                        </div>
-                    </div>>
-                    <div class="media-body" id="comentReply" >
-                        <h3 class="timeline-header"><div>{{replyId}}</div>{{replyWirter}}</h3>
-                        <input type="text" name='title' class="timeline-body" value={{replyText}} readonly="readonly">
-                        <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
-                    </div>
-                </div>
-            </li>
-            {{/each}}
-        </script>
-        <div class="col-3"></div><div id='modifyModal' class="modal modal-primary fade" role="dialog">
-        <%--modal-title--%>
-        <div class ='modal-dialog'>
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body" data-replyId>
-                        <p><input type="text" id="replyText" class="form-control"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"  class="btn btn-info" id="replyModBtn">Modify</button>
-                        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+        </div>
+        {{#if replyParent}}
+
+        {{else}}
+        <div>대댓글 등록</div>
+        <div>
+            <div class="form-group">
+                <input type="text" name='writer' class="form-control reRegister"  value="${boardVO.boardWriter}"  readonly="readonly">
+                <textarea class="form-control " rows="3" >대댓글 입력하세요</textarea>
+                <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                <button type="button"  class="btn btn-info addBtn"  >등록 </button>
             </div>
         </div>
+        {{/if}}
+    </li>
+
+    {{/each}}
+</script>
+
+
+
+
+<%--modal bootsrtrap --%>
+<div class="modal modal-primary fade modifyModal" role="dialog">
+    <%--modal-title--%>
+    <div class ="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal</h4>
+            </div>
+            <div class="modal-body" data-replyId>
+                <p><input type="text"  class="form-control replyText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-info replyModBtn" >Modify</button>
+                <button type="button" class="btn btn-danger replyDelBtn" >DELETE</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
-        <script>
-            $(document).ready(function () {
-                var heartval = ${heart};
-
-                if(heartval>0) {
-                    console.log(heartval);
-                    $("#heart").prop("src", "/resources/images/like2.png");
-                    $(".heart").prop('name',heartval)
-                }
-                else {
-                    console.log(heartval);
-                    $("#heart").prop("src", "/resources/images/like1.png");
-                    $(".heart").prop('name',heartval)
-                }        var formObj = $("form[role='form']");
-                var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
-
-                $(".modifyBtn").on("click", function () {
-                    formObj.attr("action", "/board/modify");
-                    formObj.attr("method", "get");
-                    formObj.append(boardid);
-                    formObj.submit();
-                });
-
-                $(".removeBtn").on("click", function () {
-                    formObj.attr("action", "/board/remove");
-                    formObj.append(boardid);
-                    formObj.submit();
-                });
-
-                $(".goListBtn").on("click", function () {
-                    formObj.attr("method", "get");
-                    formObj.attr("action", "/board/list");
-
-                    formObj.submit();
-                });
+</div>
 
 
-                $(".reHeartt").on("click", function () {
+    <script>
+        $(document).ready(function () {
+            var heartval = ${heart};
 
-                    var that = $(".reHeart");
+            if(heartval>0) {
+                console.log(heartval);
+                $("#heart").prop("src", "/resources/images/like2.png");
+                $(".heart").prop('name',heartval)
+            }
+            else {
+                console.log(heartval);
+                $("#heart").prop("src", "/resources/images/like1.png");
+                $(".heart").prop('name',heartval)
+            }        var formObj = $("form[role='form']");
+            var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
-                    var sendData = {'replyId' : '${replyVO.replyId}','heart' : that.prop('name')};
-                    $.ajax({
-                        url :'/board/heart',
-                        type :'POST',
-                        data : sendData,
-                        success : function(data){
-                            that.prop('name',data);
-                            if(data==1) {
-                                $('#heart').prop("src","/resources/images/like2.png");
-                            }
-                            else{
-                                $('#heart').prop("src","/resources/images/like1.png");
-                            }
+            $(".modifyBtn").on("click", function () {
+                formObj.attr("action", "/board/modify");
+                formObj.attr("method", "get");
+                formObj.append(boardid);
+                formObj.submit();
+            });
+
+            $(".removeBtn").on("click", function () {
+                formObj.attr("action", "/board/remove");
+                formObj.append(boardid);
+                formObj.submit();
+            });
+
+            $(".goListBtn").on("click", function () {
+                formObj.attr("method", "get");
+                formObj.attr("action", "/board/list");
+
+                formObj.submit();
+            });
 
 
+            $(".heart").on("click", function () {
+
+                var that = $(".heart");
+
+                var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
+                $.ajax({
+                    url :'/board/heart',
+                    type :'POST',
+                    data : sendData,
+                    success : function(data){
+                        that.prop('name',data);
+                        if(data==1) {
+                            $('#heart').prop("src","/resources/images/like2.png");
                         }
-                    });
+                        else{
+                            $('#heart').prop("src","/resources/images/like1.png");
+                        }
+
+
+                    }
                 });
+            });
 
-
-
-            })
-        </script>
-
-
-        <script>
-
-            //1.댓글등록부분
-            $("#addBtn").on("click", function () {
+            $(document).on("click",".addBtn", function () {
                 //각각의 id값을 받아온다
+                console.log("Ssss");
 
-                var replyTextObj = $("#newReplyText");
+                var replyTextObj = $(".newReplyText");
                 //내용입력 comment
                 var replyText = replyTextObj.val();
-                var replyer = $("#register").val();
+                var replyer = $(".register").val();
+                var replyParent= $(".replyParent").val();
+                console.log(replyParent+"replyId?");
 
                 $.ajax({
                     type: 'post',
@@ -295,7 +326,7 @@
                     },
                     dataType: 'text',
                     //문자를 객체로 바꿈
-                    data: JSON.stringify({boardId: boardId, replyText: replyText,replyWirter:replyer}),
+                    data: JSON.stringify({boardId: boardId, replyText: replyText,replyWirter:replyer,replyParent:replyParent}),
                     success: function (result) {
                         if (result == 'SUCCESS') {
                             alert("등록");
@@ -307,238 +338,223 @@
                     }
                 });
             });
-            <%--modal창 수정 삭제--%>
-            $("#replyDelBtn").on("click",function() {
-                var replyId = $('.modal-title').html();
-                var replyText = $("#replyText").val();
+        });
+    </script>
+
+
+    <script>
+        <%--modal창 수정 삭제--%>
+
+            $(document).on("click",".replyModBtn", function () {
+                var replyId = $(".replyId").val();
+                var replyText = $(".replyIn").val();
+                console.log(replyId);
+                console.log(replyText+"글?");
 
                 $.ajax({
-                    type: 'delete',
+                    type: 'put',
                     url: '/replies/' + replyId,
                     headers: {
                         "Content-Type": "application/json",
-                        "X-HTTP-Method-Override": "DELETE"
-                    },
-                    dataType: 'text',
-                    success: function (result) {
-
-                        if (result == 'SUCCESS') {
-                            alert("삭제 되었습니다.");
-                            getPage("/replies/"+boardId+"/"+replyPage);
-                        }
-                    }
-                });
-
-            });
-            $("#replyModBtn").on("click", function () {
-
-                var replyId = $('.modal-title').html();
-                var replyText = $("#replyText").val();
-                //console.log(replyText);
-
-                $.ajax({
-                    type:'put',
-                    url:'/replies/'+ replyId,
-                    headers: {
-                        "Content-Type":"application/json",
                         "X-HTTP-Method-Override": "PUT"
                     },
-                    data:JSON.stringify({replyText:replyText}),
+                    data: JSON.stringify({replyText: replyText}),
                     dataType: 'text',
                     success: function (result) {
+                        console.log("수정완료?");
                         if (result == 'SUCCESS') {
                             alert("수정 되었습니다.");
-                            getPage("/replies/"+boardId+"/"+replyPage);
-                        }
-                    }
-                });
-            });
-
-        </script>
-
-        <script>
-            <%--3.날짜부분--%>
-            Handlebars.registerHelper("prettifyDate",function(timeValue){
-                var dateObj = new Date(timeValue);
-                console.log(timeValue+"나오니?????");
-                var year = dateObj.getFullYear();
-                console.log(year+"year");
-                var month = dateObj.getMonth()+1;
-                var date = dateObj.getDate();
-                var hour = dateObj.getHours();
-                var minute = dateObj.getMinutes();
-                var second = dateObj.getSeconds();
-                var strDate = year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
-                return strDate;
-            });
-        </script>
-        <script>
-            <%--페이지 연결부분--%>
-            var printData = function (replyArr,target,templateObject){
-
-                var template = Handlebars.compile(templateObject.html());
-                // console.log(template+">>>>>");
-                var html = template(replyArr);
-                $(".replyLi").remove();
-                target.after(html);
-            }
-        </script>
-        <script>
-            /*댓글 목록 보기*/
-            //해당 게시물의 번호
-
-            var boardId=${boardVO.boardId};
-            var replyPage=1;
-
-            //댓글목록 처리
-            //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
-            function getPage(pageInfo){
-                $.getJSON(pageInfo,function (data) {
-                    console.log("pageMaker?:"+data.pageMaker);
-                    printData(data.list,$("#repliesDiv"),$('#template'));
-                    printPaging(data.pageMaker ,$(".pagination"));
-
-                    $("#modifyModal").modal('hide');
-
-                    //    예상:대댓글부분div 숨긴다
-                });
-            }
-
-            //페이지 네이션 부분
-            var printPaging = function(pageMaker,target){
-                var str="";
-                console.log(pageMaker+"나오니");
-                if(pageMaker.prev){
-                    str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
-                }
-
-                for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len ; i++){
-                    var strClass = pageMaker.cri.page == i?'class=active':'';
-                    str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
-                }
-
-                if(pageMaker.next){
-                    str += "<li><a href ='"+(pageMaker.endPage+1)+"'> >> </a></li>";
-                }
-                target.html(str);
-            };
-
-            //최초로 댓글의 1페이지가져오는작업 (repliesList)버튼 클릭하면 작동
-            $("#repliesDiv").on("click",function(){
-                if($(".timeline li").resize()>1){
-                    return;
-                }
-                getPage("/replies/"+boardId+"/1");
-            });
-            //페이지 네이션 부분
-            $(".pagination").on("click","li a", function(event){
-
-                event.preventDefault();
-
-                replyPage = $(this).attr("href");
-
-                getPage("/replies/"+boardId+"/"+replyPage);
-            });
-
-            //대글리스트 나오는 부분
-            $("#replies").on("click",".replyLi button", function () {
-                var reply = $(this).parent();
-                //reply의 속성
-                var replyId = reply.attr("data-replyId");
-
-                var replyText = reply.text();
-
-                $(".modal-title").html(replyId);
-                $("#replyText").val(replyText);
-                $("#modDiv").show("slow");
-            });
-
-
-            //댓글의 수정버튼을 누르면 모달창이 나오도록
-            $(".timeline").on("click",".replyLi",function (event){
-
-                var reply =$(this);
-                //#repliesText의 값을 reply에서 찾는다(class이름이 timeline-bodyd의 글에서
-                $("#repliesText").val(reply.find('.timeline-body').text());
-                //data-replyId 값을 받아서 modal-title값으로 보낸다
-                $(".modal-title").html(reply.attr("data-replyId"));
-
-            });
-
-            //대댓글 목록 부분
-            function listReply2(){
-                $.ajax({
-                    type: "get",
-                    //contentType: "application/json", ==> 생략가능(RestController이기때문에 가능)
-                    url: "${path}/reply/listJson.do?bno=${dto.bno}",
-                    success: function(result){
-                        console.log(result);
-                        var output = "<table>";
-                        for(var i in result){
-                            output += "<tr>";
-                            output += "<td>"+result[i].userName;
-                            output += "("+changeDate(result[i].regdate)+")<br>";
-                            output += result[i].replytext+"</td>";
-                            output += "<tr>";
-                        }
-                        output += "</table>";
-                        $("#listReply").html(output);
-                    }
-                });
-            }
-
-            $("#reAddBtn").click(function () {
-                //reply 같으면 div창이 나타나게
-                //div에는 reply아이디값을 값이
-
-                var reReplyTextObj = $("#newReReplyText");
-
-                $.ajax({
-                    type: 'post',
-                    url: '/replies/re',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-HTTP-Method-Override": "POST"
-                    },
-                    dataType: 'text',
-                    //문자를 객체로 바꿈
-                    data: JSON.stringify({boardId: boardId, replyText: replyText,userId:uerId}),
-                    success: function (result) {
-                        if (result == 'SUCCESS') {
-                            alert("대댓글 등록");
-                            replyPage = 1;
                             getPage("/replies/" + boardId + "/" + replyPage);
-
-                            replyTextObj.val("");
                         }
                     }
                 });
             });
 
-        </script>
-        <script>
-            //댓글부분
-            //좋아요 버튼
-            $("#reHeart").click(function() {
-                var reHeartVal = ${heart};
+        $(document).on("click",".replyDelBtn", function () {
+            var replyId = $(".replyId").val();
+            var replyText = $(".replyIn").val();
 
-                if(reHeartVal>0) {
-                    console.log(heartval);
-                    $("#reHeart").prop("src", "/resources/images/like2.png");
-                    $(".reHeart").prop('name',reHeartVal)
+            console.log(replyId+"삭제아이디");
+            console.log(replyText+"삭제 글?");
+            $.ajax({
+                type: 'delete',
+                url: '/replies/' + replyId,
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-HTTP-Method-Override": "DELETE"
+                },
+                dataType: 'text',
+                success: function (result) {
+                    console.log("삭제?");
+                    if (result == 'SUCCESS') {
+                        alert("삭제 되었습니다.");
+                        getPage("/replies/" + boardId + "/" + replyPage);
+                    }
                 }
-                else {
-                    console.log(reHeartVal);
-                    $("#reHeart").prop("src", "/resources/images/like1.png");
-                    $(".reHeart").prop('name',reHeartVal)
-                }        var formObj = $("form[role='form']");
-                var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
+            });
+        });
+    </script>
+
+    <script>
+        <%--3.날짜부분--%>
+        Handlebars.registerHelper("prettifyDate",function(timeValue){
+            var dateObj = new Date(timeValue);
+
+            var year = dateObj.getFullYear();
+            console.log(year+"year");
+            var month = dateObj.getMonth()+1;
+            var date = dateObj.getDate();
+            var hour = dateObj.getHours();
+            var minute = dateObj.getMinutes();
+            var second = dateObj.getSeconds();
+            var strDate = year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+            return strDate;
+        });
+    </script>
+
+    <script>
+        <%--페이지 연결부분--%>
+        var printData = function (replyArr,target,templateObject){
+
+            var template = Handlebars.compile(templateObject.html());
+            // console.log(template+">>>>>");
+            var html = template(replyArr);
+            $(".replyLi").remove();
+            target.after(html);
+        }
+    </script>
+    <script>
+        /*댓글 목록 보기*/
+        //해당 게시물의 번호
+
+        var boardId=${boardVO.boardId};
+        var replyPage=1;
+
+        //댓글목록 처리
+        //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
+        function getPage(pageInfo){
+            $.getJSON(pageInfo,function (data) {
+                // console.log("pageMaker?:"+data.pageMaker);
+                printData(data.list,$(".repliesDiv"),$('.template'));
+                printPaging(data.pageMaker ,$("#pagination"));
+
+                // $("#modifyModal").modal('hide');
 
             });
+        }
+
+        //페이지 네이션 부분
+        var printPaging = function(pageMaker,target){
+            var str="";
+
+            if(pageMaker.prev){
+                str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+            }
+
+            for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len ; i++){
+                var strClass = pageMaker.cri.page == i?'class=active':'';
+                str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
+            }
+
+            if(pageMaker.next){
+                str += "<li><a href ='"+(pageMaker.endPage+1)+"'> >> </a></li>";
+            }
+            target.html(str);
+        };
+
+        //최초로 댓글의 1페이지가져오는작업 (repliesList)버튼 클릭하면 작동
+        $(".repliesDiv").on("click",function(){
+
+            if($(".timeline li").resize()>1){
+                return;
+            }
+            getPage("/replies/"+boardId+"/1");
+        });
+        //페이지 네이션 부분
+        $("#pagination").on("click","li a", function(event){
+
+            event.preventDefault();
+
+            replyPage = $(this).attr("href");
+
+            getPage("/replies/"+boardId+"/"+replyPage);
+        });
+
+        //댓글리스트 나오는 부분
+        $(".replies").on("click",".replyLi button", function () {
+            var reply = $(this).parent();
+            //reply의 속성
+            var replyId = reply.attr("data-replyId");
+
+            var replyText = reply.text();
+
+            $(".modal-title").html(replyId);
+            console.log(replyId+"???");
+            $(".replyText").val(replyText);
+            console.log(replyText+"리스트의 택스트 글");
+
+
+        });
+
+
+        //댓글의 수정버튼을 누르면 모달창이 나오도록
+        $(document).on("click",".timeline", function () {
+
+            var reply =$(this);
+
+            //#repliesText의 값을 reply에서 찾는다(class이름이 timeline-bodyd의 글에서 텍스트를 밥아온다)
+            $(".repliesText").val(reply.find('.timeline-body').text());
+            //data-replyId 속성 값을 받아서 modal-title값으로 보낸다
+            $(".modal-title").html(reply.attr("data-replyId"));
+
+        });
 
 
 
-        </script>
+    </script>
+    <%--<script>--%>
+    <%--//좋아요 버튼--%>
+    <%--$("#reHeart").click(function() {--%>
+    <%--var reHeartVal = ${reHeart};--%>
+    <%--console.log(reHeartVal+"하트");--%>
+    <%--if(reHeartVal>0) {--%>
+    <%--console.log(reHeartval);--%>
+    <%--$("#reHeart").prop("src", "/resources/images/like2.png");--%>
+    <%--$(".reHeart").prop('name',reHeartVal)--%>
+    <%--}--%>
+    <%--else {--%>
+    <%--console.log(reHeartVal);--%>
+    <%--$("#reHeart").prop("src", "/resources/images/like1.png");--%>
+    <%--$(".reHeart").prop('name',reHeartVal)--%>
+    <%--}--%>
+    <%--});--%>
 
-        <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
+
+    <%--$(".reHeart").on("click", function () {--%>
+
+    <%--var that = $(".reHeart").val();--%>
+
+    <%--var sendData = {'replyId' : '${replyVO.replyId}','reHeart' : that.prop('name')};--%>
+    <%--console.log(sendData+"replyId");--%>
+    <%--$.ajax({--%>
+    <%--url :'/replies/reHeart',--%>
+    <%--type :'POST',--%>
+    <%--data : sendData,--%>
+    <%--success : function(data){--%>
+    <%--that.prop('name',data);--%>
+    <%--if(data==1) {--%>
+    <%--$('#reHeart').prop("src","/resources/images/like2");--%>
+    <%--}--%>
+    <%--else{--%>
+    <%--$('#reHeart').prop("src","/resources/images/like1.png");--%>
+    <%--}--%>
+    <%--}--%>
+    <%--});--%>
+    <%--});--%>
+
+    <%--</script>--%>
+
+
+
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
 <%--<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>--%>

@@ -35,6 +35,7 @@ public class ReplyController {
         ResponseEntity<String> entity = null;
         try {
             //생성
+            System.out.println(vo);
             service.insertReply(vo);
             entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 
@@ -48,22 +49,24 @@ public class ReplyController {
     }
 
     //   대댓글을 등록하는데 성공,실패
-    @RequestMapping(value = "/re", method = RequestMethod.POST)
-    public ResponseEntity<String> reRegister(@RequestBody ReplyVO vo) {
-
-        ResponseEntity<String> entity = null;
-        try {
-            //생성
-            service.reInsertReply(vo);
-            entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            //400를 결과로 전송한다.
-            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        return entity;
-    }
+//    @RequestMapping(value = "/re", method = RequestMethod.POST)
+//    public ResponseEntity<String> reRegister(@RequestBody ReplyVO vo) {
+//        System.out.println("들어왔니");
+//        ResponseEntity<String> entity = null;
+//        try {
+//            //생성
+//            service.reInsertReply(vo);
+//            entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+//            System.out.println("들어왔니??");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            //400를 결과로 전송한다.
+//            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//
+//            System.out.println("들어왔니ㅁㅁ");
+//        }
+//        return entity;
+//    }
 
 
     //게시글 번호로 글 찾기
@@ -73,6 +76,7 @@ public class ReplyController {
 
         ResponseEntity<List<ReplyVO>> entity = null;
         try {
+
             entity = new ResponseEntity<>(
                     service.listReply(boardId), HttpStatus.OK);
 
@@ -84,31 +88,31 @@ public class ReplyController {
         return entity;
     }
 
-//좋아요 부분
+    //좋아요 부분
     @ResponseBody
-    @RequestMapping(value = "/heart", method = RequestMethod.POST, produces = "application/json")
-    public int heart(HttpServletRequest httpRequest) throws Exception {
+    @RequestMapping(value = "/reHeart", method = RequestMethod.POST, produces = "application/json")
+    public int reHeart(HttpServletRequest httpRequest) throws Exception {
 
-        int heart = Integer.parseInt(httpRequest.getParameter("heart"));
-        int boardId = Integer.parseInt(httpRequest.getParameter("replyId"));
+        int reHeart = Integer.parseInt(httpRequest.getParameter("reHeart"));
+        int replyId = Integer.parseInt(httpRequest.getParameter("replyId"));
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
         ReplyLikeVO ReplyLikeVO = new ReplyLikeVO();
 
-        ReplyLikeVO.setReplyId(boardId);
+        ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
 
-        System.out.println(heart);
+        System.out.println(reHeart+"reply");
 
-        if (heart >= 1) {
+        if (reHeart >= 1) {
             service.deleteReplyLike(ReplyLikeVO);
-            heart = 0;
+            reHeart = 0;
         } else {
             service.insertReplyLike(ReplyLikeVO);
-            heart = 1;
+            reHeart = 1;
         }
 
-        return heart;
+        return reHeart;
     }
 
 
@@ -141,9 +145,11 @@ public class ReplyController {
     public ResponseEntity<String> remove(
 
             @PathVariable("replyId") Integer replyId) {
+System.out.println(replyId+"삭제값 넘어오나요?");
 
         ResponseEntity<String> entity = null;
         try {
+            System.out.println(replyId+"삭제값 try 넘어오나요?");
             service.deleteReply(replyId);
             entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         } catch (Exception e) {
@@ -165,7 +171,7 @@ public class ReplyController {
         try {
             Criteria cri = new Criteria();
             cri.setPage(page);
-            System.out.println(page+"페이징 처리?????");
+
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(cri);
 
@@ -176,11 +182,11 @@ public class ReplyController {
 
             int replyCount = service.count(boarId);
             pageMaker.setTotalCount(replyCount);
-            System.out.println(replyCount+"페이징 처리2");
+
             map.put("pageMaker", pageMaker);
 
             entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.MULTI_STATUS.OK);
-            System.out.println(entity+"페이징 처리3");
+
         } catch (Exception e) {
             e.printStackTrace();
             entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);

@@ -38,6 +38,7 @@ public class ReplyServiceImpl implements ReplyService {
     //삭제
     @Override
     public void deleteReply(int replyId) throws Exception {
+        System.out.println(replyId+"삭제값 넘어오나요DAO?");
         dao.deleteReply(replyId);
 
     }
