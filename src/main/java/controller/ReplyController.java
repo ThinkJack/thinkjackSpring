@@ -53,25 +53,6 @@ public class ReplyController {
 
     }
 
-    //   대댓글을 등록하는데 성공,실패
-//    @RequestMapping(value = "/re", method = RequestMethod.POST)
-//    public ResponseEntity<String> reRegister(@RequestBody ReplyVO vo) {
-//        System.out.println("들어왔니");
-//        ResponseEntity<String> entity = null;
-//        try {
-//            //생성
-//            service.reInsertReply(vo);
-//            entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-//            System.out.println("들어왔니??");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            //400를 결과로 전송한다.
-//            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//
-//            System.out.println("들어왔니ㅁㅁ");
-//        }
-//        return entity;
-//    }
 
 
     //게시글 번호로 글 찾기
@@ -107,7 +88,7 @@ public class ReplyController {
         ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
 
-        System.out.println(reHeart+"reply");
+        System.out.println(reHeart+"하트 들어왔니");
 
         if (reHeart >= 1) {
             service.deleteReplyLike(ReplyLikeVO);
@@ -116,7 +97,7 @@ public class ReplyController {
             service.insertReplyLike(ReplyLikeVO);
             reHeart = 1;
         }
-
+System.out.println(reHeart+"하트?리턴 값");
         return reHeart;
     }
 

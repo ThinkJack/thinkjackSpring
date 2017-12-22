@@ -185,17 +185,19 @@
             </div>
                           {{#if replyParent}}
                  <%--<div class="registerReply"  >--%>
+                   <div class="registerReply">
                      <span class="badge">대댓글</span>
+                 <h2 class="replyId">{{replyId}} </h2>
            <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
                 <%--replyId와 replyWirter 나타나는 부분--%>
                 <h3 class="timeline-header">{{replyWirter}}</h3>
                 <%--입력된 댓글 text부분--%>
-                <input class="replyId" readonly=readonly value="{{replyText}}"> </input>
-                <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
-                <button type="button" class="btn btn-warning  timeline" data-toggle="modal" data-target="#modifyModal">Open Modal</button>
+                <input class="replyText" readonly=readonly value="{{replyText}}"> </input>
+                       <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
+                <button type="button" class="btn btn-warning  modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
             <%--</div>--%>
-
+                   </div>
                     {{else}}
                 <div class="registerReply">
                     <span class="badge">댓글</span>
@@ -207,9 +209,9 @@
                     <%--replyId와 replyWirter 나타나는 부분--%>
                     <h3 class="timeline-header">{{replyWirter}}</h3>
                 <%--입력된 댓글 text부분--%>
-                <input class="replyId" readonly=readonly value="{{replyText}}"> </input>
+                <input class="replyText" readonly=readonly value="{{replyText}}"> </input>
                     <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
-                    <button type="button" class="btn btn-warning timeline" data-toggle="modal" data-target="#modifyModal">Open Modal</button>
+                    <button type="button" class="btn btn-warning modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
 
                     <div class="form-group">
                         <input type="text" name='writer' class="reRegister"  value="${boardVO.boardWriter}"  readonly="readonly">
@@ -220,11 +222,12 @@
                     </div>
                 </div>
             {{/if}}
-                    </span>
-
-
 
             {{else}}
+                <div class="media well">
+                 <h3 class="timeline-header">{{replyId}}</h3>
+                <input type="text" name='title' class="timeline-body" value="삭제된 댓글입니다." readonly="readonly">
+    </div>
             {{/if}}
         </div>
     </li>
@@ -245,7 +248,7 @@
                 <h4 class="modal-title">Modal</h4>
             </div>
             <div class="modal-body" data-replyId>
-                <p><input type="text"  class="form-control replyText"></p>
+                <p><input type="text"  class="form-control newReplyText" ></p>
             </div>
             <div class="modal-footer">
                 <button type="button"  class="btn btn-info replyModBtn" >Modify</button>
@@ -378,19 +381,15 @@
 
     });
 
-
-
-
-
 </script>
 
 <script>
     <%--modal창 수정 삭제--%>
 
     $(document).on("click",".replyModBtn", function () {
-        var replyId = $(".replyId").val();
-        var replyText = $(".replyIn").val();
-        console.log(replyId);
+        var replyId =$(".modal-title").html();
+        var replyText =$(".newReplyText").val();
+        console.log(replyId+"수정아이디");
         console.log(replyText+"글?");
 
         $.ajax({
@@ -413,8 +412,8 @@
     });
 
     $(document).on("click",".replyDelBtn", function () {
-        var replyId = $(".replyId").val();
-        var replyText = $(".replyIn").val();
+        var replyId = $(".modal-title").html();
+        var replyText =$(".newReplyText").val();
 
         console.log(replyId+"삭제아이디");
         console.log(replyText+"삭제 글?");
@@ -465,6 +464,7 @@
         target.after(html);
     }
 </script>
+
 <script>
     /*댓글 목록 보기*/
     //해당 게시물의 번호
@@ -484,17 +484,7 @@
 
         });
     }
-    //대댓글 용
-    function getPageReply(pageInfo){
-        $.getJSON(pageInfo,function (data) {
-            // console.log("pageMaker?:"+data.pageMaker);
-            printData(data.list,$(".addBtn").parents().parents(".form-group"),$('.template'));
-            printPaging(data.pageMaker ,$("#pagination"));
 
-            // $("#modifyModal").modal('hide');
-
-        });
-    }
     //페이지 네이션 부분
     var printPaging = function(pageMaker,target){
         var str="";
@@ -552,62 +542,61 @@
 
 
     //댓글의 수정버튼을 누르면 모달창이 나오도록
-    $(document).on("click",".timeline", function () {
-
-        var reply =$(this);
-
+    $(document).on("click",".modalReply", function () {
 
         //newReplyText의 값을 reply에서 찾는다(class이름이 timeline-bodyd의 글에서 텍스트를 밥아온다)
-        $(".newReplyText").val(reply.find('.timeline-body').text());
+        $(".newReplyText").val($(this).parent().find('.replyText').val());
+        console.log("모달?나오니?"+  $(this).parent().find('.replyText').val());
         //data-replyId 속성 값을 받아서 modal-title값으로 보낸다
-        $(".modal-title").html(reply.attr("data-replyId"));
-
+        $(".modal-title").html($(this).parent().find('.replyId').text());
+        console.log("모달제목?나오니?"+ $(this).parent().find('.replyId').text())
     });
 
 
 
 </script>
-<%--<script>--%>
-<%--//좋아요 버튼--%>
-<%--$("#reHeart").click(function() {--%>
-<%--var reHeartVal = ${reHeart};--%>
-<%--console.log(reHeartVal+"하트");--%>
-<%--if(reHeartVal>0) {--%>
-<%--console.log(reHeartval);--%>
-<%--$("#reHeart").prop("src", "/resources/images/like2.png");--%>
-<%--$(".reHeart").prop('name',reHeartVal)--%>
-<%--}--%>
-<%--else {--%>
-<%--console.log(reHeartVal);--%>
-<%--$("#reHeart").prop("src", "/resources/images/like1.png");--%>
-<%--$(".reHeart").prop('name',reHeartVal)--%>
-<%--}--%>
-<%--});--%>
+<script>
+
+    //좋아요 버튼
+    $("#reHeart").click(function() {
+        var reHeartVal =
+            console.log(reHeartVal+"하트");
+        if(reHeartVal>0) {
+            console.log(reHeartval);
+            $("#reHeart").prop("src", "/resources/images/like2.png");
+            $(".reHeart").prop('name',reHeartVal)
+        }
+        else {
+            console.log(reHeartVal);
+            $("#reHeart").prop("src", "/resources/images/like1.png");
+            $(".reHeart").prop('name',reHeartVal)
+        }
+    });
 
 
-<%--$(".reHeart").on("click", function () {--%>
+    $(".reHeart").on("click", function () {
 
-<%--var that = $(".reHeart").val();--%>
+        var that = $(".reHeart").val();
+        console.log(that+"하트 that");
+        var sendData = {'replyId' : ,'reHeart' : that.prop('name')};
+        console.log(sendData+"하트+sendData");
+        $.ajax({
+            url :'/replies/reHeart',
+            type :'POST',
+            data : sendData,
+            success : function(data){
+                that.prop('name',data);
+                if(data==1) {
+                    $('#reHeart').prop("src","/resources/images/like2");
+                }
+                else{
+                    $('#reHeart').prop("src","/resources/images/like1.png");
+                }
+            }
+        });
+    });
 
-<%--var sendData = {'replyId' : '${replyVO.replyId}','reHeart' : that.prop('name')};--%>
-<%--console.log(sendData+"replyId");--%>
-<%--$.ajax({--%>
-<%--url :'/replies/reHeart',--%>
-<%--type :'POST',--%>
-<%--data : sendData,--%>
-<%--success : function(data){--%>
-<%--that.prop('name',data);--%>
-<%--if(data==1) {--%>
-<%--$('#reHeart').prop("src","/resources/images/like2");--%>
-<%--}--%>
-<%--else{--%>
-<%--$('#reHeart').prop("src","/resources/images/like1.png");--%>
-<%--}--%>
-<%--}--%>
-<%--});--%>
-<%--});--%>
-
-<%--</script>--%>
+</script>
 
 
 
