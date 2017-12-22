@@ -20,7 +20,17 @@ public interface UserDAO {
 
 	public void createAuthKey(String userEmail, String userAuthCode) throws Exception;
 
-	public void userAuth(String userEmail) throws Exception;
+	public UserVO chkAuth(UserVO vo) throws Exception;
+
+	public void userAuth(UserVO vo) throws Exception;
 
 	public UserVO authenticate(String str) throws Exception;
+
+	public void updateAuthKey(String userEmail, String userAuthCode) throws Exception;
+
+	public void updatePassword(UserVO vo) throws Exception;
+
+	public void successAuth (UserVO vo) throws Exception;
+
+
 }

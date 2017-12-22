@@ -13,6 +13,7 @@
 	<script>
 
         var chkid=false;
+        var chkpass=false;
 console.log(signup);
         function checkvalue() {
             console.log('3번째: '+signup.userPassword.value);
@@ -21,14 +22,16 @@ console.log(signup);
                 if(signup.userPassword.value!=signup.chkPassword.value){
                     $('#pwsame').text('비밀번호가 일치하지 않습니다.');
                     $('#pwsame').css("color","red");
+                    chkpass=false;
                 }else if(signup.userPassword.value===signup.chkPassword.value) {
                     $('#pwsame').text('비밀번호가 일치합니다.');
-                    $('#pwsame').css("color","#2EFE2E")
+                    $('#pwsame').css("color","#2EFE2E");
+                    chkpass=true;
                 }
             } else {
-                $('#pwsame').text('비밀번호와 비밀번호확인을 입력해주세요.');
-                $('#pwsame').css("color","red");
-
+					$('#pwsame').text('비밀번호와 비밀번호확인을 입력해주세요.');
+					$('#pwsame').css("color","red");
+					chkpass=false;
             }
 
         }

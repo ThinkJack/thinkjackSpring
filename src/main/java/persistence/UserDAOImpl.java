@@ -37,14 +37,19 @@ public class UserDAOImpl implements UserDAO{
 		vo.setUserAuthCode(userAuthCode);
 		vo.setUserEmail(userEmail);
 
-		session.selectOne(namespace + ".createAuthKey", vo);
+		session.update(namespace + ".createAuthKey", vo);
+	}
+
+	//이메일 인증 코드 확인
+	@Override
+	public UserVO chkAuth(UserVO vo) throws Exception {
+
+		return session.selectOne(namespace + ".chkAuth", vo);
 	}
 
 	@Override
-	public void userAuth(String userEmail) throws Exception {
-
-		System.out.println("userEmail"+userEmail);
-		session.update(namespace + ".userAuth", userEmail);
+	public void userAuth(UserVO vo) throws Exception {
+		session.update(namespace + ".userAuth", vo);
 	}
 
 	@Override
@@ -81,5 +86,24 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserVO naverReadUser(LoginDTO dto) throws Exception {
 		return session.selectOne(namespace+".naverReadUser",dto);
+	}
+
+	@Override
+	public void updateAuthKey(String userEmail, String userAuthCode) throws Exception {
+		UserVO vo = new UserVO();
+		vo.setUserAuthCode(userAuthCode);
+		vo.setUserEmail(userEmail);
+
+		session.update(namespace + ".createAuthKey", vo);
+	}
+
+	@Override
+	public void updatePassword(UserVO vo) throws Exception {
+		session.update(namespace+".updatePassword",vo);
+	}
+
+	@Override
+	public void successAuth(UserVO vo) throws Exception {
+		session.update(namespace+".successAuth",vo);
 	}
 }

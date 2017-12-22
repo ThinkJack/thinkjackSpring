@@ -80,8 +80,6 @@ public class UserController {
 		}else{
 			responseMsg = "{\"msg\":\""+"사용이 불가한 이메일 입니다."+"\"}";
 		}
-
-
 		URLEncoder.encode(responseMsg , "UTF-8");
 
 		System.out.println(userEmail);
@@ -91,14 +89,93 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-	public String emailConfirm(String userEmail, Model model) throws Exception { // 이메일인증
-		System.out.println(userEmail);
-		service.userAuth(userEmail);
-		model.addAttribute("userEmail", userEmail);
+	public String emailConfirm(UserVO user,Model model,RedirectAttributes rttr) throws Exception { // 이메일인증
+		System.out.println("cont get user"+user);
+		UserVO vo = new UserVO();
+
+		vo=service.userAuth(user);
+
+		if(vo == null) {
+			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
+			return "redirect:/";
+
+			//페이지 에서 경고창 스크립트
+//			<script type="text/javascript">
+//					var msg = '${msg}';
+//			if(msg){
+//				alert(msg);
+//			}
+//			</script>
+		}
+		//System.out.println("usercontroller vo =" +vo);
+		model.addAttribute("login",vo);
 
 		return "/user/emailConfirm";
+
 	}
-	
+
+	//비밀번호 찾기 기능
+    @RequestMapping(value = "/findPassword", method = RequestMethod.GET)
+    public void findPasswordGET(BoardVO board, Model model) throws Exception {
+        System.out.println("password 찾기 GET 진입");
+
+    }
+
+    @RequestMapping(value = "/findPassword", method = RequestMethod.POST)
+    public String findPasswordPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
+        System.out.println("find passwordPost 진입 ");
+
+        String str= user.getUserEmail();
+
+		String msg = service.authenticate(str);
+		System.out.println("/authenticate 진입"+msg);
+
+		if(msg == "T") {
+			rttr.addFlashAttribute("msg" , "이메일이 없습니다. 회원가입을 해주세요");
+		}else if(msg == "F"){
+			rttr.addFlashAttribute("msg" , "인증 대기중인 이메일 입니다. 인증해주세요.");
+		}else{
+			service.findPassword(user);
+			rttr.addFlashAttribute("msg" , "이메일 인증 후 비밀번호를 변경해 주세요");
+		}
+
+        return "redirect:/";
+    }
+    @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
+    public String passwordSetConfirm(UserVO user, Model model, RedirectAttributes rttr) throws Exception { // 이메일인증
+        //System.out.println(userEmail);
+		UserVO vo = new UserVO();
+
+		vo=service.userAuth(user);
+
+		if(vo == null) {
+			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
+			return "redirect:/";
+		}
+
+		model.addAttribute("login",vo);
+
+        return "user/setPassword";
+    }
+
+	@RequestMapping(value = "/setPassword", method = RequestMethod.GET)
+	public void setPassword(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
+
+	}
+
+	@RequestMapping(value = "/setPassword", method = RequestMethod.POST)
+	public String setPasswordPost(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
+			System.out.println("패스워드 변경 값"+user);
+    	try{
+			service.modifypassUser(user);
+			rttr.addFlashAttribute("msg" , "변경되었습니다. 변경된 패스워드로 로그인해 주세요");
+		}catch (Exception e){
+			rttr.addFlashAttribute("msg" , "오류가 발생했습니다. 관리자에게 문의 주세요");
+		}
+
+		return "redirect:/";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) {
 		

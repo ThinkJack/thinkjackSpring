@@ -36,7 +36,7 @@ select user_id userId,
         where user_id = #{userId}
 </select>
 
-    <update id="updateUser">
+<update id="updateUser">
     update tbl_user SET
     user_name =#{userName},
     user_password = #{userPassword}
@@ -72,4 +72,27 @@ user_state = '1'
 where user_email = #{userEmail}
 
 </update>
+    <select id="chkAuth" resultType="UserVO">
+
+        select user_id userId,
+        user_name userName,
+        user_email userEmail
+        from tbl_user
+        where user_auth_code = #{userAuthCode}
+    </select>
+
+<update id="updatePassword">
+        update tbl_user SET
+          user_password = #{userPassword}
+        where user_id = #{userId}
+</update>
+
+<update id="successAuth">
+        update tbl_user SET
+        user_auth_code = NULL
+        where user_id = #{userId}
+</update>
+
+
+
 </mapper>

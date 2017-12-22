@@ -78,5 +78,12 @@ ${serverTime}
         }
     });
 </script>
+<script type="text/javascript">
+    var msg = '${msg}';
+if(msg){
+    alert(msg);
+}
+</script>
+
 </body>
 </html>
