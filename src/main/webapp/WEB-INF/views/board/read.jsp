@@ -118,7 +118,7 @@
                        <%--하트 버튼(좋아요)--%>
             <div style="text-align: right;">
 
-                        <h1>{{replyLikeCnt}}</h1> <h1>{{replyLikeCnt}}</h1>
+
                 <a class="reHeart btn btn-outline-dark">
                     <img class="reHeart" src="">
                 </a>
@@ -129,6 +129,7 @@
 
                      <span class="badge">대댓글</span>
                  <h2 class="replyId">{{replyId}} </h2>
+                       <h1>{{replyLikeCnt}}</h1>
 
            <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
@@ -148,6 +149,7 @@
                     <%--replyId 불러오기 위해 필요한 부분--%>
 
                     <h2 class="replyId">{{replyId}} </h2>
+                    <h1>{{replyLikeCnt}}</h1>
                     <%--replyId와 replyWirter 나타나는 부분--%>
                     <h3 class="timeline-header">{{replyWirter}}</h3>
                 <%--입력된 댓글 text부분--%>
@@ -193,8 +195,8 @@
                 <p><input type="text"  class="form-control newReplyText" ></p>
             </div>
             <div class="modal-footer">
-                <button type="button"  class="btn btn-info replyModBtn" >Modify</button>
-                <button type="button" class="btn btn-danger replyDelBtn" >DELETE</button>
+                <button type="button"  class="btn btn-info replyModBtn" data-dismiss="modal" >Modify</button>
+                <button type="button" class="btn btn-danger replyDelBtn" data-dismiss="modal">DELETE</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -216,7 +218,9 @@
             console.log(heartval);
             $("#heart").prop("src", "/resources/images/like1.png");
             $(".heart").prop('name',heartval)
-        }        var formObj = $("form[role='form']");
+        }
+
+        var formObj = $("form[role='form']");
         var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
         $(".modifyBtn").on("click", function () {
@@ -418,8 +422,9 @@
             printData(data.list,$(".repliesDiv"),$('.template'));
             printPaging(data.pageMaker ,$("#pagination"));
 
-            // $("#modifyModal").modal('hide');
-
+            // $(".modifyModal").modal('hide');
+            // $(".modalReply").modal('hide');
+            // console.log("sdfsdf");
         });
     }
 
@@ -495,46 +500,48 @@
 </script>
 <script>
 
-    <%--//좋아요 버튼--%>
-    <%--$(".reHeart").click(function() {--%>
-        <%--var reHeartVal =--%>
-            <%--console.log(reHeartVal+"하트");--%>
-        <%--if(reHeartVal>0) {--%>
-            <%--console.log(reHeartval);--%>
-            <%--$(".reHeart").prop("src", "/resources/images/like2.png");--%>
-            <%--$(".reHeart").prop('name',reHeartVal)--%>
-        <%--}--%>
-        <%--else {--%>
-            <%--console.log(reHeartVal);--%>
-            <%--$(".reHeart").prop("src", "/resources/images/like1.png");--%>
-            <%--$(".reHeart").prop('name',reHeartVal)--%>
-        <%--}--%>
-    <%--});--%>
+    //좋아요 버튼
+    $(".reHeart").click(function() {
+        var reHeartVal =
+            console.log(reHeartVal+"하트");
+        if(reHeartVal>0) {
+            console.log(reHeartval);
+            $(".reHeart").prop("src", "/resources/images/like2.png");
+            $(".reHeart").prop('name',reHeartVal)
+        }
+        else {
+            console.log(reHeartVal);
+            $(".reHeart").prop("src", "/resources/images/like1.png");
+            $(".reHeart").prop('name',reHeartVal)
+        }
+    });
 
 
-    <%--$(".reHeart").on("click", function () {--%>
+    $(".reHeart").on("click", function () {
 
-        <%--var that = $(".reHeart").val();--%>
-        <%--console.log(that+"하트 that");--%>
-        <%--var sendData = {'replyId' : ,'reHeart' : that.prop('name')};--%>
-        <%--console.log(sendData+"하트+sendData");--%>
-        <%--$.ajax({--%>
-            <%--url :'/replies/reHeart',--%>
-            <%--type :'POST',--%>
-            <%--data : sendData,--%>
-            <%--success : function(data){--%>
-                <%--that.prop('name',data);--%>
-                <%--if(data==1) {--%>
-                    <%--$('.reHeart').prop("src","/resources/images/like2");--%>
-                <%--}--%>
-                <%--else{--%>
-                    <%--$('.reHeart').prop("src","/resources/images/like1.png");--%>
-                <%--}--%>
-            <%--}--%>
-        <%--});--%>
-    <%--});--%>
+        var that = $(".reHeart").val();
+        console.log(that+"하트 that");
 
-<%--</script>--%>
+
+        var sendData = {'replyId' :$(this).parent().parent().find('h2').text() ,'reHeart' : that.prop('name')};
+        console.log(sendData+"하트+sendData");
+        $.ajax({
+            url :'/replies/reHeart',
+            type :'POST',
+            data : sendData,
+            success : function(data){
+                that.prop('name',data);
+                if(data==1) {
+                    $('.reHeart').prop("src","/resources/images/like2");
+                }
+                else{
+                    $('.reHeart').prop("src","/resources/images/like1.png");
+                }
+            }
+        });
+    });
+
+</script>
 
 
 

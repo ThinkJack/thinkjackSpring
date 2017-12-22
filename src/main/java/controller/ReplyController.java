@@ -84,7 +84,7 @@ public class ReplyController {
         ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
 
-        System.out.println(reHeart+"하트 들어왔니");
+        System.out.println(reHeart+"하트 들어왔니"+replyId+"아이디");
 
         if (reHeart >= 1) {
             service.deleteReplyLike(ReplyLikeVO);

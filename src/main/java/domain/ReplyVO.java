@@ -20,7 +20,7 @@ public class ReplyVO {
 
 	private Integer replyParent;
 //	대댓글에 필요한 부분
-	private Integer replyLikeCnt;
+	private int replyLikeCnt;
 //좋아요수
 	private int replyState;
 	//삭제부분 0,1
@@ -78,15 +78,15 @@ public class ReplyVO {
 		return replyParent;
 	}
 
-	public void setReplyParent(Integer replyParent) {
+	public void setReplyParent(int replyParent) {
 		this.replyParent = replyParent;
 	}
 
-	public Integer getReplyLikeCnt() {
+	public int getReplyLikeCnt() {
 		return replyLikeCnt;
 	}
 
-	public void setReplyLikeCnt(Integer replyLikeCnt) {
+	public void setReplyLikeCnt(int replyLikeCnt) {
 		this.replyLikeCnt = replyLikeCnt;
 	}
 

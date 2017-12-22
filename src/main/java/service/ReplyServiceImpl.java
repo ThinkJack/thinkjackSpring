@@ -88,7 +88,7 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public Integer readLike(ReplyLikeVO vo) throws Exception {
+    public int readLike(ReplyLikeVO vo) throws Exception {
          return dao.readLike(vo);
     }
 
