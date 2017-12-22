@@ -29,7 +29,9 @@
             reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
-        ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
+#         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
+#         ORDER BY  replyRegdate ASC
+        order by if(isnull(reply_parent),reply_id,reply_parent);
     </select>
 
     <!--정정(update)-->
@@ -66,7 +68,9 @@
             reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
-        ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent)
+#         ORDER BY IF(ISNULL(reply_parent), reply_id, replyParent),reply_id ASC
+#         ORDER BY  replyRegdate ASC
+        order by if(isnull(reply_parent),reply_id,reply_parent)
         LIMIT #{cri.pageStart}, #{cri.perPageNum};
     </select>
 
