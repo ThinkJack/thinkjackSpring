@@ -18,7 +18,7 @@
                         <div class="col">
                             <div class="col">
                                 <div class="row"><span>A masterpiece by</span></div>
-                                <div class="row" id="user-id"><h4>Name</h4></div>
+                                <div class="row" id="src-id"><h4><c:out value="${SrcVO.srcId}" default="CAPTAIN ANONYMOUS"/></h4></div>
                             </div>
                         </div>
                     </div>
@@ -43,9 +43,10 @@
                     <div class="row">
                         <div class="row"><h6>DESCRIPTION</h6></div>
                         <div class="row form-control comment_view" id="comment_view">
+                            <c:out value="${SrcVO.srcComments}" default=""/>
                         </div>
                         <div class="row">
-                            <span><i>Created</i></span><span class="regdate" id="regdate">  2017-12-15</span>
+                            <span><i>Created</i></span><span class="regdate" id="regdate"> <c:out value="${SrcVO.srcRegdate}" default=""/></span>
                         </div>
                     </div>
                     <%--댓글 등록 부분--%>

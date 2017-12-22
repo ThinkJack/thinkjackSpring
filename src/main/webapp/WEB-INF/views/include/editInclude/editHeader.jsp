@@ -21,14 +21,14 @@
                 <!--href="" 는 현재 패이지 reload해줌 -->
                 <div class="page_title_view" id="page-title-view">
                     <a class="page_title">
-                        <span id="page-title">Title</span>
+                        <span id="src-title"><c:out value="${SrcVO.srcTitle}" default="Untitled" /></span>
                     </a>
                     <img class="pencil" id="pencil" src="/resources/images/pencil.png">
                 </div>
                 <div class="page_title_text"  id="page-title-text">
-                    <input type="text" name="page-title" id="page-title-input" value=""/>
+                    <input type="text" name="page-title" id="src-title-input" value=""/>
                 </div>
-                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="page-user-id">Name</span></div>
+                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"><c:out value="${SrcVO.srcWriter}" default="CAPTAIN ANONYMOUS"/></span></div>
             </li>
             <li class="nav-item">
             </li>
@@ -38,6 +38,13 @@
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;">
                         <img src="/resources/images/reload.png"> Run
+                    </a>`
+                </div>
+            </li>
+            <li class="nav-item active">
+                <div>
+                    <a class="btn btn-outline-dark" href="javascript:;">
+                        <img src="/resources/images/cloud1.png" id="saveCode"> Save
                     </a>
                 </div>
             </li>
@@ -61,7 +68,26 @@
                     <img src="/resources/images/browser-visualization.png"> Change View
                 </a>
             </li>
-
+            <%--<c:if test="${sessionScope.userVO eq null}">--%>
+                <li class="nav-item active login">
+                    <a class="btn btn-outline-dark" href="/user/login" >
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item active sign_in">
+                    <a class="btn btn-outline-dark" href="/user/register">
+                        Sign in
+                    </a>
+                </li>
+            <%--</c:if>--%>
+            <%--<c:if test="${sessionScope.userVO ne null}">--%>
+                <%--<p><c:out value="gsdg"/></p>--%>
+                <%--<li class="nav-item active sign_in">--%>
+                    <%--<a class="btn btn-outline-dark" href="/user/logout">--%>
+                        <%--Logout--%>
+                    <%--</a>--%>
+                <%--</li>--%>
+            <%--</c:if>--%>
         </ul>
     </div>
     <br>

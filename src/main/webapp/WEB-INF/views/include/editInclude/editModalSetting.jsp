@@ -41,7 +41,7 @@
                             <label>Code Title</label>
                             <div>
                                 <label class="form-check-label setting_info">
-                                    <input class="form-control" type="text" id="modal-title">
+                                    <input class="form-control" type="text" id="src-title-modal">
                                 </label>
                             </div>
                         </div>
@@ -49,7 +49,9 @@
                             <label>Discription</label>
                             <div>
                                 <label class="form-check-label setting_info">
-                                    <textarea class="form-control comment" id="modal-comment" rows="5"></textarea>
+                                    <textarea class="form-control comment" id="modal-comment" rows="5">
+                                        <c:out value="${SrcVO.srcComments}" default=""/>
+                                    </textarea>
                                 </label>
                             </div>
                         </div>

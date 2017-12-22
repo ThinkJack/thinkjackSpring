@@ -4,15 +4,43 @@ import java.util.Date;
 
 public class SrcVO {
     private String srcId;
-    private int srcWriter;
+    private int srcWriter; //null일때 작성자 없는것 (익명)
     private String srcPath;
     private String srcComments;
     private Date srcRegdate;
     private Date srcUpdate;
     private String srcTitle;
-    private int srcLikeCnt;
-    private int srcViewCnt;
-    private int srcStatus;  //0 하고 1로 구분 (삭제에서 사용)
+    private int srcLikecnt;
+    private int srcViewcnt;
+    private int srcStatus;  //0, 1, 2로 구분 (private, public, delete)
+
+    private String srcHtml;
+    private String srcCss;
+    private String srcJavaScript;
+
+    public String getSrcHtml() {
+        return srcHtml;
+    }
+
+    public void setSrcHtml(String srcHtml) {
+        this.srcHtml = srcHtml;
+    }
+
+    public String getSrcCss() {
+        return srcCss;
+    }
+
+    public void setSrcCss(String srcCss) {
+        this.srcCss = srcCss;
+    }
+
+    public String getSrcJavaScript() {
+        return srcJavaScript;
+    }
+
+    public void setSrcJavaScript(String srcJavaScript) {
+        this.srcJavaScript = srcJavaScript;
+    }
 
     public String getSrcId() {
         return srcId;
@@ -70,20 +98,20 @@ public class SrcVO {
         this.srcTitle = srcTitle;
     }
 
-    public int getSrcLikeCnt() {
-        return srcLikeCnt;
+    public int getSrcLikecnt() {
+        return srcLikecnt;
     }
 
-    public void setSrcLikeCnt(int srcLikeCnt) {
-        this.srcLikeCnt = srcLikeCnt;
+    public void setSrcLikecnt(int srcLikecnt) {
+        this.srcLikecnt = srcLikecnt;
     }
 
-    public int getSrcViewCnt() {
-        return srcViewCnt;
+    public int getSrcViewcnt() {
+        return srcViewcnt;
     }
 
-    public void setSrcViewCnt(int srcViewCnt) {
-        this.srcViewCnt = srcViewCnt;
+    public void setSrcViewcnt(int srcViewcnt) {
+        this.srcViewcnt = srcViewcnt;
     }
 
     public int getSrcStatus() {
@@ -104,9 +132,12 @@ public class SrcVO {
                 ", srcRegdate=" + srcRegdate +
                 ", srcUpdate=" + srcUpdate +
                 ", srcTitle='" + srcTitle + '\'' +
-                ", srcLikeCnt=" + srcLikeCnt +
-                ", srcViewCnt=" + srcViewCnt +
+                ", srcLikecnt=" + srcLikecnt +
+                ", srcViewcnt=" + srcViewcnt +
                 ", srcStatus=" + srcStatus +
+                ", srcHtml='" + srcHtml + '\'' +
+                ", srcCss='" + srcCss + '\'' +
+                ", srcJavaScript='" + srcJavaScript + '\'' +
                 '}';
     }
 }

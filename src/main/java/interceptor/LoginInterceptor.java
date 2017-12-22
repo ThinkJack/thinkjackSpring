@@ -34,7 +34,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
-
+			if(dest != null){
+				if(dest instanceof String) {
+					response.sendRedirect(String.valueOf(dest));
+				}
+			}
 			System.out.println("postHandle dest: "+dest);
 
 		}
