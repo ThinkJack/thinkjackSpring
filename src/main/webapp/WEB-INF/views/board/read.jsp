@@ -10,69 +10,7 @@
 <%--이모티콘--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <%--하트 스타일부분--%>
-<style>
 
-    .boxcoracao{
-        width: 35px;
-        display: inline-block;
-        position: relative;
-    }
-
-    .textbtn{ display: inline-block;}
-
-    .coracao{
-        background: url("https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png");
-        height: 50px;
-        width: 50px;
-        background-size: 2900%;
-        background-position: left center;
-
-        top: -30px;
-        left:  0px;
-        position:absolute;
-
-    }
-    .coracao.ativo{
-        background: url("https://abs.twimg.com/a/1446542199/img/t1/web_heart_animation.png");
-        height: 50px;
-        width: 50px;
-        background-size: 2900%;
-        background-position: right center;
-
-        top: -30px;
-        left:  0px;
-        position:absolute;
-        animation: none 0s !important;
-        -moz-animation: none 0s !important;
-
-    }
-    .btn:hover  .coracao{
-        animation: animationFrames 1.4s steps(28) infinite;
-    }
-
-    @keyframes animationFrames{
-        100%{
-            background-position: -2800px ;
-
-        }
-    }
-
-
-    .btn-purple{
-        color: #fff;
-        background-color: #AE30DA;
-        border-color: #8A2EAB;
-    }
-
-    .btn-purple:hover{
-        color: #fff;
-        background-color: #8F33AF;
-        border-color: #8A2EAB;
-
-    }
-
-    .btn{ transition: background-color 0.2s ease;}
-</style>
 <style>
     #panel, #flip {
         padding: 5px;
@@ -179,15 +117,19 @@
                       <%-- 조건문으로 parent값 있는것을 구분한다--%>
                        <%--하트 버튼(좋아요)--%>
             <div style="text-align: right;">
+
+                        <h1>{{replyLikeCnt}}</h1> <h1>{{replyLikeCnt}}</h1>
                 <a class="reHeart btn btn-outline-dark">
-                    <img id="reHeart" src="">
+                    <img class="reHeart" src="">
                 </a>
             </div>
                           {{#if replyParent}}
                  <%--<div class="registerReply"  >--%>
                    <div class="registerReply">
+
                      <span class="badge">대댓글</span>
                  <h2 class="replyId">{{replyId}} </h2>
+
            <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
                 <%--replyId와 replyWirter 나타나는 부분--%>
@@ -337,8 +279,8 @@
         //내용입력 comment
 
         //각각의 id값을 받아온다
-
-        var replyText = $(this).parent().parent().find('.replyTextReply').val();
+        var replyTextObj = $(this).parent().parent().find('.replyTextReply');
+        var replyText = replyTextObj.val();
         console.log("내용확인"+replyText);
 
         var replyer = $(".register").val();
@@ -361,18 +303,14 @@
                 replyParent: replyParent
             }),
             success: function (result) {
-                if (result.data == 'SUCCESS') {
+                if (result == 'SUCCESS') {
                     alert("등록");
                     replyPage = 1;
-                    // if(result.isParent == 0){
-                    getPage("/replies/" + boardId + "/" + replyPage);
 
-                    // }else{
-                    //     getPageReply("/replies/" + boardId + "/" + replyPage);
-                    //
-                    // }
+                    getPage("/replies/" + boardId + "/" +replyPage);
 
-                    replyText.val("");
+
+                    replyTextObj.val("");
                 }
             }
         });
@@ -476,7 +414,7 @@
     //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
     function getPage(pageInfo){
         $.getJSON(pageInfo,function (data) {
-            // console.log("pageMaker?:"+data.pageMaker);
+
             printData(data.list,$(".repliesDiv"),$('.template'));
             printPaging(data.pageMaker ,$("#pagination"));
 
@@ -557,46 +495,46 @@
 </script>
 <script>
 
-    //좋아요 버튼
-    $("#reHeart").click(function() {
-        var reHeartVal =
-            console.log(reHeartVal+"하트");
-        if(reHeartVal>0) {
-            console.log(reHeartval);
-            $("#reHeart").prop("src", "/resources/images/like2.png");
-            $(".reHeart").prop('name',reHeartVal)
-        }
-        else {
-            console.log(reHeartVal);
-            $("#reHeart").prop("src", "/resources/images/like1.png");
-            $(".reHeart").prop('name',reHeartVal)
-        }
-    });
+    <%--//좋아요 버튼--%>
+    <%--$(".reHeart").click(function() {--%>
+        <%--var reHeartVal =--%>
+            <%--console.log(reHeartVal+"하트");--%>
+        <%--if(reHeartVal>0) {--%>
+            <%--console.log(reHeartval);--%>
+            <%--$(".reHeart").prop("src", "/resources/images/like2.png");--%>
+            <%--$(".reHeart").prop('name',reHeartVal)--%>
+        <%--}--%>
+        <%--else {--%>
+            <%--console.log(reHeartVal);--%>
+            <%--$(".reHeart").prop("src", "/resources/images/like1.png");--%>
+            <%--$(".reHeart").prop('name',reHeartVal)--%>
+        <%--}--%>
+    <%--});--%>
 
 
-    $(".reHeart").on("click", function () {
+    <%--$(".reHeart").on("click", function () {--%>
 
-        var that = $(".reHeart").val();
-        console.log(that+"하트 that");
-        var sendData = {'replyId' : ,'reHeart' : that.prop('name')};
-        console.log(sendData+"하트+sendData");
-        $.ajax({
-            url :'/replies/reHeart',
-            type :'POST',
-            data : sendData,
-            success : function(data){
-                that.prop('name',data);
-                if(data==1) {
-                    $('#reHeart').prop("src","/resources/images/like2");
-                }
-                else{
-                    $('#reHeart').prop("src","/resources/images/like1.png");
-                }
-            }
-        });
-    });
+        <%--var that = $(".reHeart").val();--%>
+        <%--console.log(that+"하트 that");--%>
+        <%--var sendData = {'replyId' : ,'reHeart' : that.prop('name')};--%>
+        <%--console.log(sendData+"하트+sendData");--%>
+        <%--$.ajax({--%>
+            <%--url :'/replies/reHeart',--%>
+            <%--type :'POST',--%>
+            <%--data : sendData,--%>
+            <%--success : function(data){--%>
+                <%--that.prop('name',data);--%>
+                <%--if(data==1) {--%>
+                    <%--$('.reHeart').prop("src","/resources/images/like2");--%>
+                <%--}--%>
+                <%--else{--%>
+                    <%--$('.reHeart').prop("src","/resources/images/like1.png");--%>
+                <%--}--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
 
-</script>
+<%--</script>--%>
 
 
 

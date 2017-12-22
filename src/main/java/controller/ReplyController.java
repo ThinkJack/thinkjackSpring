@@ -30,8 +30,7 @@ public class ReplyController {
 
     //    새로운 댓글을 등록하는데 성공,실패
     @RequestMapping(value = "", method = RequestMethod.POST)
-            public ResponseEntity<String>register(@RequestBody ReplyVO vo){
-//    public @ResponseBody String  register(@RequestBody ReplyVO vo) {
+    public ResponseEntity<String> register(@RequestBody ReplyVO vo) {
 
         ResponseEntity<String> entity = null;
         try {
@@ -44,15 +43,12 @@ public class ReplyController {
             e.printStackTrace();
             //400를 결과로 전송한다.
             entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
         }
 
-//        int str = vo.getReplyParent();
-//        String message = "{\"isParent\":\""+str+"\", \"data\":\""+"SUCCESS"+"\"}";
-//        return message;
         return entity;
 
     }
-
 
 
     //게시글 번호로 글 찾기
