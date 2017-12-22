@@ -187,11 +187,11 @@
                  <%--<div class="registerReply"  >--%>
                      <span class="badge">대댓글</span>
            <%--댓글의 replyId를 받아오기 위한 부분--%>
-                <input  id="reParent">{{replyParent}}</input>
+                <input type="hidden" id="reParent" value="{{replyParent}}">
                 <%--replyId와 replyWirter 나타나는 부분--%>
                 <h3 class="timeline-header">{{replyWirter}}</h3>
                 <%--입력된 댓글 text부분--%>
-                 <input type="text" name='title' class="reText reply" value={{replyText}}  readonly="readonly">
+                <input class="replyId" readonly=readonly value="{{replyText}}"> </input>
                 <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
                 <button type="button" class="btn btn-warning  timeline" data-toggle="modal" data-target="#modifyModal">Open Modal</button>
             <%--</div>--%>
@@ -206,8 +206,8 @@
                     <h2 class="replyId">{{replyId}} </h2>
                     <%--replyId와 replyWirter 나타나는 부분--%>
                     <h3 class="timeline-header">{{replyWirter}}</h3>
-                    <%--입력된 댓글 text부분--%>
-                    <input type="text" name='title' class="reText"  readonly="readonly">
+                <%--입력된 댓글 text부분--%>
+                <input class="replyId" readonly=readonly value="{{replyText}}"> </input>
                     <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
                     <button type="button" class="btn btn-warning timeline" data-toggle="modal" data-target="#modifyModal">Open Modal</button>
 
@@ -341,6 +341,7 @@
         var replyer = $(".register").val();
         console.log(replyParent + "replyId?");
 
+
         $.ajax({
             type: 'post',
             url: '/replies/',
@@ -373,7 +374,8 @@
             }
         });
 
-        //아이디 설정부분
+
+
     });
 
 
