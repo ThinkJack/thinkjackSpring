@@ -19,13 +19,16 @@
             if(chpass.userPassword.value!=chpass.chkPassword.value){
                 $('#pwsame').text('비밀번호가 일치하지 않습니다.');
                 $('#pwsame').css("color","red");
+                chkpass=false;
             }else if(chpass.userPassword.value===chpass.chkPassword.value) {
                 $('#pwsame').text('비밀번호가 일치합니다.');
-                $('#pwsame').css("color","#2EFE2E")
+                $('#pwsame').css("color","#2EFE2E");
+                chkpass=true;
             }
         } else {
             $('#pwsame').text('비밀번호와 비밀번호확인을 입력해주세요.');
             $('#pwsame').css("color","red");
+            chkpass=false;
         }
     }
 
@@ -38,7 +41,8 @@
             return false;
         }
         if(!chkpass){
-            alert("비밀번호가 일치하지 않습니다. 다시 시작해 주세요");
+            alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+            return false;
         }
 
     }

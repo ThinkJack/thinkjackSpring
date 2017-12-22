@@ -61,7 +61,10 @@ console.log(signup);
                 obj.userName.focus();
                 return false;
             }
-
+            if(!chkpass){
+                alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+                return false;
+            }
 		}
 
 
