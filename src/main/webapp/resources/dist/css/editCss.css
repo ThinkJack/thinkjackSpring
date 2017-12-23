@@ -73,9 +73,6 @@ span.arrow {
     padding-top: 70px;
     /*height: 100%*/
 }
-.main_ch {
-    /*height: calc(100% - 174px);*/
-}
 
 .edit-console-view {
     width: 100%;
@@ -198,7 +195,7 @@ p.err {
     color: red;
 }
 
-#codeHtml, #codeCss, #codeJavaScript {
+#codeHtml, #codeCss, #codeJavaScript, #codeUnitTest {
     border: 5px solid #000000;
     background-color: #fff;
     padding: 0px;

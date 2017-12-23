@@ -71,4 +71,6 @@
 <%--<script src="/resources/codemirror/js/lib/beautify-css.js"></script>--%>
 
 <!--mode && emmet import-->
-<script src="/resources/dist/js/editPage/codeEdit.js"></script>
+<script src="/resources/dist/js/editPage/editPageDefine.js"></script>
+<script src="/resources/dist/js/editPage/editPageEvent.js"></script>
+
