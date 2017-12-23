@@ -1,21 +1,20 @@
 package domain;
 
 public class ReplyVO {
-
+	//	댓글 번호
 	private Integer replyId;
-//	댓글 번호
+	//글 번호
 	private Integer boardId;
-//글 번호
+	//	댓글 내용
 	private String replyText;
-//	댓글 내용
+	//	유저 ID
 	private String replyWirter;
-//	유저 ID
+	//	대댓글에 필요한 부분
 	private Integer replyParent;
-//	대댓글에 필요한 부분
+	//좋아요수
 	private Integer replyLikeCnt;
-//좋아요수
-	private int replyState;
 	//삭제부분 0,1
+	private int replyState;
 
 
 	public Integer getReplyId() {

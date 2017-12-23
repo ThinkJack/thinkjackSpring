@@ -13,6 +13,7 @@ public class SrcVO {
     private int srcLikeCnt;
     private int srcViewCnt;
     private int srcStatus;  //0 하고 1로 구분 (삭제에서 사용)
+//    private int recnt; // **소스게시글 댓글의 수
 
     public String getSrcId() {
         return srcId;
@@ -94,6 +95,14 @@ public class SrcVO {
         this.srcStatus = srcStatus;
     }
 
+//    public int getRecnt() {
+//        return recnt;
+//    }
+//
+//    public void setRecnt(int recnt) {
+//        this.recnt = recnt;
+//    }
+
     @Override
     public String toString() {
         return "SrcVO{" +
@@ -107,6 +116,7 @@ public class SrcVO {
                 ", srcLikeCnt=" + srcLikeCnt +
                 ", srcViewCnt=" + srcViewCnt +
                 ", srcStatus=" + srcStatus +
+//                ", recnt=" + recnt +
                 '}';
     }
 }

@@ -44,6 +44,7 @@
 
     <select id="readPage" resultType="BoardVO">
         <![CDATA[
+
         SELECT
             board_id                                                             boardId,
             board_title                                                          boardTitle,
@@ -61,9 +62,9 @@
                                           WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'free'
         ORDER BY board_id DESC , board_regdate DESC
         LIMIT #{page}, 10
+
         ]]>
     </select>
-
 
 
     <sql id="searchOption">
@@ -133,6 +134,7 @@
 
     <select id="criteria" resultType="BoardVO">
         <![CDATA[
+
  select
      board_id                                                             boardId,
      board_title                                                          boardTitle,
@@ -151,6 +153,7 @@
                          WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free'
  order by board_id desc, board_regdate desc
  limit #{pageStart}, #{perPageNum}
- ]]>
+
+        ]]>
     </select>
 </mapper>
