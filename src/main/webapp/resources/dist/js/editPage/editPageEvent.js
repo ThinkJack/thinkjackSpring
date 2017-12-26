@@ -273,6 +273,8 @@ $(function() {
 $(function () {
     editConsole.style.display = "none";
     commandLine.style.display = "none";
+    // srcId = ;
+    console.log(srcId);
 
 });
 //--------------------
@@ -468,31 +470,35 @@ $(function () { //--자동저장
     }
 });
 
-$("#saveCode").click(function(e) {
+$("#saveCode").click(function (e) {
 
-    saveStatus = true;
+
     saveImg.src = "/resources/images/cloud1.png";
     srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
 
-    $.ajax({
-        type: "post",
-        url : "/edit/save",
-        headers: {
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "POST"
-        },
-        dataType: 'text',
-        data : JSON.stringify({
-            srcId: srcId,
-            srcComments: srcComments,
-            srcTitle: srcTitle,
-            srcHtml: codeHtml.getValue(),
-            srcCss: codeCss.getValue(),
-            srcJavaScript: codeJavaScript.getValue()
-        }),
-        success : function(getLink){
-            // location.replace(getLink);
-            alert(getLink);
-        }
-    });
-})
+    if(!saveStatus){
+        $.ajax({
+            type: "post",
+            url : "/editRest/save",
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            dataType: 'text',
+            data : JSON.stringify({
+                srcId: srcId,
+                srcComments: srcComments,
+                srcTitle: srcTitle,
+                srcHtml: codeHtml.getValue(),
+                srcCss: codeCss.getValue(),
+                srcJavaScript: codeJavaScript.getValue()
+            }),
+            success : function(getLink){
+                if(srcId === ""){
+                    location.replace("/edit/editPage/" + getLink);
+                }
+                saveStatus = true;
+            }
+        });
+    }
+});

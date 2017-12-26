@@ -1,19 +1,15 @@
 package controller;
 
-import domain.BoardVO;
 import domain.SrcVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import service.SrcService;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/edit/*")
@@ -29,19 +25,16 @@ public class EditController {
     }
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
-    public String editView(HttpServletRequest request, @ModelAttribute SrcVO vo)throws Exception {
-        service.readSrc(request, vo);
+    public String editView(HttpServletRequest request, Model model)throws Exception {
+        SrcVO vo = new SrcVO();
+        vo = service.readSrc(request, vo);
         System.out.println(vo);
+
+        model.addAttribute("SrcVO", vo);
 
         return "forward:/edit/editPage";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String srcSave(HttpServletRequest request, @RequestBody SrcVO vo) throws Exception{
-        System.out.println("저장요청");
-
-        return "/edit/editPage/" + service.saveSrc(request, vo);
-    }
 
     //----------------------------------------------------------------------
 

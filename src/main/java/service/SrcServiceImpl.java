@@ -20,23 +20,24 @@ public class SrcServiceImpl implements SrcService {
     private SrcDAO dao;
 
     @Override
-    public void readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
+    public SrcVO readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
+
+
         String uri = request.getRequestURI();
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
-        if(srcId.equals("")){
-            vo.setSrcTitle("Untitled");
-        }else{
-            try {
-                vo = dao.selectSrcOne("ksIqKm");
-                vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
-                vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
-                vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            vo = dao.selectSrcOne(srcId);
+//            System.out.println(vo.getSrcPath() + "/html.txt");
+            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return vo;
     }
 
     @Override
@@ -66,17 +67,16 @@ public class SrcServiceImpl implements SrcService {
             fileWriter(filePath + "/css.txt", vo.getSrcCss());
             fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
             // 파일안에 문자열 쓰기
+            vo.setSrcPath(filePath);
+            if(srcEmpty) {
+                vo.setSrcId(srcId);
+                dao.insertSrc(vo);
+            }else{
+                dao.updateSrc(vo);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        vo.setSrcPath(filePath);
-        if(srcEmpty) {
-            vo.setSrcId(srcId);
-            dao.insertSrc(vo);
-        }else{
-            dao.updateSrc(vo);
-        }
-
         return srcId;
     }
 
