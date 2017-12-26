@@ -73,9 +73,10 @@ public class BoardController {
         BoardLikeVO vo = new BoardLikeVO();
         vo.setBoardId(boardId);
         vo.setUserId(userid);
+        System.out.println(vo.getUserId()+ "userId??");
 
         int boardlike = service.getBoardLike(vo);
-        System.out.println(boardlike);
+        System.out.println(boardlike+"boardLike숫자");
 
         model.addAttribute("heart",boardlike);
     }

@@ -1,4 +1,5 @@
 import domain.ReplyLikeVO;
+import domain.ReplyVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,7 +18,49 @@ public class ReplyDAOTest {
     @Inject
     private ReplyDAO dao;
 
+    @Inject
+    private ReplyService service;
+    @Test
+    public void test() throws Exception{
+
+        ReplyLikeVO vo = new ReplyLikeVO();
+        vo.setReplyId(12);
+        vo.setUserId(2);
+        int like = service.getReplyLike(vo);
+
+        System.out.println(like);
+    }
 }
+
+//    @Test
+//    public void testCreate() throws Exception {
+//
+//        ReplyVO reply = new ReplyVO();
+//        reply.setBoardId(1);
+//        reply.setReplyText("testh");
+//        /*존재한 User_name 이어야 한다*/
+//        reply.setReplyWriter("user00");
+//        dao.createReply(reply);
+//    }
+//
+//
+//
+//    //댓글 찾기
+//    @Test
+//    public void testRead() throws Exception {
+//
+//        ReplyVO reply = new ReplyVO();
+//        List<ReplyVO> replyVOList = dao.readReply(1);
+////        모든리스트를 가져온다
+////        System.out.println(replyVOList);
+////        0번째 댓글 가져온다
+//        reply=replyVOList.get(0);
+//        System.out.println(reply);
+//
+//
+//    }
+
+//}
 //    @Inject
 //    private ReplyService service;
     //    댓글을 추가
@@ -42,18 +85,7 @@ public class ReplyDAOTest {
 //        dao.updateReply(reply);
 //    }
 //
-//    //댓글 찾기
-//    @Test
-//    public void testRead() throws Exception {
-//
-//        ReplyVO reply = new ReplyVO();
-//        List<ReplyVO> replyVOList = dao.readReply(1);
-////        모든리스트를 가져온다
-////        System.out.println(replyVOList);
-////        0번째 댓글 가져온다
-//        reply=replyVOList.get(0);
-//        System.out.println(reply);
-//    }
+
 //    //삭제(댓글)
 //    @Test
 //    public void testDelete() throws Exception{
@@ -116,18 +148,18 @@ public class ReplyDAOTest {
 //        replyLike.setUserId(2);
 //        service.deleteReplyLike(replyLike);
 //    }
-
+//
 //    @Test
 //    public void heart() throws Exception {
-//        유저 아이디를 받아서 유저의 댓글목록을 리스트에 저장
+//        //유저 아이디를 받아서 유저의 댓글목록을 리스트에 저장
 //
-//        List<ReplyLikeVO> list = dao.readLike(1);
+//        List<ReplyLikeVO> list = dao.(1);
 //
 //        System.out.println(list.toString());
-//
+
 // 그 리스트에서 받아온 replyID와 같은지 확인
-//ReplyLikeVO vo =dao.
-//
-//     -
-//    }
-//}
+////ReplyLikeVO vo =dao.
+////
+////     -
+////    }
+////}

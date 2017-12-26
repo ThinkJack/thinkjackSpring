@@ -38,6 +38,7 @@ public class ReplyServiceImpl implements ReplyService {
     //삭제
     @Override
     public void deleteReply(int replyId) throws Exception {
+        System.out.println(replyId+"삭제값 넘어오나요DAO?");
         dao.deleteReply(replyId);
 
     }
@@ -87,8 +88,8 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public Integer readLike(ReplyLikeVO vo) throws Exception {
-         return dao.readLike(vo);
+    public int getReplyLike(ReplyLikeVO vo) throws Exception {
+         return dao.getReplyLike(vo);
     }
 
 }

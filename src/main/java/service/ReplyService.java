@@ -35,7 +35,7 @@ public interface ReplyService {
     //좋아요 업데이트
     public void deleteReplyLike(ReplyLikeVO vo) throws  Exception;
    // 좋아요 버튼
-    public Integer readLike(ReplyLikeVO vo)  throws Exception;
+    public int getReplyLike(ReplyLikeVO vo)  throws Exception;
 
 
 

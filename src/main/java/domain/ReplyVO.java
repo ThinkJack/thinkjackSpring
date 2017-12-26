@@ -10,7 +10,7 @@ public class ReplyVO {
 //글 번호
 	private String replyText;
 //	댓글 내용
-	private String replyWirter;
+	private String replyWriter;
 //	유저 ID
 
 	//	날짜부분
@@ -20,7 +20,7 @@ public class ReplyVO {
 
 	private Integer replyParent;
 //	대댓글에 필요한 부분
-	private Integer replyLikeCnt;
+	private int replyLikeCnt;
 //좋아요수
 	private int replyState;
 	//삭제부분 0,1
@@ -50,12 +50,12 @@ public class ReplyVO {
 		this.replyText = replyText;
 	}
 
-	public String getReplyWirter() {
-		return replyWirter;
+	public String getReplyWriter() {
+		return replyWriter;
 	}
 
-	public void setReplyWirter(String replyWirter) {
-		this.replyWirter = replyWirter;
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
 	}
 
 	public Date getReplyRegdate() {
@@ -82,11 +82,11 @@ public class ReplyVO {
 		this.replyParent = replyParent;
 	}
 
-	public Integer getReplyLikeCnt() {
+	public int getReplyLikeCnt() {
 		return replyLikeCnt;
 	}
 
-	public void setReplyLikeCnt(Integer replyLikeCnt) {
+	public void setReplyLikeCnt(int replyLikeCnt) {
 		this.replyLikeCnt = replyLikeCnt;
 	}
 
@@ -104,7 +104,7 @@ public class ReplyVO {
 				"replyId=" + replyId +
 				", boardId=" + boardId +
 				", replyText='" + replyText + '\'' +
-				", replyWirter='" + replyWirter + '\'' +
+				", replyWriter='" + replyWriter + '\'' +
 				", replyRegdate=" + replyRegdate +
 				", replyUpdate=" + replyUpdate +
 				", replyParent=" + replyParent +

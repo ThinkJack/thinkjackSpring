@@ -44,7 +44,7 @@ public class ReplyDAOImpl implements ReplyDAO {
     //삭제(delete)
     @Override
     public void deleteReply(int replyId) throws Exception {
-        session.update(namespace + ".delete", replyId);
+        session.delete(namespace + ".delete", replyId);
     }
     //대댓글 입력
     @Override
@@ -87,7 +87,7 @@ public class ReplyDAOImpl implements ReplyDAO {
     }
 
     @Override
-    public Integer readLike(ReplyLikeVO vo) throws Exception {
+    public int getReplyLike(ReplyLikeVO vo) throws Exception {
 
         return session.selectOne(namespace + ".heart", vo);
     }
