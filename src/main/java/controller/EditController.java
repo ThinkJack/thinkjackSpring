@@ -61,8 +61,8 @@ public class EditController {
     // REST : Representational State Transfer
     // 하나의 URI가 하나의 고유한 리소스를 대표하도록 설계된 개념
 
-    // http://localhost/spring02/list?src_id=1 ==> url+파라미터
-    // http://localhost/spring02/list/1 ==> url
+    // http://localhost/list?src_id=1 ==> url+파라미터
+    // http://localhost/list/1 ==> url
     // RestController은 스프링 4.0부터 지원
     // @Controller, @RestController 차이점은 메서드가 종료되면 화면전환의 유무
     //@Controller
@@ -75,7 +75,7 @@ public class EditController {
 
         // 댓글 입력
         @RequestMapping("srcInsert.do")
-        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session){
+        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session) throws Exception {
             Integer userId = (Integer) session.getAttribute("userId");
             vo.setReplyWriter(userId);
             srcReplyService.create(vo);
@@ -83,7 +83,7 @@ public class EditController {
 
         // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
         @RequestMapping("srcList.do")
-        public ModelAndView list(@RequestParam String srcId, ModelAndView mav){
+        public ModelAndView list(@RequestParam String srcId, ModelAndView mav) throws Exception {
             List<SrcReplyVO> list = srcReplyService.list(srcId);
             // 뷰이름 지정
             mav.setViewName("board/srcReplyList");
@@ -96,7 +96,7 @@ public class EditController {
         // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴)
         @RequestMapping("srcListJson.do")
         @ResponseBody // 리턴데이터를 json으로 변환(생략가능)
-        public List<SrcReplyVO> srcListJson(@RequestParam String srcId){
+        public List<SrcReplyVO> srcListJson(@RequestParam String srcId) throws Exception {
 //            List<SrcReplyVO> list= srcReplyService.list(srcId);
 //            return list;
               return srcReplyService.list(srcId);

@@ -44,7 +44,7 @@ codeHtml.on("keyup", function (cm, event) {
     }
 });
 
-//번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
+//번호표 옆에 빈칸을 클릭시 editPageDefine.js의 makeMarker 를 호출해서 마크 뿌려줌
 codeHtml.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
@@ -463,4 +463,4 @@ $("#saveCode").click(function(e) {
 
     saveStatus = true;
     saveImg.src = "/resources/images/cloud1.png";
-})
+});

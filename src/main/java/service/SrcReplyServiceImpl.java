@@ -15,24 +15,24 @@ public class SrcReplyServiceImpl implements SrcReplyService {
 
     // 댓글 목록
     @Override
-    public List<SrcReplyVO> list(String srcId) {
+    public List<SrcReplyVO> list(String srcId) throws Exception{
         return srcReplyDao.list(srcId);
     }
     // 댓글 작성
     @Override
-    public void create(SrcReplyVO vo) {
+    public void create(SrcReplyVO vo) throws Exception{
         srcReplyDao.create(vo);
     }
     // 댓글 수정
     @Override
-    public void update(SrcReplyVO vo) {
-        // TODO Auto-generated method stub
+    public void update(SrcReplyVO vo) throws Exception{
+        srcReplyDao.update(vo);
 
     }
     // 댓글 삭제
     @Override
-    public void delete(Integer replyId) {
-        // TODO Auto-generated method stub
+    public void delete(Integer replyId) throws Exception{
+        srcReplyDao.delete(replyId);
 
     }
 

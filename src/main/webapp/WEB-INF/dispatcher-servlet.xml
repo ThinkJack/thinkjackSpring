@@ -27,7 +27,7 @@
     
     <bean id="loginInterceptor" class="interceptor.LoginInterceptor"></bean>
 
-    <bean id="editPageInterceptor" class="interceptor.EditPageInterceptor"></bean>
+    <!--<bean id="editPageInterceptor" class="interceptor.EditPageInterceptor"></bean>-->
 
     <bean id="naverLoginBo" class="naver.NaverLoginBo"></bean>
 
@@ -43,11 +43,11 @@
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 
-        <beans:interceptor>
-            <beans:mapping path="/edit/editPage"/>
-            <!--<beans:mapping path="/edit/editPage/*"/>-->
-            <ref bean="editPageInterceptor"/>
-        </beans:interceptor>
+        <!--<beans:interceptor>-->
+            <!--<beans:mapping path="/edit/editPage"/>-->
+            <!--&lt;!&ndash;<beans:mapping path="/edit/editPage/*"/>&ndash;&gt;-->
+            <!--<ref bean="editPageInterceptor"/>-->
+        <!--</beans:interceptor>-->
 
 	</beans:interceptors>
     

@@ -70,7 +70,7 @@
 <%--<script src="/codebox/js/lib/beautify.js"></script>--%>
 <%--<script src="/resources/codemirror/js/lib/beautify-css.js"></script>--%>
 
-<!--mode && emmet import-->
+<!--스크립트 define & event 분리참조-->
 <script src="/resources/dist/js/editPage/editPageDefine.js"></script>
 <script src="/resources/dist/js/editPage/editPageEvent.js"></script>
 

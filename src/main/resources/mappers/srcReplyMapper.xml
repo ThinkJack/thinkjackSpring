@@ -6,10 +6,13 @@
 <mapper namespace="mapper.srcReplyMapper">
 
     <!-- 댓글 입력 -->
+    <!--<insert id="insertReply">-->
+        <!--INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_status)-->
+        <!--VALUES (#{srcId}, #{replyText}, #{replyWriter}, #{replyStatus})-->
+    <!--</insert>-->
     <insert id="insertReply">
-        INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_status)
-        VALUES (#{srcId}, #{replyText}, #{replyWriter},
-                #{replyStatus})
+        INSERT INTO tbl_src_reply (src_id, reply_text, reply_status)
+        VALUES (#{srcId}, #{replyText},  #{replyStatus})
     </insert>
 
     <!-- 댓글 수정 -->
@@ -21,8 +24,6 @@
         WHERE tbl_src_reply.reply_id = #{replyId}
     </update>
 
-
-
     <!-- 댓글 삭제 -->
     <delete id="deleteReply">
         DELETE FROM tbl_src_reply
@@ -31,7 +32,7 @@
     </delete>
 
     <!-- 댓글 목록 -->
-    <select id="listSrcReply" resultType="domain.SrcReplyVo">
+    <select id="listSrcReply" resultType="SrcReplyVo">
         SELECT reply_id, src_id, reply_text, reply_writer, user_name AS userName, r.reply_regdate, r.reply_update
         FROM tbl_src_reply r, tbl_user m
         WHERE  r.reply_writer = m.user_id AND src_id=#{srcId}
