@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- header 메뉴바 -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
 
@@ -43,8 +45,8 @@
             </li>
             <li class="nav-item active">
                 <div>
-                    <a class="btn btn-outline-dark" href="javascript:;">
-                        <img src="/resources/images/cloud1.png" id="saveCode"> Save
+                    <a class="btn btn-outline-dark" href="javascript:;" id="saveCode">
+                        <img src="/resources/images/cloud1.png" id="save-img"> Save
                     </a>
                 </div>
             </li>
