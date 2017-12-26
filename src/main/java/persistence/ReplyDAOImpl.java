@@ -87,7 +87,7 @@ public class ReplyDAOImpl implements ReplyDAO {
     }
 
     @Override
-    public Integer readLike(ReplyLikeVO vo) throws Exception {
+    public int getReplyLike(ReplyLikeVO vo) throws Exception {
 
         return session.selectOne(namespace + ".heart", vo);
     }

@@ -119,9 +119,10 @@
             <div style="text-align: right;">
 
 
-                <a class="reHeart btn btn-outline-dark">
+                <a class="btn btn-outline-dark reHeart">
                     <img class="reHeart" src="">
                 </a>
+
             </div>
                           {{#if replyParent}}
                  <%--<div class="registerReply"  >--%>
@@ -130,11 +131,11 @@
                      <span class="badge">대댓글</span>
                  <h2 class="replyId">{{replyId}} </h2>
                        <h1>{{replyLikeCnt}}</h1>
-
+    <h2>하트값?</h2>
            <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
-                <%--replyId와 replyWirter 나타나는 부분--%>
-                <h3 class="timeline-header">{{replyWirter}}</h3>
+                <%--replyId와 replyWriter 나타나는 부분--%>
+                <h3 class="timeline-header">{{replyWriter}}</h3>
                 <%--입력된 댓글 text부분--%>
                 <input class="replyText" readonly=readonly value="{{replyText}}"> </input>
                        <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
@@ -150,8 +151,8 @@
 
                     <h2 class="replyId">{{replyId}} </h2>
                     <h1>{{replyLikeCnt}}</h1>
-                    <%--replyId와 replyWirter 나타나는 부분--%>
-                    <h3 class="timeline-header">{{replyWirter}}</h3>
+                    <%--replyId와 replyWriter 나타나는 부분--%>
+                    <h3 class="timeline-header">{{replyWriter}}</h3>
                 <%--입력된 댓글 text부분--%>
                 <input class="replyText" readonly=readonly value="{{replyText}}"> </input>
                     <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
@@ -276,7 +277,6 @@
 
     $(document).on("click",".addBtn", function () {
 
-
         var replyParent = $(this).parent().parent().find('h2').text();
 
         console.log("reParent 값?"+replyParent);
@@ -301,10 +301,7 @@
             dataType: 'text',
             //문자를 객체로 바꿈
             data: JSON.stringify({
-                boardId: boardId,
-                replyText: replyText,
-                replyWirter: replyer,
-                replyParent: replyParent
+                boardId: boardId, replyText: replyText, replyWriter: replyer, replyParent: replyParent
             }),
             success: function (result) {
                 if (result == 'SUCCESS') {
@@ -414,17 +411,21 @@
     var boardId=${boardVO.boardId};
     var replyPage=1;
 
+
     //댓글목록 처리
     //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
     function getPage(pageInfo){
         $.getJSON(pageInfo,function (data) {
 
             printData(data.list,$(".repliesDiv"),$('.template'));
+            console.log(Boolean(data.list)+"나오");
             printPaging(data.pageMaker ,$("#pagination"));
+
+
+
 
             // $(".modifyModal").modal('hide');
             // $(".modalReply").modal('hide');
-            // console.log("sdfsdf");
         });
     }
 
@@ -500,33 +501,34 @@
 </script>
 <script>
 
-    //좋아요 버튼
-    $(".reHeart").click(function() {
-        var reHeartVal =
-            console.log(reHeartVal+"하트");
+
+    $(document).ready(function () {
+
+        var reHeartVal =${data.reHeart};
+            console.log(reHeartVal+"reply 하트");
+
         if(reHeartVal>0) {
-            console.log(reHeartval);
-            $(".reHeart").prop("src", "/resources/images/like2.png");
-            $(".reHeart").prop('name',reHeartVal)
+            console.log(reHeartVal);
+            $('.reHeart').prop("src","/resources/images/like2.png");
+            $('.reHeart').prop('name',reHeartVal);
         }
         else {
             console.log(reHeartVal);
-            $(".reHeart").prop("src", "/resources/images/like1.png");
-            $(".reHeart").prop('name',reHeartVal)
+            $('.reHeart').prop("src","/resources/images/like1.png");
+            $('.reHeart').prop('name',reHeartVal);
         }
     });
 
 
-    $(".reHeart").on("click", function () {
+    $(document).on("click",".reHeart", function () {
 
-        var that = $(".reHeart").val();
-        console.log(that+"하트 that");
-
+        var that = $('.reHeart');
 
         var sendData = {'replyId' :$(this).parent().parent().find('h2').text() ,'reHeart' : that.prop('name')};
-        console.log(sendData+"하트+sendData");
+
+
         $.ajax({
-            url :'/replies/reHeart',
+            url :'/replies/heart',
             type :'POST',
             data : sendData,
             success : function(data){

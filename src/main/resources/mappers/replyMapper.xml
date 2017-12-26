@@ -7,10 +7,10 @@
 
     <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
     <insert id="insert">
-        INSERT INTO tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
+        INSERT INTO tbl_reply (board_id, reply_text, reply_writer, reply_parent)
         VALUES (#{boardId}, #{replyText}, (SELECT user_id
                                            FROM tbl_user
-                                           WHERE user_name = #{replyWirter}), #{replyParent});
+                                           WHERE user_name = #{replyWriter}), #{replyParent});
     </insert>
 
     <!-- 조회(select)-->
@@ -21,7 +21,7 @@
             reply_text                                        replyText,
             (SELECT user_name
              FROM tbl_user
-             WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWirter,
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,
@@ -60,7 +60,7 @@
             reply_text                                        replyText,
             (SELECT user_name
              FROM tbl_user
-             WHERE tbl_user.user_id = tbl_reply.reply_wirter) replyWirter,
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,
@@ -107,7 +107,7 @@
     <!-- 좋아요 조회(select)-->
     <select id="heart" resultType="int">
         SELECT count(*)
-        FROM tbl_reply
+        FROM tbl_reply_like
         WHERE reply_id = #{replyId} AND user_id = #{userId}
     </select>
 

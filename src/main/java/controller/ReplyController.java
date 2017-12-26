@@ -36,6 +36,7 @@ public class ReplyController {
         try {
             //생성
             System.out.println(vo);
+
             service.insertReply(vo);
             entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 
@@ -72,7 +73,7 @@ public class ReplyController {
 
     //좋아요 부분
     @ResponseBody
-    @RequestMapping(value = "/reHeart", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/heart", method = RequestMethod.POST, produces = "application/json")
     public int reHeart(HttpServletRequest httpRequest) throws Exception {
 
         int reHeart = Integer.parseInt(httpRequest.getParameter("reHeart"));
@@ -80,7 +81,6 @@ public class ReplyController {
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
         ReplyLikeVO ReplyLikeVO = new ReplyLikeVO();
-
         ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
 
@@ -94,10 +94,9 @@ public class ReplyController {
             reHeart = 1;
         }
 System.out.println(reHeart+"하트?리턴 값");
+
         return reHeart;
     }
-
-
 
     //수정
     @RequestMapping(value ="/{replyId}", method = {RequestMethod.PUT, RequestMethod.PATCH})
@@ -146,7 +145,8 @@ System.out.println(replyId+"삭제값 넘어오나요?");
     @RequestMapping(value = "/{boardId}/{page}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> listPage(
             @PathVariable("boardId") Integer boarId,
-            @PathVariable("page") Integer page) {
+            @PathVariable("page") Integer page,
+            HttpServletRequest httpRequest) {
 
         //화면으로 전달되는 Map데이터
         ResponseEntity<Map<String, Object>> entity = null;
@@ -157,8 +157,32 @@ System.out.println(replyId+"삭제값 넘어오나요?");
             PageMaker pageMaker = new PageMaker();
             pageMaker.setCri(cri);
 
+//            userId를 받아온다
+            ReplyLikeVO reHeart = new ReplyLikeVO();
+
+
             Map<String, Object> map = new HashMap<String, Object>();
             List<ReplyVO> list = service.listReplyPage(boarId, cri);
+
+            for( int i = 0 ; i < list.size() ; i++) {
+//                list의 replyId 값을 받아온다
+                list.get(i).getReplyId();
+                System.out.println( list.get(i).toString()+"하트의 list의 toString");
+                reHeart.setReplyId(list.get(i).getReplyId());
+
+//                userId 값을 받아와야 한다.
+                int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
+
+                reHeart.setUserId(userid);
+                System.out.println( reHeart.getUserId() +"하트의  userid");
+
+                System.out.println(  reHeart.toString() +"하트의  toString");
+
+                int replyLikeCnt = service.getReplyLike(reHeart);
+                System.out.println( replyLikeCnt +"하트의  replyLikeCnt");
+                map.put("reHeart",replyLikeCnt);
+
+            }
 
             map.put("list", list);
 
@@ -166,6 +190,7 @@ System.out.println(replyId+"삭제값 넘어오나요?");
             pageMaker.setTotalCount(replyCount);
 
             map.put("pageMaker", pageMaker);
+
 
             entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.MULTI_STATUS.OK);
 

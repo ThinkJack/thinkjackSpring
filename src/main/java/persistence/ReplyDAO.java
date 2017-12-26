@@ -34,10 +34,11 @@ public interface ReplyDAO {
     //   reply_likecnt가 +1 ,-1 되되록
     public void updateReplyLikeCnt(int reply_id) throws Exception;
 
-    //좋아요 목록(select)
-    public Integer readLike(ReplyLikeVO vo) throws  Exception;
-
     public void deleteReplyLikeCnt(ReplyLikeVO vo) throws Exception;
+
+    //좋아요 목록(select)
+    public int getReplyLike(ReplyLikeVO vo) throws  Exception;
+
 
 }
 

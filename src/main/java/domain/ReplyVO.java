@@ -10,7 +10,7 @@ public class ReplyVO {
 //글 번호
 	private String replyText;
 //	댓글 내용
-	private String replyWirter;
+	private String replyWriter;
 //	유저 ID
 
 	//	날짜부분
@@ -50,12 +50,12 @@ public class ReplyVO {
 		this.replyText = replyText;
 	}
 
-	public String getReplyWirter() {
-		return replyWirter;
+	public String getReplyWriter() {
+		return replyWriter;
 	}
 
-	public void setReplyWirter(String replyWirter) {
-		this.replyWirter = replyWirter;
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
 	}
 
 	public Date getReplyRegdate() {
@@ -78,7 +78,7 @@ public class ReplyVO {
 		return replyParent;
 	}
 
-	public void setReplyParent(int replyParent) {
+	public void setReplyParent(Integer replyParent) {
 		this.replyParent = replyParent;
 	}
 
@@ -104,7 +104,7 @@ public class ReplyVO {
 				"replyId=" + replyId +
 				", boardId=" + boardId +
 				", replyText='" + replyText + '\'' +
-				", replyWirter='" + replyWirter + '\'' +
+				", replyWriter='" + replyWriter + '\'' +
 				", replyRegdate=" + replyRegdate +
 				", replyUpdate=" + replyUpdate +
 				", replyParent=" + replyParent +
