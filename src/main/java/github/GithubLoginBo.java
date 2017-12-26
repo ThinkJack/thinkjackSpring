@@ -6,6 +6,7 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
+import common.PrivateKey;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
@@ -14,12 +15,14 @@ import java.util.UUID;
 
 public class GithubLoginBo {
 
-    private final static String CLIENT_ID = "a6b8d2b790d818e653f2";
-    private final static String CLIENT_SECRET = "4d3e121449ccbcca18474f2f51f3a4082cd3ef3d";
-    private final static String REDIRECT_URI = "http://localhost:8080/user/githubcallback";
-    private final static String SESSION_STATE = "oauth_state";
+    PrivateKey key=new PrivateKey();
+
+    private String CLIENT_ID = key.getGitClientId();
+    private String CLIENT_SECRET = key.getGitClientSecret();
+    private String REDIRECT_URI = key.getGitRedirectUri();
+    private String SESSION_STATE = key.getGitSessionState();
     /* 프로필 조회 API URL */
-    private final static String PROFILE_API_URL = "https://api.github.com/user";
+    private String PROFILE_API_URL = key.getGitProfileApiUrl();
 
     /* github 인증 URL 생성 Method */
     public String getAuthorizationUrl(HttpSession session) {
@@ -63,7 +66,7 @@ public class GithubLoginBo {
 
             /* Scribe에서 제공하는 AccessToken 획득 기능으로 git Access Token을 획득 */
             System.out.println("세션 검증 완료 ");
-            System.out.println("oauthService :"+oauthService.getAccessToken(code));
+           // System.out.println("oauthService :"+oauthService.getAccessToken(code));
             OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
             System.out.println("토큰 저장 완료 ");
             return accessToken;

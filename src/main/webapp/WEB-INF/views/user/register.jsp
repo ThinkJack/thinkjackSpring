@@ -9,16 +9,122 @@
 <html>
 <head>
 	<title>Home</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+
+        var chkid=false;
+        var chkpass=false;
+console.log(signup);
+        function checkvalue() {
+            console.log('3번째: '+signup.userPassword.value);
+            console.log('4번째: '+signup.chkPassword.value);
+            if(signup.userPassword.value && signup.chkPassword.value) {
+                if(signup.userPassword.value!=signup.chkPassword.value){
+                    $('#pwsame').text('비밀번호가 일치하지 않습니다.');
+                    $('#pwsame').css("color","red");
+                    chkpass=false;
+                }else if(signup.userPassword.value===signup.chkPassword.value) {
+                    $('#pwsame').text('비밀번호가 일치합니다.');
+                    $('#pwsame').css("color","#2EFE2E");
+                    chkpass=true;
+                }
+            } else {
+					$('#pwsame').text('비밀번호와 비밀번호확인을 입력해주세요.');
+					$('#pwsame').css("color","red");
+					chkpass=false;
+            }
+
+        }
+
+
+        function signinchk(obj){
+		    if(!obj.userEmail.value || obj.userEmail.value.trim().length ==0){
+		        alert("이메일이 입력되지 않았습니다.");
+		        obj.userEmail.value ="";
+		        obj.userEmail.focus();
+		        return false;
+			}
+            if(!chkid){
+                alert("이메일 중복체크를 실행해주세요.");
+                obj.userEmail.focus();
+                return false;
+            }
+            if(!obj.userPassword.value || obj.userPassword.value.trim().length ==0){
+                alert("비밀번호를 입력해주세요.");
+                obj.userPassword.value ="";
+                obj.userPassword.focus();
+                return false;
+            }
+            if(!obj.userName.value || obj.userName.value.trim().length ==0){
+                alert("이름을 입력해주세요.");
+                obj.userName.value ="";
+                obj.userName.focus();
+                return false;
+            }
+            if(!chkpass){
+                alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+                return false;
+            }
+		}
+
+
+
+
+
+	</script>
+	<script>
+
+
+        $(document).on('click','#authenticate',function(){
+            var userEmail = $('#userEmail').val();
+
+            var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+            if(!userEmail || userEmail.trim().length ==0){
+                alert("이메일이 입력되지 않았습니다.");
+                return false;
+            }
+            if(regex.test(userEmail) === false) {
+                alert("잘못된 이메일 형식입니다.");
+                return false;
+            } else {
+
+
+            $.ajax({
+                url:'/user/authenticate',
+                type:'POST',
+                data: {'userEmail' : userEmail},
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                dataType : "json",
+
+                success:function(data){
+                    console.log("success")
+                    alert(decodeURIComponent(data.msg))
+                    if(data.chk == "T"){
+                        chkid=true;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown){
+
+                    alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+                }
+            }); }
+        });
+
+	</script>
 </head>
 <body>
 
-<h1>첫번째 회원가입</h1>
-<form action = "/user/register" method="post">
-	email<input type = "userEmail" name = "email"><br>
-	password<input type = "userPassword" name = "password"><br>
-	name<input type = "text" name = "userName"><br>
+<h1>TJ 회원가입</h1>
+<form name="signup"  method="post" onsubmit="return signinchk(this)">
+	email<input type = "text" name = "userEmail" id="userEmail"><button type="button" id="authenticate">중복체크</button><br>
+	name<input type = "text" name = "userName" ><br>
+	password<input type = "password" name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
+	password 확인<input type = "password" name = "chkPassword" id="chkPassword" onkeyup="checkvalue()"><br>
+	<p id="pwsame" name="pwsame"  ></p>
 	<input type = "submit" value = "회원가입">
 </form>
+
 
 </body>
 </html>

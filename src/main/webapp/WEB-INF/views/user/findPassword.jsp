@@ -16,29 +16,14 @@
 </head>
   <body>
   
-  <form name="login" action="/user/loginPost" method="post">
+  <form name="findPassword" action="/user/findPassword" method="post">
     
-      아이디 : <input type="text" name="userEmail" /><p>
-      비밀번호 : <input type="password" name="userPassword" /><p>
-      <input type="submit" value="로그인"/>
+      이메일 : <input type="text" name="userEmail" /><p>
+
+      <input type="submit" value="비밀번호 찾기"/>
       <input type="reset" value="취소"/>
-     <div>
-     <label>
-     <input type="checkbox" name="useCookie"> remember me
-     </label>
-     
-     </div>
+
   </form>
-  <div>
-  <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-  </div>
-  <div id="google_id_login"><a href="/user/googleLogin"><img width="230" src="https://techsneak.com/wp-content/uploads/2017/01/login-google.png"/></a></div>
-  <div>
-      <a class="btn btn-social-icon btn-github" href="/user/githubLogin">
-          <span class="fa fa-github">
-              Sign in with Github
-          </span>
-          <i class="fa fa-github"></i></a>
-  </div>
+
   </body>
 </html>
