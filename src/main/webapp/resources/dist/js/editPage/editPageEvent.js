@@ -273,8 +273,6 @@ $(function() {
 $(function () {
     editConsole.style.display = "none";
     commandLine.style.display = "none";
-    // srcId = ;
-    console.log(srcId);
 
 });
 //--------------------

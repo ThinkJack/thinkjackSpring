@@ -24,18 +24,18 @@ public class SrcTest {
 
     private SrcVO vo = new SrcVO();
 
-//    @Test
-//    public void insertSrc() throws Exception {// 익명 유저 데이터 입력
-//        vo.setSrcHtml("<html</html>");
-//        vo.setSrcCss("html{background : red;}");
-//        vo.setSrcJavaScript("var aaa = function(){return 1;}");
-//        vo.setSrcComments("gksdgksdlkghlk");
-//        vo.setSrcTitle("gkgkgk");
-//
-//        service.saveSrc(vo);
-//    }
+    @Test
+    public void insertSrc() throws Exception {// 익명 유저 데이터 입력
+        vo.setSrcHtml("<html</html>");
+        vo.setSrcCss("html{background : red;}");
+        vo.setSrcJavaScript("var aaa = function(){return 1;}");
+        vo.setSrcComments("abcdabcd");
+        vo.setSrcTitle("abcd");
+//        vo.setSrcWriter(3535);
 
-    //    @Test
+    }
+
+//        @Test
 //    public void updateSrc() throws Exception {// 익명 유저 데이터 입력
 //
 //        vo.setSrcId("plXInl");

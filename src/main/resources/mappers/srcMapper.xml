@@ -5,6 +5,10 @@
 
 <mapper namespace="mapper.srcMapper">
 
+    <!--<insert id="insertSrc">-->
+    <!--insert into tbl_src (src_id, src_path, src_comments, src_title, src_writer)-->
+    <!--values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle}, #{srcWriter})-->
+<!--</insert>-->
     <insert id="insertSrc">
         insert into tbl_src (src_id, src_path, src_comments, src_title)
         values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle})

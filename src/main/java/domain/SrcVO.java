@@ -10,6 +10,7 @@ public class SrcVO {
     private Date srcRegdate;
     private Date srcUpdate;
     private String srcTitle;
+//  private int recnt; // **소스게시글 댓글의 수
     private int srcLikecnt;
     private int srcViewcnt;
     private int srcStatus;  //0, 1, 2로 구분 (private, public, delete)
@@ -122,6 +123,14 @@ public class SrcVO {
         this.srcStatus = srcStatus;
     }
 
+//    public int getRecnt() {
+//        return recnt;
+//    }
+//
+//    public void setRecnt(int recnt) {
+//        this.recnt = recnt;
+//    }
+
     @Override
     public String toString() {
         return "SrcVO{" +
@@ -138,6 +147,7 @@ public class SrcVO {
                 ", srcHtml='" + srcHtml + '\'' +
                 ", srcCss='" + srcCss + '\'' +
                 ", srcJavaScript='" + srcJavaScript + '\'' +
+//                ", recnt=" + recnt +
                 '}';
     }
 }

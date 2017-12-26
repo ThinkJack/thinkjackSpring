@@ -15,5 +15,14 @@ public interface UserService {
 
 	public UserVO googleLogin(LoginDTO dto) throws Exception;
 
-	public UserVO onAuthenticationBinding(LoginDTO dto, User facebookUser) throws Exception;
+	public UserVO userAuth(UserVO user) throws Exception;
+
+	public void deleteUser(UserVO user) throws Exception;
+
+	public String authenticate(String str) throws Exception;
+
+	public void findPassword(UserVO user) throws Exception;
+
+	public void modifypassUser(UserVO user) throws Exception;
+
 }
