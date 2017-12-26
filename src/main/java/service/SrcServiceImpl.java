@@ -21,7 +21,6 @@ public class SrcServiceImpl implements SrcService {
 
     @Override
     public void readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
-        int i;
         String uri = request.getRequestURI();
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
@@ -41,18 +40,17 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public void saveSrc(SrcVO vo)throws Exception{
-        String srcId = "";   //램덤하게 생성되는 id값
+    public String saveSrc(HttpServletRequest request, SrcVO vo)throws Exception{
+        String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
+        boolean srcEmpty = false;
         String filePath;
 
-
-        if(vo.getSrcId() == null) {
+        if(srcId == "") {
             //srcID값 작업
+            srcEmpty = true;
             do {
                 srcId = randomSrcId();
             } while (dao.selectSrcOne(srcId) != null);
-        }else {
-            srcId = vo.getSrcId();
         }
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;
@@ -72,12 +70,14 @@ public class SrcServiceImpl implements SrcService {
             e.printStackTrace();
         }
         vo.setSrcPath(filePath);
-        if(vo.getSrcId() == null) {
+        if(srcEmpty) {
             vo.setSrcId(srcId);
             dao.insertSrc(vo);
         }else{
             dao.updateSrc(vo);
         }
+
+        return srcId;
     }
 
     @Override
@@ -92,6 +92,12 @@ public class SrcServiceImpl implements SrcService {
         int i;
 
         File file = new File(filePath);
+//        if(!file.exists()){
+//            file.createNewFile();
+//        }else{
+//            file.delete();
+//            file.createNewFile();
+//        }
         FileReader fr = new FileReader(file);
         while ((i = fr.read()) != -1) {
             str += (char) i;

@@ -37,10 +37,10 @@ public class EditController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String srcSave(@RequestBody SrcVO vo) {
+    public String srcSave(HttpServletRequest request, @RequestBody SrcVO vo) throws Exception{
         System.out.println("저장요청");
 
-        return "redirect:/edit/editPage";
+        return "/edit/editPage/" + service.saveSrc(request, vo);
     }
 
     //----------------------------------------------------------------------

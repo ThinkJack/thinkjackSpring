@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- Modal -->
 <div class="modal fade" id="setting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -49,9 +51,7 @@
                             <label>Discription</label>
                             <div>
                                 <label class="form-check-label setting_info">
-                                    <textarea class="form-control comment" id="modal-comment" rows="5">
-                                        <c:out value="${SrcVO.srcComments}" default=""/>
-                                    </textarea>
+                                    <textarea class="form-control comment" id="modal-comment" rows="5"><c:out value="${SrcVO.srcComments}" default=""/></textarea>
                                 </label>
                             </div>
                         </div>

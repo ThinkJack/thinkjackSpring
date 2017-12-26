@@ -121,23 +121,32 @@ $(function () {
             changeTitle(this);
         }
     });
-
+    $("#src-title-input").focusout(function (e) {
+        changeTitle(this);
+    });
     $("#src-title-modal").keydown(function(){
         changeTitle(this);
     })
 
     var changeTitle = function(el){
-        document.getElementById("src-title").innerHTML = el.value;
+        srcTitle = el.value;
+        document.getElementById("src-title").innerHTML = srcTitle;
         if(el.id === "src-title-modal"){
-            document.getElementById("src-title-input").value = el.value;
+            document.getElementById("src-title-input").value = srcTitle;
         }else{
-            document.getElementById("src-title-modal").value = el.value;
+            document.getElementById("src-title-modal").value = srcTitle;
         }
         pageTitleView.style = "display: block;";
         pageTitleText.style = "display: none;";
     }
 });
-
+//comments 변경시 등록
+$(function () {
+    $("#modal-comment").on("change", function (e) {
+        srcComments = this.value;
+        document.getElementById("comment-view").value = srcComments;
+    });
+});
 //Setting Behavior부분 함수
 $(function () {//---------------------------- tab-size 변경시
     $("#tab-size").change(function () {
@@ -463,4 +472,27 @@ $("#saveCode").click(function(e) {
 
     saveStatus = true;
     saveImg.src = "/resources/images/cloud1.png";
+    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
+
+    $.ajax({
+        type: "post",
+        url : "/edit/save",
+        headers: {
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "POST"
+        },
+        dataType: 'text',
+        data : JSON.stringify({
+            srcId: srcId,
+            srcComments: srcComments,
+            srcTitle: srcTitle,
+            srcHtml: codeHtml.getValue(),
+            srcCss: codeCss.getValue(),
+            srcJavaScript: codeJavaScript.getValue()
+        }),
+        success : function(getLink){
+            // location.replace(getLink);
+            alert(getLink);
+        }
+    });
 })
