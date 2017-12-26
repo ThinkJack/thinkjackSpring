@@ -179,8 +179,12 @@ System.out.println(replyId+"삭제값 넘어오나요?");
                 System.out.println(  reHeart.toString() +"하트의  toString");
 
                 int replyLikeCnt = service.getReplyLike(reHeart);
-                System.out.println( replyLikeCnt +"하트의  replyLikeCnt");
+
+                System.out.println(  replyLikeCnt +"하트의  replyLikeCnt");
+
                 map.put("reHeart",replyLikeCnt);
+
+                System.out.println(map.toString()+"map의 내용");
 
             }
 

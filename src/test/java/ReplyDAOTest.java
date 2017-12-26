@@ -20,6 +20,16 @@ public class ReplyDAOTest {
 
     @Inject
     private ReplyService service;
+    @Test
+    public void test() throws Exception{
+
+        ReplyLikeVO vo = new ReplyLikeVO();
+        vo.setReplyId(12);
+        vo.setUserId(2);
+        int like = service.getReplyLike(vo);
+
+        System.out.println(like);
+    }
 }
 
 //    @Test

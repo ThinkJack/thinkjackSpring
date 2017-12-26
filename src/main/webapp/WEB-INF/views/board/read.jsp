@@ -120,7 +120,7 @@
 
 
                 <a class="btn btn-outline-dark reHeart">
-                    <img class="reHeart" src="">
+                    <img class="replyheart" src="">
                 </a>
 
             </div>
@@ -208,6 +208,7 @@
 
 <script>
     $(document).ready(function () {
+        //하트
         var heartval = ${heart};
 
         if(heartval>0) {
@@ -415,10 +416,12 @@
     //댓글목록 처리
     //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
     function getPage(pageInfo){
+
+
         $.getJSON(pageInfo,function (data) {
 
             printData(data.list,$(".repliesDiv"),$('.template'));
-            console.log(Boolean(data.list)+"나오");
+
             printPaging(data.pageMaker ,$("#pagination"));
 
 
@@ -500,24 +503,6 @@
 
 </script>
 <script>
-
-
-    $(document).ready(function () {
-
-        var reHeartVal =${data.reHeart};
-            console.log(reHeartVal+"reply 하트");
-
-        if(reHeartVal>0) {
-            console.log(reHeartVal);
-            $('.reHeart').prop("src","/resources/images/like2.png");
-            $('.reHeart').prop('name',reHeartVal);
-        }
-        else {
-            console.log(reHeartVal);
-            $('.reHeart').prop("src","/resources/images/like1.png");
-            $('.reHeart').prop('name',reHeartVal);
-        }
-    });
 
 
     $(document).on("click",".reHeart", function () {
