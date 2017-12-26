@@ -74,6 +74,7 @@ public class BoardController {
         BoardLikeVO vo = new BoardLikeVO();
         vo.setBoardId(boardId);
         vo.setUserId(userid);
+        System.out.println(vo.getUserId()+ "userId??");
 
         int boardlike = service.getBoardLike(vo);
         System.out.println(boardlike);
