@@ -5,3 +5,5 @@
 /lib/
 /target/
 /*.iml
+/src/main/resources/application.properties
+/src/main/java/common/PrivateKey.java

@@ -26,7 +26,7 @@
         board_viewcnt                                                        boardViewcnt,
         board_likecnt                                                        boardLikecnt
         FROM tbl_board
-        WHERE board_id = #{boardId} AND board_status = 1
+        WHERE board_id = #{boardId} AND board_state = 1
     </select>
 
     <update id="update">
@@ -40,7 +40,7 @@
     <update id="delete">
         UPDATE tbl_board
         SET
-            board_status = 0
+            board_state = 0
         WHERE tbl_board.board_id = #{boardId}
     </update>
 
@@ -61,7 +61,7 @@
         WHERE tbl_board.board_id > 0 AND (SELECT category_name
                                           FROM tbl_board_category
                                           WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'notice'
-              AND board_status = 1
+              AND board_state = 1
         ORDER BY board_id DESC , board_regdate DESC
         LIMIT #{page}, 10
         ]]>
@@ -114,7 +114,7 @@
   from tbl_board
   where board_id > 0 AND (SELECT category_name
              FROM tbl_board_category
-             WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'notice' AND board_status = 1
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'notice' AND board_state = 1
         ]]>
 
         <include refid="searchOption"></include>
@@ -132,7 +132,7 @@
   from tbl_board
   where board_id > 0 AND (SELECT category_name
                          FROM tbl_board_category
-                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='notice' AND board_status = 1
+                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='notice' AND board_state = 1
         ]]>
         <include refid="searchOption"></include>
     </select>
