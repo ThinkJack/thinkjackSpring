@@ -18,27 +18,16 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <a class="col-sm btn btn-light" href="javascript:;">
+                    <a class="col-sm btn btn-light" id="left-layout">
                         <img src="/resources/images/left-panel.png">
                     </a>
-                    <a class="col-sm btn btn-light" href="javascript:;">
+                    <a class="col-sm btn btn-light" id="top-layout">
                         <img src="/resources/images/top-panel.png">
                     </a>
-                    <a class="col-sm btn btn-light" href="javascript:;">
+                    <a class="col-sm btn btn-light" id="right-layout">
                         <img src="/resources/images/right-panel.png">
                     </a>
                 </div>
-                <%--<div class="row">--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/left-panel.png">--%>
-                    <%--</a>--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/top-panel.png">--%>
-                    <%--</a>--%>
-                    <%--<a class="col btn btn-light" href="javascript:;">--%>
-                        <%--<img src="/resources/images/right-panel.png">--%>
-                    <%--</a>--%>
-                <%--</div>--%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

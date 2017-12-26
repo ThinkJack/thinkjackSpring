@@ -19,6 +19,9 @@
             <div class="modal-body">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
+                        <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link btn-light" data-toggle="tab" href="#settingHTML">HTML</a>
                     </li>
                     <li class="nav-item">
@@ -33,7 +36,27 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active container" id="settingHTML">
+                    <div class="tab-pane active container" id="settingInfo">
+                        <div class="form-check">
+                            <label>Code Title</label>
+                            <div>
+                                <label class="form-check-label setting_info">
+                                    <input class="form-control" type="text" id="src-title-modal">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <label>Discription</label>
+                            <div>
+                                <label class="form-check-label setting_info">
+                                    <textarea class="form-control comment" id="modal-comment" rows="5">
+                                        <c:out value="${SrcVO.srcComments}" default=""/>
+                                    </textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane container" id="settingHTML">
                         <label for="htmlPreprocessor">HTML Preprocessor</label>
                         <select id="htmlPreprocessor" class="form-control">
                             <option selected>None</option>
@@ -104,7 +127,7 @@
                         <div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="autoPreview"> ENABLED
+                                    <input class="form-check-input" type="checkbox" id="autoPreview" checked > ENABLED
                                 </label>
                             </div>
                         </div>
@@ -113,8 +136,17 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Save & Close</button>
             </div>
         </div>
     </div>
 </div>
+
+<%--<script>--%>
+    <%--$(document).ready(function(){--%>
+        <%--$("button").click(function(){--%>
+             <%--alert($("#w3s").attr("href"));--%>
+            <%--alert($("#gridRadios1").attr("name"))--%>
+        <%--});--%>
+    <%--});--%>
+<%--</script>--%>
