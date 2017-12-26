@@ -16,18 +16,22 @@
     </insert>
 
     <!-- 댓글 수정 -->
-    <update id="updateReply">
+    <update id="updateReply" parameterType="SrcReplyVo">
         UPDATE  tbl_src_reply
-        SET src_id=#{srcId},
+        SET
+            src_id=#{srcId},
             reply_text =#{replyText},
-            reply_writer =#{replyWriter}
-        WHERE tbl_src_reply.reply_id = #{replyId}
+#             reply_writer =#{replyWriter},
+            reply_status = #{replyStatus}
+        WHERE reply_id = #{replyId}
+#         where  src_id=#{srcId}
     </update>
 
     <!-- 댓글 삭제 -->
     <delete id="deleteReply">
         DELETE FROM tbl_src_reply
-        WHERE reply_id = #{replyId} AND src_id = #{srcId}
+        WHERE reply_id = #{replyId}
+#               AND src_id = #{srcId}
 
     </delete>
 

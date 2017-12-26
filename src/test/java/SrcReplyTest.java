@@ -33,22 +33,27 @@ public class SrcReplyTest {
 
 
     // 댓글 작성
-    @Test
-    public void createTest() throws Exception{
-        vo.setSrcId("VXNOvK");
-        vo.setReplyText("멋진소스 잘봤습니다!!");
-        vo.setReplyStatus(1);
-        System.out.println(vo);
-        service.create(vo);
-    }
+//    @Test
+//    public void createTest() throws Exception{
+//        vo.setSrcId("VXNOvK");
+//        vo.setReplyText("멋진소스 잘봤습니다!!");
+//        vo.setReplyStatus(1);
+//        System.out.println(vo);
+//        service.create(vo);
+//    }
     // 댓글 수정
-    @Test
-    public void updateTest(SrcReplyVO vo) throws Exception{
-        service.update(vo);
-    }
+//    @Test
+//    public void updateTest() throws Exception{
+//        vo.setReplyId(6);
+//        vo.setSrcId("VXNOvK");
+//        vo.setReplyText("다시 만들어 주세요");
+//        vo.setReplyStatus(1);
+//        System.out.println(vo);
+//        service.update(vo);
+//    }
     // 댓글 삭제
     @Test
-    public void deleteTest(Integer replyId) throws Exception{
-        service.delete(replyId);
+    public void deleteTest() throws Exception{
+        service.delete(6);
     }
 }
