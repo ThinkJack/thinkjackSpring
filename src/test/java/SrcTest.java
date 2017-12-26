@@ -33,7 +33,6 @@ public class SrcTest {
         vo.setSrcTitle("abcd");
 //        vo.setSrcWriter(3535);
 
-        service.saveSrc(vo);
     }
 
 //        @Test
