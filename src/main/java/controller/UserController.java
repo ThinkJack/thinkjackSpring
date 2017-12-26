@@ -183,7 +183,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
-
+		System.out.println("loginPost");
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {

@@ -12,6 +12,9 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
+
+
+    var chkpass=false;
     function checkvalue() {
         console.log('3번째: '+chpass.userPassword.value);
         console.log('4번째: '+chpass.chkPassword.value);
