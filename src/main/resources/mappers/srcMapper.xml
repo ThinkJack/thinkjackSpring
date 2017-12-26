@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.srcMapper">
+
+    <!--<insert id="insertSrc">-->
+    <!--insert into tbl_src (src_id, src_path, src_comments, src_title, src_writer)-->
+    <!--values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle}, #{srcWriter})-->
+<!--</insert>-->
+    <insert id="insertSrc">
+        insert into tbl_src (src_id, src_path, src_comments, src_title)
+        values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle})
+    </insert>
+
+    <select id="selectSrcOne" resultType="SrcVO">
+        select
+        src_id srcId,
+        src_writer srcWriter,
+        src_path srcPath,
+        src_comments srcComments,
+        src_regdate srcRegdate,
+        src_update srcUpdate,
+        src_title srcTitle,
+        src_likecnt srcLikecnt,
+        src_viewcnt srcViewcnt
+        from tbl_src where src_id = #{srcId}
+    </select>
+
+    <update id="updateSrc">
+        update tbl_src set
+        src_comments = #{srcComments},
+        src_title = #{srcTitle},
+        src_update = CURRENT_TIMESTAMP
+        where src_id = #{srcId}
+    </update>
+
+    <update id="updateSrcStatus">
+        update tbl_src set src_status = 2 where src_id = #{srcId}
+    </update>
+</mapper>

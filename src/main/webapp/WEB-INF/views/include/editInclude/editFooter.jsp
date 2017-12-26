@@ -10,17 +10,17 @@
     <nav class="navbar navbar-expand">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting" id="console-button">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" id="console-button">
                     Console
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting">
-                    Comments
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal">
+                    Reply
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#Setting">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts
                 </a>
             </li>

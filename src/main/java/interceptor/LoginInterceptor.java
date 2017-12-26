@@ -20,12 +20,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("LoginInterceptor postHandle 진입");
+		System.out.println("postHandle 진입");
 		HttpSession session = request.getSession();
 
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object userVO = modelMap.get("userVO");
-		//System.out.println("userVo"+userVO);
+		
 		if(userVO != null) {
 			
 			logger.info("new login success");
@@ -50,9 +50,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		// TODO Auto-generated method stub
 
-		System.out.println("Logininterceptor preHandle 진입");
+		System.out.println("preHandle 진입");
 		HttpSession session = request.getSession();
-		//System.out.println("LOGIN :"+session.getAttribute(LOGIN));
+		
 		if(session.getAttribute(LOGIN) != null) {
 			logger.info("clear login data before");
 			session.removeAttribute(LOGIN);
