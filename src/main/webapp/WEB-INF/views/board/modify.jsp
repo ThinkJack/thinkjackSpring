@@ -1,24 +1,23 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwak
-  Date: 2017. 12. 6.
-  Time: PM 2:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Modify</title>
-</head>
-<body>
-<form role="form" method="post" id = "registerForm">
+
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
+
+<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+
+    <form role="form" method="post" id = "registerForm">
     <div class="box-body">
         <div class="form-group">
             <div class="form-group">
-                <label >boardId</label>
                 <input type="text"
                        name='boardId' class="form-control"
-                       value="${boardVO.boardId}">
+                       value="${boardVO.boardId}" hidden>
             </div>
             <label>Title</label>
             <input type="text"
@@ -52,5 +51,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-</body>
-</html>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
