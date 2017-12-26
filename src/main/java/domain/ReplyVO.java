@@ -1,20 +1,29 @@
 package domain;
 
+import java.util.Date;
+
 public class ReplyVO {
-	//	댓글 번호
+
 	private Integer replyId;
-	//글 번호
+//	댓글 번호
 	private Integer boardId;
-	//	댓글 내용
+//글 번호
 	private String replyText;
-	//	유저 ID
-	private String replyWirter;
-	//	대댓글에 필요한 부분
+//	댓글 내용
+	private String replyWriter;
+//	유저 ID
+
+	//	날짜부분
+	private Date replyRegdate;
+	private Date replyUpdate;
+
+
 	private Integer replyParent;
-	//좋아요수
-	private Integer replyLikeCnt;
-	//삭제부분 0,1
+//	대댓글에 필요한 부분
+	private int replyLikeCnt;
+//좋아요수
 	private int replyState;
+	//삭제부분 0,1
 
 
 	public Integer getReplyId() {
@@ -41,12 +50,28 @@ public class ReplyVO {
 		this.replyText = replyText;
 	}
 
-	public String getReplyWirter() {
-		return replyWirter;
+	public String getReplyWriter() {
+		return replyWriter;
 	}
 
-	public void setReplyWirter(String replyWirter) {
-		this.replyWirter = replyWirter;
+	public void setReplyWriter(String replyWriter) {
+		this.replyWriter = replyWriter;
+	}
+
+	public Date getReplyRegdate() {
+		return replyRegdate;
+	}
+
+	public void setReplyRegdate(Date replyRegdate) {
+		this.replyRegdate = replyRegdate;
+	}
+
+	public Date getReplyUpdate() {
+		return replyUpdate;
+	}
+
+	public void setReplyUpdate(Date replyUpdate) {
+		this.replyUpdate = replyUpdate;
 	}
 
 	public Integer getReplyParent() {
@@ -57,11 +82,11 @@ public class ReplyVO {
 		this.replyParent = replyParent;
 	}
 
-	public Integer getReplyLikeCnt() {
+	public int getReplyLikeCnt() {
 		return replyLikeCnt;
 	}
 
-	public void setReplyLikeCnt(Integer replyLikeCnt) {
+	public void setReplyLikeCnt(int replyLikeCnt) {
 		this.replyLikeCnt = replyLikeCnt;
 	}
 
@@ -79,7 +104,9 @@ public class ReplyVO {
 				"replyId=" + replyId +
 				", boardId=" + boardId +
 				", replyText='" + replyText + '\'' +
-				", replyWirter='" + replyWirter + '\'' +
+				", replyWriter='" + replyWriter + '\'' +
+				", replyRegdate=" + replyRegdate +
+				", replyUpdate=" + replyUpdate +
 				", replyParent=" + replyParent +
 				", replyLikeCnt=" + replyLikeCnt +
 				", replyState=" + replyState +

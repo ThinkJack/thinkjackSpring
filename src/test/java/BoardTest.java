@@ -52,14 +52,24 @@ public class BoardTest {
     public void Test1() throws Exception{
         SearchCriteria cri =null;
 
-        System.out.println(dao.search(cri,"qna"));
+//        System.out.println(dao.search(cri,"qna"));
 
         PageMaker pageMaker = new PageMaker();
 
         pageMaker.setCri(cri);
 
-        System.out.println(dao.searchCount(cri,"qna"));
+//        System.out.println(dao.searchCount(cri,"qna"));
 
+    }
+
+    @Test
+    public void Test2() throws Exception{
+        BoardLikeVO vo = new BoardLikeVO();
+        vo.setBoardId(124);
+        vo.setUserId(1);
+
+        System.out.println(dao.getBoardLike(vo));
+        dao.deleteBoardLike(vo);
     }
 
 

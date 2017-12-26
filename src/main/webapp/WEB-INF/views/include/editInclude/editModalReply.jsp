@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -29,6 +31,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
+
                     <div class="row count_img_view">
                         <div class="col-md-auto count_img_view_inner">
                             <span id="view-count">13</span>
@@ -42,8 +45,8 @@
                     <%--설명부분(comment 가져와서 찍기)--%>
                     <div class="row">
                         <div class="row"><h6>DESCRIPTION</h6></div>
-                        <div class="row form-control comment_view" id="comment_view">
-                            <c:out value="${SrcVO.srcComments}" default=""/>
+                        <div class="row">
+                            <textarea class="form-control comment" id="comment-view" rows="5" default><c:out value="${SrcVO.srcComments}" default=""/></textarea>
                         </div>
                         <div class="row">
                             <span><i>Created</i></span><span class="regdate" id="regdate"> <c:out value="${SrcVO.srcRegdate}" default=""/></span>

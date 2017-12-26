@@ -19,10 +19,16 @@
     <select id="updateBoardLike">
         UPDATE tbl_board
         SET
-        board_likecnt = (SELECT COUNT(*)
-        FROM tbl_board_like
-        WHERE board_id = #{boardId})
+            board_likecnt = (SELECT COUNT(*)
+                             FROM tbl_board_like
+                             WHERE board_id = #{boardId})
         WHERE board_id = #{boardId}
+    </select>
+
+    <select id="getBoardLike" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board_like
+        WHERE board_id = #{boardId} AND user_id = #{userId}
     </select>
 
 </mapper>

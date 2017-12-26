@@ -11,6 +11,7 @@
 
 <jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
 
+
     <!-- Top menu on small screens -->
     <header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-16">
         <span class="w3-left w3-padding">THINK JACK</span>
@@ -41,5 +42,26 @@
             <hr>
         </div>
     </div>
+
+<ul id="replies">
+</ul>
+
+<script>
+    <%--전체 게시판 숫자 불러오기--%>
+var boardId=1;
+$.getJSON("/replies/all/" + boardId , function (data) {
+    console.log(data.length);
+
+//전체 댓글 목록 출력
+    $(data).each(
+        function(){
+            str += "<li data-replyId='"+this.replyId+"' class ='replyLi'>"
+                + this.replyId +":"+this.replyText
+                +'</li>';
+        });
+
+    $("#replies").html(str);
+    });
+</script>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

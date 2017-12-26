@@ -254,7 +254,7 @@ var ExcludedIntelliSenseTriggerKeys =
 var delay;
 
 var saveStatus = true //저장 유도관련 변수
-var saveImg = document.getElementById("saveCode"); //save 이미지 변경 관련 변수
+var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
 var imgPath = "/resources/images/";
 //---------console관련 변수
 var editConsoleView = document.getElementById("edit-console-view");
@@ -276,6 +276,7 @@ var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
 var srcId, srcComments, srcTitle;
+var curhref = location.href;
 
 
 var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수

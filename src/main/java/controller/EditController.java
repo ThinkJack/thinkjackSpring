@@ -38,19 +38,15 @@ public class EditController {
     }
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
-    public String editView(HttpServletRequest request, @ModelAttribute SrcVO vo)throws Exception {
-        service.readSrc(request, vo);
+    public String editView(HttpServletRequest request, Model model)throws Exception {
+        SrcVO vo = new SrcVO();
+        vo = service.readSrc(request, vo);
         System.out.println(vo);
 
+        model.addAttribute("SrcVO", vo);
         return "forward:/edit/editPage";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String srcSave(@RequestBody SrcVO vo) {
-        System.out.println("저장요청");
-
-        return "redirect:/edit/editPage";
-    }
 
     //----------------------------------------------------------------------
 
