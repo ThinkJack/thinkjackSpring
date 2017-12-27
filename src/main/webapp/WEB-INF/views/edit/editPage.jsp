@@ -6,8 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="domain.SrcVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--<%--%>
 <%--response.setHeader("Cache-Control","no-cache");--%>
@@ -91,10 +90,54 @@
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
     <script>
-        <%--srcId = <%= ${SrcVO.srcTitle}%>--%>
+        srcId = '<c:out value="${SrcVO.srcId}" default=""/>';
+        srcWriterName = '<c:out value="${SrcVO.srcWriterName}" default="CAPTAIN ANONYMOUS"/>';
+        srcComments = '<c:out value="${SrcVO.srcComments}" default=""/>';
+        srcTitle = '<c:out value="${SrcVO.srcTitle}" default="Untitled"/>';
+        srcRegdate = '<c:out value="${SrcVO.srcRegdate}" default=""/>';
+        srcUpdate = '<c:out value="${SrcVO.srcUpdate}" default=""/>';
+        strHtml = escapeHtml('<c:out value="${SrcVO.srcHtml}" default=""/>');
+        strCss = escapeHtml('<c:out value="${SrcVO.srcCss}" default=""/>');
+        strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
+        <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
+        <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
+        <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
+        $(function () {
+            document.getElementById("src-title").innerHTML = srcTitle;
+            document.getElementById("src-title-modal").value = srcTitle;
+            document.getElementById("src-writer").innerHTML = srcWriterName;
+            document.getElementById("src-title-reply-modal").innerHTML = "\<h4\>" + srcWriterName + "\</h4\>";
+            document.getElementById("modal-comment").value = srcComments;
+            document.getElementById("comment-view").value = srcComments;
 
+            codeHtml.setValue(strHtml);
+            codeCss.setValue(strCss);
+            codeJavaScript.setValue(strJs);
 
+            if (srcRegdate !== "") {
+                if (srcUpdate !== srcRegdate) {
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
+                        "/tUpdate&nbsp&nbsp" + srcUpdate;
+                } else {
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
+                }
+            }
+        });
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&lt;/gi, "<")
+                .replace(/&gt;/gi, ">")
+                .replace(/&#33;/gi, "!")
+                .replace(/&#034;/gi, '"')
+                .replace(/&quot;/gi, '"')
+                .replace(/&#035;/gi, '"')
+                .replace(/&#037;/gi, "%")
+                .replace(/&amp;/gi, "&")
+                .replace(/&#038;/gi, "&")
+                .replace(/&#039;/gi, "'");
+        }
     </script>
 </body>
 </html>

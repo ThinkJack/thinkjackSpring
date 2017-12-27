@@ -129,6 +129,8 @@ $(function () {
     })
 
     var changeTitle = function(el){
+        saveImg.src = "/resources/images/cloud2.png";
+        saveStatus = false;
         srcTitle = el.value;
         document.getElementById("src-title").innerHTML = srcTitle;
         if(el.id === "src-title-modal"){
@@ -143,6 +145,8 @@ $(function () {
 //comments 변경시 등록
 $(function () {
     $("#modal-comment").on("change", function (e) {
+        saveImg.src = "/resources/images/cloud2.png";
+        saveStatus = false;
         srcComments = this.value;
         document.getElementById("comment-view").value = srcComments;
     });
@@ -459,7 +463,6 @@ var likebt = function () {
 };
 
 
-
 $(function () { //--자동저장
     if ($('#autoSave').is(':checked')) {
         // alert(1);
@@ -496,6 +499,8 @@ $("#saveCode").click(function (e) {
                     location.replace("/edit/editPage/" + getLink);
                 }
                 saveStatus = true;
+
+                alert("저장이 되었습니다.");
             }
         });
     }

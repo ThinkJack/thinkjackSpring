@@ -4,10 +4,10 @@ import domain.SrcVO;
 import domain.UserVO;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
+import persistence.UserDAO;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,18 +17,25 @@ import java.io.IOException;
 public class SrcServiceImpl implements SrcService {
 
     @Inject
-    private SrcDAO dao;
+    private SrcDAO srcdao;
+
+    @Inject
+    private UserDAO userdao;
 
     @Override
     public SrcVO readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
 
-
+        UserVO userVo = new UserVO();
         String uri = request.getRequestURI();
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
         try {
-            vo = dao.selectSrcOne(srcId);
+            vo = srcdao.selectSrcOne(srcId);
+            userVo.setUserId(vo.getSrcWriter());
+            if(userVo.getUserId() != 0){
+                vo.setSrcWriterName(userdao.read(userVo).getUserName());
+            }
 //            System.out.println(vo.getSrcPath() + "/html.txt");
             vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
             vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
@@ -51,7 +58,7 @@ public class SrcServiceImpl implements SrcService {
             srcEmpty = true;
             do {
                 srcId = randomSrcId();
-            } while (dao.selectSrcOne(srcId) != null);
+            } while (srcdao.selectSrcOne(srcId) != null);
         }
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;
@@ -70,9 +77,9 @@ public class SrcServiceImpl implements SrcService {
             vo.setSrcPath(filePath);
             if(srcEmpty) {
                 vo.setSrcId(srcId);
-                dao.insertSrc(vo);
+                srcdao.insertSrc(vo);
             }else{
-                dao.updateSrc(vo);
+                srcdao.updateSrc(vo);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +89,7 @@ public class SrcServiceImpl implements SrcService {
 
     @Override
     public void updateSrcStatus(String srcId) throws Exception {
-        dao.updateSrcStatus(srcId);
+        srcdao.updateSrcStatus(srcId);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -92,15 +99,14 @@ public class SrcServiceImpl implements SrcService {
         int i;
 
         File file = new File(filePath);
-//        if(!file.exists()){
-//            file.createNewFile();
-//        }else{
-//            file.delete();
-//            file.createNewFile();
-//        }
         FileReader fr = new FileReader(file);
         while ((i = fr.read()) != -1) {
-            str += (char) i;
+            if(i == 10){
+                str += "\\n";
+            }else{
+                str += (char) i;
+            }
+
         }
         fr.close();
         return str;

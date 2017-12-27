@@ -20,7 +20,7 @@
                         <div class="col">
                             <div class="col">
                                 <div class="row"><span>A masterpiece by</span></div>
-                                <div class="row" id="src-id"><h4><c:out value="${SrcVO.srcId}" default="CAPTAIN ANONYMOUS"/></h4></div>
+                                <div class="row" id="src-title-reply-modal"></div>
                             </div>
                         </div>
                     </div>
@@ -46,10 +46,10 @@
                     <div class="row">
                         <div class="row"><h6>DESCRIPTION</h6></div>
                         <div class="row">
-                            <textarea class="form-control comment" id="comment-view" rows="5" default><c:out value="${SrcVO.srcComments}" default=""/></textarea>
+                            <textarea class="form-control comment" id="comment-view" rows="5" disabled></textarea>
                         </div>
                         <div class="row">
-                            <span><i>Created</i></span><span class="regdate" id="regdate"> <c:out value="${SrcVO.srcRegdate}" default=""/></span>
+                            <span class="regdate" id="regdate"></span>
                         </div>
                     </div>
                     <%--댓글 등록 부분--%>
