@@ -35,7 +35,8 @@
     <div class="row">
         <div class="col-8"></div>
         <div class="col-4">
-            <button href="">로그인</button>
+            <button onclick="location.href='/user/login'">로그인</button>
+            <button onclick="location.href='/user/logout'">로그아웃</button>
             <!--로그인 했을때-->
             <!--<button href="">로그인</button>-->
             <!--<button href="" style="padding-left:10px;">버튼2</button>-->

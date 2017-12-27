@@ -353,10 +353,24 @@ public class UserController {
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
 
+
+
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
 
-		session.setAttribute("login", vo );
 
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="/user/login"){
+				session.setAttribute("dest","/");
+			}
+			System.out.println("postHandle dest: "+dest);
+
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
@@ -425,12 +439,35 @@ public class UserController {
 		System.out.println("controller dto: "+dto);
 
 		UserVO vo = new UserVO();
-        vo = service.googleLogin(dto);
+
+		try {
+			vo = service.googleLogin(dto);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
+		}
+
+
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="/user/login"){
+				session.setAttribute("dest","/");
+			}
+			System.out.println("postHandle dest: "+dest);
+
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 
 
-        session.setAttribute("login", vo );
-		model.addAttribute("userVO",vo);
+//        session.setAttribute("login", vo );
+//		model.addAttribute("userVO",vo);
 		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
         return "redirect:/user/socialLoginPost";
     }
@@ -510,6 +547,20 @@ public class UserController {
 			e.printStackTrace();
 		}
 
+		//세션 생성
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="/user/login"){
+				session.setAttribute("dest","/");
+			}
+			System.out.println("postHandle dest: "+dest);
+
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
@@ -517,7 +568,9 @@ public class UserController {
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
 
+public static void destDefault (UserVO vo){
 
+}
 
 
 }
