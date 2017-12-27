@@ -79,11 +79,12 @@ public class SrcReplyVO {
 //    }
 
 
+
     @Override
     public String toString() {
         return "SrcReplyVO{" +
                 "replyId=" + replyId +
-                ", srcId='" + srcId + '\'' +
+                ", srcId='" + srcId +
                 ", replyText='" + replyText + '\'' +
                 ", replyWriter=" + replyWriter +
                 ", replyRegdate=" + replyRegdate +

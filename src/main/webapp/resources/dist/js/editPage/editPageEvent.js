@@ -462,13 +462,13 @@ var likebt = function () {
 
 $(function () { //--자동저장
     if ($('#autoSave').is(':checked')) {
-        // alert(1);
-    } else {
-        // alert(2);
-    }
+        alert(1);
+        clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
+        delay = setTimeout(saveCode, 30);}
+
 });
 
-$("#saveCode").click(function (e) {
+var saveCode = $("#saveCode").click(function (e) {
 
 
     saveImg.src = "/resources/images/cloud1.png";

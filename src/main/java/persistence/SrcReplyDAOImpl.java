@@ -12,7 +12,7 @@ import java.util.List;
 public class SrcReplyDAOImpl implements SrcReplyDAO {
 
     @Inject
-    private SqlSession sqlSession;
+    SqlSession sqlSession;
 
     final String srcReplyMapper = "mapper.srcReplyMapper";
 
