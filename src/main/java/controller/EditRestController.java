@@ -22,9 +22,8 @@ public class EditRestController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity<String> srcSave(HttpServletRequest request,@RequestBody SrcVO vo) throws Exception{
 
-        ResponseEntity<String> entity = new ResponseEntity<>(service.saveSrc(request, vo), HttpStatus.OK);;
+        ResponseEntity<String> entity = new ResponseEntity<>(service.saveSrc(request, vo), HttpStatus.OK);
 
         return entity;
     }
-
 }

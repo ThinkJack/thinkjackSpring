@@ -275,7 +275,8 @@ var resizeCode1 = document.getElementById("resize-code-1");
 var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcComments, srcTitle;
+var srcId, srcComments, srcTitle, srcWriterName, srcRegdate ,srcUpdate;
+var strHtml, strCss, strJs;
 var curhref = location.href;
 
 
@@ -370,3 +371,4 @@ function autoFormatSelection() {
 // codeCss.autoFormatRange(range.from, range.to);
 // codeJavaScript.autoFormatRange(range.from, range.to);
 // }
+

@@ -5,6 +5,7 @@ import java.util.Date;
 public class SrcVO {
     private String srcId;
     private int srcWriter; //null일때 작성자 없는것 (익명)
+    private String srcWriterName;
     private String srcPath;
     private String srcComments;
     private Date srcRegdate;
@@ -18,6 +19,15 @@ public class SrcVO {
     private String srcHtml;
     private String srcCss;
     private String srcJavaScript;
+
+
+    public String getSrcWriterName() {
+        return srcWriterName;
+    }
+
+    public void setSrcWriterName(String srcWriterName) {
+        this.srcWriterName = srcWriterName;
+    }
 
     public String getSrcHtml() {
         return srcHtml;
@@ -131,11 +141,13 @@ public class SrcVO {
 //        this.recnt = recnt;
 //    }
 
+
     @Override
     public String toString() {
         return "SrcVO{" +
                 "srcId='" + srcId + '\'' +
                 ", srcWriter=" + srcWriter +
+                ", srcWriterName='" + srcWriterName + '\'' +
                 ", srcPath='" + srcPath + '\'' +
                 ", srcComments='" + srcComments + '\'' +
                 ", srcRegdate=" + srcRegdate +
@@ -147,7 +159,6 @@ public class SrcVO {
                 ", srcHtml='" + srcHtml + '\'' +
                 ", srcCss='" + srcCss + '\'' +
                 ", srcJavaScript='" + srcJavaScript + '\'' +
-//                ", recnt=" + recnt +
                 '}';
     }
 }
