@@ -1,9 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <html>
 <head>
-    <title>EditPage</title>
+    <title>unitTest</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
@@ -14,7 +15,7 @@
             padding: 6px;
         }
         .test_case {
-            overflow-x: scroll;
+            overflow: scroll;
             height: 400px;
             /*display: flex;*/
         }
@@ -130,6 +131,17 @@
 <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
 <script>
+
+    var testFunc;
+    codeUnitTest.on("change", function () {
+        var origin = codeUnitTest.getValue();
+        var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
+        testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
+        $(".test_case").empty();
+    });
+
+
+
     //변수선언
     var imgPath = "/resources/images/";
     //---------console관련 변수
@@ -249,12 +261,16 @@
         });
     });
     $(document).on("click","#add-test-case",function () {
+        var inputbox ="";
+        for(var i = 0; i < testFunc.length; i++)
+            inputbox += "<input type='text' class='input_box inputs' />";                                         
 
-       var testCases =
+
+        var testCases =
            "<div class='row case'>" +
-           "input : " +
-           "<input type='text' class='input_box inputs' />" +
-           "ouput : " +
+           "<span>input : </span>" +
+            inputbox +
+           "<span>ouput : </span>" +
            "<input type='text' class='input_box output' />" +
            "<button class='btn_case test_one'>TEST</button>" +
            "<button class='btn_case delete_case'>DELETE</button>" +
@@ -275,7 +291,11 @@
     $(document).ready(function () {
         editConsole.style.display = "block";
         commandLine.style.display = "block";
-    })
+
+
+    });
+
+
 
 </script>
 </body>

@@ -168,6 +168,10 @@ codeUnitTest.setValue(
     "   return 0;\n" +
     "}");
 
+var origin = codeUnitTest.getValue();
+var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
+testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
+
 var codePython = CodeMirror(document.getElementById("codePython"), {
     mode: "python",
     lineNumbers: true,

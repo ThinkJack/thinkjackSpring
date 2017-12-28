@@ -25,9 +25,6 @@ codeJavaScript.on("change", function () {
         delay = setTimeout(updatePreview, 0);}
 });
 
-codeUnitTest.on("change", function () {
-    consoleView(codeUnitTest.getValue());
-});
 
 //키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
@@ -80,21 +77,22 @@ codeJavaScript.on("keyup", function (cm, event) {
             }
         }
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
+
     }
 });
-codeUnitTest.on("keyup", function (cm, event) {
-    if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
-        var scope = {};
-        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
-        for (var i in window) {
-            if (preventList.indexOf(i) === -1) {
-                scope[i] = window[i]
-            }
-        }
-        CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
-    }
-});
+// codeUnitTest.on("keyup", function (cm, event) {
+//     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+//         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
+//         var scope = {};
+//         var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+//         for (var i in window) {
+//             if (preventList.indexOf(i) === -1) {
+//                 scope[i] = window[i]
+//             }
+//         }
+//         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
+//     }
+// });
 codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
