@@ -363,10 +363,13 @@ public class UserController {
 			//response.sendRedirect("/");
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
-			if(dest=="/user/login"){
+			if(dest=="/user/socialLoginPost"){
 				session.setAttribute("dest","/");
 			}
-			System.out.println("postHandle dest: "+dest);
+			//System.out.println("postHandle dest: "+dest);
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
 
 		}else{
 			session.setAttribute("dest","/user/login");
@@ -455,11 +458,13 @@ public class UserController {
 			//response.sendRedirect("/");
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
-			if(dest=="/user/login"){
+			if(dest=="user/socialLoginPost"){
 				session.setAttribute("dest","/");
 			}
 			System.out.println("postHandle dest: "+dest);
-
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
@@ -553,10 +558,13 @@ public class UserController {
 			//response.sendRedirect("/");
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
-			if(dest=="/user/login"){
+			if(dest=="/user/socialLoginPost"){
 				session.setAttribute("dest","/");
 			}
 			System.out.println("postHandle dest: "+dest);
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
 
 		}else{
 			session.setAttribute("dest","/user/login");
