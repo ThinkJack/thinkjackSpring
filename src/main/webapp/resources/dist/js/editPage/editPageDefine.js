@@ -163,6 +163,10 @@ var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
 // editor.foldCode(CodeMirror.Pos(13, 0));
+codeUnitTest.setValue(
+    "function testFunction(){\n" +
+    "   return 0;\n" +
+    "}");
 
 var codePython = CodeMirror(document.getElementById("codePython"), {
     mode: "python",

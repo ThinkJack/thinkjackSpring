@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
 <html>
 <head>
     <title>EditPage</title>
@@ -10,6 +9,29 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
+        .unit_test {
+            display: block;
+            padding: 6px;
+        }
+        .test_case {
+            overflow-x: scroll;
+            height: 400px;
+            /*display: flex;*/
+        }
+        .input_box{
+            width: 100px;
+        }
+        .btn_case{
+            margin: 0px 2px;
+        }
+        .case{
+            margin-top: 2px;
+        }
+        .test_buttons{
+            margin-bottom: 6px;
+        }
+
+
         .code_layout {
             width: 100%;
         }
@@ -29,9 +51,11 @@
         .CodeMirror {
             height: calc(100% - 62px);
         }
+
         .main_view .console_body {
             bottom: auto;
         }
+
         .unit_test {
             height: 50%;
         }
@@ -39,6 +63,7 @@
         .console_body {
             height: calc(50% - 96px);
         }
+
         /*.console_body{}*/
 
     </style>
@@ -59,15 +84,22 @@
                     <div class="col" id="codeUnitTest"></div>
                 </div>
             </div>
-            <div class="col resize_code layout-ch" ></div>
+            <div class="col resize_code layout-ch"></div>
             <%--결과창--%>
             <div class="col main_view layout" id="layout2">
                 <div class="row unit_test" id="">
-
+                    <div class="col "><p class="h4 text-white code-name">TestCase</p></div>
+                    <div class="col test_buttons">
+                        <button id="delete-all" >Clear</button>
+                        <button id="add-test-case" >AddTestCase</button>
+                        <button id="test-all">TestAll</button>
+                    </div>
+                    <div class="test_case">
+                        
+                    </div>
                 </div>
                 <div class="row resize-console"></div>
                 <div class="row console_body">
-
                     <%--console--%>
                     <div class="row edit-console" id="edit-console">
                         <div class="build col">
@@ -77,7 +109,7 @@
                     </div>
                     <div class="row command-line" id="command-line-view">
                         <span class="arrow">></span>
-                        <input type="text" name="command-line" id="command-line" value="" />
+                        <input type="text" name="command-line" id="command-line" value=""/>
                     </div>
                 </div>
             </div>
@@ -108,14 +140,14 @@
         var pageTitleView = document.getElementById("page-title-view");
         var pageTitleText = document.getElementById("page-title-text");
 
-        $("#pencil").click(function(){
+        $("#pencil").click(function () {
             pageTitleView.style = "display: none;";
             pageTitleText.style = "display: block;";
             document.getElementById("page-title-input").focus();
         });
         //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
         $("#page-title-input").keydown(function (key) {
-            if(key.keyCode == 13) {
+            if (key.keyCode == 13) {
                 changeTitle();
             }
         });
@@ -125,7 +157,7 @@
             changeTitle();
         });
 
-        var changeTitle = function(){
+        var changeTitle = function () {
             var title = document.getElementById("page-title-input");
             document.getElementById("page-title").innerHTML = title.value;
             pageTitleView.style = "display: block;";
@@ -168,66 +200,6 @@
         });
     });
 
-    //Setting Behavior부분 함수
-    $(function () {//---------------------------- option button 변경시
-        $('input[type=radio][name=gridRadios]').change(function () {
-            alert(222);
-
-            //현재 리스트박스의 탭사이즈 값 가져오기.
-            var e = document.getElementById("tab-size");
-            var strUser = e.options[e.selectedIndex].value;
-
-            // var sp = this.value;
-            if (this.value === "option1") {
-                // alert('a');
-
-                codeHtml.setOption("extraKeys", {
-                    Tab: function (cm) {
-                        var spaces = Array(cm.getOption("indentUnit") +
-                            parseInt(strUser)).join(" ");
-                        cm.replaceSelection(spaces);
-                    }
-                });
-            } else if (this.value === "option2") { // have to: option1 갖다오면 백탭안됨
-                // alert('b');
-                // codeHtml.setOption("indentWithTabs", true);
-                codeHtml.setOption("tabSize", strUser);
-                codeCss.setOption("tabSize", strUser);
-                codeJavaScript.setOption("tabSize", strUser);
-                console.log(strUser);
-
-            }
-        });
-    });
-
-
-    $(function () {
-        if ($('#autoPreview').is(':checked')) {//첫 로딩시 상태
-        } else {
-            var runstyle = document.getElementById("run");
-            runstyle.style = "visibility: visible;"
-        }
-
-        $("#autoPreview").click(function () { //클릭시 상태
-            var runstyle = document.getElementById("run");
-            if (this.checked) {
-                runstyle.style = "visibility: hidden;"
-            } else {
-                runstyle.style = "visibility: visible;"
-            }
-        });
-    });
-
-
-    $(function () {
-        $("#run").click(function () { // run button 실행
-            updatePreview();
-        });
-    });
-
-    // command line  enter 입력시 이벤트
-    //    var makeConsole = new Console();
-
     $(function () {
         $("#command-line").keyup(function (e) {
             if (e.keyCode === 13) {
@@ -237,13 +209,13 @@
         });
     });
 
-    var consoleView = function(str) {
+    var consoleView = function (str) {
         var commandLineValue = str;
         //console.log() 입력시 문자열 작업(정규식)
         var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
         var temp = commandLineValue.match(reg);
 
-        for(i in temp){
+        for (i in temp) {
             temp[i] = temp[i].replace("console.log(", "");
             temp[i] = temp[i].replace("console.log(", "");
             temp[i] = temp[i].replace("'", "");
@@ -252,15 +224,15 @@
             temp[i] = temp[i].replace("\")", "");
         }
 
-        try{
+        try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
-            if(temp !== null){
-                for(i in temp){
+            if (temp !== null) {
+                for (i in temp) {
                     editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
                 }
             }
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
-        }catch(err){
+        } catch (err) {
             editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
         }
 
@@ -268,24 +240,6 @@
     };
 
 
-    //footer
-    //console 버튼 누를때
-    $(function() {
-        $("#console-button").click(function() {
-            if(editConsole.style.display === "none"){
-                editConsole.style.display = "block";
-                commandLine.style.display = "block";
-
-                jQuery("#console-button").addClass("btn_active");
-
-            }else{
-                editConsole.style.display = "none";
-                commandLine.style.display = "none";
-                jQuery("#console-button").removeClass("btn_active");
-
-            }
-        });
-    });
     $(function () {
         $(window).resize(function () {
             //            창크기 width 제한
@@ -294,7 +248,34 @@
             }
         });
     });
+    $(document).on("click","#add-test-case",function () {
 
+       var testCases =
+           "<div class='row case'>" +
+           "input : " +
+           "<input type='text' class='input_box inputs' />" +
+           "ouput : " +
+           "<input type='text' class='input_box output' />" +
+           "<button class='btn_case test_one'>TEST</button>" +
+           "<button class='btn_case delete_case'>DELETE</button>" +
+           "</div>";
+       $(".test_case").append(testCases);
+    });
+    $(document).on("click",".test_one",function () {
+
+    });
+
+    $(document).on("click",".delete_case",function () {
+        $(this).parent().remove();
+    });
+
+    $(document).on("click","#delete-all",function () {
+        $(".test_case").empty();
+    });
+    $(document).ready(function () {
+        editConsole.style.display = "block";
+        commandLine.style.display = "block";
+    })
 
 </script>
 </body>
