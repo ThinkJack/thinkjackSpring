@@ -10,32 +10,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
 .mainNavbarEdit{
-    padding-top: 5%;
+    margin-top: 60px;
 }
 
         .navbar {
             margin-bottom: 0;
-            background-color: #0C1021;
             z-index: 9999;
             border: 0;
-            font-size: 15px !important;
+            font-size: 20px !important;
             line-height: 1.42857143 !important;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             border-radius: 0;
-
-
         }
 
         .navbar li a, .navbar .navbar-brand {
-            color: #fff !important;
+            color: #0C1021 !important;
         }
         .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #f4511e !important;
+            color: #0C1021!important;
             background-color: #fff !important;
         }
         .navbar-default .navbar-toggle {
             border-color: transparent;
             color: #fff !important;
+        }
+        .iconBtn
+        { border-radius: 0;
+
         }
         @media screen and (max-width: 768px) {
             .col-sm-4 {
@@ -53,14 +54,15 @@
 
 <nav class="navbar navbar-default  navbar-fixed-top">
     <div class="row mainNavbarEdit">
-        <div class="col-lg-2" style="background-color: #aa0000"></div>
+        <div class="col-lg-2"></div>
         <div class="col-lg-3" style="background-color: #00a8c6">
             <a class="navbar-brand" href="#mainPage">Logo</a>
         </div>
-        <div class="col-lg-5" style="background-color: #2E8B57">
+        <div class="col-lg-5" >
             <form class="form-inline my-2 my-lg-0"  style="text-align: right">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button  class="btn btn-outline-secondary iconBtn" type="submit">로그인</button>
+                <button class="btn btn-outline-light iconBtn" type="submit">Mypage</button>
+                <button class="btn btn-outline-dark iconBtn" type="submit">ㄴㄴ</button>
             </form>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar" >
@@ -78,7 +80,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-2" style="background-color: #aa0000"></div>
+        <div class="col-lg-2"></div>
     </div>
 </nav>
 

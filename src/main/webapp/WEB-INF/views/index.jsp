@@ -20,6 +20,15 @@
       /*font-family: Helvetica, sans-serif;*/
       transition: all 0.3s ease-in-out
     }
+
+    a{
+      color:#fff;
+    }
+
+    a:hover{
+
+      text-decoration: none;
+    }
     /*box있는 container*/
     .image {
       /*background-color:#aa0000;*/
@@ -172,8 +181,8 @@
         </div>
       </div>
       <div class="box">
-        <div class=rightBt href="/main">
-          Main
+        <div class=rightBt >
+          <a href="/main">Main</a>
         </div>
       </div>
     </div>

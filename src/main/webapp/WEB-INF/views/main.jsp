@@ -1,62 +1,127 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-
 <style>
-<%--전체적으로 padding-top값 존재--%>
-    .container-fluid{
-        padding-top: 220px;
-        height: 850px;
+    <%--전체적으로 padding-top값 존재--%>
+    .maginPage{
+        height: 700px;
     }
 
     .logo{
         width:100%;
         height:100%;
-
     }
     .mainText{
         width:100%;
-        height:15%;
-     background-color: #5A5CAD
+        height:30%;
+        background-color: #5A5CAD;
     }
 
     .textPage{
         width:100%;
-        height:100%;
+        height:70%;
         background-color: #2A00FF;
     }
 
     img{
-        width: 100%;
-        height: 100%;
+        width: 450px;
+        height: 450px;
+        Position: relative;
+        left: -15px;
+    }
+    .deaf{
+        height: 165px;
+        /*background-color: #aa0000;*/
+    }
+    .pageBox{
+        height: 700px;
     }
 </style>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
+
+
 <%--Main--%>
-<div id="main" class="container-fluid">
-    <div class="row ">
-        <div class="col-lg-2" style="background-color: #aa0000"></div>
+<div class="container-fluid " >
+    <div class="deaf" id="main"></div>
+    <div class="row maginPage"  >
+    <div class="col-lg-2 pageBox"></div>
+    <div class="col-lg-3" style="background-color: #00a8c6">
+        <div class="logo">
+            <img src="/resources/images/logo.png" >
+        </div>
+    </div>
+    <div class="col-lg-5" >
+        <div class="mainText">
+
+        </div>
+        <div class="textPage">
+
+        </div>
+    </div>
+    <div class="col-lg-2 pageBox"> </div>
+</div>
+
+
+    <div class="deaf" id="editor"></div>
+    <div class="row maginPage" >
+        <div class="col-lg-2 pageBox"></div>
+        <div class="col-lg-3" style="background-color: #00a8c6">
+            <div  class="logo">
+                <img src="/resources/images/slid2.jpg" >
+            </div>
+        </div>
+        <div class="col-lg-5" >
+            <div class="mainText">
+
+            </div>
+            <div class="textPage">
+
+            </div>
+        </div>
+        <div class="col-lg-2 pageBox"> </div>
+    </div>
+
+
+
+    <div class="deaf" id="test"></div>
+    <div class="row maginPage" >
+        <div class="col-lg-2 pageBox"></div>
         <div class="col-lg-3" style="background-color: #00a8c6">
             <div  class="logo">
                 <img src="/resources/images/logo.png" >
             </div>
         </div>
-        <div class="col-lg-5" style="background-color: #2E8B57">
+        <div class="col-lg-5" >
             <div class="mainText">
-                <h2>main navbar 공간</h2>
+
             </div>
             <div class="textPage">
-                <h2>??</h2>
-            </div>
-            <div class="mainText">
-                <h2>??</h2>
+
             </div>
         </div>
-        <div class="col-lg-2" style="background-color: #aa0000">      <h2>이미지</h2></div>
+        <div class="col-lg-2 pageBox"> </div>
+    </div>
+
+
+    <div class="deaf" id="board"></div>
+    <div class="row maginPage" >
+        <div class="col-lg-2 pageBox"></div>
+        <div class="col-lg-3" style="background-color: #00a8c6">
+            <div  class="logo">
+                <img src="/resources/images/intro1.jpg" >
+            </div>
+        </div>
+        <div class="col-lg-5" >
+            <div class="mainText">
+
+            </div>
+            <div class="textPage">
+
+            </div>
+        </div>
+        <div class="col-lg-2 pageBox"> </div>
     </div>
 </div>
-
-
-
 
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
