@@ -40,8 +40,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
         HttpSession session = request.getSession();
 
         if(session.getAttribute("login")==null){
-            logger.info("current user is not logined");
-            System.out.println("current user is not logined");
+           // logger.info("current user is not logined");
+           // System.out.println("current user is not logined");
             saveDest(request);
 
             response.sendRedirect("/user/login");

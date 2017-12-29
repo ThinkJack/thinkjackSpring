@@ -182,7 +182,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
+	public void loginPOST(LoginDTO dto, HttpSession session, Model model,RedirectAttributes rttr) throws Exception{
 		System.out.println("loginPost");
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
@@ -191,6 +191,7 @@ public class UserController {
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+		rttr.addFlashAttribute("msg","로그인 되었습니다.");
 		System.out.println(vo);
 
 	}
@@ -226,7 +227,7 @@ public class UserController {
 
 			}
 		}
-		return "user/logout";
+		return "/main";
 	}
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
 	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
@@ -234,26 +235,34 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.POST)
-	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model) throws Exception{
+	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
 		UserVO vo = service.login(dto);
 		if(vo == null) {
 			return "user/modifyAuthCheck";
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+		//model.addAttribute("modify",true);
+		rttr.addFlashAttribute("modify",true);
 
-		return "user/modifyUser";
+
+		return "redirect:/user/modifyUser";
 
 	}
 
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET)
 	public void ModifyUserGet(UserVO user,Model model) throws Exception{
 
+
 	}
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
-	public String ModifyUserPost(UserVO user,Model model) throws Exception{
-		service.modifyUser(user);
-		return "redirect:/";
+	public String ModifyUserPost(UserVO user,Model model,RedirectAttributes rttr,HttpSession session) throws Exception{
+		UserVO vo=service.modifyUser(user);
+		//System.out.println("modifyUser"+vo);
+		session.setAttribute("login",vo);
+		//model.addAttribute("login",vo);
+		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
+		return "redirect:/main";
 	}
 	@RequestMapping (value="/deleteUser",method = RequestMethod.GET)
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{

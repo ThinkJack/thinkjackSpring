@@ -28,6 +28,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script>
+        var msg=Boolean("${msg}");
+        if(msg){
+            alert("${msg}");
+        }
+
         $(document).ready(function() {
             var headerimg;
             var fullName="${login.userProfile}";
@@ -64,6 +69,7 @@
             <div>${login.userName}</div>
             <button onclick="location.href='/user/login'">로그인</button>
             <button onclick="location.href='/user/logout'">로그아웃</button>
+            <button onclick="location.href='/user/modifyUser'">정보변경</button>
             <!--로그인 했을때-->
             <!--<button href="">로그인</button>-->
             <!--<button href="" style="padding-left:10px;">버튼2</button>-->

@@ -29,6 +29,13 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/upload.js"></script>
     <script>
+
+        //수정 권한 확인
+        var check=Boolean(${modify});
+        if(!check){
+            self.location = '/user/modifyAuthCheck';
+        }
+
     $(document).ready(function() {
     console.log( "ready!" );
     var imgtest;

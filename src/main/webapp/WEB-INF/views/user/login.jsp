@@ -56,7 +56,7 @@
                 <input type="text" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" >
                 <input type="submit" class="form-control btn btn-primary" value="로그인"/>
 
-                    <a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>
+                    <%--<a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>--%>
 
 
 
@@ -65,6 +65,9 @@
                     <%--<a href="/user/githubLogin">--%>
                      <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
                         <%--</a>--%>
+                        <a class="btn btn-block btn-social btn-google" style="background-color:#1EC800;"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                            <img src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
+                        </a>
                         <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
                             <span class="fa fa-google"></span> Sign in with Google
                         </a>

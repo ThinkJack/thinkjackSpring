@@ -38,7 +38,7 @@ public class UploadFileUtils {
                   String testupload=  savedPath+"/"+savedName;
             uploadedFileName = testupload.replace('\\','/');
                  // System.out.println("testupload: "+testupload);
-                  System.out.println("testupload:replce "+testupload.replace('\\','/'));
+                 // System.out.println("testupload:replce "+testupload.replace('\\','/'));
                   //System.out.println("thumbFile:"+uploadedFileName);
                    // makeThumbnail(uploadPath,saveedPath,saveedName);
 

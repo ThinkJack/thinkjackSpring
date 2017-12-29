@@ -34,9 +34,9 @@ public class UploadController {
     @RequestMapping(value = "/uploadForm",method = RequestMethod.GET)
     public String uploadForm(MultipartFile file, Model model) throws Exception{
 
-        System.out.println("originalName:"+file.getOriginalFilename());
-        System.out.println("size: "+file.getSize());
-        System.out.println("contentType:"+file.getContentType());
+       // System.out.println("originalName:"+file.getOriginalFilename());
+        //System.out.println("size: "+file.getSize());
+       // System.out.println("contentType:"+file.getContentType());
 
         String savedName =
                 uploadFile(file.getOriginalFilename(),file.getBytes());
@@ -55,7 +55,7 @@ public class UploadController {
     @RequestMapping(value = "/uploadAjax",method = RequestMethod.POST, produces = "text/plane;charset=UTF-8")
     public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 
-        System.out.println("originalName:"+file.getOriginalFilename());
+       // System.out.println("originalName:"+file.getOriginalFilename());
 //        System.out.println("size: "+file.getSize());
 //        System.out.println("contentType:"+file.getContentType());
 
@@ -84,7 +84,7 @@ public class UploadController {
         InputStream in = null;
         ResponseEntity<byte[]> entity = null;
 
-        System.out.println("FileName : "+fileName);
+        //System.out.println("FileName : "+fileName);
 
         try{
             String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
