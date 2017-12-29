@@ -2,27 +2,27 @@
 //------------------------------------------------------코드 자동 적용 기능
 
 codeHtml.on("change", function () {
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);}
+        delay = setTimeout(updatePreview, 0);
+    }
 });
 
 codeCss.on("change", function () {
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);}
+        delay = setTimeout(updatePreview, 0);
+    }
 });
 
 codeJavaScript.on("change", function () {
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);}
+        delay = setTimeout(updatePreview, 0);
+    }
 });
 
 codeUnitTest.on("change", function () {
@@ -110,32 +110,31 @@ $(function () {
     var pageTitleView = document.getElementById("page-title-view");
     var pageTitleText = document.getElementById("page-title-text");
 
-    $("#pencil").click(function(){
+    $("#pencil").click(function () {
         pageTitleView.style = "display: none;";
         pageTitleText.style = "display: block;";
         document.getElementById("src-title-input").focus();
     });
     //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
     $("#src-title-input").keydown(function (key) {
-        if(key.keyCode == 13) {
+        if (key.keyCode == 13) {
             changeTitle(this);
         }
     });
     $("#src-title-input").focusout(function (e) {
         changeTitle(this);
     });
-    $("#src-title-modal").keydown(function(){
+    $("#src-title-modal").keydown(function () {
         changeTitle(this);
     })
 
-    var changeTitle = function(el){
-        saveImg.src = "/resources/images/cloud2.png";
-        saveStatus = false;
+    var changeTitle = function (el) {
+        changeSaveImg(2);
         srcTitle = el.value;
         document.getElementById("src-title").innerHTML = srcTitle;
-        if(el.id === "src-title-modal"){
+        if (el.id === "src-title-modal") {
             document.getElementById("src-title-input").value = srcTitle;
-        }else{
+        } else {
             document.getElementById("src-title-modal").value = srcTitle;
         }
         pageTitleView.style = "display: block;";
@@ -145,8 +144,7 @@ $(function () {
 //comments 변경시 등록
 $(function () {
     $("#modal-comment").on("change", function (e) {
-        saveImg.src = "/resources/images/cloud2.png";
-        saveStatus = false;
+        changeSaveImg(2);
         srcComments = this.value;
         document.getElementById("comment-view").value = srcComments;
     });
@@ -224,13 +222,13 @@ $(function () {
     });
 });
 
-var consoleView = function(str) {
+var consoleView = function (str) {
     var commandLineValue = str;
     //console.log() 입력시 문자열 작업(정규식)
     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
     var temp = commandLineValue.match(reg);
 
-    for(i in temp){
+    for (i in temp) {
         temp[i] = temp[i].replace("console.log(", "");
         temp[i] = temp[i].replace("console.log(", "");
         temp[i] = temp[i].replace("'", "");
@@ -239,15 +237,15 @@ var consoleView = function(str) {
         temp[i] = temp[i].replace("\")", "");
     }
 
-    try{
+    try {
         editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
-        if(temp !== null){
-            for(i in temp){
+        if (temp !== null) {
+            for (i in temp) {
                 editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
             }
         }
         editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
-    }catch(err){
+    } catch (err) {
         editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
     }
 
@@ -257,15 +255,15 @@ var consoleView = function(str) {
 
 //footer
 //console 버튼 누를때
-$(function() {
-    $("#console-button").click(function() {
-        if(editConsole.style.display === "none"){
+$(function () {
+    $("#console-button").click(function () {
+        if (editConsole.style.display === "none") {
             editConsole.style.display = "block";
             commandLine.style.display = "block";
 
             jQuery("#console-button").addClass("btn_active");
 
-        }else{
+        } else {
             editConsole.style.display = "none";
             commandLine.style.display = "none";
             jQuery("#console-button").removeClass("btn_active");
@@ -299,7 +297,7 @@ $(function () {
     $("#left-layout").click(function () {
         codeMain.style = "height: calc(100% - 9px);";
         iframeBody.style = "height: calc(100% - 50px);";
-        layout2,style = "height: 100%;";
+        layout2, style = "height: 100%;";
         layout1.className = "col-4 layout";
         resizeView.className = "col resize_view";
         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
@@ -307,11 +305,11 @@ $(function () {
         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
 
-        for(i in codeMirrorLayout) {
+        for (i in codeMirrorLayout) {
             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
         }
 
-        for(i in codeLayout){
+        for (i in codeLayout) {
             codeLayout[i].style = "width: 100%;";
         }
     });
@@ -319,7 +317,7 @@ $(function () {
     $("#top-layout").click(function () {
         codeMain.style = "height: 100%;";
         iframeBody.style = "height: calc(100% - 417px);";
-        layout2,style = "height: calc(100% - 417px);";
+        layout2, style = "height: calc(100% - 417px);";
         layout1.className = "row layout";
         resizeView.className = "row resize_view";
         resizeView.style = "height:5px; max-width: 100%; cursor: row-resize;";
@@ -327,11 +325,11 @@ $(function () {
         resizeCode1.style = "max-width: 5px; height: ; cursor: col-resize;";
         resizeCode2.style = "max-width: 5px; height: ; cursor: col-resize;";
 
-        for(i in codeMirrorLayout){
+        for (i in codeMirrorLayout) {
             codeMirrorLayout[i].style = "height: 300px";
         }
 
-        for(i in codeLayout){
+        for (i in codeLayout) {
             codeLayout[i].style = "width: 33.1%;";
         }
     });
@@ -339,7 +337,7 @@ $(function () {
     $("#right-layout").click(function () {
         codeMain.style = "height: calc(100% - 9px);";
         iframeBody.style = "height: calc(100% - 50px);";
-        layout2,style = "height: 100%;";
+        layout2, style = "height: 100%;";
         layout1.className = "col-4 order-12 layout";
         resizeView.className = "col order-6 resize_view";
         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
@@ -347,11 +345,11 @@ $(function () {
         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
 
-        for(i in codeMirrorLayout){
+        for (i in codeMirrorLayout) {
             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
         }
 
-        for(i in codeLayout){
+        for (i in codeLayout) {
             codeLayout[i].style = "width: 100%;";
         }
     });
@@ -359,7 +357,7 @@ $(function () {
 
 
 //화면 영역 조절관련 function
-jQuery("#resize-code-1").mousedown(function(e) {
+jQuery("#resize-code-1").mousedown(function (e) {
     e.preventDefault();
     dragging = true;
     var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
@@ -371,7 +369,7 @@ jQuery("#resize-code-1").mousedown(function(e) {
         console.log(cssBuild.offsetWidth);
         if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
 
-        }else{
+        } else {
             htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
             cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
         }
@@ -379,7 +377,7 @@ jQuery("#resize-code-1").mousedown(function(e) {
     });
 });
 
-jQuery("#resize-code-2").mousedown(function(e) {
+jQuery("#resize-code-2").mousedown(function (e) {
     e.preventDefault();
     dragging = true;
     var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
@@ -396,7 +394,7 @@ jQuery("#resize-code-2").mousedown(function(e) {
     });
 });
 
-jQuery("#resize-view").mousedown(function(e) {
+jQuery("#resize-view").mousedown(function (e) {
     e.preventDefault();
     dragging = true;
     var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
@@ -404,8 +402,8 @@ jQuery("#resize-view").mousedown(function(e) {
     $(window).mousemove(function (e) {
         cifl = startP - e.pageY;
 //                if (-350 < cifl && cifl < 350) {
-        for(i in codeMLayout){
-            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl)+ "px);";
+        for (i in codeMLayout) {
+            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
         }
 
         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
@@ -413,8 +411,8 @@ jQuery("#resize-view").mousedown(function(e) {
 
     $('.iframeWrapper').mousemove(function (e) {
         cifl = startP - e.pageY;
-        for(i in codeMLayout){
-            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl)+ "px);";
+        for (i in codeMLayout) {
+            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
         }
 
         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
@@ -471,37 +469,11 @@ $(function () { //--자동저장
     }
 });
 
-$("#saveCode").click(function (e) {
-
-
-    saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
-
-    if(!saveStatus){
-        $.ajax({
-            type: "post",
-            url : "/editRest/save",
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            dataType: 'text',
-            data : JSON.stringify({
-                srcId: srcId,
-                srcComments: srcComments,
-                srcTitle: srcTitle,
-                srcHtml: codeHtml.getValue(),
-                srcCss: codeCss.getValue(),
-                srcJavaScript: codeJavaScript.getValue()
-            }),
-            success : function(getLink){
-                if(srcId === ""){
-                    location.replace("/edit/editPage/" + getLink);
-                }
-                saveStatus = true;
-
-                alert("저장이 되었습니다.");
-            }
-        });
+$("#login").click(function (e) {
+    if (window.sessionStorage) {
+        if (srcId !== "") {
+            sessionStorage.setItem('srcId', srcId);
+        }
     }
+    self.location = '/user/login'
 });

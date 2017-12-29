@@ -14,7 +14,6 @@
 <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
-
 <html>
 <head>
     <title>EditPage</title>
@@ -24,7 +23,6 @@
     <%--<meta http-equiv="Cache-Control" content="no-cache"/>--%>
     <%--<meta http-equiv="Expires" content="0"/>--%>
     <%--<meta http-equiv="Pragma" content="no-cache"/>--%>
-
 
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
@@ -90,7 +88,9 @@
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
     <script>
+
         srcId = '<c:out value="${SrcVO.srcId}" default=""/>';
+        srcWriter = '<c:out value="${SrcVO.srcWriter}" default="0"/>';
         srcWriterName = '<c:out value="${SrcVO.srcWriterName}" default="CAPTAIN ANONYMOUS"/>';
         srcComments = '<c:out value="${SrcVO.srcComments}" default=""/>';
         srcTitle = '<c:out value="${SrcVO.srcTitle}" default="Untitled"/>';
@@ -103,12 +103,15 @@
         <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
         <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
+
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
-            document.getElementById("src-title-modal").value = srcTitle;
+            <c:if test="${login.userId eq SrcVO.srcWriter}">
+                document.getElementById("src-title-modal").value = srcTitle;
+                document.getElementById("modal-comment").value = srcComments;
+            </c:if>
             document.getElementById("src-writer").innerHTML = srcWriterName;
             document.getElementById("src-title-reply-modal").innerHTML = "\<h4\>" + srcWriterName + "\</h4\>";
-            document.getElementById("modal-comment").value = srcComments;
             document.getElementById("comment-view").value = srcComments;
 
             codeHtml.setValue(strHtml);
@@ -125,6 +128,10 @@
             }
         });
 
+        $("#saveCode").click(function (e) {
+            codeSave();
+        });
+
         function escapeHtml(text) {
             return text
                 .replace(/&lt;/gi, "<")
@@ -137,6 +144,45 @@
                 .replace(/&amp;/gi, "&")
                 .replace(/&#038;/gi, "&")
                 .replace(/&#039;/gi, "'");
+        }
+
+
+        function codeSave() {
+            saveImg.src = "/resources/images/cloud1.png";
+            srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
+
+            if (!saveStatus) {
+                $.ajax({
+                    type: "post",
+                    url: "/edit/save",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-HTTP-Method-Override": "POST"
+                    },
+                    dataType: 'text',
+                    data: JSON.stringify({
+                        srcId: srcId,
+                        srcComments: srcComments,
+                        srcWriter: srcWriter,
+                        srcTitle: srcTitle,
+                        srcHtml: codeHtml.getValue(),
+                        srcCss: codeCss.getValue(),
+                        srcJavaScript: codeJavaScript.getValue()
+                    }),
+                    success: function (getLink) {
+                        if(srcId === ""){
+                            document.cookie = getLink + "=";
+                        }
+
+                        if (srcId === "" || (srcWriter === "0" && "${login.userId}" !== "")) {
+                            location.replace("/edit/editPage/" + getLink);
+                        }
+                        saveStatus = true;
+
+//                        alert("저장이 되었습니다.");
+                    }
+                });
+            }
         }
     </script>
 </body>

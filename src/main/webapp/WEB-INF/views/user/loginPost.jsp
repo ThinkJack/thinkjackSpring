@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <body>
-  
-<script type="text/javascript">
+<body>
 
-self.location = '${dest}';
+<script type="text/javascript">
+    var srcId = sessionStorage.getItem('srcId');
+    sessionStorage.removeItem('srcId');
+    if (srcId !== null) {
+        self.location = '${dest}' + "/" + srcId;
+    } else {
+        self.location = '${dest}';
+    }
 </script>
-  
-  </body>
+
+</body>
 </html>

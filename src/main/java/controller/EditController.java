@@ -4,6 +4,8 @@ import domain.BoardVO;
 import domain.SrcVO;
 import domain.ReplyVO;
 import domain.SrcReplyVO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,6 +49,14 @@ public class EditController {
         return "forward:/edit/editPage";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public ResponseEntity<String> srcSave(HttpServletRequest request, HttpServletResponse response, @RequestBody SrcVO vo) throws Exception{
+
+        ResponseEntity<String> entity = new ResponseEntity<>(service.saveSrc(request, response, vo), HttpStatus.OK);
+
+        return entity;
+    }
 
     //----------------------------------------------------------------------
 

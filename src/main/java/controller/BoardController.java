@@ -12,6 +12,7 @@ import service.BoardService;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/board/*")
@@ -74,12 +75,12 @@ public class BoardController {
         BoardLikeVO vo = new BoardLikeVO();
         vo.setBoardId(boardId);
         vo.setUserId(userid);
-        System.out.println(vo.getUserId()+ "userId??");
+        System.out.println(vo.getUserId() + "userId??");
 
         int boardlike = service.getBoardLike(vo);
-        System.out.println(boardlike+"boardLike숫자");
+        System.out.println(boardlike + "boardLike숫자");
 
-        model.addAttribute("heart",boardlike);
+        model.addAttribute("heart", boardlike);
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -130,17 +131,22 @@ public class BoardController {
 
         System.out.println(heart);
 
-        if(heart >= 1) {
+        if (heart >= 1) {
             service.deleteBoardLike(boardLikeVO);
-            heart=0;
+            heart = 0;
         } else {
             service.insertBoardLike(boardLikeVO);
-            heart=1;
+            heart = 1;
         }
 
         return heart;
 
     }
 
+    //--------------------------------------------------------------------------------------------------src게시판 관련 코드들
 
+    @RequestMapping(value = "/srcList", method = RequestMethod.GET)
+    public void srcList(HttpServletRequest request) throws Exception {
+
+    }
 }

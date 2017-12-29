@@ -15,11 +15,13 @@
                     Console
                 </a>
             </li>
-            <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal">
-                    Reply
-                </a>
-            </li>
+            <c:if test="${SrcVO.srcId ne null}">
+                <li class="nav-item active">
+                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal">
+                        Reply
+                    </a>
+                </li>
+            </c:if>
             <li class="nav-item active">
                 <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts

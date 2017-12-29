@@ -275,7 +275,7 @@ var resizeCode1 = document.getElementById("resize-code-1");
 var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcComments, srcTitle, srcWriterName, srcRegdate ,srcUpdate;
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate;
 var strHtml, strCss, strJs;
 var curhref = location.href;
 
@@ -284,7 +284,6 @@ var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
 var layoutMode = 0; //0 - top, 1 - left 2 - right
 var dragging = false;
 // var session = session.getAttribute("login");
-
 
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
@@ -327,7 +326,6 @@ function updatePreview() {
 }
 
 
-
 //Folding
 // codeHtml.foldCode(CodeMirror.Pos(0, 0));
 // codeHtml.foldCode(CodeMirror.Pos(34, 0));
@@ -336,19 +334,21 @@ function updatePreview() {
 // codeCss.foldCode(CodeMirror.Pos(34, 0));
 
 
-
 //autoFormatSelection, commentSelection
 // CodeMirror.commands["selectAll"](codeHtml);
 
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
+
 function getSelectedRange1() {
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
+
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
+
 function getSelectedRange3() {
     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 }
@@ -364,6 +364,7 @@ function autoFormatSelection() {
     var range3 = getSelectedRange2();
     codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
+
 //--ctrl+/
 // function commentSelection(isComment) {
 //     var range = getSelectedRange();
@@ -371,4 +372,12 @@ function autoFormatSelection() {
 // codeCss.autoFormatRange(range.from, range.to);
 // codeJavaScript.autoFormatRange(range.from, range.to);
 // }
+
+//저장 이미지 변경
+function changeSaveImg(idx) {
+    if (saveImg !== null) {
+        saveImg.src = "/resources/images/cloud" + idx + ".png";
+        saveStatus = false;
+    }
+}
 

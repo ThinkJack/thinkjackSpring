@@ -2,16 +2,24 @@ package service;
 
 import domain.SrcVO;
 import domain.UserVO;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
 import persistence.UserDAO;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SrcServiceImpl implements SrcService {
@@ -25,10 +33,19 @@ public class SrcServiceImpl implements SrcService {
     @Override
     public SrcVO readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
 
-        UserVO userVo = new UserVO();
+        HttpSession session = request.getSession();
+        UserVO userVo = new UserVO();;
         String uri = request.getRequestURI();
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
+
+        if(session.getAttribute("login") instanceof UserVO){
+            userVo = (UserVO) session.getAttribute("login");
+            int chk = vo.getSrcWriter();
+            if (chk == 0) {
+                srcdao.updateSrcWriter(userVo.getUserId(), srcId);
+            }
+        }
 
         try {
             vo = srcdao.selectSrcOne(srcId);
@@ -48,17 +65,44 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public String saveSrc(HttpServletRequest request, SrcVO vo)throws Exception{
+    public String saveSrc(HttpServletRequest request, HttpServletResponse response, SrcVO vo)throws Exception{
         String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
         boolean srcEmpty = false;
         String filePath;
 
+        HttpSession session = request.getSession();
+        Object userVo = session.getAttribute("login");
+
+        System.out.println(vo.getSrcWriter());
+        if(vo.getSrcWriter() == 0){
+            if (userVo != null) {
+                if(userVo instanceof UserVO) {
+                    vo.setSrcWriter(((UserVO) userVo).getUserId());
+
+                    System.out.println(vo.getSrcWriter());
+                }
+            }
+        }
+
         if(srcId == "") {
             //srcID값 작업
             srcEmpty = true;
+
             do {
                 srcId = randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
+            // cookie 작업
+//            String cookNam;
+//            Cookie[] cookies = request.getCookies();
+//            if (cookies != null && cookies.length > 0) {
+//                for(int i=1; i<cookies.length; i++){
+//                    cookNam = cookies[i].getName();
+//                    if ((!cookNam.equals(srcId))) {
+//                        Cookie cookie = new Cookie(srcId, "");
+//                        response.addCookie(cookie);
+//                    }
+//                }
+//            }
         }
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;

@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class SrcDAOImpl implements SrcDAO {
@@ -34,5 +36,11 @@ public class SrcDAOImpl implements SrcDAO {
         return sqlSession.selectOne(srcMapper + ".selectSrcOne", srcId);
     }
 
-
+    @Override
+    public void updateSrcWriter(int srcWriter, String srcId) {
+        Map map = new HashMap<>();
+        map.put("srcWriter", srcWriter);
+        map.put("srcId", srcId);
+        sqlSession.update(srcMapper + ".updateSrcWriter", map);
+    }
 }
