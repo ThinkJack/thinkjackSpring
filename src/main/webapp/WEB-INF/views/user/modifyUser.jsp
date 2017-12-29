@@ -25,6 +25,10 @@
         form{
             z-index:1;
         }
+        div p{
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/upload.js"></script>
@@ -52,20 +56,28 @@
 
     });
     </script>
+
+
+
+
+
 </head>
   <body>
   <h3>Profile Image</h3>
   <div class="fileDrop">
       <div class="uploadedList"></div>
   </div>
-
+  <input type='file' id="imgInp" />
+  <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
   <form class="modifyUser" name="login" action="/user/modifyUser" method="post">
-
       <input type="hidden" name="userId" value="${login.userId}" readonly/>
       아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><br>
       이름 : <input type="text" name="userName" value="${login.userName}"/><br>
       <input type="text" name="test" value="${login.userProfile}" /><br>
       <input type="hidden" id="userProfile" name="userProfile">
+
+
+
       <input type="submit" value="정보변경"/>
       <input type="reset" value="취소"/>
      <div>
@@ -118,6 +130,27 @@
           // i 는 정규식의 대소문자 구별 없다는 표현
           var pattern = /jpg$|gif$|png$|jpeg$/i;
           return fileName.match(pattern);
+      }
+
+
+      $(function() {
+          $("#imgInp").on('change', function(){
+              readURL(this);
+          });
+      });
+
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  str = "<div>" + "<img style='width:300px;height:200px;' src='" + e.target.result + "'/>" + "</div>";
+                  console.log();
+                  $(".uploadedList").empty();
+                  $(".uploadedList").append(str);
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
       }
   </script>
   </body>
