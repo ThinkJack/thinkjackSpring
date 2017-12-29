@@ -76,12 +76,12 @@ public class ReplyController {
 
     //좋아요 부분
     @ResponseBody
-    @RequestMapping(value = "/heart/{replyId}/{replyHeart}", method = RequestMethod.POST)
+    @RequestMapping(value ="/heart/{replyId}/{replyHeart}", method = RequestMethod.POST)
     public int replyHeart(HttpServletRequest httpRequest,
                             @PathVariable int replyId,
                           @PathVariable int replyHeart) throws Exception {
 
-//        System.out.println(replyHeart);
+        System.out.println(replyHeart);
         int reHeart= replyHeart;
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 

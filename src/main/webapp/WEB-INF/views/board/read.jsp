@@ -108,7 +108,7 @@
                  <%--<div class="registerReply"  >--%>
                 <div class="registerReply">
                     <span class="badge">대댓글</span>
-                    <h2 class="replyId">{{ replyVo.replyId}} </h2>
+                    <h2 class="replyId">{{ replyVo.replyId}}</h2>
                     {{#if reHeart}}
                         <div style="text-align: right;">
                             <a class="replyHeartBtn btn btn-outline-dark " name=1>
@@ -140,7 +140,7 @@
                     <span class="badge">댓글</span>
                      <%--댓글 부분--%>
                     <%--replyId 불러오기 위해 필요한 부분--%>
-                    <h2 class="replyId">{{ replyVo.replyId}} </h2>
+                    <h2 class="replyId">{{replyVo.replyId}}</h2>
                     <input  class="replyHeart" value="{{reHeart}}">
                      {{#if reHeart}}
                     <%--reHeart값이 있을떄--%>
@@ -155,11 +155,11 @@
                         <a class="replyHeartBtn btn btn-outline-dark " name=0>
                              <img class="reHeart" src="/resources/images/like1.png">
                         </a>
-                        <h1 > {{replyVo.replyLikeCnt}}</h1>
+                        <h1 >{{replyVo.replyLikeCnt}}</h1>
                     </div>
                     {{/if}}
                     <%--replyId와 replyWriter 나타나는 부분--%>
-                    <h3 class="timeline-header">{{ replyVo.replyWriter}}</h3>
+                    <h3 class="timeline-header">{{replyVo.replyWriter}}</h3>
                 <%--입력된 댓글 text부분--%>
                       <input class="replyText" readonly=readonly value="{{replyVo.replyText}}"> </input>
                     <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
@@ -468,10 +468,10 @@
 //  자바스크립트 객체 형태로 전달
 
         var heart_replyid = $(this).parent().parent().find('h2').text();
-        var heart =  $(this).prop('name');
+        var heart = $(this).prop('name');
         var sendLike = {'replyId':heart_replyid,'replyHeart': heart};
-
-console.log($(this).parent().parent().find('h2').text()+" replyId"+$(this).prop('name')+"name값");
+//
+console.log('/replies/heart/'+heart_replyid+'/'+heart);
 
         $.ajax({
             url :'/replies/heart/'+heart_replyid+'/'+heart,
