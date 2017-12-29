@@ -6,7 +6,7 @@
     <style>
         .fileDrop{
             z-index: 8;
-            width:30%;
+            width:300px;
             height:200px;
             border:1px solid black;
         }
@@ -27,7 +27,24 @@
         }
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/resources/upload.js"></script>
+    <script>
+    $(document).ready(function() {
+    console.log( "ready!" );
+    var imgtest;
+    var fullName="${login.userProfile}";
+    if(fullName!=="") {
+        imgtest = getFileInfo(fullName);
+        console.log(imgtest);
+        str = "<div>" + "<img style='width:300px;height:200px;' src=" + imgtest + "/>" + "</div>";
+    }else{
+        str = "<div>" + "<img style='width:300px;height:200px;' src='/resources/images/123.gif'/>" + "</div>";
+    }
+    $(".uploadedList").append(str);
 
+
+    });
+    </script>
 </head>
   <body>
   <h3>Profile Image</h3>
@@ -38,8 +55,9 @@
   <form class="modifyUser" name="login" action="/user/modifyUser" method="post">
 
       <input type="hidden" name="userId" value="${login.userId}" readonly/>
-      아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><p>
-      이름 : <input type="text" name="userName" value="${login.userName}"/><p>
+      아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><br>
+      이름 : <input type="text" name="userName" value="${login.userName}"/><br>
+      <input type="text" name="test" value="${login.userProfile}" /><br>
       <input type="hidden" id="userProfile" name="userProfile">
       <input type="submit" value="정보변경"/>
       <input type="reset" value="취소"/>
@@ -77,7 +95,7 @@
                   var str="";
 
                   if(checkImageType(data)){
-                      str="<div>"+"<img style='width:100%;height:200px;' src='http://localhost:8080/displayFile?fileName="+data+"'/>"+"</div>";
+                      str="<div>"+"<img style='width:300px;height:200px;' src='http://localhost:8080/displayFile?fileName="+data+"'/>"+"</div>";
                   }else{
                       str="<script>"+"alert('이미지 파일 아닙니다. JPG | GIF |')"+"<\/script>";
                   }

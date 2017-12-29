@@ -18,7 +18,8 @@ values(#{userEmail}, #{userPassword}, #{userName})
 
 select user_email userEmail,
         user_id userId,
-        user_name userName
+        user_name userName,
+        user_profile userProfile
 from tbl_user
   where user_email = #{userEmail}
  and user_password = #{userPassword}

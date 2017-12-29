@@ -26,6 +26,31 @@
     <!--아이콘-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script>
+        $(document).ready(function() {
+            var headerimg;
+            var fullName="${login.userProfile}";
+
+            var test =fullName.lastIndexOf("/");
+            fileName= fullName.substring(test+1,fullName.length);
+            path= fullName.substring(0,test+1);
+            console.log(path);
+            console.log(fileName);
+            console.log(test);
+            profileheader =path+"s_"+fileName;
+            console.log(fullName);
+            if(fullName!=="") {
+                headerimg = getFileInfo(profileheader);
+               // console.log(headerimg);
+                hstr = headerimg;
+            }else{
+                hstr = "/resources/images/123.gif";
+            }
+
+            $("#profileHeader").attr("src",hstr);
+        });
+    </script>
 </head>
 
 <!--배경색 변경가능 (class 이름 변경으로 색상 선택 가능)-->
@@ -35,6 +60,8 @@
     <div class="row">
         <div class="col-8"></div>
         <div class="col-4">
+            <img id="profileHeader" src="" style="width:30px;height:30px;" >
+            <div>${login.userName}</div>
             <button onclick="location.href='/user/login'">로그인</button>
             <button onclick="location.href='/user/logout'">로그아웃</button>
             <!--로그인 했을때-->

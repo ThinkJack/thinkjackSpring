@@ -58,11 +58,16 @@
 
                     <a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>
 
-                <a href="/user/googleLogin"><img width="100%" height="50" src="/resources/images/google.png"/></a>
+
+
+                <%--<a href="/user/googleLogin"><img width="100%" height="50" src="/resources/images/google.png"/></a>--%>
                 <div>
                     <%--<a href="/user/githubLogin">--%>
                      <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
                         <%--</a>--%>
+                        <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                            <span class="fa fa-google"></span> Sign in with Google
+                        </a>
                         <a class="btn btn-block btn-social btn-github" href="/user/githubLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-github']);">
                             <span class="fa fa-github"></span> Sign in with GitHub
                         </a>

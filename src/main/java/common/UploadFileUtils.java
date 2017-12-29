@@ -21,11 +21,11 @@ public class UploadFileUtils {
 
         UUID uid = UUID.randomUUID();
 
-        String saveedName = uid.toString() +"_"+originalName;
+        String savedName = uid.toString() +"_"+originalName;
 
-        String saveedPath = calcPath(uploadPath);
+        String savedPath = calcPath(uploadPath);
 
-        File target =new File(uploadPath +saveedPath,saveedName);
+        File target =new File(uploadPath +savedPath,savedName);
 
         FileCopyUtils.copy(fileData,target);
 
@@ -34,9 +34,16 @@ public class UploadFileUtils {
         String uploadedFileName =null;
 
         if(MediaUtils.getMediaType(formatName) !=null){
-            uploadedFileName = makeThumbnail(uploadPath,saveedPath,saveedName);
+            makeThumbnail(uploadPath,savedPath,savedName);
+                  String testupload=  savedPath+"/"+savedName;
+            uploadedFileName = testupload.replace('\\','/');
+                 // System.out.println("testupload: "+testupload);
+                  System.out.println("testupload:replce "+testupload.replace('\\','/'));
+                  //System.out.println("thumbFile:"+uploadedFileName);
+                   // makeThumbnail(uploadPath,saveedPath,saveedName);
+
         }else{
-            uploadedFileName = makeIcon(uploadPath,saveedPath,saveedName);
+            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
         }
 
         return uploadedFileName;
