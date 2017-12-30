@@ -10,6 +10,10 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
+        .intext{
+            color: #FFFFFF;
+            
+        }
         .unit_test {
             display: block;
             padding: 6px;
@@ -133,10 +137,17 @@
 <script>
 
     var testFunc;
+    var declaration;
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
-        var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
-        testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
+        declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2).split(",");
+        console.log(  declaration.length);
+
+        testFunc = new Function("arguments",
+            "for(var i = 0 ; i <  arguments.length ; i++){" +
+            "declaration[0]" +
+            "}" +
+            origin.substr(origin.indexOf("{")+1,origin.lastIndexOf("}")-origin.indexOf("{")-1));
         $(".test_case").empty();
     });
 
@@ -262,22 +273,39 @@
     });
     $(document).on("click","#add-test-case",function () {
         var inputbox ="";
-        for(var i = 0; i < testFunc.length; i++)
+        for(var i = 0; i < declaration.length; i++)
             inputbox += "<input type='text' class='input_box inputs' />";                                         
 
 
         var testCases =
            "<div class='row case'>" +
-           "<span>input : </span>" +
+           "<span class='intext'>input : </span>" +
             inputbox +
-           "<span>ouput : </span>" +
+           "<span  class='intext'>ouput : </span>" +
            "<input type='text' class='input_box output' />" +
            "<button class='btn_case test_one'>TEST</button>" +
            "<button class='btn_case delete_case'>DELETE</button>" +
            "</div>";
        $(".test_case").append(testCases);
     });
-    $(document).on("click",".test_one",function () {
+    $(document).on("click",".test_one",function (){
+        var result = false;
+
+        var inputs = $(this).parent().find(".inputs");
+
+        var arguments = new Array(inputs.length);
+
+        for(var i = 0; i < inputs.length; i++){
+            arguments[i]= inputs.get(i).value;
+        }
+        // console.log();
+
+        console.log(testFunc(arguments));
+
+        // console.log(inputs.get(0).value+","+inputs.get(1).value);
+
+
+        // testFunc()
 
     });
 
