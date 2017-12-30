@@ -6,9 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.text.DecimalFormat;
+
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -17,13 +18,14 @@ public class UploadFileUtils {
             LoggerFactory.getLogger(UploadFileUtils.class);
 
 
-    public static String uploadFile(String uploadPath, String originalName, byte[] fileData)throws Exception{
-
+    public static String uploadFile(String uploadPath, String originalName,byte[] fileData, String userId)throws Exception{
+        //UserVo 필요
         UUID uid = UUID.randomUUID();
+
 
         String savedName = uid.toString() +"_"+originalName;
 
-        String savedPath = calcPath(uploadPath);
+        String savedPath = calcPath(uploadPath,userId);
 
         File target =new File(uploadPath +savedPath,savedName);
 
@@ -57,24 +59,28 @@ public class UploadFileUtils {
         return iconName.substring(uploadPath.length()).replace(File.separatorChar,'/');
     }
 
-    private static  String calcPath(String uploadPath){
+    private static  String calcPath(String uploadPath, String userId){
         Calendar cal =Calendar.getInstance();
+        String profilePath = "/"+userId;
 
-        String  yearPath = File.separator+cal.get(Calendar.YEAR);
+        makeDir(uploadPath, profilePath);
 
-        String monthPath = yearPath +
-                File.separator +
-                new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
+//
+//        String  yearPath = File.separator+cal.get(Calendar.YEAR);
+//
+//        String monthPath = yearPath +
+//                File.separator +
+//                new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
+//
+//                String datePath = monthPath +
+//                        File.separator +
+//                        new DecimalFormat("00").format(cal.get(Calendar.DATE));
+//
+//                makeDir(uploadPath, yearPath,monthPath,datePath);
 
-                String datePath = monthPath +
-                        File.separator +
-                        new DecimalFormat("00").format(cal.get(Calendar.DATE));
+              //  logger.info(datePath);
 
-                makeDir(uploadPath, yearPath,monthPath,datePath);
-
-                logger.info(datePath);
-
-                        return datePath;
+                        return profilePath;
     }
 
     private static void makeDir(String uploadPath, String... paths) {

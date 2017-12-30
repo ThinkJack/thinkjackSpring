@@ -2,6 +2,7 @@ package controller;
 
 import common.MediaUtils;
 import common.UploadFileUtils;
+import domain.UserVO;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -53,16 +55,20 @@ public class UploadController {
     }
     @ResponseBody
     @RequestMapping(value = "/uploadAjax",method = RequestMethod.POST, produces = "text/plane;charset=UTF-8")
-    public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
+    public ResponseEntity<String> uploadAjax(MultipartFile file, HttpSession session)throws Exception{
 
        // System.out.println("originalName:"+file.getOriginalFilename());
 //        System.out.println("size: "+file.getSize());
 //        System.out.println("contentType:"+file.getContentType());
+        UserVO vo = (UserVO)session.getAttribute("login");
+
+        String userId= vo.getUserId()+"";
 
         return new ResponseEntity<>(
                 UploadFileUtils.uploadFile(uploadPath,
                         file.getOriginalFilename(),
-                        file.getBytes()),
+                        file.getBytes(),
+                        userId),
                         HttpStatus.CREATED);
 
     }
