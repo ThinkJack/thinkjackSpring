@@ -12,6 +12,12 @@
 .mainNavbarEdit{
     margin-top: 60px;
 }
+.navbar-brand{
+    width:93%;
+    margin-right: 0;
+    background-color: #6a0d6a;
+}
+
 
         .navbar {
             margin-bottom: 0;
@@ -23,8 +29,11 @@
             border-radius: 0;
         }
 
-        .navbar li a, .navbar .navbar-brand {
-            color: #0C1021 !important;
+        .navbar li a{}
+        .navbar{}
+.navbar-brand {
+    position: relative;
+    left: 15px;
         }
         .navbar-nav li a:hover, .navbar-nav li.active a {
             color: #0C1021!important;
@@ -44,6 +53,10 @@
                 margin: 25px 0;
             }
         }
+        .removePadding{
+            padding-left: 0;
+            padding-right: 0;
+        }
     </style>
 </head>
 
@@ -54,17 +67,18 @@
 
 <nav class="navbar navbar-default  navbar-fixed-top">
     <div class="row mainNavbarEdit">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-3" style="background-color: #00a8c6">
+        <div class="col-lg-2" removePadding></div>
+        <div class="col-lg-3 removePadding" >
+            <%--49px왼쪽 페딩--%>
             <a class="navbar-brand" href="#mainPage">Logo</a>
         </div>
-        <div class="col-lg-5" >
-            <form class="form-inline my-2 my-lg-0"  style="text-align: right">
+        <div class="col-lg-5 removePadding" >
+            <form class="form-inline my-2 my-lg-0g"  style="text-align: right">
                 <button  class="btn btn-outline-secondary iconBtn" type="submit">로그인</button>
                 <button class="btn btn-outline-light iconBtn" type="submit">Mypage</button>
                 <button class="btn btn-outline-dark iconBtn" type="submit">ㄴㄴ</button>
             </form>
-            <div class="navbar-header">
+            <div class="navbar-header ">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar" >
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -80,7 +94,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2 removePadding"></div>
     </div>
 </nav>
 

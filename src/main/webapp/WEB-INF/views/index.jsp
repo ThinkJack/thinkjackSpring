@@ -110,7 +110,7 @@
 
     .box:first-of-type {
       background: linear-gradient(to top, rgba(41, 128, 185, 1), rgba(41, 128, 185, 0.7))
-      ,url('/resources/images/intro1.jpg') no-repeat center;
+      ,url('/resources/images/intro2.jpg') no-repeat center;
       background-size: cover;
     }
 
@@ -125,7 +125,7 @@
 
     .box:last-of-type {
       background:linear-gradient(to top, rgba(192,192,192,0.3), rgba(255,0,0,0.3)),
-      url('/resources/images/logo.png') no-repeat center;
+      url('/resources/images/intro (2).jpg') no-repeat center;
       background-size: cover
     }
 
