@@ -140,13 +140,10 @@
     var declaration;
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
-        declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2).split(",");
-        console.log(  declaration.length);
+        declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
+        console.log(  declaration);
 
-        testFunc = new Function("arguments",
-            "for(var i = 0 ; i <  arguments.length ; i++){" +
-            "declaration[0]" +
-            "}" +
+        testFunc = new Function(declaration,
             origin.substr(origin.indexOf("{")+1,origin.lastIndexOf("}")-origin.indexOf("{")-1));
         $(".test_case").empty();
     });
@@ -273,7 +270,7 @@
     });
     $(document).on("click","#add-test-case",function () {
         var inputbox ="";
-        for(var i = 0; i < declaration.length; i++)
+        for(var i = 0; i < testFunc.length; i++)
             inputbox += "<input type='text' class='input_box inputs' />";                                         
 
 
@@ -292,15 +289,14 @@
         var result = false;
 
         var inputs = $(this).parent().find(".inputs");
-
-        var arguments = new Array(inputs.length);
-
-        for(var i = 0; i < inputs.length; i++){
-            arguments[i]= inputs.get(i).value;
+        var testarguments ="";
+        for(var i = 0 ; i < inputs.length; i++){
+            if(i == 0)
+                testarguments = inputs[i].value;
+            else
+                testarguments = testarguments+","+inputs[i].value;
         }
-        // console.log();
-
-        console.log(testFunc(arguments));
+        console.log(testFunc(eval("testarguments")));
 
         // console.log(inputs.get(0).value+","+inputs.get(1).value);
 
