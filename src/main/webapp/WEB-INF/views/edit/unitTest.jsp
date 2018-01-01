@@ -141,11 +141,13 @@
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
         declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
-        console.log(  declaration);
+        console.log(declaration);
 
+        var before = testFunc.length;
         testFunc = new Function(declaration,
             origin.substr(origin.indexOf("{")+1,origin.lastIndexOf("}")-origin.indexOf("{")-1));
-        $(".test_case").empty();
+        if(before != testFunc.length)
+            $(".test_case").empty();
     });
 
 
@@ -296,7 +298,7 @@
             else
                 testarguments = testarguments+","+inputs[i].value;
         }
-        console.log(testFunc(eval("testarguments")));
+        // console.log(testFunc(eval("testarguments"));
 
         // console.log(inputs.get(0).value+","+inputs.get(1).value);
 
