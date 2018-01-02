@@ -26,7 +26,7 @@
   <!--공간을 br로 띄어 씀-->
   <br>
   <!--반응형 6:6-->
-  <div class="row">`
+  <div class="row">
     <div class="col-6">
       <!--메인 이미지 왼쪽-->
       <img src="/resources/images/slide1.jpg" style="width:100%" alt="Image">
