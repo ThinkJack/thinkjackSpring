@@ -1,5 +1,6 @@
 package controller;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import common.TempKey;
+import common.UploadFileUtils;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -16,6 +18,7 @@ import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.social.connect.Connection;
 
 import org.springframework.social.google.api.Google;
@@ -29,18 +32,22 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import domain.BoardVO;
 import domain.UserVO;
 import dto.LoginDTO;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import service.UserService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.UUID;
 
 
 @Controller
@@ -255,9 +262,29 @@ public class UserController {
 
 
 	}
-	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
-	public String ModifyUserPost(UserVO user,Model model,RedirectAttributes rttr,HttpSession session) throws Exception{
-		UserVO vo=service.modifyUser(user);
+
+	@Resource(name="uploadPath")
+	private String uploadPath;
+
+	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST, produces = "text/plane;charset=UTF-8")
+	public String ModifyUserPost(UserVO user,Model model,RedirectAttributes rttr,HttpSession session, MultipartFile file) throws Exception{
+
+
+//		System.out.println("modifyUser file");
+//		System.out.println(file.isEmpty());
+//		if (file.isEmpty()){
+//			System.out.println("파일이 넘어오지 않음");
+//		}
+
+		String userId= user.getUserId()+"";
+		String uploadedFileName=UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(),
+				file.getBytes(),
+				userId);
+		System.out.println("파일 업로드 완료");
+		user.setUserProfile(uploadedFileName);
+    	UserVO vo=service.modifyUser(user);
+
 		//System.out.println("modifyUser"+vo);
 		session.setAttribute("login",vo);
 		//model.addAttribute("login",vo);
@@ -588,6 +615,15 @@ public class UserController {
 public static void destDefault (UserVO vo){
 
 }
+	private String uploadFile(String originalName, byte[] fileData) throws Exception{
 
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() +"_" +originalName;
+
+		File target = new File(uploadPath,savedName);
+
+		FileCopyUtils.copy(fileData,target);
+		return savedName;
+	}
 
 }

@@ -67,13 +67,14 @@
   <div class="fileDrop">
       <div class="uploadedList"></div>
   </div>
-  <input type='file' id="imgInp" />
+
   <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-  <form class="modifyUser" name="login" action="/user/modifyUser" method="post">
+  <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data">
       <input type="hidden" name="userId" value="${login.userId}" readonly/>
       아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><br>
       이름 : <input type="text" name="userName" value="${login.userName}"/><br>
       <input type="text" name="test" value="${login.userProfile}" /><br>
+      <input type='file' id="imgInp" name="file" />
       <input type="hidden" id="userProfile" name="userProfile">
 
 
@@ -98,31 +99,37 @@
           var files = event.originalEvent.dataTransfer.files;
 
           var file = files[0];
-          //console.log(file);
-          var formData = new FormData();
+         // console.log(file);
+          // var formData = new FormData();
+          //
+          // formData.append("file",file);
 
-          formData.append("file",file);
-
-          $.ajax({
-              url:'/uploadAjax',
-              data:formData,
-              dataType:'text',
-              processData:false,
-              contentType:false,
-              type:'POST',
-              success:function (data) {
-                  var str="";
-
-                  if(checkImageType(data)){
-                      str="<div>"+"<img style='width:300px;height:200px;' src='http://localhost:8080/displayFile?fileName="+data+"'/>"+"</div>";
-                  }else{
-                      str="<script>"+"alert('이미지 파일 아닙니다. JPG | GIF |')"+"<\/script>";
-                  }
-                  $(".uploadedList").empty();
-                  $(".uploadedList").append(str);
-                  $("#userProfile").val(data);
-              }
-          });
+          //file / 에 집어 넣기
+          $("input[type='file']")
+              .prop("files", files)  // put files into element
+              .closest("form");
+             // .submit();
+         // console.log(file);
+          // $.ajax({
+          //     url:'/uploadAjax',
+          //     data:formData,
+          //     dataType:'text',
+          //     processData:false,
+          //     contentType:false,
+          //     type:'POST',
+          //     success:function (data) {
+          //         var str="";
+          //
+          //         if(checkImageType(data)){
+          //             str="<div>"+"<img style='width:300px;height:200px;' src='http://localhost:8080/displayFile?fileName="+data+"'/>"+"</div>";
+          //         }else{
+          //             str="<script>"+"alert('이미지 파일 아닙니다. JPG | GIF |')"+"<\/script>";
+          //         }
+          //         $(".uploadedList").empty();
+          //         $(".uploadedList").append(str);
+          //         $("#userProfile").val(data);
+          //     }
+          // });
 
       });
 
@@ -134,6 +141,14 @@
 
 
       $(function() {
+          $("#imgInp").on('change', function(){
+          var  filename = document.getElementById('imgInp').value; //파일을 추가한 input 박스의 값
+          if(!checkImageType(filename)){ //확장자를 확인합니다.
+              alert('이미지 파일(jpg, png, gif, bmp)만 등록 가능합니다.');
+              return;
+          }
+          });
+
           $("#imgInp").on('change', function(){
               readURL(this);
           });
@@ -149,6 +164,7 @@
                   $(".uploadedList").empty();
                   $(".uploadedList").append(str);
               }
+
               reader.readAsDataURL(input.files[0]);
           }
       }
