@@ -91,10 +91,15 @@
 <link rel="stylesheet" href="/resources/codemirror/lib/codemirror.css">
 <link rel="stylesheet" href="/resources/codemirror/gfm/default.css">
 
+<!--haml------>
+<script src="/resources/codemirror/mode/haml/haml.js"></script>
+<script src="/resources/codemirror/mode/ruby/ruby.js"></script>
 
 
 <!--스크립트 define & event 분리참조-->
 <script src="/resources/dist/js/editPage/editPageDefine.js"></script>
 <script src="/resources/dist/js/editPage/editPageEvent.js"></script>
 <script src="//d1l6p2sc9645hc.cloudfront.net/tracker.js" data-gs="GSN-265185-D" async></script>
+
+
 
