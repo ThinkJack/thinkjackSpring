@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         UserVO vo =new UserVO();
 
         vo=dao.chkAuth(user);
-        System.out.println("ser.userAuth.chkauth"+vo);
+        //System.out.println("ser.userAuth.chkauth"+vo);
         if(vo!=null){
             try{
                 dao.userAuth(user);
@@ -57,6 +57,22 @@ public class UserServiceImpl implements UserService {
             }}
 
         return vo;
+	}
+
+	@Override
+	public UserVO userAuthFindPassword(UserVO user) throws Exception {
+		UserVO vo =new UserVO();
+
+		vo=dao.chkAuth(user);
+		//System.out.println("ser.userAuth.chkauth"+vo);
+		if(vo!=null){
+			try{
+				dao.successAuth(user);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}}
+
+		return vo;
 	}
 
 
@@ -159,10 +175,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void modifypassUser(UserVO user) throws Exception {
-
+		System.out.println("dao.vo 입력 값"+user);
 		try {
-			dao.updatePassword(user);
 			dao.successAuth(user);
+			dao.updatePassword(user);
+
+			System.out.println("코드 삭제");
 		}catch (Exception e){
 			e.printStackTrace();
 		}

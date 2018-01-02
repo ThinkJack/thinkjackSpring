@@ -17,8 +17,7 @@ values(#{userEmail}, #{userPassword}, #{userName})
         select user_id userId, user_state userState from tbl_user where user_name = #{userName}
 </select>
 
-    <select id="login" resultType="UserVO">
-
+<select id="login" resultType="UserVO">
 select user_email userEmail,
         user_id userId,
         user_name userName,

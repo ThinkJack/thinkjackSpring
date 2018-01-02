@@ -117,7 +117,7 @@ public class UserController {
 
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
 	public String emailConfirm(UserVO user,Model model,RedirectAttributes rttr) throws Exception { // 이메일인증
-		System.out.println("cont get user"+user);
+		//System.out.println("cont get user"+user);
 		UserVO vo = new UserVO();
 
 		vo=service.userAuth(user);
@@ -170,19 +170,22 @@ public class UserController {
     }
     @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
     public String passwordSetConfirm(UserVO user, Model model, RedirectAttributes rttr) throws Exception { // 이메일인증
-        //System.out.println(userEmail);
-		UserVO vo = new UserVO();
-
-		vo=service.userAuth(user);
-
+       // System.out.println("컨트롤러 입력 정보: "+user);
+		UserVO vo=service.userAuthFindPassword(user);
+        //System.out.println("controller 서비스에서 받은: "+vo);
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
 			return "redirect:/main";
 		}
+		int id=vo.getUserId();
         rttr.addFlashAttribute("setPassword",true);
-		model.addAttribute("login",vo);
+		rttr.addFlashAttribute("userId",id);
 
-        return "user/setPassword";
+		//model.addAttribute("userId",id);
+		//rttr.addAttribute("login",vo);
+		//System.out.println("Confirm VO : "+vo);
+
+        return "redirect:setPassword";
     }
 
 	@RequestMapping(value = "/setPassword", method = RequestMethod.GET)
@@ -192,7 +195,7 @@ public class UserController {
 
 	@RequestMapping(value = "/setPassword", method = RequestMethod.POST)
 	public String setPasswordPost(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
-			System.out.println("패스워드 변경 값"+user);
+			//System.out.println("패스워드 변경 값"+user);
     	try{
 			service.modifypassUser(user);
 			rttr.addFlashAttribute("msg" , "변경되었습니다. 변경된 패스워드로 로그인해 주세요");
@@ -200,7 +203,7 @@ public class UserController {
 			rttr.addFlashAttribute("msg" , "오류가 발생했습니다. 관리자에게 문의 주세요");
 		}
 
-		return "redirect:/";
+		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

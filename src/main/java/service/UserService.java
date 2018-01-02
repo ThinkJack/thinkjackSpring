@@ -17,6 +17,8 @@ public interface UserService {
 
 	public UserVO userAuth(UserVO user) throws Exception;
 
+	public UserVO userAuthFindPassword(UserVO user) throws Exception;
+
 	public void deleteUser(UserVO user) throws Exception;
 
 	public String authenticate(String str) throws Exception;
