@@ -39,9 +39,10 @@
         if(!check){
             self.location = '/user/modifyAuthCheck';
         }
-
+        var chkName=true;
     $(document).ready(function() {
-    console.log( "ready!" );
+    //console.log( "ready!" );
+
     var imgtest;
     var fullName="${login.userProfile}";
     if(fullName!=="") {
@@ -55,9 +56,64 @@
 
 
     });
+
+
+        function checkvalue() {
+            chkName=false;
+        }
+
+
+        function signinchk(obj){
+
+            if(!obj.userName.value || obj.userName.value.trim().length ==0){
+                alert("이름을 입력해주세요.");
+                obj.userName.value ="";
+                obj.userName.focus();
+                return false;
+            }
+            if(!chkName){
+                alert("이름 중복체크를 실행해주세요.");
+                obj.userName.focus();
+                return false;
+            }
+        }
+
     </script>
+    <script>
+        $(document).on('click','#authenticateName',function(){
+            var userName = $('#userName').val();
+            var oldName="${login.userName}";
+            console.log(userName);
+            if(userName==oldName){
+                alert(" 사용 가능한 이름입니다.");
+                return chkName=true;
+            }else if(!userName || userName.trim().length ==0){
+                alert("유저 네임이 입력되지 않았습니다.");
+                return false;
+            } else {
+                $.ajax({
+                    url:'/user/authenticateName',
+                    type:'POST',
+                    data: {'userName' : userName},
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    dataType : "json",
 
+                    success:function(data){
+                        console.log("success")
+                        alert(decodeURIComponent(data.msg))
+                        if(data.chk == "T"){
+                            alert('사용 가능한 이름입니다.' );
+                            chkName=true;
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown){
 
+                        alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+                    }
+                }); }
+        });
+
+    </script>
 
 
 
@@ -69,10 +125,10 @@
   </div>
 
   <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-  <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data">
+  <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
       <input type="hidden" name="userId" value="${login.userId}" readonly/>
-      아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><br>
-      이름 : <input type="text" name="userName" value="${login.userName}"/><br>
+      아이디 : <input type="text" name="userEmail" id="userEmail"  value="${login.userEmail}" readonly/><br>
+      이름 : <input type="text" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><button type="button" id="authenticateName">중복체크</button><br>
       <input type="text" name="test" value="${login.userProfile}" /><br>
       <input type='file' id="imgInp" name="file" />
       <input type="hidden" id="userProfile" name="userProfile">

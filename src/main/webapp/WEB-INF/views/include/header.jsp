@@ -40,9 +40,9 @@
             var test =fullName.lastIndexOf("/");
             fileName= fullName.substring(test+1,fullName.length);
             path= fullName.substring(0,test+1);
-            console.log(path);
-            console.log(fileName);
-            console.log(test);
+            // console.log(path);
+            // console.log(fileName);
+            // console.log(test);
             profileheader =path+"s_"+fileName;
             console.log(fullName);
             if(fullName!=="") {

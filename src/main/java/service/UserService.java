@@ -21,6 +21,8 @@ public interface UserService {
 
 	public String authenticate(String str) throws Exception;
 
+	public String authenticateName(String str) throws Exception;
+
 	public void findPassword(UserVO user) throws Exception;
 
 	public void modifypassUser(UserVO user) throws Exception;

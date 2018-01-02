@@ -72,7 +72,7 @@ public class UserController {
 
 		return "redirect:/";
 	}
-
+    //유저 email 중복 체크
 	@RequestMapping(value = "/authenticate" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody
 	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String userEmail, Model model)throws Exception {
@@ -94,6 +94,26 @@ public class UserController {
 		return responseMsg;
 
 	}
+    //유저 네임 중복 체크
+    @RequestMapping(value = "/authenticateName" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String checkDuplicateName(HttpServletResponse response, @RequestParam("userName") String userName, Model model)throws Exception {
+        System.out.println("/authenticateName 진입");
+        String msg = service.authenticateName(userName);
+        System.out.println("/authenticateName 진입"+msg);
+        String responseMsg;
+        if(msg == "T") {
+            responseMsg = "{\"msg\":\""+"사용가능한 이름 입니다."+"\",\"chk\":\""+"T"+"\"}";
+        }else{
+            responseMsg = "{\"msg\":\""+"중복된 이름 입니다. 다시 설정해 주세요"+"\"}";
+        }
+        URLEncoder.encode(responseMsg , "UTF-8");
+
+        System.out.println(userName);
+        System.out.println(responseMsg);
+        return responseMsg;
+
+    }
 
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
 	public String emailConfirm(UserVO user,Model model,RedirectAttributes rttr) throws Exception { // 이메일인증
@@ -275,14 +295,22 @@ public class UserController {
 //		if (file.isEmpty()){
 //			System.out.println("파일이 넘어오지 않음");
 //		}
-
+        System.out.println("파일 isEmpty"+file.isEmpty());
+        String test=user.getUserProfile();
+        System.out.println(test);
 		String userId= user.getUserId()+"";
-		String uploadedFileName=UploadFileUtils.uploadFile(uploadPath,
-				file.getOriginalFilename(),
-				file.getBytes(),
-				userId);
-		System.out.println("파일 업로드 완료");
-		user.setUserProfile(uploadedFileName);
+		if(!file.isEmpty()) {
+            String uploadedFileName = UploadFileUtils.uploadFile(uploadPath,
+                    file.getOriginalFilename(),
+                    file.getBytes(),
+                    userId);
+            System.out.println("파일 업로드 완료");
+            user.setUserProfile(uploadedFileName);
+        }else{
+            UserVO vot =(UserVO) session.getAttribute("login");
+            user.setUserProfile(vot.getUserProfile());
+		    }
+
     	UserVO vo=service.modifyUser(user);
 
 		//System.out.println("modifyUser"+vo);

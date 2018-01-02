@@ -36,6 +36,25 @@
     <link href="/resources/assets/css/docs.css" rel="stylesheet" >
 
     <link href="/resources/bootstrap-social.css" rel="stylesheet" >
+    <style>
+
+        .naver{
+          background-color:#1EC800;
+            margin-top: 5px;
+        }
+        .naverImg{
+            background-color:#1EC800;
+        }
+        .naverImg:hover {
+            /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
+            background-color: #39e600;
+        }
+        .naver:hover {
+            /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
+            background-color: #39e600;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container text-center">
@@ -65,8 +84,8 @@
                     <%--<a href="/user/githubLogin">--%>
                      <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
                         <%--</a>--%>
-                        <a class="btn btn-block btn-social btn-google" style="background-color:#1EC800;"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
-                            <img src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
+                        <a class="btn btn-block btn-social btn-google naver"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                            <img class="naverImg" src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
                         </a>
                         <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
                             <span class="fa fa-google"></span> Sign in with Google
@@ -76,6 +95,8 @@
                         </a>
                 </div>
                 <button type="button" onclick="location.href='/user/register'">회원가입</button>
+                <button type="button" onclick="location.href='/user/findPassword'">비밀번호 찾기</button>
+
              </form>
         </div>
     </div>

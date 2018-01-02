@@ -13,6 +13,9 @@ values(#{userEmail}, #{userPassword}, #{userName})
 <select id = "checkdupl" resultType = "UserVO">
     select user_id userId, user_state userState from tbl_user where user_email = #{userEmail}
 </select>
+<select id = "checkduplName" resultType = "UserVO">
+        select user_id userId, user_state userState from tbl_user where user_name = #{userName}
+</select>
 
     <select id="login" resultType="UserVO">
 
@@ -27,8 +30,7 @@ from tbl_user
 
 </select>
 
-    <select id="readUser" resultType="UserVO">
-
+<select id="readUser" resultType="UserVO">
 select user_id userId,
         user_email userEmail,
         user_name userName,

@@ -26,6 +26,8 @@ public interface UserDAO {
 
 	public UserVO authenticate(String str) throws Exception;
 
+	public UserVO authenticateName(String str) throws Exception;
+
 	public void updateAuthKey(String userEmail, String userAuthCode) throws Exception;
 
 	public void updatePassword(UserVO vo) throws Exception;

@@ -13,11 +13,12 @@
 	<script>
 
         var chkid=false;
+        var chkName=false;
         var chkpass=false;
 console.log(signup);
         function checkvalue() {
-            console.log('3번째: '+signup.userPassword.value);
-            console.log('4번째: '+signup.chkPassword.value);
+           // console.log('3번째: '+signup.userPassword.value);
+           // console.log('4번째: '+signup.chkPassword.value);
             if(signup.userPassword.value && signup.chkPassword.value) {
                 if(signup.userPassword.value!=signup.chkPassword.value){
                     $('#pwsame').text('비밀번호가 일치하지 않습니다.');
@@ -73,8 +74,6 @@ console.log(signup);
 
 	</script>
 	<script>
-
-
         $(document).on('click','#authenticate',function(){
             var userEmail = $('#userEmail').val();
 

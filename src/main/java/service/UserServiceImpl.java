@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO modifyUser(UserVO user) throws Exception {
+		System.out.println("DAO user: "+user);
 		dao.updateUser(user);
 		return  dao.read(user);
 	}
@@ -117,13 +118,26 @@ public class UserServiceImpl implements UserService {
 		//System.out.println("인증 중");
 
 		UserVO vo = dao.authenticate(str);
-		System.out.println("dao vo:"+vo);
+	//	System.out.println("dao vo:"+vo);
 		if(vo == null) {
 			return "T";
 		}else if(vo.getUserState() == 0){
 			return "F";
 		}else{
 			return "D";
+		}
+	}
+
+	@Override
+	public String authenticateName(String str) throws Exception {
+		//System.out.println("인증 중");
+
+		UserVO vo = dao.authenticateName(str);
+		System.out.println("dao vo:"+vo);
+		if(vo == null) {
+			return "T";
+		}else{
+			return "F";
 		}
 	}
 
