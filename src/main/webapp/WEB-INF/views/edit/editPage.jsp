@@ -55,7 +55,7 @@
             <%--결과창--%>
             <div class="row main_view layout" id="layout2">
                 <div class="row iframe_body iframeWrapper" id="iframe-body">
-                    <iframe class="col" id="resultView"></iframe>
+                    <iframe class="col" id="resultView" scrolling="yes"></iframe>
                 </div>
                 <div class="row console_body">
                     <div class="row resize-console"></div>
@@ -120,13 +120,16 @@
             document.getElementById("comment-view").value = srcComments;
             document.getElementById("view-count").innerHTML = viewCnt;
             document.getElementById("like-couont").innerHTML = likeCnt;
-            document.getElementById("visibility" + srcStatus).checked = true;
-
+            if(document.getElementById("visibility" + srcStatus) !== null){
+                document.getElementById("visibility" + srcStatus).checked = true;
+            }
 
             //코드 세팅
+            console.log(strHtml);
             codeHtml.setValue(strHtml);
             codeCss.setValue(strCss);
             codeJavaScript.setValue(strJs);
+            changeSaveImg(1);
 
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {

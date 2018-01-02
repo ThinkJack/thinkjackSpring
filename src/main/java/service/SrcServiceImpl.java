@@ -64,8 +64,8 @@ public class SrcServiceImpl implements SrcService {
                 } else if (chk != userVo.getUserId()) {
                     //view cnt관련 코드
                     srcdao.updateSrcViewCnt(srcId);
-                    vo = srcdao.selectSrcOne(srcId);
                 }
+                vo = srcdao.selectSrcOne(srcId);
             }
 
             if (vo.getSrcWriter() != 0) {
@@ -171,7 +171,17 @@ public class SrcServiceImpl implements SrcService {
 
     @Override
     public List srcList() throws Exception {
-        return srcdao.selectSrcList();
+        List list = srcdao.selectSrcList();
+
+        for(int i=0; i<list.size(); i++){
+            SrcVO vo = (SrcVO)list.get(i);
+            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+            list.set(i, vo);
+        }
+
+        return list;
     }
 
 

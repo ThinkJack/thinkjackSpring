@@ -423,7 +423,6 @@ function codeSave() {
                 }
                 saveStatus = true;
 
-                alert("저장이 되었습니다.");
             }
         });
     }

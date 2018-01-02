@@ -36,7 +36,7 @@
 <script src="/resources/assets/js/vendor/holder.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
-
+<script src="/resources/upload.js"></script>
 <%--<script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"><\/script>')</script>--%>
 
 

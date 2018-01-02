@@ -202,9 +202,9 @@ p.err {
     overflow: auto;
 }
 
-.iframeWrapper iframe{
-    pointer-events: none; /* let any clicks go trough me */
-}
+/*.iframeWrapper iframe{*/
+    /*pointer-events: none; !* let any clicks go trough me *!*/
+/*}*/
 
 .main_view .iframe_body {
     height: calc(100% - 488px);

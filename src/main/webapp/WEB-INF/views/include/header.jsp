@@ -26,7 +26,6 @@
     <!--아이콘-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <script>
         var msg=Boolean("${msg}");
         if(msg){
@@ -40,17 +39,17 @@
             var test =fullName.lastIndexOf("/");
             fileName= fullName.substring(test+1,fullName.length);
             path= fullName.substring(0,test+1);
-            console.log(path);
-            console.log(fileName);
-            console.log(test);
+//            console.log(path);
+//            console.log(fileName);
+//            console.log(test);
             profileheader =path+"s_"+fileName;
-            console.log(fullName);
+//            console.log(fullName);
             if(fullName!=="") {
                 headerimg = getFileInfo(profileheader);
-               // console.log(headerimg);
+                // console.log(headerimg);
                 hstr = headerimg;
             }else{
-                hstr = "/resources/images/123.gif";
+                hstr = "/resources/images/like1.png";
             }
 
             $("#profileHeader").attr("src",hstr);

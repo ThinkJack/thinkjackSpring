@@ -111,8 +111,8 @@ public class SrcTest {
 //        dao.deleteSrcLike(vo);
 //    }
     @Test
-    public void selectSrcList(){
-        List list = dao.selectSrcList();
+    public void selectSrcList()throws Exception{
+        List list = service.srcList();
         System.out.println(list);
     }
 }

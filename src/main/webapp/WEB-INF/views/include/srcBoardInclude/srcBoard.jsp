@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <style>
     .card {
         margin-bottom: 20px;
@@ -23,6 +25,27 @@
     .title_div {
         margin-bottom: 20px;
     }
+
+    .iframe_wrap {
+        height: 25%;
+    }
+
+    .iframe_wrap iframe{
+        -ms-transform: scale(0.5);
+        -moz-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+
+        -ms-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+
+        width: 200%;
+        height: 200%;
+    }
 </style>
 <div class="container">
     <div class="row title_div">
@@ -30,142 +53,73 @@
             <h1 class="title"><b>SrcBoard (좋아요 순!)</b></h1>
         </div>
     </div>
+    <c:forEach var="srcVo" items="${list}" varStatus="status" >
+        <c:if test="${status.count % 3 eq 1}">
     <div class="row">
+        </c:if>
         <div class="col">
             <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
+                <div class="iframe_wrap">
+                    <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
+                    </iframe>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title" id="src-title1">Card title</h5>
-                    <p class="card-text" id="src-comments1">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
+                    <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
+                    <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
                 </div>
                 <div class="card-body">
                     <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer2">James</a>
+                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link" id="src-writer2">${srcVo.srcWriterName}</a>
                     <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt2">30</a>
+                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right" id="src-likecnt2">${srcVo.srcLikecnt}</a>
                     <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt2">10</a>
+                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right" id="src-replycnt2">10</a>
                     <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt2">220</a>
+                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right" id="src-viewcnt2">${srcVo.srcViewcnt}</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h5 class="card-title" id="src-title3">Card title</h5>
-                    <p class="card-text" id="src-comments3">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
-                </div>
-                <div class="card-body">
-                    <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer3">James</a>
-                    <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt3">30</a>
-                    <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt3">10</a>
-                    <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt3">220</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h5 class="card-title" id="src-title4">Card title</h5>
-                    <p class="card-text" id="src-comments4">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
-                </div>
-                <div class="card-body">
-                    <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer4">James</a>
-                    <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt4">30</a>
-                    <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt4">10</a>
-                    <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt4">220</a>
-                </div>
-            </div>
-        </div>
+        <c:if test="${status.count % 3 eq 0}">
     </div>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h5 class="card-title" id="src-title5">Card title</h5>
-                    <p class="card-text" id="src-comments5">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
-                </div>
-                <div class="card-body">
-                    <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer5">James</a>
-                    <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt5">30</a>
-                    <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt5">10</a>
-                    <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt5">220</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h5 class="card-title" id="src-title6">Card title</h5>
-                    <p class="card-text" id="src-comments6">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
-                </div>
-                <div class="card-body">
-                    <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer6">James</a>
-                    <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt6">30</a>
-                    <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt6">10</a>
-                    <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt6">220</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <iframe class="card-img-top" src="" frameborder="0"></iframe>
-                <div class="card-body">
-                    <h5 class="card-title" id="src-title">Card title</h5>
-                    <p class="card-text" id="src-comments">Some quick example text to build on the card title and make
-                        up the bulk of the
-                        card's content.</p>
-                </div>
-                <div class="card-body">
-                    <img src="" style="width:20px; height:20px;">
-                    <a href="#" class="card-link" id="src-writer">James</a>
-                    <img src="/resources/images/like24-1.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-likecnt">30</a>
-                    <img src="/resources/images/reply24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-replycnt">10</a>
-                    <img src="/resources/images/view24.png" class="fl-right" style="width:20px; height:20px;">
-                    <a href="#" class="card-link fl-right" id="src-viewcnt">220</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        </c:if>
+        <script>
+            $(function () {
+                var previewFrame = document.getElementById('${srcVo.srcId}');
+                previewFrame.style = "overflow: hidden;";
+                var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                var tempHtml = escapeHtml('<c:out value="${srcVo.srcHtml}" default=""/>');
+                var tempCss = escapeHtml('<c:out value="${srcVo.srcCss}" default=""/>');
+                var tempJs = escapeHtml('<c:out value="${srcVo.srcJavaScript}" default=""/>');
+                preview.open();
+
+                preview.write(
+                    "" + tempHtml
+                    +
+                    "<style>" + tempCss + "<\/style>"
+                    +
+                    "<script>" + tempJs + "<\/script>"
+                    +
+                    "<script>" + "<\/script>"
+                );
+                preview.close();
+            });
+
+            function escapeHtml(text) {
+                return text
+                    .replace(/&lt;/gi, "<")
+                    .replace(/&gt;/gi, ">")
+                    .replace(/&#33;/gi, "!")
+                    .replace(/&#034;/gi, '"')
+                    .replace(/&quot;/gi, '"')
+                    .replace(/&#035;/gi, '"')
+                    .replace(/&#037;/gi, "%")
+                    .replace(/&amp;/gi, "&")
+                    .replace(/&#038;/gi, "&")
+                    .replace(/&#039;/gi, "'");
+            }
+        </script>
+    </c:forEach>
 </div>
 <!--내용-->
 

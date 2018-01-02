@@ -48,6 +48,7 @@
             </script>
             <c:if test="${(login.userId eq SrcVO.srcWriter) or
                         (SrcVO.srcId eq '') or
+                        ((SrcVO.srcId eq null) and (login ne null)) or
                         ((SrcVO.srcId ne '') and !(empty cookie.get(SrcVO.srcId)))}">
             <li class="nav-item active">
                 <div>

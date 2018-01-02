@@ -11,6 +11,7 @@
         src.src_writer srcWriter,
         src.src_likecnt srcLikecnt,
         src.src_viewcnt srcViewcnt,
+        src.src_path srcPath,
         user.user_name srcWriterName
         from tbl_src src, tbl_user user where src.src_status = 1 and src.src_writer = user.user_id
         ORDER BY src.src_likecnt DESC

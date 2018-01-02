@@ -3,6 +3,7 @@ package controller;
 import domain.SrcLikeVO;
 import domain.SrcVO;
 import domain.SrcReplyVO;
+import domain.UserVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.SrcReplyService;
+import service.UserService;
 
 import java.util.List;
 import java.util.Map;
@@ -30,11 +32,23 @@ public class EditController {
 
     @Inject
     private SrcService service;
+
+    @Inject
+    private UserService userService;
     //----------------------------------------------------------------------src 부분
     @RequestMapping(value = "/editPage", method = RequestMethod.GET)
-    public void newEditView()throws Exception {
-//        service.readSrc(request, vo);
-//        System.out.println(vo);
+    public void newEditView(HttpSession session, Model model)throws Exception {
+        SrcVO srcVO = new SrcVO();
+        if(session.getAttribute("login") instanceof UserVO){
+            UserVO userVO =(UserVO) session.getAttribute("login");
+            if (userVO != null) {
+                srcVO.setSrcWriterName(userVO.getUserName());
+                srcVO.setSrcWriter(userVO.getUserId());
+                srcVO.setSrcStatus(1);
+            }
+        }
+
+        model.addAttribute("SrcVO", srcVO);
     }
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
