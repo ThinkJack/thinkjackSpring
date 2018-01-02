@@ -56,10 +56,10 @@
             <div class="row resize_view" id="resize-view"></div>
             <%--결과창--%>
             <div class="row main_view layout" id="layout2">
-                <div class="row iframe_body iframeWrapper" id="iframe-body">
-                    <iframe class="col" id="resultView"></iframe>
+                <div class="row iframe_body iframeWrapper" id="iframe-body" >
+                    <iframe class="col" id="resultView" scrolling="yes"></iframe>
                 </div>
-                <div class="row console_body">
+                <div class="row console_body" overflow-y:auto>
                     <div class="row resize-console"></div>
                     <%--console--%>
                     <div class="row edit-console" id="edit-console">

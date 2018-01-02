@@ -53,7 +53,7 @@ public class SrcServiceImpl implements SrcService {
         boolean srcEmpty = false;
         String filePath;
 
-        if(srcId == "") {
+        if (srcId == "") {
             //srcID값 작업
             srcEmpty = true;
             do {
