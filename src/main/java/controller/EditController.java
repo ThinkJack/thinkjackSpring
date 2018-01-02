@@ -1,8 +1,7 @@
 package controller;
 
-import domain.BoardVO;
+import domain.SrcLikeVO;
 import domain.SrcVO;
-import domain.ReplyVO;
 import domain.SrcReplyVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.SrcReplyService;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/edit/*")
@@ -41,25 +39,23 @@ public class EditController {
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
     public String editView(HttpServletRequest request, Model model)throws Exception {
-        SrcVO vo = new SrcVO();
-        vo = service.readSrc(request, vo);
-        System.out.println(vo);
-
-        model.addAttribute("SrcVO", vo);
-        return "forward:/edit/editPage";
+        Map map = service.readSrc(request);
+        model.addAttribute("SrcVO", map.get("vo"));
+        model.addAttribute("like", map.get("like"));
+        return "/edit/editPage";
     }
 
-    @ResponseBody
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ResponseEntity<String> srcSave(HttpServletRequest request, HttpServletResponse response, @RequestBody SrcVO vo) throws Exception{
-
-        ResponseEntity<String> entity = new ResponseEntity<>(service.saveSrc(request, response, vo), HttpStatus.OK);
-
-        return entity;
+    public @ResponseBody String srcSave(HttpServletRequest request, HttpServletResponse response, @RequestBody SrcVO vo) throws Exception{
+        return service.saveSrc(request, response, vo);
     }
 
+    @RequestMapping(value = "/like", method = RequestMethod.POST)
+    public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
+        return service.srcLike(request, vo);
+    }
     //----------------------------------------------------------------------
-
 
 
     //----------------------------------------------------------------------reply 부분
@@ -92,7 +88,7 @@ public class EditController {
         public ModelAndView list(@RequestParam String srcId, ModelAndView mav) throws Exception {
             List<SrcReplyVO> list = srcReplyService.list(srcId);
             // 뷰이름 지정
-            mav.setViewName("board/srcReplyList");
+            mav.setViewName("srcBoard/srcReplyList");
             // 뷰에 전달할 데이터 지정
             mav.addObject("list", list);
             // srcReplyList.jsp로 포워딩
@@ -105,7 +101,7 @@ public class EditController {
         public List<SrcReplyVO> srcListJson(@RequestParam String srcId) throws Exception {
 //            List<SrcReplyVO> list= srcReplyService.list(srcId);
 //            return list;
-              return srcReplyService.list(srcId);
+            return srcReplyService.list(srcId);
         }
     }
 

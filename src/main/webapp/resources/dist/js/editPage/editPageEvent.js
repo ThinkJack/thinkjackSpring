@@ -451,15 +451,33 @@ $(function () {
 
 
 //좋아요 버튼 이미지 변경
-var likebt = function () {
-    var likebtEl = document.getElementById("likebt");
-    if (0 < likebtEl.src.indexOf("1")) {
-        likebtEl.src = imgPath + "like2.png"
-    } else {
-        likebtEl.src = imgPath + "like1.png"
-    }
-};
+$(function () {
+    $("#like").click(function (e) {
+        $.ajax({
+            type: "post",
+            url: "/edit/like",
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            dataType: 'json',
+            data: JSON.stringify({
+                srcId: srcId
+            }),
+            success: function (success) {
+                if (success.result === 0) {
+                    //좋아요 추가시
+                    likeImgChange(2);
+                } else {
+                    //좋아요 취소시
+                    likeImgChange(1);
+                }
 
+                document.getElementById("like-couont").innerHTML = success.srcLikeCnt;
+            }
+        });
+    });
+});
 
 $(function () { //--자동저장
     if ($('#autoSave').is(':checked')) {
@@ -477,3 +495,9 @@ $("#login").click(function (e) {
     }
     self.location = '/user/login'
 });
+
+$('input[name="visibility"]').on("change", function (e) {
+    srcStatus = this.value;
+});
+
+// $('input[name="genderS"]:checked')

@@ -6,9 +6,14 @@
 
 <script type="text/javascript">
     var srcId = sessionStorage.getItem('srcId');
+    var dest = '${dest}';
     sessionStorage.removeItem('srcId');
     if (srcId !== null) {
-        self.location = '${dest}' + "/" + srcId;
+        if(dest.replace('/edit/editPage/', '') !== ''){
+            self.location = '${dest}';
+        }else{
+            self.location = '${dest}' + '/' + srcId;
+        }
     } else {
         self.location = '${dest}';
     }

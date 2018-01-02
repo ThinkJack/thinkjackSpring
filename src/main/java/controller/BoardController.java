@@ -143,10 +143,5 @@ public class BoardController {
 
     }
 
-    //--------------------------------------------------------------------------------------------------src게시판 관련 코드들
 
-    @RequestMapping(value = "/srcList", method = RequestMethod.GET)
-    public void srcList(HttpServletRequest request) throws Exception {
-
-    }
 }

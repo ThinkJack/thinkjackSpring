@@ -96,14 +96,19 @@
         srcTitle = '<c:out value="${SrcVO.srcTitle}" default="Untitled"/>';
         srcRegdate = '<c:out value="${SrcVO.srcRegdate}" default=""/>';
         srcUpdate = '<c:out value="${SrcVO.srcUpdate}" default=""/>';
+        likeCnt = '<c:out value="${SrcVO.srcLikecnt}" default="0"/>';
+        viewCnt = '<c:out value="${SrcVO.srcViewcnt}" default="0"/>';
+        srcStatus = '<c:out value="${SrcVO.srcStatus}" default="1"/>';
         strHtml = escapeHtml('<c:out value="${SrcVO.srcHtml}" default=""/>');
         strCss = escapeHtml('<c:out value="${SrcVO.srcCss}" default=""/>');
         strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
+        Heart = "<c:out value="${like}" default="0"/>";
         <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
         <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
         <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
 
+        //화면에서 받은 값 세팅
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
             <c:if test="${login.userId eq SrcVO.srcWriter}">
@@ -113,11 +118,17 @@
             document.getElementById("src-writer").innerHTML = srcWriterName;
             document.getElementById("src-title-reply-modal").innerHTML = "\<h4\>" + srcWriterName + "\</h4\>";
             document.getElementById("comment-view").value = srcComments;
+            document.getElementById("view-count").innerHTML = viewCnt;
+            document.getElementById("like-couont").innerHTML = likeCnt;
+            document.getElementById("visibility" + srcStatus).checked = true;
 
+
+            //코드 세팅
             codeHtml.setValue(strHtml);
             codeCss.setValue(strCss);
             codeJavaScript.setValue(strJs);
 
+            //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
@@ -126,64 +137,24 @@
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
                 }
             }
+
+            //좋아요 세팅
+            if(document.getElementById("like") !== null) {
+                if(Heart === "0") {
+                    //없을때
+                    likeImgChange(1);
+                } else {
+                    //있을때
+                    likeImgChange(2);
+                }
+            }
         });
 
         $("#saveCode").click(function (e) {
             codeSave();
         });
 
-        function escapeHtml(text) {
-            return text
-                .replace(/&lt;/gi, "<")
-                .replace(/&gt;/gi, ">")
-                .replace(/&#33;/gi, "!")
-                .replace(/&#034;/gi, '"')
-                .replace(/&quot;/gi, '"')
-                .replace(/&#035;/gi, '"')
-                .replace(/&#037;/gi, "%")
-                .replace(/&amp;/gi, "&")
-                .replace(/&#038;/gi, "&")
-                .replace(/&#039;/gi, "'");
-        }
 
-
-        function codeSave() {
-            saveImg.src = "/resources/images/cloud1.png";
-            srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
-
-            if (!saveStatus) {
-                $.ajax({
-                    type: "post",
-                    url: "/edit/save",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-HTTP-Method-Override": "POST"
-                    },
-                    dataType: 'text',
-                    data: JSON.stringify({
-                        srcId: srcId,
-                        srcComments: srcComments,
-                        srcWriter: srcWriter,
-                        srcTitle: srcTitle,
-                        srcHtml: codeHtml.getValue(),
-                        srcCss: codeCss.getValue(),
-                        srcJavaScript: codeJavaScript.getValue()
-                    }),
-                    success: function (getLink) {
-                        if(srcId === ""){
-                            document.cookie = getLink + "=";
-                        }
-
-                        if (srcId === "" || (srcWriter === "0" && "${login.userId}" !== "")) {
-                            location.replace("/edit/editPage/" + getLink);
-                        }
-                        saveStatus = true;
-
-//                        alert("저장이 되었습니다.");
-                    }
-                });
-            }
-        }
     </script>
 </body>
 </html>

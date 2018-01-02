@@ -61,7 +61,7 @@
             <li class="nav-item active">
                 <div>
                     <!-- 좋아요 버튼 -->
-                    <a class="btn btn-outline-dark" href="javascript:likebt();">
+                    <a class="btn btn-outline-dark" href="javascript:;" id="like">
                         <img src="/resources/images/like1.png" id="likebt"> Like
                     </a>
                 </div>

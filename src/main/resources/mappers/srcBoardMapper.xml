@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.srcBoardMapper">
+    <select id="selectSrcBoardList" resultType="SrcVO">
+        SELECT
+        src.src_id srcId,
+        src.src_title srcTitle,
+        src.src_writer srcWriter,
+        src.src_likecnt srcLikecnt,
+        src.src_viewcnt srcViewcnt,
+        user.user_name srcWriterName
+        from tbl_src src, tbl_user user where src.src_status = 1 and src.src_writer = user.user_id
+        ORDER BY src.src_likecnt DESC
+    </select>
+</mapper>

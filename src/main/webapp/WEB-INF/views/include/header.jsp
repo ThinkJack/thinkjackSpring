@@ -51,7 +51,7 @@
                 <a href="/board/list?category=free" class="w3-bar-item w3-button ">Cummunity</a>
                 <a href="/board/list?category=qna" class="w3-bar-item w3-button ">QNA</a>
                 <a href="/board/list?category=notice" class="w3-bar-item w3-button "> Release Notes</a>
-                <a href="/board/srcList" class="w3-bar-item w3-button "> Src Page</a>
+                <a href="/srcBoard/srcList" class="w3-bar-item w3-button "> Src Page</a>
                 <a href="/edit/editPage" class="w3-bar-item w3-button "> Editor</a>
                 <a href="/edit/unitTest" class="w3-bar-item w3-button "> UnitTest</a>
             </div>

@@ -12,10 +12,10 @@
     <insert id="insertSrc">
         insert into tbl_src (src_id, src_path,
         <if test="srcWriter != 0">src_writer,</if>
-        src_comments, src_title)
+        src_comments, src_title, src_status)
         values(#{srcId}, #{srcPath},
         <if test="srcWriter != 0">#{srcWriter},</if>
-        #{srcComments}, #{srcTitle})
+        #{srcComments}, #{srcTitle}, #{srcStatus})
     </insert>
 
     <select id="selectSrcOne" resultType="SrcVO">
@@ -28,7 +28,8 @@
         src_update srcUpdate,
         src_title srcTitle,
         src_likecnt srcLikecnt,
-        src_viewcnt srcViewcnt
+        src_viewcnt srcViewcnt,
+        src_status srcStatus
         from tbl_src where src_id = #{srcId}
     </select>
 
@@ -36,7 +37,8 @@
         update tbl_src set
         src_comments = #{srcComments},
         src_title = #{srcTitle},
-        src_update = CURRENT_TIMESTAMP
+        src_update = CURRENT_TIMESTAMP,
+        src_status = #{srcStatus}
         where src_id = #{srcId}
     </update>
 
@@ -46,5 +48,13 @@
 
     <update id="updateSrcWriter">
         update tbl_src set src_writer = #{srcWriter} where src_id = #{srcId}
+    </update>
+
+    <update id="updateSrcLikeCnt">
+        update tbl_src set src_likecnt = #{srcLikecnt} where src_id = #{srcId}
+    </update>
+
+    <update id="updateSrcViewCnt">
+        update tbl_src set src_viewcnt =  src_viewcnt + 1 where src_id = #{srcId}
     </update>
 </mapper>

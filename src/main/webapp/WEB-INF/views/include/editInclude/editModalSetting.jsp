@@ -58,6 +58,19 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="form-check">
+                                <label>Visibility</label>
+                                <div>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="visibility1" name="visibility" value="1" checked>
+                                        public
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="visibility0" name="visibility" value="0">
+                                        private
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane container" id="settingHTML">
                     </c:if>
@@ -143,7 +156,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Save & Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
