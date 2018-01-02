@@ -113,7 +113,6 @@ public class SrcTest {
     @Test
     public void selectSrcList(){
         List list = dao.selectSrcList();
-
         System.out.println(list);
     }
 }

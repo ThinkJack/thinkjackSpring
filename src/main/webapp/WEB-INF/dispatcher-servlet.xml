@@ -61,7 +61,7 @@
     </bean>
     <!-- 파일 저장 관련 설정 -->
     <bean id="uploadPath" class="java.lang.String">
-        <constructor-arg value="F:\\zzz\\profile"></constructor-arg>
+        <constructor-arg value="C:\\zzz\\profile"></constructor-arg>
     </bean>
 </beans>
 
