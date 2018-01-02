@@ -12,7 +12,11 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
-
+    var check=Boolean(${setPassword});
+    if(!check){
+        alert("비정상적인 접근입니다.");
+        self.location = '/main';
+    }
 
     var chkpass=false;
     function checkvalue() {

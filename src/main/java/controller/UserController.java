@@ -177,9 +177,9 @@ public class UserController {
 
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-			return "redirect:/";
+			return "redirect:/main";
 		}
-
+        rttr.addFlashAttribute("setPassword",true);
 		model.addAttribute("login",vo);
 
         return "user/setPassword";
