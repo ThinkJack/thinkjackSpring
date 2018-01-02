@@ -33,14 +33,14 @@
             </div>
             <div class="col-sm-8">
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" name="login" action="/user/loginPost" method="post">
                     <div class="form-group">
-                        <label  for="inputSuccess2"  class="col-sm-2 control-label">Email</label>
+                        <label  for="userEmail"  class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
                             <div class="form-group has-success has-feedback">
                                 <!--<input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
                                 <!--성공-->
-                                <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+                                <input type="text" class="form-control" id="userEmail" aria-describedby="inputSuccess2Status">
                                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 <span id="inputSuccess2Status" class="sr-only">(success)</span>
                                 <!--경고-->
@@ -63,12 +63,12 @@
                 </form>
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label  for="inputSuccess"  class="col-sm-2 control-label">PW</label>
+                        <label  for="userPassword"  class="col-sm-2 control-label">PW</label>
                         <div class="col-sm-10">
                             <div class="form-group has-success has-feedback">
                                 <!--<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">-->
                                 <!--성공-->
-                                <input type="text" class="form-control" id="inputSuccess" aria-describedby="inputSuccess2Status">
+                                <input type="text" class="form-control" id="userPassword" aria-describedby="inputSuccess2Status">
                                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 <span id="inputSuccess2Status2" class="sr-only">(success)</span>
                                 <!--경고-->
@@ -96,9 +96,17 @@
                     <div class="form-group">
                         <label    class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-default btn-lg btn-block">페이스북으로 로그인</button>
-                            <button type="button" class="btn btn-default btn-lg btn-block">구글 로그인</button>
-                            <button type="button" class="btn btn-default btn-lg btn-block">카카오로 로그인</button>
+                            <div>
+                                <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+                            </div>
+                            <div id="google_id_login"><a href="/user/googleLogin"><img width="230" src="https://techsneak.com/wp-content/uploads/2017/01/login-google.png"/></a></div>
+                            <div>
+                                <a class="btn btn-social-icon btn-github" href="/user/githubLogin">
+          <span class="fa fa-github">
+              Sign in with Github
+          </span>
+                                    <i class="fa fa-github"></i></a>
+                            </div>
                         </div>
 
                     </div>

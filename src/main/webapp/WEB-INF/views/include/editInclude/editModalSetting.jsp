@@ -20,9 +20,11 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
-                    </li>
+                    <c:if test="${(login.userId eq SrcVO.srcWriter)or (SrcVO.srcWriter eq null)}">
+                        <li class="nav-item">
+                            <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
+                        </li>
+                    </c:if>
                     <li class="nav-item">
                         <a class="nav-link btn-light" data-toggle="tab" href="#settingHTML">HTML</a>
                     </li>
@@ -38,25 +40,43 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active container" id="settingInfo">
-                        <div class="form-check">
-                            <label>Code Title</label>
-                            <div>
-                                <label class="form-check-label setting_info">
-                                    <input class="form-control" type="text" id="src-title-modal">
-                                </label>
+                    <c:if test="${(login.userId eq SrcVO.srcWriter)or (SrcVO.srcWriter eq null)}">
+                        <div class="tab-pane active container" id="settingInfo">
+                            <div class="form-check">
+                                <label>Code Title</label>
+                                <div>
+                                    <label class="form-check-label setting_info">
+                                        <input class="form-control" type="text" id="src-title-modal">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <label>Discription</label>
+                                <div>
+                                    <label class="form-check-label setting_info">
+                                        <textarea class="form-control comment" id="modal-comment" rows="5"><c:out value="${SrcVO.srcComments}" default=""/></textarea>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <label>Visibility</label>
+                                <div>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="visibility1" name="visibility" value="1" checked>
+                                        public
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="visibility0" name="visibility" value="0">
+                                        private
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-check">
-                            <label>Discription</label>
-                            <div>
-                                <label class="form-check-label setting_info">
-                                    <textarea class="form-control comment" id="modal-comment" rows="5"><c:out value="${SrcVO.srcComments}" default=""/></textarea>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane container" id="settingHTML">
+                        <div class="tab-pane container" id="settingHTML">
+                    </c:if>
+                    <c:if test="${login.userId ne SrcVO.srcWriter}">
+                        <div class="tab-pane container active" id="settingHTML">
+                    </c:if>
                         <label for="htmlPreprocessor">HTML Preprocessor</label>
                         <select id="htmlPreprocessor" class="form-control">
                             <option selected value="0">None</option>
@@ -136,7 +156,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Save & Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

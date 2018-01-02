@@ -1,17 +1,28 @@
 package service;
 
+import domain.SrcLikeVO;
 import domain.SrcVO;
 import domain.UserVO;
+import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
 import persistence.UserDAO;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SrcServiceImpl implements SrcService {
@@ -23,39 +34,84 @@ public class SrcServiceImpl implements SrcService {
     private UserDAO userdao;
 
     @Override
-    public SrcVO readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
+    public Map readSrc(HttpServletRequest request) throws Exception {
 
-        UserVO userVo = new UserVO();
+        Map map = new HashMap();
+        HttpSession session = request.getSession();
         String uri = request.getRequestURI();
+        SrcVO vo = new SrcVO();
+
+        SrcLikeVO srcLikeVo = new SrcLikeVO();
+        int like = 0;
+
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
+
         try {
             vo = srcdao.selectSrcOne(srcId);
-            userVo.setUserId(vo.getSrcWriter());
-            if(userVo.getUserId() != 0){
-                vo.setSrcWriterName(userdao.read(userVo).getUserName());
+            srcLikeVo.setSrcId(vo.getSrcId());
+
+            if (session.getAttribute("login") instanceof UserVO) {
+                int chk = vo.getSrcWriter();
+
+                UserVO userVo = (UserVO) session.getAttribute("login");
+                srcLikeVo.setUserId(userVo.getUserId());
+                like = srcdao.readLike(srcLikeVo);
+
+                if (chk == 0) {
+                    srcdao.updateSrcWriter(userVo.getUserId(), srcId);
+                } else if (chk != userVo.getUserId()) {
+                    //view cnt관련 코드
+                    srcdao.updateSrcViewCnt(srcId);
+                    vo = srcdao.selectSrcOne(srcId);
+                }
+            }
+
+            if (vo.getSrcWriter() != 0) {
+
+                UserVO imsiUserVo = new UserVO();
+                imsiUserVo.setUserId(vo.getSrcWriter());
+                vo.setSrcWriterName(userdao.read(imsiUserVo).getUserName());
+
             }
 //            System.out.println(vo.getSrcPath() + "/html.txt");
             vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
             vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
             vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return vo;
+        map.put("vo", vo);
+        map.put("like", like);
+
+        return map;
     }
 
     @Override
-    public String saveSrc(HttpServletRequest request, SrcVO vo)throws Exception{
+    public String saveSrc(HttpServletRequest request, HttpServletResponse response, SrcVO vo) throws Exception {
         String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
         boolean srcEmpty = false;
         String filePath;
 
+        HttpSession session = request.getSession();
+        Object userVo = session.getAttribute("login");
+
+        if (vo.getSrcWriter() == 0) {
+            if (userVo != null) {
+                if (userVo instanceof UserVO) {
+                    vo.setSrcWriter(((UserVO) userVo).getUserId());
+                }
+            }
+        }
+
         if (srcId == "") {
             //srcID값 작업
             srcEmpty = true;
+
             do {
                 srcId = randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
@@ -75,10 +131,10 @@ public class SrcServiceImpl implements SrcService {
             fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
             // 파일안에 문자열 쓰기
             vo.setSrcPath(filePath);
-            if(srcEmpty) {
+            if (srcEmpty) {
                 vo.setSrcId(srcId);
                 srcdao.insertSrc(vo);
-            }else{
+            } else {
                 srcdao.updateSrc(vo);
             }
         } catch (Exception e) {
@@ -88,9 +144,38 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public void updateSrcStatus(String srcId) throws Exception {
-        srcdao.updateSrcStatus(srcId);
+    public Map srcLike(HttpServletRequest request, SrcLikeVO srcLikeVO) {
+        int result;
+        SrcVO srcVo = new SrcVO();
+        Map map = new HashMap<>();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("login") instanceof UserVO) {
+            srcLikeVO.setUserId(((UserVO) session.getAttribute("login")).getUserId());
+        }
+
+        result = srcdao.readLike(srcLikeVO);
+        if (result == 0) {
+            srcdao.insertSrcLike(srcLikeVO);
+        } else {
+            srcdao.deleteSrcLike(srcLikeVO);
+        }
+
+        srcVo.setSrcId(srcLikeVO.getSrcId());
+        srcVo.setSrcLikecnt(srcdao.selectSrcLikeCnt(srcLikeVO.getSrcId()));
+        srcdao.updateSrcLikeCnt(srcVo);
+
+        map.put("result", result);
+        map.put("srcLikeCnt", srcdao.selectSrcOne(srcVo.getSrcId()).getSrcLikecnt());
+        return map;
     }
+
+    @Override
+    public List srcList() throws Exception {
+        return srcdao.selectSrcList();
+    }
+
+
+
 
     ///////////////////////////////////////////////////////////////////////////////
     //codeFile 읽어오는 작업
@@ -101,9 +186,9 @@ public class SrcServiceImpl implements SrcService {
         File file = new File(filePath);
         FileReader fr = new FileReader(file);
         while ((i = fr.read()) != -1) {
-            if(i == 10){
+            if (i == 10) {
                 str += "\\n";
-            }else{
+            } else {
                 str += (char) i;
             }
 
@@ -111,8 +196,9 @@ public class SrcServiceImpl implements SrcService {
         fr.close();
         return str;
     }
+
     //srcID값 작업
-    public String randomSrcId(){
+    public String randomSrcId() {
 
         int charType;   //0-소문자, 1-대문자
         int charValue = 0;  //문자 1개의 아스키값
@@ -136,18 +222,20 @@ public class SrcServiceImpl implements SrcService {
     }
 
     //실제 코드 파일 생성
-    public void fileWriter(String filePath, String src)throws Exception{
+    public void fileWriter(String filePath, String src) throws Exception {
         File file = new File(filePath);
-        if(!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
-        }else{
+        } else {
             file.delete();
             file.createNewFile();
         }
-        FileWriter fw = new FileWriter(file, true) ;
+        FileWriter fw = new FileWriter(file, true);
         fw.write(src);
         fw.flush();
         // 객체 닫기
         fw.close();
     }
+
+
 }

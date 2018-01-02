@@ -9,7 +9,7 @@
     <!--내용-->
     <div class="w3-container w3-dark w3-center w3-text-light-grey w3-padding-32" id="about">
         <!--메뉴 bar-->
-        <div class="w3-content w3-justify" ">
+        <div class="w3-content w3-justify">
             <hr class="w3-opacity">
             <h4 class="w3-padding-16">자신의 코드를 올려주세요</h4>
             <div class="w3-row-padding" style="margin:0 -32px">

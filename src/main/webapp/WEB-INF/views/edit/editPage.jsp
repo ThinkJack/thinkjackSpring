@@ -14,7 +14,6 @@
 <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
-
 <html>
 <head>
     <title>EditPage</title>
@@ -24,7 +23,6 @@
     <%--<meta http-equiv="Cache-Control" content="no-cache"/>--%>
     <%--<meta http-equiv="Expires" content="0"/>--%>
     <%--<meta http-equiv="Pragma" content="no-cache"/>--%>
-
 
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
@@ -90,31 +88,47 @@
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
     <script>
+
         srcId = '<c:out value="${SrcVO.srcId}" default=""/>';
+        srcWriter = '<c:out value="${SrcVO.srcWriter}" default="0"/>';
         srcWriterName = '<c:out value="${SrcVO.srcWriterName}" default="CAPTAIN ANONYMOUS"/>';
         srcComments = '<c:out value="${SrcVO.srcComments}" default=""/>';
         srcTitle = '<c:out value="${SrcVO.srcTitle}" default="Untitled"/>';
         srcRegdate = '<c:out value="${SrcVO.srcRegdate}" default=""/>';
         srcUpdate = '<c:out value="${SrcVO.srcUpdate}" default=""/>';
+        likeCnt = '<c:out value="${SrcVO.srcLikecnt}" default="0"/>';
+        viewCnt = '<c:out value="${SrcVO.srcViewcnt}" default="0"/>';
+        srcStatus = '<c:out value="${SrcVO.srcStatus}" default="1"/>';
         strHtml = escapeHtml('<c:out value="${SrcVO.srcHtml}" default=""/>');
         strCss = escapeHtml('<c:out value="${SrcVO.srcCss}" default=""/>');
         strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
+        Heart = "<c:out value="${like}" default="0"/>";
         <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
         <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
         <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
+
+        //화면에서 받은 값 세팅
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
-            document.getElementById("src-title-modal").value = srcTitle;
+            <c:if test="${login.userId eq SrcVO.srcWriter}">
+                document.getElementById("src-title-modal").value = srcTitle;
+                document.getElementById("modal-comment").value = srcComments;
+            </c:if>
             document.getElementById("src-writer").innerHTML = srcWriterName;
             document.getElementById("src-title-reply-modal").innerHTML = "\<h4\>" + srcWriterName + "\</h4\>";
-            document.getElementById("modal-comment").value = srcComments;
             document.getElementById("comment-view").value = srcComments;
+            document.getElementById("view-count").innerHTML = viewCnt;
+            document.getElementById("like-couont").innerHTML = likeCnt;
+            document.getElementById("visibility" + srcStatus).checked = true;
 
+
+            //코드 세팅
             codeHtml.setValue(strHtml);
             codeCss.setValue(strCss);
             codeJavaScript.setValue(strJs);
 
+            //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
@@ -123,21 +137,24 @@
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
                 }
             }
+
+            //좋아요 세팅
+            if(document.getElementById("like") !== null) {
+                if(Heart === "0") {
+                    //없을때
+                    likeImgChange(1);
+                } else {
+                    //있을때
+                    likeImgChange(2);
+                }
+            }
         });
 
-        function escapeHtml(text) {
-            return text
-                .replace(/&lt;/gi, "<")
-                .replace(/&gt;/gi, ">")
-                .replace(/&#33;/gi, "!")
-                .replace(/&#034;/gi, '"')
-                .replace(/&quot;/gi, '"')
-                .replace(/&#035;/gi, '"')
-                .replace(/&#037;/gi, "%")
-                .replace(/&amp;/gi, "&")
-                .replace(/&#038;/gi, "&")
-                .replace(/&#039;/gi, "'");
-        }
+        $("#saveCode").click(function (e) {
+            codeSave();
+        });
+
+
     </script>
 </body>
 </html>

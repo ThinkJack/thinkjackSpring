@@ -1,5 +1,6 @@
 package controller;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import common.TempKey;
+import common.UploadFileUtils;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -16,6 +18,7 @@ import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.social.connect.Connection;
 
 import org.springframework.social.google.api.Google;
@@ -29,18 +32,22 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import domain.BoardVO;
 import domain.UserVO;
 import dto.LoginDTO;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import service.UserService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.UUID;
 
 
 @Controller
@@ -182,8 +189,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
-
+	public void loginPOST(LoginDTO dto, HttpSession session, Model model,RedirectAttributes rttr) throws Exception{
+		System.out.println("loginPost");
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {
@@ -191,6 +198,7 @@ public class UserController {
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+		rttr.addFlashAttribute("msg","로그인 되었습니다.");
 		System.out.println(vo);
 
 	}
@@ -226,7 +234,7 @@ public class UserController {
 
 			}
 		}
-		return "user/logout";
+		return "/main";
 	}
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
 	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
@@ -234,26 +242,54 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.POST)
-	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model) throws Exception{
+	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
 		UserVO vo = service.login(dto);
 		if(vo == null) {
 			return "user/modifyAuthCheck";
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+		//model.addAttribute("modify",true);
+		rttr.addFlashAttribute("modify",true);
 
-		return "user/modifyUser";
+
+		return "redirect:/user/modifyUser";
 
 	}
 
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET)
 	public void ModifyUserGet(UserVO user,Model model) throws Exception{
 
+
 	}
-	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
-	public String ModifyUserPost(UserVO user,Model model) throws Exception{
-		service.modifyUser(user);
-		return "redirect:/";
+
+	@Resource(name="uploadPath")
+	private String uploadPath;
+
+	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST, produces = "text/plane;charset=UTF-8")
+	public String ModifyUserPost(UserVO user,Model model,RedirectAttributes rttr,HttpSession session, MultipartFile file) throws Exception{
+
+
+//		System.out.println("modifyUser file");
+//		System.out.println(file.isEmpty());
+//		if (file.isEmpty()){
+//			System.out.println("파일이 넘어오지 않음");
+//		}
+
+		String userId= user.getUserId()+"";
+		String uploadedFileName=UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(),
+				file.getBytes(),
+				userId);
+		System.out.println("파일 업로드 완료");
+		user.setUserProfile(uploadedFileName);
+    	UserVO vo=service.modifyUser(user);
+
+		//System.out.println("modifyUser"+vo);
+		session.setAttribute("login",vo);
+		//model.addAttribute("login",vo);
+		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
+		return "redirect:/main";
 	}
 	@RequestMapping (value="/deleteUser",method = RequestMethod.GET)
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
@@ -353,10 +389,27 @@ public class UserController {
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
 
+
+
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
 
-		session.setAttribute("login", vo );
 
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="/user/socialLoginPost"){
+				session.setAttribute("dest","/");
+			}
+			//System.out.println("postHandle dest: "+dest);
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
+
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
@@ -425,12 +478,37 @@ public class UserController {
 		System.out.println("controller dto: "+dto);
 
 		UserVO vo = new UserVO();
-        vo = service.googleLogin(dto);
+
+		try {
+			vo = service.googleLogin(dto);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
+		}
+
+
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="user/socialLoginPost"){
+				session.setAttribute("dest","/");
+			}
+			System.out.println("postHandle dest: "+dest);
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 
 
-        session.setAttribute("login", vo );
-		model.addAttribute("userVO",vo);
+//        session.setAttribute("login", vo );
+//		model.addAttribute("userVO",vo);
 		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
         return "redirect:/user/socialLoginPost";
     }
@@ -510,6 +588,23 @@ public class UserController {
 			e.printStackTrace();
 		}
 
+		//세션 생성
+		if(vo != null) {
+			session.setAttribute("login", vo );
+			//response.sendRedirect("/");
+			//System.out.println(userVO);
+			Object dest = session.getAttribute("dest");
+			if(dest=="/user/socialLoginPost"){
+				session.setAttribute("dest","/");
+			}
+			System.out.println("postHandle dest: "+dest);
+			if(dest==null){
+				session.setAttribute("dest","/");
+			}
+
+		}else{
+			session.setAttribute("dest","/user/login");
+		}
 
 		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
@@ -517,7 +612,18 @@ public class UserController {
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
 
+public static void destDefault (UserVO vo){
 
+}
+	private String uploadFile(String originalName, byte[] fileData) throws Exception{
 
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() +"_" +originalName;
+
+		File target = new File(uploadPath,savedName);
+
+		FileCopyUtils.copy(fileData,target);
+		return savedName;
+	}
 
 }

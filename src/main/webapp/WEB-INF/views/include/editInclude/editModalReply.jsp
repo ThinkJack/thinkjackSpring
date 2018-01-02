@@ -5,6 +5,7 @@
   Time: 오전 9:14
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -34,11 +35,11 @@
 
                     <div class="row count_img_view">
                         <div class="col-md-auto count_img_view_inner">
-                            <span id="view-count">13</span>
+                            <span id="view-count"></span>
                             <img src="/resources/images/view24.png">
-                            <span id="reply-couont">23</span>
+                            <span id="reply-couont"></span>
                             <img src="/resources/images/reply24.png">
-                            <span id="like-couont">23</span>
+                            <span id="like-couont"></span>
                             <img src="/resources/images/like24-2.png">
                         </div>
                     </div>

@@ -18,7 +18,8 @@ values(#{userEmail}, #{userPassword}, #{userName})
 
 select user_email userEmail,
         user_id userId,
-        user_name userName
+        user_name userName,
+        user_profile userProfile
 from tbl_user
   where user_email = #{userEmail}
  and user_password = #{userPassword}
@@ -31,7 +32,8 @@ from tbl_user
 select user_id userId,
         user_email userEmail,
         user_name userName,
-        user_social_id userSocialId
+        user_social_id userSocialId,
+        user_profile userProfile
         from tbl_user
         where user_id = #{userId}
 </select>
@@ -39,7 +41,7 @@ select user_id userId,
 <update id="updateUser">
     update tbl_user SET
     user_name =#{userName},
-    user_password = #{userPassword}
+    user_profile =#{userProfile}
     where user_id = #{userId}
 </update>
     <update id="deleteUser">
@@ -55,7 +57,6 @@ select user_id userId,
 </insert>
 
     <select id="naverReadUser" resultType="UserVO">
-
         select user_id userId,
         user_name userName
         from tbl_user

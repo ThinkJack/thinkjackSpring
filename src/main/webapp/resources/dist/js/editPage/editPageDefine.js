@@ -31,11 +31,9 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
     autofocus: true
 });
-// }
 
 
 var codeCss = CodeMirror(document.getElementById("codeCss"), {
-
     mode: "css",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
@@ -217,9 +215,8 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
-
-
 var delay;
+
 var saveStatus = true //저장 유도관련 변수
 var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
 var imgPath = "/resources/images/";
@@ -242,7 +239,8 @@ var resizeCode1 = document.getElementById("resize-code-1");
 var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate;
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus;
+var Heart;
 var strHtml, strCss, strJs;
 var curhref = location.href;
 
@@ -251,7 +249,7 @@ var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
 var layoutMode = 0; //0 - top, 1 - left 2 - right
 var dragging = false;
 // var session = session.getAttribute("login");
-
+var likebt = document.getElementById("likebt");
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
@@ -351,15 +349,12 @@ var saveCode = function () {
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
-
 function getSelectedRange1() {
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
-
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
-
 function getSelectedRange3() {
     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 }
@@ -375,7 +370,6 @@ function autoFormatSelection() {
     var range3 = getSelectedRange2();
     codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
-
 //--ctrl+/
 // function commentSelection(isComment) {
 //     var range = getSelectedRange();
@@ -384,6 +378,73 @@ function autoFormatSelection() {
 // codeJavaScript.autoFormatRange(range.from, range.to);
 // }
 
+// 문자치환
+function escapeHtml(text) {
+    return text
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">")
+        .replace(/&#33;/gi, "!")
+        .replace(/&#034;/gi, '"')
+        .replace(/&quot;/gi, '"')
+        .replace(/&#035;/gi, '"')
+        .replace(/&#037;/gi, "%")
+        .replace(/&amp;/gi, "&")
+        .replace(/&#038;/gi, "&")
+        .replace(/&#039;/gi, "'");
+}
+
+//코드 저장 로직
+function codeSave() {
+    saveImg.src = "/resources/images/cloud1.png";
+    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
+    alert(srcStatus);
+    if (!saveStatus) {
+        $.ajax({
+            type: "post",
+            url: "/edit/save",
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            dataType: 'text',
+            data: JSON.stringify({
+                srcId: srcId,
+                srcComments: srcComments,
+                srcWriter: srcWriter,
+                srcTitle: srcTitle,
+                srcHtml: codeHtml.getValue(),
+                srcCss: codeCss.getValue(),
+                srcJavaScript: codeJavaScript.getValue(),
+                srcStatus: srcStatus
+            }),
+            success: function (getLink) {
+                if(srcId === ""){
+                    document.cookie = getLink + "=";
+                }
+
+                if (srcId === "" || (srcWriter === "0" && "${login.userId}" !== "")) {
+                    location.replace("/edit/editPage/" + getLink);
+                }
+                saveStatus = true;
+
+                alert("저장이 되었습니다.");
+            }
+        });
+    }
+}
+
+//저장 이미지 변경
+function changeSaveImg(idx) {
+    if (saveImg !== null) {
+        saveImg.src = "/resources/images/cloud" + idx + ".png";
+        saveStatus = false;
+    }
+}
+
+//이미지 색상 체크
+function likeImgChange(num) {
+    likebt.src = imgPath + "like" + num +".png";
+}
 
 //==========================================GFM setting
 

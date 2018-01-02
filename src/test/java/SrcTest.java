@@ -1,3 +1,4 @@
+import domain.SrcLikeVO;
 import domain.SrcVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/**/applicationContext.xml"})
@@ -24,16 +26,16 @@ public class SrcTest {
 
     private SrcVO vo = new SrcVO();
 
-    @Test
-    public void insertSrc() throws Exception {// 익명 유저 데이터 입력
-        vo.setSrcHtml("<html</html>");
-        vo.setSrcCss("html{background : red;}");
-        vo.setSrcJavaScript("var aaa = function(){return 1;}");
-        vo.setSrcComments("abcdabcd");
-        vo.setSrcTitle("abcd");
-//        vo.setSrcWriter(3535);
-
-    }
+//    @Test
+//    public void insertSrc() throws Exception {// 익명 유저 데이터 입력
+//        vo.setSrcHtml("<html</html>");
+//        vo.setSrcCss("html{background : red;}");
+//        vo.setSrcJavaScript("var aaa = function(){return 1;}");
+//        vo.setSrcComments("abcdabcd");
+//        vo.setSrcTitle("abcd");
+////        vo.setSrcWriter(3535);
+//
+//    }
 
 //        @Test
 //    public void updateSrc() throws Exception {// 익명 유저 데이터 입력
@@ -76,4 +78,41 @@ public class SrcTest {
 //        fr.close();
 //        return str;
 //    }
+
+//    @Test
+//    public void selectSrcLike(){
+//        SrcLikeVO vo = new SrcLikeVO();
+//        vo.setUserId(1);
+//        vo.setSrcId("LPlitL");
+//        int chk = dao.readLike(vo);
+//        System.out.println(chk);
+//    }
+
+//    @Test
+//    public void insertSrcLike(){
+//        SrcLikeVO vo = new SrcLikeVO();
+//        vo.setUserId(1);
+//        vo.setSrcId("LPlitL");
+//        dao.insertSrcLike(vo);
+//    }
+
+//    @Test
+//    public void deleteSrcLike(){
+//        SrcLikeVO vo = new SrcLikeVO();
+//        vo.setUserId(1);
+//        vo.setSrcId("LPlitL");
+//        dao.deleteSrcLike(vo);
+//    }
+//    @Test
+//    public void deleteSrcLike(){
+//        SrcLikeVO vo = new SrcLikeVO();
+//        vo.setUserId(1);
+//        vo.setSrcId("LPlitL");
+//        dao.deleteSrcLike(vo);
+//    }
+    @Test
+    public void selectSrcList(){
+        List list = dao.selectSrcList();
+        System.out.println(list);
+    }
 }

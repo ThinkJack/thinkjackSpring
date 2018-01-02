@@ -1,10 +1,8 @@
 //var allEditValue;//html, javascript, css 모두 합친 문자열
 //------------------------------------------------------코드 자동 적용 기능
 
-codeHtml.on("change", function () { //AutoSave
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
-
+codeHtml.on("change", function () {
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
@@ -24,8 +22,7 @@ codeHtml.on("change", function () { //AutoSave
 });
 
 codeCss.on("change", function () {
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
@@ -45,8 +42,7 @@ codeCss.on("change", function () {
 });
 
 codeJavaScript.on("change", function () {
-    saveImg.src = "/resources/images/cloud2.png";
-    saveStatus = false;
+    changeSaveImg(2);
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
@@ -67,7 +63,7 @@ codeUnitTest.on("change", function () {
     consoleView(codeUnitTest.getValue());
 });
 
-//키업 이벤트 발생시 마다 ExcludedIntelliSenseTriggerKeys 를  제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
+//키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
@@ -75,7 +71,7 @@ codeHtml.on("keyup", function (cm, event) {
         var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
         for (var i in window) {
             if (preventList.indexOf(i) === -1) {
-                scope[i] = window[i] // 이슈: 스코프 에러
+                scope[i] = window[i]
             }
         }
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
@@ -167,8 +163,7 @@ $(function () {
     })
 
     var changeTitle = function (el) {
-        saveImg.src = "/resources/images/cloud2.png";
-        saveStatus = false;
+        changeSaveImg(2);
         srcTitle = el.value;
         document.getElementById("src-title").innerHTML = srcTitle;
         if (el.id === "src-title-modal") {
@@ -183,8 +178,7 @@ $(function () {
 //comments 변경시 등록
 $(function () {
     $("#modal-comment").on("change", function (e) {
-        saveImg.src = "/resources/images/cloud2.png";
-        saveStatus = false;
+        changeSaveImg(2);
         srcComments = this.value;
         document.getElementById("comment-view").value = srcComments;
     });
@@ -531,7 +525,6 @@ $(function () {
     }
 
     $("#autoPreview").click(function () { //클릭시 상태
-        // alert('zzz');
         var runstyle = document.getElementById("run");
         if (this.checked) {
             runstyle.style = "visibility: hidden;"
@@ -543,15 +536,33 @@ $(function () {
 
 
 //좋아요 버튼 이미지 변경
-var likebt = function () {
-    var likebtEl = document.getElementById("likebt");
-    if (0 < likebtEl.src.indexOf("1")) {
-        likebtEl.src = imgPath + "like2.png"
-    } else {
-        likebtEl.src = imgPath + "like1.png"
-    }
-};
+$(function () {
+    $("#like").click(function (e) {
+        $.ajax({
+            type: "post",
+            url: "/edit/like",
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            dataType: 'json',
+            data: JSON.stringify({
+                srcId: srcId
+            }),
+            success: function (success) {
+                if (success.result === 0) {
+                    //좋아요 추가시
+                    likeImgChange(2);
+                } else {
+                    //좋아요 취소시
+                    likeImgChange(1);
+                }
 
+                document.getElementById("like-couont").innerHTML = success.srcLikeCnt;
+            }
+        });
+    });
+});
 
 // save & update
 $("#saveCode").click(function (e) {
@@ -559,3 +570,18 @@ $("#saveCode").click(function (e) {
 
 });
 
+
+$("#login").click(function (e) {
+    if (window.sessionStorage) {
+        if (srcId !== "") {
+            sessionStorage.setItem('srcId', srcId);
+        }
+    }
+    self.location = '/user/login'
+});
+
+$('input[name="visibility"]').on("change", function (e) {
+    srcStatus = this.value;
+});
+
+// $('input[name="genderS"]:checked')

@@ -27,13 +27,8 @@ public class EditPageInterceptor extends HandlerInterceptorAdapter{
     private void saveSrcDest(HttpServletRequest req){
         System.out.println("EditPageInterceptor saveSrcDest 진입");
         String uri = req.getRequestURI();
-        HttpSession session = req.getSession();
-        Object dest = session.getAttribute("dest");
 
         if(req.getMethod().equals("GET")){
-            if (dest instanceof String) {
-//                (String)dist;
-            }
             logger.info("dest: "+ uri);
             req.getSession().setAttribute("dest",uri);
         }
