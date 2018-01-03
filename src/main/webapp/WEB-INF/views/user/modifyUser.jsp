@@ -85,6 +85,13 @@
             var userName = $('#userName').val();
             var oldName="${login.userName}";
             console.log(userName);
+
+            if(!userName || userName.trim().length >10){
+                alert("이름을 10자 이내로 입력해 주세요.");
+                return false;
+            }
+
+
             if(userName==oldName){
                 alert(" 사용 가능한 이름입니다.");
                 return chkName=true;
