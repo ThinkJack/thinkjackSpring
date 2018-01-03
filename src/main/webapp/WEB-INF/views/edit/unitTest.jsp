@@ -10,6 +10,10 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
+        .resultLog{
+            color:#EFEFEF;
+        }
+
         .col-6, .col-12 {
             padding-right: 0px;
             padding-left: 0px;
@@ -225,7 +229,7 @@
         }
         finally {
             var runningTime = getTimeStamp() - startTime;
-            resultText = "<div>[input : " + input.join() +
+            resultText = "<div class='resultLog'>[input : " + input.join() +
                 " / output : " + output + "] " +
                 "결과 : " + (result ? "성공" : "실패") +
                 " (경과시간 : " + runningTime + "ms)<br/>"
