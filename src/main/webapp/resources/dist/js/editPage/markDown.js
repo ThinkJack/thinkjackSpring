@@ -103,7 +103,7 @@ document.addEventListener('drop', function(e){
     };
 
     reader.readAsText(e.dataTransfer.files[0]);
-}, false);
+}, true);
 
 
 
@@ -180,7 +180,7 @@ document.addEventListener('keydown', function(e){
         e.preventDefault();
         return false;
     }
-});
+}, {passive: true});
 
 
 

@@ -263,8 +263,7 @@ function makeMarker() {
 
 //------------------------------------------------------미리보기 기능
 function updatePreview() {
-    val = codeHtml.getValue();
-    val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
+    var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
         return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
     });
 
@@ -526,7 +525,7 @@ document.addEventListener('drop', function (e) {
     };
 
     reader.readAsText(e.dataTransfer.files[0]);
-}, false);
+},false );
 
 
 function saveAsMarkdown() {
@@ -598,7 +597,7 @@ document.addEventListener('keydown', function (e) {
         e.preventDefault();
         return false;
     }
-});
+}, {passive: true});
 
 
 function updateHash() {
