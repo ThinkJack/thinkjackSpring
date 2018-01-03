@@ -123,6 +123,7 @@
                             </a>
                             <h1 > {{replyVo.replyLikeCnt}}</h1>
                         </div>
+
                      {{/if}}
 
            <%--댓글의 replyId를 받아오기 위한 부분--%>
