@@ -175,12 +175,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void modifypassUser(UserVO user) throws Exception {
-		System.out.println("dao.vo 입력 값"+user);
+		//System.out.println("dao.vo 입력 값"+user);
 		try {
 			dao.successAuth(user);
 			dao.updatePassword(user);
 
-			System.out.println("코드 삭제");
+		//	System.out.println("코드 삭제");
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -36,6 +36,13 @@
     <link href="/resources/assets/css/docs.css" rel="stylesheet" >
 
     <link href="/resources/bootstrap-social.css" rel="stylesheet" >
+    <script>
+        var socialId=Boolean(${socialID});
+        if(socialId){
+            self.location = '/user/modifyUser';
+        }
+
+    </script>
 </head>
 <body>
 <div class="container text-center">

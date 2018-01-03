@@ -36,7 +36,8 @@
 
         //수정 권한 확인
         var check=Boolean(${modify});
-        if(!check){
+        var socialId=Boolean(${socialID});
+        if(!check||!socialId){
             self.location = '/user/modifyAuthCheck';
         }
         var chkName=true;

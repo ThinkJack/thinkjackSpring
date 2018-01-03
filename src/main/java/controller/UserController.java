@@ -156,7 +156,7 @@ public class UserController {
 
 		String msg = service.authenticate(str);
 		System.out.println("/authenticate 진입"+msg);
-
+        //계정 상태에 따른 메시지
 		if(msg == "T") {
 			rttr.addFlashAttribute("msg" , "이메일이 없습니다. 회원가입을 해주세요");
 		}else if(msg == "F"){
@@ -166,7 +166,7 @@ public class UserController {
 			rttr.addFlashAttribute("msg" , "이메일 인증 후 비밀번호를 변경해 주세요");
 		}
 
-        return "redirect:/";
+        return "redirect:/main";
     }
     @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
     public String passwordSetConfirm(UserVO user, Model model, RedirectAttributes rttr) throws Exception { // 이메일인증
@@ -233,7 +233,8 @@ public class UserController {
 
 	@RequestMapping(value = "/socialLoginPost", method = RequestMethod.GET)
 	public void socialLoginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
-
+        session.setAttribute("socialID","true");
+        session.setAttribute("modify","true");
 	}
 
 

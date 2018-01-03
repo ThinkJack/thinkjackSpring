@@ -57,9 +57,11 @@ select user_id userId,
         values(#{userEmail},#{userSocialId}, #{userName})
 </insert>
 
-    <select id="naverReadUser" resultType="UserVO">
+<select id="naverReadUser" resultType="UserVO">
         select user_id userId,
-        user_name userName
+        user_name userName,
+        user_email userEmail,
+        user_profile userProfile
         from tbl_user
         where user_social_id = #{userSocialId}
 </select>
