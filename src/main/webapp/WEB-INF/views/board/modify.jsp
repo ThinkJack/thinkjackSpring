@@ -24,12 +24,14 @@
                    name='boardTitle'
                    class="form-control"
                    placeholder="Enter Title"
-                   value="${boardVO.boardTitle}">
+                   value="${boardVO.boardTitle}"
+                   required>
         </div>
         <div class="form-group">
             <label>Content</label>
             <textarea class="form-control" name="boardContent" rows="3"
-                      placeholder="Enter ...">${boardVO.boardContent}</textarea>
+                      placeholder="Enter ..."
+                      required>${boardVO.boardContent}</textarea>
         </div>
         <div class="form-group">
             <label>Writer</label>

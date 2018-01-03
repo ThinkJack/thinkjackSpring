@@ -78,20 +78,26 @@
                 and board_content like CONCAT('%', #{keyword}, '%')
             </if>
             <if test="searchType == 'w'.toString()">
-                and board_writer like CONCAT('%', #{keyword}, '%')
+                and (SELECT user_name
+                FROM tbl_user
+                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%')
             </if>
             <if test="searchType == 'tc'.toString()">
                 and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
             </if>
             <if test="searchType == 'cw'.toString()">
-                and ( board_content like CONCAT('%', #{keyword}, '%') OR board_writer like CONCAT('%', #{keyword}, '%'))
+                and ( board_content like CONCAT('%', #{keyword}, '%') OR (SELECT user_name
+                FROM tbl_user
+                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%'))
             </if>
             <if test="searchType == 'tcw'.toString()">
                 and ( board_itle like CONCAT('%', #{keyword}, '%')
                 OR
                 board_content like CONCAT('%', #{keyword}, '%')
                 OR
-                board_writer like CONCAT('%', #{keyword}, '%'))
+                (SELECT user_name
+                FROM tbl_user
+                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%'))
             </if>
         </if>
     </sql>

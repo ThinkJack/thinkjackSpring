@@ -13,22 +13,19 @@
                     <input type="text"
                            name='boardTitle'
                            class="form-control"
-                           placeholder="Enter Title">
+                           placeholder="Enter Title"
+                           required>
                 </div>
                 <div class="form-group">
                     <label>Content</label>
                     <textarea class="form-control" name="boardContent" rows="20"
-                              placeholder="Enter ..."></textarea>
+                              placeholder="Enter ..."
+                              required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Writer</label>
                     <input type="text" name="boardWriter" value="${login.userName}"
                            class="form-control" placeholder="Enter Writer" readonly>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="boardCategoryName" value="free"
-                           class="form-control" placeholder="Enter Writer" readonly hidden>
                 </div>
 
             </div>
