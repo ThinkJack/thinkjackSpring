@@ -13,7 +13,8 @@
 
     <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:30px;"></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -30,7 +31,8 @@
                 <div class="page_title_text"  id="page-title-text">
                     <input type="text" name="page-title" id="src-title-input" value=""/>
                 </div>
-                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"><c:out value="${SrcVO.srcWriter}" default="CAPTAIN ANONYMOUS"/></span></div>
+                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer">
+                    <c:out value="${SrcVO.srcWriter}" default="CAPTAIN ANONYMOUS"/></span></div>
             </li>
             <li class="nav-item">
             </li>
@@ -45,30 +47,10 @@
             </li>
             <li class="nav-item active">
                 <div>
-                    <a class="btn btn-outline-dark" href="javascript:;" id="saveCode">
-                        <img src="/resources/images/cloud1.png" id="save-img"> Save
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item active">
-                <div>
-                    <!-- 좋아요 버튼 -->
-                    <a class="btn btn-outline-dark" href="javascript:likebt();">
-                        <img src="/resources/images/like1.png" id="likebt"> Like
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item active">
-                <div>
                     <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#setting">
                         <img src="/resources/images/setting.png"> Setting
                     </a>
                 </div>
-            </li>
-            <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#changeView">
-                    <img src="/resources/images/browser-visualization.png"> Change View
-                </a>
             </li>
             <%--<c:if test="${sessionScope.userVO eq null}">--%>
                 <li class="nav-item active login">

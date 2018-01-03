@@ -10,116 +10,92 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
-        .col-6{
+        .col-6, .col-12 {
             padding-right: 0px;
-            padding-left : 0px;
+            padding-left: 0px;
         }
-        .col-12{
-            padding-right: 0px;
-            padding-left : 0px;
-        }
-        intext{
+
+        intext {
             color: #FFFFFF;
-            
+
         }
-        #err{
+
+        #err {
             color: red;
         }
-        .unit_test {
-            display: block;
-        }
-        .test_case {
+
+        .right_view {
+            height: calc(100% - 48px);
             overflow: scroll;
-            height: 90%;
         }
-        .input_box{
+
+        .input_box {
             width: 80px;
         }
 
-
-
-        .edit-console, .main_view {
+        /*.console_body{}*/
+        .whole {
             height: 100%;
+            padding-top: 70px;
+            padding-bottom: 47px;
         }
 
-
-        .main_ch {
-            height: calc(100% - 74px);
-        }
-
-        .CodeMirror {
-            height: calc(100% - 62px);
-        }
-
-        .main_view .console_body {
-            bottom: auto;
-        }
-
-        .unit_test {
+        .right {
             height: 50%;
         }
 
-        .console_body {
-            height: calc(50% - 96px);
+        #codeUnitTest {
+            height: 100%;
+            padding-bottom: 44px;
         }
 
-        /*.console_body{}*/
+        .CodeMirror {
+             height: 100%;
+         }
+
+        .container-fluid {
+            overflow: hidden;
+        }
 
     </style>
 </head>
-<body>
+<body class="container-fluid">
 <%--header--%>
 <jsp:include page="../include/editInclude/unitTestHeader.jsp" flush="false"/>
-<main role="main" class="main" id="code-main">
-    <div class="row container-fluid">
-        <div class="row boarderLine"></div>
-        <div class="row">
-            <div class="col">
-                <div class="build col" id="jsBuild">
-                    <div class="col"><p class="h4 text-white code-name">JS</p></div>
-                    <div class="col" id="codeUnitTest"></div>
+
+<div class="col-12 row justify-contents-center whole">
+    <div class="col-6">
+        <div class="col"><p class="h4 text-white code-name">JS</p></div>
+        <div class="col" id="codeUnitTest"></div>
+    </div>
+    <div class="col-6">
+        <div class="col unit_test right">
+            <div class="col-12 row justify-content-between">
+                <div class="col-6 row justify-content-start">
+                    <p class="h4 text-white code-name">TestCase</p>
+                </div>
+                <div class="col-6 row justify-content-end my-1 ">
+                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1">Clear</button>
+                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1">AddTestCase</button>
+                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1">TestAll</button>
                 </div>
             </div>
-            <div class="col resize_code layout-ch"></div>
-            <%--결과창--%>
-            <div class="col main_view layout" id="layout2">
-                <div class="row unit_test" id="">
-                    <div class="col-12 row justify-content-between">
-                        <div class="col-6 row justify-content-start">
-                        <p class="h4 text-white code-name">TestCase</p>
-                        </div>
-                        <div class="col-6 row justify-content-end my-1 ">
-                        <button id="delete-all" class="unit-header btn btn-outline-dark mx-1" >Clear</button>
-                        <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1" >AddTestCase</button>
-                        <button id="test-all" class="unit-header  btn btn-outline-dark mx-1">TestAll</button>
-                        </div>
-                    </div>
-                    <div class="test_case">
-                        
-                    </div>
+            <div class="right_view" id="test-case"></div>
+        </div>
+        <div class="col right">
+            <div class="col-12 row justify-content-between">
+                <div class="col-6 row justify-content-start">
+                    <p class="h4 text-white code-name">Result</p>
                 </div>
-                <div class="row resize-console"></div>
-                <div class="row console-body">
-                    <%--console--%>
-                    <div class="row edit_console" id="edit-console">
-                        <div class="build col">
-                            <div class="col-12 row justify-content-between">
-                                <div class="col-6 row justify-content-start">
-                                    <p class="h4 text-white code-name">Result</p>
-                                </div>
-                                <div class="col-6 row justify-content-end my-1 ">
-                                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1" >Clear</button>
-                                </div>
-                            </div>
-                            <div class="row " id="resultView" readonly></div>
-                        </div>
-                    </div>
+                <div class="col-6 row justify-content-end my-1 ">
+                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1">Clear
+                    </button>
                 </div>
             </div>
+            <div class="right_view" id="resultView" readonly></div>
         </div>
     </div>
-</main>
-
+</div>
 
 <!--modal 창-->
 <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
@@ -140,42 +116,42 @@
     var errors = false;
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
-        declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
+        declaration = origin.substr(origin.indexOf("(") + 1, origin.indexOf("{") - origin.indexOf("(") - 2);
         // console.log(c);
         // $("#resultView").empty();
         try {
             testFunc = new Function(declaration,
                 origin.substr(origin.indexOf("{") + 1, origin.lastIndexOf("}") - origin.indexOf("{") - 1));
             errors = false;
-        }catch(err){
-            $("#resultView").append("<div><span id='err'>"+err+"</span></div>");
+        } catch (err) {
+            $("#resultView").append("<div><span id='err'>" + err + "</span></div>");
             errors = true;
         }
-        if(before != testFunc.length)
-            $(".test_case").empty();
+        if (before != testFunc.length)
+            $("#test-case").empty();
         before = testFunc.length;
     });
-    $(document).on("click","#add-test-case",function () {
-        var inputbox ="";
-        for(var i = 0; i < testFunc.length; i++)
+    $(document).on("click", "#add-test-case", function () {
+        var inputbox = "";
+        for (var i = 0; i < testFunc.length; i++)
             inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
-           "<div class='row case m-2'>" +
-           "<span class='input-group-addon'>input : </span>" +
+            "<div class='row case m-2'>" +
+            "<span class='input-group-addon'>input : </span>" +
             inputbox +
-           "<span  class='input-group-addon'>ouput : </span>" +
-           "<input type='text' class='form-control input_box output' />" +
-           "<button class='btn btn-outline-dark test_one' >TEST</button>" +
-           "<button class='btn btn-outline-dark delete_case'>DELETE</button>" +
-           "</div>";
-       $(".test_case").append(testCases);
+            "<span  class='input-group-addon'>ouput : </span>" +
+            "<input type='text' class='form-control input_box output' />" +
+            "<button class='btn btn-outline-dark test_one' >TEST</button>" +
+            "<button class='btn btn-outline-dark delete_case'>DELETE</button>" +
+            "</div>";
+        $("#test-case").append(testCases);
     });
 
-    function codeTest(input,output) {
+    function codeTest(input, output) {
         var result = false;
         var functionValue;
-        var startTime =  getTimeStamp();
-        var errMassage ="";
+        var startTime = getTimeStamp();
+        var errMassage = "";
         try {
             switch (input.length) {
                 case 0 :
@@ -242,9 +218,9 @@
                         input[7]);
                     break;
             }
-            if(output == functionValue)
+            if (output == functionValue)
                 result = true;
-        }catch (err){
+        } catch (err) {
             errMassage = err;
         }
         finally {
@@ -253,7 +229,7 @@
                 " / output : " + output + "] " +
                 "결과 : " + (result ? "성공" : "실패") +
                 " (경과시간 : " + runningTime + "ms)<br/>"
-                +"<span id='err'>"+errMassage+"</span>"+
+                + "<span id='err'>" + errMassage + "</span>" +
                 "</div>";
             return resultText;
         }
@@ -265,40 +241,54 @@
         return new Date().getMilliseconds();
     }
 
-    $(document).on("click",".test_one",function (){
+    $(document).on("click", ".test_one", function () {
         var startTime = getTimeStamp();
         var inputs = $(this).parent().find(".inputs");
         var testArguments = new Array;
-        for(var i = 0 ; i < inputs.length; i++){
+        for (var i = 0; i < inputs.length; i++) {
             testArguments.push(inputs[i].value);
         }
         var output = $(this).parent().find(".output");
         var output = output[0].value;
         // console.log(output);
 
-        var result = codeTest(testArguments,output);
+        var result = codeTest(testArguments, output);
 
 
-
-        if(!errors) {
+        if (!errors) {
             // $("#resultView").empty();
             $("#resultView").append(result);
         }
     });
 
 
-    $(document).on("click",".delete-case",function () {
+    $(document).on("click", ".delete_case", function () {
         $(this).parent().remove();
 
     });
 
-    $(document).on("click","#delete-all",function () {
+    $(document).on("click", "#delete-all", function () {
         // $("#resultView").empty();
-        $(".test_case").empty();
+        $("#test-case").empty();
     });
 
-    $(document).on("click","#clear-result-view",function () {
+    $(document).on("click", "#clear-result-view", function () {
         $("#resultView").empty();
+    });
+    $(document).on("click", "#test-all", function () {
+        var testCase = $("#test-case").find(".test_one");
+            testCase.trigger("click");
+    });
+    $(document).ready(function () {
+        $("#test-case").bind('DOMNodeInserted',function () {
+            $(this).scrollTop($(document).height());
+
+        });
+
+        $("#resultView").bind('DOMNodeInserted',function () {
+            $(this).scrollTop($(document).height());
+
+        });
     })
 
 
