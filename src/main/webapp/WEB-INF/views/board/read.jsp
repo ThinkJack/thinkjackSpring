@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -23,12 +23,31 @@
         padding: 50px;
         display: none;
     }
+#heart {
+    width: 25px;
+    height: 25px;
+}
+
+.reHeart{
+
+    width: 25px;
+    height: 25px;
+}
+
+.replyheart{
+    width: 25px;
+    height: 25px;
+}
 </style>
 
 
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
+<div class="page-header">
+
+</div>
+<div class="container-fluid">
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-6">
 
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
@@ -38,7 +57,7 @@
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
         <div class="box-body">
-            <div style="text-align: right;">
+            <div class=heartSize style="text-align: right;">
                 <a class="btn btn-outline-dark heart">
                     <img id="heart" src="">
                 </a>
@@ -61,9 +80,9 @@
         </div>
         <div class="box-footer">
             <c:if test="${login.userName == boardVO.boardWriter}">
-                <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-                <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
-            </c:if>
+            <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
+            <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+        </c:if>
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
 
@@ -98,7 +117,7 @@
         </ul>
 
     </div>
-    <div class="col-3"></div>
+    <div class="col-lo-2"></div>
 </div>
 <%--댓글 반복문 부분--%>
 <script class="template" type="text/x-handlebars-template">
@@ -131,7 +150,7 @@
                      <span class="badge">대댓글</span>
                  <h2 class="replyId">{{replyId}} </h2>
                        <h1>{{replyLikeCnt}}</h1>
-    <h2>하트값?</h2>
+                         <h2>하트값?</h2>
            <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
                 <%--replyId와 replyWriter 나타나는 부분--%>
@@ -509,9 +528,9 @@
 
         var that = $('.reHeart');
 
-        var sendData = {'replyId' :$(this).parent().parent().find('h2').text() ,'reHeart' : that.prop('name')};
-
-
+        var sendData = {'replyId' :$(this).parent().parent().find('.replyId').text() ,'reHeart' : that.prop('name')};
+// console.log($(this).parent().parent().find('.replyId').text() +"replyID");
+console.log(that.prop('name')+"sss");
         $.ajax({
             url :'/replies/heart',
             type :'POST',

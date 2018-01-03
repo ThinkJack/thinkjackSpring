@@ -4,19 +4,29 @@
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-
-<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
 <style>
     td, th {
         text-align: center;
     }
-</style>
-<div class="row">
-    <div class="col-3"></div>
 
-    <div class="col-6">
-        <h1 style="text-align: center;"> ${category} 게시판</h1>
-            <select name="searchType">
+    section.list{
+        background-color: black;
+
+    }
+</style>
+
+<div class="page-header">
+
+</div>
+<div class="container-fluid">
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-6">
+        <section class="list">
+        <div class="page-header">
+        <h1> ${category} 게시판</h1></div>
+
+            <select  name="searchType">
                 <option value="n"
                         <c:out value="${cri.searchType == null?'selected':''}"/> >
                     ---</option>
@@ -40,35 +50,42 @@
                     Title OR Content OR Writer</option>
             </select>
 
-            <input type="text" name="keyword" id="keywordInput"
+            <input class="form-group form-group-sm" type="text" name="keyword" id="keywordInput"
                    value="${cri.keyword}">
 
             <button id="searchBtn">Search</button>
             <button id="newBtn">new Board</button>
 
         <hr>
-        <table class="table">
-            <tr>
-                <th style="width:10px;">boardId</th>
-                <th >TITLE</th>
-                <th >WRITER</th>
-                <th >REGDATE</th>
-                <th style="width:40px;">VIEWCNT</th>
-                <th style="width:40px;">HEART</th>
-            </tr>
-            <c:forEach items="${list}" var="boardVO">
+
+        <div class="panel panel-danger">
+            <!-- Default panel contents -->
+            <div class="panel-heading"></div>
+
+            <table class="table">
                 <tr>
-                    <td>${boardVO.boardId}</td>
-                    <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
-                            ${boardVO.boardTitle}</a> </td>
-                    <td>${boardVO.boardWriter}</td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                        value="${boardVO.boardRegdate}"/></td>
-                    <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
-                    <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                    <th style="width:10px;">boardId</th>
+                    <th >TITLE</th>
+                    <th >WRITER</th>
+                    <th >REGDATE</th>
+                    <th style="width:40px;">VIEWCNT</th>
+                    <th style="width:40px;">HEART</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${list}" var="boardVO">
+                    <tr>
+                        <td>${boardVO.boardId}</td>
+                        <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
+                                ${boardVO.boardTitle}</a> </td>
+                        <td>${boardVO.boardWriter}</td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+                                            value="${boardVO.boardRegdate}"/></td>
+                        <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
+                        <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+
 
         <div class="text-center">
             <ul class = "pagination">
@@ -94,8 +111,9 @@
 
             </ul>
         </div>
+        </section>
     </div>
-    <div class="col-3"></div>
+    <div class="col-lg-3"></div>
 </div>
 
 <script>

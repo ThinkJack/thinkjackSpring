@@ -1,314 +1,161 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    <%--전체적으로 padding-top값 존재--%>
-    .maginPage{
-        height: 700px;
-    }
-
-    .logo{
-        width:95%;
-        height:85%;
-    }
-    .imeage1{
-        width:95%;
-        height:82%;
-    }
-
-    .imeage4{
-        width:95%;
-        height:90%;
-    }
-    .mainText{
-        width:100%;
-        height:5%;
-        /*background-color: #5A5CAD;*/
-    }
-    .centerText{
-        width: 100%;
-        height: 75%;
-        /*background-color: grey;*/
-    }
-
-    .textPage{
-        width:100%;
-        height:21.79%;
-        /*background-color: #2A00FF;*/
-    }
-
-    .textPage2{
-        width:100%;
-        height:100%;
-        /*background-color: #6a0d6a;*/
-    }
-    .textPage4{
-        width:100%;
-        height:26.5%;
-        /*background-color: #888888;*/
-    }
-
-    .textPage3{
-        width:100%;
-        height:75%;
-        /*background-color: #00a8c6;*/
-    }
-
-
-
-    .deaf{
-        height: 165px;
-        /*background-color: #aa0000;*/
-    }
-    .pageBox{
-        height: 700px;
-
-    }
-    img{
-        width: 100%;
-        height: 94%;
-    }
-.line{
-    width:30px;
-    height: 100%;
-    background-color: #0C1021;
-    }
-    .line2{
-        width:95%;
-        height: 100%;
-        background-color: #FFFFFF;
-    }
-
-    .reText{
-        width: 94%;
-        height: 37%;
-    background-color:#0C1021;
-    }
-    .reText3{
-            width: 94%;
-            height:14%;
-            background-color:#0C1021;
-        }
-    .reText4{
-        width: 94%;
-        height: 41%;
-        background-color:#0C1021;
-    }
-</style>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
+<section class="ok">
 
-
-<%--Main--%>
-<div class="container-fluid " >
-    <div class="deaf" id="main"></div>
-    <div class="row maginPage"  >
-    <div class="col-lg-2 pageBox "></div>
-    <div class="col-lg-3 removePadding" >
-        <div class="logo" >
-            <img src="/resources/images/logo.png" >
-        </div>
-
-    </div>
-    <div class="col-lg-5 removePadding" >
-        <div class="mainText">
-        </div>
-        <div class="centerText">
-            <div class="line"></div>
-        </div>
-        <div class="textPage">
-
-
-
-                <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                    <div class="line"></div>
-                </div>
-                <div class="col-sm-1 removePadding" style="background-color:pink;">
-                    ta sunt explicabo.
-                </div>
-                <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                    hhhh
-                </div>
-                <div class="col-sm-2 removePadding" style="background-color:pink;">
-                    sunt explicabo.
-                </div>
-
-       </div>
-        <div class="textPage">
-
-
-
-            <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                <div class="line"></div>
+    <%--Main--%>
+    <div class="container-fluid " >
+        <div class="deaf" id="main" ></div>
+        <div class="row maginPage main">
+            <div class="col-lg-2 pageBox "></div>
+            <div class="col-lg-3 removePadding" >
+                <img src="/resources/images/titile.jpg" >
             </div>
-            <div class="col-sm-1 removePadding" style="background-color:pink;">
-                ta sunt explicabo.
+            <div class="col-lg-5 removePadding" >
+                <div class="mainText">
+                </div>
             </div>
-            <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                hhhh
-            </div>
-            <div class="col-sm-2 removePadding" style="background-color:pink;">
-                sunt explicabo.
-            </div>
-
+            <div class="col-lg-2 pageBox "> </div>
         </div>
     </div>
-    <div class="col-lg-2 pageBox "> </div>
-</div>
+
+    <a href="#" class="scroll-down" address="true"></a>
+</section>
+<section class="ok">
+    <div class="deaf" id="editor" style="background-color: #2aa198">
+
+    </div>
 
 
-    <div class="deaf" id="editor"></div>
     <div class="row maginPage" >
         <div class="col-lg-2 pageBox "></div>
-        <div class="col-lg-3 removePadding ">
+        <div class="col-lg-3 removePadding "  >
             <div  class="imeage1">
-                <img src="/resources/images/slid2.jpg" >
+                <img src="/resources/images/io.JPG" >
+            </div>
+        </div>
+        <div class="col-lg-5 removePadding" >
+            <div class="mainText pt2">
+            </div>
+            <div class="widthFull2 ">
+                <%--<iframe frameborder="0" height="100%" width="100%"--%>
+                <%--src="https://www.youtube.com/embed/aQsy17K84Ls?&version=3&loop=1&playlist=aQsy17K84Ls&autoplay=1&controls=0"frameborder="0"></iframe>--%>
+                <div class="textPage2 ">
+                    <div class="col-sm-6 removePadding" >
+
+                    </div>
+                    <div class="col-sm-6 removePadding" >
+                        <button type="button" class="btn button1 widthFull " onclick.href="/board/list?category=free" onclick="location.replace('/edit/editPage')" ><p>Edit Page</p></button>
+                    </div>
+                </div>
+
+                <div class="textPage2 ">
+                    <div class="col-sm-6 removePadding" >
+                        <button type="button" class="btn button1 widthFull " onclick="location.replace('/edit/unitTest')" ><p>Unit Test</p></button>
+                    </div>
+                    <div class="col-sm-6 removePadding" >
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2 pageBox "> </div>
+    </div>
+
+</section>
+<div class="col-lg-5 "> </div>
+    <div class="col-lg-4 rotate ">
+        <ul>
+            <li>
+                <a href="#">
+                    <div class="front img-circle">
+                        <%--<i class="fa fa-android fa-4x"></i>--%>
+                        <img src="/resources/images/like24-2.png" >
+                    </div>
+                    <div class="back img-circle">
+                        <img src="/resources/images/like24-1.png" >
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+<section class="ok " id="board">
+    <div class="row maginPage"  >
+        <div class="col-lg-2 pageBox" ></div>
+        <div class="col-lg-3 removePadding ">
+            <div  class="imeage1 ">
+                <figure class="snip1585">
+                    <img src="/resources/images/main2.jpg" >
+                    <figcaption>
+                        <h3>원하는 게시판의 버튼을 클릭하세요 </h3>
+                    </figcaption>
+                </figure>
+
             </div>
             <div class="reText">
-                <div class="line2"></div>
+                <div class="col-sm-1 pt1" >
+                    <svg class="rect " width="60px" height="60px">
+                        <rect width="60px" height="60px" style="color:black"/>
+                    </svg>
+                </div>
+                <div class="col-sm-10 pt" >
+                    <div class=" positionBtn"><p>Board Page</p></div>
+                </div>
+                <div class="col-sm-1 line">
+                    <svg class="rect" width="30px" height="100%" >
+                        <rect width="30px" height="100%" style="color:black"/>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class="col-lg-5 removePadding" >
-            <div class="mainText">
-            </div>
-            <div class="textPage2">
-            </div>
-        </div>
-        <div class="col-lg-2 pageBox "> </div>
-    </div>
-
-
-    <div class="deaf" id="test"></div>
-    <div class="row maginPage" >
-        <div class="col-lg-2 pageBox "></div>
-        <div class="col-lg-3 removePadding ">
-            <div  class="logo">
-                <img src="/resources/images/slide1.jpg" >
-            </div>
-            <div class="reText3">
-                <div class="line2"></div>
-            </div><br><br>
-            <div class="reText3">
-                <div class="line2"></div>
-            </div>
-        </div>
-        <div class="col-lg-5 removePadding" >
-            <div class="mainText">
-            </div>
-                <div class="textPage3">
-
-
-                    <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                        <div class="line"></div>
-                    </div>
-                    <div class="col-sm-1 removePadding" style="background-color:pink;">
-                        ta sunt explicabo.
-                    </div>
-                    <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                        hhhh
-                    </div>
-                    <div class="col-sm-2 removePadding" style="background-color:pink;">
-                        sunt explicabo.
-                    </div>
-
-
-            </div>
-        </div>
-        <div class="col-lg-2 pageBox "> </div>
-    </div>
-
-
-
-
-    <div class="deaf" id="board"></div>
-    <div class="row maginPage" >
-        <div class="col-lg-2 pageBox"></div>
-        <div class="col-lg-3 removePadding">
-            <div  class="imeage4">
-                <img src="/resources/images/intro1.jpg" >
-            </div>
-            <div class="reText4">
-                <div class="line2"></div>
-            </div>
-        </div>
-        <div class="col-lg-5 removePadding" >
-            <div class="mainText">
-            </div>
-            <div class="textPage4 ">
-            <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                <div class="line"></div>
-            </div>
-            <div class="col-sm-1 removePadding" style="background-color:pink;">
-                ta sunt explicabo.
-            </div>
-            <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                hhhh
-            </div>
-            <div class="col-sm-2 removePadding" style="background-color:pink;">
-                sunt explicabo.
-            </div>
-
-
-
-        </div>
-
-            <div class="textPage4 ">
-                <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                    <div class="line"></div>
+            <div class="mainText pt2"></div>
+            <div class="textPage2 ">
+                <div class="col-sm-6 removePadding" >
+                    <button type="button" class="btn button1 widthFull" onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
                 </div>
-                <div class="col-sm-1 removePadding" style="background-color:pink;">
-                    ta sunt explicabo.
+                <div class="col-sm-6 removePadding">
                 </div>
-                <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                    hhhh
-                </div>
-                <div class="col-sm-2 removePadding" style="background-color:pink;">
-                    sunt explicabo.
-                </div>
-
-
-
             </div>
-
-            <div class="textPage4 ">
-                <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                    <div class="line"></div>
+            <div class="textPage2 ">
+                <div class="col-sm-6 removePadding" ></div>
+                <div class="col-sm-6 removePadding" >
+                    <button type="button" class="btn button1 widthFull " onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
                 </div>
-                <div class="col-sm-1 removePadding" style="background-color:pink;">
-                    ta sunt explicabo.
-                </div>
-                <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                    hhhh
-                </div>
-                <div class="col-sm-2 removePadding" style="background-color:pink;">
-                    sunt explicabo.
-                </div>
-
-
-
             </div>
-
-            <div class="textPage4 ">
-                <div class="col-sm-6 removePadding" style="background-color:yellow;">
-                    <div class="line"></div>
+            <div class="textPage2 ">
+                <div class="col-sm-6 removePadding" >
+                    <button type="button" class="btn button1 widthFull " onclick="location.replace('#');"><p>Source</p></button>
                 </div>
-                <div class="col-sm-1 removePadding" style="background-color:pink;">
-                    ta sunt explicabo.
+                <div class="col-sm-6 removePadding" >
                 </div>
-                <div class="col-sm-3 removePadding" style="background-color:yellow;">
-                    hhhh
-                </div>
-                <div class="col-sm-2 removePadding" style="background-color:pink;">
-                    sunt explicabo.
-                </div>
-
-
-
             </div>
-
+            <div class="textPage2 ">
+                <div class="col-sm-6 removePadding" >
+                </div>
+                <div class="col-sm-6 removePadding" >
+                    <button type="button" class="btn button1 widthFull " onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
+                </div>
+            </div>
         </div>
         <div class="col-lg-2 pageBox"> </div>
     </div>
-</div>
+
+    <div class="deaf" ></div>
+
+</section>
+<script>
+    <%--슬라이드--%>
+    $(function() {
+        $('.scroll-down').click (function() {
+            $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+            return false;
+        });
+    });
 
 
+
+
+</script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
