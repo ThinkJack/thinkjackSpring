@@ -46,10 +46,8 @@
             <script>
                 <%--alert('${(SrcVO.srcId eq '')}' !== '');--%>
             </script>
-            <c:if test="${(login.userId eq SrcVO.srcWriter) or
-                        (SrcVO.srcId eq '') or
-                        ((SrcVO.srcId eq null) and (login ne null)) or
-                        ((SrcVO.srcId ne '') and !(empty cookie.get(SrcVO.srcId)))}">
+            <c:if test="${(SrcVO.srcId eq null) or
+                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;" id="saveCode">

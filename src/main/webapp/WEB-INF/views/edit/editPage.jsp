@@ -111,7 +111,7 @@
         //화면에서 받은 값 세팅
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
-            <c:if test="${login.userId eq SrcVO.srcWriter}">
+            <c:if test="${(login.userId eq SrcVO.srcWriter) and (SrcVO.srcId ne null)}">
                 document.getElementById("src-title-modal").value = srcTitle;
                 document.getElementById("modal-comment").value = srcComments;
             </c:if>

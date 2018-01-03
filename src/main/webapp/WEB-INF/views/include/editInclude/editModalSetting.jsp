@@ -20,7 +20,8 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills">
-                    <c:if test="${(login.userId eq SrcVO.srcWriter)or (SrcVO.srcWriter eq null)}">
+                    <c:if test="${(SrcVO.srcId eq null) or
+                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
                         <li class="nav-item">
                             <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
                         </li>
@@ -40,7 +41,8 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <c:if test="${(login.userId eq SrcVO.srcWriter)or (SrcVO.srcWriter eq null)}">
+                    <c:if test="${(SrcVO.srcId eq null) or
+                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
                         <div class="tab-pane active container" id="settingInfo">
                             <div class="form-check">
                                 <label>Code Title</label>
