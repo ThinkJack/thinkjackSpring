@@ -81,11 +81,11 @@
                     </c:if>
                         <label for="htmlPreprocessor">HTML Preprocessor</label>
                         <select id="htmlPreprocessor" class="form-control">
-                            <option selected>None</option>
-                            <option>Haml</option>
-                            <option>MarkDown</option>
-                            <option>Slim</option>
-                            <option>Pug</option>
+                            <option selected value="0">None</option>
+                            <option value="1">Haml</option>
+                            <option value="2">MarkDown</option>
+                            <option value="3">Slim</option>
+                            <option value="4">Pug</option>
                         </select>
                     </div>
                     <div class="tab-pane container" id="settingCSS">
@@ -140,7 +140,7 @@
                         <div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="autoSave"> AUTOSAVE
+                                    <input class="form-check-input" type="checkbox" id="autoSave" checked> AUTOSAVE
                                 </label>
                             </div>
                         </div>

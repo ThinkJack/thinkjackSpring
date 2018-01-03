@@ -70,7 +70,36 @@
 <%--<script src="/codebox/js/lib/beautify.js"></script>--%>
 <%--<script src="/resources/codemirror/js/lib/beautify-css.js"></script>--%>
 
+
+<!--GFM MarkDown-->
+<script src="/resources/codemirror/gfm/markdown-it.js"></script>
+<script src="/resources/codemirror/gfm/markdown-it-footnote.js"></script>
+<script src="/resources/codemirror/gfm/highlight.pack.js"></script>
+<script src="/resources/codemirror/gfm/emojify.js"></script>
+<%--<script src="codemirror/lib/codemirror.js"></script>--%>
+<script src="/resources/codemirror/gfm/overlay.js"></script>
+<%--<script src="codemirror/mode/xml/xml.js"></script>--%>
+<script src="/resources/codemirror/mode/markdown/markdown.js"></script>
+<script src="/resources/codemirror/mode/gfm/gfm.js"></script>
+<%--<script src="codemirror/mode/javascript/javascript.js"></script>--%>
+<%--<script src="codemirror/mode/css/css.js"></script>--%>
+<%--<script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>--%>
+<%--<script src="codemirror/addon/edit/continuelist.js"></script>--%>
+<script src="/resources/codemirror/gfm/rawinflate.js"></script>
+<script src="/resources/codemirror/gfm/rawdeflate.js"></script>
+<%--<link rel="stylesheet" href="codemirror/theme/base16-light.css">--%>
+<link rel="stylesheet" href="/resources/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="/resources/codemirror/gfm/default.css">
+
+<!--haml------>
+<script src="/resources/codemirror/mode/haml/haml.js"></script>
+<script src="/resources/codemirror/mode/ruby/ruby.js"></script>
+
+
 <!--스크립트 define & event 분리참조-->
 <script src="/resources/dist/js/editPage/editPageDefine.js"></script>
 <script src="/resources/dist/js/editPage/editPageEvent.js"></script>
+<script src="//d1l6p2sc9645hc.cloudfront.net/tracker.js" data-gs="GSN-265185-D" async></script>
+
+
 

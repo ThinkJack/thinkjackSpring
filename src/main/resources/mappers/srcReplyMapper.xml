@@ -15,19 +15,20 @@
         VALUES (#{srcId}, #{replyText},  #{replyStatus})
     </insert>
 
-    <!-- 댓글 수정 -->
-    <update id="updateReply">
+    <!-- 댓글 수정  필드 주석처리하면 테스트케이스 실패함-->
+    <update id="updateReply" >
         UPDATE  tbl_src_reply
-        SET src_id=#{srcId},
-            reply_text =#{replyText},
-            reply_writer =#{replyWriter}
-        WHERE tbl_src_reply.reply_id = #{replyId}
+        SET
+          src_id = #{srcId},
+          reply_text = #{replyText},
+          reply_status = #{replyStatus}
+        WHERE reply_id = #{replyId}
     </update>
 
-    <!-- 댓글 삭제 -->
+    <!-- 댓글 삭제  필드 주석처리하면 테스트케이스 실패함 -->
     <delete id="deleteReply">
         DELETE FROM tbl_src_reply
-        WHERE reply_id = #{replyId} AND src_id = #{srcId}
+        WHERE reply_id = #{replyId}
 
     </delete>
 

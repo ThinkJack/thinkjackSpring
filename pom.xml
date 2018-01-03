@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bit</groupId>
 	<artifactId>ThinkJack</artifactId>
@@ -119,7 +119,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java MYSQL
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java MYSQL 
 			Mybats -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -151,7 +151,7 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!--jackson:json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

@@ -125,7 +125,6 @@
             }
 
             //코드 세팅
-            console.log(strHtml);
             codeHtml.setValue(strHtml);
             codeCss.setValue(strCss);
             codeJavaScript.setValue(strJs);

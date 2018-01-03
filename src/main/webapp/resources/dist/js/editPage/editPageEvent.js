@@ -7,6 +7,18 @@ codeHtml.on("change", function () {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
     }
+
+    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
+        if (srcId === "") {
+            // alert(111)
+        }else{
+            // alert(srcId);
+            clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
+            delay = setTimeout(saveCode, 3000);
+        }
+
+    }
+
 });
 
 codeCss.on("change", function () {
@@ -15,6 +27,18 @@ codeCss.on("change", function () {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
     }
+
+    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
+        if (srcId === "") {
+            // alert(111)
+        }else{
+            // alert(srcId);
+            clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
+            delay = setTimeout(saveCode, 3000);
+        }
+    }
+
+
 });
 
 codeJavaScript.on("change", function () {
@@ -22,6 +46,16 @@ codeJavaScript.on("change", function () {
     if ($('#autoPreview').is(':checked')) {
         clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
+    }
+
+    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
+        if (srcId === "") {
+            // alert(111)
+        }else{
+            // alert(srcId);
+            clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
+            delay = setTimeout(saveCode, 3000);
+        }
     }
 });
 
@@ -149,6 +183,57 @@ $(function () {
         document.getElementById("comment-view").value = srcComments;
     });
 });
+
+// HTML Preprocessor 설정
+$(function () {
+
+    $("#htmlPreprocessor").change(function () {
+        // alert(selectedText); //선택된 text
+        selectedText = $("#htmlPreprocessor option:selected").text();
+
+        // document.getElementById("htmlPreprocessor");
+        // var strUser = e.options[e.selectedIndex].value;
+
+        if (selectedText === "None") {
+
+        }
+        else if (selectedText === "Haml") {
+
+
+        } else if(selectedText === "MarkDown"){
+            // alert(this.value);
+            // alert(this.text);
+            // document.write("<script src=" +
+            //     "'/resources/dist/js/editPage/markDown.js'></script>");
+            codeHtml.setValue("");
+            codeHtml.clearHistory();
+            codeHtml.setOption("mode", 'gfm');
+            codeHtml.setOption("lineNumbers", false);
+            codeHtml.setOption("matchBrackets", 'true');
+            codeHtml.setOption("lineWrapping", 'true');
+            codeHtml.setOption("theme", 'base16-light');
+            codeHtml.setOption("extraKeys", {"Enter":
+                    "newlineAndIndentContinueMarkdownList"});
+            // alert(codeHtml.getOption("mode"));
+
+
+
+
+        } else if(selectedText === "Slim"){
+
+
+        } else if(selectedText === "Pug"){
+
+
+        }
+
+    });
+
+});
+
+
+
+
 //Setting Behavior부분 함수
 $(function () {//---------------------------- tab-size 변경시
     $("#tab-size").change(function () {
@@ -177,7 +262,7 @@ $(function () {//---------------------------- tab-size 변경시
 //Setting Behavior부분 함수
 $(function () {//---------------------------- option button 변경시
     $('input[type=radio][name=gridRadios]').change(function () {
-        alert(222);
+        // alert('gridRadios');
 
         //현재 리스트박스의 탭사이즈 값 가져오기.
         var e = document.getElementById("tab-size");
@@ -291,69 +376,69 @@ $(function () {
 
 
 //layout 관련 script
-$(function () {
-
-
-    $("#left-layout").click(function () {
-        codeMain.style = "height: calc(100% - 9px);";
-        iframeBody.style = "height: calc(100% - 50px);";
-        layout2, style = "height: 100%;";
-        layout1.className = "col-4 layout";
-        resizeView.className = "col resize_view";
-        resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-        layout2.className = "col main_view layout";
-        resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-        resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-
-        for (i in codeMirrorLayout) {
-            codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-        }
-
-        for (i in codeLayout) {
-            codeLayout[i].style = "width: 100%;";
-        }
-    });
-
-    $("#top-layout").click(function () {
-        codeMain.style = "height: 100%;";
-        iframeBody.style = "height: calc(100% - 417px);";
-        layout2, style = "height: calc(100% - 417px);";
-        layout1.className = "row layout";
-        resizeView.className = "row resize_view";
-        resizeView.style = "height:5px; max-width: 100%; cursor: row-resize;";
-        layout2.className = "row main_view layout";
-        resizeCode1.style = "max-width: 5px; height: ; cursor: col-resize;";
-        resizeCode2.style = "max-width: 5px; height: ; cursor: col-resize;";
-
-        for (i in codeMirrorLayout) {
-            codeMirrorLayout[i].style = "height: 300px";
-        }
-
-        for (i in codeLayout) {
-            codeLayout[i].style = "width: 33.1%;";
-        }
-    });
-
-    $("#right-layout").click(function () {
-        codeMain.style = "height: calc(100% - 9px);";
-        iframeBody.style = "height: calc(100% - 50px);";
-        layout2, style = "height: 100%;";
-        layout1.className = "col-4 order-12 layout";
-        resizeView.className = "col order-6 resize_view";
-        resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-        layout2.className = "col order-1 main_view layout";
-        resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-        resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-
-        for (i in codeMirrorLayout) {
-            codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-        }
-
-        for (i in codeLayout) {
-            codeLayout[i].style = "width: 100%;";
-        }
-    });
-});
+// $(function () {
+//
+//
+//     $("#left-layout").click(function () {
+//         codeMain.style = "height: calc(100% - 9px);";
+//         iframeBody.style = "height: calc(100% - 50px);";
+//         layout2.style = "height: 100%;";
+//         layout1.className = "col-4 layout";
+//         resizeView.className = "col resize_view";
+//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
+//         layout2.className = "col main_view layout";
+//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
+//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
+//
+//         for (i in codeMirrorLayout) {
+//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
+//         }
+//
+//         for (i in codeLayout) {
+//             codeLayout[i].style = "width: 100%;";
+//         }
+//     });
+//
+//     $("#top-layout").click(function () {
+//         codeMain.style = "height: 100%;";
+//         iframeBody.style = "height: calc(100% - 417px);";
+//         layout2.style = "height: calc(100% - 417px);";
+//         layout1.className = "row layout";
+//         resizeView.className = "row resize_view";
+//         resizeView.style = "height:5px; max-width: 100%; cursor: row-resize;";
+//         layout2.className = "row main_view layout";
+//         resizeCode1.style = "max-width: 5px; height: ; cursor: col-resize;";
+//         resizeCode2.style = "max-width: 5px; height: ; cursor: col-resize;";
+//
+//         for (i in codeMirrorLayout) {
+//             codeMirrorLayout[i].style = "height: 300px";
+//         }
+//
+//         for (i in codeLayout) {
+//             codeLayout[i].style = "width: 33.1%;";
+//         }
+//     });
+//
+//     $("#right-layout").click(function () {
+//         codeMain.style = "height: calc(100% - 9px);";
+//         iframeBody.style = "height: calc(100% - 50px);";
+//         layout2.style = "height: 100%;";
+//         layout1.className = "col-4 order-12 layout";
+//         resizeView.className = "col order-6 resize_view";
+//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
+//         layout2.className = "col order-1 main_view layout";
+//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
+//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
+//
+//         for (i in codeMirrorLayout) {
+//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
+//         }
+//
+//         for (i in codeLayout) {
+//             codeLayout[i].style = "width: 100%;";
+//         }
+//     });
+// });
 
 
 //화면 영역 조절관련 function
@@ -433,7 +518,7 @@ jQuery('.iframeWrapper').mouseup(function (e) {
 
 
 $(function () {
-    if ($('#autoPreview').is(':checked')) {//첫 로딩시 상태
+    if ($('#autoPreview').is(':checked')) { //첫 로딩시 상태
     } else {
         var runstyle = document.getElementById("run");
         runstyle.style = "visibility: visible;"
@@ -479,13 +564,12 @@ $(function () {
     });
 });
 
-$(function () { //--자동저장
-    if ($('#autoSave').is(':checked')) {
-        // alert(1);
-    } else {
-        // alert(2);
-    }
+// save & update
+$("#saveCode").click(function (e) {
+        saveCode();
+
 });
+
 
 $("#login").click(function (e) {
     if (window.sessionStorage) {
