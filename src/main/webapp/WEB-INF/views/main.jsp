@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-<section class="ok">
+<section class="basic">
 
     <%--Main--%>
     <div class="container-fluid " >
@@ -22,8 +22,8 @@
 
     <a href="#" class="scroll-down" address="true"></a>
 </section>
-<section class="ok">
-    <div class="deaf" id="editor" style="background-color: #2aa198">
+<section class="basic">
+    <div class="deaf" id="editor" style="background-color: black">
 
     </div>
 
@@ -64,6 +64,7 @@
     </div>
 
 </section>
+<section class="point">
 <div class="col-lg-5 "> </div>
     <div class="col-lg-4 rotate ">
         <ul>
@@ -80,6 +81,7 @@
             </li>
         </ul>
     </div>
+</section>
 <section class="ok " id="board">
     <div class="row maginPage"  >
         <div class="col-lg-2 pageBox" ></div>

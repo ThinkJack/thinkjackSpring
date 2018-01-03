@@ -10,7 +10,7 @@
     }
 
     section.list{
-        background-color: black;
+height: 70%;
 
     }
 </style>

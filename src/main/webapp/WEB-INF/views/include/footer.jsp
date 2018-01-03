@@ -1,9 +1,9 @@
 <style>
 
 footer{
-    margin-top: 30px;
-    height: 13%;
-    background-color: #6a0d6a;
+    margin-top: 10%;
+    height: 15%;
+    background-color: black;
 }
 </style>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

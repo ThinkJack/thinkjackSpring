@@ -112,7 +112,7 @@
       /*background: linear-gradient(to top, rgba(41, 128, 185, 1), rgba(41, 128, 185, 0.7))*/
       /*,url('/resources/images/intro2.jpg') no-repeat center;*/
       /*background-size: cover;*/
-      background-color: #888888;
+      /*background-color: #888888;*/
 
     }
 
@@ -122,14 +122,14 @@
       /*url('https://s9.postimg.org/7k45gm47z/image.jpg') no-repeat center;*/
       /*background-size: cover;*/
       /*background-color:red;*/
-      flex-grow:1;
+      flex-grow:2
     }
 
     .box:last-of-type {
       /*background:linear-gradient(to top, rgba(192,192,192,0.3), rgba(255,0,0,0.3)),*/
       /*url('/resources/images/intro (2).jpg') no-repeat center;*/
       background-size: cover;
-      background-color:red;
+      /*background-color:red;*/
 
     }
 

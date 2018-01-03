@@ -51,7 +51,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <div class="btn-group login" role="group" aria-label="Basic example">
-                                    <button id="loginBtn" type="button" class="btn btn-secondary button1 rounded-0">로그인</button>
+                                    <button id="loginBtn" type="button" class="btn btn-secondary button1 rounded-0" onclick="location.replace('/user/login')" >로그인</button>
                                     <button id="joinBtn" type="button" class="btn btn-secondary button1 rounded-0">회원가입</button>
                                 </div></li>
                             <li>
@@ -65,7 +65,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <div class="btn-group login" role="group" aria-label="Basic example">
-                                    <button id="logoutBtn" type="button" class="btn btn-secondary button1 rounded-0">로그아웃</button>
+                                    <button id="logoutBtn" type="button" class="btn btn-secondary button1 rounded-0"  onclick="location.replace('/user/logout')" >로그아웃</button>
                                 </div></li>
 
                             <li class="dropdown">
