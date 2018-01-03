@@ -27,16 +27,7 @@
                         </li>
                     </c:if>
                     <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab" href="#settingHTML">HTML</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab" href="#settingCSS">CSS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab"href="#settingJS">JavaScript</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab" href="#settingBehavior">Behavior</a>
+                        <a class="nav-link btn-light" data-toggle="tab" href="#settingSetting">Setting</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -74,10 +65,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane container" id="settingHTML">
+                        <div class="tab-pane container" id="settingSetting">
                     </c:if>
-                    <c:if test="${login.userId ne SrcVO.srcWriter}">
-                        <div class="tab-pane container active" id="settingHTML">
+                    <c:if test="${(SrcVO.srcId ne null) or
+                                   ((SrcVO.srcId eq null) and (empty cookie.get(SrcVO.srcId)))}">
+                        <div class="tab-pane container active" id="settingSetting">
                     </c:if>
                         <label for="htmlPreprocessor">HTML Preprocessor</label>
                         <select id="htmlPreprocessor" class="form-control">
@@ -87,8 +79,6 @@
                             <option value="3">Slim</option>
                             <option value="4">Pug</option>
                         </select>
-                    </div>
-                    <div class="tab-pane container" id="settingCSS">
                         <label for="cssPreprocessor">CSS Preprocessor</label>
                         <select id="cssPreprocessor" class="form-control">
                             <option selected>None</option>
@@ -98,8 +88,6 @@
                             <option>Stylus</option>
                             <option>PostCSS</option>
                         </select>
-                    </div>
-                    <div class="tab-pane container" id="settingJS">
                         <label for="jsPreprocessor">JavaScript Preprocessor</label>
                         <select id="jsPreprocessor" class="form-control">
                             <option selected>None</option>
@@ -108,9 +96,6 @@
                             <option>TypeScript</option>
                             <option>Babel</option>
                         </select>
-                    </div>
-                    <div class="tab-pane container" id="settingBehavior">
-                        <%--<label for="jsPreprocessor">Code Indentation</label>--%>
                         <label>Code Indentation</label>
                         <div>
                             <div class="form-check">
@@ -140,7 +125,7 @@
                         <div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="autoSave" checked> AUTOSAVE
+                                    <input class="form-check-input" type="checkbox" id="autoSave"> AUTOSAVE
                                 </label>
                             </div>
                         </div>
