@@ -97,6 +97,18 @@ public class EditController {
             srcReplyService.create(vo);
         }
 
+        // 댓글 입력
+//        @RequestMapping(value= "srcInsert.do", method = RequestMethod.POST)
+//        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session) throws Exception {
+//            System.out.println("aaa");
+//            Integer replyWriter = (Integer) session.getAttribute("replyWriter");
+//            vo.setReplyWriter(replyWriter);
+//            srcReplyService.create(vo);
+//        }
+
+
+
+
         // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
         @RequestMapping("srcList.do")
         public ModelAndView list(@RequestParam String srcId, ModelAndView mav) throws Exception {

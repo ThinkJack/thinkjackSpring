@@ -3,17 +3,20 @@
 
 codeHtml.on("change", function () {
     changeSaveImg(2);
+    clearTimeout(delay);
+
     if ($('#autoPreview').is(':checked')) {
-        clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
+        //setTimeout()에 지정된 함수 실행을 중지
         delay = setTimeout(updatePreview, 0);
     }
 
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
+    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
+        // clearTimeout(delay);
         if (srcId === "") {
             // alert(111)
         }else{
             // alert(srcId);
-            clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
+            // clearTimeout(delay);
             delay = setTimeout(saveCode, 3000);
         }
 
@@ -585,3 +588,38 @@ $('input[name="visibility"]').on("change", function (e) {
 });
 
 // $('input[name="genderS"]:checked')
+
+
+//=================Reply============
+$(function () {
+    $("#post").click(function (e) {
+        alert(1);
+        $.ajax({
+            type: "post",
+            url: "/srcReply/srcInsert.do",
+            headers: {
+                "Content-Type": "application/json",
+                "X-HTTP-Method-Override": "POST"
+            },
+            dataType: 'text',
+            data: JSON.stringify({
+                // srcId: srcId,
+                replyText: textarea,
+                replyWriter: srcId
+            }),
+
+            error : function(){
+                alert('통신실패!!');
+            },
+
+            success: function () {
+                if (textarea === "") {
+                    location.replace("/editPage/editModalReply/");
+                }
+                saveStatus = true;
+
+                alert("저장이 되었습니다.");
+            }
+        });
+    });
+});

@@ -61,12 +61,12 @@
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-user-img">
                             </div>
                             <div class="col">
-                                <textarea class="form-control"></textarea>
+                                <textarea id="textarea" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row reply_btn">
-                        <div class="col btn btn-primary right-button">POST</div>
+                        <div id="post" class="col btn btn-primary right-button">POST</div>
                     </div>
                     <%--댓글 리스트 부분--%>
                     <div class="row reply_list_view">
