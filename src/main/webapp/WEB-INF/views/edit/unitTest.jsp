@@ -293,7 +293,7 @@
             $(this).scrollTop($(document).height());
 
         });
-    })
+    });
 
 
 
