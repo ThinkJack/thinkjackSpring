@@ -71,8 +71,10 @@
                         </div>
                         <div class="tab-pane container" id="settingSetting">
                     </c:if>
-                    <c:if test="${(SrcVO.srcId ne null) or
-                                   ((SrcVO.srcId eq null) and (empty cookie.get(SrcVO.srcId)))}">
+                    <c:if test="${!(((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                                ((login ne null) and (SrcVO.srcId eq null)) or
+                                ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                                ((login eq null) and (SrcVO.srcId eq null)))}">
                         <div class="tab-pane container active" id="settingSetting">
                     </c:if>
                         <label for="htmlPreprocessor">HTML Preprocessor</label>

@@ -32,7 +32,7 @@ function getFileInfo(fullName) {
 
 function filePathChange(path) {
     var headerimg;
-    var fullName="path";
+    var fullName=path;
     var test =fullName.lastIndexOf("/");
     fileName= fullName.substring(test+1,fullName.length);
     path= fullName.substring(0,test+1);
