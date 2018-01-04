@@ -240,6 +240,7 @@ var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
 var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus;
+var userId;
 var Heart;
 var strHtml, strCss, strJs;
 var curhref = location.href;
@@ -287,7 +288,7 @@ function updatePreview() {
     }
 
     clearTimeout(hashto);
-    hashto = setTimeout(updateHash, 1000);
+    // hashto = setTimeout(updateHash, 1000);
 
 
     // -- mode 별 out(미리보기) 선택
@@ -296,7 +297,7 @@ function updatePreview() {
         md.render(val) : codeHtml.getValue(); //markdown : html
 
     out.write(
-        rlt
+        "" + rlt
         +
         "<style>" + codeCss.getValue() + "</style>"
         +
@@ -306,44 +307,6 @@ function updatePreview() {
     consoleView(codeJavaScript.getValue());
     out.close();
 }
-
-var saveCode = function () {
-
-    // alert('savecode');
-
-    saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
-
-    if (!saveStatus) {
-        $.ajax({
-            type: "post",
-            url: "/editRest/save",
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            dataType: 'text',
-            data: JSON.stringify({
-                srcId: srcId,
-                srcComments: srcComments,
-                srcTitle: srcTitle,
-                srcHtml: codeHtml.getValue(),
-                srcCss: codeCss.getValue(),
-                srcJavaScript: codeJavaScript.getValue()
-            }),
-            success: function (getLink) {
-                if (srcId === "") {
-                    location.replace("/edit/editPage/" + getLink);
-                }
-                saveStatus = true;
-
-                alert("저장이 되었습니다.");
-            }
-        });
-    }
-
-};
-
 
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
@@ -396,7 +359,6 @@ function escapeHtml(text) {
 function codeSave() {
     saveImg.src = "/resources/images/cloud1.png";
     srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
-    alert(srcStatus);
     if (!saveStatus) {
         $.ajax({
             type: "post",
@@ -417,7 +379,7 @@ function codeSave() {
                 srcStatus: srcStatus
             }),
             success: function (getLink) {
-                if(srcId === ""){
+                if(srcId === "" && userId === ""){
                     document.cookie = getLink + "=";
                 }
 
@@ -430,6 +392,37 @@ function codeSave() {
         });
     }
 }
+
+
+var consoleView = function (str) {
+    var commandLineValue = str;
+    //console.log() 입력시 문자열 작업(정규식)
+    var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
+    var temp = commandLineValue.match(reg);
+
+    for (i in temp) {
+        temp[i] = temp[i].replace("console.log(", "");
+        temp[i] = temp[i].replace("console.log(", "");
+        temp[i] = temp[i].replace("'", "");
+        temp[i] = temp[i].replace("\"", "");
+        temp[i] = temp[i].replace("')", "");
+        temp[i] = temp[i].replace("\")", "");
+    }
+
+    try {
+        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
+        if (temp !== null) {
+            for (i in temp) {
+                editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
+            }
+        }
+        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
+    } catch (err) {
+        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+    }
+
+    editConsoleView.scrollTop = editConsoleView.scrollHeight
+};
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
@@ -581,57 +574,57 @@ function hideMenu() {
 // });
 
 
-document.addEventListener('keydown', function (e) {
-    if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
-        alert(111);
-        e.shiftKey ? showMenu() : saveAsMarkdown();
+// document.addEventListener('keydown', function (e) {
+//     if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
+//         alert(111);
+//         e.shiftKey ? showMenu() : saveAsMarkdown();
+//
+//         e.preventDefault();
+//         return false;
+//     }
+//
+//     if (e.keyCode === 27 && menuVisible) {
+//         hideMenu();
+//
+//         e.preventDefault();
+//         return false;
+//     }
+// }, {passive: true});
 
-        e.preventDefault();
-        return false;
-    }
 
-    if (e.keyCode === 27 && menuVisible) {
-        hideMenu();
+// function updateHash() {
+//     window.location.hash = btoa( // base64 so url-safe
+//         RawDeflate.deflate( // gzip
+//             unescape(encodeURIComponent( // convert to utf8
+//                 codeHtml.getValue()
+//             ))
+//         )
+//     );
+// }
 
-        e.preventDefault();
-        return false;
-    }
-}, {passive: true});
-
-
-function updateHash() {
-    window.location.hash = btoa( // base64 so url-safe
-        RawDeflate.deflate( // gzip
-            unescape(encodeURIComponent( // convert to utf8
-                codeHtml.getValue()
-            ))
-        )
-    );
-}
-
-if (window.location.hash) {
-    var h = window.location.hash.replace(/^#/, '');
-    if (h.slice(0, 5) == 'view:') {
-        setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
-        document.body.className = 'view';
-    } else {
-        codeHtml.setOption(
-            decodeURIComponent(escape(
-                RawDeflate.inflate(
-                    atob(
-                        h
-                    )
-                )
-            ))
-        );
-        updatePreview();
-        codeHtml.focus();
-    }
-}
-else {
-    // updatePreview();
-    codeHtml.focus();
-}
+// if (window.location.hash) {
+//     var h = window.location.hash.replace(/^#/, '');
+//     if (h.slice(0, 5) == 'view:') {
+//         setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
+//         document.body.className = 'view';
+//     } else {
+//         codeHtml.setOption(
+//             decodeURIComponent(escape(
+//                 RawDeflate.inflate(
+//                     atob(
+//                         h
+//                     )
+//                 )
+//             ))
+//         );
+//         updatePreview();
+//         codeHtml.focus();
+//     }
+// }
+// else {
+//     // updatePreview();
+//     codeHtml.focus();
+// }
 // document.write("<script src='//d1l6p2sc9645hc.cloudfront.net/tracker.js' data-gs='GSN-265185-D' async'></script>");
 
 

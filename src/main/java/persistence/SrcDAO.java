@@ -1,5 +1,6 @@
 package persistence;
 
+import domain.Criteria;
 import domain.SrcLikeVO;
 import domain.SrcVO;
 
@@ -21,5 +22,7 @@ public interface SrcDAO {
 
     void updateSrcViewCnt(String srcId);
 
-    List selectSrcList();
+    List selectSrcList(Criteria cri);
+
+    int countPaging(Criteria cri) throws Exception;
 }

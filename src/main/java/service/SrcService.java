@@ -1,5 +1,6 @@
 package service;
 
+import domain.Criteria;
 import domain.SrcLikeVO;
 import domain.SrcVO;
 
@@ -13,6 +14,9 @@ public interface SrcService {
     Map readSrc(HttpServletRequest request)throws Exception;
     String saveSrc(HttpServletRequest request, HttpServletResponse response, SrcVO vo)throws Exception;
     Map srcLike(HttpServletRequest request, SrcLikeVO vo);
-    List srcList()throws Exception;
+
+    List srcList(Criteria cri)throws Exception;
+
+    int listCountCriteria(Criteria cri) throws Exception;
 
 }

@@ -1,5 +1,6 @@
 package persistence;
 
+import domain.Criteria;
 import domain.SrcLikeVO;
 import domain.SrcVO;
 import org.apache.ibatis.session.SqlSession;
@@ -79,7 +80,12 @@ public class SrcDAOImpl implements SrcDAO {
     }
 
     @Override
-    public List selectSrcList() {
-        return sqlSession.selectList(srcBoardMapper + ".selectSrcBoardList");
+    public List selectSrcList(Criteria cri){
+        return sqlSession.selectList(srcBoardMapper + ".selectSrcBoardList", cri);
+    }
+
+    @Override
+    public int countPaging(Criteria cri) throws Exception {
+        return sqlSession.selectOne(srcBoardMapper + ".countPaging", cri);
     }
 }
