@@ -29,3 +29,25 @@ function getFileInfo(fullName) {
     //return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName}
     return imgsrc;
 }
+
+function filePathChange(path) {
+    var headerimg;
+    var fullName="path";
+    var test =fullName.lastIndexOf("/");
+    fileName= fullName.substring(test+1,fullName.length);
+    path= fullName.substring(0,test+1);
+//            console.log(path);
+//            console.log(fileName);
+//            console.log(test);
+    profileheader =path+"s_"+fileName;
+//            console.log(fullName);
+    if(fullName!=="") {
+        headerimg = getFileInfo(profileheader);
+        // console.log(headerimg);
+        hstr = headerimg;
+    }else{
+        hstr = "/resources/images/like1.png";
+    }
+
+    $("#reply-user-img").attr("src", hstr);
+}

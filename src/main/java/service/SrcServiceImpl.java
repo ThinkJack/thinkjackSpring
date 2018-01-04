@@ -1,15 +1,14 @@
 package service;
 
+import domain.Criteria;
 import domain.SrcLikeVO;
 import domain.SrcVO;
 import domain.UserVO;
-import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
 import persistence.UserDAO;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,9 +16,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +112,7 @@ public class SrcServiceImpl implements SrcService {
                 srcId = randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
         }
+
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;
         File fileDir = new File(filePath);
@@ -170,8 +167,8 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public List srcList() throws Exception {
-        List list = srcdao.selectSrcList();
+    public List srcList(Criteria cri) throws Exception {
+        List list = srcdao.selectSrcList(cri);
 
         for(int i=0; i<list.size(); i++){
             SrcVO vo = (SrcVO)list.get(i);
@@ -185,7 +182,10 @@ public class SrcServiceImpl implements SrcService {
     }
 
 
-
+    @Override
+    public int listCountCriteria(Criteria cri) throws Exception {
+        return srcdao.countPaging(cri);
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     //codeFile 읽어오는 작업

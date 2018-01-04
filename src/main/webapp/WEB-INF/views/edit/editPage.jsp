@@ -103,15 +103,18 @@
         strCss = escapeHtml('<c:out value="${SrcVO.srcCss}" default=""/>');
         strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
         Heart = "<c:out value="${like}" default="0"/>";
+        userId = "<c:out value="${login.userId}" default=""/>";
         <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
         <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
         <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
-
         //화면에서 받은 값 세팅
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
-            <c:if test="${(login.userId eq SrcVO.srcWriter) and (SrcVO.srcId ne null)}">
+            <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
                 document.getElementById("src-title-modal").value = srcTitle;
                 document.getElementById("modal-comment").value = srcComments;
             </c:if>
@@ -150,13 +153,11 @@
                     likeImgChange(2);
                 }
             }
+
+            <c:if test="${login.userProfile ne null}">
+                filePathChange("${login.userProfile}");
+            </c:if>
         });
-
-        $("#saveCode").click(function (e) {
-            codeSave();
-        });
-
-
     </script>
 </body>
 </html>

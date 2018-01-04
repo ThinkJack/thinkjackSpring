@@ -110,9 +110,4 @@ public class SrcTest {
 //        vo.setSrcId("LPlitL");
 //        dao.deleteSrcLike(vo);
 //    }
-    @Test
-    public void selectSrcList()throws Exception{
-        List list = service.srcList();
-        System.out.println(list);
-    }
 }

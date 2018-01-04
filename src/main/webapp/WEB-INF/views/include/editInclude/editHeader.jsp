@@ -11,7 +11,7 @@
 <!-- header 메뉴바 -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
 
-    <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:30px;"></a>
+    <a class="navbar-brand" href="/"><img src="/resources/images/logo.png" style="width:30px;"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,12 @@
                     <a class="page_title">
                         <span id="src-title"></span>
                     </a>
+                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
                     <img class="pencil" id="pencil" src="/resources/images/pencil.png">
+                    </c:if>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
                     <input type="text" name="page-title" id="src-title-input" value=""/>
@@ -46,8 +51,10 @@
             <script>
                 <%--alert('${(SrcVO.srcId eq '')}' !== '');--%>
             </script>
-            <c:if test="${(SrcVO.srcId eq null) or
-                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
+            <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;" id="saveCode">

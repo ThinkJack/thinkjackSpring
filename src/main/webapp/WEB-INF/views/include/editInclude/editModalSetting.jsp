@@ -20,8 +20,10 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills">
-                    <c:if test="${(SrcVO.srcId eq null) or
-                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
+                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
                         <li class="nav-item">
                             <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
                         </li>
@@ -32,8 +34,10 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <c:if test="${(SrcVO.srcId eq null) or
-                        ((SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId)))}">
+                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
                         <div class="tab-pane active container" id="settingInfo">
                             <div class="form-check">
                                 <label>Code Title</label>
@@ -121,6 +125,10 @@
                             </div>
                         </div>
 
+                        <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                                    ((login ne null) and (SrcVO.srcId eq null)) or
+                                    ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                                    ((login eq null) and (SrcVO.srcId eq null))}">
                         <label>Save Automatically</label>
                         <div>
                             <div class="form-check">
@@ -129,6 +137,7 @@
                                 </label>
                             </div>
                         </div>
+                        </c:if>
 
                         <label>Auto-Updating Preview</label>
                         <div>

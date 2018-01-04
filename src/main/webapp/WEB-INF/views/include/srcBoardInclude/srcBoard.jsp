@@ -42,9 +42,15 @@
         -o-transform-origin: 0 0;
         -webkit-transform-origin: 0 0;
         transform-origin: 0 0;
-
         width: 200%;
         height: 200%;
+
+        pointer-events: none;
+    }
+
+    .iframe_wrap:hover {
+        opacity: 0.5;
+        cursor: pointer;
     }
 </style>
 <div class="container">
@@ -60,7 +66,7 @@
         <div class="col">
             <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
-                <div class="iframe_wrap">
+                <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                     <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                     </iframe>
                 </div>
@@ -83,6 +89,8 @@
         <c:if test="${status.count % 3 eq 0}">
     </div>
         </c:if>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
             $(function () {
                 var previewFrame = document.getElementById('${srcVo.srcId}');
@@ -120,6 +128,35 @@
             }
         </script>
     </c:forEach>
+    <c:if test="${status.count % 3 eq 0}">
+    </div>
+    </c:if>
+    <div class="text-center">
+        <ul class="pagination justify-content-center">
+            <c:if test="${pageMaker.prev}">
+            <li class="page-item">
+                <a class="page-link" href="srcList?page=${pageMaker.startPage - 1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            </c:if>
+            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+            <li
+                <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
+                <a class="page-link" href="srcList?page=${idx}">${idx}</a>
+            </li>
+            </c:forEach>
+            <c:if test="${pageMaker.next && pageMakekr.endPage > 0}">
+            <li class="page-item">
+                <a class="page-link" href="srcList?page=${pageMaker.endPage + 1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            </c:if>
+        </ul>
+    </div>
 </div>
 <!--내용-->
 

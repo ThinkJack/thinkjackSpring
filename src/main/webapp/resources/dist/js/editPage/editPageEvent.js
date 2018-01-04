@@ -14,7 +14,7 @@ codeHtml.on("change", function () {
         }else{
             // alert(srcId);
             clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(saveCode, 3000);
+            delay = setTimeout(codeSave, 3000);
         }
 
     }
@@ -34,7 +34,7 @@ codeCss.on("change", function () {
         }else{
             // alert(srcId);
             clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(saveCode, 3000);
+            delay = setTimeout(codeSave, 3000);
         }
     }
 
@@ -54,7 +54,7 @@ codeJavaScript.on("change", function () {
         }else{
             // alert(srcId);
             clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(saveCode, 3000);
+            delay = setTimeout(codeSave, 3000);
         }
     }
 });
@@ -307,36 +307,6 @@ $(function () {
     });
 });
 
-var consoleView = function (str) {
-    var commandLineValue = str;
-    //console.log() 입력시 문자열 작업(정규식)
-    var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-    var temp = commandLineValue.match(reg);
-
-    for (i in temp) {
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("'", "");
-        temp[i] = temp[i].replace("\"", "");
-        temp[i] = temp[i].replace("')", "");
-        temp[i] = temp[i].replace("\")", "");
-    }
-
-    try {
-        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
-        if (temp !== null) {
-            for (i in temp) {
-                editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
-            }
-        }
-        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
-    } catch (err) {
-        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
-    }
-
-    editConsoleView.scrollTop = editConsoleView.scrollHeight
-};
-
 
 //footer
 //console 버튼 누를때
@@ -566,7 +536,7 @@ $(function () {
 
 // save & update
 $("#saveCode").click(function (e) {
-        saveCode();
+    codeSave();
 
 });
 
