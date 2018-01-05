@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <html>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -55,14 +56,16 @@
 
 
 </script>
+<div class="col-sm-4"></div>
+<div class="col-sm-4">
 <h1>TJ 비밀번호 변경</h1>
-<form name="chpass"  method="post" onsubmit="return chpasschk(this)">
+<form name="chpass"  method="post" action="/user/setPassword" onsubmit="return chpasschk(this)">
             <input type="hidden" name="userId" id="userId" value="${userId}" >
     password<input type = "password" name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
     password 확인<input type = "password" name = "chkPassword" id="chkPassword" onkeyup="checkvalue()"><br>
     <p id="pwsame" name="pwsame"  ></p>
     <input type="submit" value="패스워드 변경"/>
 </form>
-
+</div>
 </body>
 </html>
