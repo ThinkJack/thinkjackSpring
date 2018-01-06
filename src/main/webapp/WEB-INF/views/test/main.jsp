@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
+<%--<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>--%>
 
     <!-- dark배경ㅡ,가운데위치, 밝은 회색.패팅32 id=about -->
     <div class="w3-container w3-center w3-text-light-grey " >

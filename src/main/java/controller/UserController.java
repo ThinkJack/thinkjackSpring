@@ -188,6 +188,30 @@ public class UserController {
         return "redirect:setPassword";
     }
 
+    @RequestMapping(value = "/setPassAuthCheck", method = RequestMethod.GET)
+    public void setPassUserAuthGet(UserVO user,Model model) throws Exception{
+
+    }
+
+
+    @RequestMapping(value = "/setPassAuthCheck", method = RequestMethod.POST)
+    public String setPassUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
+        //System.out.println(dto);
+        UserVO vo = service.login(dto);
+       // System.out.println(vo);
+        if(vo == null) {
+            return "user/setPassAuthCheck";
+        }
+        //System.out.println("usercontroller vo =" +vo);
+        model.addAttribute("userVO",vo);
+        //model.addAttribute("modify",true);
+        int id=vo.getUserId();
+        rttr.addFlashAttribute("userId",id);
+        rttr.addFlashAttribute("setPassword",true);
+        return "redirect:/user/setPassword";
+
+    }
+
 	@RequestMapping(value = "/setPassword", method = RequestMethod.GET)
 	public void setPassword(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
 
@@ -195,14 +219,13 @@ public class UserController {
 
 	@RequestMapping(value = "/setPassword", method = RequestMethod.POST)
 	public String setPasswordPost(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
-			//System.out.println("패스워드 변경 값"+user);
+			System.out.println("패스워드 변경 값"+user);
     	try{
 			service.modifypassUser(user);
 			rttr.addFlashAttribute("msg" , "변경되었습니다. 변경된 패스워드로 로그인해 주세요");
 		}catch (Exception e){
 			rttr.addFlashAttribute("msg" , "오류가 발생했습니다. 관리자에게 문의 주세요");
 		}
-
 		return "redirect:/main";
 	}
 
@@ -260,6 +283,12 @@ public class UserController {
 		}
 		return "/main";
 	}
+
+    @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
+    public void myinfo(BoardVO board, RedirectAttributes rttr) throws Exception{
+
+    }
+
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
 	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
 
@@ -267,7 +296,12 @@ public class UserController {
 
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.POST)
 	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
-		UserVO vo = service.login(dto);
+
+    	System.out.println(dto);
+    	UserVO vo = service.login(dto);
+
+		System.out.println(vo);
+
 		if(vo == null) {
 			return "user/modifyAuthCheck";
 		}

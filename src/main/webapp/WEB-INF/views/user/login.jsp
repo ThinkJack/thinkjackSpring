@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -55,6 +55,13 @@
         }
 
     </style>
+<script>
+    var userId=Boolean(${login.userId});
+    if(userId){
+        alert("이미 로그인 되어있습니다. 로그아웃 해주세요");
+    self.location = '/main';
+    }
+</script>
 </head>
 <body>
 <div class="container text-center">

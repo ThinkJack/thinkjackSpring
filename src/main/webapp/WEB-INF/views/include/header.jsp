@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <!--필수 -->
@@ -55,6 +56,8 @@
 
             $("#profileHeader").attr("src",hstr);
         });
+
+
     </script>
 </head>
 
@@ -64,16 +67,21 @@
 
     <div class="row">
         <div class="col-8"></div>
-        <div class="col-4">
-            <img id="profileHeader" src="" style="width:30px;height:30px;" >
-            <div>${login.userName}</div>
-            <button onclick="location.href='/user/login'">로그인</button>
-            <button onclick="location.href='/user/logout'">로그아웃</button>
-            <button onclick="location.href='/user/modifyUser'">정보변경</button>
-            <!--로그인 했을때-->
-            <!--<button href="">로그인</button>-->
-            <!--<button href="" style="padding-left:10px;">버튼2</button>-->
-        </div>
+        <c:set var="chk" value="${login.userId}" />
+        <c:choose>
+             <c:when test="${not empty chk}">
+                  <div class="col-4">
+                     <img id="profileHeader" src="" style="width:30px;height:30px;" >
+                      <div>"${login.userName}" 님 환영합니다.</div>
+                      <button onclick="location.href='/user/logout'">로그아웃</button>
+                      <button onclick="location.href='/user/myinfo'">정보변경</button>
+                  </div>
+             </c:when>
+            <c:otherwise>
+                <button onclick="location.href='/user/login'">로그인</button>
+                <button onclick="location.href='/user/register'">회원가입</button>
+            </c:otherwise>
+        </c:choose>
     </div>
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,7 +38,7 @@
         //수정 권한 확인
         var check=Boolean(${modify});
         var socialId=Boolean(${socialID});
-        if(!check||!socialId){
+        if(!check&&!socialId){
             self.location = '/user/modifyAuthCheck';
         }
         var chkName=true;
@@ -93,7 +94,7 @@
 
 
             if(userName==oldName){
-                alert(" 사용 가능한 이름입니다.");
+                alert("현재 사용 중인 이름입니다.");
                 return chkName=true;
             }else if(!userName || userName.trim().length ==0){
                 alert("유저 네임이 입력되지 않았습니다.");
@@ -127,24 +128,31 @@
 
 </head>
   <body>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
   <h3>Profile Image</h3>
   <div class="fileDrop">
       <div class="uploadedList"></div>
   </div>
 
-  <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
+
   <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
+      <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
+      <input type='file' id="imgInp" name="file" /><br>
       <input type="hidden" name="userId" value="${login.userId}" readonly/>
       아이디 : <input type="text" name="userEmail" id="userEmail"  value="${login.userEmail}" readonly/><br>
       이름 : <input type="text" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><button type="button" id="authenticateName">중복체크</button><br>
       <input type="text" name="test" value="${login.userProfile}" /><br>
-      <input type='file' id="imgInp" name="file" />
+
       <input type="hidden" id="userProfile" name="userProfile">
 
 
 
       <input type="submit" value="정보변경"/>
       <input type="reset" value="취소"/>
+  </form>
+  </div>
+
      <div>
      <label>
 

@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -39,7 +40,8 @@
     <script>
         var socialId=Boolean(${socialID});
         if(socialId){
-            self.location = '/user/modifyUser';
+            alert("소셜 아이디는 패스워드를 변경할 수 없습니다. \n해당 소셜 사이트에 접속하여 변경해 주세요.");
+            self.location = '/test/myinfo';
         }
 
     </script>
@@ -53,11 +55,11 @@
         <div class="col-sm-4">
 
 
-            <form name="login" action="/user/modifyAuthCheck" method="post">
+            <form name="login" action="/user/setPassAuthCheck" method="post">
 
 
                 <div class="panel-heading">
-                    <div class="panel-title"><h1>회원 정보 변경</h1></div>
+                    <div class="panel-title"><h1>패스워드 변경</h1></div>
                 </div>
                 <input type="text" class="form-control" id="userEmail" name="userEmail" value="${login.userEmail}" readonly autofocus>
                 <input type="text" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" autofocus >

@@ -63,7 +63,7 @@
             <input type="hidden" name="userId" id="userId" value="${userId}" >
     password<input type = "password" name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
     password 확인<input type = "password" name = "chkPassword" id="chkPassword" onkeyup="checkvalue()"><br>
-    <p id="pwsame" name="pwsame"  ></p>
+    <p id="pwsame" name="pwsame" ></p>
     <input type="submit" value="패스워드 변경"/>
 </form>
 </div>
