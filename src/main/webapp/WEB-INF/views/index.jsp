@@ -165,8 +165,6 @@
 <div class="container text-center" style="height: 20%">
   <a class="maintitle">Thinkjack</a>
 </div>
-
-
 <div class="row content">
   <div class="col-sm-3"></div>
 

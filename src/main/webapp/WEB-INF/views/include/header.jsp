@@ -5,71 +5,102 @@
 <head>
     <!--필수 -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%--반응형 웹디자인 아닌 조정폭--%>
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link href="/resources/dist/css/home.css" rel="stylesheet">
+
+    <%--애니메이션 효과--%>
+    <%--<link rel="stylesheet" href="/resources/dist/css/animate.min.css">--%>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/resources/dist/js/scrolla.jquery.min.js"></script>
+    <script>$('.animate').scrolla();</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 </head>
-<%--스크롤--%>
-<a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<body>
+
+<div  class="container-fluid removePadding">
+    <div class="row removePadding">
+
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="col-xs-2 removePadding" >
+
+                </div>
+
+                <div class="col-xs-5 removePadding" >
+                    <a class="navbar-brand " onclick="location.replace('/main')">Logo</a>
 
 
-<body id="mainPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<nav class="navbar navbar-default  navbar-fixed-top ">
-    <div class="row mainNavbarEdit">
-        <div class="col-lg-2" removePadding></div>
-        <div class="col-lg-3 removePadding" >
 
-        </div>
-        <div class="col-lg-5 removePadding" >
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
 
-            <div class="container-fluid">
 
-                <div class="collapse navbar-collapse width1" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav snip1189 ">
-                            <li class="current"><a href="#main" >Main</a></li>
+                    <div class="collapse navbar-collapse" id="myNavbar" >
+                        <ul class="nav navbar-nav   pt5">
+                            <li><a href="#main" >Main</a></li>
                             <li><a href="#editor" >Service</a></li>
-                            <%--<li class="dropdown">--%>
-                                <%--<a href="#board" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >Board</a>--%>
-                                <%--<ul class="dropdown-menu" >--%>
-                                    <%--<li><a href="/board/list?category=free">Free</a></li>--%>
-                                    <%--<li><a href="#">QNA</a></li>--%>
-                                    <%--<li><a href="#">도움말</a></li>--%>
-                                    <%--<li class="divider"></li>--%>
-                                    <%--<li><a href="#">소스 게시판</a></li>--%>
-                                <%--</ul>--%>
-                            <%--</li>--%>
-                        <li><a href="#board" >Board</a></li>
-
-                    </ul>
-                    <%--로그인 되었을때--%>
+                            <li><a href="#board" >Board</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-3 removePadding" >
+                    <%--로그인--%>
+                    <%--로그아웃 상태--%>
                     <c:if test="${login eq null}">
                         <ul class="nav navbar-nav navbar-right">
+
                             <li>
                                 <div class="btn-group login" role="group" aria-label="Basic example">
-                                    <button id="loginBtn" type="button" class="btn btn-secondary button1 rounded-0" onclick="location.replace('/user/login')" >로그인</button>
-                                    <button id="joinBtn" type="button" class="btn btn-secondary button1 rounded-0">회원가입</button>
-                                </div></li>
+                                        <button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>
+                                                <button id="joinBtn"  class="btn btn-secondary button1  btn-13 pt5 ">회원가입</button>
+                                </div>
+                            </li>
+
+
                             <li>
-                            <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle" src="/resources/images/mycircle.png" ></a>
+                                <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull" src="/resources/images/mycircle.png" ></a>
+
+                                <%--<ul class="dropdown-menu" role="menu">--%>
+                                    <%--<li>--%>
+                                            <%--<button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>--%>
+                                    <%--</li>--%>
+                                    <%--<li>--%>
+                                        <%--<button id="joinBtn"  class="btn btn-secondary button1  btn-13 pt5 ">회원가입</button>--%>
+                                    <%--</li>--%>
+
+                                <%--</ul>--%>
                             </li>
 
                         </ul>
                     </c:if>
-
+                    <%--로그인 상태--%>
                     <c:if test="${login ne null}">
                         <ul class="nav navbar-nav navbar-right">
+
                             <li>
                                 <div class="btn-group login" role="group" aria-label="Basic example">
-                                    <button id="logoutBtn" type="button" class="btn btn-secondary button1 rounded-0"  onclick="location.replace('/user/logout')" >로그아웃</button>
-                                </div></li>
+                                    <button id="logoutBtn" type="button" class="btn btn-secondary btn-13 button1 pt5"  onclick="location.replace('/user/logout')" >로그아웃</button>
+                                </div>
+                            </li>
 
                             <li class="dropdown">
-                                <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle"  src="/resources/images/main2.jpg" ></a>
+                                <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  src="/resources/images/main2.jpg" ></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#">회원정보 수정</a></li>
                                     <li><a href="#">마이페이지</a></li>
@@ -80,15 +111,15 @@
                             </li>
                         </ul>
                     </c:if>
-                </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
 
-            </div><!-- /.container-fluid -->
 
-        </div>
-        <div class="col-lg-2 removePadding">
-        </div>
     </div>
-</nav>
+
+</div>
+
+
 
 
 

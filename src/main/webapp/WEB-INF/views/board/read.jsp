@@ -40,14 +40,12 @@
     }
 </style>
 
+<div class="deaf2 "></div>
 
-<div class="page-header">
+<div class="row text-center removePadding ">
+    <div class="col-xs-3"></div>
 
-</div>
-<div class="container-fluid">
-    <div class="col-lg-3"></div>
-
-    <div class="col-lg-6">
+    <div class="col-xs-6 borderLB  widthFull3" style="background-color:#000000 ">
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -63,20 +61,21 @@
             </div>
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" name='title' class="form-control" value="${boardVO.boardTitle}"
+                <input type="text" name='title' class="form-control inputC" value="${boardVO.boardTitle}"
                        readonly="readonly">
             </div>
             <div class="form-group">
                 <label>Content</label>
-                <textarea type="text" name='content' class="form-control" rows="20"
+                <textarea type="text" name='content' class="form-control inputC" rows="20"
                           readonly="readonly">${boardVO.boardContent}</textarea>
             </div>
             <div class="form-group">
                 <label>Writer</label>
-                <input type="text" name='writer' class="form-control" value="${boardVO.boardWriter}"
+                <input type="text" name='writer' class="form-control inputC" value="${boardVO.boardWriter}"
                        readonly="readonly">
             </div>
         </div>
+
         <div class="box-footer">
             <c:if test="${login.userName == boardVO.boardWriter}">
                 <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
@@ -84,17 +83,28 @@
             </c:if>
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
+    </div>
+    <div class="col-xs-3 widthFull3" style="background-color:#000000"></div>
+</div>
 
-        <%--댓글 등록 부분 --%>
-        <div class="media well">
-            <div class="media-body">
-                <%--댓글 등록하는 아이디(--%>
-                <input type="text" name='writer' class="form-control register" value="${boardVO.boardWriter}"  readonly="readonly">
-                <%--댓글 입력 부분--%>
-                <div class="form-group">
-                    <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요</textarea>
-                    <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                    <button type="button"  class="btn btn-primary addBtn" >댓글등록 </button>
+<div class="row text-center removePadding ">
+    <div class="col-xs-3"></div>
+
+    <div class="col-xs-6 removePadding " >
+
+<%--댓글 등록 부분 --%>
+        <div class="row removePadding" style="background-color: black">
+            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #fff">
+                <div class="deaf2"></div>
+                <div class="">
+                    <%--댓글 등록하는 아이디(--%>
+                    <input type="text" name='writer' class="form-control register" value="${boardVO.boardWriter}"  readonly="readonly">
+                    <%--댓글 입력 부분--%>
+                    <div class="form-group">
+                        <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요</textarea>
+                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                        <button type="button"  class="btn btn-primary addBtn" >댓글등록 </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,7 +121,11 @@
             </div>
         </ul>
     </div>
-    <div class="col-3"></div>
+
+
+    <div class="col-xs-3 widthFull4" style="background-color: black" ></div>
+
+
 </div>
 <%--댓글 반복문 부분--%>
 <script class="template" type="text/x-handlebars-template">
