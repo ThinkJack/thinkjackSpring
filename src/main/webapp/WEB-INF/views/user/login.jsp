@@ -83,7 +83,7 @@
                 <input type="submit" class="form-control btn btn-primary" value="로그인"/>
 
                     <%--<a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>--%>
-
+                </form>
 
 
                 <%--<a href="/user/googleLogin"><img width="100%" height="50" src="/resources/images/google.png"/></a>--%>
@@ -101,10 +101,11 @@
                             <span class="fa fa-github"></span> Sign in with GitHub
                         </a>
                 </div>
-                <button type="button" onclick="location.href='/user/register'">회원가입</button>
-                <button type="button" onclick="location.href='/user/findPassword'">비밀번호 찾기</button>
 
-             </form>
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:47%;display:inline-block;" onclick="location.href='/user/register'">회원가입</button>
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:47%;display:inline-block;" onclick="location.href='/user/findPassword'">비밀번호 찾기</button></div>
+
+
         </div>
     </div>
 
