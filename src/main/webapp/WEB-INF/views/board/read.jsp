@@ -42,7 +42,7 @@
 
 <div class="deaf2 "></div>
 
-<div class="row text-center removePadding ">
+<div class="row  removePadding ">
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 borderLB  widthFull3" style="background-color:#000000 ">
@@ -87,17 +87,18 @@
     <div class="col-xs-3 widthFull3" style="background-color:#000000"></div>
 </div>
 
-<div class="row text-center removePadding ">
+<div class="row removePadding ">
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 removePadding " >
 
-<%--댓글 등록 부분 --%>
+        <%--댓글 등록 부분 --%>
         <div class="row removePadding" style="background-color: black">
             <div class="col-xs-12  borderRTW  removePadding " style="background-color: #fff">
                 <div class="deaf2"></div>
                 <div class="">
                     <%--댓글 등록하는 아이디(--%>
+
                     <input type="text" name='writer' class="form-control register" value="${boardVO.boardWriter}"  readonly="readonly">
                     <%--댓글 입력 부분--%>
                     <div class="form-group">
@@ -113,7 +114,8 @@
         <ul class="timeline">
             <%--버튼을 클릭하면 댓글목록이 나온다--%>
             <li class = "time-label repliesDiv"  >
-                <button type="button" class=""> Replies List </button>
+                <%--<button type="button" class=""> Replies List </button>--%>
+                <h2> Replies List</h2>
             </li>
             <%--페이지네이션 부분--%>
             <div class ='text-center'>
@@ -134,89 +136,130 @@
         <%--댓글이 삭제되었는지 확인--%>
         {{#if replyVo.replyState}}
         <div class="timeline-item well">
-            <%--3.날짜부분--%>
-            <span class="time">
-                    {{prettifyDate  replyVo.replyRegdate}}
-                      <%-- 조건문으로 parent값 있는것을 구분한다--%>
-                       <%--하트 버튼(좋아요)--%>
-                  {{#if replyVo.replyParent}}
-                 <%--<div class="registerReply"  >--%>
-                <div class="registerReply">
-                    <span class="badge">대댓글</span>
-                    <h2 class="replyId">{{ replyVo.replyId}}</h2>
-                    {{#if reHeart}}
-                        <div style="text-align: right;">
-                            <a class="replyHeartBtn btn btn-outline-dark " name=1>
-                                 <img class="reHeart" src="/resources/images/like2.png">
-                            </a>
-                            <h1 > {{replyVo.replyLikeCnt}}</h1>
-                        </div>
-                       {{else}}
-                        <div style="text-align: right;">
-                            <a class="replyHeartBtn btn btn-outline-dark " name=0>
-                                 <img class="reHeart" src="/resources/images/like1.png">
-                            </a>
-                            <h1 > {{replyVo.replyLikeCnt}}</h1>
-                        </div>
-                     {{/if}}
 
-           <%--댓글의 replyId를 받아오기 위한 부분--%>
+            <%-- 조건문으로 parent값 있는것을 구분한다--%>
+            <%--하트 버튼(좋아요)--%>
+            {{#if replyVo.replyParent}}
+            <%--<div class="registerReply"  >--%>
+            <div class="">
+                <span class="badge">대댓글</span>
+                <h2 class="replyId">{{ replyVo.replyId}}</h2>
+                {{#if reHeart}}
+                <div style="text-align: right;">
+                    <a class="replyHeartBtn btn btn-outline-dark " name=1>
+                        <img class="reHeart" src="/resources/images/like2.png">
+                    </a>
+                    <h1 > {{replyVo.replyLikeCnt}}</h1>
+                </div>
+                {{else}}
+                <div style="text-align: right;">
+                    <a class="replyHeartBtn btn btn-outline-dark " name=0>
+                        <img class="reHeart" src="/resources/images/like1.png">
+                    </a>
+                    <h1 > {{replyVo.replyLikeCnt}}</h1>
+                </div>
+                {{/if}}
+
+                <%--댓글의 replyId를 받아오기 위한 부분--%>
                 <input type="hidden" id="reParent" value="{{replyParent}}">
                 <%--replyId와 replyWriter 나타나는 부분--%>
                 <h3 class="timeline-header">{{replyVo.replyWriter}}</h3>
                 <%--입력된 댓글 text부분--%>
                 <input class="replyText" readonly=readonly value="{{replyVo.replyText}}">
-                       <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
+                <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
                 <button type="button" class="btn btn-warning  modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
-            <%--</div>--%>
-                   </div>
-                    {{else}}
-                <div class="registerReply">
-                    <span class="badge">댓글</span>
-                     <%--댓글 부분--%>
-                    <%--replyId 불러오기 위해 필요한 부분--%>
-                    <h2 class="replyId">{{replyVo.replyId}}</h2>
-                    <input  class="replyHeart" value="{{reHeart}}">
-                     {{#if reHeart}}
+                <%--</div>--%>
+            </div>
+            {{else}}
+            <%--댓글 부분--%>
+            <div class="row removePadding  ">
+                <div class="col-xs-1">
+                    <%--사진--%>
+                    <input type="hidden" class="replyHeart" value="{{reHeart}}">
+                    <img src="/resources/images/intro2.jpg" class="media-object" style="width:100px">
+                </div>
+                <div class="col-xs-9">
+                    <strong class="title">
+                        <span class="badge">댓글</span>
+                        <%--replyId 불러오기 위해 필요한 부분--%>
+                        <span class="replyId">{{replyVo.replyId}}</span>
+                        <%--replyId와 replyWriter 나타나는 부분--%>
+                        <span class="replyWriter">{{replyVo.replyWriter}}</span>
+                        <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                    </strong>
+
+                    <div class="comment">
+                        <%--입력된 댓글 text부분--%>
+                        <span class="replyText">{{replyVo.replyText}}</span>
+                        <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
+
+                    </div>
+
+                </div>
+                <div class="col-xs-2">
+
+                    {{#if reHeart}}
                     <%--reHeart값이 있을떄--%>
                     <div style="text-align: right;">
                         <a class="replyHeartBtn btn btn-outline-dark " name=1>
-                             <img class="reHeart" src="/resources/images/like2.png">
+                            <img class="reHeart" src="/resources/images/like2.png">
                         </a>
                         <h1 > {{replyVo.replyLikeCnt}}</h1>
                     </div>
                     {{else}}
-                    <div style="text-align: right;">
+                    <div >
                         <a class="replyHeartBtn btn btn-outline-dark " name=0>
-                             <img class="reHeart" src="/resources/images/like1.png">
+                            <img class="reHeart" src="/resources/images/like1.png">
                         </a>
-                        <h1 >{{replyVo.replyLikeCnt}}</h1>
+                        <span >{{replyVo.replyLikeCnt}}</span>
                     </div>
                     {{/if}}
-                    <%--replyId와 replyWriter 나타나는 부분--%>
-                    <h3 class="timeline-header">{{replyVo.replyWriter}}</h3>
-                <%--입력된 댓글 text부분--%>
-                      <input class="replyText" readonly=readonly value="{{replyVo.replyText}}"> </input>
-                    <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
-                    <button type="button" class="btn btn-warning modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
 
-                    <div class="form-group">
-                        <input type="text" name='writer' class="reRegister"  value="${boardVO.boardWriter}"  readonly="readonly">
+                    <%--3.날짜부분--%>
+                    <span class="time">
+                {{prettifyDate  replyVo.replyRegdate}}</span>
+                    <button type="button" class="btn btn-warning modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>
+                    <button type="button" class="btn btn-info demoReply" data-toggle="collapse" data-target=".demo">답글</button>
+                </div>
+
+                <%--버튼 누르면 나오게 하기--%>
+
+                <div class="row removePadding  ">
+                    <div  class="collapse demo">
+                        <span  class="reRegister"></span>
+                        <%--<span  class="reRegister" >${boardVO.boardWriter}</span>--%>
                         <textarea class="form-control replyTextReply" rows="3" >대댓글 입력하세요</textarea>
                         <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
                         <button type="button"  class="btn btn-primary addBtn" >등록 </button>
                         <%--등록을 누르면 replyParent값이 1이되는 조건문이 필요--%>
                     </div>
                 </div>
-            {{/if}}
 
-            {{else}}
-                <div class="media well">
-                 <h3 class="timeline-header">{{replyVo.replyId}}</h3>
-                <input type="text" name='title' class="timeline-body" value="삭제된 댓글입니다." readonly="readonly">
-    </div>
-            {{/if}}
+
+
+            </div>
         </div>
+        {{/if}}
+
+        {{else}}
+        <div class="timeline-item well">
+            <div class="row removePadding  ">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-9">
+                    <strong class="title">
+                        <span class="badge">댓글</span>
+                        <%--replyId와 replyWriter 나타나는 부분--%>
+                        <span class="replyWriter">{{replyVo.replyWriter}}</span>
+                    </strong>
+                    <div class="comment"  >
+                        <span >삭제된 댓글입니다</span>
+                    </div>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+        </div>
+        {{/if}}
+
     </li>
     {{/each}}
 </script>
@@ -295,6 +338,10 @@
             });
         });
     });
+
+
+
+
 </script>
 <script>
     //대댓글 id는 replyParent에서 받아오고 댓글 id=replyId값에서 받아온다
@@ -455,7 +502,7 @@
         target.html(str);
     };
     //최초로 댓글의 1페이지가져오는작업 (repliesList)버튼 클릭하면 작동
-    $(".repliesDiv").on("click",function(){
+    $(".repliesDiv").ready(function () {
 
         if($(".timeline li").resize()>1){
             return;
@@ -485,7 +532,7 @@
         $(".replyText").val(replyText);
         // console.log(replyText+"리스트의 택스트 글");
     });
-    //댓글의 수정버튼을 누르면 모달창이 나오도록
+
     $(document).on("click",".modalReply", function () {
 
         //newReplyText의 값을 reply에서 찾는다(class이름이 timeline-bodyd의 글에서 텍스트를 밥아온다)
@@ -495,6 +542,34 @@
         $(".modal-title").html($(this).parent().find('.replyId').text());
         // console.log("모달제목?나오니?"+ $(this).parent().find('.replyId').text())
     });
+
+    // //버튼을 클릭
+    // $(document).on("click",".demoReply", function () {
+    // //    버튼의 uername값이 타겟과 같으면 클릭
+    //     var replyWriter=$(this).parent().parent().find('.replyWriter');
+    //
+    //     $('.reRegister').html(replyWriter.text());
+    //
+    //     var replyW=$('.replyWriter').html();
+    //
+    //     console.log(replyW+"나와?");
+    //
+    //
+    //     if(replyW == replyWriter.text()) {
+    //         console.log(replyWriter.text()+"같니");
+    //         $('.demoReply').collapse({
+    //             toggle: true
+    //         })
+    //     }
+    //     else {
+    //         console.log(replyWriter.text()+"다르니");
+    //         $('.demoReply').collapse({
+    //             toggle: false
+    //         })
+    //     }
+    //
+    //
+    // });
 
 </script>
 <script>

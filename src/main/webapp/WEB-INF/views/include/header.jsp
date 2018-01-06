@@ -18,11 +18,10 @@
           href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/resources/dist/js/scrolla.jquery.min.js"></script>
-    <script>$('.animate').scrolla();</script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
 </head>
 

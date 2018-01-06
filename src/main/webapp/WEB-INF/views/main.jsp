@@ -14,12 +14,18 @@
             <div class="col-xs-2  "></div>
             <div class="col-xs-3 removePadding" >
 
-                <div class="imeage1 animate1">
+                <div class="imeage1 animate1 " >
                     <img src="/resources/images/titile.jpg" >
                 </div>
             </div>
             <div class="col-xs-5 removePadding" >
                 <div class="mainText ">
+
+                    <h1 class="foo1 " style="color:black" >자신의 코드를</h1>
+
+                    <h1 class="foo2 " style="color: black">작성해 보세요</h1>
+                    <h1 class="foo3 " style="color: red">Thinkjack</h1>
+
 
 
                 </div>
@@ -38,8 +44,10 @@
 
             <div class="col-xs-5 removePadding" >
                 <div class="mainText pt2">
+
                 </div>
                 <div class="widthFull2 ">
+
                     <%--<iframe frameborder="0" height="100%" width="100%"--%>
                     <%--src="https://www.youtube.com/embed/aQsy17K84Ls?&version=3&loop=1&playlist=aQsy17K84Ls&autoplay=1&controls=0"frameborder="0"></iframe>--%>
                     <div class="textPage2 ">
@@ -66,6 +74,7 @@
                         <div class="col-sm-5 removePadding" >
                         </div>
                         <div class="col-sm-1 removePadding" >
+
                         </div>
                         <div class="col-sm-4 removePadding" >
                             <button class="custom-btn btn-12 widthFull mov" onclick="location.replace('/edit/editPage')" ><p>Edit Page</p></button>
@@ -81,12 +90,17 @@
     <div class="deaf" style="background-color:black">
     </div>
     <section class="c">
-        <div class="col-xs-7 "> </div>
+        <div class="col-xs-7 ">
+            <h1 class="animate2">
+                자신의 생각을 코드로 표현!
+            </h1>
+        </div>
         <div class="col-xs-3 ">
+
             <div class="imeage1">
                 <div id="lampadario">
-                    <%--@declare id="switch"--%><input class="input" type="radio" name="switch" value="on" />
-                    <input class="input" type="radio" name="switch" value="off" checked="checked"/>
+                    <%--@declare id="switch"--%><input class="input" id="a" type="radio" name="switch" value="on" />
+                    <input class="input" type="radio" id="b" name="switch" value="off" checked="checked"/>
                     <label  for="switch"></label>
                 </div>
             </div>
@@ -173,9 +187,30 @@
 
 </script>
 <script>
-    $('.animate1').addClass('animated swing');
 
 
+
+    <%--title--%>
+    $(window).scroll(function() {
+        var $el = $('.animate1');
+
+        if($(this).scrollTop() >=10) $el.addClass('animated swing');
+        else $el.removeClass('animated swing');
+    })
+
+    //title옆 글
+    window.sr = ScrollReveal({ reset: true });
+    sr.reveal('.foo1');
+    sr.reveal('.foo2',{duration: 1000});
+    sr.reveal('.foo3',{duration: 1500});
+
+    //전구 옆 글
+    $(window).scroll(function() {
+        var $el = $('.animate2');
+
+        if($(this).scrollTop() >=1500) $el.addClass('animated fadeInLeft');
+        else $el.removeClass('animated fadeInLeft');
+    });
 
 
 </script>
