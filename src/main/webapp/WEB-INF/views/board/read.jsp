@@ -71,7 +71,7 @@
                 <input type="text" name='writer' class="form-control register" value="${boardVO.boardWriter}"  readonly="readonly">
                 <%--댓글 입력 부분--%>
                 <div class="form-group">
-                    <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요</textarea>
+                    <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요!</textarea>
                     <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
                     <button type="button"  class="btn btn-primary addBtn" >댓글등록 </button>
                 </div>
