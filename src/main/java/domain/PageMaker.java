@@ -24,12 +24,10 @@ public class PageMaker {
 
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
-
         calcData();
     }
 
     private void calcData() {
-
         endPage = (int) (Math.ceil(cri.getPage() /
                 (double) displayPageNum) * displayPageNum);
 

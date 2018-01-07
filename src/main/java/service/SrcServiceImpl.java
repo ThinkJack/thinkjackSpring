@@ -1,9 +1,6 @@
 package service;
 
-import domain.Criteria;
-import domain.SrcLikeVO;
-import domain.SrcVO;
-import domain.UserVO;
+import domain.*;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
 import persistence.UserDAO;
@@ -76,6 +73,10 @@ public class SrcServiceImpl implements SrcService {
             vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
             vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
 
+            //사진경로 가져오기
+            if(vo.getSrcWriter() != 0){
+                vo.setSrcWriterImgPath(userdao.getUserProfile(vo.getSrcWriter()));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,6 +142,11 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
+    public void srcDelete(SrcVO vo) throws Exception {
+        srcdao.updateSrcDelete(vo);
+    }
+
+    @Override
     public Map srcLike(HttpServletRequest request, SrcLikeVO srcLikeVO) {
         int result;
         SrcVO srcVo = new SrcVO();
@@ -167,7 +173,22 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public List srcList(Criteria cri) throws Exception {
+    public int selectSrcLike(HttpServletRequest request, SrcLikeVO vo) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("login") instanceof UserVO) {
+            vo.setUserId(((UserVO) session.getAttribute("login")).getUserId());
+        }
+        return srcdao.readLike(vo);
+    }
+
+    @Override
+    public List<SrcVO> srcList(SearchCriteria cri) throws Exception {
+
+//        if(cri.getSearchType().equals("w") || cri.getSearchType().equals("tw")){
+//            //키워드에서 user검색시 name값 처리해서 id 가져오는 로직 추가필요
+//
+//        }
+
         List list = srcdao.selectSrcList(cri);
 
         for(int i=0; i<list.size(); i++){
@@ -181,11 +202,11 @@ public class SrcServiceImpl implements SrcService {
         return list;
     }
 
-
     @Override
-    public int listCountCriteria(Criteria cri) throws Exception {
-        return srcdao.countPaging(cri);
+    public int srcListSearchCount(SearchCriteria cri) throws Exception {
+        return srcdao.srcListSearchCount(cri);
     }
+
 
     ///////////////////////////////////////////////////////////////////////////////
     //codeFile 읽어오는 작업
@@ -246,6 +267,4 @@ public class SrcServiceImpl implements SrcService {
         // 객체 닫기
         fw.close();
     }
-
-
 }

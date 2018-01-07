@@ -559,6 +559,9 @@ $('input[name="visibility"]').on("change", function (e) {
     srcStatus = this.value;
 });
 
+$("#src-delete").click(function (e) {
+    srcDelete();
+});
 // $('input[name="genderS"]:checked')
 
 
@@ -595,3 +598,5 @@ $(function () {
         });
     });
 });
+
+

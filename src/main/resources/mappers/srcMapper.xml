@@ -8,7 +8,7 @@
     <!--<insert id="insertSrc">-->
     <!--insert into tbl_src (src_id, src_path, src_comments, src_title, src_writer)-->
     <!--values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle}, #{srcWriter})-->
-<!--</insert>-->
+    <!--</insert>-->
     <insert id="insertSrc">
         insert into tbl_src (src_id, src_path,
         <if test="srcWriter != 0">src_writer,</if>
@@ -19,42 +19,58 @@
     </insert>
 
     <select id="selectSrcOne" resultType="SrcVO">
-        select
-        src_id srcId,
-        src_writer srcWriter,
-        src_path srcPath,
-        src_comments srcComments,
-        src_regdate srcRegdate,
-        src_update srcUpdate,
-        src_title srcTitle,
-        src_likecnt srcLikecnt,
-        src_viewcnt srcViewcnt,
-        src_status srcStatus
-        from tbl_src where src_id = #{srcId}
+        SELECT
+            src.src_id       srcId,
+            src.src_writer   srcWriter,
+            src.src_path     srcPath,
+            src.src_comments srcComments,
+            src.src_regdate  srcRegdate,
+            src.src_update   srcUpdate,
+            src.src_title    srcTitle,
+            src.src_likecnt  srcLikecnt,
+            src.src_viewcnt  srcViewcnt,
+            src.src_status   srcStatus
+        FROM tbl_src src
+        WHERE src_id = #{srcId}
     </select>
 
     <update id="updateSrc">
-        update tbl_src set
-        src_comments = #{srcComments},
-        src_title = #{srcTitle},
-        src_update = CURRENT_TIMESTAMP,
-        src_status = #{srcStatus}
-        where src_id = #{srcId}
+        UPDATE tbl_src
+        SET
+            src_comments = #{srcComments},
+            src_title    = #{srcTitle},
+            src_update   = CURRENT_TIMESTAMP,
+            src_status   = #{srcStatus}
+        WHERE src_id = #{srcId}
     </update>
 
     <update id="updateSrcStatus">
-        update tbl_src set src_status = 2 where src_id = #{srcId}
+        UPDATE tbl_src
+        SET src_status = 2
+        WHERE src_id = #{srcId}
     </update>
 
     <update id="updateSrcWriter">
-        update tbl_src set src_writer = #{srcWriter} where src_id = #{srcId}
+        UPDATE tbl_src
+        SET src_writer = #{srcWriter}
+        WHERE src_id = #{srcId}
     </update>
 
     <update id="updateSrcLikeCnt">
-        update tbl_src set src_likecnt = #{srcLikecnt} where src_id = #{srcId}
+        UPDATE tbl_src
+        SET src_likecnt = #{srcLikecnt}
+        WHERE src_id = #{srcId}
     </update>
 
     <update id="updateSrcViewCnt">
-        update tbl_src set src_viewcnt =  src_viewcnt + 1 where src_id = #{srcId}
+        UPDATE tbl_src
+        SET src_viewcnt = src_viewcnt + 1
+        WHERE src_id = #{srcId}
+    </update>
+
+    <update id="updateSrcDelete">
+        UPDATE tbl_src
+        SET src_status = 2
+        WHERE src_id = #{srcId}
     </update>
 </mapper>

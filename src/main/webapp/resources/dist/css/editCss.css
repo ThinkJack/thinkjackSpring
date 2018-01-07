@@ -349,6 +349,21 @@ p.err {
     animation: loadingC .6s .3s linear infinite;
 }
 
+.cdn-container {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.cdn_input {
+    width: 86%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.cdn_close {
+    margin:10px;
+}
+
 @keyframes loadingC {
     0% {
         transform: translate(0, 0);

@@ -17,7 +17,7 @@
             </li>
             <c:if test="${SrcVO.srcId ne null}">
                 <li class="nav-item active">
-                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal">
+                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal" id="reply-modal-bt">
                         Reply
                     </a>
                 </li>

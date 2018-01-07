@@ -83,7 +83,6 @@
     <!--footer-->
     <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 
-
     <%--script단--%>
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
 
@@ -104,9 +103,6 @@
         strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
         Heart = "<c:out value="${like}" default="0"/>";
         userId = "<c:out value="${login.userId}" default=""/>";
-        <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
-        <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
-        <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
 
         //화면에서 받은 값 세팅
         $(function () {
@@ -137,7 +133,7 @@
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
-                        "/tUpdate&nbsp&nbsp" + srcUpdate;
+                        "&nbsp&nbspUpdate&nbsp&nbsp" + srcUpdate;
                 } else {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
                 }
@@ -155,7 +151,17 @@
             }
 
             <c:if test="${login.userProfile ne null}">
-                filePathChange("${login.userProfile}");
+                $("#reply-user-img").attr("src", filePathChange("${login.userProfile}"));
+            </c:if>
+
+            <c:if test="${SrcVO.srcWriterImgPath ne null}">
+                $("#user-img").attr("src", filePathChange("${SrcVO.srcWriterImgPath}"));
+            </c:if>
+
+            <c:if test="${param.reply eq 'show'}">
+                if($("#reply-modal") !== null){
+                    $("#reply-modal-bt").trigger('click');
+                }
             </c:if>
         });
     </script>

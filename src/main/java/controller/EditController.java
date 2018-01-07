@@ -69,6 +69,12 @@ public class EditController {
     public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
         return service.srcLike(request, vo);
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public @ResponseBody String srcDelete(@RequestBody SrcVO vo) throws Exception{
+        service.srcDelete(vo);
+        return "삭제 되었습니다.";
+    }
     //----------------------------------------------------------------------
 
 

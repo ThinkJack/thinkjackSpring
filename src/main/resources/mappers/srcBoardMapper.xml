@@ -7,22 +7,46 @@
     <select id="selectSrcBoardList" resultType="SrcVO">
         <![CDATA[
         SELECT
-        src.src_id srcId,
-        src.src_title srcTitle,
-        src.src_writer srcWriter,
-        src.src_likecnt srcLikecnt,
-        src.src_viewcnt srcViewcnt,
-        src.src_path srcPath,
-        user.user_name srcWriterName
-        from tbl_src src, tbl_user user where src.src_status = 1 and src.src_writer = user.user_id
-        ORDER BY src.src_likecnt, src.src_id DESC
-        limit #{pageStart}, #{perPageNum}
+            src.src_id        srcId,
+            src.src_title     srcTitle,
+            src.src_writer    srcWriter,
+            src.src_likecnt   srcLikecnt,
+            src.src_viewcnt   srcViewcnt,
+            src.src_path      srcPath,
+            user.user_name    srcWriterName,
+            user.user_profile srcWriterImgPath
+        FROM tbl_src src, tbl_user user
+        WHERE src.src_status = 1 AND src.src_writer = user.user_id
+        ]]>
+        <include refid="search"></include>
+        <![CDATA[
+        ORDER BY src.src_likecnt DESC, src.src_id ASC
+        LIMIT #{pageStart}, #{perPageNum}
         ]]>
     </select>
 
-    <select id="countPaging" resultType="int">
-        <![CDATA[
-          select count(src_id) from tbl_src where src_status = 1
+    <select id="srcListSearchCount" resultType="int">
+    <![CDATA[
+        SELECT count(*)
+        FROM tbl_src src, tbl_user user
+        WHERE src.src_status = 1 AND src.src_writer = user.user_id
         ]]>
+        <include refid="search"></include>
+
     </select>
+
+    <sql id="search">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and src_title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'w'.toString()">
+                and src_writer like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'tw'.toString()">
+                and (src_title like CONCAT('%', #{keyword}, '%') OR src_writer like CONCAT('%', #{keyword}, '%'))
+            </if>
+        </if>
+    </sql>
 </mapper>
+

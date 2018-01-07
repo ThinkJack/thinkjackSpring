@@ -26,6 +26,9 @@
     <!--아이콘-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <%--이미지 파일 작업관련 js 정의한 파일--%>
+    <script src="/resources/upload.js"></script>
     <script>
         var msg=Boolean("${msg}");
         if(msg){

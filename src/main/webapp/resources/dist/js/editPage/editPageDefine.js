@@ -393,6 +393,26 @@ function codeSave() {
     }
 }
 
+function srcDelete() {
+    $.ajax({
+        type: "post",
+        url: "/edit/delete",
+        headers: {
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "POST"
+        },
+        // dataType: 'text',
+        data: JSON.stringify({
+            srcId: srcId,
+            srcStatus: srcStatus
+        }),
+        success: function (result) {
+            alert(result);
+            location.replace("/");
+        }
+    });
+}
+
 
 var consoleView = function (str) {
     var commandLineValue = str;
