@@ -27,7 +27,7 @@
     <!--아이콘-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <script src="/resources/upload.js"></script>
     <script>
         var msg=Boolean("${msg}");
         if(msg){
@@ -45,7 +45,7 @@
             // console.log(fileName);
             // console.log(test);
             profileheader =path+"s_"+fileName;
-            console.log(fullName);
+            //console.log(fullName);
             if(fullName!=="") {
                 headerimg = getFileInfo(profileheader);
                // console.log(headerimg);

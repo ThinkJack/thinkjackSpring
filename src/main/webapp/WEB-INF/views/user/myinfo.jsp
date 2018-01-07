@@ -70,12 +70,13 @@
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Account_information')">Account information</button>
+    <button class="tablinks" show onclick="openCity(event, 'Account_information')" >Account information</button>
     <button class="tablinks" onclick="openCity(event, 'Board')">Board</button>
     <button class="tablinks" onclick="openCity(event, 'Source_code')">Source code</button>
 </div>
 
 <div id="Account_information" class="tabcontent">
+    <p style="text-align: left">사용자 프로필</p>
     <div class="big-area">
         <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;"  src="" alt="Profile image example"/>
         <div class="small-unit"><h1>${login.userEmail}</h1><br><p>${login.userName}</p><br><button onclick="location.href='/user/modifyUser'">정보변경</button><br><button onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>

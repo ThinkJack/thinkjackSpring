@@ -144,18 +144,18 @@ public class UserController {
 	//비밀번호 찾기 기능
     @RequestMapping(value = "/findPassword", method = RequestMethod.GET)
     public void findPasswordGET(BoardVO board, Model model) throws Exception {
-        System.out.println("password 찾기 GET 진입");
+        //System.out.println("password 찾기 GET 진입");
 
     }
 
     @RequestMapping(value = "/findPassword", method = RequestMethod.POST)
     public String findPasswordPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
-        System.out.println("find passwordPost 진입 ");
+        //System.out.println("find passwordPost 진입 ");
 
         String str= user.getUserEmail();
 
 		String msg = service.authenticate(str);
-		System.out.println("/authenticate 진입"+msg);
+		//System.out.println("/authenticate 진입"+msg);
         //계정 상태에 따른 메시지
 		if(msg == "T") {
 			rttr.addFlashAttribute("msg" , "이메일이 없습니다. 회원가입을 해주세요");
@@ -219,7 +219,7 @@ public class UserController {
 
 	@RequestMapping(value = "/setPassword", method = RequestMethod.POST)
 	public String setPasswordPost(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
-			System.out.println("패스워드 변경 값"+user);
+			//System.out.println("패스워드 변경 값"+user);
     	try{
 			service.modifypassUser(user);
 			rttr.addFlashAttribute("msg" , "변경되었습니다. 변경된 패스워드로 로그인해 주세요");
@@ -236,7 +236,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model,RedirectAttributes rttr) throws Exception{
-		System.out.println("loginPost");
+		//System.out.println("loginPost");
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {
@@ -245,7 +245,7 @@ public class UserController {
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
 		rttr.addFlashAttribute("msg","로그인 되었습니다.");
-		System.out.println(vo);
+		//System.out.println(vo);
 
 	}
 
@@ -297,10 +297,10 @@ public class UserController {
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.POST)
 	public String ModifyUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
 
-    	System.out.println(dto);
+    	//System.out.println(dto);
     	UserVO vo = service.login(dto);
 
-		System.out.println(vo);
+		//System.out.println(vo);
 
 		if(vo == null) {
 			return "user/modifyAuthCheck";
@@ -333,16 +333,16 @@ public class UserController {
 //		if (file.isEmpty()){
 //			System.out.println("파일이 넘어오지 않음");
 //		}
-        System.out.println("파일 isEmpty"+file.isEmpty());
+       // System.out.println("파일 isEmpty"+file.isEmpty());
         String test=user.getUserProfile();
-        System.out.println(test);
+       // System.out.println(test);
 		String userId= user.getUserId()+"";
 		if(!file.isEmpty()) {
             String uploadedFileName = UploadFileUtils.uploadFile(uploadPath,
                     file.getOriginalFilename(),
                     file.getBytes(),
                     userId);
-            System.out.println("파일 업로드 완료");
+         //   System.out.println("파일 업로드 완료");
             user.setUserProfile(uploadedFileName);
         }else{
             UserVO vot =(UserVO) session.getAttribute("login");
@@ -360,7 +360,7 @@ public class UserController {
 	@RequestMapping (value="/deleteUser",method = RequestMethod.GET)
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		Object obj = session.getAttribute("login");
-		System.out.println("obj"+obj);
+		//System.out.println("obj"+obj);
 
 
 		UserVO vo = (UserVO)obj;
@@ -407,8 +407,8 @@ public class UserController {
 	public ModelAndView login(HttpSession session) {
 		/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String naverAuthUrl = naverLoginBo.getAuthorizationUrl(session);
-		System.out.println("naverLogin controller 호출");
-		System.out.println(naverAuthUrl);
+		//System.out.println("naverLogin controller 호출");
+		//System.out.println(naverAuthUrl);
 		return new ModelAndView("user/naverLogin", "url", naverAuthUrl);
 	}
 
@@ -422,9 +422,9 @@ public class UserController {
 
 		OAuth2AccessToken oauthToken = naverLoginBo.getAccessToken(session, code, state);
 
-		System.out.println("oauthToken 값: "+oauthToken);
+		//System.out.println("oauthToken 값: "+oauthToken);
 		apiResult = naverLoginBo.getUserProfile(oauthToken);
-	     System.out.println(apiResult);
+	   //  System.out.println(apiResult);
 
 		JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
 
@@ -502,7 +502,7 @@ public class UserController {
 
 //		googleOAuth2Parameters.setRedirectUri("http://localhost:8080/user/googleLogincallback");
         String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-        System.out.println("/user/googleLogincallback, url : " + url);
+       // System.out.println("/user/googleLogincallback, url : " + url);
         model.addAttribute("url",url);
 
         return "user/googleLogin";
@@ -512,7 +512,7 @@ public class UserController {
 
     @RequestMapping(value = "/googleLogincallback")
     public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
-        System.out.println("/user/googleLogincallback");
+       // System.out.println("/user/googleLogincallback");
         String code = request.getParameter("code");
 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -523,7 +523,7 @@ public class UserController {
 		Long expireTime = accessGrant.getExpireTime();
 		if (expireTime != null && expireTime < System.currentTimeMillis()) {
 			accessToken = accessGrant.getRefreshToken();
-			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+			//System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
@@ -536,12 +536,12 @@ public class UserController {
         LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
-        System.out.println(person.getDisplayName());
+       // System.out.println(person.getDisplayName());
         dto.setUserEmail("google");
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
-		System.out.println("controller dto: "+dto);
+		//System.out.println("controller dto: "+dto);
 
 		UserVO vo = new UserVO();
 
@@ -563,7 +563,7 @@ public class UserController {
 			if(dest=="user/socialLoginPost"){
 				session.setAttribute("dest","/");
 			}
-			System.out.println("postHandle dest: "+dest);
+			//System.out.println("postHandle dest: "+dest);
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
@@ -596,8 +596,8 @@ public class UserController {
 	public ModelAndView githublogin(HttpSession session) {
 		/* github 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String githubAuthUrl = githubLoginBo.getAuthorizationUrl(session);
-		System.out.println("github Login controller 호출");
-		System.out.println(githubAuthUrl);
+		//System.out.println("github Login controller 호출");
+		//System.out.println(githubAuthUrl);
 		return new ModelAndView("user/githubLogin", "url", githubAuthUrl);
 	}
 
@@ -663,7 +663,7 @@ public class UserController {
 			if(dest=="/user/socialLoginPost"){
 				session.setAttribute("dest","/");
 			}
-			System.out.println("postHandle dest: "+dest);
+			//System.out.println("postHandle dest: "+dest);
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
@@ -672,7 +672,7 @@ public class UserController {
 			session.setAttribute("dest","/user/login");
 		}
 
-		System.out.println("UserVO "+vo);
+		//System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);

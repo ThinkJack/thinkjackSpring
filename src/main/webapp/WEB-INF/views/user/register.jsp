@@ -38,7 +38,7 @@
         var chkid=false;
         var chkName=false;
         var chkpass=false;
-console.log(signup);
+//console.log(signup);
         function checkvalue() {
            // console.log('3번째: '+signup.userPassword.value);
            // console.log('4번째: '+signup.chkPassword.value);
@@ -175,49 +175,43 @@ console.log(signup);
 </head>
 <body>
 <div class="col-sm-4"></div>
-
-	<article class="container">
-		<div class="col-sm-6">
-		<div class="page-header">
-			<h1>TJ 회원가입</h1>
-		</div>
-		</div>
-			<div class="col-md-6 col-md-offset-3">
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<div class="panel-title" style="text-align: center"><h1>TJ 회원가입</h1></div>
+			</div>
 			<form role="form" name="signup"  method="post" onsubmit="return signinchk(this)">
-	<table>
-		<tr>
-			<div class="control-group">
-			<td></td>
-			<td><input type = "text" class="form-control" name="userEmail" id="userEmail" placeholder="Email 주소를 입력해주세요" autofocus></td><td><button type="button" class="btn btn-warning" id="authenticate">중복체크</button></td><br>
-			</div>
-			<tr>
-			<td></td>
-			<td><input type = "text" class="form-control"  name="userName" id="userName"  placeholder="이름을 입력해주세요" ></td><td><button type="button" id="authenticateName" class="btn btn-warning">중복체크</button></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td><input type = "password" class="form-control"  name="userPassword" id="userPassword" onkeyup="checkvalue()" placeholder="패스워드를 입력해주세요" ></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td><input type = "password" class="form-control" name="chkPassword" id="chkPassword" onkeyup="checkvalue()"  placeholder="패스워드를 다시 한 번 입력해주세요" ></td>
-			</tr>
-			<tr>
-			<td width="96" height="36" ></td>
-			<td><p id="pwsame" name="pwsame"  ></p></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td><input type = "submit" value = "회원가입" class="btn btn-primary"></td>
-			</tr>
-		</table>
+				<table>
+					<tr>
+						<div class="control-group">
+							<td></td>
+							<td><input type = "text" class="form-control" name="userEmail" id="userEmail" placeholder="Email 주소를 입력해주세요" autofocus></td><td><button type="button" class="btn btn-warning" id="authenticate">중복체크</button></td><br>
+						</div>
+					<tr>
+						<td></td>
+						<td><input type = "text" class="form-control"  name="userName" id="userName"  placeholder="이름을 입력해주세요" ></td><td><button type="button" id="authenticateName" class="btn btn-warning">중복체크</button></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "password" class="form-control"  name="userPassword" id="userPassword" onkeyup="checkvalue()" placeholder="패스워드를 입력해주세요" ></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "password" class="form-control" name="chkPassword" id="chkPassword" onkeyup="checkvalue()"  placeholder="패스워드를 다시 한 번 입력해주세요" ></td>
+					</tr>
+					<tr>
+						<td width="96" height="36" ></td>
+						<td><p id="pwsame" name="pwsame"  ></p></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "submit" value = "회원가입" class="btn btn-primary"></td>
+					</tr>
+				</table>
 
-		</form>
+			</form>
 
-			</div>
-	</article>
-
-
+		</div>
+<div class="col-sm-4"></div>
 
 
 </body>

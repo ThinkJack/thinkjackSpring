@@ -102,13 +102,13 @@
                         </a>
                 </div>
 
-                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:47%;display:inline-block;" onclick="location.href='/user/register'">회원가입</button>
-                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:47%;display:inline-block;" onclick="location.href='/user/findPassword'">비밀번호 찾기</button></div>
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/register'">회원가입</button>
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/findPassword'">비밀번호 찾기</button></div>
 
 
         </div>
     </div>
-
+<div class="col-sm-4">
 </div>
 
 </body>
