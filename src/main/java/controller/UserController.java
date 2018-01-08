@@ -413,7 +413,6 @@ public class UserController {
 		LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
-
 		dto.setUserEmail("naver");
 		dto.setUserSocialId("n"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
@@ -425,18 +424,13 @@ public class UserController {
 //		System.out.println("UserVO "+dto);
 		try {
 			vo = service.naverLogin(dto);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
-		}
-
-
+			}
 
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
-
-
 		if(vo != null) {
 			session.setAttribute("login", vo );
 			//response.sendRedirect("/");
@@ -449,19 +443,11 @@ public class UserController {
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
-
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
-
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
-
-
-//	@RequestMapping(value = "/naverSuccess", method = RequestMethod.GET)
-//	public void naverSuccess (HttpSession session, UserVO user,Model model) throws Exception{
-//
-//	}
 
     //google 로그인 컨트롤러
 
@@ -471,21 +457,14 @@ public class UserController {
 	@Inject
 	private OAuth2Parameters googleOAuth2Parameters;
 
-
-
 	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
     public String doGoogleSignInActionPage(HttpServletResponse response, Model model) throws Exception{
         OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 
-//		googleOAuth2Parameters.setRedirectUri("http://localhost:8080/user/googleLogincallback");
         String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-       // System.out.println("/user/googleLogincallback, url : " + url);
         model.addAttribute("url",url);
-
         return "user/googleLogin";
-
     }
-
 
     @RequestMapping(value = "/googleLogincallback")
     public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
@@ -508,29 +487,22 @@ public class UserController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
-		//System.out.println("UserVO 전");
-
         LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
-
        // System.out.println(person.getDisplayName());
         dto.setUserEmail("google");
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
 		//System.out.println("controller dto: "+dto);
-
 		UserVO vo = new UserVO();
-
 		try {
 			vo = service.googleLogin(dto);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
-
 
 		if(vo != null) {
 			session.setAttribute("login", vo );
@@ -547,23 +519,19 @@ public class UserController {
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
-
-
-
 //        session.setAttribute("login", vo );
 //		model.addAttribute("userVO",vo);
 		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
         return "redirect:/user/socialLoginPost";
     }
 
+
+
 //======================================github login ==================================================
-
-
 	private GithubLoginBo githubLoginBo;
 	private String githubapiResult = null;
 
 	/* githubLoginBO */
-
 	@Inject
 	private void setGithubLoginBo(GithubLoginBo githubLoginBo) {
 		this.githubLoginBo = githubLoginBo;
@@ -588,7 +556,6 @@ public class UserController {
 
 		//토큰 생성
 		OAuth2AccessToken oauthToken = githubLoginBo.getAccessToken(session, code, state);
-
 		//System.out.println("github oauthToken 값: "+oauthToken);
 		githubapiResult = githubLoginBo.getUserProfile(oauthToken);
 		//System.out.println(githubapiResult);
@@ -604,11 +571,9 @@ public class UserController {
 		}
 		//JSON 객체 생성
 		JSONObject jsonobj = (JSONObject) obj;
-
 		//System.out.println(jsonobj);
 		String name = (String) jsonparse.JsonToString(jsonobj, "login");
 		String userSocialId = (String) (jsonparse.JsonToString(jsonobj, "id")+"");
-
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();
@@ -634,8 +599,6 @@ public class UserController {
 		//세션 생성
 		if(vo != null) {
 			session.setAttribute("login", vo );
-			//response.sendRedirect("/");
-			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
 			if(dest=="/user/socialLoginPost"){
 				session.setAttribute("dest","/");
@@ -644,29 +607,11 @@ public class UserController {
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
-
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
-
-		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
-
-public static void destDefault (UserVO vo){
-
-}
-	private String uploadFile(String originalName, byte[] fileData) throws Exception{
-
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString() +"_" +originalName;
-
-		File target = new File(uploadPath,savedName);
-
-		FileCopyUtils.copy(fileData,target);
-		return savedName;
-	}
-
 }
