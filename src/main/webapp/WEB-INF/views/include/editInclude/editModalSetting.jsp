@@ -140,7 +140,7 @@
                             <div class="row">
                                 <div class="col align-items-end">
                                     <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;"
-                                            onclick="cdnCssAdd(cdnCssidx);">add</button>
+                                            onclick="cdnCssAdd('');">add</button>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             <div class="row">
                                 <div class="col align-items-end">
                                 <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;"
-                                        onclick="cdnJsAdd(cdnJsidx)">add</button>
+                                        onclick="cdnJsAdd('')">add</button>
                                 </div>
                             </div>
                         </div>
