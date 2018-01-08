@@ -53,32 +53,31 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
+
 	@Inject
 	private UserService service;
-
+	//유저 등록
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
-		System.out.println("register GET 진입");
+		//System.out.println("register GET 진입");
       
     }
-	
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String RegisterPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
-    	System.out.println("regesterPost 진입 ");
-
+    	//System.out.println("regesterPost 진입 ");
     	service.regist(user);
-        rttr.addFlashAttribute("authmsg" , "가입시 사용한 이메일로 인증해주 3");
-
+        rttr.addFlashAttribute("msg" , "가입시 사용한 이메일로 인증해주세요");
 		return "redirect:/";
 	}
+
     //유저 email 중복 체크
 	@RequestMapping(value = "/authenticate" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	public @ResponseBody
 	String checkDuplicate(HttpServletResponse response, @RequestParam("userEmail") String userEmail, Model model)throws Exception {
 
 		String msg = service.authenticate(userEmail);
-		System.out.println("/authenticate 진입"+msg);
+		//System.out.println("/authenticate 진입"+msg);
 		String responseMsg;
 		if(msg == "T") {
 			responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\",\"chk\":\""+"T"+"\"}";
@@ -88,19 +87,18 @@ public class UserController {
 			responseMsg = "{\"msg\":\""+"사용이 불가한 이메일 입니다."+"\"}";
 		}
 		URLEncoder.encode(responseMsg , "UTF-8");
-
-		System.out.println(userEmail);
-		System.out.println(responseMsg);
+		//System.out.println(userEmail);
+		//System.out.println(responseMsg);
 		return responseMsg;
-
 	}
+
     //유저 네임 중복 체크
     @RequestMapping(value = "/authenticateName" , method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody
     String checkDuplicateName(HttpServletResponse response, @RequestParam("userName") String userName, Model model)throws Exception {
-        System.out.println("/authenticateName 진입");
+        //System.out.println("/authenticateName 진입");
         String msg = service.authenticateName(userName);
-        System.out.println("/authenticateName 진입"+msg);
+       // System.out.println("/authenticateName 진입"+msg);
         String responseMsg;
         if(msg == "T") {
             responseMsg = "{\"msg\":\""+"사용가능한 이름 입니다."+"\",\"chk\":\""+"T"+"\"}";
@@ -108,52 +106,38 @@ public class UserController {
             responseMsg = "{\"msg\":\""+"중복된 이름 입니다. 다시 설정해 주세요"+"\"}";
         }
         URLEncoder.encode(responseMsg , "UTF-8");
-
-        System.out.println(userName);
-        System.out.println(responseMsg);
+        //System.out.println(userName);
+        //System.out.println(responseMsg);
         return responseMsg;
 
     }
-
+	//이메일 인증 코드 검증
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
 	public String emailConfirm(UserVO user,Model model,RedirectAttributes rttr) throws Exception { // 이메일인증
 		//System.out.println("cont get user"+user);
 		UserVO vo = new UserVO();
-
 		vo=service.userAuth(user);
-
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
 			return "redirect:/";
-
-			//페이지 에서 경고창 스크립트
-//			<script type="text/javascript">
-//					var msg = '${msg}';
-//			if(msg){
-//				alert(msg);
-//			}
-//			</script>
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("login",vo);
-
 		return "/user/emailConfirm";
-
 	}
 
 	//비밀번호 찾기 기능
     @RequestMapping(value = "/findPassword", method = RequestMethod.GET)
-    public void findPasswordGET(BoardVO board, Model model) throws Exception {
+    public void findPasswordGET(UserVO user, Model model) throws Exception {
         //System.out.println("password 찾기 GET 진입");
 
     }
-
+	//이메일 확인 후
     @RequestMapping(value = "/findPassword", method = RequestMethod.POST)
     public String findPasswordPost(UserVO user,Model model,RedirectAttributes rttr) throws Exception{
         //System.out.println("find passwordPost 진입 ");
-
+		//userEmail 값으로 회원 여부 확인 requestparam 으로 변경??
         String str= user.getUserEmail();
-
 		String msg = service.authenticate(str);
 		//System.out.println("/authenticate 진입"+msg);
         //계정 상태에 따른 메시지
@@ -165,9 +149,9 @@ public class UserController {
 			service.findPassword(user);
 			rttr.addFlashAttribute("msg" , "이메일 인증 후 비밀번호를 변경해 주세요");
 		}
-
         return "redirect:/main";
     }
+    //비밀번호 찾기 이메일 인증 코드 검증
     @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
     public String passwordSetConfirm(UserVO user, Model model, RedirectAttributes rttr) throws Exception { // 이메일인증
        // System.out.println("컨트롤러 입력 정보: "+user);
@@ -192,8 +176,6 @@ public class UserController {
     public void setPassUserAuthGet(UserVO user,Model model) throws Exception{
 
     }
-
-
     @RequestMapping(value = "/setPassAuthCheck", method = RequestMethod.POST)
     public String setPassUserAuthPost(@ModelAttribute("dto") LoginDTO dto,Model model,RedirectAttributes rttr) throws Exception{
         //System.out.println(dto);
@@ -207,6 +189,7 @@ public class UserController {
         //model.addAttribute("modify",true);
         int id=vo.getUserId();
         rttr.addFlashAttribute("userId",id);
+        //패스워드 권한 인증 코드 전송
         rttr.addFlashAttribute("setPassword",true);
         return "redirect:/user/setPassword";
 
@@ -216,7 +199,7 @@ public class UserController {
 	public void setPassword(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
 
 	}
-
+	//패스워드 변경
 	@RequestMapping(value = "/setPassword", method = RequestMethod.POST)
 	public String setPasswordPost(UserVO user, Model model, RedirectAttributes rttr) throws Exception {
 			//System.out.println("패스워드 변경 값"+user);
@@ -244,23 +227,23 @@ public class UserController {
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
-		rttr.addFlashAttribute("msg","로그인 되었습니다.");
+		//rttr.addFlashAttribute("msg","로그인 되었습니다.");
 		//System.out.println(vo);
 
 	}
 
 	@RequestMapping(value = "/loginPost", method = RequestMethod.GET)
 	public void loginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
-		session.setAttribute("dest","/");
+		//바로 login
+    	session.setAttribute("dest","/main");
 	}
 
 	@RequestMapping(value = "/socialLoginPost", method = RequestMethod.GET)
 	public void socialLoginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
+       //소셜 id 정보 변경 관련 권한
         session.setAttribute("socialID","true");
         session.setAttribute("modify","true");
 	}
-
-
 
 
 	@RequestMapping (value="/logout",method = RequestMethod.GET)
@@ -283,12 +266,13 @@ public class UserController {
 		}
 		return "/main";
 	}
-
+	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-    public void myinfo(BoardVO board, RedirectAttributes rttr) throws Exception{
+    public void myinfo(UserVO user,Model model) throws Exception{
 
     }
 
+    //유저 정보변경 권한 체크
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
 	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
 
@@ -299,9 +283,7 @@ public class UserController {
 
     	//System.out.println(dto);
     	UserVO vo = service.login(dto);
-
 		//System.out.println(vo);
-
 		if(vo == null) {
 			return "user/modifyAuthCheck";
 		}
@@ -309,34 +291,26 @@ public class UserController {
 		model.addAttribute("userVO",vo);
 		//model.addAttribute("modify",true);
 		rttr.addFlashAttribute("modify",true);
-
-
 		return "redirect:/user/modifyUser";
 
 	}
-
+	//유저 정보변경 인증후 변경 페이지
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.GET)
 	public void ModifyUserGet(UserVO user,Model model) throws Exception{
 
-
 	}
 
+	//업로드 파일의 경로 설정
 	@Resource(name="uploadPath")
 	private String uploadPath;
 
 	@RequestMapping(value = "/modifyUser", method = RequestMethod.POST, produces = "text/plane;charset=UTF-8")
 	public String ModifyUserPost(UserVO user,Model model,RedirectAttributes rttr,HttpSession session, MultipartFile file) throws Exception{
-
-
-//		System.out.println("modifyUser file");
-//		System.out.println(file.isEmpty());
-//		if (file.isEmpty()){
-//			System.out.println("파일이 넘어오지 않음");
-//		}
-       // System.out.println("파일 isEmpty"+file.isEmpty());
+		//profile 정보 확인
         String test=user.getUserProfile();
-       // System.out.println(test);
+        //user 정보 저장
 		String userId= user.getUserId()+"";
+		//file 업로드 여부 확인
 		if(!file.isEmpty()) {
             String uploadedFileName = UploadFileUtils.uploadFile(uploadPath,
                     file.getOriginalFilename(),
@@ -345,6 +319,7 @@ public class UserController {
          //   System.out.println("파일 업로드 완료");
             user.setUserProfile(uploadedFileName);
         }else{
+			//프로필 업로드 하지 않을 때 원래 정보를 저장
             UserVO vot =(UserVO) session.getAttribute("login");
             user.setUserProfile(vot.getUserProfile());
 		    }
@@ -357,35 +332,31 @@ public class UserController {
 		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
 		return "redirect:/main";
 	}
+
+	//유저 탈퇴
 	@RequestMapping (value="/deleteUser",method = RequestMethod.GET)
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 		Object obj = session.getAttribute("login");
 		//System.out.println("obj"+obj);
-
-
 		UserVO vo = (UserVO)obj;
-
 		service.deleteUser(vo);
 		System.out.println("회원 탈퇴");
-
+		//탈퇴 후 로그인 정보 로그 아웃
 		if(obj !=null){
 			vo=(UserVO) obj;
-
 			session.removeAttribute("login");
 			session.invalidate();
-
 			Cookie loginCookie = WebUtils.getCookie(request,"loginCookie");
 			if(loginCookie !=null){
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
-
 			}
 		}
 		return "redirect:/";
 	}
 
-
+//oauth2 로그인 방식
 	//Login Api======================================================================
 	private NaverLoginBo naverLoginBo;
 	private String apiResult = null;
@@ -395,13 +366,9 @@ public class UserController {
 		this.naverLoginBo = naverLoginBo;
 	}
 
+	//JSON과 STRING 분석 메서드 사용
 	@Inject
 	private JsonStringParse jsonparse;
-
-//	@RequestMapping(value="/naverLogin", method = RequestMethod.GET)
-//	public void loginGet(HttpSession session) {
-//
-//	}
 
 	@RequestMapping(value="/naverLogin", method = RequestMethod.GET)
 	public ModelAndView login(HttpSession session) {
@@ -411,7 +378,7 @@ public class UserController {
 		//System.out.println(naverAuthUrl);
 		return new ModelAndView("user/naverLogin", "url", naverAuthUrl);
 	}
-
+	//API 에서 토큰을 받을 콜백 주소
 	@RequestMapping(value="/callback",method = RequestMethod.GET)
 	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session,Model model) throws IOException {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
@@ -421,16 +388,12 @@ public class UserController {
 		System.out.println("code : "+code);*/
 
 		OAuth2AccessToken oauthToken = naverLoginBo.getAccessToken(session, code, state);
-
-		//System.out.println("oauthToken 값: "+oauthToken);
 		apiResult = naverLoginBo.getUserProfile(oauthToken);
-	   //  System.out.println(apiResult);
 
 		JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
 
 		String userSocialId = jsonparse.JsonToString(jsonobj, "id");
 		String name = jsonparse.JsonToString(jsonobj, "nickname");
-
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();

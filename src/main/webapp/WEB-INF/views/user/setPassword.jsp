@@ -61,10 +61,10 @@
 <h1>TJ 비밀번호 변경</h1>
 <form name="chpass"  method="post" action="/user/setPassword" onsubmit="return chpasschk(this)">
             <input type="hidden" name="userId" id="userId" value="${userId}" >
-    password<input type = "password" name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
-    password 확인<input type = "password" name = "chkPassword" id="chkPassword" onkeyup="checkvalue()"><br>
-    <p id="pwsame" name="pwsame" ></p>
-    <input type="submit" value="패스워드 변경"/>
+    <input type = "password" class="form-control" placeholder="패스워드를 입력해주세요"  name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
+    <input type = "password" class="form-control" placeholder="패스워드를 다시 입력해주세요"  name = "chkPassword" id="chkPassword" onkeyup="checkvalue()">
+        <p style="height:20px;" id="pwsame" name="pwsame" ></p>
+    <input  class="btn btn-primary" type="submit" value="패스워드 변경"/>
 </form>
 </div>
 </body>
