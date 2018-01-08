@@ -198,9 +198,7 @@
                         <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
                         <spna class="textSpan">{{replyVo.replyText}}</spna>
                     </div>
-
                 </div>
-
 
                 <div class="col-xs-2">
 
