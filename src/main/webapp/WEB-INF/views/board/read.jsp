@@ -131,7 +131,35 @@
 
 </div>
 <%--댓글 반복문 부분--%>
+<script>
+    $(document).ready(function () {
+
+        <%--Handlebars.registerHelper('ifCond', function(loginUser, replyWriter, options) {--%>
+        <%--&lt;%&ndash;<span>{{replyVo.replyWriter}}</span>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;<span>{{loginUser}}</span>&ndash;%&gt;--%>
+        <%--loginUser = "<p>{{loginUser}}</p>"--%>
+        <%--replyWriter  ="<p>{{replyVo.replyWriter}}</p>"--%>
+
+
+        <%--if(loginUser === replyWriter) {--%>
+        <%--console.log(loginUser +'dddd');--%>
+        <%--console.log(replyWriter+'dddd' );--%>
+        <%--return options.fn(this);--%>
+        <%--}--%>
+
+        <%--return options.inverse(this);--%>
+        <%--});--%>
+        Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+            if(v1 === v2) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        });
+
+    });
+</script>
 <script class="template" type="text/x-handlebars-template">
+
     {{#each .}}
     <li class ="replyLi" data-replyId={{replyId}}>
         <div class="timeline-item">
@@ -156,7 +184,7 @@
                     <strong class="title ">
                         <span class="badge">대댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId">{{replyVo.replyId}}</span>
+                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
                         <%--replyId와 replyWriter 나타나는 부분--%>
                         <%--댓글의 replyId를 받아오기 위한 부분--%>
                         <input type="hidden" class="reParent" value="{{replyParent}}">
@@ -167,8 +195,8 @@
 
                     <div class="comment">
                         <%--입력된 댓글 text부분--%>
-                        <input class="replyText" readonly value="{{replyVo.replyText}}"></input>
-                        <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
+                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
+                        <spna class="textSpan">{{replyVo.replyText}}</spna>
                     </div>
 
                 </div>
@@ -196,8 +224,13 @@
                     <%--3.날짜부분--%>
                     <span class="time">
                             {{prettifyDate  replyVo.replyRegdate}}</span>
-                    <button type="button"  class="btn btn-warning replyModBtn" >Modify</button>
-                    <button type="button" class="btn btn-danger replyDelBtn" >DELETE</button>
+
+                    {{#ifCond loginUser replyVo.replyWriter}}
+
+                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
+                    <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
+                    {{/ifCond}}
+                    <%--{{/if}}--%>
                 </div>
             </div>
             {{else}}
@@ -213,7 +246,7 @@
                     <strong class="title">
                         <span class="badge">댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId">{{replyVo.replyId}}</span>
+                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
                         <%--replyId와 replyWriter 나타나는 부분--%>
                         <span class="replyWriter register">{{replyVo.replyWriter}}</span>
                         <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
@@ -221,9 +254,8 @@
 
                     <div class="comment">
                         <%--입력된 댓글 text부분--%>
-                        <input class="replyText" readonly value="{{replyVo.replyText}}"></input>
-                        <%--<input class="replyText" type="hidden">{{replyVo.replyText}}</input>--%>
-                        <%--clss에  timeline 찾아서 버튼부분 확인 가능 --%>
+                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
+                        <spna class="textSpan">{{replyVo.replyText}}</spna>
                     </div>
 
                 </div>
@@ -249,10 +281,14 @@
                     <%--3.날짜부분--%>
                     <span class="time">
                     {{prettifyDate  replyVo.replyRegdate}}</span>
-                    <%--<button type="button" class="btn btn-warning modalReply" data-toggle="modal" data-target=".modifyModal">Open Modal</button>--%>
-                    <button type="button"  class="btn btn-warning replyModBtn" >Modify</button>
-                    <button type="button" class="btn btn-danger replyDelBtn" >DELETE</button>
-                    <button type="button" class="btn btn-info demoReply" >답글</button>
+
+                    {{#ifCond loginUser replyVo.replyWriter}}
+
+                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
+                    <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
+
+                    {{/ifCond}}
+                    <button type="button" class="btn btn-info demoReply" ><span class="glyphicon glyphicon-collapse-down"></span> 답글</button>
                 </div>
 
                 <%--버튼 누르면 나오게 하기--%>
@@ -262,8 +298,8 @@
                     <div class="col-xs-1">
 
                     </div>
-                    <div class="col-xs-8 well">
-                        <input type="hidden" class="demoReplyId" value="{{replyVo.replyId}}">
+                    <div class="col-xs-9">
+
                         <span  class="reRegister"></span>
                         <%--<span  class="reRegister" >${boardVO.boardWriter}</span>--%>
                         <textarea class="form-control replyTextReply" rows="3">대댓글 입력하세요</textarea>
@@ -283,7 +319,7 @@
             <div class="row removePadding ">
 
                 <strong class="title">
-                    <input type="hidden" class="demoReplyId">{{replyVo.replyId}}</input>
+
                     <span class="badge">댓글</span>
                     <%--replyId와 replyWriter 나타나는 부분--%>
                     <span class="replyWriter">{{replyVo.replyWriter}}</span>
@@ -299,25 +335,8 @@
     </li>
     {{/each}}
 </script>
-<%--<script>--%>
-<%--$(document).on("click",".demoReply", function () {--%>
-<%--var replyId = $(this).parent().parent().parent().find('.replyId').text();--%>
-<%--var demoReplyId = $(this).parent().parent().parent().find('.demoReplyId').val();--%>
-<%--// console.log( $(this).parent().parent().parent().find('.demoReplyId').val()+'나와');--%>
-
-<%--if (replyId === demoReplyId) {--%>
-<%--$(this).parent().parent().find('.demo').show();--%>
-
-<%--};--%>
-
-<%--});--%>
-<%--</script>--%>
-
-
 
 <script>
-
-
     $(document).ready(function () {
         //하트
         var heartval = ${heart};
@@ -371,7 +390,6 @@
             });
         });
 
-
     });
 </script>
 <script>
@@ -411,7 +429,6 @@
             }
         });
 
-
     });
 </script>
 
@@ -422,8 +439,10 @@
 
         if ( demo.css('display')=='none') {
             demo.css("display", 'block');
+            $(this).html('<span></span> 닫기');
         }else if(demo.css('display')=='block'){
             demo.css("display", 'none');
+            $(this).html('<span></span> 답글');
         };
 
     });
@@ -437,21 +456,24 @@
         //변경된 택스트
         var replyTextObj = $(this).parent().parent().find('.replyText');
         var replyText = replyTextObj.val();
-
-        // console.log(replyText);
-        //readonly
+        var textSpan = $(this).parent().parent().find('.textSpan');
 
         if (replyTextObj.prop('readonly') == true) {
-            console.log(replyTextObj.prop('readonly')+ "에서");
+
             replyTextObj.prop('readonly', false);
-            console.log(replyTextObj.prop('readonly') + "변경");
+            $(this).html('<span></span> 수정등록');
+
+            textSpan .css('display', 'none');
+            replyTextObj.css('display', 'block');
 
         }
         else if(replyTextObj.prop('readonly')== false) {
 
-            console.log(replyTextObj.prop('readonly') + " 에서");
             replyTextObj.prop('readonly', true);
-            console.log(replyTextObj.prop('readonly')+ "변경");
+            $(this).html('<span></span> 수정하기');
+
+            replyTextObj.css('display', 'none');
+            textSpan.css('display', 'block');
         }
 
         console.log(replyText + "보내지는 글");
@@ -468,18 +490,11 @@
             success: function (result) {
                 console.log("수정완료?");
                 if (result == 'SUCCESS') {
-                    alert("수정 되었습니다.");
-
-                    // getPage("/replies/" + boardId + "/" + replyPage);
+                    textSpan.html(replyText);
                 }
             }
         });
     });
-
-
-
-
-
 
     $(document).on("click",".replyDelBtn", function () {
         var replyId =$(this).parent().parent().parent().find('.replyId').text();
@@ -548,10 +563,13 @@
             var temp = data.list;
             var temp2 = new Array(data.list.length);
             for(var i in temp){
-                temp2[i] = {replyVo: data.list[i], reHeart: data.reHeart[i]};
+                temp2[i] = {replyVo: data.list[i], reHeart: data.reHeart[i],loginUser:data.loginUser[i]};
             }
 
-            // console.log(temp2);
+
+            console.log(data.loginUser+"ㄴㄴ");
+
+
             printData(temp2, $(".repliesDiv"), $('.template'));
             // printData(data.list, $(".repliesDiv"), $('.template'), data.reHeart);
 
@@ -594,29 +612,6 @@
         getPage("/replies/"+boardId+"/"+replyPage);
     });
 
-    // //댓글리스트 나오는 부분
-    // $(".replies").on("click",".replyLi button", function () {
-    //     var reply = $(this).parent();
-    //     //reply의 속성
-    //     var replyId = reply.attr("data-replyId");
-    //
-    //     var replyText = reply.text();
-    //
-    //     $(".modal-title").html(replyId);
-    //     // console.log(replyId+"???");
-    //     $(".replyText").val(replyText);
-    //     // console.log(replyText+"리스트의 택스트 글");
-    // });
-    // //댓글의 수정버튼을 누르면 모달창이 나오도록
-    // $(document).on("click",".modalReply", function () {
-    //
-    //     //newReplyText의 값을 reply에서 찾는다(class이름이 timeline-bodyd의 글에서 텍스트를 밥아온다)
-    //     $(".newReplyText").val($(this).parent().find('.replyText').val());
-    //     // console.log("모달?나오니?"+  $(this).parent().find('.replyText').val());
-    //     //data-replyId 속성 값을 받아서 modal-title값으로 보낸다
-    //     $(".modal-title").html($(this).parent().find('.replyId').text());
-    //     // console.log("모달제목?나오니?"+ $(this).parent().find('.replyId').text())
-    // });
 
 </script>
 <script>
