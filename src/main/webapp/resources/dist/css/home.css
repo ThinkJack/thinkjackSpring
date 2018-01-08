@@ -487,3 +487,14 @@ p{
     color:white;
 
 }
+.Poto{
+    width: 100px;
+    height: 80px;
+}
+
+
+ul, menu, dir {
+    list-style-type: none;
+
+}
+
