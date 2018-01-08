@@ -7,14 +7,14 @@
     <style>
         .fileDrop{
             z-index: 8;
-            width:300px;
-            height:200px;
+            width:100%;
+            height:auto;
             border:1px solid black;
         }
         .uploadedList{
             z-index: 6;
             width:100%;
-            height:200px;
+            height:auto;
             border:1px solid black;
         }
 
@@ -30,6 +30,28 @@
             opacity: 0.5;
             filter: alpha(opacity=50);
         }
+        .small-unit {
+            float: left;
+            width: 49%;
+            height: 30%;
+            color: black;
+            /* background: #333;*/
+            margin: 1px;
+        }
+        .big-area {
+            float: left;
+            width: 100%;
+            margin: 0 10px 0 0;
+            padding: 10px;
+            /*    background: #999;*/
+        }
+         img{
+          width:100%;
+          height:auto;
+          max-height: 200px;
+             max-width:400px;
+            }
+
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/upload.js"></script>
@@ -50,9 +72,9 @@
     if(fullName!=="") {
         imgtest = getFileInfo(fullName);
         console.log(imgtest);
-        str = "<div>" + "<img style='width:300px;height:200px;' src=" + imgtest + "/>" + "</div>";
+        str = "<div>" + "<img class='img-responsive' src=" + imgtest + "/>" + "</div>";
     }else{
-        str = "<div>" + "<img style='width:300px;height:200px;' src='/resources/images/123.gif'/>" + "</div>";
+        str = "<div>" + "<img class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
     }
     $(".uploadedList").append(str);
 
@@ -127,39 +149,43 @@
 
 
 </head>
-  <body>
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4">
+
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
   <h3>Profile Image</h3>
-  <div class="fileDrop">
-      <div class="uploadedList"></div>
-  </div>
+      <div class="big-area">
+      <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
+          <div class="small-unit">
+          <div class="fileDrop">
+          <div class="uploadedList"></div>
+        </div>
+         <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
+         <input type='file' id="imgInp" name="file" /><br>
+          </div>
+          <div class="small-unit">
+         <input type="hidden" name="userId" value="${login.userId}" readonly/>
+              <div class="input-group">
+                  <span class="input-group-addon"  class="input-group-addon">Email ID</span>
+         <input type="text" class="form-control" name="userEmail" id="userEmail"  value="${login.userEmail}"  aria-describedby="basic-addon1" readonly/><br>
+              </div>
+                  <div class="input-group">
+                      <span class="input-group-addon" class="input-group-addon">Name&nbsp;&nbsp;</span>
+         <input type="text" class="form-control" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><br>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" id="authenticateName">중복체크</button>
+                           </span>
+                  </div>
+         <input type="hidden" name="test" value="${login.userProfile}" /><br>
+         <input type="hidden" id="userProfile" name="userProfile">
+          </div>
+         <div class="small-unit">
+         <input type="submit" value="정보변경"/>
+         <input type="reset" value="취소"/>
+         </div>
 
-
-  <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
-      <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-      <input type='file' id="imgInp" name="file" /><br>
-      <input type="hidden" name="userId" value="${login.userId}" readonly/>
-      아이디 : <input type="text" name="userEmail" id="userEmail"  value="${login.userEmail}" readonly/><br>
-      이름 : <input type="text" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><button type="button" id="authenticateName">중복체크</button><br>
-      <input type="text" name="test" value="${login.userProfile}" /><br>
-
-      <input type="hidden" id="userProfile" name="userProfile">
-
-
-
-      <input type="submit" value="정보변경"/>
-      <input type="reset" value="취소"/>
   </form>
+      </div>
   </div>
-
-     <div>
-     <label>
-
-     </label>
-     
-     </div>
-  </form>
 
   <script>
       $(".fileDrop").on("dragenter dragover",function (event) {
@@ -231,7 +257,7 @@
               var reader = new FileReader();
 
               reader.onload = function (e) {
-                  str = "<div>" + "<img style='width:300px;height:200px;' src='" + e.target.result + "'/>" + "</div>";
+                  str = "<div>" + "<img class='img-responsive' src='" + e.target.result + "'/>" + "</div>";
                   console.log();
                   $(".uploadedList").empty();
                   $(".uploadedList").append(str);

@@ -58,16 +58,15 @@
             width: 200px;
             height: 200px;
             color: black;
-            /* background: #333;*/
+           /* background: #333;*/
             margin: 1px;
         }
-
         .big-area {
             float: left;
             width: 500px;
             margin: 0 10px 0 0;
             padding: 10px;
-            /*    background: #999;*/
+        /*    background: #999;*/
         }
     </style>
 
@@ -80,16 +79,11 @@
     <button class="tablinks" onclick="openTab(event, 'Source_code')">Source code</button>
 </div>
 
-<div id="Account_information" class="tabcontent">
+<div id="Account_information" class="tabcontent" style="display: block;">
+    <p style="text-align: left">사용자 프로필</p>
     <div class="big-area">
-        <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;" src=""
-             alt="Profile image example"/>
-        <div class="small-unit"><h1>${login.userEmail}</h1><br>
-            <p>${login.userName}</p><br>
-            <button onclick="location.href='/user/modifyUser'">정보변경</button>
-            <br>
-            <button onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button>
-        </div>
+        <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;"  src="" alt="Profile image example"/>
+        <div class="small-unit"><h4>"${login.userName}"<p>님 반가워요</p></h4> <br><p>${login.userEmail}</p><br><button class="btn btn-default" onclick="location.href='/user/modifyUser'">정보변경</button><br><button class="btn btn-default" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>
         <div class="small-unit"></div>
         <div class="small-unit"></div>
     </div>
@@ -202,10 +196,6 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        document.getElementById('Account_information').style.display = "block";
-    });
-
     function openTab(evt, category) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -222,17 +212,17 @@
 </script>
 <script src="/resources/upload.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var imgtest;
-        var fullName = "${login.userProfile}";
-        if (fullName !== "") {
+        var fullName="${login.userProfile}";
+        if(fullName!=="") {
             imgtest = getFileInfo(fullName);
             console.log(imgtest);
             str = imgtest;
-        } else {
+        }else{
             str = "/resources/images/123.gif";
         }
-        $("#profile").attr("src", str);
+        $("#profile").attr("src",str);
     });
 </script>
 </body>

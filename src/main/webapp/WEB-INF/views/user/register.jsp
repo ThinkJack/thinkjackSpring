@@ -11,12 +11,34 @@
 <head>
 	<title>Home</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<style>
+		/*.btn {*/
+			/*display: inline-block;*/
+			/*padding: 5px 15px;*/
+			/*font-size: 12px;*/
+			/*cursor: pointer;*/
+			/*text-align: center;*/
+			/*text-decoration: none;*/
+			/*outline: none;*/
+			/*color: #fff;*/
+			/*background-color: #4CAF50;*/
+			/*border: none;*/
+			/*border-radius: 15px;*/
+			/*box-shadow: 0 9px #999;*/
+		/*}*/
+ td {
+	padding:2px;
+ }
+		input{
+			width:30em;
+		}
+	</style>
 	<script>
 
         var chkid=false;
         var chkName=false;
         var chkpass=false;
-console.log(signup);
+//console.log(signup);
         function checkvalue() {
            // console.log('3번째: '+signup.userPassword.value);
            // console.log('4번째: '+signup.chkPassword.value);
@@ -51,7 +73,7 @@ console.log(signup);
                 obj.userEmail.focus();
                 return false;
             }
-            if(!chkname){
+            if(!chkName){
                 alert("이름 중복체크를 실행해주세요.");
                 obj.userName.focus();
                 return false;
@@ -153,34 +175,44 @@ console.log(signup);
 </head>
 <body>
 <div class="col-sm-4"></div>
-<div class="col-sm-4">
-<h1>TJ 회원가입</h1>
-<form name="signup"  method="post" onsubmit="return signinchk(this)">
-	<table>
-		<tr>
-			<td>email</td>
-			<td><input type = "text" name = "userEmail" id="userEmail"><button type="button" id="authenticate">email check</button></td><br>
-			<tr>
-			<td>name</td><br>
-			<td><input type = "text" name = "userName" id="userName" ><button type="button" id="authenticateName">name check</button></td>
-			</tr>
-			<tr>
-			<td>password</td>
-			<td><input type = "password" name = "userPassword" id="userPassword" onkeyup="checkvalue()" ></td>
-			</tr>
-			<tr>
-			<td>password 확인</td>
-			<td><input type = "password" name = "chkPassword" id="chkPassword" onkeyup="checkvalue()"></td>
-			</tr>
-			<tr>
-			<td width="96" height="32" ></td>
-			<td><p id="pwsame" name="pwsame"  ></p></td>
-			</tr>
-			<tr>
-			<td><input type = "submit" value = "회원가입"></td>
-			</tr>
-</form>
-</div>
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<div class="panel-title" style="text-align: center"><h1>TJ 회원가입</h1></div>
+			</div>
+			<form role="form" name="signup"  method="post" onsubmit="return signinchk(this)">
+				<table>
+					<tr>
+						<div class="control-group">
+							<td></td>
+							<td><input type = "text" class="form-control" name="userEmail" id="userEmail" placeholder="Email 주소를 입력해주세요" autofocus></td><td><button type="button" class="btn btn-warning" id="authenticate">중복체크</button></td><br>
+						</div>
+					<tr>
+						<td></td>
+						<td><input type = "text" class="form-control"  name="userName" id="userName"  placeholder="이름을 입력해주세요" ></td><td><button type="button" id="authenticateName" class="btn btn-warning">중복체크</button></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "password" class="form-control"  name="userPassword" id="userPassword" onkeyup="checkvalue()" placeholder="패스워드를 입력해주세요" ></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "password" class="form-control" name="chkPassword" id="chkPassword" onkeyup="checkvalue()"  placeholder="패스워드를 다시 한 번 입력해주세요" ></td>
+					</tr>
+					<tr>
+						<td width="96" height="36" ></td>
+						<td><p id="pwsame" name="pwsame"  ></p></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type = "submit" value = "회원가입" class="btn btn-primary"></td>
+					</tr>
+				</table>
+
+			</form>
+
+		</div>
+<div class="col-sm-4"></div>
+
 
 </body>
 </html>
