@@ -1,7 +1,12 @@
 package persistence;
 
+import domain.BoardVO;
+import domain.SearchCriteria;
+import domain.UserCriteria;
 import domain.UserVO;
 import dto.LoginDTO;
+
+import java.util.List;
 
 public interface UserDAO {
 	public void insertUser(UserVO vo) throws Exception;
@@ -33,6 +38,11 @@ public interface UserDAO {
 	public void updatePassword(UserVO vo) throws Exception;
 
 	public void successAuth (UserVO vo) throws Exception;
+
+    public List<BoardVO> boardSearch(UserCriteria cri)throws Exception;
+
+    public int boardSearchCount(UserCriteria cri)throws Exception;
+
 
 
 }

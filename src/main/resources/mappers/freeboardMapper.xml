@@ -45,32 +45,6 @@
         WHERE tbl_board.board_id = #{boardId}
     </update>
 
-    <select id="readPage" resultType="BoardVO">
-        <![CDATA[
-
-        SELECT
-            board_id                                                             boardId,
-            board_title                                                          boardTitle,
-            board_content                                                        boardContent,
-            (SELECT user_name
-             FROM tbl_user
-             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
-            board_regdate                                                        boardRegdate,
-            board_viewcnt                                                        boardViewcnt,
-            board_likecnt                                                        boardLikecnt
-        FROM
-            tbl_board
-        WHERE tbl_board.board_id > 0 AND (SELECT category_name
-                                          FROM tbl_board_category
-                                          WHERE tbl_board_category.category_id = tbl_board.board_category_id) = 'free'
-             AND board_state = 1
-        ORDER BY board_id DESC , board_regdate DESC
-        LIMIT #{page}, 10
-
-        ]]>
-    </select>
-
-
     <sql id="searchOption">
         <if test="searchType != null">
             <if test="searchType == 't'.toString()">
@@ -134,31 +108,6 @@
                          WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free' AND board_state = 1
         ]]>
         <include refid="searchOption"></include>
-    </select>
-
-    <select id="criteria" resultType="BoardVO">
-        <![CDATA[
-
- select
-     board_id                                                             boardId,
-     board_title                                                          boardTitle,
-     board_content                                                        boardContent,
-     (SELECT user_name
-      FROM tbl_user
-      WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
-     board_regdate                                                        boardRegdate,
-     board_viewcnt                                                        boardViewcnt,
-
-     board_likecnt                                                        boardLikecnt
- from
-   tbl_board
- where board_id > 0 AND (SELECT category_name
-                         FROM tbl_board_category
-                         WHERE tbl_board_category.category_id = tbl_board.board_category_id) ='free' AND board_state = 1
- order by board_id desc, board_regdate desc
- limit #{pageStart}, #{perPageNum}
-
-        ]]>
     </select>
 
     <update id="increaseViewcnt">

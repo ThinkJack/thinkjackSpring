@@ -4,6 +4,8 @@ import javax.inject.Inject;
 
 import common.MailHandler;
 import common.TempKey;
+import domain.BoardVO;
+import domain.UserCriteria;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 import domain.UserVO;
 import dto.LoginDTO;
 import persistence.UserDAO;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -186,5 +190,15 @@ public class UserServiceImpl implements UserService {
 		}
 
 
+	}
+
+	@Override
+	public List<BoardVO> boardSearch(UserCriteria cri) throws Exception {
+		return dao.boardSearch(cri);
+	}
+
+	@Override
+	public int boardSearchCount(UserCriteria cri) throws Exception {
+		return dao.boardSearchCount(cri);
 	}
 }

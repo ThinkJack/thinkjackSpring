@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import common.TempKey;
 import common.UploadFileUtils;
+import domain.PageMaker;
+import domain.UserCriteria;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -285,7 +287,20 @@ public class UserController {
 	}
 
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-    public void myinfo(BoardVO board, RedirectAttributes rttr) throws Exception{
+    public void myinfo(@ModelAttribute("cri") UserCriteria cri,
+					   Model model) throws Exception {
+
+		System.out.println(cri.getUserId());
+		cri.setUserId(1);
+
+		model.addAttribute("list", service.boardSearch(cri));
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+
+		pageMaker.setTotalCount(service.boardSearchCount(cri));
+
+		model.addAttribute("pageMaker", pageMaker);
 
     }
 
