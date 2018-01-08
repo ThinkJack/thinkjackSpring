@@ -13,9 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SrcServiceImpl implements SrcService {
@@ -73,8 +71,16 @@ public class SrcServiceImpl implements SrcService {
             vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
             vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
 
+            //cdn setting
+            vo.setCdnCss(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                            .split(","))));
+            vo.setCdnJs(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                            .split(","))));
+
             //사진경로 가져오기
-            if(vo.getSrcWriter() != 0){
+            if (vo.getSrcWriter() != 0) {
                 vo.setSrcWriterImgPath(userdao.getUserProfile(vo.getSrcWriter()));
             }
 
@@ -89,10 +95,11 @@ public class SrcServiceImpl implements SrcService {
     }
 
     @Override
-    public String saveSrc(HttpServletRequest request, HttpServletResponse response, SrcVO vo) throws Exception {
+    public String saveSrc(HttpServletRequest request, SrcVO vo) throws Exception {
         String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
         boolean srcEmpty = false;
         String filePath;
+        String cdn;
 
         HttpSession session = request.getSession();
         Object userVo = session.getAttribute("login");
@@ -127,6 +134,14 @@ public class SrcServiceImpl implements SrcService {
             fileWriter(filePath + "/html.txt", vo.getSrcHtml());
             fileWriter(filePath + "/css.txt", vo.getSrcCss());
             fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
+
+            List cdnCssList = vo.getCdnCss();
+            List cdnJsList = vo.getCdnJs();
+            cdn = cdnSet(cdnCssList);
+            fileWriter(filePath + "/cdnCss.txt",cdn);
+            cdn = cdnSet(cdnJsList);
+            fileWriter(filePath + "/cdnJS.txt",cdn);
+
             // 파일안에 문자열 쓰기
             vo.setSrcPath(filePath);
             if (srcEmpty) {
@@ -140,6 +155,8 @@ public class SrcServiceImpl implements SrcService {
         }
         return srcId;
     }
+
+
 
     @Override
     public void srcDelete(SrcVO vo) throws Exception {
@@ -191,11 +208,18 @@ public class SrcServiceImpl implements SrcService {
 
         List list = srcdao.selectSrcList(cri);
 
-        for(int i=0; i<list.size(); i++){
-            SrcVO vo = (SrcVO)list.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            SrcVO vo = (SrcVO) list.get(i);
             vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
             vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
             vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+            //cdn setting
+            vo.setCdnCss(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                            .split(","))));
+            vo.setCdnJs(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                            .split(","))));
             list.set(i, vo);
         }
 
@@ -266,5 +290,15 @@ public class SrcServiceImpl implements SrcService {
         fw.flush();
         // 객체 닫기
         fw.close();
+    }
+
+    //cdn setting
+    public String cdnSet(List<String> list){
+        String tenp = "";
+
+        for(int i=0; i<list.size(); i++){
+            tenp += list.get(i) + ",";
+        }
+        return tenp;
     }
 }

@@ -349,6 +349,15 @@ $(function () {
     });
 });
 
+//setting 모달 닫힐때 이벤트
+$(function () {
+    $("#setting").on("hide.bs.modal", function () {
+
+        cdnCssJsValSet();
+
+        updatePreview();
+    });
+});
 
 //layout 관련 script
 // $(function () {

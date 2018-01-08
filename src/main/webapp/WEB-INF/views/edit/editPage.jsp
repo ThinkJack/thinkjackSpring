@@ -9,9 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--<%--%>
-<%--response.setHeader("Cache-Control","no-cache");--%>
-<%--response.setHeader("Pragma","no-cache");--%>
-<%--response.setDateHeader("Expires",0);--%>
+    <%--response.setHeader("Pragma","no-cache");--%>
+    <%--response.setHeader("Pragma","no-store");--%>
+    <%--response.setHeader("Cache-Control","no-cache");--%>
+    <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
 <html>
@@ -20,9 +21,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%--<meta http-equiv="Cache-Control" content="no-cache"/>--%>
-    <%--<meta http-equiv="Expires" content="0"/>--%>
-    <%--<meta http-equiv="Pragma" content="no-cache"/>--%>
+    <%--<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">--%>
+    <%--<meta http-equiv="Expires" content="-1">--%>
+    <%--<meta http-equiv="Pragma" content="no-cache">--%>
+    <%--<meta http-equiv="Cache-Control" content="no-cache">--%>
 
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
@@ -104,6 +106,19 @@
         Heart = "<c:out value="${like}" default="0"/>";
         userId = "<c:out value="${login.userId}" default=""/>";
 
+        <c:if test="${SrcVO.cdnCss ne null}">
+            <c:forEach items="${SrcVO.cdnCss}" var="item">
+                cdnCss.push("${item}");
+            </c:forEach>
+        </c:if>
+
+        <c:if test="${SrcVO.cdnJs ne null}">
+            <c:forEach items="${SrcVO.cdnJs}" var="item">
+                cdnJs.push("${item}");
+            </c:forEach>
+        </c:if>
+
+
         //화면에서 받은 값 세팅
         $(function () {
             document.getElementById("src-title").innerHTML = srcTitle;
@@ -122,12 +137,6 @@
             if(document.getElementById("visibility" + srcStatus) !== null){
                 document.getElementById("visibility" + srcStatus).checked = true;
             }
-
-            //코드 세팅
-            codeHtml.setValue(strHtml);
-            codeCss.setValue(strCss);
-            codeJavaScript.setValue(strJs);
-            changeSaveImg(1);
 
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
@@ -163,6 +172,16 @@
                     $("#reply-modal-bt").trigger('click');
                 }
             </c:if>
+
+            cdnCssJsViewSet(cdnCss, "css");
+            cdnCssJsViewSet(cdnJs, "js");
+            cdnCssJsValSet();
+
+            //코드 세팅
+            codeHtml.setValue(strHtml);
+            codeCss.setValue(strCss);
+            codeJavaScript.setValue(strJs);
+            changeSaveImg(1);
         });
     </script>
 </body>

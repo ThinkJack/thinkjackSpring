@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class SrcVO {
     private String srcId;
@@ -21,6 +22,25 @@ public class SrcVO {
     private String srcHtml;
     private String srcCss;
     private String srcJavaScript;
+
+    private List<String> cdnCss;
+    private List<String> cdnJs;
+
+    public List<String> getCdnCss() {
+        return cdnCss;
+    }
+
+    public void setCdnCss(List<String> cdnCss) {
+        this.cdnCss = cdnCss;
+    }
+
+    public List<String> getCdnJs() {
+        return cdnJs;
+    }
+
+    public void setCdnJs(List<String> cdnJs) {
+        this.cdnJs = cdnJs;
+    }
 
     public int getSrclikeCli() {
         return srclikeCli;
@@ -178,6 +198,8 @@ public class SrcVO {
                 ", srcHtml='" + srcHtml + '\'' +
                 ", srcCss='" + srcCss + '\'' +
                 ", srcJavaScript='" + srcJavaScript + '\'' +
+                ", cdnCss=" + cdnCss +
+                ", cdnJs=" + cdnJs +
                 '}';
     }
 }

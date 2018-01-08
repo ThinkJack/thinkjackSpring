@@ -68,11 +68,11 @@
                                 <label>Visibility</label>
                                 <div>
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" id="visibility1" name="visibility" value="1" checked>
+                                        <input class="form-check-input" onchange="changeSaveImg(2)" type="radio" id="visibility1" name="visibility" value="1" checked>
                                         public
                                     </label>
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" id="visibility0" name="visibility" value="0">
+                                        <input class="form-check-input" onchange="changeSaveImg(2)" type="radio" id="visibility0" name="visibility" value="0">
                                         private
                                     </label>
                                 </div>
@@ -134,95 +134,13 @@
                                     If you link to another Pen, it will include the CSS from that Pen.
                                     If the preprocessor matches, it will attempt to combine them before processing.</p>
                             </div>
-                            <div class="row cdn-container">
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn1"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn2"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn3"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn4"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn5"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn6"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col cdn_div">
-                                        <div class="col">
-                                            <img src="/resources/images/positionChange.png">
-                                            <input class="form-control cdn_input" type="text" id="css-cdn7"
-                                                   placeholder="CDN을 추가해 주세요">
-                                            <button type="button" class="close cdn_close" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row cdn-container" id="cdn-css">
+
                             </div>
                             <div class="row">
                                 <div class="col align-items-end">
-                                    <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;">add</button>
+                                    <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;"
+                                            onclick="cdnCssAdd(cdnCssidx);">add</button>
                                 </div>
                             </div>
                         </div>
@@ -241,103 +159,19 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="row">
-                                    <label>Add External Scripts/Masterpieces</label>
-                                </div>
-                                <div class="row">
-                                    <p style="font-size: 9px; padding: 0px;">Any URL's added here will be added as scripts in order, and run before the JavaScript in the editor.
-                                        You can use the URL of any other Pen and it will include the JavaScript from that Pen.</p>
-                                </div>
-                                <div class="row cdn-container">
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn1"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn7"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn2"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn3"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn4"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn5"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col cdn_div">
-                                            <div class="col">
-                                                <img src="/resources/images/positionChange.png">
-                                                <input class="form-control cdn_input" type="text" id="js-cdn6"
-                                                       placeholder="CDN을 추가해 주세요">
-                                                <button type="button" class="close cdn_close" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <label>Add External Scripts/Masterpieces</label>
+                            </div>
+                            <div class="row">
+                                <p style="font-size: 9px; padding: 0px;">Any URL's added here will be added as scripts in order, and run before the JavaScript in the editor.
+                                    You can use the URL of any other Pen and it will include the JavaScript from that Pen.</p>
+                            </div>
+                            <div class="row cdn-container" id="cdn-js">
+
                             </div>
                             <div class="row">
                                 <div class="col align-items-end">
-                                <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;">add</button>
+                                <button type="button" class="btn btn-primary btn-sm" style="float:right; padding: 0.07rem .5rem;"
+                                        onclick="cdnJsAdd(cdnJsidx)">add</button>
                                 </div>
                             </div>
                         </div>

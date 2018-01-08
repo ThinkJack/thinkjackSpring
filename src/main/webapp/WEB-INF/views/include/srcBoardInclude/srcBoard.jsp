@@ -191,16 +191,31 @@
             var tempHtml = escapeHtml('<c:out value="${srcVo.srcHtml}" default=""/>');
             var tempCss = escapeHtml('<c:out value="${srcVo.srcCss}" default=""/>');
             var tempJs = escapeHtml('<c:out value="${srcVo.srcJavaScript}" default=""/>');
-            preview.open();
+            var tempCdnCss = "";
+            var tempCdnJs = "";
+
+            <c:if test="${srcVo.cdnCss ne null}">
+                <c:forEach items="${srcVo.cdnCss}" var="item">
+                    tempCdnCss += "<link rel='stylesheet' href='" + "${item}" +"'\/>";
+                </c:forEach>
+            </c:if>
+
+            <c:if test="${srcVo.cdnJs ne null}">
+                <c:forEach items="${srcVo.cdnJs}" var="item">
+                    tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
+                </c:forEach>
+            </c:if>
 
             preview.write(
-                "" + tempHtml
+                tempCdnCss
                 +
                 "<style>" + tempCss + "<\/style>"
                 +
-                "<script>" + tempJs + "<\/script>"
+                tempHtml
                 +
-                "<script>" + "<\/script>"
+                tempCdnJs
+                +
+                "<script>" + tempJs + "<\/script>"
             );
             preview.close();
         });
@@ -263,7 +278,6 @@
                 + '&keyword=' + encodeURIComponent($('#keywordInput').val());
         });
     });
-
 </script>
 
 <!--내용-->
