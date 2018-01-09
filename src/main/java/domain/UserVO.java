@@ -9,6 +9,7 @@ public class UserVO {
 	private int userState;
 	private String userSocialId;
 	private String userAuthCode;
+	private String userProfile;
 
 
 
@@ -68,6 +69,14 @@ public class UserVO {
 		this.userAuthCode = userAuthCode;
 	}
 
+	public String getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(String userProfile) {
+		this.userProfile = userProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO{" +
@@ -77,7 +86,8 @@ public class UserVO {
 				", userPassword='" + userPassword + '\'' +
 				", userState=" + userState +
 				", userSocialId='" + userSocialId + '\'' +
-				", userAuthcode='" + userAuthCode + '\'' +
+				", userAuthCode='" + userAuthCode + '\'' +
+				", userProfile='" + userProfile + '\'' +
 				'}';
 	}
 }

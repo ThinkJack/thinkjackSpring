@@ -106,4 +106,10 @@ public class UserDAOImpl implements UserDAO{
 	public void successAuth(UserVO vo) throws Exception {
 		session.update(namespace+".successAuth",vo);
 	}
+
+	@Override
+	public String getUserProfile(int userId) throws Exception {
+		return session.selectOne(namespace + ".getUserProfile", userId);
+	}
+
 }

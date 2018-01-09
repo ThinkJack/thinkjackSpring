@@ -11,8 +11,8 @@ public interface SrcReplyService {
     // 댓글 입력
     void create(SrcReplyVO vo) throws Exception;
     // 댓글 수정
-    void update(SrcReplyVO vo) throws Exception;;
+    void update(SrcReplyVO vo) throws Exception;
     // 댓글 삭제
-    void delete(Integer replyId)throws Exception;;
+    void delete(Integer replyId)throws Exception;
 
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.srcLikeMapper">
+
+    <select id="selectLikeSrc" resultType="int">
+        select count(*) from tbl_src_like
+        where src_id = #{srcId} AND user_id = #{userId}
+    </select>
+
+    <insert id="insertLikeSrc">
+        insert into tbl_src_like (src_id, user_id) VALUES
+            (#{srcId}, #{userId})
+    </insert>
+
+    <delete id="deleteLikeSrc">
+        delete FROM tbl_src_like
+        WHERE src_id = #{srcId} AND user_id = #{userId}
+    </delete>
+
+    <select id="selectLikeSrcCnt" resultType="int">
+        select count(*) from tbl_src_like
+        where src_id = #{srcId}
+    </select>
+</mapper>

@@ -1,201 +1,302 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Uri
-  Date: 2017-12-14
-  Time: 오후 1:13
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <html>
 <head>
-    <title>EditPage</title>
+    <title>unitTest</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
+
+    <style>
+        .resultLog{
+            color:#EFEFEF;
+        }
+
+        .col-6, .col-12 {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+
+        intext {
+            color: #FFFFFF;
+
+        }
+
+        #err {
+            color: red;
+        }
+
+        .right_view {
+            height: calc(100% - 48px);
+            overflow: scroll;
+        }
+
+        .input_box {
+            width: 80px;
+        }
+
+        /*.console_body{}*/
+        .whole {
+            height: 100%;
+            padding-top: 70px;
+            padding-bottom: 47px;
+        }
+
+        .right {
+            height: 50%;
+        }
+
+        #codeUnitTest {
+            height: 100%;
+            padding-bottom: 44px;
+        }
+
+        .CodeMirror {
+             height: 100%;
+         }
+
+        .container-fluid {
+            overflow: hidden;
+        }
+
+    </style>
 </head>
-<body>
-    <%--header--%>
-    <jsp:include page="../include/editInclude/editHeader.jsp" flush="false"/>
+<body class="container-fluid">
+<%--header--%>
+<jsp:include page="../include/editInclude/unitTestHeader.jsp" flush="false"/>
 
-    <!-- main 코드 작성 페이지 -->
-    <main role="main" class="main">
-
-        <div class="row container-fluid">
-            <div class="row boarderLine"></div>
-            <div class="row">
-                <div class="build col" id="htmlBuild">
-                    <div class="col"><p class="h4 text-white code-name">HTML</p></div>
-                    <div class="col" id="codeHtml"></div>
+<div class="col-12 row justify-contents-center whole">
+    <div class="col-6">
+        <div class="col"><p class="h4 text-white code-name">JS</p></div>
+        <div class="col" id="codeUnitTest"></div>
+    </div>
+    <div class="col-6">
+        <div class="col unit_test right">
+            <div class="col-12 row justify-content-between">
+                <div class="col-6 row justify-content-start">
+                    <p class="h4 text-white code-name">TestCase</p>
                 </div>
-                <div class="resize-code" id="resize-code-1"></div>
-                <div class="build col" id="cssBuild">
-                    <div class="col"><p class="h4 text-white code-name">Css</p></div>
-                    <div class="col" id="codeCss"></div>
+                <div class="col-6 row justify-content-end my-1 ">
+                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1">Clear</button>
+                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1">AddTestCase</button>
+                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1">TestAll</button>
                 </div>
-                <div class="resize-code" id="resize-code-2"></div>
-                <div class="build col" id="jsBuild">
-                    <div class="col"><p class="h4 text-white code-name">JavaScript</p></div>
-                    <div class="col" id="codeJavaScript"></div>
-                </div>
-
             </div>
+            <div class="right_view" id="test-case"></div>
         </div>
-        <div class="row resize-view"></div>
-        <%--결과창--%>
-        <div class="row main_view">
-            <div class="row iframe_body">
-                <iframe class="col" id="resultView"></iframe>
-            </div>
-            <div class="row console_body">
-                <div class="row resize-console"></div>
-                <%--console--%>
-                <div class="row edit-console" id="edit-console">
-                    <div class="build col">
-                        <div class="col"><p class="h4 text-white code-name">Console</p></div>
-                        <div class="col edit-console-view" id="edit-console-view"></div>
-                    </div>
+        <div class="col right">
+            <div class="col-12 row justify-content-between">
+                <div class="col-6 row justify-content-start">
+                    <p class="h4 text-white code-name">Result</p>
                 </div>
-                <div class="row command-line" id="command-line-view">
-                    <span class="arrow">></span>
-                    <input type="text" name="command-line" id="command-line" value="" />
+                <div class="col-6 row justify-content-end my-1 ">
+                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1">Clear
+                    </button>
                 </div>
             </div>
+            <div class="right_view" id="resultView" readonly></div>
         </div>
-    </main>
+    </div>
+</div>
+
+<!--modal 창-->
+<jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/editModalReply.jsp" flush="false"/>
+<!--footer-->
+<jsp:include page="../include/editInclude/unitTestFooter.jsp" flush="false"/>
 
 
-    <!--modal 창-->
-    <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
-    <jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
-    <!--footer-->
-    <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
+<%--script단--%>
+<jsp:include page="../include/editInclude/untitJS.jsp" flush="false"/>
 
 
-    <%--script단--%>
-    <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
+<script>
+    var before = 0;
+    var testFunc;
+    var declaration;
+    var errors = false;
+    codeUnitTest.on("change", function () {
+        var origin = codeUnitTest.getValue();
+        declaration = origin.substr(origin.indexOf("(") + 1, origin.indexOf("{") - origin.indexOf("(") - 2);
+        // console.log(c);
+        // $("#resultView").empty();
+        try {
+            testFunc = new Function(declaration,
+                origin.substr(origin.indexOf("{") + 1, origin.lastIndexOf("}") - origin.indexOf("{") - 1));
+            errors = false;
+        } catch (err) {
+            $("#resultView").append("<div><span id='err'>" + err + "</span></div>");
+            errors = true;
+        }
+        if (before != testFunc.length)
+            $("#test-case").empty();
+        before = testFunc.length;
+    });
+    $(document).on("click", "#add-test-case", function () {
+        var inputbox = "";
+        for (var i = 0; i < testFunc.length; i++)
+            inputbox += "<input type='text' class='form-control input_box inputs' />";
+        var testCases =
+            "<div class='row case m-2'>" +
+            "<span class='input-group-addon'>input : </span>" +
+            inputbox +
+            "<span  class='input-group-addon'>ouput : </span>" +
+            "<input type='text' class='form-control input_box output' />" +
+            "<button class='btn btn-outline-dark test_one' >TEST</button>" +
+            "<button class='btn btn-outline-dark delete_case'>DELETE</button>" +
+            "</div>";
+        $("#test-case").append(testCases);
+    });
 
-    <script>
-        //변수선언
-        var imgPath = "/resources/images/";
-        var resultView = document.getElementById("resultView");
-        //---------console관련 변수
-        var editConsoleView = document.getElementById("edit-console-view");
-        var editConsole = document.getElementById("edit-console");
-        var commandLine = document.getElementById("command-line-view");
-        //좋아요 버튼 이미지 변경
-        var likebt = function () {
-            var likebt = document.getElementById("likebt");
-            if (0 < likebt.src.indexOf("1")) {
-                likebt.src = imgPath + "like2.png"
-            } else {
-                likebt.src = imgPath + "like1.png"
+    function codeTest(input, output) {
+        var result = false;
+        var functionValue;
+        var startTime = getTimeStamp();
+        var errMassage = "";
+        try {
+            switch (input.length) {
+                case 0 :
+                    functionValue = testFunc();
+                    break;
+                case 1 :
+                    functionValue = testFunc(
+                        input[0]);
+                    break;
+                case 2 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1]);
+                    break;
+                case 3 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2]);
+                    break;
+                case 4 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2],
+                        input[3]);
+                    break;
+                case 5 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2],
+                        input[3],
+                        input[4]);
+                    break;
+                case 6 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2],
+                        input[3],
+                        input[4],
+                        input[5]);
+                    break;
+                case 7 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2],
+                        input[3],
+                        input[4],
+                        input[5],
+                        input[6]);
+                    break;
+                case 8 :
+                    functionValue = testFunc(
+                        input[0],
+                        input[1],
+                        input[2],
+                        input[3],
+                        input[4],
+                        input[5],
+                        input[6],
+                        input[7]);
+                    break;
             }
-        };
+            if (output == functionValue)
+                result = true;
+        } catch (err) {
+            errMassage = err;
+        }
+        finally {
+            var runningTime = getTimeStamp() - startTime;
+            resultText = "<div class='resultLog'>[input : " + input.join() +
+                " / output : " + output + "] " +
+                "결과 : " + (result ? "성공" : "실패") +
+                " (경과시간 : " + runningTime + "ms)<br/>"
+                + "<span id='err'>" + errMassage + "</span>" +
+                "</div>";
+            return resultText;
+        }
 
-        //Setting Behavior부분 함수
-        $(function () {//----------------------------code tabsize 변경
-            $("#tab-size").change(function () {
-                codeHtml.tabSize = this.value;
-                codeCss.tabSize = this.value;
-                codeJavaScript.tabSize = this.value;
-                console.log(codeHtml.tabSize);
-            });
+
+    }
+
+    function getTimeStamp() {
+        return new Date().getMilliseconds();
+    }
+
+    $(document).on("click", ".test_one", function () {
+        var startTime = getTimeStamp();
+        var inputs = $(this).parent().find(".inputs");
+        var testArguments = new Array;
+        for (var i = 0; i < inputs.length; i++) {
+            testArguments.push(inputs[i].value);
+        }
+        var output = $(this).parent().find(".output");
+        var output = output[0].value;
+        // console.log(output);
+
+        var result = codeTest(testArguments, output);
+
+
+        if (!errors) {
+            // $("#resultView").empty();
+            $("#resultView").append(result);
+        }
+    });
+
+
+    $(document).on("click", ".delete_case", function () {
+        $(this).parent().remove();
+
+    });
+
+    $(document).on("click", "#delete-all", function () {
+        // $("#resultView").empty();
+        $("#test-case").empty();
+    });
+
+    $(document).on("click", "#clear-result-view", function () {
+        $("#resultView").empty();
+    });
+    $(document).on("click", "#test-all", function () {
+        var testCase = $("#test-case").find(".test_one");
+            testCase.trigger("click");
+    });
+    $(document).ready(function () {
+        $("#test-case").bind('DOMNodeInserted',function () {
+            $(this).scrollTop($(document).height());
+
         });
 
-        $(function () {
-            $("#autoPreview").click(function () {
-                var runstyle = document.getElementById("run");
-                if (this.checked) {
-                    runstyle.style = "visibility: visible;"
-                } else {
-                    runstyle.style = "visibility: hidden;"
-                }
-            });
+        $("#resultView").bind('DOMNodeInserted',function () {
+            $(this).scrollTop($(document).height());
+
         });
-        // command line  enter 입력시 이벤트
-        //    var makeConsole = new Console();
+    });
 
-        $(function () {
-            $("#command-line").keyup(function (e) {
-                if (e.keyCode === 13) {
-                    var commandLineValue = this.value;
-                    //console.log() 입력시 문자열 작업
-                    var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-                    var temp = commandLineValue.match(reg);
 
-                    for(i in temp){
-                        temp[i] = temp[i].replace("console.log(", "");
-                        temp[i] = temp[i].replace("console.log(", "");
-                        temp[i] = temp[i].replace("'", "");
-                        temp[i] = temp[i].replace("\"", "");
-                        temp[i] = temp[i].replace("')", "");
-                        temp[i] = temp[i].replace("\")", "");
-                    }
-                    //------------------------------------------------
 
-                    try{
-                        editConsoleView.innerHTML += "<p class='console-log'> > " + commandLineValue + "</p>";
-                        if(temp !== null){
-                            for(i in temp){
-                                editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
-                            }
-                        }
-                        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> <· " + eval(commandLineValue) + "</p>"
-                    }catch(err){
-//                    alert(err.message);
-                        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> <· " + "Uncaught " + err.name + " : " + err.message + "</p>"
-                    }finally {
-                        this.value = "";
-                    }
-
-                    editConsoleView.scrollTop = editConsoleView.scrollHeight
-                }
-            });
-        });
-
-        //footer
-        //console 버튼 누를때
-        $(function() {
-            $("#console-button").click(function() {
-                if(editConsole.style.display === "none"){
-                    editConsole.style.display = "block";
-                    commandLine.style.display = "block";
-
-                    jQuery("#console-button").addClass("btn_active");
-
-                }else{
-                    editConsole.style.display = "none";
-                    commandLine.style.display = "none";
-                    jQuery("#console-button").removeClass("btn_active");
-
-                }
-            });
-        });
-        //처음 문서 로드시 콘솔창 숨기기
-        $(function () {
-            editConsole.style.display = "none";
-            commandLine.style.display = "none";
-            window.outerWidth;
-        });
-        //--------------------
-        //resize관련 function
-        var drag_x1 = false;
-        $(function() {
-            $("#resize-code-1").on({
-                mousedown: function(event) {
-                    drag_x1 = event.offsetX;
-                }
-            })
-        })
-
-        $(window).resize(function (){
-            // width값을 가져오기
-            var width_size = window.outerWidth;
-            var height_size = window.outerHeight;
-
-            // 800 이하인지 if문으로 확인
-            console.log(width_size + " * " + height_size);
-        })
-    </script>
+</script>
 </body>
 </html>
