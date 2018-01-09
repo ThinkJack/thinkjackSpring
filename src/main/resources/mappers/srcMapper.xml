@@ -12,7 +12,7 @@
     <insert id="insertSrc">
         insert into tbl_src (src_id, src_path,
         <if test="srcWriter != 0">src_writer,</if>
-        src_comments, src_title, src_status)
+        src_comments, src_title, src_state)
         values(#{srcId}, #{srcPath},
         <if test="srcWriter != 0">#{srcWriter},</if>
         #{srcComments}, #{srcTitle}, #{srcStatus})
@@ -29,7 +29,7 @@
             src.src_title    srcTitle,
             src.src_likecnt  srcLikecnt,
             src.src_viewcnt  srcViewcnt,
-            src.src_status   srcStatus
+            src.src_state   srcStatus
         FROM tbl_src src
         WHERE src_id = #{srcId}
     </select>
@@ -40,13 +40,13 @@
             src_comments = #{srcComments},
             src_title    = #{srcTitle},
             src_update   = CURRENT_TIMESTAMP,
-            src_status   = #{srcStatus}
+            src_state   = #{srcStatus}
         WHERE src_id = #{srcId}
     </update>
 
     <update id="updateSrcStatus">
         UPDATE tbl_src
-        SET src_status = 2
+        SET src_state = 2
         WHERE src_id = #{srcId}
     </update>
 
@@ -70,7 +70,7 @@
 
     <update id="updateSrcDelete">
         UPDATE tbl_src
-        SET src_status = 2
+        SET src_state = 2
         WHERE src_id = #{srcId}
     </update>
 </mapper>

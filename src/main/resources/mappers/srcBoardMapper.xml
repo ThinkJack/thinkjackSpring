@@ -16,7 +16,7 @@
             user.user_name    srcWriterName,
             user.user_profile srcWriterImgPath
         FROM tbl_src src, tbl_user user
-        WHERE src.src_status = 1 AND src.src_writer = user.user_id
+        WHERE src.src_state = 1 AND src.src_writer = user.user_id
         ]]>
         <include refid="search"></include>
         <![CDATA[
@@ -29,7 +29,7 @@
     <![CDATA[
         SELECT count(*)
         FROM tbl_src src, tbl_user user
-        WHERE src.src_status = 1 AND src.src_writer = user.user_id
+        WHERE src.src_state = 1 AND src.src_writer = user.user_id
         ]]>
         <include refid="search"></include>
 
