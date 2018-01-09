@@ -94,22 +94,15 @@
                         <li>
                             <div class="btn-group login" role="group" aria-label="Basic example">
                                 <button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>
-                                <button id="joinBtn"  class="btn btn-secondary button1  btn-13 pt5 ">회원가입</button>
                             </div>
                         </li>
 
 
                         <li>
-                            <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader" src="" style="width:30px;height:30px;" ></a>
+                            <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  src="/resources/images/main2.jpg" ></a>
                         </li>
                     </ul>
 
-
-
-            <button onclick="location.href='/user/modifyUser'">정보변경</button>
-            <!--로그인 했을때-->
-            <!--<button href="">로그인</button>-->
-            <!--<button href="" style="padding-left:10px;">버튼2</button>-->
                         </c:if>
                         <%--로그인 상태--%>
                         <c:if test="${login ne null}">
@@ -122,13 +115,10 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  src="/resources/images/main2.jpg" ></a>
+                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader poto" src=""  ></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">회원정보 수정</a></li>
-                                        <li><a href="#">마이페이지</a></li>
-                                            <%--<li><a href="#">Something  else here</a></li>--%>
-                                            <%--<li class="divider"></li>--%>
-                                            <%--<li><a href="#">Separated link</a></li>--%>
+                                        <li><a href="/user/modifyUser">회원정보 수정</a></li>
+
                                     </ul>
                                 </li>
                             </ul>
