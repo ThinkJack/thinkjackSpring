@@ -8,9 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
+
     <style>
         body {
             font-family: Arial;
@@ -68,11 +66,15 @@
             padding: 10px;
         /*    background: #999;*/
         }
+        p{
+            color:black;
+        }
     </style>
 
-</head>
-<body>
+
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="deaf"></div>
+
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'Account_information')">Account information</button>
     <button class="tablinks" onclick="openTab(event, 'Board')">Board</button>
@@ -83,7 +85,7 @@
     <p style="text-align: left">사용자 프로필</p>
     <div class="big-area">
         <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;"  src="" alt="Profile image example"/>
-        <div class="small-unit"><h4>"${login.userName}"<p>님 반가워요</p></h4> <br><p>${login.userEmail}</p><br><button class="btn btn-default" onclick="location.href='/user/modifyUser'">정보변경</button><br><button class="btn btn-default" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>
+        <div class="small-unit"><h4>"${login.userName}"<p style="color:black;">님 반가워요</p></h4> <br><p style="color:black;">${login.userEmail}</p><br><button class="btn btn-default" onclick="location.href='/user/modifyUser'">정보변경</button><br><button class="btn btn-default" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>
         <div class="small-unit"></div>
         <div class="small-unit"></div>
     </div>
@@ -210,7 +212,7 @@
         evt.currentTarget.className += " active";
     }
 </script>
-<script src="/resources/upload.js"></script>
+<script src="/resources/dist/js/upload.js"></script>
 <script>
     $(document).ready(function() {
         var imgtest;

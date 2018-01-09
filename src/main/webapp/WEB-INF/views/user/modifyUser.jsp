@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+
     <style>
         .fileDrop{
             z-index: 8;
@@ -54,7 +53,7 @@
 
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="/resources/upload.js"></script>
+    <script src="/resources/dist/js/upload.js"></script>
     <script>
 
         //수정 권한 확인
@@ -145,13 +144,10 @@
         });
 
     </script>
-
-
-
-</head>
-
-  <div class="col-sm-3"></div>
-  <div class="col-sm-6">
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="deaf"></div>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
   <h3>Profile Image</h3>
       <div class="big-area">
       <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
@@ -165,11 +161,11 @@
           <div class="small-unit">
          <input type="hidden" name="userId" value="${login.userId}" readonly/>
               <div class="input-group">
-                  <span class="input-group-addon"  class="input-group-addon">Email ID</span>
+                  <span class="input-group-addon"  class="input-group-addon">E - mail ID</span>
          <input type="text" class="form-control" name="userEmail" id="userEmail"  value="${login.userEmail}"  aria-describedby="basic-addon1" readonly/><br>
               </div>
                   <div class="input-group">
-                      <span class="input-group-addon" class="input-group-addon">Name&nbsp;&nbsp;</span>
+                      <span class="input-group-addon" class="input-group-addon">user name</span>
          <input type="text" class="form-control" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><br>
                       <span class="input-group-btn">
                           <button type="button" class="btn btn-default" id="authenticateName">중복체크</button>
@@ -186,7 +182,7 @@
   </form>
       </div>
   </div>
-
+<div class="col-sm-4"></div>
   <script>
       $(".fileDrop").on("dragenter dragover",function (event) {
           event.preventDefault();
