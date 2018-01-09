@@ -79,9 +79,9 @@
 
                     <div class="collapse navbar-collapse" id="myNavbar" >
                         <ul class="nav navbar-nav   pt5">
-                            <li><a href="#main" >Main</a></li>
-                            <li><a href="#editor" >Service</a></li>
-                            <li><a href="#board" >Board</a></li>
+                            <li><a href="/main/#main" >Main</a></li>
+                            <li><a href="/main/#editor" >Service</a></li>
+                            <li><a href="/main/#board" >Board</a></li>
                         </ul>
                     </div>
                 </div>
