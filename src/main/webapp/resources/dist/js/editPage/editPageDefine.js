@@ -443,7 +443,7 @@ function updatePreview() {
         "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
 
-    consoleView(codeJavaScript.getValue());
+    // consoleView(codeJavaScript.getValue());
     out.close();
 
 
@@ -499,7 +499,8 @@ function escapeHtml(text) {
 //코드 저장 로직
 function codeSave() {
     saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
+    srcId = curhref.replace("https:/", "").replace("http:/", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
+
     if (!saveStatus) {
         jQuery.ajaxSettings.traditional = true;
         $.ajax({
