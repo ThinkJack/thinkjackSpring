@@ -7,7 +7,7 @@ codeHtml.on("change", function () {
 
     if ($('#autoPreview').is(':checked')) {
         //setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
@@ -29,7 +29,7 @@ codeCss.on("change", function () {
     clearTimeout(delay);
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
@@ -50,7 +50,7 @@ codeJavaScript.on("change", function () {
     clearTimeout(delay);
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.

@@ -155,7 +155,7 @@
                 </div>
                 <div class="textPage3">
                     <div class="col-sm-6 removePadding" >
-                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('#');"><p>Source</p></button>
+                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
                     </div>
                     <div class="col-sm-6 removePadding" >
                     </div>

@@ -173,7 +173,7 @@
       <div class="box">
 
         <div  class=leftBt href="/edit/editPage" >
-          Editor
+          <a href="/edit/editPage">Editor</a>
         </div>
       </div>
       <div class="box" style="">

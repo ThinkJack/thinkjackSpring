@@ -38,7 +38,6 @@ public class SrcServiceImpl implements SrcService {
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
-
         try {
             vo = srcdao.selectSrcOne(srcId);
             srcLikeVo.setSrcId(vo.getSrcId());
@@ -120,7 +119,7 @@ public class SrcServiceImpl implements SrcService {
                 srcId = randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
         }
-
+        System.out.println(srcId);
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;
         File fileDir = new File(filePath);
