@@ -226,7 +226,7 @@ public class UserController {
 
 			}
 		}
-		return "user/logout";
+		return "/main";
 	}
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
 	public void ModifyUserAuthGet(UserVO user,Model model) throws Exception{
@@ -478,7 +478,7 @@ public class UserController {
 		try {
 			obj = parser.parse(githubapiResult);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			// fTODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//JSON 객체 생성

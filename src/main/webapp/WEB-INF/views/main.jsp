@@ -1,164 +1,217 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<link href="/resources/dist/css/main.css" rel="stylesheet">
 
-<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
+<div>
+    <section class="a" >
 
-    <!-- dark배경ㅡ,가운데위치, 밝은 회색.패팅32 id=about -->
-    <div class="w3-container w3-center w3-text-light-grey " >
-        <!-- About section -->
-        <div class="w3-content w3-justify" style="max-width:800px">
-            <hr class="w3-opacity">
-            <h4><b>About We</b></h4>
-            <!--반응형 6:6-->
+        <%--Main--%>
 
-            <div class="row">
+        <div class="deaf" id="main" ></div>
 
-                <div class="w3-half">
-                    <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off ">
-                        <li class="w3-dark-grey  w3-padding-16">Basic</li>
-                        <li>Web Design</li>
-                        <li >Photography</li>
-                        <li >5GB Storage</li>
-                        <li >Mail Support</li>
-                    </ul>
+        <div class="row">
+            <div class="col-xs-2  "></div>
+            <div class="col-xs-3 removePadding" >
+
+                <div class="imeage1 animate1 " >
+                    <img src="/resources/images/titile.jpg" >
                 </div>
-                <div class="w3-half" ></div>
             </div>
+            <div class="col-xs-5 removePadding" >
+                <div class="mainText ">
 
-            <div class="row">
+                    <h1 class="foo1 " style="color:black" >자신의 코드를</h1>
 
-                <div class="w3-half" ></div>
+                    <h1 class="foo2 " style="color: black">작성해 보세요</h1>
+                    <h1 class="foo3 " style="color: red">Thinkjack</h1>
 
-                <div class="w3-half">
-                    <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off ">
-                        <li class="w3-dark-grey  w3-padding-16">Basic</li>
-                        <li>Web Design</li>
-                        <li >Photography</li>
-                        <li >5GB Storage</li>
-                        <li >Mail Support</li>
-                    </ul>
+
+
+                </div>
+            </div>
+            <div class="col-xs-2  "> </div>
+        </div>
+        <a href="#" class="scroll-down" address="true"></a>
+        <div class="deaf" ></div>
+    </section>
+
+    <div class="deaf" id="editor" style="background-color: black">
+    </div>
+    <section class="b">
+        <div class="row " >
+            <div class="col-xs-4  "></div>
+
+            <div class="col-xs-5 removePadding" >
+                <div class="mainText pt2">
+
+                </div>
+                <div class="widthFull2 ">
+
+                    <%--<iframe frameborder="0" height="100%" width="100%"--%>
+                    <%--src="https://www.youtube.com/embed/aQsy17K84Ls?&version=3&loop=1&playlist=aQsy17K84Ls&autoplay=1&controls=0"frameborder="0"></iframe>--%>
+                    <div class="textPage2 ">
+                    </div>
+                    <div class="textPage2 ">
+                        <div class="col-sm-4 removePadding" >
+                            <button class="custom-btn btn-12 widthFull" onclick="location.replace('/edit/unitTest')"><p>Unit Test</p></button>
+                        </div>
+                        <div class="col-sm-1 removePadding" >
+
+                        </div>
+                        <div class="col-sm-5 removePadding" >
+                        </div>
+                    </div>
+
+
+                    <div class="textPage2 " >
+
+
+
+                    </div>
+
+                    <div class="textPage2 ">
+                        <div class="col-sm-5 removePadding" >
+                        </div>
+                        <div class="col-sm-1 removePadding" >
+
+                        </div>
+                        <div class="col-sm-4 removePadding" >
+                            <button class="custom-btn btn-12 widthFull mov" onclick="location.replace('/edit/editPage')" ><p>Edit Page</p></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-2  "> </div>
+        </div>
+
+    </section>
+    <div class="deaf" style="background-color:black">
+    </div>
+    <section class="c">
+        <div class="col-xs-7 ">
+            <h1 class="animate2">
+                자신의 생각을 코드로 표현!
+            </h1>
+        </div>
+        <div class="col-xs-3 ">
+
+            <div class="imeage1">
+                <div id="lampadario">
+                    <%--@declare id="switch"--%><input class="input" id="a" type="radio" name="switch" value="on" />
+                    <input class="input" type="radio" id="b" name="switch" value="off" checked="checked"/>
+                    <label  for="switch"></label>
                 </div>
             </div>
         </div>
+    </section>
+    <div class="deaf" style="background-color:black">
+
     </div>
-
-
-    <!--slide 반응형 3:6:3-->
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-
-            <!--슬라이드 부분-->
-            <div id="myCarousel" class="carousel slide" data-ride="carousel"  >
-                <ol class="carousel-indicators">
-                    <!--슬라이드 1,2.3장-->
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- 슬라이드 부분 -->
-                <!--버튼을 누르면 페이지로 이동하고 새로운 업데이트 내용이 이미지 부분에서 보인다-->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="first-slide" src="/resources/images/slide1.jpg" alt="First slide" >
-                        <div class="container">
-                            <div class="carousel-caption d-none d-md-block text-left">
-                                <h1>Cumunity</h1>
-                                <p> 코드를 자랑하세요</p>
-                                <p><a class="btn btn-lg btn-primary" href="cummunity.html" role="button">이동</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="second-slide" src="/resources/images/slid2.jpg" alt="Second slide">
-                        <div class="container">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h1>QNA</h1>
-                                <p>질문하세요</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">이동</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="third-slide" src="/resources/images/slide3.JPG" alt="Third slide" >
-                        <div class="container">
-                            <div class="carousel-caption d-none d-md-block text-right">
-                                <h1>Releasenote</h1>
-                                <p>업데이트 상황</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">이동</a></p>
-                            </div>
-                        </div>
+    <section class="d" id="board">
+        <div class="row maginPage"  >
+            <div class="col-xs-2 " ></div>
+            <div class="col-xs-3 removePadding ">
+                <div  class="imeage1 ">
+                    <div class="rotate mov3">
+                        <ul>
+                            <li>
+                                <a >
+                                    <div class="front img-circle ">
+                                        <%--<i class="fa fa-android fa-4x"></i>--%>
+                                        <img class=" widthFull"  src="/resources/images/like24-2.png" >
+                                    </div>
+                                    <div class="back img-circle">
+                                        <img  class=" widthFull" src="/resources/images/like24-1.png" >
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="reText">
+
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="col-xs-1 removePadding" >
+            </div>
+            <div class="col-xs-4 removePadding" >
+                <div class="mainText pt"></div>
 
-    <!--사용한 기술 소개 부분-->
-    <h4 class="w3-padding-16">We Use</h4>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <hr class="w3-opacity">
-            <div class="row slideanim">
-                <div class="col-sm-3 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>language</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p> Java,JavaScript</p>
+                <div class="textPage3  ">
+                    <div class="col-sm-6 removePadding" >
+                        <button class="custom-btn btn-12 widthFull " onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
 
-                        </div>
+                    </div>
+                    <div class="col-sm-6 removePadding">
                     </div>
                 </div>
-
-                <div class="col-sm-3 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>Native app</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p>Sts,websotorm,Intelij </p>
-                        </div>
+                <div class="textPage3">
+                    <div class="col-sm-6 removePadding" ></div>
+                    <div class="col-sm-6 removePadding" >
+                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
                     </div>
                 </div>
-
-                <div class="col-sm-3 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>Server</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p> apachtomcat,node</p>
-                        </div>
+                <div class="textPage3">
+                    <div class="col-sm-6 removePadding" >
+                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('#');"><p>Source</p></button>
+                    </div>
+                    <div class="col-sm-6 removePadding" >
                     </div>
                 </div>
-
-                <div class="col-sm-3 col-xs-12">
-                    <div class="panel panel-default text-center">
-                        <div class="panel-heading">
-                            <h1>DB</h1>
-                        </div>
-                        <div class="panel-body">
-                            <p> mysql</p>
-                        </div>
+                <div class="textPage3">
+                    <div class="col-sm-6 removePadding" >
+                    </div>
+                    <div class="col-sm-6 removePadding" >
+                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
                     </div>
                 </div>
             </div>
+            <div class="col-xs-2 "> </div>
         </div>
-    </div>
+
+
+    </section>
+</div>
+<div class="deaf" style="background-color:black"></div>
+
+<script>
+    <%--슬라이드--%>
+    $(function() {
+        $('.scroll-down').click (function() {
+            $('html, body').animate({scrollTop: $('section.d').offset().top }, 'slow');
+            return false;
+        });
+    });
+
+</script>
+<script>
 
 
 
+    <%--title--%>
+    $(window).scroll(function() {
+        var $el = $('.animate1');
+
+        if($(this).scrollTop() >=10) $el.addClass('animated swing');
+        else $el.removeClass('animated swing');
+    })
+
+    //title옆 글
+    window.sr = ScrollReveal({ reset: true });
+    sr.reveal('.foo1');
+    sr.reveal('.foo2',{duration: 1000});
+    sr.reveal('.foo3',{duration: 1500});
+
+    //전구 옆 글
+    $(window).scroll(function() {
+        var $el = $('.animate2');
+
+        if($(this).scrollTop() >=1500) $el.addClass('animated fadeInLeft');
+        else $el.removeClass('animated fadeInLeft');
+    });
+
+
+</script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
