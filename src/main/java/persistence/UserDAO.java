@@ -32,5 +32,6 @@ public interface UserDAO {
 
 	public void successAuth (UserVO vo) throws Exception;
 
+	String getUserProfile(int userId) throws Exception;
 
 }

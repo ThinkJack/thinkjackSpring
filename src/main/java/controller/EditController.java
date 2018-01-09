@@ -1,9 +1,8 @@
 package controller;
 
-import domain.BoardVO;
-import domain.SrcVO;
-import domain.ReplyVO;
-import domain.SrcReplyVO;
+import domain.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,10 +18,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.SrcReplyService;
+import service.UserService;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/edit/*")
@@ -30,30 +29,52 @@ public class EditController {
 
     @Inject
     private SrcService service;
+
+    @Inject
+    private UserService userService;
     //----------------------------------------------------------------------src 부분
     @RequestMapping(value = "/editPage", method = RequestMethod.GET)
-    public void newEditView()throws Exception {
-//        service.readSrc(request, vo);
-//        System.out.println(vo);
+    public void newEditView(HttpSession session, Model model)throws Exception {
+        SrcVO srcVO = new SrcVO();
+        if(session.getAttribute("login") instanceof UserVO){
+            UserVO userVO =(UserVO) session.getAttribute("login");
+            if (userVO != null) {
+                srcVO.setSrcWriterName(userVO.getUserName());
+                srcVO.setSrcWriter(userVO.getUserId());
+                srcVO.setSrcStatus(1);
+            }
+        }
+
+        model.addAttribute("SrcVO", srcVO);
     }
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
-    public String editView(HttpServletRequest request, @ModelAttribute SrcVO vo)throws Exception {
-        service.readSrc(request, vo);
-        System.out.println(vo);
-
-        return "forward:/edit/editPage";
+    public String editView(HttpServletRequest request, Model model)throws Exception {
+        Map map = service.readSrc(request);
+        model.addAttribute("SrcVO", map.get("vo"));
+        model.addAttribute("like", map.get("like"));
+        return "/edit/editPage";
     }
+
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String srcSave(HttpServletRequest request, @RequestBody SrcVO vo) throws Exception{
-        System.out.println("저장요청");
+    public @ResponseBody String srcSave(HttpServletRequest request,
+                                        @RequestBody SrcVO vo) throws Exception{
+        return service.saveSrc(request, vo);
 
-        return "/edit/editPage/" + service.saveSrc(request, vo);
     }
 
-    //----------------------------------------------------------------------
+    @RequestMapping(value = "/like", method = RequestMethod.POST)
+    public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
+        return service.srcLike(request, vo);
+    }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public @ResponseBody String srcDelete(@RequestBody SrcVO vo) throws Exception{
+        service.srcDelete(vo);
+        return "삭제 되었습니다.";
+    }
+    //----------------------------------------------------------------------
 
 
     //----------------------------------------------------------------------reply 부분
@@ -81,12 +102,24 @@ public class EditController {
             srcReplyService.create(vo);
         }
 
+        // 댓글 입력
+//        @RequestMapping(value= "srcInsert.do", method = RequestMethod.POST)
+//        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session) throws Exception {
+//            System.out.println("aaa");
+//            Integer replyWriter = (Integer) session.getAttribute("replyWriter");
+//            vo.setReplyWriter(replyWriter);
+//            srcReplyService.create(vo);
+//        }
+
+
+
+
         // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
         @RequestMapping("srcList.do")
         public ModelAndView list(@RequestParam String srcId, ModelAndView mav) throws Exception {
             List<SrcReplyVO> list = srcReplyService.list(srcId);
             // 뷰이름 지정
-            mav.setViewName("board/srcReplyList");
+            mav.setViewName("srcBoard/srcReplyList");
             // 뷰에 전달할 데이터 지정
             mav.addObject("list", list);
             // srcReplyList.jsp로 포워딩
@@ -99,7 +132,7 @@ public class EditController {
         public List<SrcReplyVO> srcListJson(@RequestParam String srcId) throws Exception {
 //            List<SrcReplyVO> list= srcReplyService.list(srcId);
 //            return list;
-              return srcReplyService.list(srcId);
+            return srcReplyService.list(srcId);
         }
     }
 

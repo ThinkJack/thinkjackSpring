@@ -68,9 +68,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void modifyUser(UserVO user) throws Exception {
+	public UserVO modifyUser(UserVO user) throws Exception {
 		dao.updateUser(user);
-
+		return  dao.read(user);
 	}
 
 	@Override

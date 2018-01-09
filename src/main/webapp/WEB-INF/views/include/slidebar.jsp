@@ -12,15 +12,15 @@
            <!--간단한 회원정보-->
         <button class="accordion">MyPage</button>
         <div class="panel">
-                <img src="/resources/images/logo.png" style="width:200px"  >
+                <img id="profile" src="" style="width:200px"  >
 
                 <div class="mypage">
                         <div class="col-sm-6">ID</div>
-                        <div class="col-sm-6" >asfsfa@gmail.com</div>
+                        <div class="col-sm-6" >${login.userEmail}</div>
                 </div>
                 <div class="mypage">
                         <div class="col-sm-6">name</div>
-                        <div class="col-sm-6" >sdaggd</div>
+                        <div class="col-sm-6" >${login.userName}</div>
                 </div>
         </div>
 
@@ -64,4 +64,24 @@
             }
         }
     }
+</script>
+
+<script src="/resources/upload.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var imgtest;
+        var fullName="${login.userProfile}";
+        if(fullName!=="") {
+            imgtest = getFileInfo(fullName);
+            console.log(imgtest);
+            str = imgtest;
+        }else{
+            str = "/resources/images/123.gif";
+        }
+
+        $("#profile").attr("src",str);
+
+
+    });
 </script>

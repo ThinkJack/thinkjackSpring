@@ -9,7 +9,7 @@ public interface UserService {
 
 	public UserVO login(LoginDTO dto) throws Exception;
 
-	public void modifyUser(UserVO user) throws Exception;
+	public UserVO modifyUser(UserVO user) throws Exception;
 
 	public UserVO naverLogin(LoginDTO dto) throws Exception;
 

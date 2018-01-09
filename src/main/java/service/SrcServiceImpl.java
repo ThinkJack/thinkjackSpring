@@ -1,57 +1,126 @@
 package service;
 
-import domain.SrcVO;
-import domain.UserVO;
+import domain.*;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
+import persistence.UserDAO;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.*;
 
 @Service
 public class SrcServiceImpl implements SrcService {
 
     @Inject
-    private SrcDAO dao;
+    private SrcDAO srcdao;
+
+    @Inject
+    private UserDAO userdao;
 
     @Override
-    public void readSrc(HttpServletRequest request, SrcVO vo) throws Exception {
+    public Map readSrc(HttpServletRequest request) throws Exception {
+
+        Map map = new HashMap();
+        HttpSession session = request.getSession();
         String uri = request.getRequestURI();
+        SrcVO vo = new SrcVO();
+
+        SrcLikeVO srcLikeVo = new SrcLikeVO();
+        int like = 0;
+
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
-        if(srcId.equals("")){
-            vo.setSrcTitle("Untitled");
-        }else{
-            try {
-                vo = dao.selectSrcOne("ksIqKm");
-                vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
-                vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
-                vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
-            } catch (Exception e) {
-                e.printStackTrace();
+
+        try {
+            vo = srcdao.selectSrcOne(srcId);
+            srcLikeVo.setSrcId(vo.getSrcId());
+
+            if (session.getAttribute("login") instanceof UserVO) {
+                int chk = vo.getSrcWriter();
+
+                UserVO userVo = (UserVO) session.getAttribute("login");
+                srcLikeVo.setUserId(userVo.getUserId());
+                like = srcdao.readLike(srcLikeVo);
+
+                if (chk == 0) {
+                    srcdao.updateSrcWriter(userVo.getUserId(), srcId);
+                } else if (chk != userVo.getUserId()) {
+                    //view cnt관련 코드
+                    srcdao.updateSrcViewCnt(srcId);
+                }
+                vo = srcdao.selectSrcOne(srcId);
             }
+
+            if (vo.getSrcWriter() != 0) {
+
+                UserVO imsiUserVo = new UserVO();
+                imsiUserVo.setUserId(vo.getSrcWriter());
+                vo.setSrcWriterName(userdao.read(imsiUserVo).getUserName());
+
+            }
+//            System.out.println(vo.getSrcPath() + "/html.txt");
+            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+
+            //cdn setting
+            vo.setCdnCss(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                            .split(","))));
+            vo.setCdnJs(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                            .split(","))));
+
+            //사진경로 가져오기
+            if (vo.getSrcWriter() != 0) {
+                vo.setSrcWriterImgPath(userdao.getUserProfile(vo.getSrcWriter()));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        map.put("vo", vo);
+        map.put("like", like);
+
+        return map;
     }
 
     @Override
-    public String saveSrc(HttpServletRequest request, SrcVO vo)throws Exception{
+    public String saveSrc(HttpServletRequest request, SrcVO vo) throws Exception {
         String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
         boolean srcEmpty = false;
         String filePath;
+        String cdn;
 
-        if(srcId == "") {
+        HttpSession session = request.getSession();
+        Object userVo = session.getAttribute("login");
+
+        if (vo.getSrcWriter() == 0) {
+            if (userVo != null) {
+                if (userVo instanceof UserVO) {
+                    vo.setSrcWriter(((UserVO) userVo).getUserId());
+                }
+            }
+        }
+
+        if (srcId == "") {
             //srcID값 작업
             srcEmpty = true;
+
             do {
                 srcId = randomSrcId();
-            } while (dao.selectSrcOne(srcId) != null);
+            } while (srcdao.selectSrcOne(srcId) != null);
         }
+
         //SrcFile 생성
         filePath = "./srcCodeDir/" + srcId;
         File fileDir = new File(filePath);
@@ -65,25 +134,103 @@ public class SrcServiceImpl implements SrcService {
             fileWriter(filePath + "/html.txt", vo.getSrcHtml());
             fileWriter(filePath + "/css.txt", vo.getSrcCss());
             fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
+
+            List cdnCssList = vo.getCdnCss();
+            List cdnJsList = vo.getCdnJs();
+            cdn = cdnSet(cdnCssList);
+            fileWriter(filePath + "/cdnCss.txt",cdn);
+            cdn = cdnSet(cdnJsList);
+            fileWriter(filePath + "/cdnJS.txt",cdn);
+
             // 파일안에 문자열 쓰기
+            vo.setSrcPath(filePath);
+            if (srcEmpty) {
+                vo.setSrcId(srcId);
+                srcdao.insertSrc(vo);
+            } else {
+                srcdao.updateSrc(vo);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        vo.setSrcPath(filePath);
-        if(srcEmpty) {
-            vo.setSrcId(srcId);
-            dao.insertSrc(vo);
-        }else{
-            dao.updateSrc(vo);
-        }
-
         return srcId;
     }
 
+
+
     @Override
-    public void updateSrcStatus(String srcId) throws Exception {
-        dao.updateSrcStatus(srcId);
+    public void srcDelete(SrcVO vo) throws Exception {
+        srcdao.updateSrcDelete(vo);
     }
+
+    @Override
+    public Map srcLike(HttpServletRequest request, SrcLikeVO srcLikeVO) {
+        int result;
+        SrcVO srcVo = new SrcVO();
+        Map map = new HashMap<>();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("login") instanceof UserVO) {
+            srcLikeVO.setUserId(((UserVO) session.getAttribute("login")).getUserId());
+        }
+
+        result = srcdao.readLike(srcLikeVO);
+        if (result == 0) {
+            srcdao.insertSrcLike(srcLikeVO);
+        } else {
+            srcdao.deleteSrcLike(srcLikeVO);
+        }
+
+        srcVo.setSrcId(srcLikeVO.getSrcId());
+        srcVo.setSrcLikecnt(srcdao.selectSrcLikeCnt(srcLikeVO.getSrcId()));
+        srcdao.updateSrcLikeCnt(srcVo);
+
+        map.put("result", result);
+        map.put("srcLikeCnt", srcdao.selectSrcOne(srcVo.getSrcId()).getSrcLikecnt());
+        return map;
+    }
+
+    @Override
+    public int selectSrcLike(HttpServletRequest request, SrcLikeVO vo) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("login") instanceof UserVO) {
+            vo.setUserId(((UserVO) session.getAttribute("login")).getUserId());
+        }
+        return srcdao.readLike(vo);
+    }
+
+    @Override
+    public List<SrcVO> srcList(SearchCriteria cri) throws Exception {
+
+//        if(cri.getSearchType().equals("w") || cri.getSearchType().equals("tw")){
+//            //키워드에서 user검색시 name값 처리해서 id 가져오는 로직 추가필요
+//
+//        }
+
+        List list = srcdao.selectSrcList(cri);
+
+        for (int i = 0; i < list.size(); i++) {
+            SrcVO vo = (SrcVO) list.get(i);
+            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+            //cdn setting
+            vo.setCdnCss(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                            .split(","))));
+            vo.setCdnJs(new ArrayList<String>
+                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                            .split(","))));
+            list.set(i, vo);
+        }
+
+        return list;
+    }
+
+    @Override
+    public int srcListSearchCount(SearchCriteria cri) throws Exception {
+        return srcdao.srcListSearchCount(cri);
+    }
+
 
     ///////////////////////////////////////////////////////////////////////////////
     //codeFile 읽어오는 작업
@@ -92,21 +239,21 @@ public class SrcServiceImpl implements SrcService {
         int i;
 
         File file = new File(filePath);
-//        if(!file.exists()){
-//            file.createNewFile();
-//        }else{
-//            file.delete();
-//            file.createNewFile();
-//        }
         FileReader fr = new FileReader(file);
         while ((i = fr.read()) != -1) {
-            str += (char) i;
+            if (i == 10) {
+                str += "\\n";
+            } else {
+                str += (char) i;
+            }
+
         }
         fr.close();
         return str;
     }
+
     //srcID값 작업
-    public String randomSrcId(){
+    public String randomSrcId() {
 
         int charType;   //0-소문자, 1-대문자
         int charValue = 0;  //문자 1개의 아스키값
@@ -130,18 +277,28 @@ public class SrcServiceImpl implements SrcService {
     }
 
     //실제 코드 파일 생성
-    public void fileWriter(String filePath, String src)throws Exception{
+    public void fileWriter(String filePath, String src) throws Exception {
         File file = new File(filePath);
-        if(!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
-        }else{
+        } else {
             file.delete();
             file.createNewFile();
         }
-        FileWriter fw = new FileWriter(file, true) ;
+        FileWriter fw = new FileWriter(file, true);
         fw.write(src);
         fw.flush();
         // 객체 닫기
         fw.close();
+    }
+
+    //cdn setting
+    public String cdnSet(List<String> list){
+        String tenp = "";
+
+        for(int i=0; i<list.size(); i++){
+            tenp += list.get(i) + ",";
+        }
+        return tenp;
     }
 }
