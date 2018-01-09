@@ -136,9 +136,9 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader poto" src=""  ></a>
+                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader" class="poto" src=""  ></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/user/modifyUser">회원정보 수정</a></li>
+                                        <li><a href="/user/myinfo">회원정보 수정</a></li>
 
                                     </ul>
                                 </li>

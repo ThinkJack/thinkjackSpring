@@ -614,4 +614,6 @@ public class UserController {
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
+
+
 }
