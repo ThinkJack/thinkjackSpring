@@ -26,90 +26,90 @@ public class ReplyVO {
 	//삭제부분 0,1
 
 
-	public Integer getReplyId() {
-		return replyId;
-	}
+    public Integer getReplyId() {
+        return replyId;
+    }
 
-	public void setReplyId(Integer replyId) {
-		this.replyId = replyId;
-	}
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
 
-	public Integer getBoardId() {
-		return boardId;
-	}
+    public Integer getBoardId() {
+        return boardId;
+    }
 
-	public void setBoardId(Integer boardId) {
-		this.boardId = boardId;
-	}
+    public void setBoardId(Integer boardId) {
+        this.boardId = boardId;
+    }
 
-	public String getReplyText() {
-		return replyText;
-	}
+    public String getReplyText() {
+        return replyText;
+    }
 
-	public void setReplyText(String replyText) {
-		this.replyText = replyText;
-	}
+    public void setReplyText(String replyText) {
+        this.replyText = replyText;
+    }
 
-	public String getReplyWriter() {
-		return replyWriter;
-	}
+    public String getReplyWriter() {
+        return replyWriter;
+    }
 
-	public void setReplyWriter(String replyWriter) {
-		this.replyWriter = replyWriter;
-	}
+    public void setReplyWriter(String replyWriter) {
+        this.replyWriter = replyWriter;
+    }
 
-	public Date getReplyRegdate() {
-		return replyRegdate;
-	}
+    public Date getReplyRegdate() {
+        return replyRegdate;
+    }
 
-	public void setReplyRegdate(Date replyRegdate) {
-		this.replyRegdate = replyRegdate;
-	}
+    public void setReplyRegdate(Date replyRegdate) {
+        this.replyRegdate = replyRegdate;
+    }
 
-	public Date getReplyUpdate() {
-		return replyUpdate;
-	}
+    public Date getReplyUpdate() {
+        return replyUpdate;
+    }
 
-	public void setReplyUpdate(Date replyUpdate) {
-		this.replyUpdate = replyUpdate;
-	}
+    public void setReplyUpdate(Date replyUpdate) {
+        this.replyUpdate = replyUpdate;
+    }
 
-	public Integer getReplyParent() {
-		return replyParent;
-	}
+    public Integer getReplyParent() {
+        return replyParent;
+    }
 
-	public void setReplyParent(Integer replyParent) {
-		this.replyParent = replyParent;
-	}
+    public void setReplyParent(Integer replyParent) {
+        this.replyParent = replyParent;
+    }
 
-	public int getReplyLikeCnt() {
-		return replyLikeCnt;
-	}
+    public int getReplyLikeCnt() {
+        return replyLikeCnt;
+    }
 
-	public void setReplyLikeCnt(int replyLikeCnt) {
-		this.replyLikeCnt = replyLikeCnt;
-	}
+    public void setReplyLikeCnt(int replyLikeCnt) {
+        this.replyLikeCnt = replyLikeCnt;
+    }
 
-	public int getReplyState() {
-		return replyState;
-	}
+    public int getReplyState() {
+        return replyState;
+    }
 
-	public void setReplyState(int replyState) {
-		this.replyState = replyState;
-	}
+    public void setReplyState(int replyState) {
+        this.replyState = replyState;
+    }
 
-	@Override
-	public String toString() {
-		return "ReplyVO{" +
-				"replyId=" + replyId +
-				", boardId=" + boardId +
-				", replyText='" + replyText + '\'' +
-				", replyWriter='" + replyWriter + '\'' +
-				", replyRegdate=" + replyRegdate +
-				", replyUpdate=" + replyUpdate +
-				", replyParent=" + replyParent +
-				", replyLikeCnt=" + replyLikeCnt +
-				", replyState=" + replyState +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "ReplyVO{" +
+                "replyId=" + replyId +
+                ", boardId=" + boardId +
+                ", replyText='" + replyText + '\'' +
+                ", replyWriter='" + replyWriter + '\'' +
+                ", replyRegdate=" + replyRegdate +
+                ", replyUpdate=" + replyUpdate +
+                ", replyParent=" + replyParent +
+                ", replyLikeCnt=" + replyLikeCnt +
+                ", replyState=" + replyState +
+                '}';
+    }
 }
