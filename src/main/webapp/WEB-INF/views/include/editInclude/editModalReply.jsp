@@ -69,7 +69,7 @@
                         <div id="post" class="col btn btn-primary right-button">POST</div>
                     </div>
                     <%--댓글 리스트 부분--%>
-                    <div class="row reply_list_view">
+                    <div class="row reply_list_view" id="reply-scroll">
                         <div class="row reply_list" id="reply-list-view">
                             <div class="col-2 no_padding">
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img">
