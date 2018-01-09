@@ -13,6 +13,7 @@ public class ReplyVO {
 	private String replyWriter;
 //	유저 ID
 
+    private  String replyProfile;
 	//	날짜부분
 	private Date replyRegdate;
 	private Date replyUpdate;
@@ -56,6 +57,14 @@ public class ReplyVO {
 
     public void setReplyWriter(String replyWriter) {
         this.replyWriter = replyWriter;
+    }
+
+    public String getReplyProfile() {
+        return replyProfile;
+    }
+
+    public void setReplyProfile(String replyProfile) {
+        this.replyProfile = replyProfile;
     }
 
     public Date getReplyRegdate() {
@@ -105,6 +114,7 @@ public class ReplyVO {
                 ", boardId=" + boardId +
                 ", replyText='" + replyText + '\'' +
                 ", replyWriter='" + replyWriter + '\'' +
+                ", replyProfile='" + replyProfile + '\'' +
                 ", replyRegdate=" + replyRegdate +
                 ", replyUpdate=" + replyUpdate +
                 ", replyParent=" + replyParent +

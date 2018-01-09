@@ -42,7 +42,7 @@
 
 <div class="deaf2 "></div>
 
-<div class="row  removePadding " style="background-color:#000000 ">
+<div class="row  removePadding " style="background-color:#000 ">
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
@@ -161,7 +161,7 @@
                 <div class="col-xs-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="/resources/images/titile.jpg"  class="Poto ">
+                        <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
 
                 <div class="col-xs-8 well">
@@ -222,7 +222,7 @@
                 <div class="col-xs-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="/resources/images/titile.jpg" class="Poto ">
+                        <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
                 <div class="col-xs-9">
                     <strong class="title">
@@ -549,7 +549,7 @@
             }
 
 
-            console.log(data.loginUser+"ㄴㄴ");
+            // console.log(data.loginUser+"ㄴㄴ");
 
 
             printData(temp2, $(".repliesDiv"), $('.template'));

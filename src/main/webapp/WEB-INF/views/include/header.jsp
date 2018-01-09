@@ -66,7 +66,7 @@
 
                 </div>
 
-                <div class="col-xs-5 removePadding" >
+                <div class="col-xs-5 removePadding" style="margin-top:25px" >
                     <a class="navbar-brand " onclick="location.replace('/main')">Logo</a>
 
                     <div class="navbar-header">
