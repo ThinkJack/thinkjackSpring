@@ -12,7 +12,7 @@ function getFileInfo(fullName) {
     var fileLink;
 
     if(checkImageType(fullName)){
-        imgsrc = "http://localhost/displayFile?fileName="+fullName;
+        imgsrc = "http://" + document.location.host + "/displayFile?fileName="+fullName;
         fileLink = fullName.substr(14);
 
         var front = fullName.substr(0,12); ///2015/00/00/
