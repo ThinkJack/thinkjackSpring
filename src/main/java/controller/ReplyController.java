@@ -78,7 +78,7 @@ public class ReplyController {
     @ResponseBody
     @RequestMapping(value ="/heart/{replyId}/{replyHeart}", method = RequestMethod.POST)
     public int replyHeart(HttpServletRequest httpRequest,
-                            @PathVariable int replyId,
+                          @PathVariable int replyId,
                           @PathVariable int replyHeart) throws Exception {
 
         System.out.println(replyHeart);
@@ -89,19 +89,19 @@ public class ReplyController {
 
         ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
-        System.out.println(reHeart+": 들어온 하트 값");
+//        System.out.println(reHeart+": 들어온 하트 값");
 //reHeart =1 이면 지워지고 0으로 바뀜
         if (reHeart >= 1) {
             service.deleteReplyLike(ReplyLikeVO);
             reHeart = 0;
-            System.out.println(reHeart+":하트값이1일때 삭제하고 하트값 0 카운드업데이트");
+//            System.out.println(reHeart+":하트값이1일때 삭제하고 하트값 0 카운드업데이트");
         } else {
             service.insertReplyLike(ReplyLikeVO);
             reHeart = 1;
-            System.out.println(reHeart+":하트값이0일때 삭제하고 하트값 1 카운드업데이트");
+//            System.out.println(reHeart+":하트값이0일때 삭제하고 하트값 1 카운드업데이트");
         }
-
-        System.out.println(reHeart+":리턴되는 하트 값");
+//
+//        System.out.println(reHeart+":리턴되는 하트 값");
         return reHeart;
     }
 
@@ -171,6 +171,12 @@ public class ReplyController {
             Map<String, Object> map = new HashMap<String, Object>();
             List<ReplyVO> list = service.listReplyPage(boarId, cri);
 
+            ArrayList loginUser = new ArrayList(list.size());
+            for( int i = 0 ; i < list.size() ; i++) {
+                String userName = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserName();
+                loginUser.add(userName);
+            }
+
             ArrayList replyList = new ArrayList(list.size());
             for( int i = 0 ; i < list.size() ; i++) {
 //                list의 replyId 값을 받아온다
@@ -193,6 +199,7 @@ public class ReplyController {
 //            System.out.println(list.toString());
             map.put("reHeart",replyList);
             map.put("list", list);
+            map.put("loginUser",loginUser);
 
 //            for(Map.Entry<String, Object> entry:map.entrySet()){
 //                System.out.println("key"+entry.getKey()+"value"+entry.getValue());

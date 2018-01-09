@@ -556,7 +556,7 @@ public class UserController {
 		try {
 			obj = parser.parse(githubapiResult);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			// fTODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//JSON 객체 생성
