@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -111,6 +112,18 @@ public class UploadController {
             entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
             headers,
             HttpStatus.CREATED);
+        }catch (FileNotFoundException effe){
+            System.out.println("File Not found Exception");
+            String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+            MediaType mType = MediaUtils.getMediaType(formatName);
+            HttpHeaders headers = new HttpHeaders();
+            in = new FileInputStream(uploadPath+"/noimage.jpeg");
+
+                headers.setContentType(mType);
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
+                    headers,
+                    HttpStatus.CREATED);
         }catch (Exception e){
             e.printStackTrace();
             entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);

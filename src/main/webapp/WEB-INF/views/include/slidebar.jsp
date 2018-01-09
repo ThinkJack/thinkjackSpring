@@ -66,7 +66,7 @@
     }
 </script>
 
-<script src="/resources/upload.js"></script>
+<%--<script src="/resources/upload.js"></script>--%>
 <script>
     $(document).ready(function() {
 

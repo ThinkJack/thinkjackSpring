@@ -32,8 +32,7 @@
     <bean id="naverLoginBo" class="naver.NaverLoginBo"></bean>
 
     <bean id="githubLoginBo" class="github.GithubLoginBo"></bean>
-
-    <beans:interceptors>
+	<beans:interceptors>
 		<beans:interceptor>
 			<beans:mapping path="/user/loginPost"/>
 			<ref bean="loginInterceptor"/>
@@ -46,11 +45,18 @@
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 
-        <beans:interceptor>
-            <beans:mapping path="/edit/editPage"/>
-            <beans:mapping path="/edit/editPage/*"/>
-            <ref bean="editPageInterceptor"/>
-        </beans:interceptor>
+        <!-- 캐쉬를 날려 뒤로가기 시 POST 페이지가 다시 보내지지 않도록 한다.-->
+        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0"/>
+            <property name="useExpiresHeader" value="true"/>
+            <property name="useCacheControlHeader" value="true"/>
+            <property name="useCacheControlNoStore" value="true"/>
+        </bean>
+        <!--<beans:interceptor>-->
+            <!--<beans:mapping path="/edit/editPage"/>-->
+            <!--&lt;!&ndash;<beans:mapping path="/edit/editPage/*"/>&ndash;&gt;-->
+            <!--<ref bean="editPageInterceptor"/>-->
+        <!--</beans:interceptor>-->
 
 	</beans:interceptors>
 
@@ -61,7 +67,7 @@
     </bean>
     <!-- 파일 저장 관련 설정 -->
     <bean id="uploadPath" class="java.lang.String">
-        <constructor-arg value="C:\\zzz\\profile"></constructor-arg>
+        <constructor-arg value="F:\\zzz\\profile"></constructor-arg>
     </bean>
 </beans>
 

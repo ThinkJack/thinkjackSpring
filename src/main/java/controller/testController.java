@@ -95,5 +95,8 @@ public class testController {
 //        model.addAttribute("list", service.listAllBoard());
 //    }
 
+    @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
+    public void myinfotest(BoardVO board, RedirectAttributes rttr) throws Exception{
 
+    }
 }
