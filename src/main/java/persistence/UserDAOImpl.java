@@ -112,4 +112,10 @@ public class UserDAOImpl implements UserDAO{
 	public int boardSearchCount(UserCriteria cri) throws Exception {
 		return session.selectOne(namespace+ ".boardSearchCount", cri);
 	}
+
+	@Override
+	public String getUserProfile(int userId) throws Exception {
+		return session.selectOne(namespace + ".getUserProfile", userId);
+	}
+
 }

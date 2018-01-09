@@ -1,4 +1,3 @@
-<%--suppress ALL --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,10 +42,10 @@
 
 <div class="deaf2 "></div>
 
-<div class="row  removePadding ">
+<div class="row  removePadding " style="background-color:#000000 ">
     <div class="col-xs-3"></div>
 
-    <div class="col-xs-6 borderLB  widthFull3" style="background-color:#000000 ">
+    <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -85,19 +84,19 @@
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
     </div>
-    <div class="col-xs-3 widthFull3" style="background-color:#000000"></div>
+    <div class="col-xs-3 " ></div>
 </div>
 
-<div class="row removePadding ">
+<div class="row removePadding "  style="background-color:#000000 ">
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 removePadding " >
 
         <%--댓글 등록 부분 --%>
-        <div class="row removePadding" style="background-color: black">
-            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #fff">
+        <div class="row removePadding" style="background-color:#fff">
+            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #000">
                 <div class="deaf2"></div>
-                <div class="">
+                <div class="commentReply borderWidth" >
                     <%--댓글 등록하는 아이디(--%>
 
                     <input type="text" name='writer' class="form-control register" value="${login.userName}"  readonly="readonly">
@@ -134,21 +133,6 @@
 <script>
     $(document).ready(function () {
 
-        <%--Handlebars.registerHelper('ifCond', function(loginUser, replyWriter, options) {--%>
-        <%--&lt;%&ndash;<span>{{replyVo.replyWriter}}</span>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<span>{{loginUser}}</span>&ndash;%&gt;--%>
-        <%--loginUser = "<p>{{loginUser}}</p>"--%>
-        <%--replyWriter  ="<p>{{replyVo.replyWriter}}</p>"--%>
-
-
-        <%--if(loginUser === replyWriter) {--%>
-        <%--console.log(loginUser +'dddd');--%>
-        <%--console.log(replyWriter+'dddd' );--%>
-        <%--return options.fn(this);--%>
-        <%--}--%>
-
-        <%--return options.inverse(this);--%>
-        <%--});--%>
         Handlebars.registerHelper('ifCond', function(v1, v2, options) {
             if(v1 === v2) {
                 return options.fn(this);

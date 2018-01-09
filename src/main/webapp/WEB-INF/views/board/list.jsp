@@ -127,17 +127,14 @@
                         </li   >
                     </c:forEach>
 
-                    <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
-                        <li>
-                            <a href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}">
-                                &raquo;
-                            </a>
-                        </li>
-                    </c:if>
-
-                </ul>
-            </div>
-            <%--페이지 네이션 끝--%>
+                <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
+                    <li>
+                        <a href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
+                            &raquo;
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
         </div>
     </div>
     <div class="col-xs-3 pt4"></div>

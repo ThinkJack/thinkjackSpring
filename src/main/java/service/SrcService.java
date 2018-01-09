@@ -1,12 +1,25 @@
 package service;
 
-import domain.SrcVO;
+import domain.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 public interface SrcService {
 
-    public void readSrc(HttpServletRequest request, SrcVO vo)throws Exception;
-    public String saveSrc(HttpServletRequest request, SrcVO vo)throws Exception;
-    public void updateSrcStatus(String srcId)throws Exception;
+    Map readSrc(HttpServletRequest request) throws Exception;
+
+    String saveSrc(HttpServletRequest request, SrcVO vo) throws Exception;
+
+    Map srcLike(HttpServletRequest request, SrcLikeVO vo);
+
+    int selectSrcLike(HttpServletRequest request, SrcLikeVO vo);
+
+    List<SrcVO> srcList(SearchCriteria cri) throws Exception;
+
+    int srcListSearchCount(SearchCriteria cri) throws Exception;
+
+    void srcDelete(SrcVO vo) throws Exception;
 }

@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/main.css" rel="stylesheet">
 
-<div style="background-color: black">
+<div>
     <section class="a" >
 
         <%--Main--%>
@@ -39,7 +39,7 @@
     <div class="deaf" id="editor" style="background-color: black">
     </div>
     <section class="b">
-        <div class="row maginPage" >
+        <div class="row " >
             <div class="col-xs-4  "></div>
 
             <div class="col-xs-5 removePadding" >
@@ -117,7 +117,7 @@
                     <div class="rotate mov3">
                         <ul>
                             <li>
-                                <a href="#">
+                                <a >
                                     <div class="front img-circle ">
                                         <%--<i class="fa fa-android fa-4x"></i>--%>
                                         <img class=" widthFull"  src="/resources/images/like24-2.png" >
@@ -155,7 +155,7 @@
                 </div>
                 <div class="textPage3">
                     <div class="col-sm-6 removePadding" >
-                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('#');"><p>Source</p></button>
+                        <button  class="custom-btn btn-12 widthFull widthFull " onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
                     </div>
                     <div class="col-sm-6 removePadding" >
                     </div>

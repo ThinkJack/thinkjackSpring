@@ -25,6 +25,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
@@ -51,7 +53,7 @@
                 // console.log(headerimg);
                 hstr = headerimg;
             }else{
-                hstr = "/resources/images/123.gif";
+                hstr = "/resources/images/like1.png";
             }
             $("#profileHeader").attr("src",hstr);
         });
@@ -88,9 +90,6 @@
                 <div class="col-xs-5 removePadding" >
                     <a class="navbar-brand " onclick="location.replace('/main')">Logo</a>
 
-
-
-
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                             <span class="icon-bar"></span>
@@ -98,7 +97,6 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-
 
                     <div class="collapse navbar-collapse" id="myNavbar" >
                         <ul class="nav navbar-nav   pt5">
@@ -109,67 +107,46 @@
                     </div>
                 </div>
                 <div class="col-xs-3 removePadding" >
-                    <%--로그인--%>
+
                     <%--로그아웃 상태--%>
                     <c:if test="${login eq null}">
-                        <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
 
-                            <li>
-                                <div class="btn-group login" role="group" aria-label="Basic example">
-                                        <button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>
-                                                <button id="joinBtn"  class="btn btn-secondary button1  btn-13 pt5 ">회원가입</button>
-                                </div>
-                            </li>
+                        <li>
+                            <div class="btn-group login" role="group" aria-label="Basic example">
+                                <button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>
+                            </div>
+                        </li>
 
 
-                            <li>
-                                <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull" src="/resources/images/mycircle1.png" ></a>
+                        <li>
+                            <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  src="/resources/images/main2.jpg" ></a>
+                        </li>
+                    </ul>
 
-                                <%--<ul class="dropdown-menu" role="menu">--%>
-                                    <%--<li>--%>
-                                            <%--<button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>--%>
-                                    <%--</li>--%>
-                                    <%--<li>--%>
-                                        <%--<button id="joinBtn"  class="btn btn-secondary button1  btn-13 pt5 ">회원가입</button>--%>
-                                    <%--</li>--%>
+                        </c:if>
+                        <%--로그인 상태--%>
+                        <c:if test="${login ne null}">
+                            <ul class="nav navbar-nav navbar-right">
 
-                                <%--</ul>--%>
-                            </li>
+                                <li>
+                                    <div class="btn-group login" role="group" aria-label="Basic example">
+                                        <button id="logoutBtn" type="button" class="btn btn-secondary btn-13 button1 pt5"  onclick="location.replace('/user/logout')" >로그아웃</button>
+                                    </div>
+                                </li>
 
-                        </ul>
-                    </c:if>
-                    <%--로그인 상태--%>
-                    <c:if test="${login ne null}">
-                        <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader poto" src=""  ></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/user/modifyUser">회원정보 수정</a></li>
 
-                            <li>
-                                <div class="btn-group login" role="group" aria-label="Basic example">
-                                    <button id="logoutBtn" type="button" class="btn btn-secondary btn-13 button1 pt5"  onclick="location.replace('/user/logout')" >로그아웃</button>
-                                </div>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  id="profileHeader" src=""></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <%--<li style="color:black;"><a href="/user/modifyUser">회원정보 수정</a></li>--%>
-                                    <li style="color:black;"><a style="color: black" href="/user/myinfo">마이페이지</a></li>
-                                        <%--<li><a href="#">Something  else here</a></li>--%>
-                                        <%--<li class="divider"></li>--%>
-                                        <%--<li><a href="#">Separated link</a></li>--%>
-                                </ul>
-                            </li>
-                        </ul>
-                    </c:if>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </c:if>
                 </div>
             </nav>
-
-
     </div>
 
 </div>
-
-
-
-
-
 
