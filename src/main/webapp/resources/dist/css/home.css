@@ -10,12 +10,12 @@
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-     background-color: #fff;
+    background-color: #fff;
     /*opacity: 1;*/
 }
 
 .button1{
-   font-size: 20px;
+    font-size: 20px;
     font-color:white;
     /*padding: 10px 30px;*/
     font-family: Helvetica;
@@ -42,7 +42,7 @@
     /*letter-spacing: 4px;*/
     border-radius: 0;
 }
-.navbar li a, .navbar .navbar-brand {
+ .navbar .navbar-brand {
     /*평소 글 색상*/
     color:#fff!important;
 }
@@ -74,10 +74,10 @@
 }
 
 
-.imeage1{
-    width:95%;
-    height:50%;
-}
+/*.imeage1{*/
+/*width:100%;*/
+/*height:95%;*/
+/*}*/
 
 .mainText{
     width:100%;
@@ -114,9 +114,9 @@
 }
 
 .widthFull3{
-     height:60%;
+    height:60%;
 
- }
+}
 
 .widthFull4{
     height:100%;
@@ -126,6 +126,11 @@
     width:100%;
     height:81%;
     /*background-color: #6a0d6a;*/
+}
+
+.widthFull5{
+    height:50%;
+
 }
 
 .reText{
@@ -145,46 +150,45 @@
 }
 
 /*스크롤*/
-body {
-    /*background-color: black;*/
 
-
-}
 img {max-width: 100%;}
 
+.navbar-inverse{
+    background-color: #97a3aa;
+}
 section {
-    width: 100%;
-    display: table;
-    height: 800px;
+    /*width:2493px;*/
+    width:100%;
+    height: 936px;
     background-repeat:no-repeat;
-    background-size: 100% 133%;
+    background-size:100% 100% ;
 
+}
 
+section.a{
+    background-image: url("/resources/images/main/a.png");
+    background-color: #00c4ff;
 
 }
 section.d{
-    background-image: url("/resources/images/e.png");
-
-
-}
-section.a{
-    background-image: url("/resources/images/a.png");
-
+    background-image: url("/resources/images/main/d.png");
+    background-color: black;
 
 }
 
+section.c{
+    background-image: url("/resources/images/main/c.png");
+
+    background-color: black;
+}
 
 section.b{
-    background-image: url("/resources/images/b.png");
-
+    background-image: url("/resources/images/main/b.png");
+    background-color: black;
 
 
 }
-section.c{
-    background-image: url("/resources/images/d.png");
 
-    /*background-color: black;*/
-}
 
 p{
     color: white;
@@ -401,36 +405,43 @@ p{
 
 /*title 부분*/
 .borderLB{
-    border-left: #000 solid 10pt ;
-    border-bottom: #000 solid 10pt;
+    border-left: #fff solid 10pt ;
+    border-bottom: #fff solid 10pt;
     border-bottom-left-radius: 50px;
 }
 
 .borderRT {
-    border-right:#000 solid 10pt;
-    border-top: #000 solid 10pt;
+    border-right:#fff solid 10pt;
+    border-top: #fff solid 10pt;
     border-top-right-radius: 50px;
 }
 /*.pt3{*/
-    /*height: 150px;*/
-    /*margin-top: 0;*/
-    /*margin-bottom: 0;*/
-    /*margin-left: 5%;*/
-    /*width: 45%;*/
+/*height: 150px;*/
+/*margin-top: 0;*/
+/*margin-bottom: 0;*/
+/*margin-left: 5%;*/
+/*width: 45%;*/
 
 
 /*}*/
 .borderL{
-    border-left:#000 solid 10pt;
+    border-left:#fff solid 10pt;
 }
 .borderR{
-    border-right:#000 solid 10pt;
+    border-right:#fff solid 10pt;
 }
 
 .borderRTW{
-    border-right:#fff solid 10pt;
-    border-top: #fff solid 10pt;
+    border-right:#000 solid 10pt;
+    border-top: #000 solid 10pt;
     border-top-right-radius: 50px;
+}
+.borderWidth{
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-top: 40px;
+
 }
 
 .pt4{
@@ -455,7 +466,7 @@ p{
 }
 /*페이지 네이션*/
 .pagination>li:last-child>a, .pagination>li:last-child>span {
-     border-radius: 0px;
+    border-radius: 0px;
 
 }
 
@@ -498,3 +509,7 @@ ul, menu, dir {
 
 }
 
+.commentReply{
+    background-color: #99cc66;
+    height: 200px;
+}
