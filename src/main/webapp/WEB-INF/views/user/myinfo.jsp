@@ -73,6 +73,11 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">Home</a></li>
+    <li role="presentation"><a href="#">Profile</a></li>
+    <li role="presentation"><a href="#">Messages</a></li>
+</ul>
 <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'Account_information')">Account information</button>
     <button class="tablinks" onclick="openTab(event, 'Board')">Board</button>

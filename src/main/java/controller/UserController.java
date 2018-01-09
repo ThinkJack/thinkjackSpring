@@ -271,10 +271,11 @@ public class UserController {
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
     public void myinfo(@ModelAttribute("cri") UserCriteria cri,
-					   Model model) throws Exception {
+					   Model model,
+					   HttpServletRequest httpRequest) throws Exception {
 
 		System.out.println(cri.getUserId());
-		cri.setUserId(1);
+		cri.setUserId(((UserVO) httpRequest.getSession().getAttribute("login")).getUserId());
 
 		model.addAttribute("list", service.boardSearch(cri));
 
