@@ -79,7 +79,8 @@
 
 /*body부분*/
 .deaf{
-    height: 180px;
+    /*height: 180px;*/
+    height: 80px;
 }
 
 .deaf2{
@@ -163,26 +164,28 @@ section {
 }
 
 section.a{
-    background-image: url("/resources/images/main/a.png");
+    /*background-image: url("/resources/images/main/a.png");*/
     background-color: #00c4ff;
 
 }
-section.d{
-    background-image: url("/resources/images/main/d.png");
-    background-color: black;
+section.b{
+    /*background-image: url("/resources/images/main/b.png");*/
+    background-color:#99cc66;
+
 
 }
 
 section.c{
-    background-image: url("/resources/images/main/c.png");
+    /*background-image: url("/resources/images/main/c.png");*/
 
     background-color: black;
 }
 
-section.b{
-    background-image: url("/resources/images/main/b.png");
-    background-color: black;
 
+
+section.d{
+    /*background-image: url("/resources/images/main/d.png");*/
+    background-color: #6c71c4;
 
 }
 
@@ -202,7 +205,7 @@ p{
 
 .scroll-down {
     position: absolute;
-    bottom: 17%;
+    bottom: 30px;
     left: 50%;
     margin-left: -16px;
     display: block;
@@ -417,6 +420,11 @@ p{
     border-bottom-right-radius: 50px;
 
 }
+.borderLT {
+    border-left:#fff solid 8pt;
+    border-top: #fff solid 8pt;
+    border-top-left-radius: 50px;
+}
 /*왼쪽*/
 .borderL{
     border-left:#fff solid 8pt;
@@ -429,6 +437,11 @@ p{
 .borderB{
     border-bottom:#fff solid 8pt;
 }
+
+.borderT{
+    border-top:#fff solid 8pt;
+}
+
 
 /*오른쪽 위 50px*/
 .borderRTW{
@@ -512,3 +525,4 @@ ul, menu, dir {
     color:white;
 
 }
+

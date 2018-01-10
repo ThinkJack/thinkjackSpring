@@ -90,63 +90,81 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bd" style="font-size: 25px">
-            <div class="col-sm-2 removePadding" ></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bd" style="font-size: 25px">
+    <div class="col-sm-2 removePadding" ></div>
 
-            <div class="col-sm-5 removePadding" style="font-size: 25px" >
-                <%--<a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">Thinkjack</a>--%>
-                    <a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">
-                        <img class="img-circle" style=" height:50px;" src="/resources/images/idea.png" >
-                    </a>
+    <div class="col-sm-5 removePadding" style="font-size: 25px" >
+        <%--<a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">Thinkjack</a>--%>
+        <a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">
+            <img class="img-circle" style=" height:50px;" src="/resources/images/idea.png" >
+        </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="collapse navbar-collapse " id="navbarColor03">
+        <div class="collapse navbar-collapse " id="navbarColor03">
 
-                    <ul class="nav nav-pills">
-                        <li class="nav-item ">
-                            <a class="nav-link active" href="#main">Main</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/main/#editor">Service</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/main/#board">Board</a>
-                        </li>
+            <ul class="nav nav-pills">
+                <li class="nav-item ">
+                    <a class="nav-link active" href="#main">Main</a>
+                </li>
+            </ul>
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Service</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Unit</a>
+                    </div>
+                </li>
+            </ul>
 
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3 removePadding">
-                <%--로그아웃 상태--%>
-                <c:if test="${login eq null}">
-                    <ul class="nav nav-pills navbar-right">
-                        <li class="nav-item" style="margin-top: 10px;">
-                            <button  class="btn btn-outline-primary hn" onclick="location.replace('/user/login')" style="font-size: 20px ;height:50px;">로그인</button>
-                        </li>
-                        <li class="nav-item">
-                            <a  class="nav-link"><img class="img-circle loginPhoto "  src="/resources/images/main2.jpg" ></a>
-                        </li>
-                    </ul>
-                </c:if>
-                <%--로그인 상태--%>
-                <c:if test="${login ne null}">
-                    <ul class="nav nav-pills navbar-right">
-                        <li class="nav-item" style="margin-top: 10px;">
-                            <button  type="button"  class="btn btn-outline-primary hn"  onclick="location.replace('/user/logout')" style="font-size: 20px ;height:50px;">로그아웃</button>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <img id="profileHeader" class="img-circle loginPhoto" src="" ></a>
-                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 75px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                <a class="dropdown-item" href="/user/myinfo">회원정보 수정</a>
-                            </div>
-                        </li>
-                    </ul>
-                </c:if>
-            </div>
-        </nav>
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bd" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item " href="#">Free</a>
+                        <a class="dropdown-item " href="#">Free</a>
+                        <a class="dropdown-item " href="#">Free</a>
+                        <a class="dropdown-item " href="#">Free</a>
+                    </div>
+                </li>
+            </ul>
+
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-3 removePadding">
+        <%--로그아웃 상태--%>
+        <c:if test="${login eq null}">
+            <ul class="nav nav-pills navbar-right">
+                <li class="nav-item" style="margin-top: 10px;">
+                    <button  class="btn btn-outline-primary hn" onclick="location.replace('/user/login')" style="font-size: 20px ;height:50px;">로그인</button>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link"><img class="img-circle loginPhoto "  src="/resources/images/main2.jpg" ></a>
+                </li>
+            </ul>
+        </c:if>
+        <%--로그인 상태--%>
+        <c:if test="${login ne null}">
+            <ul class="nav nav-pills navbar-right">
+                <li class="nav-item" style="margin-top: 10px;">
+                    <button  type="button"  class="btn btn-outline-primary hn"  onclick="location.replace('/user/logout')" style="font-size: 20px ;height:50px;">로그아웃</button>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <img id="profileHeader" class="img-circle loginPhoto" src="" ></a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 75px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="/user/myinfo">회원정보 수정</a>
+                    </div>
+                </li>
+            </ul>
+        </c:if>
+    </div>
+</nav>
 
 
 
