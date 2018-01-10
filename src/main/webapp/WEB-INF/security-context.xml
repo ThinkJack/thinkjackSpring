@@ -5,5 +5,9 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-
-</beans:beans>
+        <!--<authentication-manager>-->
+            <!--<authentication-provider user-service-ref="UserServiceImpl">-->
+                <!--<password-encoder hash="sha-256"/>-->
+            <!--</authentication-provider>-->
+        <!--</authentication-manager>-->
+    </beans:beans>

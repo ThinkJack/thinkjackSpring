@@ -38,7 +38,7 @@
                     <%--<a href="/user/githubLogin">--%>
                      <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
                         <%--</a>--%>
-                        <a class="btn btn-block btn-social btn-google naver"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                        <a class="btn btn-block btn-social naver"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
                             <img class="naverImg" src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
                         </a>
                         <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">

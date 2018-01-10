@@ -62,15 +62,18 @@
         .naver{
             background-color:#1EC800;
             margin-top: 5px;
+            color:white;
         }
         .naverImg{
             background-color:#1EC800;
+            z-index: 1;
         }
         .naverImg:hover {
             /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
-            background-color: #39e600;
+
         }
         .naver:hover {
+            z-index: 10;
             /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
             background-color: #39e600;
         }

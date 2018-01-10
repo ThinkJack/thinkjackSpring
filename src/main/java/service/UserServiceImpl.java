@@ -55,13 +55,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO userAuth(UserVO user) throws Exception {
         UserVO vo =new UserVO();
-
+		System.out.println(user+"user");
         vo=dao.chkAuth(user);
         //System.out.println("ser.userAuth.chkauth"+vo);
         if(vo!=null){
             try{
+            	System.out.println(vo+"vo");
                 dao.userAuth(user);
-				dao.successAuth(user);
+				dao.successAuth(vo);
             }catch (Exception e) {
                 e.printStackTrace();
             }}
@@ -84,13 +85,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
 		//System.out.println("service dto: "+dto);
-		String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
-		String rawPw = dto.getUserPassword();
-		if(passwordEncoder.matches(rawPw, pw)) {
-			System.out.println("비밀번호 일치");
-			dto.setUserPassword(pw);
-		}else {
-			System.out.println("비밀번호 불일치");
+		try {
+			String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
+			String rawPw = dto.getUserPassword();
+			if(passwordEncoder.matches(rawPw, pw)) {
+				System.out.println("비밀번호 일치");
+				dto.setUserPassword(pw);
+			}else {
+				System.out.println("비밀번호 불일치");
+			}
+		}catch(NullPointerException npe){
+			UserVO vo=new UserVO();
+			vo=null;
+			System.out.println(vo);
+			return vo;
+		}catch (Exception e){
+			UserVO vo=new UserVO();
+			vo=null;
+			return vo;
 		}
 		return dao.login(dto);
 	}
