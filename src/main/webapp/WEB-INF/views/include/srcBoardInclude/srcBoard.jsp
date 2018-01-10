@@ -10,17 +10,8 @@
 
 
 <style>
-    /*.card {*/
-        /*margin-bottom: 20px;*/
-    /*}*/
-    .flex-container {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .flex-item {
-        flex-grow: 1;
-        margin: 20px;
+    .card {
+        margin-bottom: 20px;
     }
 
     .fl-right {
@@ -106,10 +97,10 @@
 </div>
 <c:forEach var="srcVo" items="${list}" varStatus="status">
     <c:if test="${status.count % 3 eq 1}">
-        <div class="row flex-container">
+        <div class="row">
     </c:if>
-    <div class="col flex-item">
-        <div class="thumbnail">
+    <div class="col">
+        <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                 <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
