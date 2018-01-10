@@ -3,8 +3,8 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/main.css" rel="stylesheet">
 
-<div>
-    <section class="a" >
+
+    <section class="a container-fluid" >
 
         <%--Main--%>
 
@@ -38,58 +38,42 @@
 
     <div class="deaf" id="editor" style="background-color: black">
     </div>
-    <section class="b">
-        <div class="row " >
-            <div class="col-xs-4  "></div>
-
-            <div class="col-xs-5 removePadding" >
-                <div class="mainText pt2">
-
-                </div>
-                <div class="widthFull2 ">
-
-                    <%--<iframe frameborder="0" height="100%" width="100%"--%>
-                    <%--src="https://www.youtube.com/embed/aQsy17K84Ls?&version=3&loop=1&playlist=aQsy17K84Ls&autoplay=1&controls=0"frameborder="0"></iframe>--%>
-                    <div class="textPage2 ">
-                    </div>
-                    <div class="textPage2 ">
-                        <div class="col-sm-4 removePadding" >
-                            <button class="custom-btn btn-12 widthFull" onclick="location.replace('/edit/unitTest')"><p>Unit Test</p></button>
-                        </div>
-                        <div class="col-sm-1 removePadding" >
-
-                        </div>
-                        <div class="col-sm-5 removePadding" >
+    <section class="b container-fluid">
+        <div class="row" >
+            <div class="col-xs-2 "></div>
+            <div class="col-xs-1 borderLB" style="height:193px"></div>
+            <div class="col-xs-3 borderB removePadding" >
+                <div class="row removePadding" >
+                    <div class="bBtn removePadding " style="margin-bottom:0">
+                        <div class="removePadding widthFull" style="margin-top:87px" >
+                            <button class="custom-btn btn-12 widthFull" onclick="location.replace('/edit/unitTest')">Unit</button>
                         </div>
                     </div>
-
-
-                    <div class="textPage2 " >
-
-
-
-                    </div>
-
-                    <div class="textPage2 ">
-                        <div class="col-sm-5 removePadding" >
-                        </div>
-                        <div class="col-sm-1 removePadding" >
-
-                        </div>
-                        <div class="col-sm-4 removePadding" >
-                            <button class="custom-btn btn-12 widthFull mov" onclick="location.replace('/edit/editPage')" ><p>Edit Page</p></button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-            <div class="col-xs-2  "> </div>
+            <div class="col-xs-6  "> </div>
+        </div>
+        <div class="row" >
+            <div class="col-xs-3"></div>
+            <div class="col-xs-5 borderLB" style="margin-left: 75px; height: 205px;"></div>
+            <div class="col-xs-3 removePadding" style="margin-left: -75px;">
+                <div class="row removePadding" style="margin-top:13px">
+                    <div class="bBtn removePadding " style="margin-bottom:0">
+                        <div class="removePadding widthFull" style="margin-top:87px" >
+                            <%--<button class="custom-btn btn-12 widthFull " onclick="location.replace('/edit/editPage')">Edit</button>--%>
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+
         </div>
 
     </section>
     <div class="deaf" style="background-color:black">
     </div>
-    <section class="c">
+    <section class="c container-fluid">
         <div class="col-xs-7 ">
             <h1 class="animate2">
                 자신의 생각을 코드로 표현!
@@ -109,7 +93,7 @@
     <div class="deaf" style="background-color:black">
 
     </div>
-    <section class="d" id="board">
+    <section class="d container-fluid" id="board">
         <div class="row maginPage"  >
             <div class="col-xs-2 " ></div>
             <div class="col-xs-3 removePadding ">
@@ -173,7 +157,7 @@
 
 
     </section>
-</div>
+
 <div class="deaf" style="background-color:black"></div>
 
 <script>
