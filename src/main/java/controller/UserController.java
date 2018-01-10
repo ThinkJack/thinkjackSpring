@@ -270,11 +270,13 @@ public class UserController {
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-    public void myinfo(@ModelAttribute("cri") UserCriteria cri,
+	public void myinfo() throws Exception {
+	}
+
+	@RequestMapping(value = "/myBoard", method = RequestMethod.GET)
+	public void myBoard(@ModelAttribute("cri") UserCriteria cri,
 					   Model model) throws Exception {
 
-		System.out.println(cri.getUserId());
-		cri.setUserId(1);
 
 		model.addAttribute("list", service.boardSearch(cri));
 
@@ -284,7 +286,13 @@ public class UserController {
 		pageMaker.setTotalCount(service.boardSearchCount(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
-    }
+	}
+
+	@RequestMapping(value = "/mySourceCode", method = RequestMethod.GET)
+	public void mySourceCode(){
+
+	}
+
 
     //유저 정보변경 권한 체크
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)

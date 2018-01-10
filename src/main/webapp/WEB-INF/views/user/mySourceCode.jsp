@@ -1,102 +1,32 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
-  User: Uri
-  Date: 2018-01-02
-  Time: 오전 8:26
+  User: kwak
+  Date: 2018. 1. 5.
+  Time: AM 10:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<style>
-    /*.card {*/
-        /*margin-bottom: 20px;*/
-    /*}*/
-    .flex-container {
-        display: flex;
-        justify-content: space-around;
-    }
+<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
+<head>
+    <title>myInfo</title>
+</head>
 
-    .flex-item {
-        flex-grow: 1;
-        margin: 20px;
-    }
-
-    .fl-right {
-        float: right;
-        margin-right: 5px;
-    }
-
-    .title {
-        border-bottom: 5px solid rgba(0, 0, 0, .125);
-    }
-
-    .search_div {
-        margin-bottom: 20px;
-    }
-
-    .iframe_wrap {
-        height: 25%;
-    }
-
-    .iframe_wrap iframe {
-        -ms-transform: scale(0.5);
-        -moz-transform: scale(0.5);
-        -o-transform: scale(0.5);
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-
-        -ms-transform-origin: 0 0;
-        -moz-transform-origin: 0 0;
-        -o-transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        width: 200%;
-        height: 200%;
-
-        pointer-events: none;
-    }
-
-    .src_icon:hover {
-        cursor: pointer;
-    }
-
-    .iframe_wrap:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-</style>
-<script>
-    //필요한 변수 정의 부분
-    var imgPath = "/resources/images/";
-
-    //필요한 함수 정의 부분
-    function likeImgChange(elId, num) {
-        $(elId).attr("src", imgPath + "like" + num + ".png");
-    }
-</script>
-<div class="container">
-<div class="row">
-    <div class="col">
-        <h1 class="title"><b>SrcBoard (좋아요 순!)</b></h1>
-    </div>
-</div>
+<div role="tabpanel" class="tab-pane fade active in" id="Source_code" aria-labelledby="home-tab">
 <div class="row search_div">
     <div class="col-2">
         <select name="searchType">
             <option value="n"
                     <c:out value="${cri.searchType == null?'selected':''}"/> >
-                ---</option>
+                ---
+            </option>
             <option value="t"
                     <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
-                Title</option>
-            <option value="w"
-                    <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
-                Writer</option>
-            <option value="tc"
-                    <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                Title OR Content</option>
+                Title
+            </option>
         </select>
     </div>
     <div class="col-10">
@@ -171,7 +101,7 @@
                                     if (success.result === 0) {
                                         //좋아요 추가시
                                         likeImgChange("#${srcVo.srcId}like", 2);
-                                      } else {
+                                    } else {
                                         //좋아요 취소시
                                         likeImgChange("#${srcVo.srcId}like", 1);
                                     }
@@ -205,15 +135,15 @@
             var tempCdnJs = "";
 
             <c:if test="${srcVo.cdnCss ne null}">
-                <c:forEach items="${srcVo.cdnCss}" var="item">
-                    tempCdnCss += "<link rel='stylesheet' href='" + "${item}" +"'\/>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnCss}" var="item">
+            tempCdnCss += "<link rel='stylesheet' href='" + "${item}" + "'\/>";
+            </c:forEach>
             </c:if>
 
             <c:if test="${srcVo.cdnJs ne null}">
-                <c:forEach items="${srcVo.cdnJs}" var="item">
-                    tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnJs}" var="item">
+            tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
+            </c:forEach>
             </c:if>
 
             preview.write(
@@ -253,7 +183,8 @@
         <c:if test="${pageMaker.prev}">
             <li class="page-item">
 
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}" aria-label="Previous">
+                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                   aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -275,10 +206,9 @@
         </c:if>
     </ul>
 </div>
-</div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#search-btn').click(function (e) {
 
             self.location = "srcList"
@@ -288,7 +218,12 @@
                 + '&keyword=' + encodeURIComponent($('#keywordInput').val());
         });
     });
-</script>
+    $(document).ready(function () {
+        $(".Source_code").addClass(" active");
 
-<!--내용-->
+    })
+</script>
+</div>
+</div>
+
 
