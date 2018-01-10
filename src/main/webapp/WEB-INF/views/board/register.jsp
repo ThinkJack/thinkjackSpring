@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=utf-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="page-header">
 
+</div>
+<div class="container-fluid">
+    <div class="col-lg-3"></div>
 
-<jsp:include page="/WEB-INF/views/include/slidebar.jsp" flush="false"/>
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-lg-6">
+
         <form role="form" method="post" id="registerForm">
             <div class="box-body">
                 <div class="form-group">
@@ -13,22 +15,19 @@
                     <input type="text"
                            name='boardTitle'
                            class="form-control"
-                           placeholder="Enter Title">
+                           placeholder="Enter Title"
+                           required>
                 </div>
                 <div class="form-group">
                     <label>Content</label>
                     <textarea class="form-control" name="boardContent" rows="20"
-                              placeholder="Enter ..."></textarea>
+                              placeholder="Enter ..."
+                              required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Writer</label>
                     <input type="text" name="boardWriter" value="${login.userName}"
                            class="form-control" placeholder="Enter Writer" readonly>
-                </div>
-
-                <div class="form-group">
-                    <input type="text" name="boardCategoryName" value="free"
-                           class="form-control" placeholder="Enter Writer" readonly hidden>
                 </div>
 
             </div>
@@ -45,7 +44,7 @@
             </div>
         </form>
     </div>
-    <div class="col-3"></div>
+    <div class="col-lo-3"></div>
 </div>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

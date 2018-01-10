@@ -270,11 +270,14 @@ public class UserController {
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-    public void myinfo(@ModelAttribute("cri") UserCriteria cri,
-					   Model model,
-					   HttpServletRequest httpRequest) throws Exception {
+	public void myinfo() throws Exception {
+	}
 
-		System.out.println(cri.getUserId());
+	@RequestMapping(value = "/myBoard", method = RequestMethod.GET)
+	public void myBoard(@ModelAttribute("cri") UserCriteria cri,
+					   Model model,
+                       HttpServletRequest httpRequest) throws Exception {
+
 		cri.setUserId(((UserVO) httpRequest.getSession().getAttribute("login")).getUserId());
 
 		model.addAttribute("list", service.boardSearch(cri));
@@ -286,6 +289,12 @@ public class UserController {
 
 		model.addAttribute("pageMaker", pageMaker);
     }
+
+	@RequestMapping(value = "/mySourceCode", method = RequestMethod.GET)
+	public void mySourceCode(){
+
+	}
+
 
     //유저 정보변경 권한 체크
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
@@ -635,8 +644,6 @@ public class UserController {
 		//세션 생성
 		if(vo != null) {
 			session.setAttribute("login", vo );
-			//response.sendRedirect("/");
-			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
 			if(dest=="/user/socialLoginPost"){
 				session.setAttribute("dest","/");
@@ -645,29 +652,11 @@ public class UserController {
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
-
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
-
-		System.out.println("UserVO "+vo);
 		session.setAttribute("login",vo);
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
-
-public static void destDefault (UserVO vo){
-
-}
-	private String uploadFile(String originalName, byte[] fileData) throws Exception{
-
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString() +"_" +originalName;
-
-		File target = new File(uploadPath,savedName);
-
-		FileCopyUtils.copy(fileData,target);
-		return savedName;
-	}
-
 }

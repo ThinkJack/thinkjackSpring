@@ -43,6 +43,6 @@ public interface UserDAO {
 
     public int boardSearchCount(UserCriteria cri)throws Exception;
 
-
+	String getUserProfile(int userId) throws Exception;
 
 }

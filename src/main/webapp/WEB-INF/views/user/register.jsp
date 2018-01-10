@@ -6,11 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-<html>
-<head>
-	<title>Home</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<style>
 		/*.btn {*/
 			/*display: inline-block;*/
@@ -172,8 +168,8 @@
                 }); }
         });
 	</script>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="deaf"></div>
 <div class="col-sm-4"></div>
 		<div class="col-sm-4">
 			<div class="panel-heading">

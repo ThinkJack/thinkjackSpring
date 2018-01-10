@@ -11,7 +11,7 @@
 <!-- header 메뉴바 -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
 
-    <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:30px;"></a>
+    <a class="navbar-brand" href="/"><img src="/resources/images/logo.png" style="width:30px;"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,14 +23,19 @@
                 <!--href="" 는 현재 패이지 reload해줌 -->
                 <div class="page_title_view" id="page-title-view">
                     <a class="page_title">
-                        <span id="src-title"><c:out value="${SrcVO.srcTitle}" default="Untitled" /></span>
+                        <span id="src-title"></span>
                     </a>
+                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
                     <img class="pencil" id="pencil" src="/resources/images/pencil.png">
+                    </c:if>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
                     <input type="text" name="page-title" id="src-title-input" value=""/>
                 </div>
-                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"><c:out value="${SrcVO.srcWriter}" default="CAPTAIN ANONYMOUS"/></span></div>
+                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"></span></div>
             </li>
             <li class="nav-item">
             </li>
@@ -43,6 +48,13 @@
                     </a>`
                 </div>
             </li>
+            <script>
+                <%--alert('${(SrcVO.srcId eq '')}' !== '');--%>
+            </script>
+            <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;" id="saveCode">
@@ -50,14 +62,17 @@
                     </a>
                 </div>
             </li>
+            </c:if>
+            <c:if test="${(login.userId ne SrcVO.srcWriter) and (login ne null)}">
             <li class="nav-item active">
                 <div>
                     <!-- 좋아요 버튼 -->
-                    <a class="btn btn-outline-dark" href="javascript:likebt();">
+                    <a class="btn btn-outline-dark" href="javascript:;" id="like">
                         <img src="/resources/images/like1.png" id="likebt"> Like
                     </a>
                 </div>
             </li>
+            </c:if>
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#setting">
@@ -70,9 +85,9 @@
                     <img src="/resources/images/browser-visualization.png"> Change View
                 </a>
             </li>
-            <%--<c:if test="${sessionScope.userVO eq null}">--%>
+            <c:if test="${login eq null}">
                 <li class="nav-item active login">
-                    <a class="btn btn-outline-dark" href="/user/login" >
+                    <a class="btn btn-outline-dark" href="javascript:;" id="login">
                         Login
                     </a>
                 </li>
@@ -81,15 +96,14 @@
                         Sign in
                     </a>
                 </li>
-            <%--</c:if>--%>
-            <%--<c:if test="${sessionScope.userVO ne null}">--%>
-                <%--<p><c:out value="gsdg"/></p>--%>
-                <%--<li class="nav-item active sign_in">--%>
-                    <%--<a class="btn btn-outline-dark" href="/user/logout">--%>
-                        <%--Logout--%>
-                    <%--</a>--%>
-                <%--</li>--%>
-            <%--</c:if>--%>
+            </c:if>
+            <c:if test="${login ne null}">
+                <li class="nav-item active sign_in">
+                    <a class="btn btn-outline-dark" href="/user/logout">
+                        Logout
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </div>
     <br>

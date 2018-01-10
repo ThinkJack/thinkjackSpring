@@ -7,9 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-<html>
-<body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
     var check=Boolean(${setPassword});
@@ -56,6 +54,9 @@
 
 
 </script>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
+<div class="deaf"></div>
 <div class="col-sm-4"></div>
 <div class="col-sm-4">
 <h1>TJ 비밀번호 변경</h1>

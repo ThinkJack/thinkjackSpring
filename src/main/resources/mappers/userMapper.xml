@@ -174,4 +174,10 @@
     </select>
 
 
+    <select id="getUserProfile" resultType="String">
+        SELECT
+            user_profile
+        from tbl_user
+        where user_id = #{userId}
+    </select>
 </mapper>
