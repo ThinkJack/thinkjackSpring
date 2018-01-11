@@ -3,7 +3,7 @@
 footer{
     padding: 0;
     margin-bottom: 0;
-    margin-top: 500px;
+    /*margin-top: 500px;*/
     height: 100px;
     background-color: grey;
 }

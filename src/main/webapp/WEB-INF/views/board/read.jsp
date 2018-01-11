@@ -38,8 +38,8 @@
 
 <div class="deaf2 container-fluid"></div>
 <div class="row  removePadding " style="background-color:#000 ">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 borderLB  widthFull5"  style="background-color:#fff " >
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -77,14 +77,14 @@
             <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
         </div>
     </div>
-    <div class="col-xs-3 " ></div>
+    <div class="col-sm-3 " ></div>
 </div>
 <div class="row removePadding "  style="background-color:#000000 ">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6 removePadding " >
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 removePadding " >
         <%--댓글 등록 부분 --%>
         <div class="row removePadding" style="background-color:#fff">
-            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #000">
+            <div class="col-sm-12  borderRTW  removePadding " style="background-color: #000">
                 <div class="deaf2"></div>
                 <div class="commentReply borderWidth" >
                     <%--댓글 등록하는 아이디(--%>
@@ -114,7 +114,7 @@
     </div>
 
 
-    <div class="col-xs-3 widthFull4" style="background-color: black" ></div>
+    <div class="col-sm-3 widthFull4" style="background-color: black" ></div>
 
 
 </div>
@@ -145,15 +145,15 @@
 
             <div class="row removePadding registerReply ">
 
-                <div class="col-xs-1">
+                <div class="col-sm-1">
                 </div>
-                <div class="col-xs-1">
+                <div class="col-sm-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
                     <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
 
-                <div class="col-xs-8 well">
+                <div class="col-sm-8 well">
                     <strong class="title ">
                         <span class="badge">대댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
@@ -173,7 +173,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-2">
+                <div class="col-sm-2">
 
                     {{#if reHeart}}
                     <%--reHeart값이 있을떄--%>
@@ -208,12 +208,12 @@
             <%--댓글 부분--%>
             <div class="row removePadding registerReply ">
 
-                <div class="col-xs-1">
+                <div class="col-sm-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
                     <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
-                <div class="col-xs-9">
+                <div class="col-sm-9">
                     <strong class="title">
                         <span class="badge">댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
@@ -230,7 +230,7 @@
                     </div>
 
                 </div>
-                <div class="col-xs-2">
+                <div class="col-sm-2">
 
                     {{#if reHeart}}
                     <%--reHeart값이 있을떄--%>
@@ -266,17 +266,17 @@
 
                 <div class="demo" name="demo" style="display: none">
 
-                    <div class="col-xs-1">
+                    <div class="col-sm-1">
 
                     </div>
-                    <div class="col-xs-9">
+                    <div class="col-sm-9">
 
                         <span  class="reRegister"></span>
                         <%--<span  class="reRegister" >${boardVO.boardWriter}</span>--%>
                         <textarea class="form-control replyTextReply" rows="3">대댓글 입력하세요</textarea>
                         <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="col-sm-1">
                         <button type="button" class="btn btn-primary addBtn">등록</button>
                         <%--등록을 누르면 replyParent값이 1이되는 조건문이 필요--%>
                     </div>

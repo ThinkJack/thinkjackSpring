@@ -12,25 +12,25 @@
 <div class="deaf2 "></div>
 <div class="row text-center">
 
-    <div class="col-xs-3 "></div>
+    <div class="col-sm-3 "></div>
 
     <%--제목부분--%>
 
-    <div class="col-xs-6 borderLB removePadding" >
+    <div class="col-sm-6 borderLB removePadding" >
         <h1 style="text-align: center;"> ${category} 게시판</h1>
     </div>
 
-    <div class="col-xs-3 "></div>
+    <div class="col-sm-3 "></div>
 </div>
 
 <div class="row removePadding">
-    <div class="col-xs-3 "></div>
+    <div class="col-sm-3 "></div>
 
-    <div class="col-xs-6 removePadding" >
+    <div class="col-sm-6 removePadding" >
         <%--검색부분--%>
         <div >
             <div class="row removePadding">
-                <div class="col-xs-10 removePadding pt6 ">
+                <div class="col-sm-10 removePadding pt6 ">
                     <form class="navbar-form removePadding " role="search">
                         <div class="form-group searchForm">
                             <%--<label for="sel1">Select list :</label>--%>
@@ -64,19 +64,19 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-2 removePadding pt6" >
+                <div class="col-sm-2 removePadding pt6" >
                     <button class="btn btn-default " id="newBtn">new Board</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-3">
+    <div class="col-sm-3">
     </div>
 </div>
 
 <div class="row removePadding">
-    <div class="col-xs-3 removePadding"></div>
-    <div class="col-xs-6 pt4 borderR removePadding ">
+    <div class="col-sm-3 removePadding"></div>
+    <div class="col-sm-6 pt4 borderR removePadding ">
         <%--게시글 목록--%>
         <div class="row removePadding">
             <table class="table removePadding">
@@ -130,7 +130,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-3 pt4"></div>
+        <div class="col-sm-3 pt4"></div>
 
     </div>
 
