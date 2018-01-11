@@ -109,19 +109,19 @@
                 <li class="nav-item ">
                     <a class="nav-link active" href="#main">Main</a>
                 </li>
-
-                <li class="nav-item dropdown show" >
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"> Service</a>
-                    <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 80px, 0px); top: 0px; left: 0px; will-change: transform;">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">  Service</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 80px, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item" href="/edit/editPage">Edit</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/edit/unitTest">Unit</a>
                     </div>
                 </li>
 
-                <li class="nav-item dropdown show" >
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true"> Board</a>
-                    <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 80px, 0px); top: 0px; left: 0px; will-change: transform;">
+<%--자바스트립트로 dic dropdown -item에 add class show 마우스 가저가면 나타나게 한다--%>
+                <li class="nav-item dropdown " >
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Board</a>
+                    <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 80px, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
@@ -146,7 +146,7 @@
             </c:if>
             <%--로그인 상태--%>
             <c:if test="${login ne null}">
-                <ul class="nav nav-pills ">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end ">
                     <li class="nav-item" style="margin-top: 10px" >
                         <button  type="button"  class="btn btn-outline-primary hn "  onclick="location.replace('/user/logout')" style="font-size: 20px ;height:50px;">로그아웃</button>
                     </li>
