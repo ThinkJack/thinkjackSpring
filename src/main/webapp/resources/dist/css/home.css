@@ -159,24 +159,25 @@ section {
     width:100%;
     height:700px;
     background-repeat:no-repeat;
-    background-size:100% 100% ;
-
+    background-size:98% 720px ;
+    background-attachment: fixed;
+    /*background-position: center;*/
 }
 
 section.a{
-    /*background-image: url("/resources/images/main/a.png");*/
+    background-image: url("/resources/images/main/mainA.png") ;
     background-color: #00c4ff;
 
 }
 section.b{
-    /*background-image: url("/resources/images/main/b.png");*/
+    background-image: url("/resources/images/main/mainB.png");
     background-color:#99cc66;
 
 
 }
 
 section.c{
-    /*background-image: url("/resources/images/main/c.png");*/
+    background-image: url("/resources/images/main/mainC.png");
 
     background-color: black;
 }
@@ -184,7 +185,7 @@ section.c{
 
 
 section.d{
-    /*background-image: url("/resources/images/main/d.png");*/
+    /*background-image: url("/resources/images/main/mainD.png");*/
     background-color: #6c71c4;
 
 }

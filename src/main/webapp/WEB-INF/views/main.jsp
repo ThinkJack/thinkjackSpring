@@ -79,30 +79,48 @@
 </section>
 <div class="deaf" style="background-color:black">
 </div>
-<section class="d container-fluid borderR" id="board">
+<section class="d container-fluid" id="board">
+    <div class="col-sm-6 removePadding " style="height: 20%;background-color: #8B2252">
+        <div class="rotate" style="width:100%; height: 100%;margin-left: auto">
+            <ul>
+                <li>
+                    <a >
+                        <div class="front img-circle ">
+                            <%--<i class="fa fa-android fa-4x"></i>--%>
+                            <img class=" widthFull"  src="/resources/images/like24-2.png" >
+                        </div>
+                        <div class="back img-circle">
+                            <img  class=" widthFull" src="/resources/images/like24-1.png" >
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
     <div class="col-sm-6 removePadding " style="height: 20%"></div>
-    <div class="col-sm-6 removePadding borderL" style="height: 20%"></div>
-    <div class="col-sm-6 removePadding " style="height: 48%"></div>
+    <div class="col-sm-6 removePadding " style="height: 48%">
+        <img src="/resources/images/main/f.png" style="height:auto; width:40%;position: absolute;left: 30%" > </div>
     <div class="col-sm-4 removePadding" >
 
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;" onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
+            <button class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
         </div>
-        <div class="col-sm-6 removePadding borderRT borderR" style="height: 12%;"></div>
+        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
 
-        <div class="col-sm-6 removePadding borderLT borderL" style="height: 12%;"></div>
+        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;" onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
         </div>
 
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;" onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
         </div>
-        <div class="col-sm-6 removePadding borderRT borderR " style="height: 12%;"></div>
+        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
 
-        <div class="col-sm-6 removePadding  borderT" style="height: 12%;"></div>
+        <div class="col-sm-6 removePadding  " style="height: 12%;"></div>
         <div class="col-sm-6 removePadding" style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;" onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
         </div>
 
     </div>
@@ -131,7 +149,7 @@
 
         if($(this).scrollTop() >=10) $el.addClass('animated swing');
         else $el.removeClass('animated swing');
-    })
+    });
 
     //title옆 글
     window.sr = ScrollReveal({ reset: true });
@@ -143,7 +161,7 @@
     $(window).scroll(function() {
         var $el = $('.animate2');
 
-        if($(this).scrollTop() >=1500) $el.addClass('animated fadeInLeft');
+        if($(this).scrollTop() >=1800) $el.addClass('animated fadeInLeft');
         else $el.removeClass('animated fadeInLeft');
     });
 
