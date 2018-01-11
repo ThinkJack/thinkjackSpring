@@ -36,7 +36,7 @@ public interface UserService {
 
 	public List<BoardVO> boardSearch(UserCriteria cri)throws Exception;
 
-	public List<SrcVO> selectSrcList(UserCriteria cri);
+	public List<SrcVO> selectSrcList(UserCriteria cri) throws Exception;
 
 	public int srcListSearchCount(UserCriteria cri) throws Exception;
 

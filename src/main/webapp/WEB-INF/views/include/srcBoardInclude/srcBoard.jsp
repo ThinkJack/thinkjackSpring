@@ -80,16 +80,20 @@
         <select name="searchType">
             <option value="n"
                     <c:out value="${cri.searchType == null?'selected':''}"/> >
-                ---</option>
+                ---
+            </option>
             <option value="t"
                     <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
-                Title</option>
+                Title
+            </option>
             <option value="w"
                     <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
-                Writer</option>
-            <option value="tc"
+                Writer
+            </option>
+            <option value="tw"
                     <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                Title OR Content</option>
+                Title OR Content
+            </option>
         </select>
     </div>
     <div class="col-10">
@@ -198,15 +202,15 @@
             var tempCdnJs = "";
 
             <c:if test="${srcVo.cdnCss ne null}">
-                <c:forEach items="${srcVo.cdnCss}" var="item">
-                    tempCdnCss += "<link rel='stylesheet' href='" + "${item}" +"'\/>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnCss}" var="item">
+            tempCdnCss += "<link rel='stylesheet' href='" + "${item}" + "'\/>";
+            </c:forEach>
             </c:if>
 
             <c:if test="${srcVo.cdnJs ne null}">
-                <c:forEach items="${srcVo.cdnJs}" var="item">
-                    tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnJs}" var="item">
+            tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
+            </c:forEach>
             </c:if>
 
             preview.write(
@@ -241,12 +245,13 @@
 <c:if test="${status.count % 3 eq 0}">
     </div>
 </c:if>
+
 <div class="text-center">
     <ul class="pagination justify-content-center">
         <c:if test="${pageMaker.prev}">
             <li class="page-item">
-
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}" aria-label="Previous">
+                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                   aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -271,7 +276,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#search-btn').click(function (e) {
 
             self.location = "srcList"

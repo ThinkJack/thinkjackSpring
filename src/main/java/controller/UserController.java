@@ -41,6 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
+import service.SrcService;
 import service.UserService;
 
 import java.io.File;
@@ -56,6 +57,9 @@ public class UserController {
 
 	@Inject
 	private UserService service;
+
+	@Inject
+	private SrcService srcService;
 	//유저 등록
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
@@ -304,6 +308,7 @@ public class UserController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.srcListSearchCount(cri));
+		System.out.println(pageMaker);
 		model.addAttribute("pageMaker", pageMaker);
 
 	}

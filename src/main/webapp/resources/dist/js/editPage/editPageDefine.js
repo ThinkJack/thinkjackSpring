@@ -448,11 +448,7 @@ function updatePreview() {
     editConsoleView.scrollTop = editConsoleView.scrollHeight;
 
     out.close();
-
-editConsoleView.scroll(function() {
-
-})
-
+}
 
 // var console=(function(oldCons){
 //     return {
@@ -615,7 +611,7 @@ function consoleLogView(temp){
 //
 function consoleLogStr(str) {
     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-    var temp = str.match(reg);
+    var temp = commandLineValue.match(reg);
 
     for (i in temp) {
         temp[i] = temp[i].replace("console.log(", "");

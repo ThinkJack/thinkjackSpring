@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
@@ -7,7 +8,6 @@
   Time: AM 10:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
     <title>myInfo</title>
@@ -19,10 +19,6 @@
         .fl-right {
             float: right;
             margin-right: 5px;
-        }
-
-        .title {
-            border-bottom: 5px solid rgba(0, 0, 0, .125);
         }
 
         .search_div {
@@ -62,6 +58,15 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        //필요한 변수 정의 부분
+        var imgPath = "/resources/images/";
+
+        //필요한 함수 정의 부분
+        function likeImgChange(elId, num) {
+            $(elId).attr("src", imgPath + "like" + num + ".png");
+        }
+    </script>
 </head>
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
@@ -233,8 +238,7 @@
     <ul class="pagination justify-content-center">
         <c:if test="${pageMaker.prev}">
             <li class="page-item">
-
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.startPage - 1)}"
                    aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
@@ -242,14 +246,15 @@
             </li>
         </c:if>
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+            <%--<script>alert("${pageMaker.makeSearch(idx)}"); console.log("??");</script>--%>
             <li
                     <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
-                <a class="page-link" href="srcList${pageMaker.makeSearch(idx)}">${idx}</a>
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(idx)}">${idx}</a>
             </li>
         </c:forEach>
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
             <li class="page-item">
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.endPage + 1)}" aria-label="Next">
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.endPage + 1)}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -262,7 +267,7 @@
     $(document).ready(function () {
         $('#search-btn').click(function (e) {
 
-            self.location = "srcList"
+            self.location = "mySourceCode"
                 + '${pageMaker.makeQuery(1)}'
                 + '&searchType='
                 + $('select option:selected').val()
@@ -275,4 +280,5 @@
     })
 </script>
 
-
+</div>
+</div>
