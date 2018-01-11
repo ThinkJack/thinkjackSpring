@@ -13,6 +13,7 @@ public class ReplyVO {
 	private String replyWriter;
 //	유저 ID
 
+    private  String replyProfile;
 	//	날짜부분
 	private Date replyRegdate;
 	private Date replyUpdate;
@@ -26,90 +27,99 @@ public class ReplyVO {
 	//삭제부분 0,1
 
 
-	public Integer getReplyId() {
-		return replyId;
-	}
+    public Integer getReplyId() {
+        return replyId;
+    }
 
-	public void setReplyId(Integer replyId) {
-		this.replyId = replyId;
-	}
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
+    }
 
-	public Integer getBoardId() {
-		return boardId;
-	}
+    public Integer getBoardId() {
+        return boardId;
+    }
 
-	public void setBoardId(Integer boardId) {
-		this.boardId = boardId;
-	}
+    public void setBoardId(Integer boardId) {
+        this.boardId = boardId;
+    }
 
-	public String getReplyText() {
-		return replyText;
-	}
+    public String getReplyText() {
+        return replyText;
+    }
 
-	public void setReplyText(String replyText) {
-		this.replyText = replyText;
-	}
+    public void setReplyText(String replyText) {
+        this.replyText = replyText;
+    }
 
-	public String getReplyWriter() {
-		return replyWriter;
-	}
+    public String getReplyWriter() {
+        return replyWriter;
+    }
 
-	public void setReplyWriter(String replyWriter) {
-		this.replyWriter = replyWriter;
-	}
+    public void setReplyWriter(String replyWriter) {
+        this.replyWriter = replyWriter;
+    }
 
-	public Date getReplyRegdate() {
-		return replyRegdate;
-	}
+    public String getReplyProfile() {
+        return replyProfile;
+    }
 
-	public void setReplyRegdate(Date replyRegdate) {
-		this.replyRegdate = replyRegdate;
-	}
+    public void setReplyProfile(String replyProfile) {
+        this.replyProfile = replyProfile;
+    }
 
-	public Date getReplyUpdate() {
-		return replyUpdate;
-	}
+    public Date getReplyRegdate() {
+        return replyRegdate;
+    }
 
-	public void setReplyUpdate(Date replyUpdate) {
-		this.replyUpdate = replyUpdate;
-	}
+    public void setReplyRegdate(Date replyRegdate) {
+        this.replyRegdate = replyRegdate;
+    }
 
-	public Integer getReplyParent() {
-		return replyParent;
-	}
+    public Date getReplyUpdate() {
+        return replyUpdate;
+    }
 
-	public void setReplyParent(Integer replyParent) {
-		this.replyParent = replyParent;
-	}
+    public void setReplyUpdate(Date replyUpdate) {
+        this.replyUpdate = replyUpdate;
+    }
 
-	public int getReplyLikeCnt() {
-		return replyLikeCnt;
-	}
+    public Integer getReplyParent() {
+        return replyParent;
+    }
 
-	public void setReplyLikeCnt(int replyLikeCnt) {
-		this.replyLikeCnt = replyLikeCnt;
-	}
+    public void setReplyParent(Integer replyParent) {
+        this.replyParent = replyParent;
+    }
 
-	public int getReplyState() {
-		return replyState;
-	}
+    public int getReplyLikeCnt() {
+        return replyLikeCnt;
+    }
 
-	public void setReplyState(int replyState) {
-		this.replyState = replyState;
-	}
+    public void setReplyLikeCnt(int replyLikeCnt) {
+        this.replyLikeCnt = replyLikeCnt;
+    }
 
-	@Override
-	public String toString() {
-		return "ReplyVO{" +
-				"replyId=" + replyId +
-				", boardId=" + boardId +
-				", replyText='" + replyText + '\'' +
-				", replyWriter='" + replyWriter + '\'' +
-				", replyRegdate=" + replyRegdate +
-				", replyUpdate=" + replyUpdate +
-				", replyParent=" + replyParent +
-				", replyLikeCnt=" + replyLikeCnt +
-				", replyState=" + replyState +
-				'}';
-	}
+    public int getReplyState() {
+        return replyState;
+    }
+
+    public void setReplyState(int replyState) {
+        this.replyState = replyState;
+    }
+
+    @Override
+    public String toString() {
+        return "ReplyVO{" +
+                "replyId=" + replyId +
+                ", boardId=" + boardId +
+                ", replyText='" + replyText + '\'' +
+                ", replyWriter='" + replyWriter + '\'' +
+                ", replyProfile='" + replyProfile + '\'' +
+                ", replyRegdate=" + replyRegdate +
+                ", replyUpdate=" + replyUpdate +
+                ", replyParent=" + replyParent +
+                ", replyLikeCnt=" + replyLikeCnt +
+                ", replyState=" + replyState +
+                '}';
+    }
 }

@@ -3,14 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-
 <link href="/resources/dist/css/board.css" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<%--이모티콘--%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<%--하트 스타일부분--%>
 
+<%--하트 스타일부분--%>
 <style>
     #panel, #flip {
         padding: 5px;
@@ -40,11 +36,9 @@
     }
 </style>
 
-<div class="deaf2 "></div>
-
-<div class="row  removePadding " style="background-color:#000000 ">
+<div class="deaf2 container-fluid"></div>
+<div class="row  removePadding " style="background-color:#000 ">
     <div class="col-xs-3"></div>
-
     <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
@@ -75,7 +69,6 @@
                        readonly="readonly">
             </div>
         </div>
-
         <div class="box-footer">
             <c:if test="${login.userName == boardVO.boardWriter}">
                 <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
@@ -86,19 +79,15 @@
     </div>
     <div class="col-xs-3 " ></div>
 </div>
-
 <div class="row removePadding "  style="background-color:#000000 ">
     <div class="col-xs-3"></div>
-
     <div class="col-xs-6 removePadding " >
-
         <%--댓글 등록 부분 --%>
         <div class="row removePadding" style="background-color:#fff">
             <div class="col-xs-12  borderRTW  removePadding " style="background-color: #000">
                 <div class="deaf2"></div>
                 <div class="commentReply borderWidth" >
                     <%--댓글 등록하는 아이디(--%>
-
                     <input type="text" name='writer' class="form-control register" value="${login.userName}"  readonly="readonly">
                     <%--댓글 입력 부분--%>
                     <div class="form-group">
@@ -161,7 +150,7 @@
                 <div class="col-xs-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="/resources/images/titile.jpg"  class="Poto ">
+                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
 
                 <div class="col-xs-8 well">
@@ -222,7 +211,7 @@
                 <div class="col-xs-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="/resources/images/titile.jpg" class="Poto ">
+                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
                 <div class="col-xs-9">
                     <strong class="title">
@@ -549,7 +538,7 @@
             }
 
 
-            console.log(data.loginUser+"ㄴㄴ");
+            // console.log(data.loginUser+"ㄴㄴ");
 
 
             printData(temp2, $(".repliesDiv"), $('.template'));

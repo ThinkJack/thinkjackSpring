@@ -1,28 +1,20 @@
 <style>
 
-#footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: white;
+footer{
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 500px;
+    height: 100px;
     background-color: grey;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    /*height: 15%;*/
-    /*background-color: grey;*/
 }
 </style>
-<!-- Footer -->
-        <%--<div class="col-lg-2"></div>--%>
-        <%--<div class="col-lg-8 removePadding" >--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-            <div  class="text-center footer">
-                ⓒ Thinkjack Corp. All Rights Reserved.
-            </div>
-            <%----%>
-        <%--</div>--%>
-        <%--<div class="col-lg-2"> </div>--%>
+
+            <footer class="text-center ">
+
+            </footer>
 
 </body>
+
 </html>
