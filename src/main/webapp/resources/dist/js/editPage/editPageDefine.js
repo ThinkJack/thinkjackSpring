@@ -448,7 +448,6 @@ function updatePreview() {
     editConsoleView.scrollTop = editConsoleView.scrollHeight;
 
     out.close();
-}
 
 editConsoleView.scroll(function() {
 
