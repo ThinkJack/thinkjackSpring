@@ -10,17 +10,8 @@
 
 
 <style>
-    /*.card {*/
-        /*margin-bottom: 20px;*/
-    /*}*/
-    .flex-container {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .flex-item {
-        flex-grow: 1;
-        margin: 20px;
+    .card {
+        margin-bottom: 20px;
     }
 
     .fl-right {
@@ -38,6 +29,8 @@
 
     .iframe_wrap {
         height: 25%;
+        padding: 10px;
+        border-bottom: 25px solid #333;
     }
 
     .iframe_wrap iframe {
@@ -106,21 +99,21 @@
 </div>
 <c:forEach var="srcVo" items="${list}" varStatus="status">
     <c:if test="${status.count % 3 eq 1}">
-        <div class="row flex-container">
+        <div class="row">
     </c:if>
-    <div class="col flex-item">
-        <div class="thumbnail">
+    <div class="col">
+        <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                 <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                 </iframe>
             </div>
 
-            <div class="caption">
+            <div class="card-body">
                 <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
                 <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
             </div>
-            <div class="caption">
+            <div class="card-body">
 
 
                 <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"
@@ -171,7 +164,7 @@
                                     if (success.result === 0) {
                                         //좋아요 추가시
                                         likeImgChange("#${srcVo.srcId}like", 2);
-                                      } else {
+                                    } else {
                                         //좋아요 취소시
                                         likeImgChange("#${srcVo.srcId}like", 1);
                                     }

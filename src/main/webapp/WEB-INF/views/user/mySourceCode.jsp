@@ -11,6 +11,57 @@
 
 <head>
     <title>myInfo</title>
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .fl-right {
+            float: right;
+            margin-right: 5px;
+        }
+
+        .title {
+            border-bottom: 5px solid rgba(0, 0, 0, .125);
+        }
+
+        .search_div {
+            margin-bottom: 20px;
+        }
+
+        .iframe_wrap {
+            height: 25%;
+            padding: 10px;
+            border-bottom: 25px solid #333;
+        }
+
+        .iframe_wrap iframe {
+            -ms-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+            -o-transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+
+            -ms-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            width: 200%;
+            height: 200%;
+
+            pointer-events: none;
+        }
+
+        .src_icon:hover {
+            cursor: pointer;
+        }
+
+        .iframe_wrap:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
@@ -36,21 +87,21 @@
 </div>
 <c:forEach var="srcVo" items="${list}" varStatus="status">
     <c:if test="${status.count % 3 eq 1}">
-        <div class="row flex-container">
+        <div class="row">
     </c:if>
-    <div class="col flex-item">
-        <div class="thumbnail">
+    <div class="col">
+        <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                 <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                 </iframe>
             </div>
 
-            <div class="caption">
+            <div class="card-body">
                 <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
                 <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
             </div>
-            <div class="caption">
+            <div class="card-body">
 
 
                 <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"
