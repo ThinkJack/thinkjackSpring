@@ -8,6 +8,12 @@
     td, th {
         text-align: center;
     }
+    .thumbnail{
+        display: inline;
+        width: 24px;
+        padding: 0px;
+        margin: 0px;
+    }
 </style>
 <div class="deaf2 "></div>
 <div class="row text-center">
@@ -115,11 +121,10 @@
                                     ${boardVO.boardTitle}</a></td>
                         <td>
                             <c:if test="${empty boardVO.boardWriterProfile}">
-                                <img src="/resources/images/123.gif">
+                                <img class ="thumbnail" src="/resources/images/123.gif">
                             </c:if>
                             <c:if test="${!empty boardVO.boardWriterProfile}">
-
-                                <img src="http://localhost:8080/displayFile?fileName=${boardVO.boardWriterProfile}">
+                                <img class ="thumbnail" src="http://localhost:8080/displayFile?fileName=${boardVO.boardWriterProfile}">
                             </c:if>
                                 ${boardVO.boardWriter}</td>
                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"

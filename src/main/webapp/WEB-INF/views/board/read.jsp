@@ -15,7 +15,7 @@
     #panel, #flip {
         padding: 5px;
         text-align: center;
-        background-color: #e5eecc;
+        /*background-color: #e5eecc;*/
         border: solid 1px #c3c3c3;
     }
 
@@ -42,7 +42,7 @@
 
 <div class="deaf2 "></div>
 
-<div class="row  removePadding " style="background-color:#000 ">
+<div class="row removePadding " >
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
@@ -71,6 +71,10 @@
             </div>
             <div class="form-group">
                 <label>Writer</label>
+                <%--<img id="profileImg">--%>
+                <%--<script>--%>
+                    <%--$("#profileImg").prop(src,getFileInfo(${boardVO.boardWriterProfile}));--%>
+                <%--</script>--%>
                 <input type="text" name='writer' class="form-control inputC" value="${boardVO.boardWriter}"
                        readonly="readonly">
             </div>
@@ -87,14 +91,14 @@
     <div class="col-xs-3 " ></div>
 </div>
 
-<div class="row removePadding "  style="background-color:#000000 ">
+<div class="row removePadding "  >
     <div class="col-xs-3"></div>
 
     <div class="col-xs-6 removePadding " >
 
         <%--댓글 등록 부분 --%>
         <div class="row removePadding" style="background-color:#fff">
-            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #000">
+            <div class="col-xs-12  borderRTW  removePadding " >
                 <div class="deaf2"></div>
                 <div class="commentReply borderWidth" >
                     <%--댓글 등록하는 아이디(--%>
@@ -125,7 +129,7 @@
     </div>
 
 
-    <div class="col-xs-3 widthFull4" style="background-color: black" ></div>
+    <div class="col-xs-3 widthFull4"  ></div>
 
 
 </div>
