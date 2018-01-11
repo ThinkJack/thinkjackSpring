@@ -9,24 +9,24 @@
     <insert id="insert">
         INSERT INTO tbl_reply (board_id, reply_text, reply_writer, reply_parent)
         VALUES (#{boardId}, #{replyText}, (SELECT user_id
-        FROM tbl_user
-        WHERE user_name = #{replyWriter}), #{replyParent});
+                                           FROM tbl_user
+                                           WHERE user_name = #{replyWriter}), #{replyParent});
     </insert>
 
     <!-- 조회(select)-->
     <select id="select" resultType="ReplyVO">
         SELECT
-        reply_id                                          replyId,
-        board_id                                          boardId,
-        reply_text                                        replyText,
-        (SELECT user_name
-        FROM tbl_user
-        WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
-        reply_regdate                                     replyRegdate,
-        reply_update                                      replyUpdate,
-        reply_parent                                      replyParent,
-        reply_likecnt                                     replyLikecnt,
-        reply_state                                       replyState
+            reply_id                                          replyId,
+            board_id                                          boardId,
+            reply_text                                        replyText,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            reply_regdate                                     replyRegdate,
+            reply_update                                      replyUpdate,
+            reply_parent                                      replyParent,
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
         #         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
@@ -55,17 +55,20 @@
     <!--게시판 번호에서 댓글 목록 범위 지정-->
     <select id="listPage" resultType="ReplyVO">
         SELECT
-        reply_id                                          replyId,
-        board_id                                          boardId,
-        reply_text                                        replyText,
-        (SELECT user_name
-        FROM tbl_user
-        WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
-        reply_regdate                                     replyRegdate,
-        reply_update                                      replyUpdate,
-        reply_parent                                      replyParent,
-        reply_likecnt                                     replyLikecnt,
-        reply_state                                       replyState
+            reply_id                                          replyId,
+            board_id                                          boardId,
+            reply_text                                        replyText,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyProfile,
+            reply_regdate                                     replyRegdate,
+            reply_update                                      replyUpdate,
+            reply_parent                                      replyParent,
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
         #         ORDER BY IF(ISNULL(reply_parent), reply_id, replyParent),reply_id ASC
@@ -91,8 +94,8 @@
     <update id="updateReplyLikeCnt">
         UPDATE tbl_reply
         SET reply_likecnt = (SELECT count(reply_like_id)
-        FROM tbl_reply_like
-        WHERE tbl_reply_like.reply_id = #{replyId})
+                             FROM tbl_reply_like
+                             WHERE tbl_reply_like.reply_id = #{replyId})
         WHERE reply_id = #{replyId}
     </update>
 

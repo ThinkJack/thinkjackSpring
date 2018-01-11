@@ -17,9 +17,15 @@
         FROM tbl_user
         WHERE user_email = #{userEmail}
     </select>
+    <select id="checkduplName" resultType="UserVO">
+        SELECT
+            user_id    userId,
+            user_state userState
+        FROM tbl_user
+        WHERE user_name = #{userName}
+    </select>
 
     <select id="login" resultType="UserVO">
-
         SELECT
             user_email   userEmail,
             user_id      userId,
@@ -33,7 +39,6 @@
     </select>
 
     <select id="readUser" resultType="UserVO">
-
         SELECT
             user_id        userId,
             user_email     userEmail,
@@ -66,8 +71,10 @@
 
     <select id="naverReadUser" resultType="UserVO">
         SELECT
-            user_id   userId,
-            user_name userName
+            user_id      userId,
+            user_name    userName,
+            user_email   userEmail,
+            user_profile userProfile
         FROM tbl_user
         WHERE user_social_id = #{userSocialId}
     </select>
@@ -108,6 +115,64 @@
             user_auth_code = NULL
         WHERE user_id = #{userId}
     </update>
+
+
+    <sql id="boardSearchOption">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and board_title like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'c'.toString()">
+                and board_content like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'tc'.toString()">
+                and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
+            </if>
+        </if>
+    </sql>
+
+    <select id="boardSearch" resultType="BoardVO">
+        <![CDATA[
+  select
+            board_id                                                             boardId,
+            board_title                                                          boardTitle,
+            board_content                                                        boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+            board_regdate                                                        boardRegdate,
+            board_viewcnt                                                        boardViewcnt,
+            (SELECT category_name
+             FROM tbl_board_category
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+            board_likecnt                                                        boardLikecnt
+  from tbl_board
+  where board_id > 0 AND board_writer = #{userId} AND board_state = 1
+        ]]>
+
+        <include refid="boardSearchOption"></include>
+
+        <![CDATA[
+  order by boardCategoryName asc,board_id desc
+  limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+
+    <select id="boardSearchCount" resultType="int">
+        <![CDATA[
+  select count(*)
+  from tbl_board
+  where board_id > 0 AND  board_writer = #{userId} AND board_state = 1
+        ]]>
+        <include refid="boardSearchOption"></include>
+    </select>
+
+
+    <select id="userSrc" resultType="SrcVO">
+
+    </select>
+
 
     <select id="getUserProfile" resultType="String">
         SELECT

@@ -47,19 +47,6 @@ public class BoardDAOImpl implements BoardDAO {
     }
 
     @Override
-    public List<BoardVO> listPage(int page,String category) throws Exception {
-
-
-        if (page <= 0) {
-            page = 1;
-        }
-
-        page = (page - 1) * 10;
-
-        return session.selectList(board+category + ".readPage", page);
-    }
-
-    @Override
     public List<BoardVO> search(SearchCriteria cri,String category) throws Exception {
 
 
@@ -70,12 +57,6 @@ public class BoardDAOImpl implements BoardDAO {
     public int searchCount(SearchCriteria cri,String category) throws Exception {
 
         return session.selectOne(board+category + ".searchCount", cri);
-    }
-
-    @Override
-    public int countPaging(Criteria cri,String category) throws Exception {
-
-        return session.selectOne(board+category , cri);
     }
 
     @Override

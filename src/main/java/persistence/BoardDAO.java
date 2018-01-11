@@ -18,13 +18,9 @@ public interface BoardDAO {
 
     public void deleteBoard(int boardId,String category)throws Exception;
 
-    public List<BoardVO> listPage(int page,String category) throws Exception;
-
     public List<BoardVO> search(SearchCriteria cri,String category)throws Exception;
 
     public int searchCount(SearchCriteria cri,String category)throws Exception;
-
-    public int countPaging(Criteria cri,String category) throws Exception;
 
     public void insertBoardLike(BoardLikeVO vo) throws Exception;
 
