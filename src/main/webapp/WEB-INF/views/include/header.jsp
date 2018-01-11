@@ -5,34 +5,44 @@
 <head>
     <!--필수 -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
     <%--반응형 웹디자인 아닌 조정폭--%>
     <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-    <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
 
     <%--애니메이션 효과--%>
-    <%--<link rel="stylesheet" href="/resources/dist/css/animate.min.css">--%>
+    <link rel="stylesheet" href="/resources/dist/css/animate.min.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-
-    <link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/assets/css/font-awesome.css" rel="stylesheet">
+    <%--이모티콘--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%--login--%>
+    <%--<link href="/resources/assets/css/bootstrap.css" rel="stylesheet">--%>
+    <%--<link href="/resources/assets/css/font-awesome.css" rel="stylesheet">--%>
     <link href="/resources/assets/css/docs.css" rel="stylesheet">
     <link href="/resources/bootstrap-social.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%--bootstrap--%>
+    <link rel="stylesheet" href="/resources/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/dist/css/_bootswatch.scss">
+    <link rel="stylesheet" href="/resources/dist/css/_variables.scss">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="/resources/dist/js/bootstrap.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+
+    <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+    <%--스크롤 애니메이션--%>
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
-
+    <%--첨부파일--%>
     <script src="/resources/dist/js/upload.js"></script>
 
+    <%--font--%>
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo+Da' rel='stylesheet' type='text/css'>
     <script>
         var msg=Boolean("${msg}");
         if(msg){
@@ -58,20 +68,6 @@
             }
             $("#profileHeader").attr("src",hstr);
         });
-        function getHstr(fullName) {
-            var test =fullName.lastIndexOf("/");
-            fileName= fullName.substring(test+1,fullName.length);
-            path= fullName.substring(0,test+1);
-            profileheader =path+"s_"+fileName;
-            //console.log(fullName);
-            if(fullName !== "") {
-                hstr =  getFileInfo(profileheader);
-            }else{
-                hstr = "/resources/images/123.gif";
-            }
-           return hstr;
-
-        }
     </script>
     <style>
         .naver{
@@ -92,76 +88,80 @@
     </style>
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<div  class="container-fluid removePadding">
-    <div class="row removePadding">
 
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="col-xs-2 removePadding" >
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bd" style="font-size: 25px">
 
-                </div>
+    <div class=" removePadding" style="font-size: 25px;width: 100%;" >
+        <%--<a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">Thinkjack</a>--%>
 
-                <div class="col-xs-5 removePadding" style="margin-top:25px" >
-                    <a class="navbar-brand " onclick="location.replace('/main')">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+        <div class="collapse navbar-collapse " id="navbarColor03">
+
+            <ul class="nav nav-pills mx-auto w-100 justify-content-center">
+                <a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">
+                    <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" >
+                </a>
+                <li class="nav-item ">
+                    <a class="nav-link active" href="#main">Main</a>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">  Service</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="/edit/editPage">Edit</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/edit/unitTest">Unit</a>
                     </div>
+                </li>
 
-                    <div class="collapse navbar-collapse" id="myNavbar" >
-                        <ul class="nav navbar-nav   pt5">
-                            <li><a href="/main/#main" >Main</a></li>
-                            <li><a href="/main/#editor" >Service</a></li>
-                            <li><a href="/main/#board" >Board</a></li>
-                        </ul>
+<%--자바스트립트로 dic dropdown -item에 add class show 마우스 가저가면 나타나게 한다--%>
+                <li class="nav-item dropdown " >
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Board</a>
+                    <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=notice'>Notice</a>
                     </div>
-                </div>
-                <div class="col-xs-3 removePadding" >
+                </li>
+            </ul>
 
-                    <%--로그아웃 상태--%>
-                    <c:if test="${login eq null}">
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li>
-                            <div class="btn-group login" role="group" aria-label="Basic example">
-                                <button id="loginBtn"  class="btn btn-secondary button1 btn-13 pt5" onclick="location.replace('/user/login')" >로그인</button>
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <a  id="updateicon" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img class="img-circle widthFull"  src="/resources/images/main2.jpg" ></a>
-                        </li>
-                    </ul>
-
-                        </c:if>
-                        <%--로그인 상태--%>
-                        <c:if test="${login ne null}">
-                            <ul class="nav navbar-nav navbar-right">
-
-                                <li>
-                                    <div class="btn-group login" role="group" aria-label="Basic example">
-                                        <button id="logoutBtn" type="button" class="btn btn-secondary btn-13 button1 pt5"  onclick="location.replace('/user/logout')" >로그아웃</button>
-                                    </div>
-                                </li>
-
-                                <li class="dropdown">
-                                    <a href="#" id="updateBtn" class="dropdown-toggle loginPoto" data-toggle="dropdown" role="button" aria-expanded="false"><img id="profileHeader" class="poto" src=""  ></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/user/myinfo">회원정보 수정</a></li>
-
-                                    </ul>
-                                </li>
-                            </ul>
-                        </c:if>
-                </div>
-            </nav>
+            <%--로그아웃 상태--%>
+            <c:if test="${login eq null}">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end " style="float: right;">
+                    <li class="nav-item" style="margin-top: 10px;">
+                        <button  class="btn btn-outline-primary hn " onclick="location.replace('/user/login')" style="font-size: 20px ;height:50px;">로그인</button>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><img class="rounded-circle loginPhoto "  src="/resources/images/main2.jpg" ></a>
+                    </li>
+                </ul>
+            </c:if>
+            <%--로그인 상태--%>
+            <c:if test="${login ne null}">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end ">
+                    <li class="nav-item" style="margin-top: 10px" >
+                        <button  type="button"  class="btn btn-outline-primary hn "  onclick="location.replace('/user/logout')" style="font-size: 20px ;height:50px;">로그아웃</button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <img id="profileHeader" class="rounded-circle loginPhoto" src="" ></a>
+                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <a class="dropdown-item" href="/user/myinfo">회원정보 수정</a>
+                        </div>
+                    </li>
+                </ul>
+            </c:if>
+        </div>
     </div>
+</nav>
 
-</div>
+
+
 

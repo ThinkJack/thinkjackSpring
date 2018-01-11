@@ -1,57 +1,31 @@
 /*고정폭 만들기*/
-.container-fluid {
-    width: 970px;
-    max-width: none !important;
-    min-width: 500px;
+/*.container-fluid {*/
+/*width: 970px;*/
+/*max-width: none !important;*/
+/*min-width: 500px;*/
+/*}*/
+
+/*font*/
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Baloo+Da);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+.bd{
+    font-family: 'Baloo Da', cursive;
 }
+.np { font-family: 'Nanum Pen Script', serif; }
 
 .form-control {
     border-radius: 0;
+}
+.hn{
+    font-family: 'Hanna', serif;
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background-color: #fff;
     /*opacity: 1;*/
 }
-
-.button1{
-    font-size: 20px;
-    font-color:white;
-    /*padding: 10px 30px;*/
-    font-family: Helvetica;
-    background: #000;
-    outline: none !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    color:#fff;
-
-}
-
-
-/*네비바*/
-
-.navbar {
-    margin-bottom: 0;
-    /*네브바 색상*/
-    /*background-color: red;*/
-    z-index: 9999;
-    border: 0;
-    font-size: 35px !important;
-    /*letter-spacing: 4px;*/
-    border-radius: 0;
-}
- .navbar .navbar-brand {
-    /*평소 글 색상*/
-    color:#fff!important;
-}
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    /*마우스 가져갔을떄 색상*/
-    color: red!important;
-    /*background-color: #fff !important;*/
-}
-
 
 .row{
     margin-right: 0px;
@@ -66,45 +40,35 @@
 
 /*body부분*/
 .deaf{
-    height: 180px;
+    /*height: 180px;*/
+    height: 80px;
 }
 
 .deaf2{
     height: 100px;
 }
 
-
-/*.imeage1{*/
-/*width:100%;*/
-/*height:95%;*/
+/*.navbar-collapse {*/
+    /*!*-ms-flex-preferred-size: 100%;*!*/
+     /*flex-basis: 0%;*/
+    /*-webkit-box-flex: 1;*/
+    /*-ms-flex-positive: 1;*/
+    /*flex-grow: 1;*/
+    /*-webkit-box-align: center;*/
+    /*-ms-flex-align: center;*/
+    /*align-items: center;*/
 /*}*/
 
-.mainText{
-    width:100%;
-    height:5%;
-    /*background-color: #5A5CAD;*/
-}
+/*section b 버튼 크기*/
 
-.textPage2{
-    width:100%;
-    height:145px;
-
-}
-.textPage3{
-    margin-left: 8%;
-    width:85%;
-    height:142px;
-}
-
-.mov{
+.bBtn{
+    width: 86%;
+    height: 95px;
+    margin-left: 75px;
     position: relative;
-    top: 28px;
+    top: 10px;
+}
 
-}
-.mov2{
-    position: relative;
-    top: -20px;
-}
 
 
 .widthFull{
@@ -113,41 +77,6 @@
     /*background-color: #6a0d6a;*/
 }
 
-.widthFull3{
-    height:60%;
-
-}
-
-.widthFull4{
-    height:100%;
-
-}
-.widthFull2{
-    width:100%;
-    height:81%;
-    /*background-color: #6a0d6a;*/
-}
-
-.widthFull5{
-    height:50%;
-
-}
-
-.reText{
-    width: 94%;
-    height: 37%;
-}
-
-
-
-.pt{
-    padding-bottom:255px ;
-}
-
-
-.pt2{
-    margin-bottom: 95px;
-}
 
 /*스크롤*/
 
@@ -159,43 +88,60 @@ img {max-width: 100%;}
 section {
     /*width:2493px;*/
     width:100%;
-    height: 936px;
+
     background-repeat:no-repeat;
-    background-size:100% 100% ;
+    background-size:98% 500px ;
+    /*background-attachment: fixed;*/
+    background-size:contain;
 
 }
 
 section.a{
-    background-image: url("/resources/images/main/a.png");
+    background-image: url("/resources/images/main/mainA.png");
     background-color: #00c4ff;
+background-position: bottom;
+
+
 
 }
-section.d{
-    background-image: url("/resources/images/main/d.png");
-    background-color: black;
+section.b{
+    background-image: url("/resources/images/main/mainB.png");
+    background-color:#99cc66;
+    height:700px;
+    background-attachment: fixed;
 
 }
 
 section.c{
-    background-image: url("/resources/images/main/c.png");
+    background-image: url("/resources/images/main/mainC.png");
 
     background-color: black;
-}
-
-section.b{
-    background-image: url("/resources/images/main/b.png");
-    background-color: black;
-
-
+    height:700px;
+    background-attachment: fixed;
 }
 
 
-p{
-    color: white;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+
+section.d{
+    /*background-image: url("/resources/images/main/mainD.png");*/
+    background-color: #6c71c4;
+    height:100%;
+    /*background-attachment: fixed;*/
+
 }
+
+
+/*@media (min-width: 510px) and (max-width: 1300px) {*/
+    /*!*section {*!*/
+        /*!*background-size: 98% 476px;*!*/
+    /*!*}*!*/
+    /*section.a {*/
+        /*height: 80%;*/
+    /*}*/
+    /*.animated img {*/
+        /*height: 150px;*/
+    /*}*/
+/*}*/
 
 .scroll-down {
     opacity: 1;
@@ -205,7 +151,7 @@ p{
 
 .scroll-down {
     position: absolute;
-    bottom: 17%;
+    bottom: 30px;
     left: 50%;
     margin-left: -16px;
     display: block;
@@ -258,12 +204,7 @@ p{
 
 
 /*title*/
-.mov3{
-    position: relative;
-    left: 26%;
-    top:30px;
 
-}
 
 .rotate {
     overflow: hidden;
@@ -313,127 +254,61 @@ p{
 
 
 /*버튼*/
-/*처음*/
-.custom-btn {
-    padding: 10px 30px;
-    font-family: Helvetica;
-    font-weight: 500;
-    background: #000;
-    outline: none !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    color:#fff;
-    font-size: 50px;
-}
-
-/**** BTN No. 12 ****/
-.btn-12 {
-    border: 10px solid #fff;
-    z-index: 1;
-
-}
-.btn-12:after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background: grey;
-    transition: all 0.3s ease;
-    color:#fff;
 
 
-}
-.btn-12:hover {
-    color:white;
-    border: 10px solid #000;
-    z-index: 1;
-}
-.btn-12:hover:after {
-    top: 0;
-    height: 100%;
-}
-.btn-12:active {top: 2px;}
-
-/*btn-13*/
-
-.btn-13 {
-    border: 10px solid #000;
-    z-index: 1;
-    border-radius: 0;
-
-}
-.btn-13:after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    background: black;
-    transition: all 0.3s ease;
-    color:#fff;
-
-
-}
-
-.btn-13:hover {
-    color:white;
-    border: 10px solid #fff;
-    z-index: 1;
-}
-.btn-13:hover:after {
-    top: 0;
-    height: 100%;
-}
-.btn-13:active {top: 2px;}
-
-
-.loginPoto{
-    width:100px;
-    height:100px;
-
-
+.loginPhoto{
+    width:50px;
+    height:50px;
 }
 
 /*list Page*/
 
-/*title 부분*/
+/*border line*/
+/*왼쪽 아래*/
 .borderLB{
-    border-left: #fff solid 10pt ;
-    border-bottom: #fff solid 10pt;
+    border-left: #fff solid 8pt ;
+    border-bottom: #fff solid 8pt;
     border-bottom-left-radius: 50px;
 }
-
+/*오른쪽 위*/
 .borderRT {
-    border-right:#fff solid 10pt;
-    border-top: #fff solid 10pt;
+    border-right:#fff solid 8pt;
+    border-top: #fff solid 8pt;
     border-top-right-radius: 50px;
 }
-/*.pt3{*/
-/*height: 150px;*/
-/*margin-top: 0;*/
-/*margin-bottom: 0;*/
-/*margin-left: 5%;*/
-/*width: 45%;*/
+.borderRB{
+    border-right:#fff solid 8pt;
+    border-bottom: #fff solid 8pt;
+    border-bottom-right-radius: 50px;
 
-
-/*}*/
+}
+.borderLT {
+    border-left:#fff solid 8pt;
+    border-top: #fff solid 8pt;
+    border-top-left-radius: 50px;
+}
+/*왼쪽*/
 .borderL{
-    border-left:#fff solid 10pt;
+    border-left:#fff solid 8pt;
+
 }
+/*오른쪽*/
 .borderR{
-    border-right:#fff solid 10pt;
+    border-right:#fff solid 8pt;
+}
+.borderB{
+    border-bottom:#fff solid 8pt;
 }
 
+.borderT{
+    border-top:#fff solid 8pt;
+}
+
+
+/*오른쪽 위 50px*/
 .borderRTW{
-    border-right:#000 solid 10pt;
-    border-top: #000 solid 10pt;
+    border-right:#000 solid 8pt;
+    border-top: #000 solid 8pt;
     border-top-right-radius: 50px;
 }
 .borderWidth{
@@ -451,14 +326,12 @@ p{
     margin-bottom: 0;
 
 }
-/*nav bar 높이 낮추기*/
-.pt5{
-    margin-top: 25px;
-}
+
+
 .pt6{
-    height: 100px;
-    margin-top: 0;
-    margin-bottom: 0;
+   padding: 0;
+    margin: 0;
+background-color: #99cc66;
 }
 
 #updateicon{
@@ -478,27 +351,10 @@ p{
     border-color: #fff;
 }
 
-/*new Board버튼*/
-.nb{
-    padding: 10px 30px;
-    font-family: Helvetica;
-    font-weight: 500;
-    background: #000;
-    outline: none !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    color:#fff;
-    font-size: 20px;
-}
-/*list*/
-.theadDark{
-    background-color: black;
-    color:white;
 
-}
-.Poto{
+/*list*/
+
+.Photo{
     width: 100px;
     height: 80px;
 }
@@ -510,6 +366,23 @@ ul, menu, dir {
 }
 
 .commentReply{
-    background-color: #99cc66;
+
     height: 200px;
 }
+
+/*listpage*/
+/*search*/
+/*서치박스 부분*/
+.searchForm{
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+/*list부분*/
+.theadDark{
+    background-color: black;
+    color:white;
+
+}
+

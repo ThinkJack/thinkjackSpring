@@ -13,8 +13,8 @@
 
 #lampadario {
 
-    left: 20%;
-    top: 0;
+right:135%
+
 }
 
 
@@ -38,9 +38,9 @@
 .input {
     position: absolute;
 
-    width: 350px;
-    height: 350px;
-    top: 155px;
+    width: 250px;
+    height: 250px;
+    top: 125px;
     margin-left:-180px;
     opacity: 0;
     z-index: 1;
@@ -62,11 +62,11 @@
 
 label {
     /*전구크기*/
-    width: 53%;
-    height: 370px;
-    top: 150px;
+    width:250px;
+    height:250px;
+    top: 127px;
     position: absolute;
-    left: 0;
+    left: -41px;
     margin-left: 2.5%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
