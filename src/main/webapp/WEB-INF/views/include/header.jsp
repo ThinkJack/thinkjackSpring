@@ -67,6 +67,9 @@
         .naverImg{
             background-color:#1EC800;
             z-index: 1;
+            width:18px;
+            height: 18px;
+            margin: auto;
         }
         .naverImg:hover {
             /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/

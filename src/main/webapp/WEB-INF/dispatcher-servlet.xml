@@ -42,6 +42,9 @@
             <beans:mapping path="/board/*"/>
             <beans:mapping path="/user/modifyUser"/>
             <beans:mapping path="/user/delete"/>
+            <beans:mapping path="/user/myinfo"/>
+            <beans:mapping path="/user/MyBoard"/>
+            <beans:mapping path="/user/MySourceCode"/>
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 

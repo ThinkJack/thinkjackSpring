@@ -35,22 +35,22 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		System.out.println(vo);
 		FlashMap flashMap = new FlashMap();
 		if(vo == null) {
-			flashMap.put("msg" , "아이디 또는 비밀번호가 일치하지 않습니다.+로그인 인터셉터");
-			System.out.println("아이디 비밀번호 실패");
+			flashMap.put("msg" , "아이디 또는 비밀번호가 일치하지 않습니다.");
+			//System.out.println("아이디 비밀번호 실패");
 			session.setAttribute("dest","/user/login");
 			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
 			flashMapManager.saveOutputFlashMap(flashMap, request, response);
 			return;
 		}else if(vo.getUserState()==0){
 			flashMap.put("msg" , "인증 대기 중인 아이디 입니다. 메일에 접속해 인증해주세요");
-			System.out.println("인증대기");
+			//System.out.println("인증대기");
 			session.setAttribute("dest","/user/login");
 			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
 			flashMapManager.saveOutputFlashMap(flashMap, request, response);
 			return;
 		}else if(vo.getUserState()==2){
 			flashMap.put("msg" , "탈퇴된 회원입니다. 관리자에게 문의해주세요");
-			System.out.println("탈퇴");
+			//System.out.println("탈퇴");
 			session.setAttribute("dest","/user/login");
 			FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
 			flashMapManager.saveOutputFlashMap(flashMap, request, response);
