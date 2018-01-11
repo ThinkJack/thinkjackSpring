@@ -14,7 +14,9 @@
         <div class="col-sm-2 removePadding"></div>
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
-                <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px"></div>
+                <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
+                    <h1 class="foo3 ">Thinkjack</h1>
+                </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-5">
@@ -22,17 +24,16 @@
                             <img src="/resources/images/titile.jpg" style="height: 300px; width: 300px;" >
                         </div></div>
                     <div class="col-sm-6">
-                        <h1 class="foo3 ">Thinkjack</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-sm-2 removePadding "> </div>
-    <div class="deaf" >
-        <a href="#" class="scroll-down" address="true"></a>
-    </div>
 </section>
+<div class="deaf" >
+    <a href="#" class="scroll-down" address="true"></a>
+</div>
 <div class="deaf" id="editor" style="background-color: black"></div>
 <section class="b container-fluid">
     <div class="row removePadding">
@@ -81,7 +82,7 @@
 </div>
 <section class="d container-fluid" id="board">
     <div class="col-sm-6 removePadding " style="height: 20%;background-color: #8B2252">
-        <div class="rotate" style="width:100%; height: 100%;margin-left: auto">
+        <div class="rotate" style="width:100%; height: 100%;margin-left: auto>
             <ul>
                 <li>
                     <a >
@@ -120,7 +121,7 @@
 
         <div class="col-sm-6 removePadding  " style="height: 12%;"></div>
         <div class="col-sm-6 removePadding" style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=notice');"><p>Board Page</p></button>
         </div>
 
     </div>
