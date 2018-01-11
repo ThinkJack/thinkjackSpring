@@ -11,6 +11,7 @@ public class BoardVO {
     private int boardViewcnt;
     private String boardCategoryName;
     private int boardLikecnt;
+    private String boardWriterProfile;
 
     @Override
     public String toString() {
@@ -23,42 +24,8 @@ public class BoardVO {
                 ", boardViewcnt=" + boardViewcnt +
                 ", boardCategoryName='" + boardCategoryName + '\'' +
                 ", boardLikecnt=" + boardLikecnt +
+                ", boardWriterProfile='" + boardWriterProfile + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BoardVO)) return false;
-
-        BoardVO boardVO = (BoardVO) o;
-
-        if (getBoardViewcnt() != boardVO.getBoardViewcnt()) return false;
-        if (getBoardLikecnt() != boardVO.getBoardLikecnt()) return false;
-        if (getBoardId() != null ? !getBoardId().equals(boardVO.getBoardId()) : boardVO.getBoardId() != null)
-            return false;
-        if (getBoardTitle() != null ? !getBoardTitle().equals(boardVO.getBoardTitle()) : boardVO.getBoardTitle() != null)
-            return false;
-        if (getBoardContent() != null ? !getBoardContent().equals(boardVO.getBoardContent()) : boardVO.getBoardContent() != null)
-            return false;
-        if (getBoardWriter() != null ? !getBoardWriter().equals(boardVO.getBoardWriter()) : boardVO.getBoardWriter() != null)
-            return false;
-        if (getBoardRegdate() != null ? !getBoardRegdate().equals(boardVO.getBoardRegdate()) : boardVO.getBoardRegdate() != null)
-            return false;
-        return getBoardCategoryName() != null ? getBoardCategoryName().equals(boardVO.getBoardCategoryName()) : boardVO.getBoardCategoryName() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getBoardId() != null ? getBoardId().hashCode() : 0;
-        result = 31 * result + (getBoardTitle() != null ? getBoardTitle().hashCode() : 0);
-        result = 31 * result + (getBoardContent() != null ? getBoardContent().hashCode() : 0);
-        result = 31 * result + (getBoardWriter() != null ? getBoardWriter().hashCode() : 0);
-        result = 31 * result + (getBoardRegdate() != null ? getBoardRegdate().hashCode() : 0);
-        result = 31 * result + getBoardViewcnt();
-        result = 31 * result + (getBoardCategoryName() != null ? getBoardCategoryName().hashCode() : 0);
-        result = 31 * result + getBoardLikecnt();
-        return result;
     }
 
     public Integer getBoardId() {
@@ -123,5 +90,13 @@ public class BoardVO {
 
     public void setBoardLikecnt(int boardLikecnt) {
         this.boardLikecnt = boardLikecnt;
+    }
+
+    public String getBoardWriterProfile() {
+        return boardWriterProfile;
+    }
+
+    public void setBoardWriterProfile(String boardWriterProfile) {
+        this.boardWriterProfile = boardWriterProfile;
     }
 }

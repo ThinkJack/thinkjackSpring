@@ -58,6 +58,20 @@
             }
             $("#profileHeader").attr("src",hstr);
         });
+        function getHstr(fullName) {
+            var test =fullName.lastIndexOf("/");
+            fileName= fullName.substring(test+1,fullName.length);
+            path= fullName.substring(0,test+1);
+            profileheader =path+"s_"+fileName;
+            //console.log(fullName);
+            if(fullName !== "") {
+                hstr =  getFileInfo(profileheader);
+            }else{
+                hstr = "/resources/images/123.gif";
+            }
+           return hstr;
+
+        }
     </script>
     <style>
         .naver{
