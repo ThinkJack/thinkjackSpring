@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import common.TempKey;
 import common.UploadFileUtils;
-import domain.PageMaker;
-import domain.UserCriteria;
+import domain.*;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -37,8 +36,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
-import domain.BoardVO;
-import domain.UserVO;
 import dto.LoginDTO;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,6 +46,7 @@ import service.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -291,10 +289,24 @@ public class UserController {
     }
 
 	@RequestMapping(value = "/mySourceCode", method = RequestMethod.GET)
-	public void mySourceCode(){
+	public void mySourceCode(@ModelAttribute("cri") UserCriteria cri,
+							 HttpServletRequest httpRequest,
+							 Model model) throws Exception {
+
+		cri.setUserId(((UserVO) httpRequest.getSession().getAttribute("login")).getUserId());
+
+		if (cri.getPerPageNum() == 10) {
+			cri.setPerPageNum(6);
+		}
+
+		List<SrcVO> list = service.selectSrcList(cri);
+		model.addAttribute("list", list);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.srcListSearchCount(cri));
+		model.addAttribute("pageMaker", pageMaker);
 
 	}
-
 
     //유저 정보변경 권한 체크
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)

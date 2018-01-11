@@ -45,6 +45,7 @@
     <hr>
     <table class="table">
         <tr>
+            <th style="width: 30px;">Category</th>
             <th style="width:10px;">boardId</th>
             <th>TITLE</th>
             <th>WRITER</th>
@@ -54,6 +55,7 @@
         </tr>
         <c:forEach items="${list}" var="boardVO">
             <tr>
+                <td>${boardVO.boardCategoryName}</td>
                 <td>${boardVO.boardId}</td>
                 <td>
                     <a href='/board/read${pageMaker.makeUserSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${boardVO.boardCategoryName}'>

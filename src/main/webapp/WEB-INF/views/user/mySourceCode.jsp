@@ -9,11 +9,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
-<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 <head>
     <title>myInfo</title>
 </head>
+<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
+
 
 <div role="tabpanel" class="tab-pane fade active in" id="Source_code" aria-labelledby="home-tab">
 <div class="row search_div">
@@ -223,7 +223,5 @@
 
     })
 </script>
-</div>
-</div>
 
 

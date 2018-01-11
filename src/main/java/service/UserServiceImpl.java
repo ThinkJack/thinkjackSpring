@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import common.MailHandler;
 import common.TempKey;
 import domain.BoardVO;
+import domain.SrcVO;
 import domain.UserCriteria;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -177,6 +178,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<BoardVO> boardSearch(UserCriteria cri) throws Exception {
 		return dao.boardSearch(cri);
+	}
+
+	@Override
+	public List<SrcVO> selectSrcList(UserCriteria cri) {
+		return dao.selectSrcList(cri);
+	}
+
+	@Override
+	public int srcListSearchCount(UserCriteria cri) throws Exception {
+		return dao.srcListSearchCount(cri);
 	}
 
 	@Override
