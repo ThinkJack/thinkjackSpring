@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
+b
 <%--하트 스타일부분--%>
 <style>
     #panel, #flip {
@@ -37,9 +37,9 @@
 </style>
 
 <div class="deaf2 container-fluid"></div>
-<div class="row  removePadding " style="background-color:#000 ">
+<div class="row  removePadding "  >
     <div class="col-sm-3"></div>
-    <div class="col-sm-6 borderLB  widthFull5"  style="background-color:#fff " >
+    <div class="col-sm-6 borderLB black-background  "  >
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -79,12 +79,12 @@
     </div>
     <div class="col-sm-3 " ></div>
 </div>
-<div class="row removePadding "  style="background-color:#000000 ">
+<div class="row removePadding "  >
     <div class="col-sm-3"></div>
     <div class="col-sm-6 removePadding " >
         <%--댓글 등록 부분 --%>
-        <div class="row removePadding" style="background-color:#fff">
-            <div class="col-sm-12  borderRTW  removePadding " style="background-color: #000">
+        <div class="row removePadding" >
+            <div class="col-sm-12  borderRTB ">
                 <div class="deaf2"></div>
                 <div class="commentReply borderWidth" >
                     <%--댓글 등록하는 아이디(--%>
@@ -114,7 +114,7 @@
     </div>
 
 
-    <div class="col-sm-3 widthFull4" style="background-color: black" ></div>
+    <div class="col-sm-3 widthFull4"  ></div>
 
 
 </div>

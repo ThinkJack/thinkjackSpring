@@ -9,32 +9,25 @@
         text-align: center;
     }
 </style>
-<div class="deaf2 "></div>
-<div class="row text-center">
+<div class="deaf2"></div>
 
-    <div class="col-sm-3 "></div>
+<div class="container-fluid removePadding text-center">
+    <div class="row">
+        <div class="col-sm-3 removePadding"></div>
+        <div class="col-sm-6 removePadding" >
 
-    <%--제목부분--%>
+            <%--<div class="form-group">--%>
+                <label class="control-label">   <h1 style="text-align: center;"> ${category} 게시판</h1> </label>
 
-    <div class="col-sm-6 borderLB removePadding" >
-        <h1 style="text-align: center;"> ${category} 게시판</h1>
-    </div>
-
-    <div class="col-sm-3 "></div>
-</div>
-
-<div class="row removePadding">
-    <div class="col-sm-3 "></div>
-
-    <div class="col-sm-6 removePadding" >
-        <%--검색부분--%>
-        <div >
-            <div class="row removePadding">
-                <div class="col-sm-10 removePadding pt6 ">
-                    <form class="navbar-form removePadding " role="search">
-                        <div class="form-group searchForm">
-                            <%--<label for="sel1">Select list :</label>--%>
-                            <select  class="form-control searchForm" name="searchType" id="sel1">
+                <div class="deaf2">
+                    <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
+                </div>
+                <div class="form-group">
+                    <div class="input-group ">
+                        <div class="input-group-prepend">
+                            <%--<div class="form-group ">--%>
+                            <label class="mr-1" for="sel1">Select list:</label>
+                            <select  class="custom-select" name="searchType" id="sel1">
                                 <option value="n"
                                         <c:out value="${cri.searchType == null?'selected':''}"/> >
                                     ---</option>
@@ -57,30 +50,31 @@
                                         <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/> >
                                     Title OR Content OR Writer</option>
                             </select>
+                            <%--</div>--%>
 
-                            <input type="text" class="form-control searchForm"  placeholder="Search" name="keyword" id="keywordInput"
-                                   value="${cri.keyword}">
-                            <button type="submit" class="btn btn-default searchForm" id="searchBtn">Search</button>
+                            <input type="text" class="form-control" placeholder="Search" name="keyword" id="keywordInput"
+                                   value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary " id="searchBtn">Search</button>
+                            </div>
+                                <div class="input-group-append " style="margin-left: 10rem !important;">
+                                <button class="btn btn-secondary " id="newBtn">new Board</button>
+                                </div>
                         </div>
-                    </form>
-                </div>
-                <div class="col-sm-2 removePadding pt6" >
-                    <button class="btn btn-default " id="newBtn">new Board</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-    </div>
-</div>
 
-<div class="row removePadding">
-    <div class="col-sm-3 removePadding"></div>
-    <div class="col-sm-6 pt4 borderR removePadding ">
-        <%--게시글 목록--%>
-        <div class="row removePadding">
-            <table class="table removePadding">
-                <thead class="theadDark removePadding">
+                    </div>
+
+                </div>
+
+            <%--</div>--%>
+
+            <%-- list 부분--%>
+
+
+            <%--게시글 목록--%>
+
+            <table class="table table-hover">
+                <thead>
                 <tr>
                     <th style="width:10px;">boardId</th>
                     <th >TITLE</th>
@@ -104,61 +98,56 @@
                 </c:forEach>
             </table>
             <%--게시글 pagination --%>
-            <div class="text-center">
-                <ul class = "pagination">
 
-                    <c:if test="${pageMaker.prev}">
-                        <li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
-                            &laquo;
-                        </a></li>
-                    </c:if>
+            <ul class = "pagination pagination-sm justify-content-center">
 
-                    <c:forEach begin="${pageMaker.startPage}"
-                               end = "${pageMaker.endPage}" var="idx">
-                        <li <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
-                            <a href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
-                        </li   >
-                    </c:forEach>
+                <c:if test="${pageMaker.prev}">
+                    <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&category=${category}">&laquo;</a></li>
+                </c:if>
 
-                    <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
-                        <li>
-                            <a href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
-                                &raquo;
-                            </a>
-                        </li>
-                    </c:if>
-                </ul>
-            </div>
+                <c:forEach begin="${pageMaker.startPage}"
+                           end = "${pageMaker.endPage}" var="idx">
+                    <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
+                        <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
+                    </li   >
+                </c:forEach>
+
+                <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
+                    <li class="page-item">
+                        <a class="page-link" href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
+                            &raquo;
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
         </div>
-        <div class="col-sm-3 pt4"></div>
-
     </div>
+</div>
+<script>
+    $(document).ready(
+        function () {
+            console.log("ggg");
+            $('#searchBtn').on(
+                "click",
+                function (event) {
+                    self.location = "list"
+                        +'${pageMaker.makeQuery(1)}'
+                        +"&searchType="
+                        +$("select option:selected").val()
+                        +"&keyword=" + encodeURIComponent($('#keywordInput').val())
+                        +"&category=" + '${category}';
+                }
+            );
 
-    <script>
-        $(document).ready(
-            function () {
-                console.log("ggg");
-                $('#searchBtn').on(
-                    "click",
-                    function (event) {
-                        self.location = "list"
-                            +'${pageMaker.makeQuery(1)}'
-                            +"&searchType="
-                            +$("select option:selected").val()
-                            +"&keyword=" + encodeURIComponent($('#keywordInput').val())
-                            +"&category=" + '${category}';
-                    }
-                );
+            $('#newBtn').on(
+                "click",
+                function (evt) {
+                    self.location = "register?category="+'${category}';
+                }
+            );
+        }
+    );
 
-                $('#newBtn').on(
-                    "click",
-                    function (evt) {
-                        self.location = "register?category="+'${category}';
-                    }
-                );
-            }
-        );
-
-    </script>
+</script>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
