@@ -64,7 +64,12 @@
                     <%--console--%>
                     <div class="row edit-console" id="edit-console">
                         <div class="build col">
-                            <div class="col"><p class="h4 text-white code-name">Console</p></div>
+                            <div class="col">
+                                <p class="h4 text-white code-name">Console</p>
+                                <a class="btn btn-outline-secondary btn-sm console-clear" href="javascript:;" id="console-clear">
+                                    clear
+                                </a>
+                            </div>
                             <div class="col edit-console-view" id="edit-console-view"></div>
                         </div>
                     </div>
@@ -139,6 +144,8 @@
             if(document.getElementById("visibility" + srcStatus) !== null){
                 document.getElementById("visibility" + srcStatus).checked = true;
             }
+
+            window.console = console;
 
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {

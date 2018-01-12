@@ -116,7 +116,6 @@ codeJavaScript.on("keyup", function (cm, event) {
             }
         }
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
-
     }
 });
 // codeUnitTest.on("keyup", function (cm, event) {
@@ -619,6 +618,7 @@ $(function(){
 
         if(e.keyCode === 13){
             consoleSerchLog.unshift(this.value);// 배열 앞에 추가
+            consoleCur = -1;
         }else if(e.keyCode === 38){
             if(consoleSerchLog.length - 1  !== consoleCur){
                 consoleCur++;
@@ -636,5 +636,11 @@ $(function(){
                 this.value = ""
             }
         }
+    });
+});
+
+$(function () {
+    $("#console-clear").click(function () {
+        editConsoleView.innerHTML = "";
     });
 });

@@ -373,7 +373,7 @@ function cdnCssJsValSet(){
         if($("#css-cdn" + i).length){
             if($("#css-cdn" + i).val()){
                 cdnCss.push($("#css-cdn" + i).val());
-                cssLnkSet += "<link rel='stylesheet' href='"+ $("#css-cdn" + i).val() + "'\/>"
+                cssLnkSet += "<link rel='stylesheet' href='" + $("#css-cdn" + i).val() + "'\/>";
                 changeSaveImg(2);
             }
         }
@@ -445,11 +445,36 @@ function updatePreview() {
         "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
 
-    consoleLogView(consoleLogStr(codeJavaScript.getValue()));
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
+
     out.close();
-
-
 }
+
+// var console=(function(oldCons){
+//     return {
+//         log: function(text){
+//             oldCons.log(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         info: function (text) {
+//             oldCons.info(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         warn: function (text) {
+//             oldCons.warn(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         error: function (text) {
+//             oldCons.error(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         }
+//     };
+// }(window.console));
+
 
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
@@ -567,16 +592,14 @@ var consoleView = function (str) {
 
     try {
         editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-
         consoleLogView(consoleLogStr(str));
-        // alert("document.getElementById(\"resultView\").contentWindow" + str);
         editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
                                     + document.getElementById("resultView").contentWindow.eval(str) + "</p>"
     } catch (err) {
         editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
     }
 
-    editConsoleView.scrollTop = editConsoleView.scrollHeight
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
 };
 function consoleLogView(temp){
     if (temp !== null) {
@@ -585,10 +608,10 @@ function consoleLogView(temp){
         }
     }
 }
-
+//
 function consoleLogStr(str) {
     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-    var temp = str.match(reg);
+    var temp = commandLineValue.match(reg);
 
     for (i in temp) {
         temp[i] = temp[i].replace("console.log(", "");
@@ -600,6 +623,8 @@ function consoleLogStr(str) {
     }
     return temp;
 }
+
+
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
