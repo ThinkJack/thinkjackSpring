@@ -14,7 +14,9 @@
         <div class="col-sm-2 removePadding"></div>
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
-                <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px"></div>
+                <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
+                    <h1 class="foo3 ">Thinkjack</h1>
+                </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-5">
@@ -22,19 +24,18 @@
                             <img src="/resources/images/titile.jpg" style="height: 300px; width: 300px;" >
                         </div></div>
                     <div class="col-sm-6">
-                        <h1 class="foo3 ">Thinkjack</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-sm-2 removePadding "> </div>
-    <div class="deaf" >
-        <a href="#" class="scroll-down" address="true"></a>
-    </div>
 </section>
+<div class="deaf" >
+    <a href="#" class="scroll-down" address="true"></a>
+</div>
 <div class="deaf" id="editor" style="background-color: black"></div>
-<section class="b container-fluid">
+<section class="b container-fluid removePadding">
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
         <div class="col-sm-8 removePadding" >
@@ -55,11 +56,16 @@
     </div>
 </section>
 <div class="deaf" ></div>
-<section class="c container-fluid">
+<section class="c container-fluid removePadding">
     <div class="col-sm-2 removePadding"></div>
     <div class="col-sm-8 removePadding ">
         <h1 class="animate2">
-            자신의 생각을 코드로 표현!
+            <div id="lampadario">
+                <%--@declare id="switch"--%><input class="input" id="a" type="radio" name="switch" value="on" />
+                <input class="input" type="radio" id="b" name="switch" value="off" checked="checked"/>
+                <label  for="switch"></label>
+            </div>
+
         </h1>
         <div class=" removePadding borderRB " style="height: 60.5%;margin-left: 85%">
         </div>
@@ -69,62 +75,39 @@
     <div class="col-sm-2 removePadding">
 
 
-        <div id="lampadario">
-            <%--@declare id="switch"--%><input class="input" id="a" type="radio" name="switch" value="on" />
-            <input class="input" type="radio" id="b" name="switch" value="off" checked="checked"/>
-            <label  for="switch"></label>
-        </div>
 
     </div>
 </section>
 <div class="deaf" style="background-color:black">
 </div>
-<section class="d container-fluid" id="board">
-    <div class="col-sm-6 removePadding " style="height: 20%;background-color: #8B2252">
-        <div class="rotate" style="width:100%; height: 100%;margin-left: auto">
-            <ul>
-                <li>
-                    <a >
-                        <div class="front img-circle ">
-                            <%--<i class="fa fa-android fa-4x"></i>--%>
-                            <img class=" widthFull"  src="/resources/images/like24-2.png" >
-                        </div>
-                        <div class="back img-circle">
-                            <img  class=" widthFull" src="/resources/images/like24-1.png" >
-                        </div>
-                    </a>
-                </li>
-            </ul>
+<section class="d container-fluid removePadding" id="board" >
+    <div class="row removePadding">
+        <div class="col-sm-6 removePadding " style="background-color: #8B2252;margin: 0">
+            <div class="rotate" >
+                <ul>
+                    <li>
+                        <a >
+                            <div class="front img-circle ">
+                                <%--<i class="fa fa-android fa-4x"></i>--%>
+                                <img class=" widthFull"  src="/resources/images/like24-2.png" >
+                            </div>
+                            <div class="back img-circle">
+                                <img  class=" widthFull" src="/resources/images/like24-1.png" >
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 removePadding " style=" height:50px;background-color:#00aaaa;"></div>
+            <div class="col-sm-12 removePadding " style=" height:50px;background-color:#6a0d6a;">
+                <img src="/resources/images/main/f.png" style="height:auto; width:40%;position: absolute;left: 30%" >
+            </div>
+        </div>
+        <div class="col-sm-12 removePadding" style="height:50px;background-color: #2A00FF">
+
         </div>
 
     </div>
-    <div class="col-sm-6 removePadding " style="height: 20%"></div>
-    <div class="col-sm-6 removePadding " style="height: 48%">
-        <img src="/resources/images/main/f.png" style="height:auto; width:40%;position: absolute;left: 30%" > </div>
-    <div class="col-sm-4 removePadding" >
-
-        <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
-        </div>
-        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
-
-        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
-        <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
-        </div>
-
-        <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
-        </div>
-        <div class="col-sm-6 removePadding " style="height: 12%;"></div>
-
-        <div class="col-sm-6 removePadding  " style="height: 12%;"></div>
-        <div class="col-sm-6 removePadding" style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
-        </div>
-
-    </div>
-
 </section>
 
 <div class="deaf" style="background-color:black"></div>
