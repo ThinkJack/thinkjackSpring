@@ -399,12 +399,23 @@ function makeMarker() {
 
 //------------------------------------------------------미리보기 기능
 function updatePreview() {
+
+    $("#resultView").remove();
+
+    var imsi = document.createElement("iframe");
+    imsi.setAttribute("class","col");
+    imsi.setAttribute("id","resultView");
+    imsi.setAttribute("scrolling","yes");
+    $("#iframe-body").html(imsi);
+
     var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
         return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
     });
 
     var previewFrame = document.getElementById('resultView');
     var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+
+    //초기화중
 
     emojify.run(out);
 
@@ -426,12 +437,22 @@ function updatePreview() {
     // hashto = setTimeout(updateHash, 1000);
 
 
-    // -- mode 별 out(미리보기) 선택
-    out.open();
+    var cacheWhitelist = ['v2'];
+
+    caches.keys().then(function (keyList) {
+        return Promise.all(keyList.map(function (key) {
+            if (cacheWhitelist.indexOf(key) === -1) {
+                console.log(key);
+                return caches.delete(key);
+            }
+        }));
+    });
+
+
     var rlt = codeHtml.getOption("mode") === "gfm" ?
         md.render(val) : codeHtml.getValue(); //markdown : html
 
-
+    out.open();
     out.write(
 
         cssLnkSet
@@ -442,13 +463,25 @@ function updatePreview() {
         +
         jsLnkSet
         +
-        "<script>" + codeJavaScript.getValue() + "<\/script>"
+        "<script>" + consoleString + "</script>"
+        +
+        "<script>"
+        // +
+        // consoleString
+        + codeJavaScript.getValue() + "<\/script>"
     );
 
-    editConsoleView.scrollTop = editConsoleView.scrollHeight;
-
     out.close();
+
+    consoleView("");
+    // editConsoleView.scrollTop = editConsoleView.scrollHeight;
 }
+
+window.onload = function() {
+    var previewFrame = document.getElementById('resultView');
+    var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    out.location.reload();
+};
 
 // var console=(function(oldCons){
 //     return {
@@ -526,7 +559,7 @@ function escapeHtml(text) {
 //코드 저장 로직
 function codeSave() {
     saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("https:/", "").replace("http:/", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
+    srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
 
     if (!saveStatus) {
         jQuery.ajaxSettings.traditional = true;
@@ -585,46 +618,121 @@ function srcDelete() {
     });
 }
 
-
+var consoleCategory = [];
 var consoleView = function (str) {
     //console.log() 입력시 문자열 작업(정규식)
+    var previewFrame = document.getElementById('resultView');
 
+    var temp = consoleLogStr(str);
 
-    try {
-        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-        consoleLogView(consoleLogStr(str));
-        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
-                                    + document.getElementById("resultView").contentWindow.eval(str) + "</p>"
-    } catch (err) {
-        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+    if(str !== ""){
+        try {
+            editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
+
+            consoleLogView(temp, consoleCategory);
+            editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
+                                        + previewFrame.contentWindow.eval(str) + "</p>";
+        } catch (err) {
+            editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+        }
+
+        editConsoleView.scrollTop = editConsoleView.scrollHeight;
     }
-
-    editConsoleView.scrollTop = editConsoleView.scrollHeight;
 };
-function consoleLogView(temp){
+function consoleLogView(temp, consoleCategory){
+
+
     if (temp !== null) {
+
         for (i in temp) {
-            editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + temp[i] + "\"</p>"
+            var color = "";
+            if(consoleCategory[i] ==="log"){
+                color = "darkseagreen";
+            }else if(consoleCategory[i] ==="info"){
+                color = "dodgerblue";
+            }else if(consoleCategory[i] ==="warn"){
+                color = "yellow";
+            }else if(consoleCategory[i] ==="error"){
+                color = "red";
+            }
+            editConsoleView.innerHTML += "<p class='console-log' style='color:" + color + ";'>\"" + temp[i] + "\"</p>"
         }
     }
 }
+
 //
 function consoleLogStr(str) {
-    var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-    var temp = commandLineValue.match(reg);
-
+    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
+    var temp = str.match(reg);
+    var category = ["log", "info", "warn", "error"];
     for (i in temp) {
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("'", "");
-        temp[i] = temp[i].replace("\"", "");
-        temp[i] = temp[i].replace("')", "");
-        temp[i] = temp[i].replace("\")", "");
+
+        for(j in category){
+            if(temp[i].indexOf("console." + category[j] + "(") !== -1){
+                consoleCategory[i] = category[j];
+                temp[i] = temp[i].replace("console." + category[j] + "(", "");
+                temp[i] = temp[i].replace("'", "");
+                temp[i] = temp[i].replace("\"", "");
+                temp[i] = temp[i].replace("')", "");
+                temp[i] = temp[i].replace("\")", "");
+                break;
+            }
+        }
     }
     return temp;
 }
 
 
+var consoleString = "var console=(function(oldCons){\n" +
+    "        return {\n" +
+    "            log: function(text){\n" +
+    "                oldCons.log(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            info: function (text) {\n" +
+    "                oldCons.info(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:dodgerblue;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            warn: function (text) {\n" +
+    "                oldCons.warn(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:yellow;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            error: function (text) {\n" +
+    "                oldCons.error(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:red;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            }\n" +
+    "        };\n" +
+    "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
+
+$(function () {
+    var console=(function(oldCons){
+        return {
+            log: function(text){
+                oldCons.log(text);
+                oldCons.log(document.getElementById("edit-console-view").innerHTML);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            info: function (text) {
+                oldCons.info(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            warn: function (text) {
+                oldCons.warn(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            error: function (text) {
+                oldCons.error(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            }
+        };
+    }(window.console));
+
+    window.console = console;
+});
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
