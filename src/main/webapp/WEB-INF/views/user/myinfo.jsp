@@ -85,7 +85,7 @@
     <p style="text-align: left">사용자 프로필</p>
     <div class="big-area">
         <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;"  src="" alt="Profile image example"/>
-        <div class="small-unit"><h4>"${login.userName}"<p style="color:black;">님 반가워요</p></h4> <br><p style="color:black;">${login.userEmail}</p><br><button class="btn btn-default" onclick="location.href='/user/modifyUser'">정보변경</button><br><button class="btn btn-default" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>
+        <div class="small-unit"><h4>"${login.userName}"<p style="color:black;">님 반가워요</p></h4> <br><p style="color:black;">${login.userEmail}</p><br><button class="btn btn-outline-secondary" onclick="location.href='/user/modifyUser'">정보변경</button><br><button class="btn btn-outline-secondary" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button></div>
         <div class="small-unit"></div>
         <div class="small-unit"></div>
     </div>
@@ -215,16 +215,16 @@
 <script src="/resources/dist/js/upload.js"></script>
 <script>
     $(document).ready(function() {
-        var imgtest;
+        // var imgtest;
         var fullName="${login.userProfile}";
-        if(fullName!=="") {
-            imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = imgtest;
-        }else{
-            str = "/resources/images/123.gif";
-        }
-        $("#profile").attr("src",str);
+        // if(fullName!=="") {
+        //     imgtest = getFileInfo(fullName);
+        //     console.log(imgtest);
+        //     str = imgtest;
+        // }else{
+        //     str = "/resources/images/123.gif";
+        // }
+        $("#profile").attr("src",getFileInfo(fullName));
     });
 </script>
 </body>
