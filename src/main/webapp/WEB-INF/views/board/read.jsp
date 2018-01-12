@@ -109,15 +109,18 @@ b
 
         <div class="row m-3">
             <%--입력된 댓글 목록 나타나는 부분--%>
+
             <%--<ul class="replies"></ul>--%>
-            <ul class="timeline">
+            <ul class="timeline col-sm-12" >
+
                 <%--버튼을 클릭하면 댓글목록이 나온다--%>
                 <li class = "time-label repliesDiv"  >
+
                     <%--<button type="button" class=""> Replies List </button>--%>
                 </li>
                 <%--페이지네이션 부분--%>
                 <div class ='text-center'>
-                    <ul id="pagination" class="pagination"></ul>
+                    <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
                 </div>
             </ul>
         </div>
