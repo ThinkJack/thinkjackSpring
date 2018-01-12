@@ -46,7 +46,7 @@
         var imgtest;
         var fullName = "${login.userProfile}";
         if (fullName !== "") {
-            imgtest = getFileInfo(fullName);
+            imgtest = getFileInfo("");
             console.log(imgtest);
             str = imgtest;
         } else {

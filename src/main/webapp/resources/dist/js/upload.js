@@ -7,27 +7,34 @@ function checkImageType(fileName) {
 
 function getFileInfo(fullName) {
 
+    imgsrc = "http://" + document.location.host;
+
     var fileName, imgsrc, getLink;
-
+    console.log("getfileinfo 실행");
     var fileLink;
+    if (fullName ===""||fullName===null||fullName===undefined) {
+        console.log(fullName+"getfullName");
+        return "/resources/images/123.gif";
+    }else {
+        if (checkImageType(fullName)) {
+            imgsrc = "http://" + document.location.host + "/displayFile?fileName=" + fullName;
+            fileLink = fullName.substr(14);
+            console.log("checkImage");
+            var front = fullName.substr(0, 12); ///2015/00/00/
+            var end = fullName.substr(14);
 
-    if(checkImageType(fullName)){
-        imgsrc = "http://" + document.location.host + "/displayFile?fileName="+fullName;
-        fileLink = fullName.substr(14);
+            getLink = "/displayFile?fileName=" + front + end;
+        } else {
+            console.log("checkImage");
+            imgsrc = "/resources/images/123.gif";
+            fileLink = fullName.substr(12);
+            getLink = "/displayFile?fileName=" + fullName;
+        }
+        fileName = fullName.substr(fileLink.indexOf("_") + 1);
 
-        var front = fullName.substr(0,12); ///2015/00/00/
-        var end = fullName.substr(14);
-
-        getLink = "/displayFile?fileName="+front+end;
-    }else{
-        imgsrc="/resource/dist/img/file.png";
-        fileLink=fullName.substr(12);
-        getLink="/displayFile?fileName="+fullName;
+        //return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName}
+        return imgsrc;
     }
-    fileName= fullName.substr(fileLink.indexOf("_")+1);
-
-    //return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName}
-    return imgsrc;
 }
 
 function filePathChange(path, thumbnail) {
@@ -51,7 +58,7 @@ function filePathChange(path, thumbnail) {
         // console.log(headerimg);
         hstr = headerimg;
     }else{
-        hstr = "/resources/images/like1.png";
+        hstr = "/resource/dist/img/123.gif";
     }
     return hstr;
 }
