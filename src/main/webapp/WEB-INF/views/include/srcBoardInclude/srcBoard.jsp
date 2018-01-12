@@ -107,11 +107,11 @@
                 </iframe>
             </div>
 
-            <div class="card-body">
+            <div class="caption">
                 <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
                 <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
             </div>
-            <div class="card-body">
+            <div class="caption">
 
 
                 <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"

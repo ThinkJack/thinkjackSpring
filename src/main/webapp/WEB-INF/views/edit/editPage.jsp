@@ -86,7 +86,9 @@
     <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 
     <%--script단--%>
+
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
+
 
     <script>
 

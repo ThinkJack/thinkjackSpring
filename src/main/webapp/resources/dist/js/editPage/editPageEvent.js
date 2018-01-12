@@ -14,7 +14,7 @@ codeHtml.on("change", function () {
         // clearTimeout(delay);
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay);
             delay = setTimeout(codeSave, 3000);
@@ -35,7 +35,7 @@ codeCss.on("change", function () {
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
             delay = setTimeout(codeSave, 3000);
@@ -56,7 +56,7 @@ codeJavaScript.on("change", function () {
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
             delay = setTimeout(codeSave, 3000);
@@ -203,7 +203,7 @@ $(function () {
         else if (selectedText === "Haml") {
 
 
-        } else if(selectedText === "MarkDown"){
+        } else if (selectedText === "MarkDown") {
             // alert(this.value);
             // alert(this.text);
             // document.write("<script src=" +
@@ -215,17 +215,17 @@ $(function () {
             codeHtml.setOption("matchBrackets", 'true');
             codeHtml.setOption("lineWrapping", 'true');
             codeHtml.setOption("theme", 'base16-light');
-            codeHtml.setOption("extraKeys", {"Enter":
-                    "newlineAndIndentContinueMarkdownList"});
+            codeHtml.setOption("extraKeys", {
+                "Enter":
+                    "newlineAndIndentContinueMarkdownList"
+            });
             // alert(codeHtml.getOption("mode"));
 
 
+        } else if (selectedText === "Slim") {
 
 
-        } else if(selectedText === "Slim"){
-
-
-        } else if(selectedText === "Pug"){
+        } else if (selectedText === "Pug") {
 
 
         }
@@ -233,8 +233,6 @@ $(function () {
     });
 
 });
-
-
 
 
 //Setting Behavior부분 함수
@@ -590,7 +588,7 @@ $(function () {
                 replyWriter: srcId
             }),
 
-            error : function(){
+            error: function () {
                 alert('통신실패!!');
             },
 
@@ -606,4 +604,37 @@ $(function () {
     });
 });
 
+$(function () {
 
+    $("#reply-scroll").scroll(function () {
+        console.log($("#reply-scroll").height());
+        console.log(this.scroll);
+        console.log(this.scrollTop);
+    });
+});
+
+
+$(function(){
+    $("#command-line").keydown(function (e) {
+
+        if(e.keyCode === 13){
+            consoleSerchLog.unshift(this.value);// 배열 앞에 추가
+        }else if(e.keyCode === 38){
+            if(consoleSerchLog.length - 1  !== consoleCur){
+                consoleCur++;
+                this.value = consoleSerchLog[consoleCur];
+            }
+
+        }else if(e.keyCode === 40){
+            if(consoleCur > 0){
+                consoleCur--;
+                this.value = consoleSerchLog[consoleCur];
+            }else{
+                if(consoleCur === 0){
+                    consoleCur--;
+                }
+                this.value = ""
+            }
+        }
+    });
+});
