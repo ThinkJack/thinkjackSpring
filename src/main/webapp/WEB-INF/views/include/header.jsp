@@ -49,24 +49,7 @@
             alert("${msg}");
         }
         $(document).ready(function() {
-            var headerimg;
-            var fullName="${login.userProfile}";
-            var test =fullName.lastIndexOf("/");
-            fileName= fullName.substring(test+1,fullName.length);
-            path= fullName.substring(0,test+1);
-            // console.log(path);
-            // console.log(fileName);
-            // console.log(test);
-            profileheader =path+"s_"+fileName;
-            //console.log(fullName);
-            if(fullName!=="") {
-                headerimg = getFileInfo(profileheader);
-                // console.log(headerimg);
-                hstr = headerimg;
-            }else{
-                hstr = "/resources/images/123.gif";
-            }
-            $("#profileHeader").attr("src",hstr);
+            $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
         });
     </script>
     <style>
