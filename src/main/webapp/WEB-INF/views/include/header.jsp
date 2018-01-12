@@ -119,7 +119,6 @@
                         <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=notice'>Notice</a>
->>>>>>>>> Temporary merge branch 2
                     </div>
                 </li>
             </ul>
