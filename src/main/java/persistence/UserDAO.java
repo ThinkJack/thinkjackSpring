@@ -1,9 +1,6 @@
 package persistence;
 
-import domain.BoardVO;
-import domain.SearchCriteria;
-import domain.UserCriteria;
-import domain.UserVO;
+import domain.*;
 import dto.LoginDTO;
 
 import java.util.List;
@@ -43,6 +40,12 @@ public interface UserDAO {
 
     public int boardSearchCount(UserCriteria cri)throws Exception;
 
+	public List<SrcVO> selectSrcList(UserCriteria cri);
+
+	public int srcListSearchCount(UserCriteria cri) throws Exception;
+
 	String getUserProfile(int userId) throws Exception;
+
+	public UserVO getUserPw(String userEmail) throws Exception;
 
 }

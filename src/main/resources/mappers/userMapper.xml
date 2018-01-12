@@ -24,18 +24,21 @@
         FROM tbl_user
         WHERE user_name = #{userName}
     </select>
-
+    <select id="getUserPassword" resultType="UserVO">
+    select user_password userPassword
+    FROM  tbl_user
+    WHERE user_email = #{userEmail}
+    </select>
     <select id="login" resultType="UserVO">
         SELECT
             user_email   userEmail,
             user_id      userId,
             user_name    userName,
-            user_profile userProfile
+            user_profile userProfile,
+            user_state userState
         FROM tbl_user
         WHERE user_email = #{userEmail}
               AND user_password = #{userPassword}
-              AND user_state = 1
-
     </select>
 
     <select id="readUser" resultType="UserVO">
@@ -121,10 +124,9 @@
         <if test="searchType != null">
             <if test="searchType == 't'.toString()">
                 and board_title like CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="searchType == 'c'.toString()">
-                and board_content like CONCAT('%', #{keyword}, '%')
-            </if>
+            </if>            <if test="searchType == 'c'.toString()">
+            and board_content like CONCAT('%', #{keyword}, '%')
+        </if>
             <if test="searchType == 'tc'.toString()">
                 and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
             </if>
@@ -132,6 +134,7 @@
     </sql>
 
     <select id="boardSearch" resultType="BoardVO">
+
         <![CDATA[
   select
             board_id                                                             boardId,
@@ -169,9 +172,44 @@
     </select>
 
 
-    <select id="userSrc" resultType="SrcVO">
+    <select id="srcSearch" resultType="SrcVO">
+        <![CDATA[
+        SELECT
+            src.src_id        srcId,
+            src.src_title     srcTitle,
+            src.src_writer    srcWriter,
+            src.src_likecnt   srcLikecnt,
+            src.src_viewcnt   srcViewcnt,
+            src.src_path      srcPath,
+            user.user_name    srcWriterName,
+            user.user_profile srcWriterImgPath
+        FROM tbl_src src, tbl_user user
+        WHERE NOT src.src_status = 2 AND src.src_writer = user.user_id AND  src.src_writer = #{userId}
+        ]]>
+        <include refid="SrcSearchOption"></include>
+        <![CDATA[
+        ORDER BY src.src_likecnt DESC, src.src_id ASC
+        LIMIT #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+    <select id="srcSearchCount" resultType="int">
+        <![CDATA[
+        SELECT count(*)
+        FROM tbl_src src, tbl_user user
+        WHERE NOT src.src_status = 2 AND src.src_writer = user.user_id AND src.src_writer = #{userId}
+        ]]>
+        <include refid="SrcSearchOption"></include>
 
     </select>
+
+    <sql id="SrcSearchOption">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and src_title like CONCAT('%', #{keyword}, '%')
+            </if>
+        </if>
+    </sql>
 
 
     <select id="getUserProfile" resultType="String">

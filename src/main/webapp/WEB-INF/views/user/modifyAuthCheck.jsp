@@ -5,26 +5,32 @@
 
 <html lang="en">
 
-    <link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/assets/css/font-awesome.css" rel="stylesheet">
-    <link href="/resources/assets/css/docs.css" rel="stylesheet" >
-    <link href="/resources/bootstrap-social.css" rel="stylesheet" >
-    <script>
-        var socialId=Boolean(${socialID});
-        if(socialId){
-            self.location = '/user/modifyUser';
-        }
+<link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
+<link href="/resources/assets/css/font-awesome.css" rel="stylesheet">
+<link href="/resources/assets/css/docs.css" rel="stylesheet" >
+<link href="/resources/bootstrap-social.css" rel="stylesheet" >
+<script>
+    var socialId=Boolean(${socialID});
+    if(socialId){
+        self.location = '/user/modifyUser';
+    }
 
-    </script>
+</script>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-    <div class="deaf"></div>
-<div class="container text-center">
+<link href="/resources/dist/css/login.css" rel="stylesheet">
+<div class="wrapper fadeInDown text-center">
 
-    <div class="row">
-        <div class="col-sm-4"></div>
+    <div class="card border-secondary mb-3" style="max-width: 20rem;" id="formContent">
 
-        <div class="col-sm-4">
+        <div class="card-header" style="background-color: black">
+            <!-- Icon -->
+            <%--<div class="fadeIn first">--%>
+            <%--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />--%>
+            <%--</div>--%>
+            <h1 style="color: white">Log in</h1>
 
+        </div>
+        <div class="card-body text-secondary" id="formFooter">
 
             <form name="login" action="/user/modifyAuthCheck" method="post">
 
@@ -47,12 +53,9 @@
                     <%--</a>--%>
 
                 </div>
-
             </form>
         </div>
     </div>
-
 </div>
-
-</body>
+    </body>
 </html>

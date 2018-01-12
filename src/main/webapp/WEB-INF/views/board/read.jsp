@@ -3,15 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
-<script src="/resources/upload.js"></script>
-
 <link href="/resources/dist/css/board.css" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<%--이모티콘--%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+b
 <%--하트 스타일부분--%>
-
 <style>
     #panel, #flip {
         padding: 5px;
@@ -39,12 +34,16 @@
         width: 25px;
         height: 25px;
     }
+
+    .card-header.text-white{
+        background-color:black;
+    }
 </style>
 
 <div class="deaf2 container-fluid"></div>
-<div class="row  removePadding " style="background-color:#000 ">
+<div class="row  removePadding "  >
     <div class="col-sm-3"></div>
-    <div class="col-sm-6 borderLB  widthFull5"  style="background-color:#fff " >
+    <div class="col-sm-6 cardtext-white list-group "   >
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -52,7 +51,7 @@
             <input type='hidden' name='searchType' value="${cri.searchType}">
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
-        <div class="box-body">
+        <div class="box-body m-3">
             <div style="text-align: right;">
                 <a class="btn btn-outline-dark heart">
                     <img id="heart" src="">
@@ -65,73 +64,69 @@
             </div>
             <div class="form-group">
                 <label>Content</label>
-                <textarea type="text" name='content' class="form-control inputC" rows="20"
+                <textarea type="text" name='content' class="form-control inputC" rows="15"
                           readonly="readonly">${boardVO.boardContent}</textarea>
             </div>
             <div class="form-group">
                 <label>Writer</label>
-                <img id="profileImg">
-                <script>
-
-                    $(document).ready(function () {
-                        $("#profileImg").attr("src", filePathChange("${boardVO.boardWriterProfile}", true));
-                    })
-
-                </script>
                 <input type="text" name='writer' class="form-control inputC" value="${boardVO.boardWriter}"
                        readonly="readonly">
             </div>
         </div>
-
-        <div class="box-footer">
+        <div class="box-footer m-3">
             <c:if test="${login.userName == boardVO.boardWriter}">
-                <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-                <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+                <button type="submit" class="btn btn-warning modifyBtn">수정</button>
+                <button type="submit" class="btn btn-danger removeBtn">삭제</button>
             </c:if>
-            <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
+            <button type="submit" class="btn btn-primary goListBtn pull-right">GO LIST</button>
         </div>
     </div>
     <div class="col-sm-3 " ></div>
 </div>
-<div class="row removePadding " >
+<div class="row removePadding "  >
     <div class="col-sm-3"></div>
     <div class="col-sm-6 removePadding " >
         <%--댓글 등록 부분 --%>
-        <div class="row removePadding" style="background-color:#fff">
-            <div class="col-sm-12  borderRTW  removePadding " >
-                <div class="deaf2"></div>
-                <div class="commentReply borderWidth" >
-                    <%--댓글 등록하는 아이디(--%>
+        <div class="card border-primary ">
+            <h2 class="bd m-2"> Comment</h2>
 
+            <div class="row m-3">
+                <div class="col-sm-10 ">
+                    <%--댓글 등록하는 아이디(--%>
                     <input type="text" name='writer' class="form-control register" value="${login.userName}"  readonly="readonly">
                     <%--댓글 입력 부분--%>
                     <div class="form-group">
-                        <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요</textarea>
-                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                        <button type="button"  class="btn btn-primary addBtn" >댓글등록 </button>
+                        <textarea class="form-control replyTextReply" rows="3" placeholder="댓글 입력하세요"></textarea>
                     </div>
+                </div>
+                <div class="col-sm-2  removePadding " >
+                    <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                    <button type="button"  class="btn btn-primary addBtn" style="width:100%;height:160px;" >등록 </button>
                 </div>
             </div>
         </div>
-        <%--입력된 댓글 목록 나타나는 부분--%>
-        <ul class="replies"></ul>
-        <ul class="timeline">
-            <%--버튼을 클릭하면 댓글목록이 나온다--%>
-            <li class = "time-label repliesDiv"  >
-                <%--<button type="button" class=""> Replies List </button>--%>
-                <h2> Replies List</h2>
-            </li>
-            <%--페이지네이션 부분--%>
-            <div class ='text-center'>
-                <ul id="pagination" class="pagination"></ul>
-            </div>
-        </ul>
+
+
+        <div class="row m-3">
+            <%--입력된 댓글 목록 나타나는 부분--%>
+
+            <%--<ul class="replies"></ul>--%>
+            <ul class="timeline col-sm-12" >
+
+                <%--버튼을 클릭하면 댓글목록이 나온다--%>
+                <li class = "time-label repliesDiv"  >
+
+                    <%--<button type="button" class=""> Replies List </button>--%>
+                </li>
+                <%--페이지네이션 부분--%>
+                <div class ='text-center'>
+                    <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
+                </div>
+            </ul>
+        </div>
+
     </div>
-
-
-    <div class="col-sm-3 widthFull4"  ></div>
-
-
+    <div class="col-sm-3 widthFull4" ></div>
 </div>
 <%--댓글 반복문 부분--%>
 <script>
@@ -150,7 +145,8 @@
 
     {{#each .}}
     <li class ="replyLi" data-replyId={{replyId}}>
-        <div class="timeline-item">
+
+        <div class="timeline-item card border-light mb-3">
             <%--댓글이 삭제되었는지 확인--%>
             {{#if replyVo.replyState}}
             <%-- 조건문으로 parent값 있는것을 구분한다--%>
@@ -168,7 +164,7 @@
                     <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
 
-                <div class="col-sm-8 well">
+                <div class="col-sm-8 list-group">
                     <strong class="title ">
                         <span class="badge">대댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
@@ -181,10 +177,11 @@
                         <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
                     </strong>
 
-                    <div class="comment">
+                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
                         <%--입력된 댓글 text부분--%>
-                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
-                        <spna class="textSpan">{{replyVo.replyText}}</spna>
+                        <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
+                            <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></textarea>
+                        <spna class="textSpan " >{{replyVo.replyText}}</spna>
                     </div>
                 </div>
 
@@ -213,7 +210,7 @@
 
                     {{#ifCond loginUser replyVo.replyWriter}}
 
-                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
+                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정</button>
                     <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
                     {{/ifCond}}
                     <%--{{/if}}--%>
@@ -221,12 +218,12 @@
             </div>
             {{else}}
             <%--댓글 부분--%>
-            <div class="row removePadding registerReply ">
+            <div class="row removePadding registerReply card-header  text-white ">
 
                 <div class="col-sm-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <%--<img src="" class="Poto ">--%>
+                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
                 </div>
                 <div class="col-sm-9">
                     <strong class="title">
@@ -238,10 +235,11 @@
                         <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
                     </strong>
 
-                    <div class="comment">
+                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
                         <%--입력된 댓글 text부분--%>
-                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
-                        <spna class="textSpan">{{replyVo.replyText}}</spna>
+                        <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
+                            <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></textarea>
+                        <spna class="textSpan ">{{replyVo.replyText}}</spna>
                     </div>
 
                 </div>
@@ -270,7 +268,7 @@
 
                     {{#ifCond loginUser replyVo.replyWriter}}
 
-                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
+                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정</button>
                     <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
 
                     {{/ifCond}}
@@ -302,18 +300,17 @@
             {{/if}}
 
             {{else}}
-            <div class="row removePadding ">
-
-                <strong class="title">
-
-                    <span class="badge">댓글</span>
-                    <%--replyId와 replyWriter 나타나는 부분--%>
-                    <span class="replyWriter">{{replyVo.replyWriter}}</span>
-                </strong>
-                <div class="comment"  >
-                    <span >삭제된 댓글입니다</span>
+            <div class="card border-light mb-3 ">
+                <div class="card-header">
+                    <div class="title ">
+                        <span class="badge">댓글</span>
+                        <%--replyId와 replyWriter 나타나는 부분--%>
+                        <span class="replyWriter">{{replyVo.replyWriter}}</span>
+                    </div>
+                    <div class="comment"  >
+                        <span >삭제된 댓글입니다</span>
+                    </div>
                 </div>
-
             </div>
 
             {{/if}}
@@ -447,7 +444,7 @@
         if (replyTextObj.prop('readonly') == true) {
 
             replyTextObj.prop('readonly', false);
-            $(this).html('<span></span> 수정등록');
+            $(this).html('<span></span> 등록');
 
             textSpan .css('display', 'none');
             replyTextObj.css('display', 'block');
@@ -456,7 +453,7 @@
         else if(replyTextObj.prop('readonly')== false) {
 
             replyTextObj.prop('readonly', true);
-            $(this).html('<span></span> 수정하기');
+            $(this).html('<span></span> 수정');
 
             replyTextObj.css('display', 'none');
             textSpan.css('display', 'block');

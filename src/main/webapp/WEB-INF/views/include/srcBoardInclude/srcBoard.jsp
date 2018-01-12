@@ -10,17 +10,8 @@
 
 
 <style>
-    /*.card {*/
-        /*margin-bottom: 20px;*/
-    /*}*/
-    .flex-container {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .flex-item {
-        flex-grow: 1;
-        margin: 20px;
+    .card {
+        margin-bottom: 20px;
     }
 
     .fl-right {
@@ -38,6 +29,8 @@
 
     .iframe_wrap {
         height: 25%;
+        padding: 10px;
+        border-bottom: 25px solid #333;
     }
 
     .iframe_wrap iframe {
@@ -87,16 +80,20 @@
         <select name="searchType">
             <option value="n"
                     <c:out value="${cri.searchType == null?'selected':''}"/> >
-                ---</option>
+                ---
+            </option>
             <option value="t"
                     <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
-                Title</option>
+                Title
+            </option>
             <option value="w"
                     <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
-                Writer</option>
-            <option value="tc"
+                Writer
+            </option>
+            <option value="tw"
                     <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                Title OR Content</option>
+                Title OR Content
+            </option>
         </select>
     </div>
     <div class="col-10">
@@ -106,21 +103,21 @@
 </div>
 <c:forEach var="srcVo" items="${list}" varStatus="status">
     <c:if test="${status.count % 3 eq 1}">
-        <div class="row flex-container">
+        <div class="row">
     </c:if>
-    <div class="col flex-item">
-        <div class="thumbnail">
+    <div class="col">
+        <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                 <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                 </iframe>
             </div>
 
-            <div class="caption">
+            <div class="card-body">
                 <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
                 <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
             </div>
-            <div class="caption">
+            <div class="card-body">
 
 
                 <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"
@@ -171,7 +168,7 @@
                                     if (success.result === 0) {
                                         //좋아요 추가시
                                         likeImgChange("#${srcVo.srcId}like", 2);
-                                      } else {
+                                    } else {
                                         //좋아요 취소시
                                         likeImgChange("#${srcVo.srcId}like", 1);
                                     }
@@ -205,15 +202,15 @@
             var tempCdnJs = "";
 
             <c:if test="${srcVo.cdnCss ne null}">
-                <c:forEach items="${srcVo.cdnCss}" var="item">
-                    tempCdnCss += "<link rel='stylesheet' href='" + "${item}" +"'\/>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnCss}" var="item">
+            tempCdnCss += "<link rel='stylesheet' href='" + "${item}" + "'\/>";
+            </c:forEach>
             </c:if>
 
             <c:if test="${srcVo.cdnJs ne null}">
-                <c:forEach items="${srcVo.cdnJs}" var="item">
-                    tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
-                </c:forEach>
+            <c:forEach items="${srcVo.cdnJs}" var="item">
+            tempCdnJs += "<script src='" + "${item}" + "'><\/script>";
+            </c:forEach>
             </c:if>
 
             preview.write(
@@ -248,12 +245,13 @@
 <c:if test="${status.count % 3 eq 0}">
     </div>
 </c:if>
+
 <div class="text-center">
     <ul class="pagination justify-content-center">
         <c:if test="${pageMaker.prev}">
             <li class="page-item">
-
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}" aria-label="Previous">
+                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                   aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
@@ -278,7 +276,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#search-btn').click(function (e) {
 
             self.location = "srcList"

@@ -15,8 +15,14 @@
             self.location = '${dest}' + '/' + srcId;
         }
     } else {
+        var msg=Boolean("${msg}");
+        if(msg){
+            alert("${msg}");
+        }
         self.location = '${dest}';
     }
+
+
 </script>
 
 </body>

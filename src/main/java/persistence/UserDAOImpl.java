@@ -2,13 +2,10 @@ package persistence;
 
 import javax.inject.Inject;
 
-import domain.BoardVO;
-import domain.SearchCriteria;
-import domain.UserCriteria;
+import domain.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import domain.UserVO;
 import dto.LoginDTO;
 
 import java.util.List;
@@ -114,8 +111,22 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
+	public List<SrcVO> selectSrcList(UserCriteria cri) {
+		return session.selectList(namespace+".srcSearch",cri);
+	}
+
+	@Override
+	public int srcListSearchCount(UserCriteria cri) throws Exception {
+		return session.selectOne(namespace+ ".srcSearchCount", cri);
+	}
+
+	@Override
 	public String getUserProfile(int userId) throws Exception {
 		return session.selectOne(namespace + ".getUserProfile", userId);
 	}
 
+	@Override
+	public UserVO getUserPw(String userEmail) throws Exception {
+		return session.selectOne(namespace + ".getUserPassword",userEmail);
+	}
 }
