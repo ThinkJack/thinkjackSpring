@@ -17,7 +17,7 @@
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
 
-<div role="tabpanel" class="tab-pane fade active in" id="Board" aria-labelledby="home-tab">
+<div id="Board" class="tabcontent card text-white bg-primary mb-3" style="display: block;">
     <select name="searchType">
         <option value="n"
                 <c:out value="${cri.searchType == null?'selected':''}"/> >
