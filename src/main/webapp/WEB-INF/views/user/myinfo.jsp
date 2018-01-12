@@ -83,10 +83,10 @@
 
     <section class="grid-1 big-area" >
 
-        <div class="panel panel-title">
+
             <%--<h1>사용자 프로필</h1>--%>
                 <p>사용자 프로필</p>
-        </div>
+
         <div class="panel panel-1"></div>
         <div class="panel panel-2 ">
             <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;"  src="" alt="Profile image example"/>

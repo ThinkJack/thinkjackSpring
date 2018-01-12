@@ -16,15 +16,15 @@
 .np { font-family: 'Nanum Pen Script', serif; }
 
 /*.form-control {*/
-    /*border-radius: 0;*/
+/*border-radius: 0;*/
 /*}*/
 .hn{
     font-family: 'Hanna', serif;
 }
 
 /*.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {*/
-    /*background-color: #fff;*/
-    /*!*opacity: 1;*!*/
+/*background-color: #fff;*/
+/*!*opacity: 1;*!*/
 /*}*/
 
 .row{
@@ -47,19 +47,29 @@
 .deaf2{
     height: 100px;
 }
+textarea{
+    resize: none;
+}
+.selector {word-break:break-all;}
 
 
 /*section b 버튼 크기*/
 
 /*.bBtn{*/
-    /*width: 86%;*/
-    /*height: 95px;*/
-    /*margin-left: 75px;*/
-    /*position: relative;*/
-    /*top: 10px;*/
+/*width: 86%;*/
+/*height: 95px;*/
+/*margin-left: 75px;*/
+/*position: relative;*/
+/*top: 10px;*/
 /*}*/
 
-
+.so{
+    overflow-x: auto;
+    overflow-x: -moz-hidde-unscrollable;
+    overflow-y: scroll;
+    width:300px;
+    height: 60px;
+}
 
 .widthFull{
     width:100%;
@@ -67,7 +77,26 @@
     /*background-color: #6a0d6a;*/
 }
 
+/*스크롤바 스타일*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 /*스크롤*/
 
 img {max-width: 100%;}
@@ -89,7 +118,7 @@ section {
 section.a{
     background-image: url("/resources/images/main/mainA.png");
     background-color: #00c4ff;
-background-position: bottom;
+    background-position: bottom;
 
 
 
@@ -121,24 +150,24 @@ section.d{
 }
 
 /*.e{*/
-    /*background-image: url("/resources/images/main/mainA.png");*/
-    /*background-size:contain;*/
+/*background-image: url("/resources/images/main/mainA.png");*/
+/*background-size:contain;*/
 
-    /*!*width:100%;*!*/
+/*!*width:100%;*!*/
 
-    /*background-repeat:no-repeat;*/
-    /**/
+/*background-repeat:no-repeat;*/
+/**/
 
 /*@media (min-width: 510px) and (max-width: 1300px) {*/
-    /*!*section {*!*/
-        /*!*background-size: 98% 476px;*!*/
-    /*!*}*!*/
-    /*section.a {*/
-        /*height: 80%;*/
-    /*}*/
-    /*.animated img {*/
-        /*height: 150px;*/
-    /*}*/
+/*!*section {*!*/
+/*!*background-size: 98% 476px;*!*/
+/*!*}*!*/
+/*section.a {*/
+/*height: 80%;*/
+/*}*/
+/*.animated img {*/
+/*height: 150px;*/
+/*}*/
 /*}*/
 
 .scroll-down {
