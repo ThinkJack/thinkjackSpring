@@ -216,7 +216,7 @@
 <script>
     $(document).ready(function() {
         // var imgtest;
-        var fullName="${login.userProfile}";
+        var profileName="${login.userProfile}";
         // if(fullName!=="") {
         //     imgtest = getFileInfo(fullName);
         //     console.log(imgtest);
@@ -224,7 +224,9 @@
         // }else{
         //     str = "/resources/images/123.gif";
         // }
-        $("#profile").attr("src",getFileInfo(fullName));
+        var imagetest=getFileInfo(profileName);
+        var str=imagetest;
+        $("#profile").attr("src",str);
     });
 </script>
 </body>
