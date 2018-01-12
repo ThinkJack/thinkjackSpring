@@ -1,80 +1,77 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Uri
-  Date: 2018-01-02
-  Time: 오전 8:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: kwak
+  Date: 2018. 1. 5.
+  Time: AM 10:58
+  To change this template use File | Settings | File Templates.
+--%>
+
+<head>
+    <title>myInfo</title>
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .fl-right {
+            float: right;
+            margin-right: 5px;
+        }
+
+        .search_div {
+            margin-bottom: 20px;
+        }
+
+        .iframe_wrap {
+            height: 25%;
+            padding: 10px;
+            border-bottom: 25px solid #333;
+        }
+
+        .iframe_wrap iframe {
+            -ms-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+            -o-transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+
+            -ms-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            width: 200%;
+            height: 200%;
+
+            pointer-events: none;
+        }
+
+        .src_icon:hover {
+            cursor: pointer;
+        }
+
+        .iframe_wrap:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        //필요한 변수 정의 부분
+        var imgPath = "/resources/images/";
+
+        //필요한 함수 정의 부분
+        function likeImgChange(elId, num) {
+            $(elId).attr("src", imgPath + "like" + num + ".png");
+        }
+    </script>
+</head>
+<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
 
-<style>
-    .card {
-        margin-bottom: 20px;
-    }
-
-    .fl-right {
-        float: right;
-        margin-right: 5px;
-    }
-
-    .title {
-        border-bottom: 5px solid rgba(0, 0, 0, .125);
-    }
-
-    .search_div {
-        margin-bottom: 20px;
-    }
-
-    .iframe_wrap {
-        height: 25%;
-        padding: 10px;
-        border-bottom: 25px solid #333;
-    }
-
-    .iframe_wrap iframe {
-        -ms-transform: scale(0.5);
-        -moz-transform: scale(0.5);
-        -o-transform: scale(0.5);
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-
-        -ms-transform-origin: 0 0;
-        -moz-transform-origin: 0 0;
-        -o-transform-origin: 0 0;
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-        width: 200%;
-        height: 200%;
-
-        pointer-events: none;
-    }
-
-    .src_icon:hover {
-        cursor: pointer;
-    }
-
-    .iframe_wrap:hover {
-        opacity: 0.5;
-        cursor: pointer;
-    }
-</style>
-<script>
-    //필요한 변수 정의 부분
-    var imgPath = "/resources/images/";
-
-    //필요한 함수 정의 부분
-    function likeImgChange(elId, num) {
-        $(elId).attr("src", imgPath + "like" + num + ".png");
-    }
-</script>
-<div class="container">
-<div class="row">
-    <div class="col">
-        <h1 class="title"><b>SrcBoard (좋아요 순!)</b></h1>
-    </div>
-</div>
+<div role="tabpanel" class="tab-pane fade active in" id="Source_code" aria-labelledby="home-tab">
 <div class="row search_div">
     <div class="col-2">
         <select name="searchType">
@@ -85,14 +82,6 @@
             <option value="t"
                     <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
                 Title
-            </option>
-            <option value="w"
-                    <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
-                Writer
-            </option>
-            <option value="tw"
-                    <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                Title OR Content
             </option>
         </select>
     </div>
@@ -245,12 +234,11 @@
 <c:if test="${status.count % 3 eq 0}">
     </div>
 </c:if>
-
 <div class="text-center">
     <ul class="pagination justify-content-center">
         <c:if test="${pageMaker.prev}">
             <li class="page-item">
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.startPage - 1)}"
                    aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
@@ -258,14 +246,15 @@
             </li>
         </c:if>
         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+            <%--<script>alert("${pageMaker.makeSearch(idx)}"); console.log("??");</script>--%>
             <li
                     <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
-                <a class="page-link" href="srcList${pageMaker.makeSearch(idx)}">${idx}</a>
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(idx)}">${idx}</a>
             </li>
         </c:forEach>
         <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
             <li class="page-item">
-                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.endPage + 1)}" aria-label="Next">
+                <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.endPage + 1)}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -273,20 +262,23 @@
         </c:if>
     </ul>
 </div>
-</div>
 
 <script>
     $(document).ready(function () {
         $('#search-btn').click(function (e) {
 
-            self.location = "srcList"
+            self.location = "mySourceCode"
                 + '${pageMaker.makeQuery(1)}'
                 + '&searchType='
                 + $('select option:selected').val()
                 + '&keyword=' + encodeURIComponent($('#keywordInput').val());
         });
     });
+    $(document).ready(function () {
+        $(".Source_code").addClass(" active");
+
+    })
 </script>
 
-<!--내용-->
-
+</div>
+</div>

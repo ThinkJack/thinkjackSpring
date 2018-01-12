@@ -35,6 +35,7 @@ public class SrcBoardController {
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(cri);
         pageMaker.setTotalCount(service.srcListSearchCount(cri));
+        System.out.println(pageMaker);
         model.addAttribute("pageMaker", pageMaker);
     }
 

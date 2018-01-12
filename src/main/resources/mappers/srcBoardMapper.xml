@@ -26,7 +26,7 @@
     </select>
 
     <select id="srcListSearchCount" resultType="int">
-    <![CDATA[
+        <![CDATA[
         SELECT count(*)
         FROM tbl_src src, tbl_user user
         WHERE src.src_status = 1 AND src.src_writer = user.user_id
@@ -41,10 +41,14 @@
                 and src_title like CONCAT('%', #{keyword}, '%')
             </if>
             <if test="searchType == 'w'.toString()">
-                and src_writer like CONCAT('%', #{keyword}, '%')
+                and (SELECT user_name
+                FROM tbl_user
+                WHERE tbl_user.user_id = tbl_src.src_writer) like CONCAT('%', #{keyword}, '%')
             </if>
             <if test="searchType == 'tw'.toString()">
-                and (src_title like CONCAT('%', #{keyword}, '%') OR src_writer like CONCAT('%', #{keyword}, '%'))
+                and (src_title like CONCAT('%', #{keyword}, '%') OR (SELECT user_name
+                FROM tbl_user
+                WHERE tbl_user.user_id = tbl_src.src_writer) like CONCAT('%', #{keyword}, '%'))
             </if>
         </if>
     </sql>
