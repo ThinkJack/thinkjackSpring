@@ -14,4 +14,4 @@
             <a href="/user/mySourceCode" role="tab" id="Source_code">Source_code</a></li>
 
     </ul>
-    <div id="myTabContent" class="tab-content">
+    <div id="myTabContent" class="tab-content active">

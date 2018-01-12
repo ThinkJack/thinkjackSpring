@@ -56,7 +56,7 @@
         }
     </style>
 
-<div id="Account_information" class="tabcontent card text-white bg-primary mb-3" style="display: block;">
+<div id="Account_information" class="tabcontent card text-white bg-primary mb-3">
 
     <section class="grid-1 big-area" >
 
@@ -94,15 +94,7 @@
 <script>
     $(document).ready(function () {
         $(".Account_information").addClass(" active");
-        var imgtest;
-        var fullName = "${login.userProfile}";
-        if (fullName !== "") {
-            imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = imgtest;
-        } else {
-            str = "/resources/images/123.gif";
-        }
-        $("#profile").attr("src", str);
+
+        $("#profile").attr("src", getFileInfo("${login.userProfile}"));
     });
 </script>
