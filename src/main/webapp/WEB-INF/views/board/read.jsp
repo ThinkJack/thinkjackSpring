@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<script src="/resources/upload.js"></script>
 
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 
@@ -69,10 +70,14 @@
             </div>
             <div class="form-group">
                 <label>Writer</label>
-                <%--<img id="profileImg">--%>
-                <%--<script>--%>
-                    <%--$("#profileImg").prop(src,getFileInfo(${boardVO.boardWriterProfile}));--%>
-                <%--</script>--%>
+                <img id="profileImg">
+                <script>
+
+                    $(document).ready(function () {
+                        $("#profileImg").attr("src", filePathChange("${boardVO.boardWriterProfile}", true));
+                    })
+
+                </script>
                 <input type="text" name='writer' class="form-control inputC" value="${boardVO.boardWriter}"
                        readonly="readonly">
             </div>
@@ -221,7 +226,7 @@
                 <div class="col-sm-1">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
+                    <%--<img src="" class="Poto ">--%>
                 </div>
                 <div class="col-sm-9">
                     <strong class="title">

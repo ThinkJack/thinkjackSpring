@@ -4,9 +4,9 @@
 
 </div>
 <div class="container-fluid">
-    <div class="col-lg-3"></div>
+    <div class="col-sm-3"></div>
 
-    <div class="col-lg-6">
+    <div class="col-sm-6">
 
         <form role="form" method="post" id="registerForm">
             <div class="box-body">
@@ -44,7 +44,7 @@
             </div>
         </form>
     </div>
-    <div class="col-lo-3"></div>
+    <div class="col-sm-3"></div>
 </div>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
