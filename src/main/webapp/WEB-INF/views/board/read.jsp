@@ -111,7 +111,7 @@ b
             <%--입력된 댓글 목록 나타나는 부분--%>
 
             <%--<ul class="replies"></ul>--%>
-            <ul class="timeline col-sm-12" >
+            <ul class="timeline col-sm-12">
 
                 <%--버튼을 클릭하면 댓글목록이 나온다--%>
                 <li class = "time-label repliesDiv"  >

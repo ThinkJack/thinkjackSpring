@@ -15,7 +15,6 @@
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
-                    <h1 class="foo3 ">Thinkjack</h1>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
@@ -55,35 +54,26 @@
         <div class="col-sm-2 removePadding"> </div>
     </div>
 </section>
-<div class="deaf" ></div>
+
 <section class="c container-fluid removePadding">
-    <div class="col-sm-2 removePadding"></div>
-    <div class="col-sm-8 removePadding ">
-        <h1 class="animate2">
-            <div id="lampadario">
-                <%--@declare id="switch"--%><input class="input" id="a" type="radio" name="switch" value="on" />
-                <input class="input" type="radio" id="b" name="switch" value="off" checked="checked"/>
-                <label  for="switch"></label>
-            </div>
-
-        </h1>
-        <div class=" removePadding borderRB " style="height: 60.5%;margin-left: 85%">
+    <div class="row removePadding">
+        <div class="col-sm-4 removePadding " ></div>
+        <div class="col-sm-4 removePadding  ">
+            <img class="img-responsive" src="/resources/images/main/h.png">
         </div>
-        <div class="removePadding borderLT" style="height: 60.5%;margin-left: 50%;margin-right:30%;">
+        <div class="col-sm-4 removePadding " >
+            <div class="col-sm-6 removePadding borderRB " style="height:300px;"></div>
         </div>
-    </div>
-    <div class="col-sm-2 removePadding">
-
-
-
     </div>
 </section>
-<div class="deaf" style="background-color:black">
-</div>
+
+
 <section class="d container-fluid removePadding" id="board" >
     <div class="row removePadding">
-        <div class="col-sm-6 removePadding " style="background-color: #8B2252;margin: 0">
-            <div class="rotate" >
+        <div class="col-sm-6 removePadding " style="height:50%;margin:0">
+        <div class="removePadding di" style="height:100%;width:32%;margin:0;"></div>
+        <div class="removePadding di" style="height:100%;width:30%;margin:0;background-color:black">
+            <div class="rotate widthFull " >
                 <ul>
                     <li>
                         <a >
@@ -98,20 +88,45 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-12 removePadding " style=" height:50px;background-color:#00aaaa;"></div>
-            <div class="col-sm-12 removePadding " style=" height:50px;background-color:#6a0d6a;">
-                <img src="/resources/images/main/f.png" style="height:auto; width:40%;position: absolute;left: 30%" >
+        </div>
+        <div class="removePadding di" style=";width:33%;margin:0;">
+            <button type="button"  class="btn  btn-primary border " STYLE="height:40%;width:110%;">Source</button>
+            <div class="removePadding di" style="width:103%;margin:0;">
+                      </div>
+        </div>
+    </div>
+        <div class="col-sm-6 removePadding borderL" style="height:50%;margin:0">
+            <div class="removePadding di " style="width:33%;margin:0;">
+                <button type="button" class="btn  btn-primary border" STYLE="height:40%;width:110%;">NOTICE</button>
+                <div class="removePadding di" style="height:50%;width:103%;margin:0;"></div>
+            </div>
+            <div class="removePadding di" style="height:100%;width:32%;margin:0;">
+
+            </div>
+            <div class="removePadding di" style="height:100%;width:33%;margin:0;"></div>
+        </div>
+        <div class="col-sm-6 removePadding " style="height:50%;margin:0">
+            <div class="removePadding di" style="height:100%;width:32%;margin:0;"></div>
+            <div class="removePadding di animate2 text-white" style="width:30%;margin:0; background-color: aqua">
+                                  <h1>다양한 소스를 확인하세요</h1>
+                       </div>
+            <div class="removePadding di" style=";width:33%;margin:0;">
+                <button type="button" class="btn  btn-primary border " STYLE="height:40%;width:110%;">Source</button>
+                <div class="removePadding di" style="width:103%;margin:0;"></div>
             </div>
         </div>
-        <div class="col-sm-12 removePadding" style="height:50px;background-color: #2A00FF">
-
+        <div class="col-sm-6 removePadding borderL" style="height:50%;margin:0">
+        <div class="removePadding di " style="width:33%;margin:0;">
+                <button type="button" class="btn  btn-primary border" STYLE="height:40%;width:110%;">Source</button>
+                <div class="removePadding di" style="height:50%;width:103%;margin:0;"></div>
+            </div>
+            <div class="removePadding di" style="height:100%;width:32%;margin:0; ">
+            </div>
+            <div class="removePadding di" style="height:100%;width:33%;margin:0;"></div>
         </div>
 
     </div>
 </section>
-
-<div class="deaf" style="background-color:black"></div>
-
 <script>
     <%--슬라이드--%>
     $(function() {
@@ -134,19 +149,21 @@
         else $el.removeClass('animated swing');
     });
 
+
+    $(window).scroll(function() {
+        var $el = $('.animate2');
+
+        if($(this).scrollTop() >=2000) $el.addClass('animated slideInLeft');
+        else $el.removeClass('animated slideInLeft');
+    });
+
+
     //title옆 글
     window.sr = ScrollReveal({ reset: true });
     sr.reveal('.foo1');
     sr.reveal('.foo2',{duration: 1000});
     sr.reveal('.foo3',{duration: 1500});
 
-    //전구 옆 글
-    $(window).scroll(function() {
-        var $el = $('.animate2');
-
-        if($(this).scrollTop() >=1800) $el.addClass('animated fadeInLeft');
-        else $el.removeClass('animated fadeInLeft');
-    });
 
 
 </script>
