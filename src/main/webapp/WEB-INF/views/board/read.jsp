@@ -86,6 +86,7 @@
                     <label style="color: black;">${boardVO.boardWriter}</label>
                 </div>
                 <script>
+                    console.log("${boardVO.boardWriterProfile}");
                     $("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))
                 </script>
 
@@ -180,7 +181,7 @@
                 <div class="col-md-2 ">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
+                    <img src="{{profileImg replyVo.replyProfile}}" class="Photo rounded">
                 </div>
 
                 <div class="col-md-7">
@@ -193,7 +194,7 @@
                     </strong>
 
                     <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                              style="display: none"></textarea>
+                              style="display: none">{{replyVo.replyText}}</textarea>
                     <spna class="textSpan" style="display: block">{{replyVo.replyText}}</spna>
                 </div>
 
@@ -230,7 +231,7 @@
                     <div class="col-md-2">
                         <%--사진--%>
                         <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                        <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
+                            <img src="{{profileImg replyVo.replyProfile}}" class="Photo rounded">
                     </div>
                     <div class="col-md-8">
                         <strong class="title">
@@ -247,7 +248,7 @@
                             <%--입력된 댓글 text부분--%>
                             <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
                             <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                                      style="display: none"></textarea>
+                                      style="display: none">{{replyVo.replyText}}</textarea>
                             <spna class="textSpan ">{{replyVo.replyText}}</spna>
                         </div>
 
