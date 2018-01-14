@@ -19,10 +19,14 @@ public class UploadFileUtils {
 
 
     public static String uploadFile(String uploadPath, String originalName,byte[] fileData, String userId)throws Exception{
+        //S3 서버 관련 설정
+        S3Util s3 = new S3Util();
+        String bucketName = "tjbucket";
+
         //UserVo 필요
         UUID uid = UUID.randomUUID();
 
-
+        //savedName : 570d570a-7af1-4afe-8ed5-391d660084b7_g.JPG 같은 형식으로 만들어준다.
         String savedName = uid.toString() +"_"+originalName;
 
         String savedPath = calcPath(uploadPath,userId);
@@ -35,19 +39,25 @@ public class UploadFileUtils {
 
         String uploadedFileName =null;
 
-        if(MediaUtils.getMediaType(formatName) !=null){
-            makeThumbnail(uploadPath,savedPath,savedName);
-                  String testupload=  savedPath+"/"+savedName;
-            uploadedFileName = testupload.replace('\\','/');
-                 // System.out.println("testupload: "+testupload);
-                 // System.out.println("testupload:replce "+testupload.replace('\\','/'));
-                  //System.out.println("thumbFile:"+uploadedFileName);
-                   // makeThumbnail(uploadPath,saveedPath,saveedName);
+//        if(MediaUtils.getMediaType(formatName) !=null){
+//            makeThumbnail(uploadPath,savedPath,savedName);
+//                  String testupload=  savedPath+"/"+savedName;
+//            uploadedFileName = testupload.replace('\\','/');
+//                 // System.out.println("testupload: "+testupload);
+//                 // System.out.println("testupload:replce "+testupload.replace('\\','/'));
+//                  //System.out.println("thumbFile:"+uploadedFileName);
+//                   // makeThumbnail(uploadPath,saveedPath,saveedName);
+//
+//        }else{
+//            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
+//        }
 
-        }else{
-            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
-        }
+        //S3Util 의 fileUpload 메서드로 파일을 업로드한다.
+        s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);
 
+
+        System.out.println(uploadedFileName);
+//	s3.fileUpload(bucketName, new File(fileName))
         return uploadedFileName;
 
     }

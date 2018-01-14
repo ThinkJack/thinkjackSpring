@@ -47,4 +47,6 @@ public interface UserDAO {
 
 	public UserVO getUserPw(String userEmail) throws Exception;
 
+	public void deleteImage(String userId) throws Exception;
+
 }

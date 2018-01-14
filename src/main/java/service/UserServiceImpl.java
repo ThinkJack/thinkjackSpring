@@ -213,4 +213,9 @@ public class UserServiceImpl implements UserService {
 	public int boardSearchCount(UserCriteria cri) throws Exception {
 		return dao.boardSearchCount(cri);
 	}
+
+	@Override
+	public void deleteImage(String userId) throws Exception {
+		dao.deleteImage(userId);
+	}
 }

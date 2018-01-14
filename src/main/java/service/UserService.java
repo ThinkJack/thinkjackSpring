@@ -36,4 +36,6 @@ public interface UserService {
 	public List<BoardVO> boardSearch(UserCriteria cri)throws Exception;
 
 	public int boardSearchCount(UserCriteria cri)throws Exception;
+
+	public void deleteImage(String userId)throws Exception;
 }

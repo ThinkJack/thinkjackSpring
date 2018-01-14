@@ -122,4 +122,9 @@ public class UserDAOImpl implements UserDAO{
 	public UserVO getUserPw(String userEmail) throws Exception {
 		return session.selectOne(namespace + ".getUserPassword",userEmail);
 	}
+
+	@Override
+	public void deleteImage(String userId) throws Exception {
+		session.update(namespace+".deleteImage",userId);
+	}
 }
