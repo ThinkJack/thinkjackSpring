@@ -123,7 +123,7 @@ public class UserController {
 		vo=service.userAuth(user);
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-			return "redirect:/";
+			return "redirect:/main";
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("login",vo);
@@ -227,8 +227,22 @@ public class UserController {
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {
+			rttr.addFlashAttribute("msg" , "아이디 또는 비밀번호가 일치하지 않습니다.");
+			System.out.println("아이디 비밀번호 실패");
+			model.addAttribute("userVO",vo);
+			return;
+		}else if(vo.getUserState()==0){
+			rttr.addFlashAttribute("msg" , "인증 대기 중인 아이디 입니다.\n 메일에 접속해 인증해주세요");
+			System.out.println("인증대기");
+			model.addAttribute("userVO",vo);
+			return;
+		}else if(vo.getUserState()==2){
+			rttr.addFlashAttribute("msg" , "탈퇴된 회원입니다. \n 관리자에게 문의해주세요");
+			System.out.println("탈퇴");
+			model.addAttribute("userVO",vo);
 			return;
 		}
+
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
 		//rttr.addFlashAttribute("msg","로그인 되었습니다.");
@@ -676,4 +690,6 @@ public class UserController {
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
+
+
 }

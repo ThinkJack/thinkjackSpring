@@ -133,10 +133,10 @@
             var userName = $('#userName').val();
             console.log(userName);
 
-            if(!userName || userName.trim().length==0){
-                alert("username이 입력되지 않았습니다.");
-                return false;
-            }
+            // if(!userName || userName.trim().length==0){
+            //     alert("username이 입력되지 않았습니다.");
+            //     return false;
+            // }
             if(userName.trim().length >10){
                 alert("이름을 10자 이내로 입력해 주세요.");
                 return false;
@@ -155,7 +155,7 @@
 
                     success:function(data){
                         console.log("success")
-                        alert(decodeURIComponent(data.msg))
+                       // alert(decodeURIComponent(data.msg))
                         if(data.chk == "T"){
                             alert('사용 가능한 이름입니다.' );
                             chkName=true;

@@ -49,41 +49,31 @@
             alert("${msg}");
         }
         $(document).ready(function() {
-            var headerimg;
-            var fullName="${login.userProfile}";
-            var test =fullName.lastIndexOf("/");
-            fileName= fullName.substring(test+1,fullName.length);
-            path= fullName.substring(0,test+1);
-            // console.log(path);
-            // console.log(fileName);
-            // console.log(test);
-            profileheader =path+"s_"+fileName;
-            //console.log(fullName);
-            if(fullName!=="") {
-                headerimg = getFileInfo(profileheader);
-                // console.log(headerimg);
-                hstr = headerimg;
-            }else{
-                hstr = "/resources/images/like1.png";
-            }
-            $("#profileHeader").attr("src",hstr);
+            $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
         });
     </script>
     <style>
         .naver{
             background-color:#1EC800;
             margin-top: 5px;
+            color:white;
         }
         .naverImg{
             background-color:#1EC800;
+            height:16px;
+            margin:auto;
+            padding-right:4px;
+            padding-left:4px;
+            padding:3px;
         }
-        .naverImg:hover {
+        /*.naverImg:hover {*/
+            /*!*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*!*/
+            /*background-color: #00b300;*/
+        /*}*/
+        .naver:hover{
             /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
-            background-color: #39e600;
-        }
-        .naver:hover {
-            /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
-            background-color: #39e600;
+            background-color: #00b300;
+            color:white;
         }
     </style>
 </head>

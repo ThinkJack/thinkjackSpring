@@ -576,3 +576,14 @@ a:hover {
 
 }
 
+@media (min-width: 400px) and (max-width: 1100px) {
+    section {
+        background-size: 98% 476px;
+    }
+    section.a {
+        height: 565px;
+    }
+    .animated img {
+        height: 150px;
+    }
+}

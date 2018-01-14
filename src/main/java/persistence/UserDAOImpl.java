@@ -125,4 +125,8 @@ public class UserDAOImpl implements UserDAO{
 		return session.selectOne(namespace + ".getUserProfile", userId);
 	}
 
+	@Override
+	public UserVO getUserPw(String userEmail) throws Exception {
+		return session.selectOne(namespace + ".getUserPassword",userEmail);
+	}
 }
