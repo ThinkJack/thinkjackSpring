@@ -257,9 +257,14 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.1.0.RELEASE</version>
 		</dependency>
+        <dependency>
+            <groupId>jca</groupId>
+            <artifactId>jca</artifactId>
+            <version>1.5</version>
+        </dependency>
 
 
-	</dependencies>
+    </dependencies>
 	<build>
 
 		<plugins>
