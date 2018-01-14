@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-b
+
 <%--하트 스타일부분--%>
 <style>
     #panel, #flip {
@@ -15,7 +15,7 @@ b
         border: solid 1px #c3c3c3;
     }
 
-    .boardheader{
+    .boardheader {
         display: inline-block;
     }
 
@@ -43,16 +43,16 @@ b
     .card-header.text-white {
         background-color: black;
     }
-
-    label {
-        color: white;
+    textarea{
+        width: 100%;
     }
+
+
 </style>
 
-<div class="deaf2 container-fluid"></div>
-<div class="row  removePadding ">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6 cardtext-white list-group ">
+<div class="row  removePadding " style="padding-top: 100px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 cardtext-white list-group ">
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -63,8 +63,8 @@ b
         <div class="box-body m-3">
             <div style="float:right;">
 
-                <label ><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/>      </label>
-                <a class="btn heart" >
+                <label><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
+                <a class="btn heart">
                     <img id="heart" src="">
                 </a>
             </div>
@@ -72,17 +72,17 @@ b
             <div class="form-group" style="margin-top: 10px;">
                 <label>Title</label>
                 <input type="text" name='title' class="form-control inputC" value="${boardVO.boardTitle}"
-                       readonly="readonly" >
+                       readonly="readonly">
             </div>
             <div class="form-group">
                 <label>Content</label>
                 <textarea type="text" name='content' class="form-control inputC" rows="15"
-                          readonly="readonly" style="padding-top: 20px;" >${boardVO.boardContent}</textarea>
+                          readonly="readonly" style="padding-top: 20px;">${boardVO.boardContent}</textarea>
             </div>
             <div class="form-group">
                 <label>Writer</label>
                 <div class="form-control" style="background: white">
-                    <img id='writerProfile' class="rounded loginPhoto">
+                    <img id='writerProfile' class="rounded Photo">
                     <label style="color: black;">${boardVO.boardWriter}</label>
                 </div>
                 <script>
@@ -99,17 +99,17 @@ b
             <button type="submit" class="btn btn-primary goListBtn pull-right">GO LIST</button>
         </div>
     </div>
-    <div class="col-sm-3 "></div>
+    <div class="col-md-3"></div>
 </div>
 <div class="row removePadding ">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6 removePadding ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 removePadding ">
         <%--댓글 등록 부분 --%>
         <div class="card border-primary ">
             <h2 class="bd m-2"> Comment</h2>
 
             <div class="row m-3">
-                <div class="col-sm-10 ">
+                <div class="col-md-10 ">
                     <%--댓글 등록하는 아이디(--%>
                     <input type="text" name='writer' class="form-control register" value="${login.userName}"
                            readonly="readonly">
@@ -118,7 +118,7 @@ b
                         <textarea class="form-control replyTextReply" rows="3" placeholder="댓글 입력하세요"></textarea>
                     </div>
                 </div>
-                <div class="col-sm-2  removePadding ">
+                <div class="col-md-2  removePadding ">
                     <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
                     <button type="button" class="btn btn-primary addBtn" style="width:100%;height:160px;">등록</button>
                 </div>
@@ -130,7 +130,7 @@ b
             <%--입력된 댓글 목록 나타나는 부분--%>
 
             <%--<ul class="replies"></ul>--%>
-            <ul class="timeline col-sm-12">
+            <ul class="timeline col-md-12">
 
                 <%--버튼을 클릭하면 댓글목록이 나온다--%>
                 <li class="time-label repliesDiv">
@@ -145,7 +145,7 @@ b
         </div>
 
     </div>
-    <div class="col-sm-3 widthFull4"></div>
+    <div class="col-md-2 widthFull4"></div>
 </div>
 <%--댓글 반복문 부분--%>
 <script>
@@ -172,153 +172,124 @@ b
             <%--하트 버튼(좋아요)--%>
             {{#if replyVo.replyParent}}
             <%--<div class="registerReply"  >--%>
+            <div class="row removePadding registerReply card-header text-white">
 
-            <div class="row removePadding registerReply ">
-
-                <div class="col-sm-1">
+                <div class="col-md-1">
+                    <i class="fa fa-reply fa-rotate-180" aria-hidden="true" style=""></i>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-md-2 ">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="" class="Poto ">
+                    <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
                 </div>
 
-                <div class="col-sm-8 list-group">
+                <div class="col-md-7">
                     <strong class="title ">
-                        <span class="badge">대댓글</span>
-                        <%--replyId 불러오기 위해 필요한 부분--%>
                         <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <%--댓글의 replyId를 받아오기 위한 부분--%>
                         <input type="hidden" class="reParent" value="{{replyParent}}">
 
                         <span class="replyWriter register timeline-header">{{replyVo.replyWriter}}</span>
-                        <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                        <span class="time" style="float: right">{{prettifyDate  replyVo.replyRegdate}}</span>
                     </strong>
 
-                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
-                        <%--입력된 댓글 text부분--%>
-                        <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
-                        <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                                  style="display: none"></textarea>
-                        <spna class="textSpan ">{{replyVo.replyText}}</spna>
-                    </div>
+                    <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
+                              style="display: none"></textarea>
+                    <spna class="textSpan" style="display: block">{{replyVo.replyText}}</spna>
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-md-2 removePadding">
 
                     {{#if reHeart}}
                     <%--reHeart값이 있을떄--%>
-                    <div style="text-align: right;">
-                        <a class="replyHeartBtn btn btn-outline-dark " name=1>
+                    <div>
+                        <a class="replyHeartBtn btn" name=1>
                             <img class="reHeart" src="/resources/images/like2.png">
                         </a>
                         <span> {{replyVo.replyLikeCnt}}</span>
                     </div>
                     {{else}}
                     <div>
-                        <a class="replyHeartBtn btn btn-outline-dark " name=0>
+                        <a class="replyHeartBtn btn" name=0>
                             <img class="reHeart" src="/resources/images/like1.png">
                         </a>
                         <span>{{replyVo.replyLikeCnt}}</span>
                     </div>
                     {{/if}}
 
-                    <%--3.날짜부분--%>
-                    <span class="time">
-                            {{prettifyDate  replyVo.replyRegdate}}</span>
 
                     {{#ifCond loginUser replyVo.replyWriter}}
 
-                    <button type="button" class="btn btn-warning replyModBtn"><span
-                            class="glyphicon glyphicon-collapse-down"></span> 수정
-                    </button>
-                    <button type="button" class="btn btn-danger replyDelBtn">삭제</button>
+                    <button type="button" class="btn btn-warning replyModBtn" style="width: 100%;">수정</button>
+                    <button type="button" class="btn btn-danger replyDelBtn" style="width: 100%;">삭제</button>
                     {{/ifCond}}
-                    <%--{{/if}}--%>
                 </div>
             </div>
             {{else}}
             <%--댓글 부분--%>
             <div class="row removePadding registerReply card-header  text-white ">
-
-                <div class="col-sm-1">
-                    <%--사진--%>
-                    <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
-                </div>
-                <div class="col-sm-9">
-                    <strong class="title">
-                        <span class="badge">댓글</span>
-                        <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register">{{replyVo.replyWriter}}</span>
-                        <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
-                    </strong>
-
-                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
-                        <%--입력된 댓글 text부분--%>
-                        <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
-                        <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                                  style="display: none"></textarea>
-                        <spna class="textSpan ">{{replyVo.replyText}}</spna>
+                    <div class="col-md-2">
+                        <%--사진--%>
+                        <input type="hidden" class="replyHeart" value="{{reHeart}}">
+                        <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
                     </div>
+                    <div class="col-md-8">
+                        <strong class="title">
+                            <%--replyId 불러오기 위해 필요한 부분--%>
+                            <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
+                            <%--replyId와 replyWriter 나타나는 부분--%>
+                            <span class="replyWriter register">{{replyVo.replyWriter}}</span>
 
-                </div>
-                <div class="col-sm-2">
+                            <span class="time" style="float: right">{{prettifyDate  replyVo.replyRegdate}}</span>
+                            <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                        </strong>
 
-                    {{#if reHeart}}
-                    <%--reHeart값이 있을떄--%>
-                    <div style="text-align: right;">
-                        <a class="replyHeartBtn btn btn-outline-dark " name=1>
-                            <img class="reHeart" src="/resources/images/like2.png">
-                        </a>
-                        <span> {{replyVo.replyLikeCnt}}</span>
+                        <div class="comment" style="overflow:auto; width:100%; height:150px;">
+                            <%--입력된 댓글 text부분--%>
+                            <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
+                            <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
+                                      style="display: none"></textarea>
+                            <spna class="textSpan ">{{replyVo.replyText}}</spna>
+                        </div>
+
                     </div>
-                    {{else}}
-                    <div>
-                        <a class="replyHeartBtn btn btn-outline-dark " name=0>
-                            <img class="reHeart" src="/resources/images/like1.png">
-                        </a>
-                        <span>{{replyVo.replyLikeCnt}}</span>
+                    <div class="col-md-2 removePadding">
+
+                        {{#if reHeart}}
+                        <%--reHeart값이 있을떄--%>
+                        <div>
+                            <a class="replyHeartBtn btn" name=1>
+                                <img class="reHeart" src="/resources/images/like2.png">
+                            </a>
+                            <span> {{replyVo.replyLikeCnt}}</span>
+                        </div>
+                        {{else}}
+                        <div>
+                            <a class="replyHeartBtn btn" name=0>
+                                <img class="reHeart" src="/resources/images/like1.png">
+                            </a>
+                            <span>{{replyVo.replyLikeCnt}}</span>
+                        </div>
+                        {{/if}}
+
+                        {{#ifCond loginUser replyVo.replyWriter}}
+
+                        <button type="button" class="btn btn-warning replyModBtn" style="width: 100%;"> 수정</button>
+
+                        <button type="button" class="btn btn-danger replyDelBtn" style="width: 100%;">삭제</button>
+
+                        {{/ifCond}}
+                        <button type="button" class="btn btn-info demoReply" style="width: 100%;">답글</button>
                     </div>
-                    {{/if}}
-
-                    <%--3.날짜부분--%>
-                    <span class="time">
-                    {{prettifyDate  replyVo.replyRegdate}}</span>
-
-                    {{#ifCond loginUser replyVo.replyWriter}}
-
-                    <button type="button" class="btn btn-warning replyModBtn"><span
-                            class="glyphicon glyphicon-collapse-down"></span> 수정
-                    </button>
-                    <button type="button" class="btn btn-danger replyDelBtn">삭제</button>
-
-                    {{/ifCond}}
-                    <button type="button" class="btn btn-info demoReply"><span
-                            class="glyphicon glyphicon-collapse-down"></span> 답글
-                    </button>
-                </div>
-
                 <%--버튼 누르면 나오게 하기--%>
 
-                <div class="demo" name="demo" style="display: none">
+                <div class="demo row col-md-12" name="demo" style="display: none">
 
-                    <div class="col-sm-1">
-
-                    </div>
-                    <div class="col-sm-9">
-
-                        <span class="reRegister"></span>
-                        <%--<span  class="reRegister" >${boardVO.boardWriter}</span>--%>
+                    <div class="col-md-12 removePadding">
                         <textarea class="form-control replyTextReply" rows="3">대댓글 입력하세요</textarea>
-                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="row-md-10 removePadding"></div>
+                    <div class="row-md-2 removePadding">
                         <button type="button" class="btn btn-primary addBtn">등록</button>
-                        <%--등록을 누르면 replyParent값이 1이되는 조건문이 필요--%>
                     </div>
                 </div>
 
@@ -329,14 +300,7 @@ b
             {{else}}
             <div class="card border-light mb-3 ">
                 <div class="card-header">
-                    <div class="title ">
-                        <span class="badge">댓글</span>
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter">{{replyVo.replyWriter}}</span>
-                    </div>
-                    <div class="comment">
-                        <span>삭제된 댓글입니다</span>
-                    </div>
+                    <span>삭제된 댓글입니다</span>
                 </div>
             </div>
 
@@ -541,10 +505,14 @@ b
         var date = dateObj.getDate();
         var hour = dateObj.getHours();
         var minute = dateObj.getMinutes();
-        var second = dateObj.getSeconds();
-        var strDate = year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        var strDate = year + "-" + month + "-" + date + " " + hour + ":" + minute;
         return strDate;
     });
+    Handlebars.registerHelper('profileImg', function (replyProfile) {
+        console.log(replyProfile);
+        return getFileInfo(replyProfile);
+    });
+
 </script>
 <script>
     <%--페이지 연결부분--%>
@@ -628,6 +596,7 @@ b
 </script>
 <script>
     <%--하트버튼을 누르면 senddata로 heart컨트롤러로 ajax로 보낸다.--%>
+
     $(document).on("click", ".replyHeartBtn", function () {
 //  자바스크립트 객체 형태로 전달
 
