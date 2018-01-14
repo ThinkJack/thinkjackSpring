@@ -109,9 +109,8 @@ section {
     width:100%;
 
     background-repeat:no-repeat;
-    background-size:98% 500px ;
-    /*background-attachment: fixed;*/
-    background-size:contain;
+    /*background-size:98%;*/
+
 
 }
 
@@ -119,38 +118,39 @@ section.a{
     background-image: url("/resources/images/main/mainA.png");
     background-color: #00c4ff;
     background-position: bottom;
-
+    background-size:contain;
+    height:880px;
 
 
 }
 section.b{
     background-image: url("/resources/images/main/mainB.png");
-background-color: #0f253c;
+background-color: #000;
     height:700px;
     background-attachment: fixed;
+    background-size:contain;
 
 }
 
 section.c{
-
-
-    background-image: url("/resources/images/main/mainB.png");
-    /*background-image: url("/resources/images/main/g.png");*/
+   /*background-image: url("/resources/images/main/mainA.png");*/
     /*height:700px;*/
-    background-color: #0f253c;
-    background-attachment:fixed;
+    background-color:#da7908;
+    /*background-attachment:fixed;*/
+    background-position: bottom;
+    background-size:contain;
+    height:500px;
 }
 
 
 
 section.d{
-    background-image: url("/resources/images/main/mainB.png");
-    /*background-image: url("/resources/images/main/mainD.png");*/
-    background-color: #0f253c;
-    height:100%;
-    background-attachment: fixed;
 
-}
+    /*background-image: url("/resources/images/main/mainD.png");*/
+    background-color:#da7908;
+    height:400px;
+   }
+
 .di{display: inline-block}
 
 /*.e{*/
@@ -183,7 +183,7 @@ section.d{
 .scroll-down {
     position: absolute;
     bottom: 30px;
-    left: 50%;
+    left: 75%;
     margin-left: -16px;
     display: block;
     width: 50px;
@@ -235,54 +235,6 @@ section.d{
 
 
 /*title*/
-
-
-.rotate {
-    overflow: hidden;
-    position:relative;
-}
-.rotate	li a {
-    display:block;
-    width:200px;
-    height:200px;
-    perspective: 500px;
-    color: #fff;
-    text-align: center;
-}
-.rotate	li a .front {
-    /*background-color: #8EC047;*/
-    line-height: 150px;
-    transform: rotateX(0deg) rotateY(0deg);
-    transition: all 0.5s ease-in-out;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-}
-.rotate	li a .front i {
-    line-height: 150px !important;
-    vertical-align: middle !important;
-}
-.rotate	li a .back {
-    /*background-color: #8EC047;*/
-    height: inherit;
-    width: inherit;
-    line-height: 150px;
-    position: absolute;
-    top:0;
-    transform-style: preserve-3d;
-    transform: rotateX(0deg) rotateY(-180deg);
-    transition: all 0.5s ease-in-out;
-    backface-visibility: hidden;
-    z-index: -1;
-}
-.rotate	li a:hover .front {
-    transform: rotateX(0deg) rotateY(180deg);
-}
-.rotate	li a:hover .back {
-    transform: rotateX(0deg) rotateY(0deg); z-index: 1;
-}
-
-/*버튼*/
-
 
 /*버튼*/
 

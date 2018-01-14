@@ -3,25 +3,30 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/main.css" rel="stylesheet">
 
-
 <section class="a container-fluid" >
-
     <%--Main--%>
-
     <div class="deaf" id="main" ></div>
-
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
+                    <br>
+                    <h1 class="bd" style=" font-size: 4em;" >Masterpiece</h1>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-5">
                         <div class=" animate1 " >
-                            <img src="/resources/images/titile.jpg" style="height: 300px; width: 300px;" >
-                        </div></div>
+                            <h1 class=" bd" >Website</h1>
+                            <h1 class="bd">Interactions</h1>
+                            <h1 class="text-white bd">without</h1>
+                            <h1 class="text-white bd">code</h1>
+                        </div>
+
+
+                    </div>
+                    <a href="#" class="scroll-down" address="true"></a>
                     <div class="col-sm-6">
                     </div>
                 </div>
@@ -30,24 +35,27 @@
     </div>
     <div class="col-sm-2 removePadding "> </div>
 </section>
-<div class="deaf" >
-    <a href="#" class="scroll-down" address="true"></a>
+<div  id="editor">
+    <h1 class="bd " style="margin-left:10%; font-size: 4em;" >Service</h1>
 </div>
-<div class="deaf" id="editor" style="background-color: black"></div>
 <section class="b container-fluid removePadding">
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderLB " style="height:20%;margin-right: 50% ;margin-bottom: -11px;">
-                    <button class="btn btn-primary btn-lg btn-block bd" style="margin-left:39%;width:70%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:69px;font-size: 28px" onclick="location.replace('/edit/unitTest')">Unit</button>
+
+                    <li class="tip"> <button class="btn btn-primary btn-lg btn-block bd" style="margin-left:39%;width:70%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:69px;font-size: 28px" href="/edit/unitTest">Unit Test</button>
+                        <strong class="tooltipB">Add images in the tooltip. <a href="http://codecanyon.net/item/portfolio-premium-wp-plugin/154612">
+                            <img class="ref" src="/resources/images/logo.png" height="80" width="80" alt="" /></a><a href="#"> You can even add links!</a></strong></li>
+
                 </div>
                 <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
                 <div class="col-sm-4 removePadding borderRB " style="height:20%;margin-top:139.781px;">
-                    <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.replace('/edit/editPage')">Edit</button>
+                    <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>
                 </div>
                 <div class=" removePadding borderRT " style="height:20%;width:13.33%;margin-top:139.781px;"></div>
-                <div class="col-sm-12 removePadding borderR " style="height:43%;">
+                <div class="col-sm-12 removePadding borderR " style="height:42%;">
                 </div>
             </div>
         </div>
@@ -55,76 +63,96 @@
     </div>
 </section>
 
+
+<div class="deaf" style="background-color:white">
+    <h1 class="bd " style="margin-left: 78%; font-size: 4em;" >Board</h1>
+</div>
+
+
 <section class="c container-fluid removePadding">
-    <div class="row removePadding">
-        <div class="col-sm-4 removePadding " ></div>
-        <div class="col-sm-4 removePadding  ">
-            <img class="img-responsive" src="/resources/images/main/h.png">
+    <div class="row removePadding" >
+        <div class="col-sm-3 " >
+
         </div>
-        <div class="col-sm-4 removePadding " >
-            <div class="col-sm-6 removePadding borderRB " style="height:300px;"></div>
+        <div class="col-sm-9 removePadding lampContainer">
+            <div class="lamp-container " style="display:inline-block">
+                <div class="lamp ">
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
-
 <section class="d container-fluid removePadding" id="board" >
+
     <div class="row removePadding">
-        <div class="col-sm-6 removePadding " style="height:50%;margin:0">
-        <div class="removePadding di" style="height:100%;width:32%;margin:0;"></div>
-        <div class="removePadding di" style="height:100%;width:30%;margin:0;background-color:black">
-            <div class="rotate widthFull " >
-                <ul>
-                    <li>
-                        <a >
-                            <div class="front img-circle ">
-                                <%--<i class="fa fa-android fa-4x"></i>--%>
-                                <img class=" widthFull"  src="/resources/images/like24-2.png" >
-                            </div>
-                            <div class="back img-circle">
-                                <img  class=" widthFull" src="/resources/images/like24-1.png" >
-                            </div>
-                        </a>
-                    </li>
+        <div class="col-sm-2 removePadding"></div>
+        <div class=" col-sm-2 ">
+            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=notice'">Notice</button>
+            <div class="col-sm-12 box first">
+                <span class="icon-cont"><i class="fa fa-rocket"></i></span>
+
+                <ul class="hidden">
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
                 </ul>
+               <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
             </div>
-        </div>
-        <div class="removePadding di" style=";width:33%;margin:0;">
-            <button type="button"  class="btn  btn-primary border " STYLE="height:40%;width:110%;">Source</button>
-            <div class="removePadding di" style="width:103%;margin:0;">
-                      </div>
-        </div>
-    </div>
-        <div class="col-sm-6 removePadding borderL" style="height:50%;margin:0">
-            <div class="removePadding di " style="width:33%;margin:0;">
-                <button type="button" class="btn  btn-primary border" STYLE="height:40%;width:110%;">NOTICE</button>
-                <div class="removePadding di" style="height:50%;width:103%;margin:0;"></div>
-            </div>
-            <div class="removePadding di" style="height:100%;width:32%;margin:0;">
-
-            </div>
-            <div class="removePadding di" style="height:100%;width:33%;margin:0;"></div>
-        </div>
-        <div class="col-sm-6 removePadding " style="height:50%;margin:0">
-            <div class="removePadding di" style="height:100%;width:32%;margin:0;"></div>
-            <div class="removePadding di animate2 text-white" style="width:30%;margin:0; background-color: aqua">
-                                  <h1>다양한 소스를 확인하세요</h1>
-                       </div>
-            <div class="removePadding di" style=";width:33%;margin:0;">
-                <button type="button" class="btn  btn-primary border " STYLE="height:40%;width:110%;">Source</button>
-                <div class="removePadding di" style="width:103%;margin:0;"></div>
-            </div>
-        </div>
-        <div class="col-sm-6 removePadding borderL" style="height:50%;margin:0">
-        <div class="removePadding di " style="width:33%;margin:0;">
-                <button type="button" class="btn  btn-primary border" STYLE="height:40%;width:110%;">Source</button>
-                <div class="removePadding di" style="height:50%;width:103%;margin:0;"></div>
-            </div>
-            <div class="removePadding di" style="height:100%;width:32%;margin:0; ">
-            </div>
-            <div class="removePadding di" style="height:100%;width:33%;margin:0;"></div>
         </div>
 
+        <div class=" col-sm-2 ">
+            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/srcBoard/srcList'">소스 게시판</button>
+
+            <div class="col-sm-12 box second">
+                <span class="icon-cont"><i class="fa fa-edit"></i></span>
+                <h1 class="bd  " style=" font-size: 1em;" >Click</h1>
+
+                <ul class="hidden">
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                </ul>
+
+                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+            </div>
+
+        </div>
+
+        <div class=" col-sm-2 ">
+            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=free'">자유 게시판</button>
+            <div class=" col-sm-12 box third">
+                <span class="icon-cont"><i class="fa fa-desktop"></i></span>
+
+
+
+                <ul class="hidden">
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                </ul>
+
+                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+            </div>
+        </div>
+
+        <div class=" col-sm-2 ">
+            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=qna'">질문 게시판</button>
+            <div class="col-sm-12 box fourth">
+                <span class="icon-cont"><i class="fa fa-coffee"></i></span>
+
+                <ul class="hidden">
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                    <li>Lorem ipsum dolor</li>
+                    <li>Set amet consecuter</li>
+                </ul>
+
+                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+            </div>
+        </div>
     </div>
 </section>
 <script>
@@ -135,12 +163,8 @@
             return false;
         });
     });
-
 </script>
 <script>
-
-
-
     <%--title--%>
     $(window).scroll(function() {
         var $el = $('.animate1');
@@ -151,10 +175,28 @@
 
 
     $(window).scroll(function() {
+        var $el = $('.animate');
+        if($(this).scrollTop() >=1300) $el.addClass('animated slideInLeft');
+        else $el.removeClass('animated slideInLeft');
+    });
+    $(window).scroll(function() {
+        var $el = $('.animate3');
+
+        if($(this).scrollTop() >=1600) $el.addClass('animated slideInRight');
+        else $el.removeClass('animated slideInRight');
+    });
+    $(window).scroll(function() {
         var $el = $('.animate2');
 
-        if($(this).scrollTop() >=2000) $el.addClass('animated slideInLeft');
+        if($(this).scrollTop() >=1900) $el.addClass('animated slideInLeft');
         else $el.removeClass('animated slideInLeft');
+    });
+
+    $(window).scroll(function() {
+        var $el = $('.animate4');
+
+        if($(this).scrollTop() >=2100) $el.addClass('animated slideInRight');
+        else $el.removeClass('animated slideInRight');
     });
 
 
@@ -164,7 +206,15 @@
     sr.reveal('.foo2',{duration: 1000});
     sr.reveal('.foo3',{duration: 1500});
 
+    //전구
+    $('.lamp').on("click", function(){
+        $(this).toggleClass('light');
+    });
+    //sectionD
+    $('.box').click(function() {
+        $(this).toggleClass('selected');
 
-
+    });
 </script>
+
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
