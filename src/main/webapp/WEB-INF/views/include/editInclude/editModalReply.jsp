@@ -7,8 +7,17 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%--<script>--%>
+    <%--function init() {--%>
+        <%--alert(1);--%>
+        <%--replyPage = 1;--%>
+        <%--getPage("/srcReply/" + srcId + "/" + replyPage);--%>
+    <%--};--%>
+<%--</script>--%>
+
+<%--<body onload="init();">--%>
 <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -68,78 +77,52 @@
                     <div class="row reply_btn">
                         <div id="post" class="col btn btn-primary right-button">POST</div>
                     </div>
+
                     <%--댓글 리스트 부분--%>
-                    <div class="row reply_list_view">
-                        <div class="row reply_list" id="reply-list-view">
-                            <div class="col-2 no_padding">
-                                <img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img">
-                            </div>
-                            <div class="col">
-                                <div class="row reply_user_data_view" id="reply-user-id">
-                                    <span class="reply_user_name" id="reply-user-name">Name</span>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;"
-                                       id="reply-modify-button">
-                                        Modify
-                                    </a>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;"
-                                       id="reply-save-button">
-                                        Save
-                                    </a>
-                                </div>
-                                <div class="form-control reply_content"></div>
-                            </div>
-                        </div>
-                        <div class="row reply_list" id="reply-list-view2">
-                            <div class="col-2 no_padding">
-                                <img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img2">
-                            </div>
-                            <div class="col">
-                                <div class="row reply_user_data_view" id="reply-user-id2">
-                                    <span class="reply_user_name" id="reply-user-name2">Name</span>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;"
-                                       id="reply-modify-button2">
-                                        Modify
-                                    </a>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" id="reply-save-button2">
-                                        Save
-                                    </a>
-                                </div>
-                                <div class="form-control reply_content"></div>
-                            </div>
-                        </div>
-                        <div class="row reply_list" id="reply-list-view3">
-                            <div class="col-2 no_padding">
-                                <img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img3">
-                            </div>
-                            <div class="col">
-                                <div class="row reply_user_data_view" id="reply-user-id3">
-                                    <span class="reply_user_name" id="reply-user-name3">Name</span>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;"
-                                       id="reply-modify-button3">
-                                        Modify
-                                    </a>
-                                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" id="reply-save-button3">
-                                        Save
-                                    </a>
-                                </div>
-                                <div class="form-control reply_content"></div>
-                            </div>
-                        </div>
-                        <div class="row reply_list load_view" id="reply-more-list">
-                            <div class="load">
-                                <div class="line"></div>
-                                <div class="line"></div>
-                                <div class="line"></div>
-                            </div>
-                        </div>
+                    <div class="row reply_list_view" id="list_view_all">
+                        <%--<div class="row reply_list" id="reply-list-view">--%>
+                        <%--<div class="col-2 no_padding">--%>
+                        <%--<img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img">--%>
+                        <%--</div>--%>
+                        <%--<div class="col">--%>
+                        <%--<div class="row reply_user_data_view" id="reply-user-id">--%>
+                        <%--<span class="reply_user_name" id="reply-user-name">Name</span>--%>
+                        <%--<a class="btn btn-outline-secondary btn-sm" href="javascript:;"--%>
+                        <%--id="reply-modify-button">--%>
+                        <%--Modify--%>
+                        <%--</a>--%>
+                        <%--<a class="btn btn-outline-secondary btn-sm" href="javascript:;"--%>
+                        <%--id="reply-delete-button">--%>
+                        <%--delete--%>
+                        <%--</a>--%>
+                        <%--</div>--%>
+                        <%--<div class="form-control reply_content"></div>--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                        <%--댓글 더보기--%>
+
                     </div>
+                    <div class='text-center'>
+                        <ul id="pagination" class="pagination pagination-sm no-margin ">
+
+                        </ul>
+                    </div>
+
+                    <%--<div class="row reply_list load_view" id="reply-more-list">--%>
+                    <%--<div class="load">--%>
+                    <%--<div class="line"></div>--%>
+                    <%--<div class="line"></div>--%>
+                    <%--<div class="line"></div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
             </div>
         </div>
     </div>
 </div>
-</div>
+<%--</body>--%>
 

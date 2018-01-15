@@ -136,8 +136,8 @@
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
-                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
-                        "/tUpdate&nbsp&nbsp" + srcUpdate;
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate + "\t"+
+                        "Update&nbsp&nbsp" + srcUpdate;
                 } else {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
                 }

@@ -11,8 +11,8 @@
         <!--VALUES (#{srcId}, #{replyText}, #{replyWriter}, #{replyStatus})-->
     <!--</insert>-->
     <insert id="insertReply">
-        INSERT INTO tbl_src_reply (src_id, reply_text, reply_status)
-        VALUES (#{srcId}, #{replyText},  #{replyStatus})
+        INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_status)
+        VALUES (#{srcId}, #{replyText}, #{replyWriter},  #{replyStatus})
     </insert>
 
     <!-- 댓글 수정  필드 주석처리하면 테스트케이스 실패함-->
@@ -33,10 +33,35 @@
     </delete>
 
     <!-- 댓글 목록 -->
-    <select id="listSrcReply" resultType="SrcReplyVo">
+    <select id="srcListReply" resultType="hashmap">
         SELECT reply_id, src_id, reply_text, reply_writer, user_name AS userName, r.reply_regdate, r.reply_update
         FROM tbl_src_reply r, tbl_user m
-        WHERE  r.reply_writer = m.user_id AND src_id=#{srcId}
-        ORDER BY reply_id
+        WHERE  r.reply_writer = m.user_id AND r.src_id=#{srcId}
+        ORDER BY reply_id desc
+        LIMIT  #{cri.pageStart}, #{cri.perPageNum}
+
     </select>
+
+    <!--댓글수-->
+    <select id="list" resultType="SrcReplyVO">
+        select * from tbl_src_reply WHERE  src_id = #{srcId}
+        ORDER BY  reply_id DESC
+        LIMIT  #{cri.pageStart}, #{cri.perPageNum}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(src_id) from tbl_src_reply WHERE  src_id =#{srcId}
+    </select>
+
+
+    <!-- 무한 스크롤 -->
+    <!--<select id="infiniteScrollDown" resultType="SrcReplyVO">-->
+        <!--SELECT reply_id, src_id, reply_text, reply_writer, user_name AS userName2, r.reply_regdate, r.reply_update-->
+        <!--FROM tbl_src_reply r, tbl_user m-->
+        <!--WHERE  r.reply_writer = m.user_id AND r.src_id=#{srcId}-->
+        <!--ORDER BY reply_id desc limit 0, 5;-->
+    <!--</select>-->
+
+
+
 </mapper>

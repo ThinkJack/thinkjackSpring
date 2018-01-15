@@ -46,6 +46,7 @@ public class SrcReplyVO {
         this.replyWriter = replyWriter;
     }
 
+
     public Date getReplyRegdate() {
         return replyRegdate;
     }
@@ -70,21 +71,11 @@ public class SrcReplyVO {
         this.replyStatus = replyStatus;
     }
 
-//    public int getReplyParent() {
-//        return replyParent;
-//    }
-//
-//    public void setReplyParent(int replyParent) {
-//        this.replyParent = replyParent;
-//    }
-
-
-
     @Override
     public String toString() {
         return "SrcReplyVO{" +
                 "replyId=" + replyId +
-                ", srcId='" + srcId +
+                ", srcId='" + srcId + '\'' +
                 ", replyText='" + replyText + '\'' +
                 ", replyWriter=" + replyWriter +
                 ", replyRegdate=" + replyRegdate +

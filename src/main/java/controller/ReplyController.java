@@ -84,7 +84,7 @@ public class ReplyController {
         ReplyLikeVO.setReplyId(replyId);
         ReplyLikeVO.setUserId(userid);
 
-        System.out.println(reHeart+"하트 들어왔니"+replyId+"아이디");
+        System.out.println(reHeart + "하트 들어왔니" + replyId + "아이디");
 
         if (reHeart >= 1) {
             service.deleteReplyLike(ReplyLikeVO);
@@ -93,18 +93,16 @@ public class ReplyController {
             service.insertReplyLike(ReplyLikeVO);
             reHeart = 1;
         }
-System.out.println(reHeart+"하트?리턴 값");
+        System.out.println(reHeart + "하트?리턴 값");
 
         return reHeart;
     }
 
     //수정
-    @RequestMapping(value ="/{replyId}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    @RequestMapping(value = "/{replyId}", method = {RequestMethod.PUT, RequestMethod.PATCH})
     public ResponseEntity<String> update(
             @PathVariable("replyId") Integer replyId,
             @RequestBody ReplyVO vo) {
-
-
         ResponseEntity<String> entity = null;
         try {
 
@@ -122,15 +120,12 @@ System.out.println(reHeart+"하트?리턴 값");
     }
 
     //삭제
-    @RequestMapping(value ="/{replyId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{replyId}", method = RequestMethod.DELETE)
     public ResponseEntity<String> remove(
-
             @PathVariable("replyId") Integer replyId) {
-System.out.println(replyId+"삭제값 넘어오나요?");
-
         ResponseEntity<String> entity = null;
         try {
-            System.out.println(replyId+"삭제값 try 넘어오나요?");
+            System.out.println(replyId + "삭제값 try 넘어오나요?");
             service.deleteReply(replyId);
             entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         } catch (Exception e) {
@@ -164,27 +159,27 @@ System.out.println(replyId+"삭제값 넘어오나요?");
             Map<String, Object> map = new HashMap<String, Object>();
             List<ReplyVO> list = service.listReplyPage(boarId, cri);
 
-            for( int i = 0 ; i < list.size() ; i++) {
+            for (int i = 0; i < list.size(); i++) {
 //                list의 replyId 값을 받아온다
                 list.get(i).getReplyId();
-                System.out.println( list.get(i).toString()+"하트의 list의 toString");
+                System.out.println(list.get(i).toString() + "하트의 list의 toString");
                 reHeart.setReplyId(list.get(i).getReplyId());
 
 //                userId 값을 받아와야 한다.
                 int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
                 reHeart.setUserId(userid);
-                System.out.println( reHeart.getUserId() +"하트의  userid");
+                System.out.println(reHeart.getUserId() + "하트의  userid");
 
-                System.out.println(  reHeart.toString() +"하트의  toString");
+                System.out.println(reHeart.toString() + "하트의  toString");
 
                 int replyLikeCnt = service.getReplyLike(reHeart);
 
-                System.out.println(  replyLikeCnt +"하트의  replyLikeCnt");
+                System.out.println(replyLikeCnt + "하트의  replyLikeCnt");
 
-                map.put("reHeart",replyLikeCnt);
+                map.put("reHeart", replyLikeCnt);
 
-                System.out.println(map.toString()+"map의 내용");
+                System.out.println(map.toString() + "map의 내용");
 
             }
 
