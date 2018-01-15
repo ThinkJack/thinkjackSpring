@@ -20,9 +20,9 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 
         <property name="url"
-                  value="jdbc:mysql://127.0.0.1:3306/tj?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8"></property>
-        <property name="username" value="tj"></property>
-        <property name="password" value="1234"></property>
+                  value="${spring.database.url}"></property>
+        <property name="username" value="${spring.database.username}"></property>
+        <property name="password" value="${spring.database.password}"></property>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -40,8 +40,8 @@
     <bean id="googleConnectionFactory"
           class="org.springframework.social.google.connect.GoogleConnectionFactory">
         <constructor-arg
-                value="252378785627-6v1tgs1kjie4ofmstgour5m6egi24hmi.apps.googleusercontent.com" />
-        <constructor-arg value="J6V3TJYTIexszG_1G71ZfgwR" />
+                value="${spring.social.google.appId}" />
+        <constructor-arg value="${spring.social.google.appSecret}" />
     </bean>
     <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
     <bean id="googleOAuth2Parameters"
@@ -59,7 +59,6 @@
             <bean class = "org.springframework.social.facebook.connect.FacebookConnectionFactory">
                 <constructor-arg value = "${spring.social.facebook.appId}"/>
                 <constructor-arg value = "${spring.social.facebook.appSecret}"/>
-
             </bean>
         </property>
     </bean>
@@ -67,5 +66,24 @@
         <constructor-arg ref=  "connectionFactoryLocator"/>
     </bean>
 
+    <!-- 메일 보내기 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="${spring.email.google.Id}" />
+        <property name="password" value="${spring.email.google.Secret}" />
+
+
+        <!-- email 요청시는 SMTP -->
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

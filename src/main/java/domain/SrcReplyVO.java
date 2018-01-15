@@ -9,7 +9,10 @@ public class SrcReplyVO {
     private int replyWriter;
     private Date replyRegdate;
     private Date replyUpdate;
-    private int replyParent;
+    private int replyStatus;
+//    private int replyParent;
+
+
 
     public int getReplyId() {
         return replyId;
@@ -59,24 +62,34 @@ public class SrcReplyVO {
         this.replyUpdate = replyUpdate;
     }
 
-    public int getReplyParent() {
-        return replyParent;
+    public int getReplyStatus() {
+        return replyStatus;
     }
 
-    public void setReplyParent(int replyParent) {
-        this.replyParent = replyParent;
+    public void setReplyStatus(int replyStatus) {
+        this.replyStatus = replyStatus;
     }
+
+//    public int getReplyParent() {
+//        return replyParent;
+//    }
+//
+//    public void setReplyParent(int replyParent) {
+//        this.replyParent = replyParent;
+//    }
+
+
 
     @Override
     public String toString() {
         return "SrcReplyVO{" +
                 "replyId=" + replyId +
-                ", srcId='" + srcId + '\'' +
+                ", srcId='" + srcId +
                 ", replyText='" + replyText + '\'' +
                 ", replyWriter=" + replyWriter +
                 ", replyRegdate=" + replyRegdate +
                 ", replyUpdate=" + replyUpdate +
-                ", replyParent=" + replyParent +
+                ", replyStatus=" + replyStatus +
                 '}';
     }
 }

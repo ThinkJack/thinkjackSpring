@@ -26,6 +26,9 @@ body {
     height: 100%;
 }
 
+textarea{
+    resize: none;
+}
 p {
     padding: 10px;
 }
@@ -44,12 +47,18 @@ li {
     max-width: 13.666667%;
 }
 
+.console-clear {
+    float: right;
+    margin: 9px;
+}
+
 .row h4 {
     margin: 0px;
 }
 
 p.code-name {
     margin: 0px;
+    display: inline-block;
 }
 
 div.command-line {
@@ -123,11 +132,10 @@ span.arrow {
     background-color: #000000;
 }
 
-.col, .col-4{
+.col, .col-4 {
     display: block;
     padding: 0px;
 }
-
 
 .footer {
     position: absolute;
@@ -202,9 +210,9 @@ p.err {
     overflow: auto;
 }
 
-.iframeWrapper iframe{
-    pointer-events: none; /* let any clicks go trough me */
-}
+/*.iframeWrapper iframe{*/
+/*pointer-events: none; !* let any clicks go trough me *!*/
+/*}*/
 
 .main_view .iframe_body {
     height: calc(100% - 488px);
@@ -302,6 +310,7 @@ p.err {
     overflow-x: hidden;
 
 }
+
 .CodeMirror {
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
@@ -349,6 +358,20 @@ p.err {
     animation: loadingC .6s .3s linear infinite;
 }
 
+.cdn-container {
+    max-height: 200px;
+}
+
+.cdn_input {
+    width: 86%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.cdn_close {
+    margin:10px;
+}
+
 @keyframes loadingC {
     0% {
         transform: translate(0, 0);
@@ -360,3 +383,80 @@ p.err {
         transform: translate(0, 0);
     }
 }
+
+#menu {
+    display: none;
+    position: fixed;
+    background-color: #111;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 150px;
+    margin-top: -75px;
+    margin-left: -125px;
+    z-index: 99;
+    text-align: center;
+    color: white;
+}
+
+#out {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    padding: 10px;
+    padding-left: 20px;
+    color: rgb(214, 16, 65);
+    font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5em;
+
+}
+
+/*#menu>span {*/
+/*display: block;*/
+/*font-size: 1.5em;*/
+/*line-height: 1.3;*/
+/*margin-top: 0.25em;*/
+/*}*/
+
+/*#menu>div {*/
+/*display: inline-block;*/
+/*width: 100px;*/
+/*text-align: center;*/
+/*vertical-align: top;*/
+/*cursor: pointer;*/
+/*opacity: 0.7;*/
+/*}*/
+
+/*#menu>div:hover {*/
+/*opacity: 1;*/
+/*}*/
+
+/*#menu svg {*/
+/*width: 64px;*/
+/*height: 64px;*/
+/*margin: 0 auto;*/
+/*display: block;*/
+/*}*/
+
+/*#menu path {*/
+/*fill: #fff;*/
+/*}*/
+
+/*#close-menu {*/
+/*position: absolute;*/
+/*top: 5px;*/
+/*right: 9px;*/
+/*color: white;*/
+/*cursor: pointer;*/
+/*}*/
+
+/*.emoji {*/
+/*width: 1em;*/
+/*height: 1em;*/
+/*vertical-align: baseline;*/
+/*}*/

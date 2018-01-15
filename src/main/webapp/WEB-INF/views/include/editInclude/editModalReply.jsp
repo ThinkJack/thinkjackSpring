@@ -5,7 +5,10 @@
   Time: 오전 9:14
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -18,7 +21,7 @@
                         <div class="col">
                             <div class="col">
                                 <div class="row"><span>A masterpiece by</span></div>
-                                <div class="row" id="src-id"><h4><c:out value="${SrcVO.srcId}" default="CAPTAIN ANONYMOUS"/></h4></div>
+                                <div class="row" id="src-title-reply-modal"></div>
                             </div>
                         </div>
                     </div>
@@ -29,24 +32,25 @@
             </div>
             <div class="modal-body">
                 <div class="container">
+
                     <div class="row count_img_view">
                         <div class="col-md-auto count_img_view_inner">
-                            <span id="view-count">13</span>
+                            <span id="view-count"></span>
                             <img src="/resources/images/view24.png">
-                            <span id="reply-couont">23</span>
+                            <span id="reply-couont"></span>
                             <img src="/resources/images/reply24.png">
-                            <span id="like-couont">23</span>
+                            <span id="like-couont"></span>
                             <img src="/resources/images/like24-2.png">
                         </div>
                     </div>
                     <%--설명부분(comment 가져와서 찍기)--%>
                     <div class="row">
                         <div class="row"><h6>DESCRIPTION</h6></div>
-                        <div class="row form-control comment_view" id="comment_view">
-                            <c:out value="${SrcVO.srcComments}" default=""/>
+                        <div class="row">
+                            <textarea class="form-control comment" id="comment-view" rows="5" disabled></textarea>
                         </div>
                         <div class="row">
-                            <span><i>Created</i></span><span class="regdate" id="regdate"> <c:out value="${SrcVO.srcRegdate}" default=""/></span>
+                            <span class="regdate" id="regdate"></span>
                         </div>
                     </div>
                     <%--댓글 등록 부분--%>
@@ -57,15 +61,15 @@
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-user-img">
                             </div>
                             <div class="col">
-                                <textarea class="form-control"></textarea>
+                                <textarea id="textarea" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row reply_btn">
-                        <div class="col btn btn-primary right-button">POST</div>
+                        <div id="post" class="col btn btn-primary right-button">POST</div>
                     </div>
                     <%--댓글 리스트 부분--%>
-                    <div class="row reply_list_view">
+                    <div class="row reply_list_view" id="reply-scroll">
                         <div class="row reply_list" id="reply-list-view">
                             <div class="col-2 no_padding">
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img">

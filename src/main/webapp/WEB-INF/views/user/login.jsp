@@ -1,28 +1,68 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-  <body>
-  
-  <form name="login" action="/user/loginPost" method="post">
-    
-      아이디 : <input type="text" name="userEmail" /><p>
-      비밀번호 : <input type="password" name="userPassword" /><p>
-      <input type="submit" value="로그인"/>
-      <input type="reset" value="취소"/>
-     <div>
-     <label>
-     <input type="checkbox" name="useCookie"> remember me
-     </label>
-     
-     </div>
-  </form>
-  <div>
-  <a href="/user/naverLogin"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-  </div>
-  <div id="google_id_login"><a href="/user/googleLogin"><img width="230" src="https://techsneak.com/wp-content/uploads/2017/01/login-google.png"/></a></div>
-  <div>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<script>
+    var userId=Boolean(${login.userId});
+    if(userId){
+        alert("이미 로그인 되어있습니다. 로그아웃 해주세요");
+        self.location = "/main";
+    }
 
-  </div>
-  </body>
-</html>
+</script>
+<link href="/resources/dist/css/login.css" rel="stylesheet">
+<div class="wrapper fadeInDown text-center">
+
+    <div class="card border-secondary mb-3" style="max-width: 20rem;" id="formContent">
+
+        <div class="card-header" style="background-color: black">
+            <!-- Icon -->
+            <%--<div class="fadeIn first">--%>
+            <%--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />--%>
+            <%--</div>--%>
+            <h1 style="color: white">Log in</h1>
+
+        </div>
+        <div class="card-body text-secondary" id="formFooter">
+
+            <!-- Login Form -->
+            <form name="login" action="/user/loginPost" method="post">
+
+
+                <%--<div class="panel-heading">--%>
+                <%--<div class="panel-title"><h1>Log in</h1></div>--%>
+                <%--</div>--%>
+                <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="가입한 Email을 입력해주세요" autofocus>
+                <input type="text" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" >
+                <input type="submit" class="form-control btn btn-primary" value="로그인"/>
+
+                <%--<a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>--%>
+            </form>
+
+
+
+
+            <%--<a href="/user/googleLogin"><img width="100%" height="50" src="/resources/images/google.png"/></a>--%>
+            <div>
+                <%--<a href="/user/githubLogin">--%>
+                <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
+                <%--</a>--%>
+                <a class="btn btn-block btn-social btn-google naver"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                    <img class="naverImg" src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
+                </a>
+                <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                    <span class="fa fa-google"></span> Sign in with Google
+                </a>
+                <a class="btn btn-block btn-social btn-github" href="/user/githubLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-github']);">
+                    <span class="fa fa-github"></span> Sign in with GitHub
+                </a>
+            </div>
+
+            <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/register'">회원가입</button>
+            <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/findPassword'">비밀번호 찾기</button></div>
+
+
+    </div>
+</div>
+
+
+
+

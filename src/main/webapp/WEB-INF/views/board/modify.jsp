@@ -1,36 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kwak
-  Date: 2017. 12. 6.
-  Time: PM 2:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Modify</title>
-</head>
-<body>
-<form role="form" method="post" id = "registerForm">
+
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+
+
+
+<div class="page-header">
+
+</div>
+<div class="container-fluid">
+    <div class="col-lg-3"></div>
+
+    <div class="col-lg-6">
+
+    <form role="form" method="post" id = "registerForm">
     <div class="box-body">
         <div class="form-group">
             <div class="form-group">
-                <label >boardId</label>
                 <input type="text"
                        name='boardId' class="form-control"
-                       value="${boardVO.boardId}">
+                       value="${boardVO.boardId}" hidden>
             </div>
             <label>Title</label>
             <input type="text"
                    name='boardTitle'
                    class="form-control"
                    placeholder="Enter Title"
-                   value="${boardVO.boardTitle}">
+                   value="${boardVO.boardTitle}"
+                   required>
         </div>
         <div class="form-group">
             <label>Content</label>
             <textarea class="form-control" name="boardContent" rows="3"
-                      placeholder="Enter ...">${boardVO.boardContent}</textarea>
+                      placeholder="Enter ..."
+                      required>${boardVO.boardContent}</textarea>
         </div>
         <div class="form-group">
             <label>Writer</label>
@@ -52,5 +56,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-</body>
-</html>
+    </div>
+    <div class="col-lo-3"></div>
+</div>
+
+<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>

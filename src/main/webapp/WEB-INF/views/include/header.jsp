@@ -1,59 +1,157 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en">
 <head>
     <!--필수 -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--w3schools-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
+    <%--반응형 웹디자인 아닌 조정폭--%>
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
 
-    <title>Thinkjack</title>
+    <%--애니메이션 효과--%>
+    <link rel="stylesheet" href="/resources/dist/css/animate.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <%--이모티콘--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--css파일 연결부분-->
-    <link href="/resources/dist/css/common.css" rel="stylesheet">
-    <link href="/resources/dist/css/main.css" rel="stylesheet">
+    <link href="/resources/assets/css/docs.css" rel="stylesheet">
+    <link href="/resources/bootstrap-social.css" rel="stylesheet">
 
-    <!--sidenavbar-새로운 게시글 알림-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!-- jquery load -->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <%--bootstrap--%>
+    <link rel="stylesheet" href="/resources/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/dist/css/_bootswatch.scss">
+    <link rel="stylesheet" href="/resources/dist/css/_variables.scss">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/resources/dist/js/bootstrap.min.js"></script>
 
-    <!--아이콘-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+    <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--스크롤 애니메이션--%>
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+    <%--첨부파일--%>
+    <script src="/resources/dist/js/upload.js"></script>
+
+    <%--font--%>
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo+Da' rel='stylesheet' type='text/css'>
+    <script>
+        var msg=Boolean("${msg}");
+        if(msg){
+            alert("${msg}");
+        }
+        $(document).ready(function() {
+            $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
+        });
+    </script>
+    <style>
+        .naver{
+            background-color:#1EC800;
+            margin-top: 5px;
+            color:white;
+        }
+        .naverImg{
+            background-color:#1EC800;
+            height:16px;
+            margin:auto;
+            padding-right:4px;
+            padding-left:4px;
+            padding:3px;
+        }
+        /*.naverImg:hover {*/
+            /*!*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*!*/
+            /*background-color: #00b300;*/
+        /*}*/
+        .naver:hover{
+            /*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);*/
+            background-color: #00b300;
+            color:white;
+        }
+    </style>
 </head>
 
-<!--배경색 변경가능 (class 이름 변경으로 색상 선택 가능)-->
-<%--총 넓이 2600--%>
-<body class="w3-white w3-content " style="max-width:2600px">
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-    <div class="row">
-        <div class="col-8"></div>
-        <div class="col-4">
-            <button href="">로그인</button>
-            <!--로그인 했을때-->
-            <!--<button href="">로그인</button>-->
-            <!--<button href="" style="padding-left:10px;">버튼2</button>-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top bd" style="font-size: 25px">
+
+    <div class=" removePadding" style="font-size: 25px;width: 100%;" >
+        <%--<a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">Thinkjack</a>--%>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarColor03">
+
+            <ul class="nav nav-pills mx-auto w-100 justify-content-center">
+                <a class="navbar-brand " onclick="location.replace('/main')" style="font-size: 40px">
+                    <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" >
+                </a>
+                <li class="nav-item ">
+                    <a class="nav-link active" href="#main">Main</a>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">  Service</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="/edit/editPage">Edit</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/edit/unitTest">Unit</a>
+                    </div>
+                </li>
+
+<%--자바스트립트로 dic dropdown -item에 add class show 마우스 가저가면 나타나게 한다--%>
+                <li class="nav-item dropdown " >
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Board</a>
+                    <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=notice'>Notice</a>
+                    </div>
+                </li>
+            </ul>
+
+            <%--로그아웃 상태--%>
+            <c:if test="${login eq null}">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end " style="float: right;">
+                    <li class="nav-item" style="margin-top: 10px;">
+                        <button  class="btn btn-outline-primary hn " onclick="location.replace('/user/login')" style="font-size: 20px ;height:50px;">로그인</button>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><img class="rounded-circle loginPhoto "  src="/resources/images/main2.jpg" ></a>
+                    </li>
+                </ul>
+            </c:if>
+            <%--로그인 상태--%>
+            <c:if test="${login ne null}">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end ">
+                    <li class="nav-item" style="margin-top: 10px" >
+                        <button  type="button"  class="btn btn-outline-primary hn "  onclick="location.replace('/user/logout')" style="font-size: 20px ;height:50px;">로그아웃</button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <img id="profileHeader" class="rounded-circle loginPhoto" src="" ></a>
+                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <a class="dropdown-item" href="/user/myinfo">회원정보 수정</a>
+                        </div>
+                    </li>
+                </ul>
+            </c:if>
         </div>
     </div>
+</nav>
 
 
-    <!--center navbar-->
-    <header class="w3-panel w3-center w3-opacity" >
-        <div class="w3-padding-64">
-            <div class="w3-bar w3-border">
-                <a href="#" class="w3-bar-item w3-button ">Home</a>
-                <a href="#" class="w3-bar-item w3-button ">Cummunity</a>
-                <a href="#" class="w3-bar-item w3-button ">QNA</a>
-                <a href="#" class="w3-bar-item w3-button "> Release Notes</a>
-                <a href="#" class="w3-bar-item w3-button "> Editor</a>
-            </div>
-        </div>
 
-    </header>
+

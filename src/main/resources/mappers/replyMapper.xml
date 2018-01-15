@@ -4,19 +4,116 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.replyMapper">
-<!--//생성(insert)-->
-   <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
-    <insert id="insert" >
-        insert into tbl_reply (board_id, reply_text, reply_wirter, reply_parent)
-        VALUES (#{boardId},#{replyText}),(SELECT reply_id FROM tbl_reply WHERE user_name = #{replyWirter}))
+
+    <!--생성,tbl_reply table에(글번호,댓글내용,유저ID,댓글번호)-->
+    <insert id="insert">
+        INSERT INTO tbl_reply (board_id, reply_text, reply_writer, reply_parent)
+        VALUES (#{boardId}, #{replyText}, (SELECT user_id
+                                           FROM tbl_user
+                                           WHERE user_name = #{replyWriter}), #{replyParent});
     </insert>
-<!-- 조회(select)-->
+
+    <!-- 조회(select)-->
+    <select id="select" resultType="ReplyVO">
+        SELECT
+            reply_id                                          replyId,
+            board_id                                          boardId,
+            reply_text                                        replyText,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            reply_regdate                                     replyRegdate,
+            reply_update                                      replyUpdate,
+            reply_parent                                      replyParent,
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
+        FROM tbl_reply
+        WHERE board_id = #{boardId}
+        #         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
+        #         ORDER BY  replyRegdate ASC
+        order by if(isnull(reply_parent),reply_id,reply_parent);
+    </select>
+
+    <!--정정(update)-->
+    <!--대댓글 수정-->
+    <update id="update">
+        UPDATE tbl_reply
+        SET reply_text = #{replyText}
+        WHERE reply_id = #{replyId}
+    </update>
+
+    <!--삭제(delete)-->
+    <update id="delete">
+        /*replyState =0,1입력*/
+        UPDATE tbl_reply
+        SET reply_state = 0
+        WHERE reply_id = #{replyId}
 
 
-<!-- 댓글 전체 목록(select)-->
+    </update>
 
-<!--정정(update)-->
+    <!--게시판 번호에서 댓글 목록 범위 지정-->
+    <select id="listPage" resultType="ReplyVO">
+        SELECT
+            reply_id                                          replyId,
+            board_id                                          boardId,
+            reply_text                                        replyText,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyProfile,
+            reply_regdate                                     replyRegdate,
+            reply_update                                      replyUpdate,
+            reply_parent                                      replyParent,
+            reply_likecnt                                     replyLikecnt,
+            reply_state                                       replyState
+        FROM tbl_reply
+        WHERE board_id = #{boardId}
+        #         ORDER BY IF(ISNULL(reply_parent), reply_id, replyParent),reply_id ASC
+        #         ORDER BY  replyRegdate ASC
+        order by if(isnull(reply_parent),reply_id,reply_parent)
+        LIMIT #{cri.pageStart}, #{cri.perPageNum};
+    </select>
 
-<!--삭제(delete)-->
+    <!--게시판 글번호에 해당하는 댓글 수를 찾음-->
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM tbl_reply
+        WHERE board_id = #{boardId}
+    </select>
+
+
+    <!--댓글id와 userid값이 추가된다-->
+    <insert id="createReplyLikeCnt">
+        INSERT INTO tbl_reply_like (reply_id, user_id) VALUES (#{replyId}, #{userId});
+    </insert>
+
+
+    <update id="updateReplyLikeCnt">
+        UPDATE tbl_reply
+        SET reply_likecnt = (SELECT count(reply_like_id)
+                             FROM tbl_reply_like
+                             WHERE tbl_reply_like.reply_id = #{replyId})
+        WHERE reply_id = #{replyId}
+    </update>
+
+
+    <delete id="deleteReplyLikeCnt">
+        /*update한다 tbl_reoly_의 하트 숫자를 증가시키게*/
+        DELETE FROM tbl_reply_like
+        WHERE reply_id = #{replyId} AND user_id = #{userId};
+    </delete>
+
+
+    <!-- 좋아요 조회(select)-->
+    <select id="heart" resultType="int">
+        SELECT count(*)
+        FROM tbl_reply_like
+        WHERE reply_id = #{replyId} AND user_id = #{userId}
+    </select>
+
 
 </mapper>
+
