@@ -17,18 +17,17 @@ body {
     height: 100%;
     /*background-color: #212357;*/
     background-image: url("/resources/images/main/h.png") ;
-
     background-repeat:no-repeat;
     /*background-position: center;*/
-    background-size: 420px 480px;
+    background-size: 410px 470px;
 }
 .lamp-container {
     width: 240px;
     height:240px;
     margin: 0 auto;
     position: relative;
-    left: 115px;
-    top: 105px;
+    left: 110px;
+    top: 100px;
 }
 
 
@@ -39,15 +38,12 @@ body {
 size:auto;
     cursor: pointer;
     transform-origin: top center;
-    background-color: rgba(255,255,255,.1);
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 0 100px rgba(255,255,255,.6);
     border-radius: 50%;
 
 }
 
-.lamp.light {
-    background-color: rgba(255,255,255,1);
-    box-shadow: 0 0 100px rgba(255,255,255,.6)
-}
 
 
 /*툴팁*/
@@ -62,8 +58,8 @@ h1 {
 
 
 .tip > .tooltipB,
-
-
+.tip > .tooltipA,
+.tipClick > .tooltipA,
 .tipClick > .tooltipB{
     display:none;
 }
@@ -72,14 +68,14 @@ h1 {
 
 
 .tip:hover > .tooltipB,
-
-
+.tip:hover > .tooltipA,
+.tipClick > a:focus + .tooltipA,
 .tipClick > a:focus + .tooltipB
 {
     display:block;
 }
 
-.tooltipL, .tooltipR, .tooltipB, .tooltipT{
+.tooltipA, .tooltipB{
     background: #333333; /* old browsers */
     background: rgba(0,0,0,0.85); /* For IE9 */
     background: -moz-linear-gradient(top, rgba(51,51,51,0.85) 0%, rgba(0,0,0,0.85) 100%); /* firefox */
@@ -97,7 +93,7 @@ h1 {
     text-align: center;
     z-index: 10;
 }
-
+.tooltipA:before,
 .tooltipB:before {
     border-style: solid;
     border-width: 10px;
@@ -112,8 +108,7 @@ h1 {
 /************ Bottom Tooltip *************/
 
 .tooltipB{ /* The styling on the tooltip */
-    top: 141px;
-    left: 233px;
+    top: 85px;
 }
 
 .tooltipB:before{  /* Creates the arrow for the tooltip */
@@ -122,6 +117,17 @@ h1 {
     top:-20px;
 }
 
+/************ Bottom Tooltip *************/
+
+.tooltipA{ /* The styling on the tooltip */
+    top: 25px;
+}
+
+.tooltipA:before{  /* Creates the arrow for the tooltip */
+    border-color: transparent transparent #333333 transparent;
+    right:5px;
+    top:-20px;
+}
 
 img{border:none;}
 li.tip, li.tipClick {margin-right:30px; margin-left:30px; display:inline;}

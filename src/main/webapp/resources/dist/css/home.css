@@ -539,3 +539,7 @@ a:hover {
         height: 150px;
     }
 }
+/*스크롤*/
+/* css */
+.show-on-scroll { visibility: hidden; }
+.show-on-scroll.shown { visibility: visible; }
