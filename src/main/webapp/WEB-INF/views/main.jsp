@@ -40,11 +40,11 @@
         <div class="col-sm-8 removePadding" >
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderLB " style="height:20%;margin-right: 50% ;margin-bottom: -11px;">
-                    <button class="btn btn-primary btn-lg btn-block bd" style="margin-left:39%;width:70%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:69px;font-size: 28px" onclick="location.replace('/edit/unitTest')">Unit</button>
+                    <button class="btn btn-primary btn-lg btn-block bd" style="margin-left:39%;width:70%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:69px;font-size: 28px" onclick="location.href = '/edit/unitTest'">Unit</button>
                 </div>
                 <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
                 <div class="col-sm-4 removePadding borderRB " style="height:20%;margin-top:139.781px;">
-                    <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.replace('/edit/editPage')">Edit</button>
+                    <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.href = '/edit/editPage'">Edit</button>
                 </div>
                 <div class=" removePadding borderRT " style="height:20%;width:13.33%;margin-top:139.781px;"></div>
                 <div class="col-sm-12 removePadding borderR " style="height:43%;">
@@ -104,23 +104,23 @@
     <div class="col-sm-4 removePadding" >
 
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=free');"><p>Free Board</p></button>
+            <button class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.href = '/board/list?category=free';"><p>Free Board</p></button>
         </div>
         <div class="col-sm-6 removePadding " style="height: 12%;"></div>
 
         <div class="col-sm-6 removePadding " style="height: 12%;"></div>
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=qna');"><p>QNA</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.href = '/board/list?category=qna';"><p>QNA</p></button>
         </div>
 
         <div class="col-sm-6 removePadding " style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/srcBoard/srcList');"><p>Source</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.href = '/srcBoard/srcList';"><p>Source</p></button>
         </div>
         <div class="col-sm-6 removePadding " style="height: 12%;"></div>
 
         <div class="col-sm-6 removePadding  " style="height: 12%;"></div>
         <div class="col-sm-6 removePadding" style="height: 12%;">
-            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.replace('/board/list?category=relese');"><p>Board Page</p></button>
+            <button  class="btn btn-primary btn-lg btn-block bd " style="height: 90%;position: relative;top:-35px;border: #fff 8pt solid;" onclick="location.href = '/board/list?category=relese';"><p>Board Page</p></button>
         </div>
 
     </div>
