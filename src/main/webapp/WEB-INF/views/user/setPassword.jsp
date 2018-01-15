@@ -51,6 +51,7 @@
 </script>
 
 <link href="/resources/dist/css/login.css" rel="stylesheet">
+<div  id="Password2">
 <div class="wrapper fadeInDown text-center">
 
     <div class="card border-secondary mb-3 bd " style="max-width: 20rem;" id="formContent">
