@@ -86,7 +86,6 @@
                     <label style="color: black;">${boardVO.boardWriter}</label>
                 </div>
                 <script>
-                    console.log("${boardVO.boardWriterProfile}");
                     $("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))
                 </script>
 
@@ -168,10 +167,10 @@
 
         <div class="timeline-item card border-light mb-3">
             <%--댓글이 삭제되었는지 확인--%>
-            {{#if replyVo.replyState}}
+            {{#if replyVO.replyState}}
             <%-- 조건문으로 parent값 있는것을 구분한다--%>
             <%--하트 버튼(좋아요)--%>
-            {{#if replyVo.replyParent}}
+            {{#if replyVO.replyParent}}
             <%--<div class="registerReply"  >--%>
             <div class="row removePadding registerReply card-header text-white">
 
@@ -181,21 +180,21 @@
                 <div class="col-md-2 ">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="{{profileImg replyVo.replyProfile}}" class="Photo rounded">
+                    <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
                 </div>
 
                 <div class="col-md-7">
                     <strong class="title ">
-                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
+                        <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                         <input type="hidden" class="reParent" value="{{replyParent}}">
 
-                        <span class="replyWriter register timeline-header">{{replyVo.replyWriter}}</span>
-                        <span class="time" style="float: right">{{prettifyDate  replyVo.replyRegdate}}</span>
+                        <span class="replyWriter register timeline-header">{{replyVO.replyWriter}}</span>
+                        <span class="time" style="float: right">{{prettifyDate  replyVO.replyRegdate}}</span>
                     </strong>
 
-                    <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                              style="display: none">{{replyVo.replyText}}</textarea>
-                    <spna class="textSpan" style="display: block">{{replyVo.replyText}}</spna>
+                    <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
+                              style="display: none">{{replyVO.replyText}}</textarea>
+                    <spna class="textSpan" style="display: block">{{replyVO.replyText}}</spna>
                 </div>
 
                 <div class="col-md-2 removePadding">
@@ -206,19 +205,19 @@
                         <a class="replyHeartBtn btn" name=1>
                             <img class="reHeart" src="/resources/images/like2.png">
                         </a>
-                        <span> {{replyVo.replyLikeCnt}}</span>
+                        <span> {{replyVO.replyLikeCnt}}</span>
                     </div>
                     {{else}}
                     <div>
                         <a class="replyHeartBtn btn" name=0>
                             <img class="reHeart" src="/resources/images/like1.png">
                         </a>
-                        <span>{{replyVo.replyLikeCnt}}</span>
+                        <span>{{replyVO.replyLikeCnt}}</span>
                     </div>
                     {{/if}}
 
 
-                    {{#ifCond loginUser replyVo.replyWriter}}
+                    {{#ifCond loginUser replyVO.replyWriter}}
 
                     <button type="button" class="btn btn-warning replyModBtn" style="width: 100%;">수정</button>
                     <button type="button" class="btn btn-danger replyDelBtn" style="width: 100%;">삭제</button>
@@ -231,25 +230,25 @@
                     <div class="col-md-2">
                         <%--사진--%>
                         <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                            <img src="{{profileImg replyVo.replyProfile}}" class="Photo rounded">
+                            <img src="{{profileImg replyVO.replyProfile}}" class="Photo rounded">
                     </div>
                     <div class="col-md-8">
                         <strong class="title">
                             <%--replyId 불러오기 위해 필요한 부분--%>
-                            <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
+                            <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                             <%--replyId와 replyWriter 나타나는 부분--%>
-                            <span class="replyWriter register">{{replyVo.replyWriter}}</span>
+                            <span class="replyWriter register">{{replyVO.replyWriter}}</span>
 
-                            <span class="time" style="float: right">{{prettifyDate  replyVo.replyRegdate}}</span>
-                            <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                            <span class="time" style="float: right">{{prettifyDate  replyVO.replyRegdate}}</span>
+                            <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
                         </strong>
 
                         <div class="comment" style="overflow:auto; width:100%; height:150px;">
                             <%--입력된 댓글 text부분--%>
-                            <%--<input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>--%>
-                            <textarea class="replyText form-control" readonly value="{{replyVo.replyText}}"
-                                      style="display: none">{{replyVo.replyText}}</textarea>
-                            <spna class="textSpan ">{{replyVo.replyText}}</spna>
+                            <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
+                            <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
+                                      style="display: none">{{replyVO.replyText}}</textarea>
+                            <spna class="textSpan ">{{replyVO.replyText}}</spna>
                         </div>
 
                     </div>
@@ -261,18 +260,18 @@
                             <a class="replyHeartBtn btn" name=1>
                                 <img class="reHeart" src="/resources/images/like2.png">
                             </a>
-                            <span> {{replyVo.replyLikeCnt}}</span>
+                            <span> {{replyVO.replyLikeCnt}}</span>
                         </div>
                         {{else}}
                         <div>
                             <a class="replyHeartBtn btn" name=0>
                                 <img class="reHeart" src="/resources/images/like1.png">
                             </a>
-                            <span>{{replyVo.replyLikeCnt}}</span>
+                            <span>{{replyVO.replyLikeCnt}}</span>
                         </div>
                         {{/if}}
 
-                        {{#ifCond loginUser replyVo.replyWriter}}
+                        {{#ifCond loginUser replyVO.replyWriter}}
 
                         <button type="button" class="btn btn-warning replyModBtn" style="width: 100%;"> 수정</button>
 
@@ -316,12 +315,12 @@
         //하트
         var heartval = ${heart};
         if (heartval > 0) {
-            console.log(heartval);
+            // console.log(heartval);
             $("#heart").prop("src", "/resources/images/like2.png");
             $(".heart").prop('name', heartval)
         }
         else {
-            console.log(heartval);
+            // console.log(heartval);
             $("#heart").prop("src", "/resources/images/like1.png");
             $(".heart").prop('name', heartval)
         }
@@ -410,7 +409,7 @@
 <script>
     $(document).on("click", ".demoReply", function () {
         var demo = $(this).parent().siblings('.demo');
-        console.log(demo.css('display') + 'ddd');
+        // console.log(demo.css('display') + 'ddd');
 
         if (demo.css('display') == 'none') {
             demo.css("display", 'block');
@@ -427,7 +426,7 @@
     <%--수정 삭제--%>
     $(document).on("click", ".replyModBtn", function () {
         var replyId = $(this).parent().parent().parent().find('.replyId').text();
-        console.log("reParent 값?" + replyId);
+        // console.log("reParent 값?" + replyId);
         //각각의 id값을 받아온다
         //변경된 택스트
         var replyTextObj = $(this).parent().parent().find('.replyText');
@@ -452,7 +451,7 @@
             textSpan.css('display', 'block');
         }
 
-        console.log(replyText + "보내지는 글");
+        // console.log(replyText + "보내지는 글");
 
         $.ajax({
             type: 'put',
@@ -464,7 +463,7 @@
             data: JSON.stringify({replyText: replyText}),
             dataType: 'text',
             success: function (result) {
-                console.log("수정완료?");
+                // console.log("수정완료?");
                 if (result == 'SUCCESS') {
                     textSpan.html(replyText);
                 }
@@ -499,9 +498,7 @@
     <%--3.날짜부분--%>
     Handlebars.registerHelper("prettifyDate", function (timeValue) {
         var dateObj = new Date(timeValue);
-
         var year = dateObj.getFullYear();
-        // console.log(year+"year");
         var month = dateObj.getMonth() + 1;
         var date = dateObj.getDate();
         var hour = dateObj.getHours();
@@ -510,7 +507,7 @@
         return strDate;
     });
     Handlebars.registerHelper('profileImg', function (replyProfile) {
-        console.log(replyProfile);
+        // console.log(replyProfile);
         return getFileInfo(replyProfile);
     });
 
@@ -543,7 +540,7 @@
             var temp = data.list;
             var temp2 = new Array(data.list.length);
             for (var i in temp) {
-                temp2[i] = {replyVo: data.list[i], reHeart: data.reHeart[i], loginUser: data.loginUser[i]};
+                temp2[i] = {replyVO: data.list[i], reHeart: data.reHeart[i], loginUser: data.loginUser[i]};
             }
 
 
@@ -605,7 +602,7 @@
         var heart = $(this).prop('name');
         var sendLike = {'replyId': heart_replyid, 'replyHeart': heart};
 //
-        console.log('/replies/heart/' + heart_replyid + '/' + heart);
+//         console.log('/replies/heart/' + heart_replyid + '/' + heart);
 
         $.ajax({
             url: '/replies/heart/' + heart_replyid + '/' + heart,

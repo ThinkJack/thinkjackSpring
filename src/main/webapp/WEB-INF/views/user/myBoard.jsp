@@ -50,7 +50,11 @@
                 <td>
                     <a href='/board/read${pageMaker.makeUserSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${boardVO.boardCategoryName}'>
                             ${boardVO.boardTitle}</a></td>
-                <td>${boardVO.boardWriter}</td>
+                <td><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
+                    <script>
+                        $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
+                    </script>${boardVO.boardWriter}
+                </td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
                                     value="${boardVO.boardRegdate}"/></td>
                 <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
