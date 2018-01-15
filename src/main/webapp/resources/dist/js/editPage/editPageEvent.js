@@ -348,6 +348,8 @@ $(function () {
 $(function () {
     $("#setting").on("hide.bs.modal", function () {
 
+
+
         cdnCssJsValSet();
 
         updatePreview();
