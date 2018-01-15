@@ -15,3 +15,4 @@
 
     </ul>
     <div id="myTabContent" class="tab-content active">
+<%--닫지 마세요--%>

@@ -18,7 +18,7 @@
             <%--<div class="fadeIn first">--%>
             <%--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />--%>
             <%--</div>--%>
-            <h1 style="color: white">Log in</h1>
+            <h1 class="text-white hn">Log in</h1>
 
         </div>
         <div class="card-body text-secondary" id="formFooter">
