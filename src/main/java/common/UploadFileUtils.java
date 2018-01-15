@@ -21,7 +21,7 @@ public class UploadFileUtils {
     public static String uploadFile(String uploadPath, String originalName,byte[] fileData, String userId)throws Exception{
         //S3 서버 관련 설정
         S3Util s3 = new S3Util();
-        String bucketName = "tjbucket";
+        String bucketName = "thinkjackbucket";
 
         //UserVo 필요
         UUID uid = UUID.randomUUID();
@@ -29,7 +29,9 @@ public class UploadFileUtils {
         //savedName : 570d570a-7af1-4afe-8ed5-391d660084b7_g.JPG 같은 형식으로 만들어준다.
         String savedName = uid.toString() +"_"+originalName;
 
-        String savedPath = calcPath(uploadPath,userId);
+        String imagepath = "profile/"+ uploadPath;
+
+        String savedPath = calcPath(imagepath,userId);
 
         File target =new File(uploadPath +savedPath,savedName);
 
@@ -37,7 +39,7 @@ public class UploadFileUtils {
 
         String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 
-        String uploadedFileName =null;
+        String uploadedFileName ="/profile/"+formatName;
 
 //        if(MediaUtils.getMediaType(formatName) !=null){
 //            makeThumbnail(uploadPath,savedPath,savedName);
@@ -73,7 +75,11 @@ public class UploadFileUtils {
         Calendar cal =Calendar.getInstance();
         String profilePath = "/"+userId;
 
-        makeDir(uploadPath, profilePath);
+        S3Util s3 = new S3Util();
+        String bucketName = "thinkjackbucket";
+
+        s3.createFolder(bucketName,profilePath);
+        //makeDir(uploadPath, profilePath);
 
 //
 //        String  yearPath = File.separator+cal.get(Calendar.YEAR);

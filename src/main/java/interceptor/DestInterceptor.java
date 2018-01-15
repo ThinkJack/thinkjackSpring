@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class EditPageInterceptor extends HandlerInterceptorAdapter{
+public class DestInterceptor extends HandlerInterceptorAdapter{
 
-    private static final Logger logger = LoggerFactory.getLogger(EditPageInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(DestInterceptor.class);
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -25,13 +25,13 @@ public class EditPageInterceptor extends HandlerInterceptorAdapter{
     }
 
     private void saveSrcDest(HttpServletRequest req){
-        System.out.println("EditPageInterceptor saveSrcDest 진입");
+        System.out.println("DestInterceptor saveSrcDest 진입");
         String uri = req.getRequestURI();
 
         if(req.getMethod().equals("GET")){
-            logger.info("dest: "+ uri);
+            System.out.println("dest: "+ uri);
             req.getSession().setAttribute("dest",uri);
         }
-        System.out.println("dest: " + uri);
+        //System.out.println("dest: " + uri);
     }
 }
