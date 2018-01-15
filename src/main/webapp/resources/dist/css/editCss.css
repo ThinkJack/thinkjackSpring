@@ -26,6 +26,9 @@ body {
     height: 100%;
 }
 
+textarea{
+    resize: none;
+}
 p {
     padding: 10px;
 }

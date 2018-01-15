@@ -17,7 +17,7 @@
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
 
-<div role="tabpanel" class="tab-pane fade active in" id="Board" aria-labelledby="home-tab">
+<div id="Board" class="tabcontent card text-white bg-primary mb-3 active">
     <select name="searchType">
         <option value="n"
                 <c:out value="${cri.searchType == null?'selected':''}"/> >
@@ -114,34 +114,4 @@
     </script>
 </div>
 </div>
-
-<script>
-    function openTab(evt, category) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(category).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
-<script src="/resources/dist/js/upload.js"></script>
-<script>
-    $(document).ready(function () {
-        var imgtest;
-        var fullName = "${login.userProfile}";
-        if (fullName !== "") {
-            imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = imgtest;
-        } else {
-            str = "/resources/images/123.gif";
-        }
-        $("#profile").attr("src", str);
-    });
-</script>
+</div>

@@ -100,6 +100,6 @@
 <script src="/resources/dist/js/editPage/editPageDefine.js"></script>
 <script src="/resources/dist/js/editPage/editPageEvent.js"></script>
 <script src="//d1l6p2sc9645hc.cloudfront.net/tracker.js" data-gs="GSN-265185-D" async></script>
-<script src="/resources/upload.js"></script>
+<script src="/resources/dist/js/upload.js"></script>
 
 

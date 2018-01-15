@@ -9,120 +9,116 @@
         text-align: center;
     }
 </style>
-<div class="deaf2 "></div>
-<div class="row text-center">
+<div class="deaf2"></div>
 
-    <div class="col-xs-3 "></div>
+<div class="container-fluid removePadding text-center">
+    <div class="row">
+        <div class="col-sm-3 removePadding"></div>
+        <div class="col-sm-6 removePadding" >
 
-    <%--제목부분--%>
+            <%--<div class="form-group">--%>
+            <label class="control-label">   <h1 style="text-align: center;"> ${category} 게시판</h1> </label>
 
-    <div class="col-xs-6 borderLB removePadding" >
-        <h1 style="text-align: center;"> ${category} 게시판</h1>
-    </div>
-
-    <div class="col-xs-3 "></div>
-</div>
-
-<div class="row removePadding">
-    <div class="col-xs-3 "></div>
-
-    <div class="col-xs-6 removePadding" >
-        <%--검색부분--%>
-        <div >
-            <div class="row removePadding">
-                <div class="col-xs-10 removePadding pt6 ">
-                    <form class="navbar-form removePadding " role="search">
-                        <div class="form-group searchForm">
-                            <%--<label for="sel1">Select list :</label>--%>
-                            <select  class="form-control searchForm" name="searchType" id="sel1">
-                                <option value="n"
-                                        <c:out value="${cri.searchType == null?'selected':''}"/> >
-                                    ---</option>
-                                <option value="t"
-                                        <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
-                                    Title</option>
-                                <option value="c"
-                                        <c:out value="${cri.searchType eq 'c'?'selected':''}"/> >
-                                    Content</option>
-                                <option value="w"
-                                        <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
-                                    Writer</option>
-                                <option value="tc"
-                                        <c:out value="${cri.searchType eq 'tc'?'selected':''}"/> >
-                                    Title OR Content</option>
-                                <option value="cw"
-                                        <c:out value="${cri.searchType eq 'cw'?'selected':''}"/> >
-                                    Content OR Writer</option>
-                                <option value="tcw"
-                                        <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/> >
-                                    Title OR Content OR Writer</option>
-                            </select>
-
-                            <input type="text" class="form-control searchForm"  placeholder="Search" name="keyword" id="keywordInput"
-                                   value="${cri.keyword}">
-                            <button type="submit" class="btn btn-default searchForm" id="searchBtn">Search</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-xs-2 removePadding pt6" >
-                    <button class="btn btn-default " id="newBtn">new Board</button>
-                </div>
+            <div class="deaf2">
+                <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
             </div>
-        </div>
-    </div>
-    <div class="col-xs-3">
-    </div>
-</div>
+            <div class="form-group">
+                <div class="input-group ">
+                    <div class="input-group-prepend" style="width: 100%;">
+                        <%--<div class="form-group ">--%>
+                        <label class="mr-1" for="sel1">Select list:</label>
+                        <select  class="custom-select" name="searchType" id="sel1">
+                            <option value="n"
+                                    <c:out value="${cri.searchType == null?'selected':''}"/> >
+                                ---</option>
+                            <option value="t"
+                                    <c:out value="${cri.searchType eq 't'?'selected':''}"/> >
+                                Title</option>
+                            <option value="c"
+                                    <c:out value="${cri.searchType eq 'c'?'selected':''}"/> >
+                                Content</option>
+                            <option value="w"
+                                    <c:out value="${cri.searchType eq 'w'?'selected':''}"/> >
+                                Writer</option>
+                            <option value="tc"
+                                    <c:out value="${cri.searchType eq 'tc'?'selected':''}"/> >
+                                Title OR Content</option>
+                            <option value="cw"
+                                    <c:out value="${cri.searchType eq 'cw'?'selected':''}"/> >
+                                Content OR Writer</option>
+                            <option value="tcw"
+                                    <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/> >
+                                Title OR Content OR Writer</option>
+                        </select>
+                        <%--</div>--%>
 
-<div class="row removePadding">
-    <div class="col-xs-3 removePadding"></div>
-    <div class="col-xs-6 pt4 borderR removePadding ">
-        <%--게시글 목록--%>
-        <div class="row removePadding">
-            <table class="table removePadding">
-                <thead class="theadDark removePadding">
-                <tr>
-                    <th style="width:10px;">boardId</th>
-                    <th >TITLE</th>
-                    <th >WRITER</th>
-                    <th >REGDATE</th>
-                    <th style="width:40px;">VIEWCNT</th>
-                    <th style="width:40px;">HEART</th>
-                </tr>
-                </thead>
-                <c:forEach items="${list}" var="boardVO">
-                    <tr>
-                        <td>${boardVO.boardId}</td>
-                        <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
-                                ${boardVO.boardTitle}</a> </td>
-                        <td>${boardVO.boardWriter}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                            value="${boardVO.boardRegdate}"/></td>
-                        <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
-                        <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                        <input type="text" class="form-control" placeholder="Search" name="keyword" id="keywordInput"
+                               value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary " id="searchBtn">Search</button>
+                        </div>
+                        <div class="input-group-append " >
+                            <button class="btn btn-primary" id="newBtn">new Board</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <%--</div>--%>
+
+            <%-- list 부분--%>
+            <div class="list-group mb-5" >
+
+                <%--게시글 목록--%>
+
+                <table class="table ">
+                    <thead>
+                    <tr class="table-dark text-white">
+                        <th style="width:10px;">boardId</th>
+                        <th >TITLE</th>
+                        <th >WRITER</th>
+                        <th >REGDATE</th>
+                        <th  style="width:40px;">VIEWCNT</th>
+                        <th  style="width:40px;">HEART</th>
                     </tr>
-                </c:forEach>
-            </table>
-            <%--게시글 pagination --%>
-            <div class="text-center">
-                <ul class = "pagination">
+                    </thead>
+
+                    <c:forEach items="${list}" var="boardVO">
+
+                        <tr>
+                            <td>${boardVO.boardId}</td>
+                            <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
+                                    ${boardVO.boardTitle}</a> </td>
+                            <td>${boardVO.boardWriter}</td>
+                            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+                                                value="${boardVO.boardRegdate}"/></td>
+                            <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
+                            <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                        </tr>
+
+                    </c:forEach>
+
+                </table>
+                <%--게시글 pagination --%>
+
+                <ul class = "pagination pagination-sm justify-content-center">
 
                     <c:if test="${pageMaker.prev}">
-                        <li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
-                            &laquo;
-                        </a></li>
+                        <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&category=${category}">&laquo;</a></li>
                     </c:if>
 
                     <c:forEach begin="${pageMaker.startPage}"
                                end = "${pageMaker.endPage}" var="idx">
-                        <li <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
-                            <a href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
+                        <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
+                            <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
                         </li   >
                     </c:forEach>
 
                     <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
-                        <li>
-                            <a href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
+                        <li class="page-item">
+                            <a class="page-link" href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
                                 &raquo;
                             </a>
                         </li>
@@ -130,10 +126,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-3 pt4"></div>
-
     </div>
-
+</div>
     <script>
         $(document).ready(
             function () {

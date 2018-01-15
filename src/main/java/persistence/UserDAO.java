@@ -46,4 +46,6 @@ public interface UserDAO {
 
 	String getUserProfile(int userId) throws Exception;
 
+	public UserVO getUserPw(String userEmail) throws Exception;
+
 }

@@ -24,18 +24,21 @@
         FROM tbl_user
         WHERE user_name = #{userName}
     </select>
-
+    <select id="getUserPassword" resultType="UserVO">
+    select user_password userPassword
+    FROM  tbl_user
+    WHERE user_email = #{userEmail}
+    </select>
     <select id="login" resultType="UserVO">
         SELECT
             user_email   userEmail,
             user_id      userId,
             user_name    userName,
-            user_profile userProfile
+            user_profile userProfile,
+            user_state userState
         FROM tbl_user
         WHERE user_email = #{userEmail}
               AND user_password = #{userPassword}
-              AND user_state = 1
-
     </select>
 
     <select id="readUser" resultType="UserVO">

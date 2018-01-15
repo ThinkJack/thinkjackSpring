@@ -10,6 +10,7 @@ import domain.SrcVO;
 import domain.UserCriteria;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import domain.UserVO;
@@ -28,9 +29,15 @@ public class UserServiceImpl implements UserService {
 
 	@Inject
 	private JavaMailSender mailSender;
+	@Inject
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public void regist(UserVO user) throws Exception {
+
+		String encPassword = passwordEncoder.encode(user.getUserPassword());
+		user.setUserPassword(encPassword);
+		//System.out.println("암호화된 비밀번호 : "+user.getUserPassword());
 
 		dao.insertUser(user);
 //		System.out.println(user);
@@ -52,13 +59,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO userAuth(UserVO user) throws Exception {
         UserVO vo =new UserVO();
-
+		System.out.println(user+"user");
         vo=dao.chkAuth(user);
         //System.out.println("ser.userAuth.chkauth"+vo);
         if(vo!=null){
             try{
+            	System.out.println(vo+"vo");
                 dao.userAuth(user);
-				dao.successAuth(user);
+				dao.successAuth(vo);
             }catch (Exception e) {
                 e.printStackTrace();
             }}
@@ -81,12 +89,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
 		//System.out.println("service dto: "+dto);
+		try {
+			String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
+			String rawPw = dto.getUserPassword();
+			if(passwordEncoder.matches(rawPw, pw)) {
+				System.out.println("비밀번호 일치");
+				dto.setUserPassword(pw);
+			}else {
+				System.out.println("비밀번호 불일치");
+			}
+		}catch(NullPointerException npe){
+			UserVO vo=new UserVO();
+			vo=null;
+			System.out.println(vo);
+			return vo;
+		}catch (Exception e){
+			UserVO vo=new UserVO();
+			vo=null;
+			return vo;
+		}
 		return dao.login(dto);
 	}
 	//회원 정보 변경
 	@Override
 	public UserVO modifyUser(UserVO user) throws Exception {
-		//System.out.println("DAO user: "+user);
 		dao.updateUser(user);
 		return  dao.read(user);
 	}
@@ -168,6 +194,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void modifypassUser(UserVO user) throws Exception {
 		//System.out.println("dao.vo 입력 값"+user);
+
+		String encPassword = passwordEncoder.encode(user.getUserPassword());
+		user.setUserPassword(encPassword);
+		//System.out.println("암호화된 비밀번호 : "+user.getUserPassword());
 		try {
 			dao.successAuth(user);
 			dao.updatePassword(user);
