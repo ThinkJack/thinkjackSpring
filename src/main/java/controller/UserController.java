@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import common.TempKey;
 import common.UploadFileUtils;
-import domain.PageMaker;
-import domain.UserCriteria;
+import domain.*;
 import github.GithubLoginBo;
 import naver.NaverLoginBo;
 import org.json.simple.JSONObject;
@@ -37,18 +36,18 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
-import domain.BoardVO;
-import domain.UserVO;
 import dto.LoginDTO;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
+import service.SrcService;
 import service.UserService;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -58,6 +57,9 @@ public class UserController {
 
 	@Inject
 	private UserService service;
+
+	@Inject
+	private SrcService srcService;
 	//유저 등록
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public void registerGET(BoardVO board, Model model) throws Exception {
@@ -280,15 +282,19 @@ public class UserController {
 
 			}
 		}
-		return "redirect:/main";
+		return "/main";
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-    public void myinfo(@ModelAttribute("cri") UserCriteria cri,
-					   Model model) throws Exception {
+	public void myinfo() throws Exception {
+	}
 
-		System.out.println(cri.getUserId());
-		cri.setUserId(1);
+	@RequestMapping(value = "/myBoard", method = RequestMethod.GET)
+	public void myBoard(@ModelAttribute("cri") UserCriteria cri,
+					   Model model,
+                       HttpServletRequest httpRequest) throws Exception {
+
+		cri.setUserId(((UserVO) httpRequest.getSession().getAttribute("login")).getUserId());
 
 		model.addAttribute("list", service.boardSearch(cri));
 
@@ -299,6 +305,27 @@ public class UserController {
 
 		model.addAttribute("pageMaker", pageMaker);
     }
+
+	@RequestMapping(value = "/mySourceCode", method = RequestMethod.GET)
+	public void mySourceCode(@ModelAttribute("cri") UserCriteria cri,
+							 HttpServletRequest httpRequest,
+							 Model model) throws Exception {
+
+		cri.setUserId(((UserVO) httpRequest.getSession().getAttribute("login")).getUserId());
+
+		if (cri.getPerPageNum() == 10) {
+			cri.setPerPageNum(6);
+		}
+
+		List<SrcVO> list = service.selectSrcList(cri);
+		model.addAttribute("list", list);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.srcListSearchCount(cri));
+		System.out.println(pageMaker);
+		model.addAttribute("pageMaker", pageMaker);
+
+	}
 
     //유저 정보변경 권한 체크
 	@RequestMapping(value = "/modifyAuthCheck", method = RequestMethod.GET)
@@ -427,6 +454,7 @@ public class UserController {
 		LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
+
 		dto.setUserEmail("naver");
 		dto.setUserSocialId("n"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
@@ -438,13 +466,18 @@ public class UserController {
 //		System.out.println("UserVO "+dto);
 		try {
 			vo = service.naverLogin(dto);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
-			}
+		}
+
+
 
 		//소셜아이디로 uid를 찾는 로직 추가 해야함
+
+
 		if(vo != null) {
 			session.setAttribute("login", vo );
 			//response.sendRedirect("/");
@@ -457,11 +490,19 @@ public class UserController {
 			if(dest==null){
 				session.setAttribute("dest","/");
 			}
+
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
+
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
+
+
+//	@RequestMapping(value = "/naverSuccess", method = RequestMethod.GET)
+//	public void naverSuccess (HttpSession session, UserVO user,Model model) throws Exception{
+//
+//	}
 
     //google 로그인 컨트롤러
 
@@ -471,14 +512,21 @@ public class UserController {
 	@Inject
 	private OAuth2Parameters googleOAuth2Parameters;
 
+
+
 	@RequestMapping(value = "/googleLogin", method = { RequestMethod.GET, RequestMethod.POST })
     public String doGoogleSignInActionPage(HttpServletResponse response, Model model) throws Exception{
         OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 
+//		googleOAuth2Parameters.setRedirectUri("http://localhost:8080/user/googleLogincallback");
         String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+       // System.out.println("/user/googleLogincallback, url : " + url);
         model.addAttribute("url",url);
+
         return "user/googleLogin";
+
     }
+
 
     @RequestMapping(value = "/googleLogincallback")
     public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
@@ -501,22 +549,29 @@ public class UserController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
+		//System.out.println("UserVO 전");
+
         LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
+
        // System.out.println(person.getDisplayName());
         dto.setUserEmail("google");
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
 		//System.out.println("controller dto: "+dto);
+
 		UserVO vo = new UserVO();
+
 		try {
 			vo = service.googleLogin(dto);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
+
 
 		if(vo != null) {
 			session.setAttribute("login", vo );
@@ -533,19 +588,23 @@ public class UserController {
 		}else{
 			session.setAttribute("dest","/user/login");
 		}
+
+
+
 //        session.setAttribute("login", vo );
 //		model.addAttribute("userVO",vo);
 		//System.out.println("getAattributeNames"+session.getAttribute(savedest));
         return "redirect:/user/socialLoginPost";
     }
 
-
-
 //======================================github login ==================================================
+
+
 	private GithubLoginBo githubLoginBo;
 	private String githubapiResult = null;
 
 	/* githubLoginBO */
+
 	@Inject
 	private void setGithubLoginBo(GithubLoginBo githubLoginBo) {
 		this.githubLoginBo = githubLoginBo;
@@ -570,6 +629,7 @@ public class UserController {
 
 		//토큰 생성
 		OAuth2AccessToken oauthToken = githubLoginBo.getAccessToken(session, code, state);
+
 		//System.out.println("github oauthToken 값: "+oauthToken);
 		githubapiResult = githubLoginBo.getUserProfile(oauthToken);
 		//System.out.println(githubapiResult);
@@ -580,14 +640,16 @@ public class UserController {
 		try {
 			obj = parser.parse(githubapiResult);
 		} catch (ParseException e) {
-			// fTODO Auto-generated catch block
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//JSON 객체 생성
 		JSONObject jsonobj = (JSONObject) obj;
+
 		//System.out.println(jsonobj);
 		String name = (String) jsonparse.JsonToString(jsonobj, "login");
 		String userSocialId = (String) (jsonparse.JsonToString(jsonobj, "id")+"");
+
 
 		UserVO vo =new UserVO();
 		LoginDTO dto = new LoginDTO();

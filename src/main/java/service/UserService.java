@@ -1,6 +1,7 @@
 package service;
 
 import domain.BoardVO;
+import domain.SrcVO;
 import domain.UserCriteria;
 import domain.UserVO;
 import dto.LoginDTO;
@@ -34,6 +35,10 @@ public interface UserService {
 	public void modifypassUser(UserVO user) throws Exception;
 
 	public List<BoardVO> boardSearch(UserCriteria cri)throws Exception;
+
+	public List<SrcVO> selectSrcList(UserCriteria cri) throws Exception;
+
+	public int srcListSearchCount(UserCriteria cri) throws Exception;
 
 	public int boardSearchCount(UserCriteria cri)throws Exception;
 

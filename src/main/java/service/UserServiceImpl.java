@@ -3,8 +3,10 @@ package service;
 import javax.inject.Inject;
 
 import common.MailHandler;
+import common.SrcFileSet;
 import common.TempKey;
 import domain.BoardVO;
+import domain.SrcVO;
 import domain.UserCriteria;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +17,8 @@ import domain.UserVO;
 import dto.LoginDTO;
 import persistence.UserDAO;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -212,6 +216,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<BoardVO> boardSearch(UserCriteria cri) throws Exception {
 		return dao.boardSearch(cri);
+	}
+
+	@Override
+	public List<SrcVO> selectSrcList(UserCriteria cri) throws Exception{
+
+		SrcFileSet srcFileSet = new SrcFileSet();
+		List list = dao.selectSrcList(cri);
+
+		list = srcFileSet.setList(list);
+
+		return list;
+	}
+
+	@Override
+	public int srcListSearchCount(UserCriteria cri) throws Exception {
+		return dao.srcListSearchCount(cri);
 	}
 
 	@Override

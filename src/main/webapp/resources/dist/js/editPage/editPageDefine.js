@@ -263,6 +263,8 @@ var cdnCss = new Array();
 var cdnJs = new Array();
 var cssLnkSet = "";
 var jsLnkSet = "";
+var consoleSerchLog = [];
+var consoleCur = -1;
 
 var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
 var layoutMode = 0; //0 - top, 1 - left 2 - right
@@ -371,7 +373,7 @@ function cdnCssJsValSet(){
         if($("#css-cdn" + i).length){
             if($("#css-cdn" + i).val()){
                 cdnCss.push($("#css-cdn" + i).val());
-                cssLnkSet += "<link rel='stylesheet' href='"+ $("#css-cdn" + i).val() + "'\/>"
+                cssLnkSet += "<link rel='stylesheet' href='" + $("#css-cdn" + i).val() + "'\/>";
                 changeSaveImg(2);
             }
         }
@@ -443,11 +445,36 @@ function updatePreview() {
         "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
 
-    // consoleView(codeJavaScript.getValue());
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
+
     out.close();
-
-
 }
+
+// var console=(function(oldCons){
+//     return {
+//         log: function(text){
+//             oldCons.log(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         info: function (text) {
+//             oldCons.info(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         warn: function (text) {
+//             oldCons.warn(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         error: function (text) {
+//             oldCons.error(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         }
+//     };
+// }(window.console));
+
 
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
@@ -560,8 +587,29 @@ function srcDelete() {
 
 
 var consoleView = function (str) {
-    var commandLineValue = str;
     //console.log() 입력시 문자열 작업(정규식)
+
+
+    try {
+        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
+        consoleLogView(consoleLogStr(str));
+        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
+                                    + document.getElementById("resultView").contentWindow.eval(str) + "</p>"
+    } catch (err) {
+        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+    }
+
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
+};
+function consoleLogView(temp){
+    if (temp !== null) {
+        for (i in temp) {
+            editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + temp[i] + "\"</p>"
+        }
+    }
+}
+//
+function consoleLogStr(str) {
     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
     var temp = commandLineValue.match(reg);
 
@@ -573,21 +621,10 @@ var consoleView = function (str) {
         temp[i] = temp[i].replace("')", "");
         temp[i] = temp[i].replace("\")", "");
     }
+    return temp;
+}
 
-    try {
-        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
-        if (temp !== null) {
-            for (i in temp) {
-                editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
-            }
-        }
-        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
-    } catch (err) {
-        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
-    }
 
-    editConsoleView.scrollTop = editConsoleView.scrollHeight
-};
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
