@@ -33,9 +33,9 @@ public class UploadFileUtils {
 
         String savedPath = calcPath(imagepath,userId);
 
-        File target =new File(uploadPath +savedPath,savedName);
+        File target =new File(imagepath +savedPath,savedName);
 
-        FileCopyUtils.copy(fileData,target);
+        //FileCopyUtils.copy(fileData,target);
 
         String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 
@@ -53,7 +53,7 @@ public class UploadFileUtils {
 //        }else{
 //            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
 //        }
-
+        System.out.println(uploadPath+uploadedFileName);
         //S3Util 의 fileUpload 메서드로 파일을 업로드한다.
         s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);
 
