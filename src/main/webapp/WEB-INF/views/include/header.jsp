@@ -56,7 +56,7 @@
             // console.log(path);
             // console.log(fileName);
             // console.log(test);
-            profileheader =path+"s_"+fileName;
+            profileheader =path+fileName;
             //console.log(fullName);
             if(fullName!=="") {
                 headerimg = getFileInfo(profileheader);

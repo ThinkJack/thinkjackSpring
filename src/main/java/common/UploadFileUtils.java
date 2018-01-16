@@ -53,12 +53,12 @@ public class UploadFileUtils {
 //        }else{
 //            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
 //        }
-        System.out.println(uploadPath+uploadedFileName);
+        //System.out.println(uploadPath+uploadedFileName);
         //S3Util 의 fileUpload 메서드로 파일을 업로드한다.
         s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);
-        makeThumbnail(uploadPath+uploadedFileName,savedPath,savedName);
+        //makeThumbnail(uploadPath+uploadedFileName,savedPath,savedName);
 
-        System.out.println(uploadedFileName);
+        //System.out.println(uploadedFileName);
 //	s3.fileUpload(bucketName, new File(fileName))
         return uploadedFileName;
 

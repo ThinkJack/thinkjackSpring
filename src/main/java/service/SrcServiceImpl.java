@@ -1,6 +1,5 @@
 package service;
 
-import common.S3Util;
 import domain.*;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
@@ -24,9 +23,6 @@ public class SrcServiceImpl implements SrcService {
 
     @Inject
     private UserDAO userdao;
-
-    S3Util s3 = new S3Util();
-    String bucketName = "thinkjackbucket";
 
     @Override
     public Map readSrc(HttpServletRequest request) throws Exception {
