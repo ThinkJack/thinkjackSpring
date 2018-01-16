@@ -80,11 +80,11 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item active">
-                <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#changeView">
-                    <img src="/resources/images/browser-visualization.png"> Change View
-                </a>
-            </li>
+            <%--<li class="nav-item active">--%>
+                <%--<a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#changeView">--%>
+                    <%--<img src="/resources/images/browser-visualization.png"> Change View--%>
+                <%--</a>--%>
+            <%--</li>--%>
             <c:if test="${login eq null}">
                 <li class="nav-item active login">
                     <a class="btn btn-outline-dark" href="javascript:;" id="login">

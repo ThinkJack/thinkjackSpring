@@ -28,9 +28,9 @@
                             <a class="nav-link btn-light" data-toggle="tab" href="#settingInfo">Information</a>
                         </li>
                     </c:if>
-                    <li class="nav-item">
-                        <a class="nav-link btn-light" data-toggle="tab" href="#settingHtml">HTML</a>
-                    </li>
+                    <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link btn-light" data-toggle="tab" href="#settingHtml">HTML</a>--%>
+                    <%--</li>--%>
                     <li class="nav-item">
                         <a class="nav-link btn-light" data-toggle="tab" href="#settingCss">CSS</a>
                     </li>
@@ -89,43 +89,46 @@
                         </c:if>
                         </div>
 
-                        <div class="tab-pane container" id="settingHtml">
+                        <%--<div class="tab-pane container" id="settingHtml">--%>
+                        <div class="tab-pane container" id="settingCss">
                     </c:if>
                     <c:if test="${!(((login ne null)) and (SrcVO.srcWriter eq login.userId) or
                                 ((login ne null) and (SrcVO.srcId eq null)) or
                                 ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
                                 ((login eq null) and (SrcVO.srcId eq null)))}">
-                        <div class="tab-pane container active" id="settingHtml">
+                        <%--<div class="tab-pane container active" id="settingHtml">--%>
+                        <div class="tab-pane container active" id="settingCss">
                     </c:if>
+                            <%--<div class="row">--%>
+                                <%--<div class="row">--%>
+                                    <%--<label for="htmlPreprocessor">HTML Preprocessor</label>--%>
+                                <%--</div>--%>
+                                <%--<div class="row">--%>
+                                    <%--<select id="htmlPreprocessor" class="form-control">--%>
+                                        <%--<option selected value="0">None</option>--%>
+                                        <%--<option value="1">Haml</option>--%>
+                                        <%--<option value="2">MarkDown</option>--%>
+                                        <%--<option value="3">Slim</option>--%>
+                                        <%--<option value="4">Pug</option>--%>
+                                    <%--</select>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="tab-pane container" id="settingCss">--%>
                             <div class="row">
-                                <div class="row">
-                                    <label for="htmlPreprocessor">HTML Preprocessor</label>
-                                </div>
-                                <div class="row">
-                                    <select id="htmlPreprocessor" class="form-control">
-                                        <option selected value="0">None</option>
-                                        <option value="1">Haml</option>
-                                        <option value="2">MarkDown</option>
-                                        <option value="3">Slim</option>
-                                        <option value="4">Pug</option>
-                                    </select>
-                                </div>
+                                <%--<label for="cssPreprocessor">CSS Preprocessor</label>--%>
+                                <label >CSS Preprocessor</label>
                             </div>
-                        </div>
-                        <div class="tab-pane container" id="settingCss">
-                            <div class="row">
-                                <label for="cssPreprocessor">CSS Preprocessor</label>
-                            </div>
-                            <div class="row">
-                                <select id="cssPreprocessor" class="form-control">
-                                    <option selected>None</option>
-                                    <option>LESS</option>
-                                    <option>SCSS</option>
-                                    <option>Sass</option>
-                                    <option>Stylus</option>
-                                    <option>PostCSS</option>
-                                </select>
-                            </div>
+                            <%--<div class="row">--%>
+                                <%--<select id="cssPreprocessor" class="form-control">--%>
+                                    <%--<option selected>None</option>--%>
+                                    <%--<option>LESS</option>--%>
+                                    <%--<option>SCSS</option>--%>
+                                    <%--<option>Sass</option>--%>
+                                    <%--<option>Stylus</option>--%>
+                                    <%--<option>PostCSS</option>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
                             <div class="row">
                                 <label>Add External Stylesheets/Masterpieces</label>
                             </div>
@@ -147,17 +150,18 @@
                         <div class="tab-pane container" id="settingJS">
 
                             <div class="row">
-                                <label for="jsPreprocessor">JavaScript Preprocessor</label>
+                                <%--<label for="jsPreprocessor">JavaScript Preprocessor</label>--%>
+                                <label>JavaScript Preprocessor</label>
                             </div>
-                            <div class="row">
-                                <select id="jsPreprocessor" class="form-control">
-                                    <option selected>None</option>
-                                    <option>CoffeeScript</option>
-                                    <option>LiveScript</option>
-                                    <option>TypeScript</option>
-                                    <option>Babel</option>
-                                </select>
-                            </div>
+                            <%--<div class="row">--%>
+                                <%--<select id="jsPreprocessor" class="form-control">--%>
+                                    <%--<option selected>None</option>--%>
+                                    <%--<option>CoffeeScript</option>--%>
+                                    <%--<option>LiveScript</option>--%>
+                                    <%--<option>TypeScript</option>--%>
+                                    <%--<option>Babel</option>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
                             <div class="row">
                                 <label>Add External Scripts/Masterpieces</label>
                             </div>

@@ -53,6 +53,12 @@
             padding-bottom: 44px;
         }
 
+        #frameUnitTest {
+            height: 0px;
+            width: 0px;
+
+        }
+
         .CodeMirror {
              height: 100%;
          }
@@ -101,6 +107,8 @@
     </div>
 </div>
 
+<iframe id="frameUnitTest"></iframe>
+
 <!--modal 창-->
 <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
 <jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
@@ -118,6 +126,9 @@
     var testFunc;
     var declaration;
     var errors = false;
+    var frame = document.getElementById("frameUnitTest");
+    var out = frame.contentDocument || frame.contentWindow.document;
+
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
         declaration = origin.substr(origin.indexOf("(") + 1, origin.indexOf("{") - origin.indexOf("(") - 2);
@@ -134,6 +145,17 @@
         if (before != testFunc.length)
             $("#test-case").empty();
         before = testFunc.length;
+
+        //Uritest-----------------------------------------------------------------------------------------------
+        //우리추가
+//        out.open();
+//        out.write("<script>" + testFunc + "<\/script>");
+//        out.close();
+        //해당 객체명 접근
+        console.log(frame.contentWindow.Function(testFunc));
+        //-----------
+
+
     });
     $(document).on("click", "#add-test-case", function () {
         var inputbox = "";
@@ -228,6 +250,7 @@
             errMassage = err;
         }
         finally {
+
             var runningTime = getTimeStamp() - startTime;
             resultText = "<div class='resultLog'>[input : " + input.join() +
                 " / output : " + output + "] " +
