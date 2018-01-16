@@ -103,66 +103,6 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
 
-var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
-    mode: "javascript",
-    lineNumbers: true,
-    scrollbarStyle: "simple",    // 스크롤바 스타일
-    keyMap: "sublime",           // 키맵
-    matchBrackets: true,         // 괄호강조
-    theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
-    lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
-    highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
-    // extraKeys: { ".": "autocomplete" },
-    // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
-    indentUnit: 2,                //들여쓰기
-    // indentWithTabs: false,
-    electricChars: true,         //중괄호 정렬
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
-    styleActiveLine: true,
-
-    wordWrap: true,
-    autoCloseBrackets: true,
-    // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-
-    lineWrapping: true,           //Folding
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
-        },
-        "Shift-Tab": autoFormatSelection
-    },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
-});
-// editor.foldCode(CodeMirror.Pos(13, 0));
-codeUnitTest.setValue(
-    "function testFunction(){\n" +
-    "   return 0;\n" +
-    "}");
-
-var origin = codeUnitTest.getValue();
-var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
-testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
-
-var codePython = CodeMirror(document.getElementById("codePython"), {
-    mode: "python",
-    lineNumbers: true,
-    extraKeys: {
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
-        },
-        "Shift-Tab": autoFormatSelection
-    },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-});
-
 
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
@@ -709,7 +649,6 @@ $(function () {
         return {
             log: function(text){
                 oldCons.log(text);
-                oldCons.log(document.getElementById("edit-console-view").innerHTML);
                 document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
                 // Your code
             },
