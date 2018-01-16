@@ -31,6 +31,7 @@ function getFileInfo(fullName) {
         fileName = fullName.substr(fileLink.indexOf("_") + 1);
 
         //return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName}
+        console.log("imgsrc: "+imgsrc);
         return imgsrc;
     }
 }

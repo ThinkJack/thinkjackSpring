@@ -8,22 +8,22 @@ function checkImageType(fileName) {
 function getFileInfo(fullName) {
 
     var fileName, imgsrc, getLink;
-    console.log("getfileinfo 실행");
+    //console.log("getfileinfo 실행");
     var fileLink;
     if (fullName ===""||fullName===null||fullName===undefined) {
-        console.log(fullName+"getfullName");
+        //console.log(fullName+"getfullName");
         return "/resources/images/123.gif";
     }else {
         if (checkImageType(fullName)) {
             imgsrc = "http://" + document.location.host + "/displayFile?fileName=" + fullName;
             fileLink = fullName.substr(14);
-            console.log("checkImage");
+            //console.log("checkImage");
             var front = fullName.substr(0, 12); ///2015/00/00/
             var end = fullName.substr(14);
 
             getLink = "/displayFile?fileName=" + front + end;
         } else {
-            console.log("checkImage");
+            //console.log("checkImage");
             imgsrc = "/resource/dist/img/file.png";
             fileLink = fullName.substr(12);
             getLink = "/displayFile?fileName=" + fullName;

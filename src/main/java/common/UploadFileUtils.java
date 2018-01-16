@@ -33,13 +33,13 @@ public class UploadFileUtils {
 
         String savedPath = calcPath(imagepath,userId);
 
-        File target =new File(imagepath +savedPath,savedName);
+        //File target =new File(imagepath +savedPath,savedName);
 
         //FileCopyUtils.copy(fileData,target);
 
         String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 
-        String uploadedFileName ="/profile/"+formatName;
+        String uploadedFileName =(savedPath+savedName).replace(File.separatorChar, '/');
 
 //        if(MediaUtils.getMediaType(formatName) !=null){
 //            makeThumbnail(uploadPath,savedPath,savedName);
@@ -56,7 +56,7 @@ public class UploadFileUtils {
         System.out.println(uploadPath+uploadedFileName);
         //S3Util 의 fileUpload 메서드로 파일을 업로드한다.
         s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);
-
+        makeThumbnail(uploadPath+uploadedFileName,savedPath,savedName);
 
         System.out.println(uploadedFileName);
 //	s3.fileUpload(bucketName, new File(fileName))
@@ -73,12 +73,12 @@ public class UploadFileUtils {
 
     private static  String calcPath(String uploadPath, String userId){
         Calendar cal =Calendar.getInstance();
-        String profilePath = "/"+userId;
+        String profilePath = "/profile/"+userId+"/";
 
         S3Util s3 = new S3Util();
         String bucketName = "thinkjackbucket";
 
-        s3.createFolder(bucketName,profilePath);
+        //s3.createFolder(bucketName,profilePath);
         //makeDir(uploadPath, profilePath);
 
 //

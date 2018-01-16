@@ -89,10 +89,11 @@
 
         var imgtest;
         var fullName = "${login.userProfile}";
+        console.log("fullName: "+fullName);
         if (fullName !== "") {
             imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = "<div>" + "<img id='profileimg' class='img-responsive' src=" + imgtest + "/>" + "</div>";
+            console.log("imgtest: "+imgtest);
+            str = "<div>" + "<img id='profileimg' class='img-responsive' src='" + imgtest + "'/>" + "</div>";
         } else {
             str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
         }

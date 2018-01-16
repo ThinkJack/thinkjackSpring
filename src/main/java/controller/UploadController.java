@@ -40,7 +40,7 @@ public class UploadController {
 //    private ImageService service;
 
     S3Util s3 = new S3Util();
-    String bucketName = "tjbucket";
+    String bucketName = "thinkjackbucket";
 
     @Inject
     private UserService userService;
@@ -105,6 +105,8 @@ public class UploadController {
 
         InputStream in = null;
         ResponseEntity<byte[]> entity = null;
+        HttpURLConnection uCon = null;
+        System.out.println("FILE NAME: " + fileName);
 
         //System.out.println("FileName : "+fileName);
 
@@ -114,16 +116,32 @@ public class UploadController {
             MediaType mType = MediaUtils.getMediaType(formatName);
             HttpHeaders headers = new HttpHeaders();
 
-            in = new FileInputStream(uploadPath+fileName);
-            //System.out.println("in : "+in);
-            if(mType != null){
-                headers.setContentType(mType);
-            }else{
+            String inputDirectory = "thinkjack";
+            URL url;
 
-                fileName = fileName.substring(fileName.indexOf("_")+1);
-                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-                headers.add("Content-Disposition","attachment; filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+            //in = new FileInputStream(uploadPath+fileName);
+            //System.out.println("in : "+in);
+//            if(mType != null){
+//                headers.setContentType(mType);
+//            }else{
+//
+//                fileName = fileName.substring(fileName.indexOf("_")+1);
+//                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//                headers.add("Content-Disposition","attachment; filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+//            }
+
+            try {
+                url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+                System.out.println(url);
+                uCon = (HttpURLConnection) url.openConnection();
+                in = uCon.getInputStream(); // 이미지를 불러옴
+            } catch (Exception e) {
+                url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+                uCon = (HttpURLConnection) url.openConnection();
+                in = uCon.getInputStream();
             }
+
+
             entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
             headers,
             HttpStatus.CREATED);
