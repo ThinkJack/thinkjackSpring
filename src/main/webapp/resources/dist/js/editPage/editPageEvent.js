@@ -568,70 +568,78 @@ $("#src-delete").click(function (e) {
 });
 // $('input[name="genderS"]:checked')
 
-
 //=================SrcReply===============================================
 $(function () {
+
+    //총 댓글 갯수
+    // var replyTotCnt = pageMaker.getTotalCount();
+
+    //댓글등록 회원권한
     replyPage = 1;
     getPage("/srcReply/" + srcId + "/" + replyPage);
 
-    // var replyId = $("#list_view_all").attr("#reply-user-name");
-    // var delStyle = document.getElementById("reply-delete-button");
-    // var modifyStyle =  document.getElementById("reply-modify-button");
-    // if (userId !== replyId) {
-    //     delStyle.style = "visibility: hidden;"
-    //     modifyStyle.style = "visibility: hidden;"
-    // } else {
-    //     delStyle.style = "visibility: visible;"
-    //     modifyStyle.style = "visibility: visible;"
-    // }
+    //댓글 갯수
+    // alert(srcReplyCnt);
 
-
-
-    //등록 & 전체목록
-    $("#post").click(function (e) {
-        var replyText = $("#textarea").val();
-        $.ajax({
-            type: "post",
-            url: "/srcReply/srcInsert.do",
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            dataType: 'text',
-
-            data: JSON.stringify({
-                srcId: srcId,
-                replyText: replyText,
-                replyWriter: userId,
-                replyStatus: srcStatus
-            }),
-
-            error : function(){
-               if (userId ==" " ) then
-                alert("로그인 후 이용가능합니다!");
-
-
-            },
-
-            success: function (result) {
-                console.log("result:" + result);
-                alert("등록 되었습니다.");
-                // getPageList(); //전체목록
-                replyPage =1;
-                getPage("/srcReply/"+srcId+"/"+replyPage);
-                $("#textarea").val("");
-
-                // userId.val("");
-                // replyText.val("");
-
-            }
+    if (userId == "") {
+        $("#textarea").val("로그인 하세요!");
+        $("#textarea").click(function () {
+            alert("로그인 후 이용가능합니다!");
+        });
+        $("#post").click(function () {
+            alert("로그인 후 이용가능합니다!");
         });
 
-    });
+
+    } else {
+        $("#textarea").removeAttr('readonly').val("");
+
+        //등록 & 전체목록
+        $("#post").click(function (e) {
+            var replyText = $("#textarea").val();
+            if (replyText !== "") {
+                $.ajax({
+                    type: "post",
+                    url: "/srcReply/srcInsert.do",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-HTTP-Method-Override": "POST"
+                    },
+                    dataType: 'text',
+
+                    data: JSON.stringify({
+                        srcId: srcId,
+                        replyText: replyText,
+                        replyWriter: userId,
+                        replyStatus: srcStatus
+                    }),
+
+                    error: function () {
+                        // if (userId == "") then
+                        // alert("로그인 후 이용가능합니다!");
+                    },
+
+                    success: function (result) {
+                        console.log("result:" + result);
+                        alert("등록 되었습니다.");
+                        // getPageList(); //전체목록
+                        replyPage = 1;
+                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                        $("#textarea").val("");
 
 
-    //삭제
-    $("#list_view_all").on("click", "#reply-delete-button" , function (e) {
+                    }
+                });
+            } else {
+                alert("내용을 입력하세요!");
+                $("#textarea").focus();
+            }
+
+        });
+
+
+        //삭제
+        $("#list_view_all").on("click", "#reply-delete-button", function (e) {
 
 
             var reply = $(this);
@@ -648,10 +656,9 @@ $(function () {
                 },
                 dataType: 'text',
 
-                error : function(){
-                    if (userId ==" " ) then
-                    alert("로그인 후 이용가능합니다!");
-
+                error: function () {
+                    // if (userId == " ") then
+                    // alert("로그인 후 이용가능합니다!");
 
                 },
 
@@ -661,74 +668,77 @@ $(function () {
                     if (result === 'SUCCESS') {
                         alert("삭제 되었습니다");
                         // getPageList();
-                        getPage("/srcReply/"+srcId+"/"+replyPage);
+                        getPage("/srcReply/" + srcId + "/" + replyPage);
 
 
                     }
+                },
+
+                "change": function () {
+
                 }
             })
 
 
-    });
+        });
 
 
-    //수정
-    $("#list_view_all").on("click", "#reply-modify-button", function (e) { //동적생성된 선택자에게 위임처리
-        var reply = $(this);  // #reply-modify-button의 현재값 저장
-        var rno; //리플게시글 번호(Reply_id)
-        rno = reply.attr("data-rno");  // data-rno 속성 값 저장
-        // alert(rno);
-        var replytext = $('#'+rno).val(); // 동적 rno id값 저장
-        // alert(replytext);
+        //수정
+        $("#list_view_all").on("click", "#reply-modify-button", function (e) { //동적생성된 선택자에게 위임처리
+            var reply = $(this);  // #reply-modify-button의 현재값 저장
+            var rno; //리플게시글 번호(Reply_id)
+            rno = reply.attr("data-rno");  // data-rno 속성 값 저장
+            // alert(rno);
+            var replytext = $('#' + rno).val(); // 동적 rno id값 저장
+            // alert(replytext);
 
-        $.ajax({
-            type: 'put',
-            url: '/srcReply/srcUpdate.do/' + rno,
+            $.ajax({
+                type: 'put',
+                url: '/srcReply/srcUpdate.do/' + rno,
 
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "PUT"
-            },
-            data:JSON.stringify({
-                srcId: srcId,
-                replyText:replytext,
-                replyId:rno}),
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-HTTP-Method-Override": "PUT"
+                },
+                data: JSON.stringify({
+                    srcId: srcId,
+                    replyText: replytext,
+                    replyId: rno
+                }),
 
-            dataType: 'text',
+                dataType: 'text',
 
-            error : function(){
-                if (userId ==" " ) then
-                alert("로그인 후 이용가능합니다!");
+                error: function () {
+                    // if (userId == " ") then
+                    // alert("로그인 후 이용가능합니다!");
 
+                },
 
-            },
-
-            success: function (result) {
-                console.log("result: " + result);
-                if (result === 'SUCCESS') {
-                    alert("수정 되었습니다");
-                    // getPageList();
-                    getPage("/srcReply/"+srcId+"/"+replyPage);
+                success: function (result) {
+                    console.log("result: " + result);
+                    if (result === 'SUCCESS') {
+                        alert("수정 되었습니다");
+                        // getPageList();
+                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                    }
                 }
-            }
-        })
-    });
+            })
+        });
 
 
-    $(".pagination").on("click", "li a", function(event){
+        $(".pagination").on("click", "li a", function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        replyPage = $(this).attr("href");
+            replyPage = $(this).attr("href");
 
-        getPage("/srcReply/"+srcId+"/"+replyPage);
-        // getPageList("/srcReply/"+srcId+"/"+replyPage);
+            getPage("/srcReply/" + srcId + "/" + replyPage);
+            // getPageList("/srcReply/"+srcId+"/"+replyPage);
 
-    });
+        }); //else
+    }//if
 
 });
-
-
 
 
 // $(function () {
@@ -742,7 +752,6 @@ $(function () {
 //         return false;
 //     });
 // });
-
 
 
 // $(function () {
@@ -760,7 +769,6 @@ $(function () {
 // });
 
 
-
 $(function () {
 
     $("#reply-scroll").scroll(function () {
@@ -771,24 +779,24 @@ $(function () {
 });
 
 
-$(function(){
+$(function () {
     $("#command-line").keydown(function (e) {
 
-        if(e.keyCode === 13){
+        if (e.keyCode === 13) {
             consoleSerchLog.unshift(this.value);// 배열 앞에 추가
             consoleCur = -1;
-        }else if(e.keyCode === 38){
-            if(consoleSerchLog.length - 1  !== consoleCur){
+        } else if (e.keyCode === 38) {
+            if (consoleSerchLog.length - 1 !== consoleCur) {
                 consoleCur++;
                 this.value = consoleSerchLog[consoleCur];
             }
 
-        }else if(e.keyCode === 40){
-            if(consoleCur > 0){
+        } else if (e.keyCode === 40) {
+            if (consoleCur > 0) {
                 consoleCur--;
                 this.value = consoleSerchLog[consoleCur];
-            }else{
-                if(consoleCur === 0){
+            } else {
+                if (consoleCur === 0) {
                     consoleCur--;
                 }
                 this.value = ""

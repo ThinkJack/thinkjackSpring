@@ -224,7 +224,9 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
+//------------------------------------------------------//변수 설정
 var delay;
+var srcReplyCnt;
 
 var saveStatus = true //저장 유도관련 변수
 var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
@@ -837,6 +839,9 @@ function hideMenu() {
 //소스댓글리스트
 function getPageList(pageInfo) {
     // alert(pageInfo);
+
+
+
     $.getJSON({
         type: 'get',
         dataType: "json",
@@ -854,39 +859,67 @@ function getPageList(pageInfo) {
 
         success: function (result) {
             console.log(result);
-            // console.log(result[i].reply_id);
-            // var output = "<table>";
-
+            // console.log(result[i].reply
 
             var output = "";
 
-            for (var i in result.list) {
 
+            for (var i in result.list) {
+                // alert(result.list[i].reply_writer + ":" + userId);
+                // alert(userId);
                 output += "<div class=\"row reply_list\" id=\"reply-list-view\" data-rno= "+result.list[i].reply_id+">";
                 output += "<div class=\"col-2 no_padding\">";
                 output += "<img class=\"user_img\" src=\"/resources/images/logo.png\" id=\"reply-list-user-img\">";
                 output += "</div>";
                 output += "<div class=\"col\">";
-                output += "<div class=\"row reply_user_data_view\" id=\"reply-user-id\">";
+                output += "<div style=\"display: block;\" class=\"row reply_user_data_view\" id=\"reply-user-id\">";
                 output += "<span class=\"reply_user_name\" id=\"reply-user-name\">" + result.list[i].userName + "</span>";
-                output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
-                    "                                       id=\"reply-modify-button\" data-rno= "+result.list[i].reply_id+">\n" +
-                    "                                        Modify\n" +
-                    "                                    </a>";
-                output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
-                    "                                       id=\"reply-delete-button\" data-rno= "+result.list[i].reply_id+">\n" +
-                    "                                        Delete\n" +
-                    "                                    </a>";
+
+                if (result.list[i].reply_writer  != userId) {
+                    output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
+                        "                                       style =\"visibility: hidden;\"\n" +
+                        "                                       id=\"reply-modify-button\" data-rno= " + result.list[i].reply_id + ">\n" +
+                        "                                        Modify\n" +
+                        "                                    </a>";
+
+                    output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
+                        "                                       style =\"visibility: hidden;\"\n" +
+                        "                                       id=\"reply-delete-button\" data-rno= "+result.list[i].reply_id+">\n" +
+                        "                                        Delete\n" +
+                        "                                    </a>";
+                } else if (result.list[i].reply_writer  == userId) {
+                    // alert('bbb');
+                    output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
+                        "                                       style =\"visibility: visible;\"\n" +
+                        "                                       id=\"reply-modify-button\" data-rno= " + result.list[i].reply_id + ">\n" +
+                        "                                        Modify\n" +
+                        "                                    </a>";
+
+                    output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
+                        "                                       style =\"visibility: visible;\"\n" +
+                        "                                       id=\"reply-delete-button\" data-rno= "+result.list[i].reply_id+">\n" +
+                        "                                        Delete\n" +
+                        "                                    </a>";
+                }
+                output += "<div style =\"float: right\" class=\"right\">"+changeDate(result.list[i].reply_update)+ "</div>";
                 output += "</div>";
-                output += "<textarea  class=\"form-control reply_content\" id="+result.list[i].reply_id+" data-rno= "+result.list[i].reply_id+">"
-                    + result.list[i].reply_text + "</textarea>";
+
+                if (result.list[i].reply_writer  != userId) {
+                    output += "<textarea readonly  class=\"form-control reply_content\"" +
+                        " id=" + result.list[i].reply_id + " data-rno= " + result.list[i].reply_id + ">"
+                        + result.list[i].reply_text + "</textarea>";
+                } else {
+                    output += "<textarea  class=\"form-control reply_content\"" +
+                        " id=" + result.list[i].reply_id + " data-rno= " + result.list[i].reply_id + ">"
+                        + result.list[i].reply_text + "</textarea>";
+                }
+
                 output += "</div>";
                 output += "</div>";
 
             }
             $("#list_view_all").html(output); //반복구간 시작전 부동위치 id에 동적태그 주입
-            // alert(output);
-            // printPaging(result.pageMaker);
+
         }
 
     })
@@ -900,8 +933,10 @@ function getPage(pageInfo) {
         getPageList(pageInfo);
         printPaging(data.pageMaker, $(".pagination"));
 
-        // $("#modifyModal").modal('hide');
-        // $("#replycntSmall").html("[ " + data.pageMaker.totalCount + " ]");
+        // alert(111);
+        srcReplyCnt = data.pageMaker.totalCount;
+        $("#reply-couont").html(srcReplyCnt);
+
 
     });
 }
@@ -1144,14 +1179,14 @@ var printPaging = function(pageMaker, target) {
 // }
 
 // **날짜 변환 함수 작성
-// var changeDate = function (date) {
-//     date = new Date(parseInt(date));
-//     year = date.getFullYear();
-//     month = date.getMonth() + 1;
-//     day = date.getDate();
-//     hour = date.getHours();
-//     minute = date.getMinutes();
-//     second = date.getSeconds();
-//     strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-//     return strDate;
-// }
+var changeDate = function (date) {
+    date = new Date(parseInt(date));
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    hour = date.getHours();
+    minute = date.getMinutes();
+    second = date.getSeconds();
+    strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+    return strDate;
+}

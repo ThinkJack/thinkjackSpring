@@ -133,7 +133,7 @@ public class SrcReplyController {
         return entity;
     }
 
-    //페이징 처리
+    //페이징 처리 전체목록
     @RequestMapping(value = "/{srcId}/{page}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> listPage(
             @PathVariable("srcId") String srcId,

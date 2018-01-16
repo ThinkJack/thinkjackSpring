@@ -9,6 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -61,36 +63,16 @@
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-user-img">
                             </div>
                             <div class="col">
-                                <textarea id="textarea" class="form-control"></textarea>
+                                <textarea readonly id="textarea" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="row reply_btn">
+                    <div class="row reply_btn" >
                         <div id="post" class="col btn btn-primary right-button">POST</div>
                     </div>
 
                     <%--댓글 리스트 부분--%>
                     <div class="row reply_list_view" id="list_view_all">
-                        <%--<div class="row reply_list" id="reply-list-view">--%>
-                        <%--<div class="col-2 no_padding">--%>
-                        <%--<img class="user_img" src="/resources/images/logo.png" id="reply-list-user-img">--%>
-                        <%--</div>--%>
-                        <%--<div class="col">--%>
-                        <%--<div class="row reply_user_data_view" id="reply-user-id">--%>
-                        <%--<span class="reply_user_name" id="reply-user-name">Name</span>--%>
-                        <%--<a class="btn btn-outline-secondary btn-sm" href="javascript:;"--%>
-                        <%--id="reply-modify-button">--%>
-                        <%--Modify--%>
-                        <%--</a>--%>
-                        <%--<a class="btn btn-outline-secondary btn-sm" href="javascript:;"--%>
-                        <%--id="reply-delete-button">--%>
-                        <%--delete--%>
-                        <%--</a>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-control reply_content"></div>--%>
-                        <%--</div>--%>
-                        <%--</div>--%>
-                        <%--댓글 더보기--%>
 
                     </div>
                     <div class='text-center'>

@@ -113,6 +113,8 @@
         Heart = "<c:out value="${like}" default="0"/>";
         userId = "<c:out value="${login.userId}" default=""/>";
 
+
+
         <c:if test="${SrcVO.cdnCss ne null}">
             <c:forEach items="${SrcVO.cdnCss}" var="item">
                 cdnCss.push("${item}");
@@ -124,6 +126,10 @@
                 cdnJs.push("${item}");
             </c:forEach>
         </c:if>
+
+
+
+
 
 
         //화면에서 받은 값 세팅
@@ -150,10 +156,10 @@
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
-                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
-                        "&nbsp&nbspUpdate&nbsp&nbsp" + srcUpdate;
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + (srcRegdate) +
+                        "&nbsp&nbspUpdate&nbsp&nbsp" + (srcUpdate);
                 } else {
-                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + (srcRegdate);
                 }
             }
 

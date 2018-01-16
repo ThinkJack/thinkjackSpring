@@ -78,4 +78,11 @@ public class SrcReplyTest {
     public void deleteTest() throws Exception{
         service.delete(6);
     }
+
+    //댓글 수
+    @Test
+    public int count() throws Exception {
+        vo.setSrcId("LiMpgJ");
+        return service.count("LiMpgJ");
+    }
 }

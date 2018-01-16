@@ -23,7 +23,7 @@ public class SrcReplyServiceImpl implements SrcReplyService {
     //댓글 수
     @Override
     public int count(String srcId) throws Exception {
-        return  srcReplyDao.count(srcId);
+        return srcReplyDao.count(srcId);
     }
 
     //무한스크롤
