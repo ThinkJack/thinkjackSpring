@@ -11,12 +11,12 @@
 </style>
 
 <div class="container " style="padding-top: 100px" >
-    <ul id="myTab" class="nav nav-tabs" role="tablist" style="background-color: white">
-        <li role="presentation" class="Account_information nav-link">
-            <a href="/user/myinfo" id="Account_information" role="tab" class="bd">Account_information</a></li>
-        <li role="presentation" class="Board nav-link">
+    <ul id="myTab" class="nav nav-tabs" role="tablist" >
+        <li role="presentation" class="Account_information nav-link" style="background-color: white;">
+            <a href="/user/myinfo" id="Account_information" role="tab" class="bd" >Account_information</a></li>
+        <li role="presentation" class="Board nav-link" style="background-color: white;">
             <a href="/user/myBoard" role="tab" id="Board" class="bd">Board</a></li>
-        <li role="presentation" class="Source_code nav-link">
+        <li role="presentation" class="Source_code nav-link" style="background-color: white;">
             <a href="/user/mySourceCode" role="tab" id="Source_code" class="bd">Source_code</a></li>
 
     </ul>
