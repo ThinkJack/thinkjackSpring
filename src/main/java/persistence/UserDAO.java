@@ -1,7 +1,9 @@
 package persistence;
 
-import domain.UserVO;
+import domain.*;
 import dto.LoginDTO;
+
+import java.util.List;
 
 public interface UserDAO {
 	public void insertUser(UserVO vo) throws Exception;
@@ -26,11 +28,22 @@ public interface UserDAO {
 
 	public UserVO authenticate(String str) throws Exception;
 
+	public UserVO authenticateName(String str) throws Exception;
+
 	public void updateAuthKey(String userEmail, String userAuthCode) throws Exception;
 
 	public void updatePassword(UserVO vo) throws Exception;
 
 	public void successAuth (UserVO vo) throws Exception;
 
+    public List<BoardVO> boardSearch(UserCriteria cri)throws Exception;
+
+    public int boardSearchCount(UserCriteria cri)throws Exception;
+
+	public List<SrcVO> selectSrcList(UserCriteria cri);
+
+	public int srcListSearchCount(UserCriteria cri) throws Exception;
+
+	String getUserProfile(int userId) throws Exception;
 
 }

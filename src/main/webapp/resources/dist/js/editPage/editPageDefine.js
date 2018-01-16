@@ -140,6 +140,15 @@ var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
+// editor.foldCode(CodeMirror.Pos(13, 0));
+codeUnitTest.setValue(
+    "function testFunction(){\n" +
+    "   return 0;\n" +
+    "}");
+
+var origin = codeUnitTest.getValue();
+var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
+testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
 
 var codePython = CodeMirror(document.getElementById("codePython"), {
     mode: "python",
@@ -245,6 +254,17 @@ var Heart;
 var strHtml, strCss, strJs;
 var curhref = location.href;
 
+//cdn관련 변수
+var cdnCssidx = 1;// 무조건 증가
+var cdnCssCnt = 0;
+var cdnJsidx = 1;// 무조건 증가
+var cdnJsCnt = 0;
+var cdnCss = new Array();
+var cdnJs = new Array();
+var cssLnkSet = "";
+var jsLnkSet = "";
+var consoleSerchLog = [];
+var consoleCur = -1;
 
 var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
 var layoutMode = 0; //0 - top, 1 - left 2 - right
@@ -253,6 +273,121 @@ var dragging = false;
 var likebt = document.getElementById("likebt");
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
+
+
+//cdn추가 삭제 관련 함수
+function cdnCssAdd (str) {
+    $("#cdn-css").append("<div class=\"row\" id='cdn-add-css" + cdnCssidx + "'>" +
+        "<div class=\"col cdn_div\">\n" +
+        "<div class=\"col\">\n" +
+        "<img src=\"/resources/images/positionChange.png\">\n" +
+        "<input class=\"form-control cdn_input\" type=\"text\" id=\"css-cdn" + cdnCssidx + "\"\n" +
+        "placeholder=\"CDN을 추가해 주세요\" value='"+ str + "'>\n" +
+        "<button type=\"button\" class=\"close cdn_close\" aria-label=\"Close\"" +
+        "onclick='cdnCssDelete(" + cdnCssidx + ");'>\n" +
+        "<span aria-hidden=\"true\">&times;</span>\n" +
+        "</button>\n" +
+        "</div>\n" +
+        "</div>" +
+        "</div>");
+    ++cdnCssidx;
+    ++cdnCssCnt;
+    cdnChangeCss("cdn-css", cdnCssCnt);
+}
+
+function cdnCssDelete(idx) {
+    if(cdnCssCnt > 2) {
+        $("#cdn-add-css"+ idx).remove();
+        --cdnCssCnt;
+        cdnChangeCss("cdn-css", cdnCssCnt);
+    }else{
+        $("#css-cdn"+ idx).val("");
+    }
+}
+
+function cdnJsAdd (str) {
+    $("#cdn-js").append("<div class=\"row\" id='cdn-add-Js" + cdnJsidx + "'>" +
+        "<div class=\"col cdn_div\">\n" +
+        "<div class=\"col\">\n" +
+        "<img src=\"/resources/images/positionChange.png\">\n" +
+        "<input class=\"form-control cdn_input\" type=\"text\" id=\"js-cdn" + cdnJsidx + "\"\n" +
+        "placeholder=\"CDN을 추가해 주세요\" value='"+ str +"'>\n" +
+        "<button type=\"button\" class=\"close cdn_close\" aria-label=\"Close\"" +
+        "onclick='cdnJsDelete(" + cdnJsidx + ");'>\n" +
+        "<span aria-hidden=\"true\">&times;</span>\n" +
+        "</button>\n" +
+        "</div>\n" +
+        "</div>" +
+        "</div>");
+    ++cdnJsidx;
+    ++cdnJsCnt;
+    cdnChangeCss("cdn-js", cdnJsCnt);
+}
+
+function cdnJsDelete(idx) {
+    if(cdnJsCnt > 2){
+        $("#cdn-add-Js"+ idx).remove();
+        --cdnJsCnt;
+        cdnChangeCss("cdn-js", cdnJsCnt);
+    }else{
+        $("#js-cdn"+ idx).val("");
+    }
+}
+
+function cdnChangeCss (id, idx){
+    if(idx > 4){
+        $("#" + id).css("overflow-y", "scroll");
+    }else {
+        $("#" + id).css("overflow-y", "auto");
+    }
+}
+
+function cdnCssJsViewSet(arr, kind) {
+    var arrlen = arr.length < 2 ? 2 : arr.length;
+    if(kind === "css"){
+        for(var i=1; i<=arrlen; i++){
+            if(arr[i-1]){
+                cdnCssAdd(arr[i-1]);
+            }else{
+                cdnCssAdd("");
+            }
+        }
+    }else{
+        for(var i=1; i<=arrlen; i++){
+            if(arr[i-1]){
+                cdnJsAdd(arr[i-1]);
+            }else{
+                cdnJsAdd("");
+            }
+        }
+    }
+}
+
+function cdnCssJsValSet(){
+    cdnCss = new Array();
+    cdnJs = new Array();
+    cssLnkSet = "";
+    jsLnkSet = "";
+
+    for(var i=1; i<=cdnCssCnt; i++){
+        if($("#css-cdn" + i).length){
+            if($("#css-cdn" + i).val()){
+                cdnCss.push($("#css-cdn" + i).val());
+                cssLnkSet += "<link rel='stylesheet' href='" + $("#css-cdn" + i).val() + "'\/>";
+                changeSaveImg(2);
+            }
+        }
+    }
+    for(var i=1; i<=cdnJsCnt; i++){
+        if($("#js-cdn" + i).length) {
+            if($("#js-cdn" + i).val()) {
+                cdnJs.push($("#js-cdn" + i).val());
+                jsLnkSet += "<script src='" + $("#js-cdn" + i).val() + "'><\/script>";
+                changeSaveImg(2);
+            }
+        }
+    }
+}
 
 //break point
 function makeMarker() {
@@ -296,17 +431,50 @@ function updatePreview() {
     var rlt = codeHtml.getOption("mode") === "gfm" ?
         md.render(val) : codeHtml.getValue(); //markdown : html
 
+
     out.write(
-        "" + rlt
+
+        cssLnkSet
         +
         "<style>" + codeCss.getValue() + "</style>"
+        +
+        rlt
+        +
+        jsLnkSet
         +
         "<script>" + codeJavaScript.getValue() + "<\/script>"
     );
 
-    consoleView(codeJavaScript.getValue());
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
+
     out.close();
 }
+
+// var console=(function(oldCons){
+//     return {
+//         log: function(text){
+//             oldCons.log(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         info: function (text) {
+//             oldCons.info(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         warn: function (text) {
+//             oldCons.warn(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         },
+//         error: function (text) {
+//             oldCons.error(text);
+//             editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + text + "\"</p>";
+//             // Your code
+//         }
+//     };
+// }(window.console));
+
 
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
@@ -362,8 +530,10 @@ function escapeHtml(text) {
 //코드 저장 로직
 function codeSave() {
     saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("http://localhost/edit/editPage", "").replace("/", "");
+    srcId = curhref.replace("https:/", "").replace("http:/", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
+
     if (!saveStatus) {
+        jQuery.ajaxSettings.traditional = true;
         $.ajax({
             type: "post",
             url: "/edit/save",
@@ -380,7 +550,9 @@ function codeSave() {
                 srcHtml: codeHtml.getValue(),
                 srcCss: codeCss.getValue(),
                 srcJavaScript: codeJavaScript.getValue(),
-                srcStatus: srcStatus
+                srcStatus: srcStatus,
+                cdnCss: cdnCss,
+                cdnJs: cdnJs
             }),
             success: function (getLink) {
                 if (srcId === "" && userId === "") {
@@ -397,10 +569,51 @@ function codeSave() {
     }
 }
 
+function srcDelete() {
+    $.ajax({
+        type: "post",
+        url: "/edit/delete",
+        headers: {
+            "Content-Type": "application/json",
+            "X-HTTP-Method-Override": "POST"
+        },
+        // dataType: 'text',
+        data: JSON.stringify({
+            srcId: srcId,
+            srcStatus: srcStatus
+        }),
+        success: function (result) {
+            alert(result);
+            location.replace("/");
+        }
+    });
+}
+
 
 var consoleView = function (str) {
-    var commandLineValue = str;
     //console.log() 입력시 문자열 작업(정규식)
+
+
+    try {
+        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
+        consoleLogView(consoleLogStr(str));
+        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
+                                    + document.getElementById("resultView").contentWindow.eval(str) + "</p>"
+    } catch (err) {
+        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+    }
+
+    editConsoleView.scrollTop = editConsoleView.scrollHeight;
+};
+function consoleLogView(temp){
+    if (temp !== null) {
+        for (i in temp) {
+            editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + temp[i] + "\"</p>"
+        }
+    }
+}
+//
+function consoleLogStr(str) {
     var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
     var temp = commandLineValue.match(reg);
 
@@ -412,21 +625,10 @@ var consoleView = function (str) {
         temp[i] = temp[i].replace("')", "");
         temp[i] = temp[i].replace("\")", "");
     }
+    return temp;
+}
 
-    try {
-        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + commandLineValue + "</p>";
-        if (temp !== null) {
-            for (i in temp) {
-                editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>" + temp[i] + "</p>"
-            }
-        }
-        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· " + eval(commandLineValue) + "</p>"
-    } catch (err) {
-        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
-    }
 
-    editConsoleView.scrollTop = editConsoleView.scrollHeight
-};
 
 //저장 이미지 변경
 function changeSaveImg(idx) {

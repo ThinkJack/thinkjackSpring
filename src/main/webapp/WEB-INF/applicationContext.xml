@@ -59,7 +59,6 @@
             <bean class = "org.springframework.social.facebook.connect.FacebookConnectionFactory">
                 <constructor-arg value = "${spring.social.facebook.appId}"/>
                 <constructor-arg value = "${spring.social.facebook.appSecret}"/>
-
             </bean>
         </property>
     </bean>

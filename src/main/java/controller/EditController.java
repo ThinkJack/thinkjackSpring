@@ -1,9 +1,6 @@
 package controller;
 
-import domain.SrcLikeVO;
-import domain.SrcVO;
-import domain.SrcReplyVO;
-import domain.UserVO;
+import domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -61,14 +58,22 @@ public class EditController {
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public @ResponseBody String srcSave(HttpServletRequest request, HttpServletResponse response, @RequestBody SrcVO vo) throws Exception{
-        return service.saveSrc(request, response, vo);
+    public @ResponseBody String srcSave(HttpServletRequest request,
+                                        @RequestBody SrcVO vo) throws Exception{
+        return service.saveSrc(request, vo);
+
     }
 
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
         return service.srcLike(request, vo);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public @ResponseBody String srcDelete(@RequestBody SrcVO vo) throws Exception{
+        service.srcDelete(vo);
+        return "삭제 되었습니다.";
     }
     //----------------------------------------------------------------------
 

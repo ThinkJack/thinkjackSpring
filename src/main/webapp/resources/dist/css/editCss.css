@@ -44,12 +44,18 @@ li {
     max-width: 13.666667%;
 }
 
+.console-clear {
+    float: right;
+    margin: 9px;
+}
+
 .row h4 {
     margin: 0px;
 }
 
 p.code-name {
     margin: 0px;
+    display: inline-block;
 }
 
 div.command-line {
@@ -347,6 +353,20 @@ p.err {
 
 .load .line:nth-last-child(3) {
     animation: loadingC .6s .3s linear infinite;
+}
+
+.cdn-container {
+    max-height: 200px;
+}
+
+.cdn_input {
+    width: 86%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.cdn_close {
+    margin:10px;
 }
 
 @keyframes loadingC {

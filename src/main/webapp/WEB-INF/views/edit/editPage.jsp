@@ -9,9 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--<%--%>
-<%--response.setHeader("Cache-Control","no-cache");--%>
-<%--response.setHeader("Pragma","no-cache");--%>
-<%--response.setDateHeader("Expires",0);--%>
+    <%--response.setHeader("Pragma","no-cache");--%>
+    <%--response.setHeader("Pragma","no-store");--%>
+    <%--response.setHeader("Cache-Control","no-cache");--%>
+    <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
 <html>
@@ -20,9 +21,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%--<meta http-equiv="Cache-Control" content="no-cache"/>--%>
-    <%--<meta http-equiv="Expires" content="0"/>--%>
-    <%--<meta http-equiv="Pragma" content="no-cache"/>--%>
+    <%--<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">--%>
+    <%--<meta http-equiv="Expires" content="-1">--%>
+    <%--<meta http-equiv="Pragma" content="no-cache">--%>
+    <%--<meta http-equiv="Cache-Control" content="no-cache">--%>
 
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
@@ -62,7 +64,12 @@
                     <%--console--%>
                     <div class="row edit-console" id="edit-console">
                         <div class="build col">
-                            <div class="col"><p class="h4 text-white code-name">Console</p></div>
+                            <div class="col">
+                                <p class="h4 text-white code-name">Console</p>
+                                <a class="btn btn-outline-secondary btn-sm console-clear" href="javascript:;" id="console-clear">
+                                    clear
+                                </a>
+                            </div>
                             <div class="col edit-console-view" id="edit-console-view"></div>
                         </div>
                     </div>
@@ -83,9 +90,10 @@
     <!--footer-->
     <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 
-
     <%--script단--%>
+
     <jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
+
 
     <script>
 
@@ -104,9 +112,19 @@
         strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
         Heart = "<c:out value="${like}" default="0"/>";
         userId = "<c:out value="${login.userId}" default=""/>";
-        <%--strHtml = '<c:out value="${SrcVO.srcHtml}" default=""/>';--%>
-        <%--strCss = '<c:out value="${SrcVO.srcCss}" default=""/>';--%>
-        <%--strJs = '<c:out value="${SrcVO.srcJavaScript}" default=""/>';--%>
+
+        <c:if test="${SrcVO.cdnCss ne null}">
+            <c:forEach items="${SrcVO.cdnCss}" var="item">
+                cdnCss.push("${item}");
+            </c:forEach>
+        </c:if>
+
+        <c:if test="${SrcVO.cdnJs ne null}">
+            <c:forEach items="${SrcVO.cdnJs}" var="item">
+                cdnJs.push("${item}");
+            </c:forEach>
+        </c:if>
+
 
         //화면에서 받은 값 세팅
         $(function () {
@@ -127,17 +145,13 @@
                 document.getElementById("visibility" + srcStatus).checked = true;
             }
 
-            //코드 세팅
-            codeHtml.setValue(strHtml);
-            codeCss.setValue(strCss);
-            codeJavaScript.setValue(strJs);
-            changeSaveImg(1);
+            window.console = console;
 
             //작성 및 수정날자 세팅
             if (srcRegdate !== "") {
                 if (srcUpdate !== srcRegdate) {
-                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate + "\t"+
-                        "Update&nbsp&nbsp" + srcUpdate;
+                    document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate +
+                        "&nbsp&nbspUpdate&nbsp&nbsp" + srcUpdate;
                 } else {
                     document.getElementById("regdate").innerHTML = "Create&nbsp&nbsp" + srcRegdate;
                 }
@@ -155,8 +169,28 @@
             }
 
             <c:if test="${login.userProfile ne null}">
-                filePathChange("${login.userProfile}");
+                $("#reply-user-img").attr("src", filePathChange("${login.userProfile}"));
             </c:if>
+
+            <c:if test="${SrcVO.srcWriterImgPath ne null}">
+                $("#user-img").attr("src", filePathChange("${SrcVO.srcWriterImgPath}"));
+            </c:if>
+
+            <c:if test="${param.reply eq 'show'}">
+                if($("#reply-modal") !== null){
+                    $("#reply-modal-bt").trigger('click');
+                }
+            </c:if>
+
+            cdnCssJsViewSet(cdnCss, "css");
+            cdnCssJsViewSet(cdnJs, "js");
+            cdnCssJsValSet();
+
+            //코드 세팅
+            codeHtml.setValue(strHtml);
+            codeCss.setValue(strCss);
+            codeJavaScript.setValue(strJs);
+            changeSaveImg(1);
         });
     </script>
 </body>

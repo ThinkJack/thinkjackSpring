@@ -6,94 +6,213 @@
 <mapper namespace="mapper.UserMapper">
 
     <insert id="insertUser">
-insert into tbl_user (user_email, user_password, user_name)
-values(#{userEmail}, #{userPassword}, #{userName})
-</insert>
+        INSERT INTO tbl_user (user_email, user_password, user_name)
+        VALUES (#{userEmail}, #{userPassword}, #{userName})
+    </insert>
 
-<select id = "checkdupl" resultType = "UserVO">
-    select user_id userId, user_state userState from tbl_user where user_email = #{userEmail}
-</select>
-
-    <select id="login" resultType="UserVO">
-
-select user_email userEmail,
-        user_id userId,
-        user_name userName,
-        user_profile userProfile
-from tbl_user
-  where user_email = #{userEmail}
- and user_password = #{userPassword}
- and user_state = 1
-
-</select>
-
-    <select id="readUser" resultType="UserVO">
-
-select user_id userId,
-        user_email userEmail,
-        user_name userName,
-        user_social_id userSocialId,
-        user_profile userProfile
-        from tbl_user
-        where user_id = #{userId}
-</select>
-
-<update id="updateUser">
-    update tbl_user SET
-    user_name =#{userName},
-    user_profile =#{userProfile}
-    where user_id = #{userId}
-</update>
-    <update id="deleteUser">
-    update tbl_user SET
-    user_state = '2'
-    where user_id = #{userId}
-
-</update>
-
-    <insert id="naverInsertUser">
-        insert into tbl_user (user_email,user_social_id, user_name)
-        values(#{userEmail},#{userSocialId}, #{userName})
-</insert>
-
-    <select id="naverReadUser" resultType="UserVO">
-        select user_id userId,
-        user_name userName
-        from tbl_user
-        where user_social_id = #{userSocialId}
-</select>
-
-    <update id="createAuthKey">
-       update tbl_user set user_auth_code = #{userAuthCode} where user_email = #{userEmail}
-    </update>
-
-<update id="userAuth">
-update tbl_user SET
-user_state = '1'
-where user_email = #{userEmail}
-
-</update>
-    <select id="chkAuth" resultType="UserVO">
-
-        select user_id userId,
-        user_name userName,
-        user_email userEmail
-        from tbl_user
-        where user_auth_code = #{userAuthCode}
+    <select id="checkdupl" resultType="UserVO">
+        SELECT
+            user_id    userId,
+            user_state userState
+        FROM tbl_user
+        WHERE user_email = #{userEmail}
+    </select>
+    <select id="checkduplName" resultType="UserVO">
+        SELECT
+            user_id    userId,
+            user_state userState
+        FROM tbl_user
+        WHERE user_name = #{userName}
     </select>
 
-<update id="updatePassword">
-        update tbl_user SET
-          user_password = #{userPassword}
+    <select id="login" resultType="UserVO">
+        SELECT
+            user_email   userEmail,
+            user_id      userId,
+            user_name    userName,
+            user_profile userProfile
+        FROM tbl_user
+        WHERE user_email = #{userEmail}
+              AND user_password = #{userPassword}
+              AND user_state = 1
+
+    </select>
+
+    <select id="readUser" resultType="UserVO">
+        SELECT
+            user_id        userId,
+            user_email     userEmail,
+            user_name      userName,
+            user_social_id userSocialId,
+            user_profile   userProfile
+        FROM tbl_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateUser">
+        UPDATE tbl_user
+        SET
+            user_name    = #{userName},
+            user_profile = #{userProfile}
+        WHERE user_id = #{userId}
+    </update>
+    <update id="deleteUser">
+        UPDATE tbl_user
+        SET
+            user_state = '2'
+        WHERE user_id = #{userId}
+
+    </update>
+
+    <insert id="naverInsertUser">
+        INSERT INTO tbl_user (user_email, user_social_id, user_name)
+        VALUES (#{userEmail}, #{userSocialId}, #{userName})
+    </insert>
+
+    <select id="naverReadUser" resultType="UserVO">
+        SELECT
+            user_id      userId,
+            user_name    userName,
+            user_email   userEmail,
+            user_profile userProfile
+        FROM tbl_user
+        WHERE user_social_id = #{userSocialId}
+    </select>
+
+    <update id="createAuthKey">
+        UPDATE tbl_user
+        SET user_auth_code = #{userAuthCode}
+        WHERE user_email = #{userEmail}
+    </update>
+
+    <update id="userAuth">
+        UPDATE tbl_user
+        SET
+            user_state = '1'
+        WHERE user_email = #{userEmail}
+
+    </update>
+    <select id="chkAuth" resultType="UserVO">
+
+        SELECT
+            user_id    userId,
+            user_name  userName,
+            user_email userEmail
+        FROM tbl_user
+        WHERE user_auth_code = #{userAuthCode}
+    </select>
+
+    <update id="updatePassword">
+        UPDATE tbl_user
+        SET
+            user_password = #{userPassword}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="successAuth">
+        UPDATE tbl_user
+        SET
+            user_auth_code = NULL
+        WHERE user_id = #{userId}
+    </update>
+
+
+    <sql id="boardSearchOption">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and board_title like CONCAT('%', #{keyword}, '%')
+            </if>            <if test="searchType == 'c'.toString()">
+            and board_content like CONCAT('%', #{keyword}, '%')
+        </if>
+            <if test="searchType == 'tc'.toString()">
+                and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
+            </if>
+        </if>
+    </sql>
+
+    <select id="boardSearch" resultType="BoardVO">
+
+        <![CDATA[
+  select
+            board_id                                                             boardId,
+            board_title                                                          boardTitle,
+            board_content                                                        boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
+            board_regdate                                                        boardRegdate,
+            board_viewcnt                                                        boardViewcnt,
+            (SELECT category_name
+             FROM tbl_board_category
+             WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+            board_likecnt                                                        boardLikecnt
+  from tbl_board
+  where board_id > 0 AND board_writer = #{userId} AND board_state = 1
+        ]]>
+
+        <include refid="boardSearchOption"></include>
+
+        <![CDATA[
+  order by boardCategoryName asc,board_id desc
+  limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+
+    <select id="boardSearchCount" resultType="int">
+        <![CDATA[
+  select count(*)
+  from tbl_board
+  where board_id > 0 AND  board_writer = #{userId} AND board_state = 1
+        ]]>
+        <include refid="boardSearchOption"></include>
+    </select>
+
+
+    <select id="srcSearch" resultType="SrcVO">
+        <![CDATA[
+        SELECT
+            src.src_id        srcId,
+            src.src_title     srcTitle,
+            src.src_writer    srcWriter,
+            src.src_likecnt   srcLikecnt,
+            src.src_viewcnt   srcViewcnt,
+            src.src_path      srcPath,
+            user.user_name    srcWriterName,
+            user.user_profile srcWriterImgPath
+        FROM tbl_src src, tbl_user user
+        WHERE NOT src.src_status = 2 AND src.src_writer = user.user_id AND  src.src_writer = #{userId}
+        ]]>
+        <include refid="SrcSearchOption"></include>
+        <![CDATA[
+        ORDER BY src.src_likecnt DESC, src.src_id ASC
+        LIMIT #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+    <select id="srcSearchCount" resultType="int">
+        <![CDATA[
+        SELECT count(*)
+        FROM tbl_src src, tbl_user user
+        WHERE NOT src.src_status = 2 AND src.src_writer = user.user_id AND src.src_writer = #{userId}
+        ]]>
+        <include refid="SrcSearchOption"></include>
+
+    </select>
+
+    <sql id="SrcSearchOption">
+        <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                and src_title like CONCAT('%', #{keyword}, '%')
+            </if>
+        </if>
+    </sql>
+
+
+    <select id="getUserProfile" resultType="String">
+        SELECT
+            user_profile
+        from tbl_user
         where user_id = #{userId}
-</update>
-
-<update id="successAuth">
-        update tbl_user SET
-        user_auth_code = NULL
-        where user_id = #{userId}
-</update>
-
-
-
+    </select>
 </mapper>

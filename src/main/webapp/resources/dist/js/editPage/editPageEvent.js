@@ -7,14 +7,14 @@ codeHtml.on("change", function () {
 
     if ($('#autoPreview').is(':checked')) {
         //setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
         // clearTimeout(delay);
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay);
             delay = setTimeout(codeSave, 3000);
@@ -29,13 +29,13 @@ codeCss.on("change", function () {
     clearTimeout(delay);
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
             delay = setTimeout(codeSave, 3000);
@@ -50,13 +50,13 @@ codeJavaScript.on("change", function () {
     clearTimeout(delay);
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 0);
+        delay = setTimeout(updatePreview, 3000);
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
         if (srcId === "") {
             // alert(111)
-        }else{
+        } else {
             // alert(srcId);
             // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
             delay = setTimeout(codeSave, 3000);
@@ -64,9 +64,6 @@ codeJavaScript.on("change", function () {
     }
 });
 
-codeUnitTest.on("change", function () {
-    consoleView(codeUnitTest.getValue());
-});
 
 //키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
@@ -121,19 +118,19 @@ codeJavaScript.on("keyup", function (cm, event) {
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
     }
 });
-codeUnitTest.on("keyup", function (cm, event) {
-    if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
-        var scope = {};
-        var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
-        for (var i in window) {
-            if (preventList.indexOf(i) === -1) {
-                scope[i] = window[i]
-            }
-        }
-        CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
-    }
-});
+// codeUnitTest.on("keyup", function (cm, event) {
+//     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+//         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
+//         var scope = {};
+//         var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
+//         for (var i in window) {
+//             if (preventList.indexOf(i) === -1) {
+//                 scope[i] = window[i]
+//             }
+//         }
+//         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
+//     }
+// });
 codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
@@ -205,7 +202,7 @@ $(function () {
         else if (selectedText === "Haml") {
 
 
-        } else if(selectedText === "MarkDown"){
+        } else if (selectedText === "MarkDown") {
             // alert(this.value);
             // alert(this.text);
             // document.write("<script src=" +
@@ -217,17 +214,17 @@ $(function () {
             codeHtml.setOption("matchBrackets", 'true');
             codeHtml.setOption("lineWrapping", 'true');
             codeHtml.setOption("theme", 'base16-light');
-            codeHtml.setOption("extraKeys", {"Enter":
-                    "newlineAndIndentContinueMarkdownList"});
+            codeHtml.setOption("extraKeys", {
+                "Enter":
+                    "newlineAndIndentContinueMarkdownList"
+            });
             // alert(codeHtml.getOption("mode"));
 
 
+        } else if (selectedText === "Slim") {
 
 
-        } else if(selectedText === "Slim"){
-
-
-        } else if(selectedText === "Pug"){
+        } else if (selectedText === "Pug") {
 
 
         }
@@ -235,8 +232,6 @@ $(function () {
     });
 
 });
-
-
 
 
 //Setting Behavior부분 함수
@@ -349,6 +344,15 @@ $(function () {
     });
 });
 
+//setting 모달 닫힐때 이벤트
+$(function () {
+    $("#setting").on("hide.bs.modal", function () {
+
+        cdnCssJsValSet();
+
+        updatePreview();
+    });
+});
 
 //layout 관련 script
 // $(function () {
@@ -559,6 +563,10 @@ $('input[name="visibility"]').on("change", function (e) {
     srcStatus = this.value;
 });
 
+$("#src-delete").click(function (e) {
+    srcDelete();
+});
+// $('input[name="genderS"]:checked')
 
 
 //=================SrcReply===============================================
@@ -751,3 +759,46 @@ $(function () {
 //     })
 // });
 
+
+
+$(function () {
+
+    $("#reply-scroll").scroll(function () {
+        console.log($("#reply-scroll").height());
+        console.log(this.scroll);
+        console.log(this.scrollTop);
+    });
+});
+
+
+$(function(){
+    $("#command-line").keydown(function (e) {
+
+        if(e.keyCode === 13){
+            consoleSerchLog.unshift(this.value);// 배열 앞에 추가
+            consoleCur = -1;
+        }else if(e.keyCode === 38){
+            if(consoleSerchLog.length - 1  !== consoleCur){
+                consoleCur++;
+                this.value = consoleSerchLog[consoleCur];
+            }
+
+        }else if(e.keyCode === 40){
+            if(consoleCur > 0){
+                consoleCur--;
+                this.value = consoleSerchLog[consoleCur];
+            }else{
+                if(consoleCur === 0){
+                    consoleCur--;
+                }
+                this.value = ""
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#console-clear").click(function () {
+        editConsoleView.innerHTML = "";
+    });
+});

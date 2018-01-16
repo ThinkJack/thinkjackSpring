@@ -1,17 +1,20 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class SrcVO {
     private String srcId;
     private int srcWriter; //null일때 작성자 없는것 (익명)
     private String srcWriterName;
+    private String srcWriterImgPath;
     private String srcPath;
     private String srcComments;
     private Date srcRegdate;
     private Date srcUpdate;
     private String srcTitle;
 //  private int recnt; // **소스게시글 댓글의 수
+    private int srclikeCli;
     private int srcLikecnt;
     private int srcViewcnt;
     private int srcStatus;  //0, 1, 2로 구분 (private, public, delete)
@@ -20,6 +23,40 @@ public class SrcVO {
     private String srcCss;
     private String srcJavaScript;
 
+    private List<String> cdnCss;
+    private List<String> cdnJs;
+
+    public List<String> getCdnCss() {
+        return cdnCss;
+    }
+
+    public void setCdnCss(List<String> cdnCss) {
+        this.cdnCss = cdnCss;
+    }
+
+    public List<String> getCdnJs() {
+        return cdnJs;
+    }
+
+    public void setCdnJs(List<String> cdnJs) {
+        this.cdnJs = cdnJs;
+    }
+
+    public int getSrclikeCli() {
+        return srclikeCli;
+    }
+
+    public void setSrclikeCli(int srclikeCli) {
+        this.srclikeCli = srclikeCli;
+    }
+
+    public String getSrcWriterImgPath() {
+        return srcWriterImgPath;
+    }
+
+    public void setSrcWriterImgPath(String srcWriterImgPath) {
+        this.srcWriterImgPath = srcWriterImgPath;
+    }
 
     public String getSrcWriterName() {
         return srcWriterName;
@@ -148,17 +185,21 @@ public class SrcVO {
                 "srcId='" + srcId + '\'' +
                 ", srcWriter=" + srcWriter +
                 ", srcWriterName='" + srcWriterName + '\'' +
+                ", srcWriterImgPath='" + srcWriterImgPath + '\'' +
                 ", srcPath='" + srcPath + '\'' +
                 ", srcComments='" + srcComments + '\'' +
                 ", srcRegdate=" + srcRegdate +
                 ", srcUpdate=" + srcUpdate +
                 ", srcTitle='" + srcTitle + '\'' +
+                ", srclikeCli=" + srclikeCli +
                 ", srcLikecnt=" + srcLikecnt +
                 ", srcViewcnt=" + srcViewcnt +
                 ", srcStatus=" + srcStatus +
                 ", srcHtml='" + srcHtml + '\'' +
                 ", srcCss='" + srcCss + '\'' +
                 ", srcJavaScript='" + srcJavaScript + '\'' +
+                ", cdnCss=" + cdnCss +
+                ", cdnJs=" + cdnJs +
                 '}';
     }
 }

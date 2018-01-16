@@ -1,43 +1,16 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>\
+<script>
+    var userId=Boolean(${login.userId});
+    if(userId){
+        alert("이미 로그인 되어있습니다. 로그아웃 해주세요");
+    self.location = '/main';
+    }
 
-<!DOCTYPE html>
+</script>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-<html lang="en">
-
-<head>
-    <!--필수 -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--w3schools-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-    <title>Thinkjack</title>
-
-    <!--css파일 연결부분-->
-    <link href="/resources/dist/css/common.css" rel="stylesheet">
-    <link href="/resources/dist/css/main.css" rel="stylesheet">
-
-    <!--sidenavbar-새로운 게시글 알림-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-
-    <!--아이콘-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/assets/css/font-awesome.css" rel="stylesheet">
-    <link href="/resources/assets/css/docs.css" rel="stylesheet" >
-
-    <link href="/resources/bootstrap-social.css" rel="stylesheet" >
-</head>
-<body>
+<div class="deaf2"></div>
 <div class="container text-center">
 
     <div class="row">
@@ -57,7 +30,7 @@
                 <input type="submit" class="form-control btn btn-primary" value="로그인"/>
 
                     <%--<a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>--%>
-
+                </form>
 
 
                 <%--<a href="/user/googleLogin"><img width="100%" height="50" src="/resources/images/google.png"/></a>--%>
@@ -65,8 +38,8 @@
                     <%--<a href="/user/githubLogin">--%>
                      <%--<img width="100%" height="50" src="/resources/images/github.png"/>--%>
                         <%--</a>--%>
-                        <a class="btn btn-block btn-social btn-google" style="background-color:#1EC800;"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
-                            <img src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
+                        <a class="btn btn-block btn-social btn-google naver"  href="/user/naverLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
+                            <img class="naverImg" src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
                         </a>
                         <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
                             <span class="fa fa-google"></span> Sign in with Google
@@ -75,11 +48,14 @@
                             <span class="fa fa-github"></span> Sign in with GitHub
                         </a>
                 </div>
-                <button type="button" onclick="location.href='/user/register'">회원가입</button>
-             </form>
+
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/register'">회원가입</button>
+                <button type="button" class="btn btn-block btn-social btn-tumblr" style="width:49%;margin-top: 4px;;display: inline-block;text-align: center;padding-left: 0px;padding-right:0px;" onclick="location.href='/user/findPassword'">비밀번호 찾기</button></div>
+
+
         </div>
     </div>
-
+<div class="col-sm-4">
 </div>
 
 </body>

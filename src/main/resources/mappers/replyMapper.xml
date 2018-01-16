@@ -29,8 +29,8 @@
             reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
-#         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
-#         ORDER BY  replyRegdate ASC
+        #         ORDER BY IF(ISNULL(reply_parent), reply_id, reply_parent), reply_id ASC
+        #         ORDER BY  replyRegdate ASC
         order by if(isnull(reply_parent),reply_id,reply_parent);
     </select>
 
@@ -61,6 +61,9 @@
             (SELECT user_name
              FROM tbl_user
              WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyProfile,
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,
@@ -68,8 +71,8 @@
             reply_state                                       replyState
         FROM tbl_reply
         WHERE board_id = #{boardId}
-#         ORDER BY IF(ISNULL(reply_parent), reply_id, replyParent),reply_id ASC
-#         ORDER BY  replyRegdate ASC
+        #         ORDER BY IF(ISNULL(reply_parent), reply_id, replyParent),reply_id ASC
+        #         ORDER BY  replyRegdate ASC
         order by if(isnull(reply_parent),reply_id,reply_parent)
         LIMIT #{cri.pageStart}, #{cri.perPageNum};
     </select>

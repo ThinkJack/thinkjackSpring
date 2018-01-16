@@ -12,7 +12,7 @@ function getFileInfo(fullName) {
     var fileLink;
 
     if(checkImageType(fullName)){
-        imgsrc = "http://localhost/displayFile?fileName="+fullName;
+        imgsrc = "http://" + document.location.host + "/displayFile?fileName="+fullName;
         fileLink = fullName.substr(14);
 
         var front = fullName.substr(0,12); ///2015/00/00/
@@ -30,7 +30,7 @@ function getFileInfo(fullName) {
     return imgsrc;
 }
 
-function filePathChange(path) {
+function filePathChange(path, thumbnail) {
     var headerimg;
     var fullName=path;
     var test =fullName.lastIndexOf("/");
@@ -39,7 +39,12 @@ function filePathChange(path) {
 //            console.log(path);
 //            console.log(fileName);
 //            console.log(test);
-    profileheader =path+"s_"+fileName;
+    if(thumbnail === "true"){
+        profileheader =path+"s_"+fileName;
+    }else{
+        profileheader =path+fileName;
+    }
+
 //            console.log(fullName);
     if(fullName!=="") {
         headerimg = getFileInfo(profileheader);
@@ -48,6 +53,5 @@ function filePathChange(path) {
     }else{
         hstr = "/resources/images/like1.png";
     }
-
-    $("#reply-user-img").attr("src", hstr);
+    return hstr;
 }

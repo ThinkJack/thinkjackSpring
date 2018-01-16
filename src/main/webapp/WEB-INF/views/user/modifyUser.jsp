@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+
     <style>
         .fileDrop{
             z-index: 8;
-            width:300px;
-            height:200px;
+            width:100%;
+            height:auto;
             border:1px solid black;
         }
         .uploadedList{
             z-index: 6;
             width:100%;
-            height:200px;
+            height:auto;
             border:1px solid black;
         }
 
@@ -29,66 +29,160 @@
             opacity: 0.5;
             filter: alpha(opacity=50);
         }
+        .small-unit {
+            float: left;
+            width: 49%;
+            height: 30%;
+            color: black;
+            /* background: #333;*/
+            margin: 1px;
+        }
+        .big-area {
+            float: left;
+            width: 100%;
+            margin: 0 10px 0 0;
+            padding: 10px;
+            /*    background: #999;*/
+        }
+         img{
+          width:100%;
+          height:auto;
+          max-height: 200px;
+             max-width:400px;
+            }
+
     </style>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="/resources/upload.js"></script>
+    <script src="/resources/dist/js/upload.js"></script>
     <script>
 
         //수정 권한 확인
         var check=Boolean(${modify});
-        if(!check){
+        var socialId=Boolean(${socialID});
+        if(!check&&!socialId){
             self.location = '/user/modifyAuthCheck';
         }
-
+        var chkName=true;
     $(document).ready(function() {
-    console.log( "ready!" );
+    //console.log( "ready!" );
+
     var imgtest;
     var fullName="${login.userProfile}";
     if(fullName!=="") {
         imgtest = getFileInfo(fullName);
         console.log(imgtest);
-        str = "<div>" + "<img style='width:300px;height:200px;' src=" + imgtest + "/>" + "</div>";
+        str = "<div>" + "<img class='img-responsive' src=" + imgtest + "/>" + "</div>";
     }else{
-        str = "<div>" + "<img style='width:300px;height:200px;' src='/resources/images/123.gif'/>" + "</div>";
+        str = "<div>" + "<img class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
     }
     $(".uploadedList").append(str);
 
 
     });
+
+
+        function checkvalue() {
+            chkName=false;
+        }
+
+
+        function signinchk(obj){
+
+            if(!obj.userName.value || obj.userName.value.trim().length ==0){
+                alert("이름을 입력해주세요.");
+                obj.userName.value ="";
+                obj.userName.focus();
+                return false;
+            }
+            if(!chkName){
+                alert("이름 중복체크를 실행해주세요.");
+                obj.userName.focus();
+                return false;
+            }
+        }
+
     </script>
+    <script>
+        $(document).on('click','#authenticateName',function(){
+            var userName = $('#userName').val();
+            var oldName="${login.userName}";
+            console.log(userName);
+
+            if(!userName || userName.trim().length >10){
+                alert("이름을 10자 이내로 입력해 주세요.");
+                return false;
+            }
 
 
+            if(userName==oldName){
+                alert("현재 사용 중인 이름입니다.");
+                return chkName=true;
+            }else if(!userName || userName.trim().length ==0){
+                alert("유저 네임이 입력되지 않았습니다.");
+                return false;
+            } else {
+                $.ajax({
+                    url:'/user/authenticateName',
+                    type:'POST',
+                    data: {'userName' : userName},
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    dataType : "json",
 
+                    success:function(data){
+                        console.log("success")
+                        alert(decodeURIComponent(data.msg))
+                        if(data.chk == "T"){
+                            alert('사용 가능한 이름입니다.' );
+                            chkName=true;
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown){
 
+                        alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.' );
+                    }
+                }); }
+        });
 
-</head>
-  <body>
+    </script>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="deaf"></div>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
   <h3>Profile Image</h3>
-  <div class="fileDrop">
-      <div class="uploadedList"></div>
-  </div>
+      <div class="big-area">
+      <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data" onsubmit="return signinchk(this)">
+          <div class="small-unit">
+          <div class="fileDrop">
+          <div class="uploadedList"></div>
+        </div>
+         <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
+         <input type='file' id="imgInp" name="file" /><br>
+          </div>
+          <div class="small-unit">
+         <input type="hidden" name="userId" value="${login.userId}" readonly/>
+              <div class="input-group">
+                  <span class="input-group-addon"  class="input-group-addon">E - mail ID</span>
+         <input type="text" class="form-control" name="userEmail" id="userEmail"  value="${login.userEmail}"  aria-describedby="basic-addon1" readonly/><br>
+              </div>
+                  <div class="input-group">
+                      <span class="input-group-addon" class="input-group-addon">user name</span>
+         <input type="text" class="form-control" name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()" /><br>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" id="authenticateName">중복체크</button>
+                           </span>
+                  </div>
+         <input type="hidden" name="test" value="${login.userProfile}" /><br>
+         <input type="hidden" id="userProfile" name="userProfile">
+          </div>
+         <div class="small-unit">
+         <input type="submit" value="정보변경"/>
+         <input type="reset" value="취소"/>
+         </div>
 
-  <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-  <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="userId" value="${login.userId}" readonly/>
-      아이디 : <input type="text" name="userEmail" value="${login.userEmail}" readonly/><br>
-      이름 : <input type="text" name="userName" value="${login.userName}"/><br>
-      <input type="text" name="test" value="${login.userProfile}" /><br>
-      <input type='file' id="imgInp" name="file" />
-      <input type="hidden" id="userProfile" name="userProfile">
-
-
-
-      <input type="submit" value="정보변경"/>
-      <input type="reset" value="취소"/>
-     <div>
-     <label>
-
-     </label>
-     
-     </div>
   </form>
-
+      </div>
+  </div>
+<div class="col-sm-4"></div>
   <script>
       $(".fileDrop").on("dragenter dragover",function (event) {
           event.preventDefault();
@@ -159,7 +253,7 @@
               var reader = new FileReader();
 
               reader.onload = function (e) {
-                  str = "<div>" + "<img style='width:300px;height:200px;' src='" + e.target.result + "'/>" + "</div>";
+                  str = "<div>" + "<img class='img-responsive' src='" + e.target.result + "'/>" + "</div>";
                   console.log();
                   $(".uploadedList").empty();
                   $(".uploadedList").append(str);

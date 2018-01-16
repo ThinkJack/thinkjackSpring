@@ -11,19 +11,19 @@
     <nav class="navbar navbar-expand">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:" id="console-button">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" id="console-button">
                     Console
                 </a>
             </li>
             <c:if test="${SrcVO.srcId ne null}">
                 <li class="nav-item active">
-                    <a id ="reply-click" class="btn btn-outline-secondary btn-sm" href="javascript:" data-toggle="modal" data-target="#reply-modal">
+                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal" id="reply-modal-bt">
                         Reply
                     </a>
                 </li>
             </c:if>
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:" data-toggle="modal" data-target="#keymap-modal">
+                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts
                 </a>
             </li>
