@@ -87,7 +87,7 @@
 
 </div>
 
-
+</div></div>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
 <script src="/resources/dist/js/upload.js"></script>

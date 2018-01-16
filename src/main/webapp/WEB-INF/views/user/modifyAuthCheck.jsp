@@ -12,6 +12,7 @@
 </script>
 
 <link href="/resources/dist/css/login.css" rel="stylesheet">
+
 <div  id="modifyAuthCheck">
     <div class="wrapper fadeInDown text-center">
 

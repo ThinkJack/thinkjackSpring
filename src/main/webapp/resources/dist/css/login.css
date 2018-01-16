@@ -142,3 +142,15 @@
     background-position: center center;
 
 }
+
+
+#modifyUser{
+    background-image: url("/resources/images/login4.jpg");
+    background-size: contain;
+    background-position: center center;
+}
+
+#profileimg{
+    max-width: 10rem;
+    max-height: 10rem;
+}
