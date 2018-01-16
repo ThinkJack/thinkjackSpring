@@ -89,10 +89,11 @@
 
         var imgtest;
         var fullName = "${login.userProfile}";
+        console.log("fullName: "+fullName);
         if (fullName !== "") {
             imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = "<div>" + "<img id='profileimg' class='img-responsive' src=" + imgtest + "/>" + "</div>";
+            console.log("imgtest: "+imgtest);
+            str = "<div>" + "<img id='profileimg' class='img-responsive' src='" + imgtest + "'/>" + "</div>";
         } else {
             str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
         }
@@ -184,7 +185,7 @@
                     <div class="uploadedList"></div>
                 </div>
                 <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-                <input type='file' id="imgInp" name="file"/><br>
+                <input type='file' id="imgInp" name="file"/> <input type="button" value="취소" id="filecancle" /><br>
             </div>
             <div class="small-unit" style="height: 200px">
                 <input type="hidden" name="userId" value="${login.userId}" readonly/>
@@ -266,6 +267,18 @@
         // });
 
     });
+
+
+    $('#filecancle').click(function() {   //취소버튼눌렀을때 파일업로드칸 선택한거 비우기
+
+        $('.hello').empty();
+        // 파일컴포넌트에 변경 이벤트 바인딩
+        $("#imgInp").change(function(){
+            //alert("change");
+            readURL(this);
+        });
+    });
+
 
     function checkImageType(fileName) {
         // i 는 정규식의 대소문자 구별 없다는 표현

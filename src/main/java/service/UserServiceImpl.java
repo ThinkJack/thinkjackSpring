@@ -92,11 +92,16 @@ public class UserServiceImpl implements UserService {
 		try {
 			String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
 			String rawPw = dto.getUserPassword();
+			System.out.println("db pW  : "+pw);
+			System.out.println("입렵Pw:"+rawPw);
+			System.out.println(passwordEncoder.matches(rawPw, pw));
 			if(passwordEncoder.matches(rawPw, pw)) {
 				System.out.println("비밀번호 일치");
 				dto.setUserPassword(pw);
 			}else {
-				System.out.println("비밀번호 불일치");
+				//============System.out.println("비밀번호 불일치");=======================
+				//주석 해제 시 비 암호화 설정된 db Pw  값으로  로그인 되지 않음
+				//dto.setUserPassword(pw);
 			}
 		}catch(NullPointerException npe){
 			UserVO vo=new UserVO();
@@ -232,5 +237,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int boardSearchCount(UserCriteria cri) throws Exception {
 		return dao.boardSearchCount(cri);
+	}
+
+	@Override
+	public void deleteImage(String userId) throws Exception {
+		dao.deleteImage(userId);
 	}
 }

@@ -377,6 +377,7 @@ public class UserController {
 			//프로필 업로드 하지 않을 때 원래 정보를 저장
             UserVO vot =(UserVO) session.getAttribute("login");
             user.setUserProfile(vot.getUserProfile());
+            System.out.println("");
 		    }
 
     	UserVO vo=service.modifyUser(user);
