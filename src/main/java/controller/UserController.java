@@ -365,6 +365,10 @@ public class UserController {
         String test=user.getUserProfile();
         //user 정보 저장
 		String userId= user.getUserId()+"";
+
+		String imagedefualt=user.getUserProfile();
+		System.out.println(imagedefualt);
+		String defualtprofile ="basic";
 		//file 업로드 여부 확인
 		if(!file.isEmpty()) {
             String uploadedFileName = UploadFileUtils.uploadFile(uploadPath,
@@ -374,10 +378,19 @@ public class UserController {
          //   System.out.println("파일 업로드 완료");
             user.setUserProfile(uploadedFileName);
         }else{
-			//프로필 업로드 하지 않을 때 원래 정보를 저장
-            UserVO vot =(UserVO) session.getAttribute("login");
-            user.setUserProfile(vot.getUserProfile());
+			System.out.println("imagedefualt: "+imagedefualt);
+			if(imagedefualt.equals("basic")){
+				user.setUserProfile(null);
+				System.out.println("basic"+user.getUserProfile());
+			}else {
+
+				//프로필 업로드 하지 않을 때 원래 정보를 저장
+				UserVO vot = (UserVO) session.getAttribute("login");
+				user.setUserProfile(vot.getUserProfile());
+				System.out.println("no basic"+user.getUserProfile());
+			}
 		    }
+
 
     	UserVO vo=service.modifyUser(user);
 

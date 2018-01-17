@@ -8,33 +8,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
     <%--반응형 웹디자인 아닌 조정폭--%>
     <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <%--애니메이션 효과--%>
-    <link rel="stylesheet" href="/resources/dist/css/animate.min.css">
+    <%--<link rel="stylesheet" href="/resources/dist/css/animate.min.css">--%>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
     <%--이모티콘--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <%--login--%>
+    <link href="/resources/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/resources/assets/css/font-awesome.css" rel="stylesheet">
     <link href="/resources/assets/css/docs.css" rel="stylesheet">
     <link href="/resources/bootstrap-social.css" rel="stylesheet">
 
-    <!-- jquery load -->
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%--bootstrap--%>
-    <link rel="stylesheet" href="/resources/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/dist/css/_bootswatch.scss">
     <link rel="stylesheet" href="/resources/dist/css/_variables.scss">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="/resources/dist/js/bootstrap.min.js"></script>
 
-
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
 
     <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <%--스크롤 애니메이션--%>
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <%--첨부파일--%>

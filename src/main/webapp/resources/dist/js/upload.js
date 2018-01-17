@@ -22,29 +22,30 @@ function getFileInfo(fullName) {
 
 function filePathChange(path, thumbnail) {
     var headerimg;
-    var fullName = path;
-    var test = fullName.lastIndexOf("/");
-    fileName = fullName.substring(test + 1, fullName.length);
-    path = fullName.substring(0, test + 1);
+    var fullName=path;
+    var test =fullName.lastIndexOf("/");
+    fileName= fullName.substring(test+1,fullName.length);
+    path= fullName.substring(0,test+1);
 //            console.log(path);
 //            console.log(fileName);
 //            console.log(test);
-    if (thumbnail === "true") {
-        profileheader = path + "s_" + fileName;
-    } else {
-        profileheader = path + fileName;
+    if(thumbnail === "true"){
+        profileheader =path+"s_"+fileName;
+    }else{
+        profileheader =path+fileName;
     }
 
 //            console.log(fullName);
-    if (fullName !== "") {
+    if(fullName!=="") {
         headerimg = getFileInfo(profileheader);
         // console.log(headerimg);
         hstr = headerimg;
-    } else {
+    }else{
         hstr = "/resources/images/like1.png";
     }
     return hstr;
 }
+
 
 
 // function checkImageType(fileName) {

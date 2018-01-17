@@ -1,9 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">--%>
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-<%--<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>--%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<style>
+    .fileDrop {
+        z-index: 8;
+        width: 100%;
+        height: auto;
+        border: 1px solid black;
+        max-height: 200px;
+        max-width: 400px;
+    }
+
+    .uploadedList {
+        z-index: 6;
+        width: 100%;
+        height: auto;
+        border: 1px solid black;
+        max-height: 200px;
+        max-width: 400px;
+    }
+
+    small {
+        margin-left: 3px;
+        font-weight: bold;
+        color: grey;
+    }
+
+    form {
+        z-index: 1;
+    }
+
+    div p {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+
+    .small-unit {
+        float: left;
+        width: 49%;
+        height: 30%;
+        color: black;
+        /* background: #333;*/
+        margin: 1px;
+    }
+
+    .big-area {
+        float: left;
+        width: 100%;
+        margin: 0 10px 0 0;
+        padding: 10px;
+        /*    background: #999;*/
+    }
+
+    #profileimg {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        max-width: 400px;
+    }
+
+    .inputall {
+        font-size: 4rem;
+
+    }
+    .input-group-height{
+     height:40px;
+    }
+    .input-group-text{
+     font-size:2rem;
+    }
+
+</style>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="/resources/dist/js/upload.js"></script>
 <script>
 
@@ -19,12 +89,13 @@
 
         var imgtest;
         var fullName = "${login.userProfile}";
+        //console.log("fullName: "+fullName);
         if (fullName !== "") {
             imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src=" + imgtest + "/>" + "</div>";
+            console.log("imgtest: "+imgtest);
+            str = "<div>" + "<img id='profileimg' class='img-responsive' src='" + imgtest + "'/>" + "</div>";
         } else {
-            str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src='/resources/images/123.gif'/>" + "</div>";
+            str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
         }
         $(".uploadedList").append(str);
 
@@ -96,86 +167,63 @@
     });
 
 </script>
-<link href="/resources/dist/css/login.css" rel="stylesheet">
-<div  id="modifyUser">
-    <div class="wrapper fadeInDown text-center">
-        <div class="card border-secondary mb-3" style="max-width: 30rem; max-height: 40rem;" id="formContent">
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
+<div class="row">
+<div class="deaf"></div>
+</div>
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
 
-            <section class="grid-1 big-area" style="margin-left: 5rem;" >
+    <div class="card text-white bg-dark mb-3" style="max-width: 100rem;min-width:600px;">
+        <div class="card-header">Profile Image</div>
+        <div class="card-body">
 
-                <div class="panel panel-title">
-                    <h1 class="bd">Profile Image</h1>
-                    <p>사용자 프로필을 수정하세요</p>
+        <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data"
+              onsubmit="return signinchk(this)">
+            <div class="small-unit">
+                <div class="fileDrop">
+                    <div class="uploadedList"></div>
                 </div>
-
-
-                <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data"
-                      onsubmit="return signinchk(this)">
-                    <%--<div class="panel panel-1 "></div>--%>
-                    <%--<div class="panel panel-2  "></div>--%>
-                    <%--<div class="panel panel-3 "></div>--%>
-                    <%--<div class="panel panel-4"></div>--%>
-                    <%--<div class="panel panel-5 "></div>--%>
-                    <%--<div class="panel panel-6 "></div>--%>
-                    <div class="panel panel-7"  style="max-width: 20rem;" >
-                        <p class="hn" style=" margin: 0">"${login.userName}"님 반가워요~</p>
-                    </div>
-                    <div class="panel panel-8 text-white" style="max-width: 20rem; max-height: 40rem;background-color:#000">
-
-                        <div class="small-unit">
-                            <div class="fileDrop ">
-                                <div class="uploadedList" style="padding-top:30px;">
-
-                                </div>
+                <p>사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
+                <input type='file' id="imgInp" name="file"/> <input type="button" value="기본 프로필 사용" id="filecancle" /><br>
+            </div>
+            <div class="small-unit" style="height: 200px">
+                <input type="hidden" name="userId" value="${login.userId}" readonly/>
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
                             </div>
-                            <p class="mt-1">사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-
+                            <input type="text" class="input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
                         </div>
-
                     </div>
-                    <input class="hn" type='file' id="imgInp" name="file"/>
-
-
-                    <div class="small-unit mt-5" style="height: 200px">
-                        <input type="hidden" name="userId" value="${login.userId}" readonly/>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend hn">
-                                        <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
-                                    </div>
-                                    <input type="text" class="input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
-                                </div>
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text input-group-height" class="input-group-addon">user name</span>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group mb-6">
-                                <div class="input-group-prepend hn">
-                                    <span class="input-group-text input-group-height" class="input-group-addon">user name</span>
-                                </div>
-                                <input type="text" class="input-group-text input-group-height" aria-label="Amount (to the nearest dollar)"
-                                       name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
-                                <div class="input-group-append">
-                                    <button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>
-                                </div>
-                                <div class="small-unit mt-3 " style="margin-left: 20%">
-                                    <input type="submit" class="btn btn-outline-primary hn input-group-text" value="정보변경"/>
-                                    <input type="reset" class="btn btn-outline-danger input-group-text" value="취소"/>
-                                </div>
-                            </div>
+                        <input type="text" class="input-group-text input-group-height" aria-label="Amount (to the nearest dollar)"
+                               name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
+                        <div class="input-group-append">
+                            <button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>
                         </div>
-                        <input type="hidden" name="test" value="${login.userProfile}"/><br>
-                        <input type="hidden" id="userProfile" name="userProfile">
-
                     </div>
-                </form>
-            </section>
+                </div>
+                <input type="hidden" name="test" value="${login.userProfile}"/><br>
+                <input type="hidden" id="userProfile" name="userProfile">
+            </div>
+            <div class="small-unit" style="bottom:0;right:0;height:10%;">
+                <input type="submit" class="btn btn-outline-primary hn input-group-text" value="정보변경"/>
+                <input type="reset" class="btn btn-outline-danger input-group-text" value="취소"/>
+            </div>
+        </form>
         </div>
     </div>
 </div>
 
-
-
+<div class="col-sm-3"></div>
 <script>
     $(".fileDrop").on("dragenter dragover", function (event) {
         event.preventDefault();
@@ -217,8 +265,26 @@
         //         $("#userProfile").val(data);
         //     }
         // });
-
+        $('#userProfile').val("");
     });
+    $("input[type='file']").on('change',function () {
+        $('#userProfile').val("");
+    })
+
+    $('#filecancle').click(function() {   //취소버튼눌렀을때 파일업로드칸 선택한거 비우기
+
+        $('#userProfile').val('basic');
+        // 파일컴포넌트에 변경 이벤트 바인딩
+        str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
+        $(".uploadedList").empty();
+        $(".uploadedList").append(str);
+
+        // $("#imgInp").change(function(){
+        //     //alert("change");
+        //     readURL(this);
+        // });
+    });
+
 
     function checkImageType(fileName) {
         // i 는 정규식의 대소문자 구별 없다는 표현
@@ -246,7 +312,7 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                str = "<div>" + "<img id='profileimg' class=' rounded-circle img-responsive ' src='" + e.target.result + "'/>" + "</div>";
+                str = "<div>" + "<img id='profileimg' class='img-responsive' src='" + e.target.result + "'/>" + "</div>";
                 console.log();
                 $(".uploadedList").empty();
                 $(".uploadedList").append(str);
@@ -256,3 +322,5 @@
         }
     }
 </script>
+</body>
+</html>
