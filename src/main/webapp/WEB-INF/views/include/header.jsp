@@ -135,11 +135,13 @@
             </c:if>
             <%--로그인 상태--%>
             <c:if test="${login ne null}">
-                <ul class="nav nav-pills ml-auto w-100 justify-content-end " style="float: right;margin-right: 10%;">
+                <ul class="nav nav-pills ml-auto w-100 justify-content-end ". style="float: right;margin-right: 10%;">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle  " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             <img  class="rounded-circle Photo profileHeader" src="" ></a>
                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <a class="dropdown-item hn">${login.userName}</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
                             <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
                         </div>

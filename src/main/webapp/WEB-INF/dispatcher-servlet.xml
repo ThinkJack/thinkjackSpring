@@ -51,6 +51,7 @@
             <beans:exclude-mapping path="/user//naverLogin" />
             <beans:exclude-mapping path="/user/googleLogin" />
             <beans:exclude-mapping path="/user/githubLogin" />
+            <beans:exclude-mapping path="/user/githubcallback" />
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 
