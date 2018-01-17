@@ -10,7 +10,7 @@
     <nav class="navbar">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
+                <a class="btn btn-secondary btn-sm bd modi2 " href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts
                 </a>
             </li>

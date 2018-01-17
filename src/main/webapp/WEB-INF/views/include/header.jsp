@@ -59,7 +59,7 @@
         }
         .naverImg{
             background-color:#1EC800;
-            height:16px;
+            height:32px;
             margin:auto;
             padding-right:4px;
             padding-left:4px;
@@ -92,12 +92,12 @@
         <div class="collapse navbar-collapse " id="navbarColor03">
 
             <ul class="nav nav-pills mx-auto w-100 justify-content-center">
-                <a class="navbar-brand " location.href ='/main' style="font-size: 40px">
+                <a class="navbar-brand " href ='/main' style="font-size: 40px">
                     <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" >
                 </a>
-                <li class="nav-item ">
-                    <a class="nav-link active" href="/main">Main</a>
-                </li>
+                <%--<li class="nav-item ">--%>
+                    <%--<a class="nav-link active" href="/main">Main</a>--%>
+                <%--</li>--%>
                 <li class="nav-item dropdown pointer ">
                     <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">  Service</a>
                     <div class="dropdown-menu pointerA hn" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 60px, 0px); top: 0px; left: 0px; will-change: transform;">

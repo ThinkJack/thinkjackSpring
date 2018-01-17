@@ -50,10 +50,10 @@
                         <img class="naverImg" src="/resources/images/Log in with NAVER_Icon_Green.PNG"/> Sign in with Naver
                     </a>
                     <a class="btn btn-block btn-social btn-google" href="/user/googleLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google']);">
-                        <span class="fa fa-google"></span> Sign in with Google
+                        <span class="fa fa-google mt-1"></span> Sign in with Google
                     </a>
                     <a class="btn btn-block btn-social btn-github" href="/user/githubLogin" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-github']);">
-                        <span class="fa fa-github"></span> Sign in with GitHub
+                        <span class="fa fa-github mt-1"></span> Sign in with GitHub
                     </a>
                 </div>
 
