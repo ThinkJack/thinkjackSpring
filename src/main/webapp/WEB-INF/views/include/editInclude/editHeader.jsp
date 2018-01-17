@@ -13,34 +13,36 @@
 
     <a class="navbar-brand" href="/"><img src="/resources/images/logo.png" style="width:30px;"></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto page_info">
-            <li class="nav-item active">
-                <!--href="" 는 현재 패이지 reload해줌 -->
-                <div class="page_title_view" id="page-title-view">
-                    <a class="page_title">
-                        <span id="src-title"></span>
-                    </a>
-                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+    <ul class="navbar-nav mx-auto justify-content-start page_info w-40 " >
+        <li class="nav-item active">
+            <!--href="" 는 현재 패이지 reload해줌 -->
+            <div class="page_title_view" id="page-title-view">
+                <a class="page_title">
+                    <span id="src-title"></span>
+                </a>
+                <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
                         ((login ne null) and (SrcVO.srcId eq null)) or
                         ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
                         ((login eq null) and (SrcVO.srcId eq null))}">
                     <img class="pencil" id="pencil" src="/resources/images/pencil.png">
-                    </c:if>
-                </div>
-                <div class="page_title_text"  id="page-title-text">
-                    <input type="text" name="page-title" id="src-title-input" value=""/>
-                </div>
-                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"></span></div>
-            </li>
-            <li class="nav-item">
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+                </c:if>
+            </div>
+            <div class="page_title_text"  id="page-title-text">
+                <input type="text" name="page-title" id="src-title-input" value=""/>
+            </div>
+            <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"></span></div>
+        </li>
+        <li class="nav-item">
+        </li>
+    </ul>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse show" id="navbarsExampleDefault">
+        <ul class="nav navbar-nav mx-auto  w-100 justify-content-end " >
             <li class="nav-item active run" id="run">
                 <div>
                     <a class="btn btn-outline-dark" href="javascript:;">

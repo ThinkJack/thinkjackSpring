@@ -127,7 +127,7 @@
     var declaration;
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
-    var out = frame.contentDocument || frame.contentWindow.document;
+    var out = frame.contentDocument || frame.contentWindow.document
 
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
@@ -147,14 +147,11 @@
         before = testFunc.length;
 
         //Uritest-----------------------------------------------------------------------------------------------
-        //우리추가
-//        out.open();
-//        out.write("<script>" + testFunc + "<\/script>");
-//        out.close();
-        //해당 객체명 접근
-        console.log(frame.contentWindow.Function(testFunc));
-        //-----------
+        out.open();
+        out.write("<script>" + testFunc + "<\/script>");
+        out.close();
 
+        console.log(frame.contentWindow.eval("anonymous()"));
 
     });
     $(document).on("click", "#add-test-case", function () {
@@ -250,7 +247,6 @@
             errMassage = err;
         }
         finally {
-
             var runningTime = getTimeStamp() - startTime;
             resultText = "<div class='resultLog'>[input : " + input.join() +
                 " / output : " + output + "] " +

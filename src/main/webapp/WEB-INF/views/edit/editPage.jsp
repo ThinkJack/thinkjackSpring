@@ -191,6 +191,7 @@
             codeCss.setValue(strCss);
             codeJavaScript.setValue(strJs);
             changeSaveImg(1);
+            updatePreview();
         });
     </script>
 </body>
