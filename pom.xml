@@ -257,6 +257,18 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.1.0.RELEASE</version>
 		</dependency>
+		<!--스프링과 AWS S3 서버 연결 관련 설정 -->
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+        <dependency>
+            <groupId>jca</groupId>
+            <artifactId>jca</artifactId>
+            <version>1.5</version>
+        </dependency>
 
 
 	</dependencies>

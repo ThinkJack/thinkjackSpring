@@ -41,4 +41,6 @@ public interface UserService {
 	public int srcListSearchCount(UserCriteria cri) throws Exception;
 
 	public int boardSearchCount(UserCriteria cri)throws Exception;
+
+	public void deleteImage(String userId)throws Exception;
 }

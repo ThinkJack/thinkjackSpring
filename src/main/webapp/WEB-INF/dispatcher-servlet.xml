@@ -27,7 +27,7 @@
     
     <bean id="loginInterceptor" class="interceptor.LoginInterceptor"></bean>
 
-    <bean id="editPageInterceptor" class="interceptor.EditPageInterceptor"></bean>
+    <bean id="DestInterceptor" class="interceptor.DestInterceptor"></bean>
 
     <bean id="naverLoginBo" class="naver.NaverLoginBo"></bean>
 
@@ -37,6 +37,25 @@
 			<beans:mapping path="/user/loginPost"/>
 			<ref bean="loginInterceptor"/>
 		</beans:interceptor>
+
+        <!-- Dest 관련 인터셉터-->
+        <beans:interceptor>
+            <beans:mapping path="/**"/>
+            <beans:exclude-mapping path="/resources/**" />
+            <beans:exclude-mapping path="/user/loginPost" />
+            <beans:exclude-mapping path="/user/socialLoginPost" />
+            <beans:exclude-mapping path="/user/login" />
+            <beans:exclude-mapping path="/user/callback" />
+            <beans:exclude-mapping path="/user/setPassAuthCheck" />
+            <beans:exclude-mapping path="/user/modifyAuthCheck" />
+            <beans:exclude-mapping path="/user//naverLogin" />
+            <beans:exclude-mapping path="/user/googleLogin" />
+            <beans:exclude-mapping path="/user/githubLogin" />
+            <beans:exclude-mapping path="/user/githubcallback" />
+            <ref bean="DestInterceptor"/>
+        </beans:interceptor>
+
+
 
         <beans:interceptor>
             <beans:mapping path="/board/*"/>
@@ -55,13 +74,9 @@
             <property name="useCacheControlHeader" value="true"/>
             <property name="useCacheControlNoStore" value="true"/>
         </bean>
-        <!--<beans:interceptor>-->
-            <!--<beans:mapping path="/edit/editPage"/>-->
-            <!--&lt;!&ndash;<beans:mapping path="/edit/editPage/*"/>&ndash;&gt;-->
-            <!--<ref bean="editPageInterceptor"/>-->
-        <!--</beans:interceptor>-->
-
 	</beans:interceptors>
+
+
 
     <!--파일 업로드 관련 설정 -->
     <bean id="multipartResolver"
@@ -70,7 +85,7 @@
     </bean>
     <!-- 파일 저장 관련 설정 -->
     <bean id="uploadPath" class="java.lang.String">
-        <constructor-arg value="/Users/kwak/a/"></constructor-arg>
+        <constructor-arg value="thinkjack"></constructor-arg>
     </bean>
 </beans>
 

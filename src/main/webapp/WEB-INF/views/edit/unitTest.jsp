@@ -53,6 +53,12 @@
             padding-bottom: 44px;
         }
 
+        #frameUnitTest {
+            height: 0px;
+            width: 0px;
+
+        }
+
         .CodeMirror {
              height: 100%;
          }
@@ -69,30 +75,30 @@
 
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6">
-        <div class="col"><p class="h4 text-white code-name">JS</p></div>
+        <div class="col modi4"><p class="h4 text-white code-name bd">JS</p></div>
         <div class="col" id="codeUnitTest"></div>
     </div>
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start">
-                    <p class="h4 text-white code-name">TestCase</p>
+                <div class="col-6 row justify-content-start modi4">
+                    <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
-                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1">Clear</button>
-                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1">AddTestCase</button>
-                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1">TestAll</button>
+                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
+                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
+                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
                 </div>
             </div>
             <div class="right_view" id="test-case"></div>
         </div>
         <div class="col right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start">
-                    <p class="h4 text-white code-name">Result</p>
+                <div class="col-6 row justify-content-start ">
+                    <p class="h4 text-white code-name bd ">Result</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
-                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1">Clear
+                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1 modi3">Clear
                     </button>
                 </div>
             </div>
@@ -100,6 +106,8 @@
         </div>
     </div>
 </div>
+
+<iframe id="frameUnitTest"></iframe>
 
 <!--modal 창-->
 <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
@@ -118,6 +126,9 @@
     var testFunc;
     var declaration;
     var errors = false;
+    var frame = document.getElementById("frameUnitTest");
+    var out = frame.contentDocument || frame.contentWindow.document
+
     codeUnitTest.on("change", function () {
         var origin = codeUnitTest.getValue();
         declaration = origin.substr(origin.indexOf("(") + 1, origin.indexOf("{") - origin.indexOf("(") - 2);
@@ -134,6 +145,14 @@
         if (before != testFunc.length)
             $("#test-case").empty();
         before = testFunc.length;
+
+        //Uritest-----------------------------------------------------------------------------------------------
+        out.open();
+        out.write("<script>" + testFunc + "<\/script>");
+        out.close();
+
+        console.log(frame.contentWindow.eval("anonymous()"));
+
     });
     $(document).on("click", "#add-test-case", function () {
         var inputbox = "";

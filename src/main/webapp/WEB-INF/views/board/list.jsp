@@ -7,7 +7,15 @@
 <style>
     td, th {
         text-align: center;
+
     }
+    td{
+        padding-top: 2%;
+    }
+    body{
+        background-color: orange;
+    }
+
 </style>
 <div class="deaf2"></div>
 
@@ -17,17 +25,17 @@
         <div class="col-sm-6 removePadding" >
 
             <%--<div class="form-group">--%>
-            <label class="control-label">   <h1 style="text-align: center;"> ${category} 게시판</h1> </label>
+            <label class="control-label">   <h1 class="bd" style="text-align: center;"> ${category}</h1> </label>
 
             <div class="deaf2">
                 <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
             </div>
             <div class="form-group">
-                <div class="input-group ">
+                <div class="input-group bd">
                     <div class="input-group-prepend" style="width: 100%;">
                         <%--<div class="form-group ">--%>
-                        <label class="mr-1" for="sel1">Select list:</label>
-                        <select  class="custom-select" name="searchType" id="sel1">
+                        <label class="mr-1 mt-2 " for="sel1">Select list:</label>
+                        <select  class="custom-select bd" name="searchType" id="sel1">
                             <option value="n"
                                     <c:out value="${cri.searchType == null?'selected':''}"/> >
                                 ---</option>
@@ -52,13 +60,13 @@
                         </select>
                         <%--</div>--%>
 
-                        <input type="text" class="form-control" placeholder="Search" name="keyword" id="keywordInput"
+                        <input type="text" class="form-control bd" placeholder="Search" name="keyword" id="keywordInput"
                                value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary " id="searchBtn">Search</button>
+                            <button type="submit" class="btn btn-primary bd" id="searchBtn">Search</button>
                         </div>
                         <div class="input-group-append " >
-                            <button class="btn btn-primary" id="newBtn">new Board</button>
+                            <button class="btn btn-primary bd" id="newBtn">new Board</button>
                         </div>
                     </div>
 
@@ -69,13 +77,13 @@
             <%--</div>--%>
 
             <%-- list 부분--%>
-            <div class="list-group mb-5" >
+            <div class="list-group mb-5 bd" >
 
                 <%--게시글 목록--%>
 
-                <table class="table ">
+                <table class="table " >
                     <thead>
-                    <tr class="table-dark text-white">
+                    <tr class="table-dark text-white bd">
                         <th style="width:10px;">boardId</th>
                         <th >TITLE</th>
                         <th >WRITER</th>
@@ -87,11 +95,11 @@
 
                     <c:forEach items="${list}" var="boardVO">
 
-                        <tr>
-                            <td>${boardVO.boardId}</td>
-                            <td><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
+                        <tr >
+                            <td >${boardVO.boardId}</td>
+                            <td class="hn" style="padding-top:2.5%; word-break:break-all;"><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
                                     ${boardVO.boardTitle}</a> </td>
-                            <td><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
+                            <td style="padding-top:1%;padding-bottom:1%"><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
                                 <script>
                                     $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
                                 </script>${boardVO.boardWriter}</td>
@@ -131,6 +139,7 @@
         </div>
     </div>
 </div>
+
     <script>
         $(document).ready(
             function () {

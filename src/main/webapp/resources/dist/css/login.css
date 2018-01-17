@@ -29,7 +29,7 @@
 }
 
 #formFooter {
-    background-color: #f6f6f6;
+    /*background-color: #f6f6f6;*/
     border-top: 1px solid #dce8f1;
     padding: 25px;
     text-align: center;
@@ -114,4 +114,56 @@
 
 * {
     box-sizing: border-box;
+}
+
+#login{
+    background-image: url("/resources/images/login1.jpg");
+    background-size: contain;
+    background-position: center center;
+    /*background-repeat: no-repeat;*/
+}
+#Password{
+    background-image: url("/resources/images/login3.jpg");
+    background-size: contain;
+    background-position: center center;
+
+}
+
+#Password2{
+    background-image: url("/resources/images/login3.jpg");
+    background-size: contain;
+    background-position: center center;
+
+}
+
+#modifyAuthCheck{
+    background-image: url("/resources/images/login4.jpg");
+    background-size: contain;
+    background-position: center center;
+
+}
+
+
+#modifyUser{
+    background-image: url("/resources/images/login4.jpg");
+    background-size: contain;
+    background-position: center center;
+}
+
+#profileimg{
+    max-width: 10rem;
+    max-height: 10rem;
+}
+
+#regiser{
+    background-image: url("/resources/images/login1.jpg");
+    background-size: contain;
+    background-position: center center;
+
+}
+
+#findPassword{
+    background-image: url("/resources/images/login1.jpg");
+    background-size: contain;
+    background-position: center center;
 }
