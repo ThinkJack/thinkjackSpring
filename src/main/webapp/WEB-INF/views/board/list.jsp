@@ -12,6 +12,9 @@
     td{
         padding-top: 2%;
     }
+    body{
+        background-color: orange;
+    }
 
 </style>
 <div class="deaf2"></div>

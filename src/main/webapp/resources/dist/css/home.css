@@ -137,7 +137,8 @@ background-color: #000;
 section.c{
    /*background-image: url("/resources/images/main/mainA.png");*/
     /*height:700px;*/
-    background-color:#da7908;
+    /*background-color:#da7908;*/
+    background-color: orange;
     /*background-attachment:fixed;*/
     background-position: bottom;
     background-size:contain;
@@ -149,7 +150,8 @@ section.c{
 section.d{
 
     /*background-image: url("/resources/images/main/mainD.png");*/
-    background-color:#da7908;
+    /*background-color:#da7908;*/
+    background-color: orange;
     height:400px;
    }
 
