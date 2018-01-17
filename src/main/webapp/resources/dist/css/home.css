@@ -127,7 +127,7 @@ section.a{
 }
 section.b{
     background-image: url("/resources/images/main/mainB.png");
-background-color: #000;
+    background-color: #000;
     height:700px;
     background-attachment: fixed;
     background-size:contain;
@@ -135,7 +135,7 @@ background-color: #000;
 }
 
 section.c{
-   /*background-image: url("/resources/images/main/mainA.png");*/
+    /*background-image: url("/resources/images/main/mainA.png");*/
     /*height:700px;*/
     /*background-color:#da7908;*/
     background-color: orange;
@@ -153,7 +153,7 @@ section.d{
     /*background-color:#da7908;*/
     background-color: orange;
     height:400px;
-   }
+}
 
 .di{display: inline-block}
 
@@ -444,9 +444,9 @@ a:hover {
     .grid-1 {
         /*grid-template-columns: repeat(2, 1fr);*/
         /*grid-template-rows: auto 200px auto 200px 200px auto 200px auto;*/
-}
-.panel-title,
-.panel-7,
+    }
+    .panel-title,
+    .panel-7,
     .panel-copyright {
         grid-column: span 2;
     }
@@ -463,9 +463,9 @@ a:hover {
 @media only screen and (min-width: 600px) {
 
     .grid-1 {
-          /*grid-template-columns: repeat(3, 1fr);*/
-          /*grid-template-rows: auto 200px 200px 200px auto;*/
-      }
+        /*grid-template-columns: repeat(3, 1fr);*/
+        /*grid-template-rows: auto 200px 200px 200px auto;*/
+    }
     .panel-title,
     .panel-copyright {
         grid-column: span 3;
@@ -521,4 +521,4 @@ a:hover {
 
 a {
 
-text-decoration: none; }
+    text-decoration: none; }
