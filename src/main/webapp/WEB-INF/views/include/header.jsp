@@ -60,7 +60,7 @@
         }
         .naverImg{
             background-color:#1EC800;
-            height:16px;
+            height:32px;
             margin:auto;
             padding-right:4px;
             padding-left:4px;
