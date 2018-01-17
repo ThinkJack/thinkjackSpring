@@ -13,11 +13,7 @@ public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
 
-        return "index";
-    }
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public void main() {
-
+        return "main";
     }
 
 }
