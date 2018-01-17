@@ -49,7 +49,7 @@
             alert("${msg}");
         }
         $(document).ready(function() {
-            $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
+            $(".profileHeader").attr("src",getFileInfo("${login.userProfile}"));
         });
     </script>
     <style>
@@ -130,7 +130,7 @@
                         <button  class="btn btn-outline-primary hn " onclick="location.href='/user/login'" style="font-size: 20px ;height:50px;">로그인</button>
                     </li>
                     <li class="nav-item">
-                        <a  class="nav-link"><img class="rounded-circle loginPhoto" src="/resources/images/main2.jpg"></a>
+                        <a  class="nav-link"><img class="rounded-circle Photo" src="/resources/images/123.gif"></a>
                     </li>
                 </ul>
             </c:if>
@@ -138,12 +138,12 @@
             <c:if test="${login ne null}">
                 <ul class="nav nav-pills ml-auto w-100 justify-content-end " style="float: right;margin-right: 10%;">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <img id="profileHeader" class="rounded-circle loginPhoto" src="" ></a>
+                        <a class="nav-link dropdown-toggle  " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img  class="rounded-circle Photo profileHeader" src="" ></a>
                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
                             <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
                             <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
                         </div>
-
                     </li>
                 </ul>
             </c:if>

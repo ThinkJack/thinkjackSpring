@@ -148,6 +148,9 @@
             (SELECT category_name
              FROM tbl_board_category
              WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
+             (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                     boardWriterProfile,
             board_likecnt                                                        boardLikecnt
   from tbl_board
   where board_id > 0 AND board_writer = #{userId} AND board_state = 1

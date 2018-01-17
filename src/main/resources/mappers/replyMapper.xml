@@ -22,6 +22,9 @@
             (SELECT user_name
              FROM tbl_user
              WHERE tbl_user.user_id = tbl_reply.reply_writer) replyWriter,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_reply.reply_writer) replyProfile,
             reply_regdate                                     replyRegdate,
             reply_update                                      replyUpdate,
             reply_parent                                      replyParent,

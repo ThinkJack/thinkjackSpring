@@ -6,11 +6,15 @@ function checkImageType(fileName) {
 }
 
 function getFileInfo(fullName) {
-    var imgsrc = "http://" + document.location.host;
-    if (checkImageType(fullName)) {
-        imgsrc = imgsrc + "/displayFile?fileName=" + fullName;
-    } else {
-        imgsrc = imgsrc + "/displayFile?fileName=" +  "/resources/images/123.gif";
+    try {
+        var imgsrc = "http://" + document.location.host;
+        if (checkImageType(fullName)) {
+            imgsrc = imgsrc + "/displayFile?fileName=" + fullName;
+        } else {
+            imgsrc ="/resources/images/123.gif";
+        }
+    }catch (Exception){
+        imgsrc = "/resources/images/123.gif";
     }
     return imgsrc;
 

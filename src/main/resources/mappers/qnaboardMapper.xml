@@ -7,24 +7,27 @@
     <insert id="create">
         INSERT INTO tbl_board (board_title, board_content, board_writer, board_category_id)
         VALUES (#{boardTitle}, #{boardContent}, (SELECT user_id
-        FROM tbl_user
-        WHERE user_name = #{boardWriter}), (SELECT category_id
-        FROM tbl_board_category
-        WHERE category_name =
-        'qna'))
+                                                 FROM tbl_user
+                                                 WHERE user_name = #{boardWriter}), (SELECT category_id
+                                                                                     FROM tbl_board_category
+                                                                                     WHERE category_name =
+                                                                                           'qna'))
     </insert>
 
     <select id="read" resultType="BoardVO">
         SELECT
-        board_id                                                             boardId,
-        board_title                                                          boardTitle,
-        board_content                                                        boardContent,
-        (SELECT user_name
-        FROM tbl_user
-        WHERE tbl_user.user_id = tbl_board.board_writer)                    boardWriter,
-        board_regdate                                                        boardRegdate,
-        board_viewcnt                                                        boardViewcnt,
-        board_likecnt                                                        boardLikecnt
+            board_id                                          boardId,
+            board_title                                       boardTitle,
+            board_content                                     boardContent,
+            (SELECT user_name
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer) boardWriter,
+            board_regdate                                     boardRegdate,
+            board_viewcnt                                     boardViewcnt,
+            board_likecnt                                     boardLikecnt,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer) boardWriterProfile
         FROM tbl_board
         WHERE board_id = #{boardId} AND board_state = 1
     </select>
@@ -32,15 +35,15 @@
     <update id="update">
         UPDATE tbl_board
         SET
-        board_title   = #{boardTitle},
-        board_content = #{boardContent}
+            board_title   = #{boardTitle},
+            board_content = #{boardContent}
         WHERE tbl_board.board_id = #{boardId}
     </update>
 
     <update id="delete">
         UPDATE tbl_board
         SET
-        board_state = 0
+            board_state = 0
         WHERE tbl_board.board_id = #{boardId}
     </update>
 
@@ -56,7 +59,7 @@
             <if test="searchType == 'w'.toString()">
                 and (SELECT user_name
                 FROM tbl_user
-                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%')
+                WHERE tbl_user.user_id = tbl_board.board_writer) like CONCAT('%', #{keyword}, '%')
             </if>
             <if test="searchType == 'tc'.toString()">
                 and ( board_title like CONCAT('%', #{keyword}, '%') OR board_content like CONCAT('%', #{keyword}, '%'))
@@ -64,7 +67,7 @@
             <if test="searchType == 'cw'.toString()">
                 and ( board_content like CONCAT('%', #{keyword}, '%') OR (SELECT user_name
                 FROM tbl_user
-                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%'))
+                WHERE tbl_user.user_id = tbl_board.board_writer) like CONCAT('%', #{keyword}, '%'))
             </if>
             <if test="searchType == 'tcw'.toString()">
                 and ( board_itle like CONCAT('%', #{keyword}, '%')
@@ -73,7 +76,7 @@
                 OR
                 (SELECT user_name
                 FROM tbl_user
-                WHERE tbl_user.user_id = tbl_board.board_writer)  like CONCAT('%', #{keyword}, '%'))
+                WHERE tbl_user.user_id = tbl_board.board_writer) like CONCAT('%', #{keyword}, '%'))
             </if>
         </if>
     </sql>
@@ -92,7 +95,10 @@
             (SELECT category_name
              FROM tbl_board_category
              WHERE tbl_board_category.category_id = tbl_board.board_category_id) boardCategoryName,
-            board_likecnt                                                        boardLikecnt
+            board_likecnt                                                        boardLikecnt,
+            (SELECT user_profile
+             FROM tbl_user
+             WHERE tbl_user.user_id = tbl_board.board_writer)                     boardWriterProfile
   from tbl_board
   where board_id > 0 AND (SELECT category_name
              FROM tbl_board_category
@@ -121,6 +127,8 @@
 
 
     <update id="increaseViewcnt">
-        UPDATE tbl_board SET board_viewcnt = board_viewcnt + 1 WHERE board_id = #{boardId}
+        UPDATE tbl_board
+        SET board_viewcnt = board_viewcnt + 1
+        WHERE board_id = #{boardId}
     </update>
 </mapper>

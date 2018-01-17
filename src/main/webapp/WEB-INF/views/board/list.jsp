@@ -7,7 +7,15 @@
 <style>
     td, th {
         text-align: center;
+
     }
+    td{
+        padding-top: 2%;
+    }
+    body{
+        background-color: orange;
+    }
+
 </style>
 <div class="deaf2"></div>
 
@@ -73,7 +81,7 @@
 
                 <%--게시글 목록--%>
 
-                <table class="table ">
+                <table class="table " >
                     <thead>
                     <tr class="table-dark text-white bd">
                         <th style="width:10px;">boardId</th>
@@ -87,11 +95,14 @@
 
                     <c:forEach items="${list}" var="boardVO">
 
-                        <tr>
-                            <td>${boardVO.boardId}</td>
-                            <td class="hn"><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
+                        <tr >
+                            <td >${boardVO.boardId}</td>
+                            <td class="hn" style="padding-top:2.5%; word-break:break-all;"><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
                                     ${boardVO.boardTitle}</a> </td>
-                            <td>${boardVO.boardWriter}</td>
+                            <td style="padding-top:1%;padding-bottom:1%"><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
+                                <script>
+                                    $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
+                                </script>${boardVO.boardWriter}</td>
                             <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
                                                 value="${boardVO.boardRegdate}"/></td>
                             <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
