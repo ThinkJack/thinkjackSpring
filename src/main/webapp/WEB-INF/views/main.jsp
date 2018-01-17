@@ -65,7 +65,7 @@
                 <div class="col-sm-4 removePadding borderRB " style="height:29%;margin-top:76.781px;">
                     <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
 
-                    <li class="tip">  <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:40%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>
+                    <li class="tip">  <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:40%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.href='/edit/editPage'">Edit</button>
                         <strong class="tooltipA">Add images in the tooltip. <a href="http://codecanyon.net/item/portfolio-premium-wp-plugin/154612">
                             <img class="ref" src="/resources/images/logo.png" height="150" width="150" alt="" /></a><a href="#"> You can even add links!</a></strong></li>
                 </div>

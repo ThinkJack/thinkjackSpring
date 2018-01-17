@@ -13,7 +13,7 @@ footer{
 
             <footer>
 
-                <div class="panel panel-copyright" style="background-color:#000;height: 100%;margin-bottom: 0;">
+                <div class="panel panel-copyright" style="background-color:#000;height: 100%;">
                     <p>Masterpice by Thinkjack<br>&copy; Copyright happily ever after
                         <a href="https://webdesign.tutsplus.com/tutorials/css-grid-layout-and-comics-as-explained-by-barry-the-cat--cms-27617">Envato Tuts+</a>
                 </div>
