@@ -69,30 +69,30 @@
 
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6">
-        <div class="col"><p class="h4 text-white code-name">JS</p></div>
+        <div class="col modi4"><p class="h4 text-white code-name bd">JS</p></div>
         <div class="col" id="codeUnitTest"></div>
     </div>
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start">
-                    <p class="h4 text-white code-name">TestCase</p>
+                <div class="col-6 row justify-content-start modi4">
+                    <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
-                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1">Clear</button>
-                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1">AddTestCase</button>
-                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1">TestAll</button>
+                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
+                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
+                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
                 </div>
             </div>
             <div class="right_view" id="test-case"></div>
         </div>
         <div class="col right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start">
-                    <p class="h4 text-white code-name">Result</p>
+                <div class="col-6 row justify-content-start ">
+                    <p class="h4 text-white code-name bd ">Result</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
-                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1">Clear
+                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1 modi3">Clear
                     </button>
                 </div>
             </div>

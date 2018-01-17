@@ -47,7 +47,7 @@
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderLB " style="height:20%;margin-right: 50% ;margin-bottom: -11px;">
 
-                    <li class="tip"> <button class="btn btn-primary btn-lg btn-block bd pointerC" style="margin-left:39%;width:70%;border:8pt solid #fff;height:63%;margin-bottom: 10px;position:relative;top:60px;font-size: 28px" href="/edit/unitTest">Unit Test</button>
+                    <li class="tip"> <button class="btn btn-primary btn-lg btn-block bd pointerC" style="margin-left:39%;width:70%;border:8pt solid #fff;height:63%;margin-bottom: 10px;position:relative;top:60px;font-size: 28px" onclick="location.href='/edit/unitTest'">Unit Test</button>
                         <strong class="tooltipB">Unit Test Play
                             <%--<video width="320" height="176" controls autoplay>--%>
                                 <%--<source src="/resources/test.mp4" type="video/mp4">--%>
