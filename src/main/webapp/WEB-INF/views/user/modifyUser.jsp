@@ -59,8 +59,8 @@
         var oldName = "${login.userName}";
         console.log(userName);
 
-        if (!userName || userName.trim().length > 10) {
-            alert("이름을 10자 이내로 입력해 주세요.");
+        if (!userName || userName.trim().length > 20) {
+            alert("이름을 20자 이내로 입력해 주세요.");
             return false;
         }
 
