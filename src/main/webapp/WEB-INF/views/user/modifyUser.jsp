@@ -99,7 +99,7 @@
 <link href="/resources/dist/css/login.css" rel="stylesheet">
 <div  id="modifyUser">
     <div class="wrapper fadeInDown text-center">
-        <div class="card border-secondary mb-3" style="max-width: 30rem; max-height: 40rem;" id="formContent">
+        <div class="card border-secondary mb-3" style="max-width: 30rem; max-height: 45rem;" id="formContent">
 
             <section class="grid-1 big-area" style="margin-left: 5rem;" >
 
