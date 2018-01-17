@@ -45,6 +45,12 @@
             <beans:exclude-mapping path="/user/loginPost" />
             <beans:exclude-mapping path="/user/socialLoginPost" />
             <beans:exclude-mapping path="/user/login" />
+            <beans:exclude-mapping path="/user/callback" />
+            <beans:exclude-mapping path="/user/setPassAuthCheck" />
+            <beans:exclude-mapping path="/user/modifyAuthCheck" />
+            <beans:exclude-mapping path="/user//naverLogin" />
+            <beans:exclude-mapping path="/user/googleLogin" />
+            <beans:exclude-mapping path="/user/githubLogin" />
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 

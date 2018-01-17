@@ -468,7 +468,7 @@ public class UserController {
 		TempKey TK = new TempKey();
 
 
-		dto.setUserEmail("naver");
+		dto.setUserEmail("naver"+"#"+TK.generateNumber(6));
 		dto.setUserSocialId("n"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
 
@@ -568,7 +568,7 @@ public class UserController {
 		TempKey TK = new TempKey();
 
        // System.out.println(person.getDisplayName());
-        dto.setUserEmail("google");
+        dto.setUserEmail("google"+"#"+TK.generateNumber(6));
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
@@ -668,7 +668,7 @@ public class UserController {
 		LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
-		dto.setUserEmail("github");
+		dto.setUserEmail("github"+"#"+TK.generateNumber(6));
 		dto.setUserSocialId("git"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
 
