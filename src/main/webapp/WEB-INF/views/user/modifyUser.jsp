@@ -16,7 +16,6 @@
     var chkName = true;
     $(document).ready(function () {
         //console.log( "ready!" );
-
         var imgtest;
         var fullName = "${login.userProfile}";
         if (fullName !== "") {
@@ -27,18 +26,11 @@
             str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src='/resources/images/123.gif'/>" + "</div>";
         }
         $(".uploadedList").append(str);
-
-
     });
-
-
     function checkvalue() {
         chkName = false;
     }
-
-
     function signinchk(obj) {
-
         if (!obj.userName.value || obj.userName.value.trim().length == 0) {
             alert("이름을 입력해주세요.");
             obj.userName.value = "";
@@ -51,20 +43,16 @@
             return false;
         }
     }
-
 </script>
 <script>
     $(document).on('click', '#authenticateName', function () {
         var userName = $('#userName').val();
         var oldName = "${login.userName}";
         console.log(userName);
-
         if (!userName || userName.trim().length > 20) {
             alert("이름을 20자 이내로 입력해 주세요.");
             return false;
         }
-
-
         if (userName == oldName) {
             alert("현재 사용 중인 이름입니다.");
             return chkName = true;
@@ -78,7 +66,6 @@
                 data: {'userName': userName},
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 dataType: "json",
-
                 success: function (data) {
                     console.log("success")
                     alert(decodeURIComponent(data.msg))
@@ -88,13 +75,11 @@
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-
                     alert('서버와의 통신이 원할하지 않습니다.\n다시 시도 해 주십시오.');
                 }
             });
         }
     });
-
 </script>
 <link href="/resources/dist/css/login.css" rel="stylesheet">
 <div  id="modifyUser">
@@ -133,7 +118,7 @@
                         </div>
 
                     </div>
-                    <input class="hn" type='file' id="imgInp" name="file"/>
+                    <input class="hn" type='file' id="imgInp" name="file"/><input type="button" value="기본 프로필 사용" id="filecancle" /><br>
 
 
                     <div class="small-unit mt-5" style="height: 200px">
@@ -182,15 +167,12 @@
     });
     $(".fileDrop").on("drop", function (event) {
         event.preventDefault();
-
         var files = event.originalEvent.dataTransfer.files;
-
         var file = files[0];
         // console.log(file);
         // var formData = new FormData();
         //
         // formData.append("file",file);
-
         //file / 에 집어 넣기
         $("input[type='file']")
             .prop("files", files)  // put files into element
@@ -217,16 +199,27 @@
         //         $("#userProfile").val(data);
         //     }
         // });
-
+        $('#userProfile').val("");
     });
-
+    $("input[type='file']").on('change',function () {
+        $('#userProfile').val("");
+    })
+    $('#filecancle').click(function() {   //취소버튼눌렀을때 파일업로드칸 선택한거 비우기
+        $('#userProfile').val('basic');
+        // 파일컴포넌트에 변경 이벤트 바인딩
+        str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
+        $(".uploadedList").empty();
+        $(".uploadedList").append(str);
+        // $("#imgInp").change(function(){
+        //     //alert("change");
+        //     readURL(this);
+        // });
+    });
     function checkImageType(fileName) {
         // i 는 정규식의 대소문자 구별 없다는 표현
         var pattern = /jpg$|gif$|png$|jpeg$/i;
         return fileName.match(pattern);
     }
-
-
     $(function () {
         $("#imgInp").on('change', function () {
             var filename = document.getElementById('imgInp').value; //파일을 추가한 input 박스의 값
@@ -235,23 +228,19 @@
                 return;
             }
         });
-
         $("#imgInp").on('change', function () {
             readURL(this);
         });
     });
-
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 str = "<div>" + "<img id='profileimg' class=' rounded-circle img-responsive ' src='" + e.target.result + "'/>" + "</div>";
                 console.log();
                 $(".uploadedList").empty();
                 $(".uploadedList").append(str);
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }
