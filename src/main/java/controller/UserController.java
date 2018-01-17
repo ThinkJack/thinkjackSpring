@@ -19,7 +19,6 @@ import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.social.connect.Connection;
 
 import org.springframework.social.google.api.Google;
@@ -33,7 +32,6 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import dto.LoginDTO;
@@ -44,11 +42,9 @@ import org.springframework.web.util.WebUtils;
 import service.SrcService;
 import service.UserService;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.UUID;
 
 
 @Controller
@@ -282,7 +278,7 @@ public class UserController {
 
 			}
 		}
-		return "/main";
+		return "main";
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)

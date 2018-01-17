@@ -5,13 +5,13 @@
   Time: 오후 5:06
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!-- header 메뉴바 -->
+<!-- header 메뉴바 -->s
 <nav class="navbar  navbar-expand-lg navbar-light bg-light fixed-top">
 
-    <a class="navbar-brand" href="#"><img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
+    <a class="navbar-brand" href="/"><img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                     <a class="page_title text-dark">
                         <span id="src-title"><c:out value="${SrcVO.srcTitle}" default="Untitled" /></span>
                     </a>
-                    <img class="pencil" id="pencil" src="/resources/images/pencil.png"  >
+                    <i class="fa fa-paint-brush" style="color: black"></i>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
                     <input type="text" name="page-title" id="src-title-input" value=""/>
@@ -48,7 +48,7 @@
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-primary" href="javascript:;" data-toggle="modal" data-target="#setting">
-                        <img src="/resources/images/setting.png"> Setting
+                        <i class="fa fa-cog"></i> Setting
                     </a>
                 </div>
             </li>

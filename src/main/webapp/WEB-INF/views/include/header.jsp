@@ -39,9 +39,6 @@
     <%--첨부파일--%>
     <script src="/resources/dist/js/upload.js"></script>
 
-    <%--font--%>
-    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Baloo+Da' rel='stylesheet' type='text/css'>
     <script>
         var msg=Boolean("${msg}");
         if(msg){
@@ -92,7 +89,7 @@
         <div class="collapse navbar-collapse " id="navbarColor03">
 
             <ul class="nav nav-pills mx-auto w-100 justify-content-center">
-                <a class="navbar-brand " href ='/main' style="font-size: 40px">
+                <a class="navbar-brand " href ='/' style="font-size: 40px">
                     <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" >
                 </a>
                 <%--<li class="nav-item ">--%>

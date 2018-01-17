@@ -5,13 +5,14 @@
   Time: 오후 5:06
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header 메뉴바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
-    <a class="navbar-brand" href="/main">  <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
+    <a class="navbar-brand" href="/">  <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -29,7 +30,7 @@
                         ((login ne null) and (SrcVO.srcId eq null)) or
                         ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
                         ((login eq null) and (SrcVO.srcId eq null))}">
-                    <img class="pencil" id="pencil" src="/resources/images/pencil.png" >
+                        <i class="fa fa-paint-brush" style="color: black"></i>
                     </c:if>
                 </div>
                 <div class="page_title_text"  id="page-title-text">

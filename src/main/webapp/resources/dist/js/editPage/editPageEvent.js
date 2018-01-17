@@ -136,10 +136,6 @@ codeJavaScript.on("gutterClick", function (cm, n) {
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
-codeUnitTest.on("gutterClick", function (cm, n) {
-    var info = cm.lineInfo(n);
-    cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
-});
 
 //editHeader.jsp script
 //pencil 클릭시 input text 보이기

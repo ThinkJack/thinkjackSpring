@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 
@@ -28,7 +27,7 @@
                 </div>
                 <div class="form-group text-white bd">
                     <label  style="font-size:1.35rem;">Content</label>
-                    <textarea style="padding-top: 5%;" class="form-control" name="boardContent" rows="3"
+                    <textarea style="padding-top: 5%;" class="form-control" name="boardContent" rows="15"
                               placeholder="Enter ..."
                               required>${boardVO.boardContent}</textarea>
                 </div>
@@ -48,11 +47,7 @@
 
             <!-- /.box-body -->
             <div class="box-footer m-3 ">
-                <%--<c:if test="${login.userName == boardVO.boardWriter}">--%>
-                <ul class="mailbox-attachments clearfix uploadedList">
-                </ul>
-                <%--</c:if>--%>
-                <button type="submit" class="btn btn-primary bd"  style="font-size:1.35rem;">Submit</button>
+                <button type="submit" class="btn btn-outline-success bd"  style="font-size:1.35rem; float: right;">Submit</button>
             </div>
         </form>
     </div>
