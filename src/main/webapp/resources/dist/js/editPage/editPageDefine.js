@@ -25,7 +25,10 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        "Shift-Tab": "indentAuto",
+        "Esc": "singleSelectionTop",
+        "Ctrl-D": "deleteLine"
+
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
@@ -48,7 +51,7 @@ var codeCss = CodeMirror(document.getElementById("codeCss"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        // "Shift-Tab": autoFormatSelection
     },
     indentUnit: 2,
     indentWithTabs: true,
@@ -97,7 +100,7 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        // "Shift-Tab": autoFormatSelection
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
@@ -135,7 +138,7 @@ var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        // "Shift-Tab": autoFormatSelection
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
@@ -477,6 +480,27 @@ function updatePreview() {
     // editConsoleView.scrollTop = editConsoleView.scrollHeight;
 }
 
+var consoleString = "var console=(function(oldCons){\n" +
+    "        return {\n" +
+    "            log: function(text){\n" +
+    "                oldCons.log(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            info: function (text) {\n" +
+    "                oldCons.info(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:dodgerblue;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            warn: function (text) {\n" +
+    "                oldCons.warn(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:yellow;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            error: function (text) {\n" +
+    "                oldCons.error(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:red;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            }\n" +
+    "        };\n" +
+    "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
+
 window.onload = function() {
     var previewFrame = document.getElementById('resultView');
     var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
@@ -683,26 +707,6 @@ function consoleLogStr(str) {
 }
 
 
-var consoleString = "var console=(function(oldCons){\n" +
-    "        return {\n" +
-    "            log: function(text){\n" +
-    "                oldCons.log(text);\n" +
-    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
-    "            },\n" +
-    "            info: function (text) {\n" +
-    "                oldCons.info(text);\n" +
-    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:dodgerblue;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
-    "            },\n" +
-    "            warn: function (text) {\n" +
-    "                oldCons.warn(text);\n" +
-    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:yellow;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
-    "            },\n" +
-    "            error: function (text) {\n" +
-    "                oldCons.error(text);\n" +
-    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:red;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
-    "            }\n" +
-    "        };\n" +
-    "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
 
 $(function () {
     var console=(function(oldCons){
