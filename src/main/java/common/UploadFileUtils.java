@@ -136,4 +136,11 @@ public class UploadFileUtils {
 
 
     }
+
+    public static void srcUploadFile(String uploadPath, byte[] fileData)throws Exception{
+        //S3 서버 관련 설정
+        S3Util s3 = new S3Util();
+        String bucketName = "thinkjackbucket";
+        s3.fileUpload(bucketName, uploadPath, fileData);
+    }
 }

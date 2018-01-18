@@ -30,7 +30,7 @@
                         ((login ne null) and (SrcVO.srcId eq null)) or
                         ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
                         ((login eq null) and (SrcVO.srcId eq null))}">
-                        <i class="fa fa-paint-brush" style="color: black"></i>
+                        <i class="fa fa-paint-brush pencil" id="pencil" style="color: black"></i>
                     </c:if>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
@@ -44,7 +44,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active run" id="run">
                 <div>
-                    <a class="btn  btn-primary" href="javascript:;">
+                    <a class="btn btn-primary" href="javascript:;">
                         <img src="/resources/images/reload.png"> Run
                     </a>`
                 </div>

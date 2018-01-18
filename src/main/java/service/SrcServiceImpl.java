@@ -1,5 +1,6 @@
 package service;
 
+import common.SrcFileSet;
 import domain.*;
 import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
@@ -24,6 +25,7 @@ public class SrcServiceImpl implements SrcService {
     @Inject
     private UserDAO userdao;
 
+    SrcFileSet sfs = new SrcFileSet();
     @Override
     public Map readSrc(HttpServletRequest request) throws Exception {
 
@@ -66,16 +68,16 @@ public class SrcServiceImpl implements SrcService {
 
             }
 //            System.out.println(vo.getSrcPath() + "/html.txt");
-            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
-            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
-            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+            vo.setSrcHtml(sfs.readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(sfs.readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(sfs.readCodeSet(vo.getSrcPath() + "/js.txt"));
 
             //cdn setting
             vo.setCdnCss(new ArrayList<String>
-                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
                             .split(","))));
             vo.setCdnJs(new ArrayList<String>
-                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
                             .split(","))));
 
             //사진경로 가져오기
@@ -116,30 +118,25 @@ public class SrcServiceImpl implements SrcService {
             srcEmpty = true;
 
             do {
-                srcId = randomSrcId();
+                srcId = sfs.randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
         }
         System.out.println(srcId);
         //SrcFile 생성
-        filePath = "./srcCodeDir/" + srcId;
-        File fileDir = new File(filePath);
+        filePath = "thinkjack/srcCodeDir/" + srcId;
+
         try {
-            // 파일 경로 dir 생성
-            if (!fileDir.exists()) {
-                fileDir.mkdirs();
-                System.out.println("파일 디렉토리 생성");
-            }
             // true 지정시 파일의 기존 내용에 이어서 작성
-            fileWriter(filePath + "/html.txt", vo.getSrcHtml());
-            fileWriter(filePath + "/css.txt", vo.getSrcCss());
-            fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
+            sfs.fileWriter(filePath + "/html.txt", vo.getSrcHtml());
+            sfs.fileWriter(filePath + "/css.txt", vo.getSrcCss());
+            sfs.fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
 
             List cdnCssList = vo.getCdnCss();
             List cdnJsList = vo.getCdnJs();
-            cdn = cdnSet(cdnCssList);
-            fileWriter(filePath + "/cdnCss.txt",cdn);
-            cdn = cdnSet(cdnJsList);
-            fileWriter(filePath + "/cdnJS.txt",cdn);
+            cdn = sfs.cdnSet(cdnCssList);
+            sfs.fileWriter(filePath + "/cdnCss.txt",cdn);
+            cdn = sfs.cdnSet(cdnJsList);
+            sfs.fileWriter(filePath + "/cdnJs.txt",cdn);
 
             // 파일안에 문자열 쓰기
             vo.setSrcPath(filePath);
@@ -209,15 +206,15 @@ public class SrcServiceImpl implements SrcService {
 
         for (int i = 0; i < list.size(); i++) {
             SrcVO vo = (SrcVO) list.get(i);
-            vo.setSrcHtml(readCodeSet(vo.getSrcPath() + "/html.txt"));
-            vo.setSrcCss(readCodeSet(vo.getSrcPath() + "/css.txt"));
-            vo.setSrcJavaScript(readCodeSet(vo.getSrcPath() + "/js.txt"));
+            vo.setSrcHtml(sfs.readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(sfs.readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(sfs.readCodeSet(vo.getSrcPath() + "/js.txt"));
             //cdn setting
             vo.setCdnCss(new ArrayList<String>
-                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
                             .split(","))));
             vo.setCdnJs(new ArrayList<String>
-                    (Arrays.asList(readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
                             .split(","))));
             list.set(i, vo);
         }
@@ -230,74 +227,4 @@ public class SrcServiceImpl implements SrcService {
         return srcdao.srcListSearchCount(cri);
     }
 
-
-    ///////////////////////////////////////////////////////////////////////////////
-    //codeFile 읽어오는 작업
-    public String readCodeSet(String filePath) throws IOException {
-        String str = "";
-        int i;
-
-        File file = new File(filePath);
-        FileReader fr = new FileReader(file);
-        while ((i = fr.read()) != -1) {
-            if (i == 10) {
-                str += "\\n";
-            } else {
-                str += (char) i;
-            }
-
-        }
-        fr.close();
-        return str;
-    }
-
-    //srcID값 작업
-    public String randomSrcId() {
-
-        int charType;   //0-소문자, 1-대문자
-        int charValue = 0;  //문자 1개의 아스키값
-        String srcId = "";
-        for (int j = 0; j < 6; j++) {
-            charType = (int) (Math.random() * 2);
-            for (int i = 0; i < 3; i++) {
-                if (i != 2) {
-                    charValue += (int) (Math.random() * 10);
-                } else {
-                    charValue += (int) (Math.random() * 8) + 65;
-                    if (charType == 1) {
-                        charValue += 32;
-                    }
-                }
-            }
-            srcId = srcId + (char) charValue;
-            charValue = 0;
-        }
-        return srcId;
-    }
-
-    //실제 코드 파일 생성
-    public void fileWriter(String filePath, String src) throws Exception {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-        } else {
-            file.delete();
-            file.createNewFile();
-        }
-        FileWriter fw = new FileWriter(file, true);
-        fw.write(src);
-        fw.flush();
-        // 객체 닫기
-        fw.close();
-    }
-
-    //cdn setting
-    public String cdnSet(List<String> list){
-        String tenp = "";
-
-        for(int i=0; i<list.size(); i++){
-            tenp += list.get(i) + ",";
-        }
-        return tenp;
-    }
 }

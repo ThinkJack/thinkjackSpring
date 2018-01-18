@@ -128,7 +128,7 @@
                             <div class="card-body">
 
 
-                                <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"
+                                <img class="src_icon" src="/resources/images/123.gif" style="width:20px; height:20px;" id="${srcVo.srcId}img"
                                      onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                                 <a href="/edit/editPage/${srcVo.srcId}" class="card-link" id="src-writer2">${srcVo.srcWriterName}</a>
 

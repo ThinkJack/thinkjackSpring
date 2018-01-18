@@ -1,6 +1,8 @@
 package common;
 
 import domain.SrcVO;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class SrcFileSet{
 
+    S3Util s3 = new S3Util();
     public List setList(List<SrcVO> list)throws Exception{
         for (int i = 0; i < list.size(); i++) {
             SrcVO vo = list.get(i);
@@ -32,21 +35,12 @@ public class SrcFileSet{
 
 
     public String readCodeSet(String filePath) throws IOException {
-        String str = "";
-        int i;
 
         File file = new File(filePath);
-        FileReader fr = new FileReader(file);
-        while ((i = fr.read()) != -1) {
-            if (i == 10) {
-                str += "\\n";
-            } else {
-                str += (char) i;
-            }
+        byte[] filedata = s3.getSrcFile("thinkjackbucket", filePath);
+        FileUtils.writeByteArrayToFile(file, filedata);
 
-        }
-        fr.close();
-        return str;
+        return FileUtils.readFileToString(file);
     }
 
     //srcID값 작업
@@ -76,17 +70,10 @@ public class SrcFileSet{
     //실제 코드 파일 생성
     public void fileWriter(String filePath, String src) throws Exception {
         File file = new File(filePath);
-        if (!file.exists()) {
-            file.createNewFile();
-        } else {
-            file.delete();
-            file.createNewFile();
-        }
-        FileWriter fw = new FileWriter(file, true);
-        fw.write(src);
-        fw.flush();
-        // 객체 닫기
-        fw.close();
+        CharSequence cs = new StringBuffer(src);
+        FileUtils.write(file, cs);
+        byte[] filedata = FileUtils.readFileToByteArray(file);
+        UploadFileUtils.srcUploadFile(filePath, filedata);
     }
 
     //cdn setting
