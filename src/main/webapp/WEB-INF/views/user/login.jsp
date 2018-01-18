@@ -4,7 +4,7 @@
     var userId=Boolean(${login.userId});
     if(userId){
         alert("이미 로그인 되어있습니다. 로그아웃 해주세요");
-        self.location = "/main";
+        self.location = "/";
     }
 
 </script>
