@@ -53,7 +53,8 @@
                                 <%--<source src="/resources/test.mp4" type="video/mp4">--%>
                             <%--</video>--%>
 
-                            <iframe width="420" height="345"  src="https://www.youtube.com/embed/PzBrwCGbTJ4?autoplay=1">
+                            <iframe width="420" height="345"
+                                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0" allowfullscreen>
                             </iframe>
 
                             <a href="#">Unit Test</a>
