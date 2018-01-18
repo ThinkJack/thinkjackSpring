@@ -24,7 +24,7 @@
 
         }
 
-        #err {
+        .err {
             color: red;
         }
 
@@ -90,11 +90,12 @@
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start modi4">
+                <div class="col-4 row justify-content-start modi4">
                     <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
-                <div class="col-6 row justify-content-end my-1 ">
-                    <select id="functions" class="mx-1 modi3"></select>
+                <div class="col-8 row justify-content-end my-1 ">
+                    <select id="functions" class="mx-1 modi3"><
+                        <option>------</option></select>
                     <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
                     <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
                     <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
@@ -162,13 +163,21 @@
         }
 
         $("#functions").empty();
+        $("#functions").append("<option>"+"------"+"</option>");
         for(var i = 0; i < count ; i++)
-            $("#functions").append("<option>"+functions[0]+"</option>");
+            $("#functions").append("<option>"+functions[i]+"</option>");
 
     });
     $(document).on("click", "#add-test-case", function () {
-        console.log($("#functions").val());
-        inputbox += "<input type='text' class='form-control input_box inputs' />";
+        if($('#functions').val() == "------") {
+            alert("테스트 코드를 작성, 선택 해주세요");
+            return;
+        }
+
+        var funcationLength = frame.contentWindow.eval($('#functions').val()+".length");
+        var inputbox = "";
+        for(var i = 0 ; i < funcationLength ; i++)
+            inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
             "<div class='row case m-2'>" +
             "<span class='input-group-addon'>input : </span>" +
@@ -182,93 +191,16 @@
     });
 
     function codeTest(input, output) {
-        var result = false;
-        var functionValue;
         var startTime = getTimeStamp();
-        var errMassage = "";
-        try {
-            switch (input.length) {
-                case 0 :
-                    functionValue = testFunc();
-                    break;
-                case 1 :
-                    functionValue = testFunc(
-                        input[0]);
-                    break;
-                case 2 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1]);
-                    break;
-                case 3 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2]);
-                    break;
-                case 4 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3]);
-                    break;
-                case 5 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4]);
-                    break;
-                case 6 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5]);
-                    break;
-                case 7 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5],
-                        input[6]);
-                    break;
-                case 8 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5],
-                        input[6],
-                        input[7]);
-                    break;
-            }
-            if (output == functionValue)
-                result = true;
-        } catch (err) {
-            errMassage = err;
-        }
-        finally {
-            var runningTime = getTimeStamp() - startTime;
-            resultText = "<div class='resultLog'>[input : " + input.join() +
-                " / output : " + output + "] " +
-                "결과 : " + (result ? "성공" : "실패") +
-                " (경과시간 : " + runningTime + "ms)<br/>"
-                + "<span id='err'>" + errMassage + "</span>" +
-                "</div>";
-            return resultText;
-        }
+        try{
+            var inputResult = frame.contentWindow.eval($('#functions').val()+"("+input+")");
 
+            $("#resultView").append(
+                "<div class='resultLog'> [ input : "+ input + " / output : " + output + " ] " + (inputResult === output ? "성공" : "실패") +"( 경과시간 : "+ (getTimeStamp() - startTime)+ "ms)"+"</div>");
 
+        }catch(err){
+            $("#resultView").append("<div class='err'>" + err + "</div>");
+        }
     }
 
     function getTimeStamp() {
@@ -276,23 +208,16 @@
     }
 
     $(document).on("click", ".test_one", function () {
-        var startTime = getTimeStamp();
         var inputs = $(this).parent().find(".inputs");
-        var testArguments = new Array;
+        var testArguments = "";
         for (var i = 0; i < inputs.length; i++) {
-            testArguments.push(inputs[i].value);
+            testArguments += ","+inputs[i].value;
         }
-        var output = $(this).parent().find(".output");
-        var output = output[0].value;
-        // console.log(output);
+        var outputs = $(this).parent().find(".output");
+        var output = outputs[0].value;
 
-        var result = codeTest(testArguments, output);
+        codeTest(testArguments, output);
 
-
-        if (!errors) {
-            // $("#resultView").empty();
-            $("#resultView").append(result);
-        }
     });
 
 
@@ -310,8 +235,11 @@
         $("#resultView").empty();
     });
     $(document).on("click", "#test-all", function () {
+        var startTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
         testCase.trigger("click");
+        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp()-startTime) + "ms)"+"</div>");
+
     });
     $(document).ready(function () {
         $("#test-case").bind('DOMNodeInserted',function () {
