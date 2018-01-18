@@ -60,8 +60,8 @@
         }
 
         .CodeMirror {
-             height: 100%;
-         }
+            height: 100%;
+        }
 
         .container-fluid {
             overflow: hidden;
@@ -94,6 +94,7 @@
                     <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
+                    <select id="functions" class="mx-1 modi3"></select>
                     <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
                     <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
                     <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
@@ -134,22 +135,40 @@
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
     var out = frame.contentDocument || frame.contentWindow.document;
-
+    var count;var functions;
     codeUnitTest.on("change", function () {
-        if($("#autoremove"))
+        count = 0;
+        var javascroptCode = codeUnitTest.getValue();
+        if($("#autoremove").prop("checked"))
             $("#test-case").empty();
-        //Uritest-----------------------------------------------------------------------------------------------
-        out.open();
-        out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
-        out.close();
 
-        console.log(frame.contentWindow.eval('testFunction()'));
+
+        try {
+            out.open();
+            out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
+            out.close();
+        }catch (err){
+            // console.log(err);
+        }
+
+
+        var pos =0;
+        functions = new Array();
+        while (pos !== -1) {
+            count++;
+            functioncode = javascroptCode.substring(pos);
+            functions.push(functioncode.substring(functioncode.indexOf('function')+8,functioncode.indexOf('(')));
+            pos = javascroptCode.indexOf('function', pos + 1 );
+        }
+
+        $("#functions").empty();
+        for(var i = 0; i < count ; i++)
+            $("#functions").append("<option>"+functions[0]+"</option>");
 
     });
     $(document).on("click", "#add-test-case", function () {
-        var inputbox = "";
-        for (var i = 0; i < testFunc.length; i++)
-            inputbox += "<input type='text' class='form-control input_box inputs' />";
+        console.log($("#functions").val());
+        inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
             "<div class='row case m-2'>" +
             "<span class='input-group-addon'>input : </span>" +
@@ -292,7 +311,7 @@
     });
     $(document).on("click", "#test-all", function () {
         var testCase = $("#test-case").find(".test_one");
-            testCase.trigger("click");
+        testCase.trigger("click");
     });
     $(document).ready(function () {
         $("#test-case").bind('DOMNodeInserted',function () {
