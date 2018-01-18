@@ -79,9 +79,10 @@
             <p class="h4 text-white code-name bd">JS</p>
         </div>
         <div class="col-6 row justify-content-end modi4">
-            <label style="color: white;">
-                <input type="checkbox" value="">테스트 케이스 자동 삭제
-            </label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="autoremove" checked="">
+                <label class="custom-control-label text-white" for="autoremove">테스트 케이스 자동 삭제</label>
+            </div>
         </div>
 
         <div class="col" id="codeUnitTest"></div>
@@ -130,15 +131,12 @@
 
 
 <script>
-    var before = 0;
-    var testFunc;
-    var declaration;
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
-    var out = frame.contentDocument || frame.contentWindow.document
+    var out = frame.contentDocument || frame.contentWindow.document;
 
     codeUnitTest.on("change", function () {
-        if()
+        if($("#autoremove"))
             $("#test-case").empty();
         //Uritest-----------------------------------------------------------------------------------------------
         out.open();
