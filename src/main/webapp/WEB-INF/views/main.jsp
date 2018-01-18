@@ -112,7 +112,7 @@
         </div>
     </div>
 </section>
-<section class="d container-fluid removePadding" id="board" >
+<section class="d container-fluid removePadding mb-5" id="board" >
 
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>

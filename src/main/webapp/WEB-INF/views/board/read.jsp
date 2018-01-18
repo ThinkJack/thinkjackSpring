@@ -137,7 +137,7 @@
                     <%--<button type="button" class=""> Replies List </button>--%>
                 </li>
                 <%--페이지네이션 부분--%>
-                <div class='text-center'>
+                <div class='text-center mb-5'>
                     <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
                 </div>
             </ul>

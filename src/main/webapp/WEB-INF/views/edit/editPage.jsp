@@ -87,6 +87,7 @@
 <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
 <jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
 <jsp:include page="../include/editInclude/editModalReply.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/editKeyMapModal.jsp" flush="false"/>
 <!--footer-->
 <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 

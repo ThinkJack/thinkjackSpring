@@ -63,18 +63,31 @@
         </div>
 
 
-        <div class="panel panel-8" style="background-color: #da7908"><img id="profile" align="left" class="small-unit rounded-circle"
-                                        style="width:15rem;height:15rem;" src="" alt="Profile image example">
-            <div class="panel panel-7 ">
-                <p class="hn" style="font-size: 30px">"${login.userName}"님 반가워요~</p>
+        <div class="panel panel-8" style="background-color: #da7908">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="panel panel-7 ">
+                        <p class="hn" style="font-size: 30px">"${login.userName}"님 반가워요~</p>
+                    </div>
+                </div>
+                <div class="col-6 mb-2 " style="padding-left: 60px">
+                    <img id="profile" align="left" class="small-unit rounded-circle"
+                         style="width:12rem;height:12rem;" src="" alt="Profile image example">
+                </div>
+                <div class="col-6">
+                    <p  class=" mt-3 bd " style="font-size: 30px">Email:<a class="ml-3" style="font-size:20px">${login.userEmail}</a></p>
+                    <p  class=" mt-1 bd" style="font-size: 30px">Name:<a class="hn ml-3" style="font-size:20px">${login.userName}</a></p>
+
+                    <button class="btn btn-primary text-white" onclick="location.href='/user/modifyUser'">정보변경
+                    </button>
+                    <button class="btn btn-primary  text-white"
+                            onclick="location.href='/user/setPassAuthCheck'">패스워드 변경
+                    </button>
+                </div>
+
             </div>
-            <p  class=" mt-3 bd" style="font-size: 30px">Email:<a class="ml-3" style="font-size:20px">${login.userEmail}</a></p>
-            <p  class=" mt-1 bd" style="font-size: 30px">Name:<a class="hn ml-3" style="font-size:20px">${login.userName}</a></p>
-            <button class="btn btn-primary text-white" onclick="location.href='/user/modifyUser'">정보변경
-            </button>
-            <button class="btn btn-primary  text-white"
-                    onclick="location.href='/user/setPassAuthCheck'">패스워드 변경
-            </button>
         </div>
 
     </section>
