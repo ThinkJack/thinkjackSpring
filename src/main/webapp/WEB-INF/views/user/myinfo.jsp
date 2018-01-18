@@ -63,20 +63,16 @@
         </div>
 
 
-        <div class="panel panel-8"><img id="profile" align="left" class="small-unit rounded-circle"
+        <div class="panel panel-8" style="background-color: #da7908"><img id="profile" align="left" class="small-unit rounded-circle"
                                         style="width:15rem;height:15rem;" src="" alt="Profile image example">
             <div class="panel panel-7 ">
-                <p class="hn">"${login.userName}"님 반가워요~</p>
+                <p class="hn" style="font-size: 30px">"${login.userName}"님 반가워요~</p>
             </div>
-            <h3 class="mt-5 bd">Email:${login.userEmail}</h3>
-
-
-            <h3 class="mb-5 bd">Name:${login.userName}</h3>
-
-            <button class="btn btn-primary text-white" style="width:100px;height:50px;"
-                    onclick="location.href='/user/modifyUser'">정보변경
+            <p  class=" mt-3 bd" style="font-size: 30px">Email:<a class="ml-3" style="font-size:20px">${login.userEmail}</a></p>
+            <p  class=" mt-1 bd" style="font-size: 30px">Name:<a class="hn ml-3" style="font-size:20px">${login.userName}</a></p>
+            <button class="btn btn-primary text-white" onclick="location.href='/user/modifyUser'">정보변경
             </button>
-            <button class="btn btn-primary  text-white" style="width:100px;height:50px;"
+            <button class="btn btn-primary  text-white"
                     onclick="location.href='/user/setPassAuthCheck'">패스워드 변경
             </button>
         </div>

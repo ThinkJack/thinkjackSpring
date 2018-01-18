@@ -12,7 +12,7 @@
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
                     <br>
-                    <h1 class="bd aniB mt-5" style=" font-size: 5em;" >Masterpiece</h1>
+                    <p class="bd aniB mt-5" style=" font-size: 4em;" ><a style="font-size:6rem">rn</a>asterpiece</p>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>

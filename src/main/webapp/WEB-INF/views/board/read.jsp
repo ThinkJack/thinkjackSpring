@@ -110,7 +110,7 @@
             <div class="row m-3">
                 <div class="col-md-10" >
                     <%--댓글 등록하는 아이디(--%>
-                    <input type="text" name='writer' class="form-control register bd" value="${login.userName}"
+                    <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
                            readonly="readonly">
                     <%--댓글 입력 부분--%>
                     <div class="form-group ">
@@ -189,7 +189,7 @@
                         <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                         <input type="hidden" class="reParent" value="{{replyParent}}">
                         <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register bd" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
+                        <span class="replyWriter register hn" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
 
                         <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
                         <span style="float: right" class="bd">
@@ -248,7 +248,7 @@
                         <%--replyId 불러오기 위해 필요한 부분--%>
                         <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                         <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register bd"  style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
+                        <span class="replyWriter register hn"  style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
 
                         <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
                         <span style="float: right" class="bd">
@@ -294,14 +294,13 @@
                 </div>
                 <%--버튼 누르면 나오게 하기--%>
             </div>
-            <div class="demo row " name="demo" style="display: none">
+            <div class="demo row mt-3 " name="demo" style="display: none">
 
-                <div class="col-md-12 removePadding">
+                <div class="col-md-10 removePadding " style="float: left">
                     <textarea class="form-control replyTextReply hn" rows="3">대댓글 입력하세요</textarea>
                 </div>
-                <div class="row-md-10 removePadding"></div>
-                <div class="row-md-2 removePadding">
-                    <button type="button" class="btn btn-primary addBtn hn">등록</button>
+                <div class="col-md-2 removePadding " style="float:right;">
+                    <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">등록</button>
                 </div>
             </div>
 
