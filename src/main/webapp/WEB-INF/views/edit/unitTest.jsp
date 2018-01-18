@@ -74,8 +74,16 @@
 <jsp:include page="../include/editInclude/unitTestHeader.jsp" flush="false"/>
 
 <div class="col-12 row justify-contents-center whole">
-    <div class="col-6">
-        <div class="col modi4"><p class="h4 text-white code-name bd">JS</p></div>
+    <div class="col-6 row justify-content-between" >
+        <div class="col-6 row justify-content-start modi4">
+            <p class="h4 text-white code-name bd">JS</p>
+        </div>
+        <div class="col-6 row justify-content-end modi4">
+            <label style="color: white;">
+                <input type="checkbox" value="">테스트 케이스 자동 삭제
+            </label>
+        </div>
+
         <div class="col" id="codeUnitTest"></div>
     </div>
     <div class="col-6">
@@ -130,28 +138,14 @@
     var out = frame.contentDocument || frame.contentWindow.document
 
     codeUnitTest.on("change", function () {
-        var origin = codeUnitTest.getValue();
-        declaration = origin.substr(origin.indexOf("(") + 1, origin.indexOf("{") - origin.indexOf("(") - 2);
-        // console.log(c);
-        // $("#resultView").empty();
-        try {
-            testFunc = new Function(declaration,
-                origin.substr(origin.indexOf("{") + 1, origin.lastIndexOf("}") - origin.indexOf("{") - 1));
-            errors = false;
-        } catch (err) {
-            $("#resultView").append("<div><span id='err'>" + err + "</span></div>");
-            errors = true;
-        }
-        if (before != testFunc.length)
+        if()
             $("#test-case").empty();
-        before = testFunc.length;
-
         //Uritest-----------------------------------------------------------------------------------------------
         out.open();
-        out.write("<script>" + testFunc + "<\/script>");
+        out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
         out.close();
 
-        console.log(frame.contentWindow.eval("anonymous()"));
+        console.log(frame.contentWindow.eval('testFunction()'));
 
     });
     $(document).on("click", "#add-test-case", function () {

@@ -3,10 +3,7 @@ package common;
 import domain.SrcVO;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,11 +33,17 @@ public class SrcFileSet{
 
     public String readCodeSet(String filePath) throws IOException {
 
-        File file = new File(filePath);
-        byte[] filedata = s3.getSrcFile("thinkjackbucket", filePath);
-        FileUtils.writeByteArrayToFile(file, filedata);
-
-        return FileUtils.readFileToString(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(s3.getSrcFile("thinkjackbucket", filePath)));
+        String str = "";
+        while (true) {
+            String line = reader.readLine();
+            if(line == null) {
+                str += "\\n";
+                break;
+            }
+            str += line;
+        }
+        return str;
     }
 
     //srcID값 작업

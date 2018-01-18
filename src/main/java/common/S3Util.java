@@ -9,10 +9,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
 import org.apache.commons.io.IOUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class S3Util {
@@ -74,12 +71,13 @@ public class S3Util {
     }
 
     // src파일 읽어오기
-    public byte[] getSrcFile(String bucketName, String fileName) throws IOException{
+    public S3ObjectInputStream getSrcFile(String bucketName, String fileName) throws IOException{
         System.out.println("넘어오는 파일명 : "+fileName);
         fileName = (fileName).replace(File.separatorChar, '/');
         S3Object s3object = conn.getObject(new GetObjectRequest(bucketName, fileName));
         S3ObjectInputStream objectInputStream = s3object.getObjectContent();
-        return IOUtils.toByteArray(objectInputStream);
+
+        return objectInputStream;
     }
 
 
