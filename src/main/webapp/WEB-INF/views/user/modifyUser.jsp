@@ -21,7 +21,7 @@
         if (fullName !== "") {
             imgtest = getFileInfo(fullName);
             console.log(imgtest);
-            str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src=" + imgtest + "/>" + "</div>";
+            str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src='" + imgtest + "'/>" + "</div>";
         } else {
             str = "<div>" + "<img id='profileimg' class='img-responsive rounded-circle' src='/resources/images/123.gif'/>" + "</div>";
         }

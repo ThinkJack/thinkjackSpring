@@ -63,7 +63,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			//System.out.println(userVO);
 			Object dest = session.getAttribute("dest");
 			if(dest=="/user/login"||dest==""||dest==null){
-				session.setAttribute("dest","/main");
+				session.setAttribute("dest","/");
 			}
 			//System.out.println("postHandle dest: "+dest);
 

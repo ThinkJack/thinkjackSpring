@@ -119,7 +119,7 @@ public class UserController {
 		vo=service.userAuth(user);
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-			return "redirect:/main";
+			return "redirect:/";
 		}
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("login",vo);
@@ -149,7 +149,7 @@ public class UserController {
 			service.findPassword(user);
 			rttr.addFlashAttribute("msg" , "이메일 인증 후 비밀번호를 변경해 주세요");
 		}
-        return "redirect:/main";
+        return "redirect:/";
     }
     //비밀번호 찾기 이메일 인증 코드 검증
     @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
@@ -159,7 +159,7 @@ public class UserController {
         //System.out.println("controller 서비스에서 받은: "+vo);
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-			return "redirect:/main";
+			return "redirect:/";
 		}
 		int id=vo.getUserId();
         rttr.addFlashAttribute("setPassword",true);
@@ -209,7 +209,7 @@ public class UserController {
 		}catch (Exception e){
 			rttr.addFlashAttribute("msg" , "오류가 발생했습니다. 관리자에게 문의 주세요");
 		}
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -249,7 +249,7 @@ public class UserController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.GET)
 	public void loginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		//바로 login
-    	session.setAttribute("dest","/main");
+    	session.setAttribute("dest","/");
 	}
 
 	@RequestMapping(value = "/socialLoginPost", method = RequestMethod.GET)
@@ -394,7 +394,7 @@ public class UserController {
 		session.setAttribute("login",vo);
 		//model.addAttribute("login",vo);
 		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	//유저 탈퇴

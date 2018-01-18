@@ -169,8 +169,8 @@ public class UploadController {
     @RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
     public ResponseEntity<String> deleteFile(String fileName, String userId)throws Exception {
 
-        System.out.println("delete file: " + fileName);
-        System.out.println("delete uid:"+userId);
+        //System.out.println("delete file: " + fileName);
+       // System.out.println("delete uid:"+userId);
 
         String inputDirectory = userId;
 
