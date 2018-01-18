@@ -112,7 +112,7 @@
         </div>
     </div>
 </section>
-<section class="d container-fluid removePadding mb-5" id="board" >
+<section class="d container-fluid removePadding " id="board" >
 
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
@@ -189,6 +189,7 @@
         </div>
     </div>
 </section>
+<div class="deaf" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
     $(function() {
