@@ -397,13 +397,14 @@ function updatePreview() {
 
         cssLnkSet
         +
+        "<script>" + consoleString + "</script>"
+        +
         "<style>" + codeCss.getValue() + "</style>"
         +
         rlt
         +
         jsLnkSet
-        +
-        "<script>" + consoleString + "</script>"
+
         +
         "<script>"
         // +
