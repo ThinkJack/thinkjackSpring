@@ -73,7 +73,7 @@
 
                     });
                 </script>
-                <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
+                <div class="col-sm-4 removePadding borderLB " style="height:40.2%;margin-left: 20%;"></div>
                 <div class="col-sm-4 removePadding borderRB " style="height:29%;margin-top:76.781px;">
                     <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
 

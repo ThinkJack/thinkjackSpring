@@ -25,7 +25,7 @@
                                 <kbd>ctrl</kbd> + <kbd>F</kbd> = <var>Find</var>
                             </div>
                             <div class="col-6 removePadding">
-                                <a class="ml-3" >찾기</a>
+                                <a class="ml-3" >문자열 검색</a>
                             </div>
                         </div>
                         <div class="row">
@@ -33,7 +33,7 @@
                                 <kbd>ctrl</kbd> + <kbd>G</kbd> = <var>Find Next</var>
                             </div>
                             <div class="col-6 removePadding">
-                                <a class="ml-3" >검색</a>
+                                <a class="ml-3" >검색된 다음 문자열</a>
                             </div>
                         </div>
                         <div class="row">
@@ -41,7 +41,7 @@
                                 <kbd>ctrl</kbd> + <kbd>Shift</kbd> + <kbd>G</kbd> = <var>Find Prev</var>
                             </div>
                             <div class="col-6 removePadding">
-                                <a class="ml-3" >검색</a>
+                                <a class="ml-3" >검색된 이전 문자열</a>
                             </div>
                         </div>
                         <div class="row">

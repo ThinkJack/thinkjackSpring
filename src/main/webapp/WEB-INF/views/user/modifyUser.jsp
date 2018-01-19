@@ -112,22 +112,22 @@
                         </div>
                     </div>
                     <div class="row">
-                    <input class="col-md-5 hn" type='file' id="imgInp" name="file"/>
-                    <input class="col-md-4 btn btn-primary" type="button" value="기본 프로필 사용" id="filecancle" /><br>
+                        <input class="col-md-5 hn" type='file' id="imgInp" name="file"/>
+                        <input class="col-md-4 btn btn-outline-primary" type="button" value="기본 프로필 사용" id="filecancle" /><br>
                     </div>
 
-                    <div class="small-unit mt-5" style="height: 200px">
+                    <div class=" mt-2" >
                         <input type="hidden" name="userId" value="${login.userId}" readonly/>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend hn">
-                                        <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
-                                    </div>
-                                    <input type="text" class="input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
+
+                        <div class=" form-group">
+                            <div class="row input-group mb-3">
+                                <div class="input-group-prepend hn">
+                                    <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
                                 </div>
+                                <input type="text" class="col-7 input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row input-group mb-6">
                                 <div class="input-group-prepend hn">
@@ -137,9 +137,9 @@
                                        name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
                                 <div class="input-group-append">
                                     <%--<button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>--%>
-                                        <button type="button" class="btn btn-primary" id="authenticateName">중복체크</button>
+                                    <button type="button" class="btn btn-primary" id="authenticateName">중복체크</button>
                                 </div>
-                                <div class="small-unit mt-4 hn" style="margin-left: 20%">
+                                <div class="small-unit mt-5 hn" style="margin-left: 20%">
                                     <input type="submit" class=" btn btn-primary " value="정보변경"/>
                                     <button class=" btn btn-primary text-white"  href='/main' >취소</button>
                                 </div>

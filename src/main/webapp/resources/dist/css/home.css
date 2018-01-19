@@ -121,14 +121,14 @@ section.a{
     background-color: #00c4ff;
     background-position: bottom;
     background-size:contain;
-    height:880px;
+    height:80%;
 
 
 }
 section.b{
     background-image: url("/resources/images/main/mainB.png");
     background-color: #000;
-    height:700px;
+    height:70%;
     background-attachment: fixed;
     background-size:contain;
 
@@ -142,7 +142,7 @@ section.c{
     /*background-attachment:fixed;*/
     background-position: bottom;
     background-size:contain;
-    height:500px;
+    height:50%;
 }
 
 
@@ -152,7 +152,7 @@ section.d{
     /*background-image: url("/resources/images/main/mainD.png");*/
     /*background-color:#da7908;*/
     background-color: orange;
-    height:400px;
+    height:40%;
 }
 
 .di{display: inline-block}
