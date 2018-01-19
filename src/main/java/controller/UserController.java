@@ -278,7 +278,7 @@ public class UserController {
 
 			}
 		}
-		return "main";
+		return "redirect:/";
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
