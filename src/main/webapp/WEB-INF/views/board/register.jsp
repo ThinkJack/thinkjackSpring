@@ -23,14 +23,17 @@
                 </div>
                 <div class="form-group text-white bd">
                     <label  style="font-size:1.35rem;">Content</label>
-                    <textarea class="form-control " style="padding-top: 5%;" name="boardContent" rows="20" placeholder="Enter ..." required></textarea>
+                    <textarea class="form-control " style="padding-top: 5%;" name="boardContent" rows="10" placeholder="Enter ..." required></textarea>
                 </div>
                 <div class="form-group text-white bd">
                     <label  style="font-size:1.35rem;" >Writer</label>
-                    <div class="form-control" style="background: white">
-                        <img id='UserProfile' class="rounded photo2">
-                        <input type="text" name="boardWriter" value="${login.userName}"
-                               class="form-control" placeholder="Enter Writer" readonly>
+                    <div class="row" style="background: white">
+                        <div class="col-2">
+                        <img id='UserProfile' class="rounded photo2 ">
+                        </div>
+                        <label style="color: black;" class="mt-4 hn"   >${login.userName} </label>
+                        <%--<input type="text" name="boardWriter" value="${login.userName} " style="border: 0"--%>
+                               <%--class="form-control col-10 hn" placeholder="Enter Writer" readonly>--%>
                     </div>
                     <script>
                         <%--$("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))--%>

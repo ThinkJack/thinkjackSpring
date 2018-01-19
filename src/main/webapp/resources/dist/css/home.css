@@ -523,3 +523,13 @@ a:hover {
 a {
 
     text-decoration: none; }
+
+.btn-outline-success {
+    color: #A0D468;
+    background-color: transparent;
+    background-image: none;
+    border-color: #A0D468;
+}
+input{
+    font-family: 'Hanna', serif;
+}
