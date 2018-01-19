@@ -64,6 +64,7 @@ public class EditController {
 
     }
 
+
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
         return service.srcLike(request, vo);
@@ -75,67 +76,6 @@ public class EditController {
         return "삭제 되었습니다.";
     }
     //----------------------------------------------------------------------
-
-
-    //----------------------------------------------------------------------reply 부분
-
-    // REST : Representational State Transfer
-    // 하나의 URI가 하나의 고유한 리소스를 대표하도록 설계된 개념
-
-    // http://localhost/list?src_id=1 ==> url+파라미터
-    // http://localhost/list/1 ==> url
-    // RestController은 스프링 4.0부터 지원
-    // @Controller, @RestController 차이점은 메서드가 종료되면 화면전환의 유무
-    //@Controller
-    @RestController
-    @RequestMapping("/srcReply/*")
-    public class ReplyController {
-
-        @Inject
-        SrcReplyService srcReplyService;
-
-        // 댓글 입력
-        @RequestMapping("srcInsert.do")
-        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session) throws Exception {
-            Integer userId = (Integer) session.getAttribute("userId");
-            vo.setReplyWriter(userId);
-            srcReplyService.create(vo);
-        }
-
-        // 댓글 입력
-//        @RequestMapping(value= "srcInsert.do", method = RequestMethod.POST)
-//        public void insert(@ModelAttribute SrcReplyVO vo, HttpSession session) throws Exception {
-//            System.out.println("aaa");
-//            Integer replyWriter = (Integer) session.getAttribute("replyWriter");
-//            vo.setReplyWriter(replyWriter);
-//            srcReplyService.create(vo);
-//        }
-
-
-
-
-        // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
-        @RequestMapping("srcList.do")
-        public ModelAndView list(@RequestParam String srcId, ModelAndView mav) throws Exception {
-            List<SrcReplyVO> list = srcReplyService.list(srcId);
-            // 뷰이름 지정
-            mav.setViewName("srcBoard/srcReplyList");
-            // 뷰에 전달할 데이터 지정
-            mav.addObject("list", list);
-            // srcReplyList.jsp로 포워딩
-            return mav;
-        }
-
-        // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴)
-        @RequestMapping("srcListJson.do")
-        @ResponseBody // 리턴데이터를 json으로 변환(생략가능)
-        public List<SrcReplyVO> srcListJson(@RequestParam String srcId) throws Exception {
-//            List<SrcReplyVO> list= srcReplyService.list(srcId);
-//            return list;
-            return srcReplyService.list(srcId);
-        }
-    }
-
 
 
 

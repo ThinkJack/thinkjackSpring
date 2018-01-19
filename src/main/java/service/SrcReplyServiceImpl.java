@@ -1,5 +1,6 @@
 package service;
 
+import domain.Criteria;
 import domain.SrcReplyVO;
 import org.springframework.stereotype.Service;
 import persistence.SrcReplyDAO;
@@ -15,9 +16,25 @@ public class SrcReplyServiceImpl implements SrcReplyService {
 
     // 댓글 목록
     @Override
-    public List<SrcReplyVO> list(String srcId) throws Exception{
-        return srcReplyDao.list(srcId);
+    public List<SrcReplyVO> list(String srcId, Criteria cri) throws Exception{
+        return srcReplyDao.list(srcId, cri);
     }
+
+    //댓글 수
+    @Override
+    public int count(String srcId) throws Exception {
+        return srcReplyDao.count(srcId);
+    }
+
+    //무한스크롤
+//    @Override
+//    public List<SrcReplyVO> infiniteScrollDown(int replyId) throws Exception {
+//        return srcReplyDao.infiniteScrollDown(replyId);
+//
+//    }
+
+
+
     // 댓글 작성
     @Override
     public void create(SrcReplyVO vo) throws Exception{
@@ -35,5 +52,6 @@ public class SrcReplyServiceImpl implements SrcReplyService {
         srcReplyDao.delete(replyId);
 
     }
+
 
 }

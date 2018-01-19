@@ -10,8 +10,8 @@
             src.src_id        srcId,
             src.src_title     srcTitle,
             src.src_writer    srcWriter,
-            src.src_likecnt   srcLikecnt,
             src.src_viewcnt   srcViewcnt,
+            src.src_likecnt   srcLikecnt,
             src.src_path      srcPath,
             user.user_name    srcWriterName,
             user.user_profile srcWriterImgPath

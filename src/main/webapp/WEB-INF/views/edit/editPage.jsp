@@ -9,10 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--<%--%>
-<%--response.setHeader("Pragma","no-cache");--%>
-<%--response.setHeader("Pragma","no-store");--%>
-<%--response.setHeader("Cache-Control","no-cache");--%>
-<%--response.setDateHeader("Expires",0);--%>
+    <%--response.setHeader("Pragma","no-cache");--%>
+    <%--response.setHeader("Pragma","no-store");--%>
+    <%--response.setHeader("Cache-Control","no-cache");--%>
+    <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
 <html>

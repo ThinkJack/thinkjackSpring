@@ -7,36 +7,77 @@
 
     <!-- 댓글 입력 -->
     <!--<insert id="insertReply">-->
-        <!--INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_status)-->
-        <!--VALUES (#{srcId}, #{replyText}, #{replyWriter}, #{replyStatus})-->
+    <!--INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_status)-->
+    <!--VALUES (#{srcId}, #{replyText}, #{replyWriter}, #{replyStatus})-->
     <!--</insert>-->
     <insert id="insertReply">
-        INSERT INTO tbl_src_reply (src_id, reply_text, reply_status)
-        VALUES (#{srcId}, #{replyText},  #{replyStatus})
+        INSERT INTO tbl_src_reply (src_id, reply_text, reply_writer, reply_state)
+        VALUES (#{srcId}, #{replyText}, #{replyWriter}, #{replyStatus})
     </insert>
 
     <!-- 댓글 수정  필드 주석처리하면 테스트케이스 실패함-->
-    <update id="updateReply" >
-        UPDATE  tbl_src_reply
+    <update id="updateReply">
+        UPDATE tbl_src_reply
         SET
-          src_id = #{srcId},
-          reply_text = #{replyText},
-          reply_status = #{replyStatus}
+            src_id      = #{srcId},
+            reply_text  = #{replyText},
+            reply_state = #{replyStatus}
         WHERE reply_id = #{replyId}
     </update>
 
     <!-- 댓글 삭제  필드 주석처리하면 테스트케이스 실패함 -->
     <delete id="deleteReply">
-        DELETE FROM tbl_src_reply
+        UPDATE tbl_src_reply
+        SET reply_state = 0
         WHERE reply_id = #{replyId}
 
     </delete>
 
-    <!-- 댓글 목록 -->
-    <select id="listSrcReply" resultType="SrcReplyVo">
-        SELECT reply_id, src_id, reply_text, reply_writer, user_name AS userName, r.reply_regdate, r.reply_update
+
+    <!-- 댓글 리스트 -->
+    <select id="srcListReply" resultType="hashmap">
+        SELECT
+            reply_id,
+            src_id,
+            reply_text,
+            reply_writer,
+            user_name AS userName,
+            r.reply_regdate,
+            r.reply_update
         FROM tbl_src_reply r, tbl_user m
-        WHERE  r.reply_writer = m.user_id AND src_id=#{srcId}
-        ORDER BY reply_id
+        WHERE r.reply_writer = m.user_id AND r.src_id = #{srcId}
+              AND r.reply_state = 1
+        ORDER BY reply_id desc
+        LIMIT #{cri.pageStart}, #{cri.perPageNum}
+
     </select>
+    <!--리스트-->
+    <!--<select id="list" resultType="SrcReplyVO">-->
+        <!--SELECT *-->
+        <!--FROM tbl_src_reply-->
+        <!--WHERE src_id = #{srcId}-->
+              <!--AND reply_state = 1-->
+        <!--ORDER BY reply_id desc-->
+        <!--LIMIT #{cri.pageStart}, #{cri.perPageNum}-->
+    <!--</select>-->
+
+    <!--댓글수-->
+    <select id="count" resultType="int">
+        SELECT count(src_id)
+        FROM tbl_src_reply
+        WHERE src_id = #{srcId}
+              AND reply_state = 1
+        order by reply_id desc
+    </select>
+
+
+    <!-- 무한 스크롤 -->
+    <!--<select id="infiniteScrollDown" resultType="SrcReplyVO">-->
+    <!--SELECT reply_id, src_id, reply_text, reply_writer, user_name AS userName2, r.reply_regdate, r.reply_update-->
+    <!--FROM tbl_src_reply r, tbl_user m-->
+    <!--WHERE  r.reply_writer = m.user_id AND r.src_id=#{srcId}-->
+    <!--ORDER BY reply_id desc limit 0, 5;-->
+    <!--</select>-->
+
+
 </mapper>
