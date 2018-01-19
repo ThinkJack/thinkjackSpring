@@ -194,9 +194,8 @@
         var startTime = getTimeStamp();
         try{
             var inputResult = frame.contentWindow.eval($('#functions').val()+"("+input+")");
-
             $("#resultView").append(
-                "<div class='resultLog'> [ input : "+ input + " / output : " + output + " ] " + (inputResult === output ? "성공" : "실패") +"( 경과시간 : "+ (getTimeStamp() - startTime)+ "ms)"+"</div>");
+                "<div class='resultLog'> [ input : "+ input + " / output : " + output + "/ result : ] " + (inputResult === output ? "성공" : "실패") +"( 경과시간 : "+ (getTimeStamp() - startTime)+ "ms)"+"</div>");
 
         }catch(err){
             $("#resultView").append("<div class='err'>" + err + "</div>");
@@ -209,9 +208,9 @@
 
     $(document).on("click", ".test_one", function () {
         var inputs = $(this).parent().find(".inputs");
-        var testArguments = inputs[0].value;
+        var testArguments = "\""+inputs[0].value+"\"";
         for (var i = 1; i < inputs.length; i++) {
-            testArguments += ","+inputs[i+1].value;
+            testArguments += ",\""+inputs[i].value+"\"";
         }
         var outputs = $(this).parent().find(".output");
         var output = outputs[0].value;
