@@ -99,7 +99,7 @@
                             <td >${boardVO.boardId}</td>
                             <td class="hn" style="padding-top:2.5%; word-break:break-all;"><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
                                     ${boardVO.boardTitle}</a> </td>
-                            <td style="padding-top:1%;padding-bottom:1%"><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
+                            <td  class="hn" style="padding-top:1%;padding-bottom:1%"><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
                                 <script>
                                     $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
                                 </script>${boardVO.boardWriter}</td>
@@ -139,7 +139,7 @@
         </div>
     </div>
 </div>
-
+<div class="deaf2"></div>
     <script>
         $(document).ready(
             function () {

@@ -54,6 +54,11 @@
         opacity: 0.5;
         cursor: pointer;
     }
+
+
+    body{
+        background-color: orange;
+    }
 </style>
 <script>
     //필요한 변수 정의 부분
