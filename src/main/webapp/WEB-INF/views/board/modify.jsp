@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group text-white bd">
                     <label  style="font-size:1.35rem;">Content</label>
-                    <textarea style="padding-top: 5%;" class="form-control" name="boardContent" rows="15"
+                    <textarea style="padding-top: 5%;" class="form-control" name="boardContent" rows="10"
                               placeholder="Enter ..."
                               required>${boardVO.boardContent}</textarea>
                 </div>
@@ -35,7 +35,7 @@
                     <label  style="font-size:1.35rem;" >Writer</label>
                     <div class="form-control" style="background: white">
                         <img id='writerProfile' class="rounded photo2">
-                        <label style="color: black;">${boardVO.boardWriter}</label>
+                        <label class="hn ml-3" style="color: black;">${boardVO.boardWriter}</label>
                     </div>
                     <script>
                         $("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))
