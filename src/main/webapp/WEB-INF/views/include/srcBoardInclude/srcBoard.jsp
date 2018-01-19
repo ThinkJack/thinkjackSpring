@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="replyCount" class="service.SrcReplyServiceImpl"/>
 
 
 <style>
@@ -60,15 +61,48 @@
         cursor: pointer;
     }
 </style>
-<script>
-    //필요한 변수 정의 부분
-    var imgPath = "/resources/images/";
 
-    //필요한 함수 정의 부분
-    function likeImgChange(elId, num) {
-        $(elId).attr("src", imgPath + "like" + num + ".png");
+
+<script>
+    var getPage = function (srcId) {
+        // var pageInfo = "/srcReply/" + srcId + "/" + 1;
+        // alert(srcId);
+        $.getJSON("/srcReply/" + srcId + "/" + 1, function (data) {
+
+            var srcReplyCnt = data.pageMaker.totalCount;
+
+            // document.getElementById("srcReply" + srcId).innerText = srcReplyCnt;
+            $('#srcReply' + srcId).html(srcReplyCnt);
+
+        });
+
+
+        //필요한 변수 정의 부분
+        var imgPath = "/resources/images/";
+
+        //필요한 함수 정의 부분
+        function likeImgChange(elId, num) {
+            $(elId).attr("src", imgPath + "like" + num + ".png");
+        }
+
+        //필요한 댓글 개수 부분
+        <%--var getpage = (function (srcId) {--%>
+        <%--var pageInfo = "/srcReply/" + srcId + "/" + 1;--%>
+        <%--// alert(pageInfo);--%>
+        <%--$.getJSON(pageInfo, function (data) {--%>
+        <%--var srcReplyCnt = data.pageMaker.totalCount;--%>
+        <%--// return { srcReplyCnt : data.pageMaker.totalCount;}--%>
+        <%--$("#src-replycnt2").html(srcReplyCnt);--%>
+        <%--// srcReplyCnt ="";--%>
+        <%--});--%>
+
+        <%--})("${srcVo.srcId}");--%>
+
     }
+
 </script>
+
+
 <div class="container">
 <div class="row">
     <div class="col">
@@ -101,10 +135,16 @@
         <button id='search-btn'>Search</button>
     </div>
 </div>
+
+
 <c:forEach var="srcVo" items="${list}" varStatus="status">
+    <%--<script>alert("${srcVo.srcId}");</script>--%>
+    <script>console.log('a');</script>
+
     <c:if test="${status.count % 3 eq 1}">
         <div class="row">
     </c:if>
+
     <div class="col">
         <div class="card">
                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
@@ -132,7 +172,9 @@
                 <img class="fl-right src_icon" src="/resources/images/reply24.png"
                      onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
                      style="width:20px; height:20px;">
-                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt2">10</a>
+                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
+                    <script>getPage("${srcVo.srcId}")</script>
+                </a>
 
                 <img class="fl-right src_icon" src="/resources/images/view24.png"
                      onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
@@ -179,6 +221,8 @@
                             </c:if>
                         });
                     });
+
+
                 </script>
             </div>
         </div>
@@ -285,8 +329,13 @@
                 + $('select option:selected').val()
                 + '&keyword=' + encodeURIComponent($('#keywordInput').val());
         });
+
+
     });
+
+
 </script>
+
 
 <!--내용-->
 

@@ -1189,4 +1189,4 @@ var changeDate = function (date) {
     second = date.getSeconds();
     strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     return strDate;
-}
+};

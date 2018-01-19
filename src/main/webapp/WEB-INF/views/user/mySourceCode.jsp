@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
+
 <%--
   Created by IntelliJ IDEA.
   User: kwak
@@ -66,6 +68,25 @@
         function likeImgChange(elId, num) {
             $(elId).attr("src", imgPath + "like" + num + ".png");
         }
+
+        //필요한 댓글 개수 부분
+        function getPage (srcId) {
+            pageinfo = "/srcReply/" + srcId + "/" + 1;
+            $.getJSON(pageInfo, function(data) {
+                // printData(data.list, $("#repliesDiv"), $('#template'));
+                // getPageList(pageInfo);
+                // printPaging(data.pageMaker, $(".pagination"));
+
+                // alert(111);
+                return  data.pageMaker.totalCount;
+                // $("#src-replycnt2").html(srcReplyCnt);
+
+
+            });
+        }
+
+
+
     </script>
 </head>
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
@@ -91,6 +112,9 @@
     </div>
 </div>
 <c:forEach var="srcVo" items="${list}" varStatus="status">
+
+    <script> alert(111); </script>
+
     <c:if test="${status.count % 3 eq 1}">
         <div class="row">
     </c:if>
@@ -121,7 +145,9 @@
                 <img class="fl-right src_icon" src="/resources/images/reply24.png"
                      onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
                      style="width:20px; height:20px;">
-                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt2">10</a>
+                <%--<a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt2" value="${fn:getPage(${srcVo.srcId})}"> </a>--%>
+                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt2"> <script> getPage(${srcVo.srcId});</script> </a>
+
 
                 <img class="fl-right src_icon" src="/resources/images/view24.png"
                      onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">

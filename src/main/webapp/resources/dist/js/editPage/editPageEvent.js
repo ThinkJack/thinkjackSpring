@@ -578,8 +578,6 @@ $(function () {
     replyPage = 1;
     getPage("/srcReply/" + srcId + "/" + replyPage);
 
-    //댓글 갯수
-    // alert(srcReplyCnt);
 
     if (userId == "") {
         $("#textarea").val("로그인 하세요!");
@@ -615,6 +613,7 @@ $(function () {
                     }),
 
                     error: function () {
+                        alert("등록에러");
                         // if (userId == "") then
                         // alert("로그인 후 이용가능합니다!");
                     },

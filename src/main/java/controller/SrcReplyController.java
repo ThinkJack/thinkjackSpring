@@ -19,7 +19,7 @@ import static service.SrcReplyService.*;
 
 @RestController
 //@Controller
-@RequestMapping("/srcReply")
+    @RequestMapping("/srcReply")
 
 
 public class SrcReplyController {

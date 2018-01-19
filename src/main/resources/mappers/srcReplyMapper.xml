@@ -34,7 +34,7 @@
     </delete>
 
 
-    <!-- 댓글 등록 -->
+    <!-- 댓글 리스트 -->
     <select id="srcListReply" resultType="hashmap">
         SELECT
             reply_id,
@@ -47,19 +47,19 @@
         FROM tbl_src_reply r, tbl_user m
         WHERE r.reply_writer = m.user_id AND r.src_id = #{srcId}
               AND r.reply_state = 1
-        ORDER BY reply_id DESC
+        ORDER BY reply_id desc
         LIMIT #{cri.pageStart}, #{cri.perPageNum}
 
     </select>
     <!--리스트-->
-    <select id="list" resultType="SrcReplyVO">
-        SELECT *
-        FROM tbl_src_reply
-        WHERE src_id = #{srcId}
-              AND reply_state = 1
-        ORDER BY reply_id DESC
-        LIMIT #{cri.pageStart}, #{cri.perPageNum}
-    </select>
+    <!--<select id="list" resultType="SrcReplyVO">-->
+        <!--SELECT *-->
+        <!--FROM tbl_src_reply-->
+        <!--WHERE src_id = #{srcId}-->
+              <!--AND reply_state = 1-->
+        <!--ORDER BY reply_id desc-->
+        <!--LIMIT #{cri.pageStart}, #{cri.perPageNum}-->
+    <!--</select>-->
 
     <!--댓글수-->
     <select id="count" resultType="int">
@@ -67,6 +67,7 @@
         FROM tbl_src_reply
         WHERE src_id = #{srcId}
               AND reply_state = 1
+        order by reply_id desc
     </select>
 
 
