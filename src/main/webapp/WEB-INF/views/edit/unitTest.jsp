@@ -169,7 +169,7 @@
 
     });
     $(document).on("click", "#add-test-case", function () {
-        if($('#functions').val() == "------") {
+        if($('#functions').val() === "------") {
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
