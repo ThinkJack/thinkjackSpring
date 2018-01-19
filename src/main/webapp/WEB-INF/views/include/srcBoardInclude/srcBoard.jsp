@@ -85,19 +85,6 @@
             $(elId).attr("src", imgPath + "like" + num + ".png");
         }
 
-        //필요한 댓글 개수 부분
-        <%--var getpage = (function (srcId) {--%>
-        <%--var pageInfo = "/srcReply/" + srcId + "/" + 1;--%>
-        <%--// alert(pageInfo);--%>
-        <%--$.getJSON(pageInfo, function (data) {--%>
-        <%--var srcReplyCnt = data.pageMaker.totalCount;--%>
-        <%--// return { srcReplyCnt : data.pageMaker.totalCount;}--%>
-        <%--$("#src-replycnt2").html(srcReplyCnt);--%>
-        <%--// srcReplyCnt ="";--%>
-        <%--});--%>
-
-        <%--})("${srcVo.srcId}");--%>
-
     }
 
 </script>

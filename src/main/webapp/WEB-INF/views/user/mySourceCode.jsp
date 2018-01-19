@@ -70,17 +70,14 @@
         }
 
         //필요한 댓글 개수 부분
-        function getPage (srcId) {
-            pageinfo = "/srcReply/" + srcId + "/" + 1;
-            $.getJSON(pageInfo, function(data) {
-                // printData(data.list, $("#repliesDiv"), $('#template'));
-                // getPageList(pageInfo);
-                // printPaging(data.pageMaker, $(".pagination"));
+        var getPage = function (srcId) {
+            // alert(srcId);
+            $.getJSON("/srcReply/" + srcId + "/" + 1, function (data) {
 
-                // alert(111);
-                return  data.pageMaker.totalCount;
-                // $("#src-replycnt2").html(srcReplyCnt);
+                var srcReplyCnt = data.pageMaker.totalCount;
 
+                // document.getElementById("srcReply" + srcId).innerText = srcReplyCnt;
+                $('#src-viewcnt' + srcId).html(srcReplyCnt);
 
             });
         }
@@ -152,7 +149,10 @@
                 <img class="fl-right src_icon" src="/resources/images/view24.png"
                      onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
                 <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                   id="src-viewcnt2">${srcVo.srcViewcnt}</a>
+                   id="src-viewcnt${srcVo.srcId}">
+                    <script>getPage("${srcVo.srcId}")</script>
+
+                </a>
 
 
                 <script>
