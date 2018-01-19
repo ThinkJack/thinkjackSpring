@@ -464,6 +464,11 @@ p.err {
 
 }
 
+.removePadding{
+    padding: 0;
+    margin: 0;
+}
+
 /*#menu>span {*/
 /*display: block;*/
 /*font-size: 1.5em;*/

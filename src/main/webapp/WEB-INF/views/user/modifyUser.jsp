@@ -84,7 +84,7 @@
 <link href="/resources/dist/css/login.css" rel="stylesheet">
 <div  id="modifyUser">
     <div class="wrapper fadeInDown text-center">
-        <div class="card border-secondary mb-3" style="max-width: 30rem; max-height: 45rem;" id="formContent">
+        <div class="card border-secondary " style="max-width: 30rem; max-height: 45rem;" id="formContent">
 
             <section class="grid-1 big-area" style="margin-left: 5rem;" >
 
@@ -96,12 +96,7 @@
 
                 <form class="modifyUser" name="login" action="/user/modifyUser" method="post" enctype="multipart/form-data"
                       onsubmit="return signinchk(this)">
-                    <%--<div class="panel panel-1 "></div>--%>
-                    <%--<div class="panel panel-2  "></div>--%>
-                    <%--<div class="panel panel-3 "></div>--%>
-                    <%--<div class="panel panel-4"></div>--%>
-                    <%--<div class="panel panel-5 "></div>--%>
-                    <%--<div class="panel panel-6 "></div>--%>
+
                     <div class="panel panel-7"  style="max-width: 20rem;" >
                         <p class="hn" style=" margin: 0">"${login.userName}"님 반가워요~</p>
                     </div>
@@ -114,44 +109,44 @@
                                 </div>
                             </div>
                             <p class="mt-1">사진 파일 위에 Drag&Drop 으로 사진을 올려 놓으세요</p>
-
                         </div>
-
                     </div>
-                    <input class="hn" type='file' id="imgInp" name="file"/><input type="button" value="기본 프로필 사용" id="filecancle" /><br>
+                    <div class="row">
+                        <input class="col-md-5 hn" type='file' id="imgInp" name="file"/>
+                        <input class="col-md-4 btn btn-outline-primary" type="button" value="기본 프로필 사용" id="filecancle" /><br>
+                    </div>
 
-
-                    <div class="small-unit mt-5" style="height: 200px">
+                    <div class=" mt-2" >
                         <input type="hidden" name="userId" value="${login.userId}" readonly/>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend hn">
-                                        <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
-                                    </div>
-                                    <input type="text" class="input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
+
+                        <div class=" form-group">
+                            <div class="row input-group mb-3">
+                                <div class="input-group-prepend hn">
+                                    <span class="input-group-text input-group-height" class="input-group-addon">E-mail ID</span>
                                 </div>
+                                <input type="text" class="col-7 input-group-text input-group-height" name="userEmail" id="userEmail" value="${login.userEmail}" aria-describedby="basic-addon1" readonly/>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <div class="input-group mb-6">
+                            <div class="row input-group mb-6">
                                 <div class="input-group-prepend hn">
                                     <span class="input-group-text input-group-height" class="input-group-addon">user name</span>
                                 </div>
-                                <input type="text" class="input-group-text input-group-height" aria-label="Amount (to the nearest dollar)"
+                                <input type="text" class="input-group-text input-group-height " aria-label="Amount (to the nearest dollar)"
                                        name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
                                 <div class="input-group-append">
-                                    <button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>
+                                    <%--<button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>--%>
+                                    <button type="button" class="btn btn-primary" id="authenticateName">중복체크</button>
                                 </div>
-                                <div class="small-unit mt-3 " style="margin-left: 20%">
-                                    <input type="submit" class="btn btn-outline-primary hn input-group-text" value="정보변경"/>
-                                    <input type="reset" class="btn btn-outline-danger input-group-text" value="취소"/>
+                                <div class="small-unit mt-5 hn" style="margin-left: 20%">
+                                    <input type="submit" class=" btn btn-primary " value="정보변경"/>
+                                    <button class=" btn btn-primary text-white"  href='/main' >취소</button>
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" name="test" value="${login.userProfile}"/><br>
                         <input type="hidden" id="userProfile" name="userProfile">
-
                     </div>
                 </form>
             </section>

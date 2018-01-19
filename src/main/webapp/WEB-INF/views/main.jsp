@@ -12,7 +12,7 @@
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
                     <br>
-                    <h1 class="bd aniB mt-5" style=" font-size: 5em;" >Masterpiece</h1>
+                    <p class="bd aniB mt-5" style=" font-size: 4em;" ><a style="font-size:6rem">rn</a>asterpiece</p>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
@@ -74,7 +74,7 @@
 
                     });
                 </script>
-                <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
+                <div class="col-sm-4 removePadding borderLB " style="height:40.2%;margin-left: 20%;"></div>
                 <div class="col-sm-4 removePadding borderRB " style="height:29%;margin-top:76.781px;">
                     <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
 
@@ -113,7 +113,7 @@
         </div>
     </div>
 </section>
-<section class="d container-fluid removePadding" id="board" >
+<section class="d container-fluid removePadding " id="board" >
 
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
@@ -190,6 +190,7 @@
         </div>
     </div>
 </section>
+<div class="deaf" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
     $(function() {

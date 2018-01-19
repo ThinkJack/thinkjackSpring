@@ -51,7 +51,7 @@
                 <h1 class="text-white hn">Find Password</h1>
             </div>
             <div class="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                <img class="mt-3 mb-3"   style="width: 150px " src="/resources/images/password2.svg" id="icon" alt="User Icon" />
             </div>
 
             <form name="findPassword" action="/user/findPassword" method="post" onsubmit="return signinchk(this)">
