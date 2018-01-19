@@ -54,6 +54,8 @@
             <beans:exclude-mapping path="/user/githubcallback" />
             <beans:exclude-mapping path="/user/emailConfirm" />
             <beans:exclude-mapping path="/user/findPasswordConfirm" />
+            <beans:exclude-mapping path="/user/logout" />
+            <beans:exclude-mapping path="/user/register" />
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 
