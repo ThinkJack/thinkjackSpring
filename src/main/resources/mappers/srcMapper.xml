@@ -32,6 +32,8 @@
             src.src_status   srcStatus
         FROM tbl_src src
         WHERE src_id = #{srcId}
+
+
     </select>
 
     <update id="updateSrc">

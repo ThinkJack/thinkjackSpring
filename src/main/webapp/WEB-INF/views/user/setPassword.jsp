@@ -59,7 +59,7 @@
         <div class="card-header" style="background-color: black">
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="/resources/images/main/mainB.png">
+                <img style="width: 200px " src="/resources/images/password2.svg">
                 <h1 class="hn text-white">비밀번호 변경</h1>
             </div>
         </div>

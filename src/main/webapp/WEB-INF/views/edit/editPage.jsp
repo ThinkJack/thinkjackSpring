@@ -9,10 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--<%--%>
-<%--response.setHeader("Pragma","no-cache");--%>
-<%--response.setHeader("Pragma","no-store");--%>
-<%--response.setHeader("Cache-Control","no-cache");--%>
-<%--response.setDateHeader("Expires",0);--%>
+    <%--response.setHeader("Pragma","no-cache");--%>
+    <%--response.setHeader("Pragma","no-store");--%>
+    <%--response.setHeader("Cache-Control","no-cache");--%>
+    <%--response.setDateHeader("Expires",0);--%>
 <%--%>--%>
 
 <html>
@@ -87,6 +87,7 @@
 <jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
 <jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
 <jsp:include page="../include/editInclude/editModalReply.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/editKeyMapModal.jsp" flush="false"/>
 <!--footer-->
 <jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
 

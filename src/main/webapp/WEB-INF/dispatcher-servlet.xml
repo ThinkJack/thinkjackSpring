@@ -56,6 +56,9 @@
             <beans:exclude-mapping path="/user/findPasswordConfirm" />
             <beans:exclude-mapping path="/user/logout" />
             <beans:exclude-mapping path="/user/register" />
+            <beans:exclude-mapping path="/srcReply/**" />
+            <beans:exclude-mapping path="/replies/**" />
+            <beans:exclude-mapping path="/displayFile" />
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 

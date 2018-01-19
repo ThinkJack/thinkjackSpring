@@ -20,7 +20,7 @@
             <div class="card-header" style="background-color: black">
                 <!-- Icon -->
                 <div class="fadeIn first">
-                    <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                    <img   style="width: 200px " src="/resources/images/password2.svg" id="icon" alt="User Icon" />
                     <%--<img src="/resources/images/main/mainB.png">--%>
                     <h1 class="hn text-white">패스워드 변경</h1>
                 </div>

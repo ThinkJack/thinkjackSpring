@@ -24,7 +24,7 @@
 
         }
 
-        #err {
+        .err {
             color: red;
         }
 
@@ -60,8 +60,8 @@
         }
 
         .CodeMirror {
-             height: 100%;
-         }
+            height: 100%;
+        }
 
         .container-fluid {
             overflow: hidden;
@@ -79,9 +79,10 @@
             <p class="h4 text-white code-name bd">JS</p>
         </div>
         <div class="col-6 row justify-content-end modi4">
-            <label style="color: white;">
-                <input type="checkbox" value="">테스트 케이스 자동 삭제
-            </label>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="autoremove" checked="">
+                <label class="custom-control-label text-white" for="autoremove">테스트 케이스 자동 삭제</label>
+            </div>
         </div>
 
         <div class="col" id="codeUnitTest"></div>
@@ -89,10 +90,12 @@
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-6 row justify-content-start modi4">
+                <div class="col-4 row justify-content-start modi4">
                     <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
-                <div class="col-6 row justify-content-end my-1 ">
+                <div class="col-8 row justify-content-end my-1 ">
+                    <select id="functions" class="mx-1 modi3"><
+                        <option>------</option></select>
                     <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
                     <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
                     <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
@@ -130,27 +133,50 @@
 
 
 <script>
-    var before = 0;
-    var testFunc;
-    var declaration;
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
-    var out = frame.contentDocument || frame.contentWindow.document
-
+    var out = frame.contentDocument || frame.contentWindow.document;
+    var count;var functions;
     codeUnitTest.on("change", function () {
-        if()
+        count = 0;
+        var javascroptCode = codeUnitTest.getValue();
+        if($("#autoremove").prop("checked"))
             $("#test-case").empty();
-        //Uritest-----------------------------------------------------------------------------------------------
-        out.open();
-        out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
-        out.close();
 
-        console.log(frame.contentWindow.eval('testFunction()'));
+
+        try {
+            out.open();
+            out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
+            out.close();
+        }catch (err){
+            // console.log(err);
+        }
+
+
+        var pos =0;
+        functions = new Array();
+        while (pos !== -1) {
+            count++;
+            functioncode = javascroptCode.substring(pos);
+            functions.push(functioncode.substring(functioncode.indexOf('function')+8,functioncode.indexOf('(')));
+            pos = javascroptCode.indexOf('function', pos + 1 );
+        }
+
+        $("#functions").empty();
+        $("#functions").append("<option>"+"------"+"</option>");
+        for(var i = 0; i < count ; i++)
+            $("#functions").append("<option>"+functions[i]+"</option>");
 
     });
     $(document).on("click", "#add-test-case", function () {
+        if($('#functions').val() === "------") {
+            alert("테스트 코드를 작성, 선택 해주세요");
+            return;
+        }
+
+        var funcationLength = frame.contentWindow.eval($('#functions').val()+".length");
         var inputbox = "";
-        for (var i = 0; i < testFunc.length; i++)
+        for(var i = 0 ; i < funcationLength ; i++)
             inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
             "<div class='row case m-2'>" +
@@ -165,93 +191,16 @@
     });
 
     function codeTest(input, output) {
-        var result = false;
-        var functionValue;
         var startTime = getTimeStamp();
-        var errMassage = "";
-        try {
-            switch (input.length) {
-                case 0 :
-                    functionValue = testFunc();
-                    break;
-                case 1 :
-                    functionValue = testFunc(
-                        input[0]);
-                    break;
-                case 2 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1]);
-                    break;
-                case 3 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2]);
-                    break;
-                case 4 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3]);
-                    break;
-                case 5 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4]);
-                    break;
-                case 6 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5]);
-                    break;
-                case 7 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5],
-                        input[6]);
-                    break;
-                case 8 :
-                    functionValue = testFunc(
-                        input[0],
-                        input[1],
-                        input[2],
-                        input[3],
-                        input[4],
-                        input[5],
-                        input[6],
-                        input[7]);
-                    break;
-            }
-            if (output == functionValue)
-                result = true;
-        } catch (err) {
-            errMassage = err;
-        }
-        finally {
-            var runningTime = getTimeStamp() - startTime;
-            resultText = "<div class='resultLog'>[input : " + input.join() +
-                " / output : " + output + "] " +
-                "결과 : " + (result ? "성공" : "실패") +
-                " (경과시간 : " + runningTime + "ms)<br/>"
-                + "<span id='err'>" + errMassage + "</span>" +
-                "</div>";
-            return resultText;
-        }
+        try{
+            var inputResult = frame.contentWindow.eval($('#functions').val()+"("+input+")");
 
+            $("#resultView").append(
+                "<div class='resultLog'> [ input : "+ input + " / output : " + output + " ] " + (inputResult === output ? "성공" : "실패") +"( 경과시간 : "+ (getTimeStamp() - startTime)+ "ms)"+"</div>");
 
+        }catch(err){
+            $("#resultView").append("<div class='err'>" + err + "</div>");
+        }
     }
 
     function getTimeStamp() {
@@ -259,23 +208,16 @@
     }
 
     $(document).on("click", ".test_one", function () {
-        var startTime = getTimeStamp();
         var inputs = $(this).parent().find(".inputs");
-        var testArguments = new Array;
-        for (var i = 0; i < inputs.length; i++) {
-            testArguments.push(inputs[i].value);
+        var testArguments = inputs[0].value;
+        for (var i = 1; i < inputs.length; i++) {
+            testArguments += ","+inputs[i+1].value;
         }
-        var output = $(this).parent().find(".output");
-        var output = output[0].value;
-        // console.log(output);
+        var outputs = $(this).parent().find(".output");
+        var output = outputs[0].value;
 
-        var result = codeTest(testArguments, output);
+        codeTest(testArguments, output);
 
-
-        if (!errors) {
-            // $("#resultView").empty();
-            $("#resultView").append(result);
-        }
     });
 
 
@@ -293,8 +235,11 @@
         $("#resultView").empty();
     });
     $(document).on("click", "#test-all", function () {
+        var startTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
-            testCase.trigger("click");
+        testCase.trigger("click");
+        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp()-startTime) + "ms)"+"</div>");
+
     });
     $(document).ready(function () {
         $("#test-case").bind('DOMNodeInserted',function () {

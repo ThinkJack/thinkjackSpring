@@ -12,7 +12,7 @@
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB " style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
                     <br>
-                    <h1 class="bd aniB mt-5" style=" font-size: 5em;" >Masterpiece</h1>
+                    <p class="bd aniB mt-5" style=" font-size: 4em;" ><a style="font-size:6rem">rn</a>asterpiece</p>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
                     <div class="col-sm-1"></div>
@@ -54,7 +54,7 @@
                             <%--</video>--%>
 
                             <iframe width="420" height="345"
-                                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0" allowfullscreen>
+                                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
                             </iframe>
 
                             <a href="#">Unit Test</a>
@@ -74,15 +74,14 @@
 
                     });
                 </script>
-                <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
-                <div class="col-sm-4 removePadding borderRB " style="height:29%;margin-top:76.781px;">
+                <div class="col-sm-4 removePadding borderLB " style="height:40.2%;margin-left: 20%;"></div>
+                <div class="col-sm-4 removePadding borderRB " style="height:29.6%;margin-top:76.781px;">
                     <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
-
                     <li class="tip">  <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:40%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.href='/edit/editPage'">Edit</button>
                         <strong class="tooltipA">Add images in the tooltip. <a href="http://codecanyon.net/item/portfolio-premium-wp-plugin/154612">
                             <img class="ref" src="/resources/images/logo.png" height="150" width="150" alt="" /></a><a href="#"> You can even add links!</a></strong></li>
                 </div>
-                <div class=" removePadding borderRT " style="height:20%;width:13.33%;margin-top:139.781px;"></div>
+                <div class=" removePadding borderRT " style="height:24%;width:13.33%;margin-top:139.781px; "></div>
                 <div class="col-sm-12 removePadding borderR " style="height:42%;">
                 </div>
             </div>
@@ -113,7 +112,7 @@
         </div>
     </div>
 </section>
-<section class="d container-fluid removePadding" id="board" >
+<section class="d container-fluid removePadding " id="board" >
 
     <div class="row removePadding">
         <div class="col-sm-2 removePadding"></div>
@@ -190,6 +189,7 @@
         </div>
     </div>
 </section>
+<div class="deaf" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
     $(function() {
