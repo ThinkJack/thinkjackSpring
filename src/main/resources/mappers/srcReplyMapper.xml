@@ -19,9 +19,7 @@
     <update id="updateReply">
         UPDATE tbl_src_reply
         SET
-            src_id      = #{srcId},
-            reply_text  = #{replyText},
-            reply_state = #{replyStatus}
+            reply_text  = #{replyText}
         WHERE reply_id = #{replyId}
     </update>
 
