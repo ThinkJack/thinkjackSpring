@@ -98,7 +98,7 @@
                       onsubmit="return signinchk(this)">
 
                     <div class="panel panel-7"  style="max-width: 20rem;" >
-                        <p class="hn" style=" margin: 0">"${login.userName}"님 반가워요~</p>
+                        <p class="hn pl-3 mr-0 mt-0 mb-0" >"${login.userName}"님 <br><a class="ml-5" style="font-size: 1.5rem;">반가워요~~!!!</a></p>
                     </div>
                     <div class="panel panel-8 text-white" style="max-width: 20rem; max-height: 40rem;background-color:#000">
 
@@ -133,7 +133,7 @@
                                 <div class="input-group-prepend hn">
                                     <span class="input-group-text input-group-height" class="input-group-addon">user name</span>
                                 </div>
-                                <input type="text" class="input-group-text input-group-height " aria-label="Amount (to the nearest dollar)"
+                                <input type="text" class="col-4 input-group-text input-group-height " aria-label="Amount (to the nearest dollar)"
                                        name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
                                 <div class="input-group-append">
                                     <%--<button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>--%>

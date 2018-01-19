@@ -82,7 +82,7 @@
                 <label  style="font-size:1.35rem;" >Writer</label>
                 <div class="form-control" style="background: white">
                     <img id='writerProfile' class="rounded photo2">
-                    <label style="color: black;">${boardVO.boardWriter}</label>
+                    <label class="hn ml-3" style="color: black;">${boardVO.boardWriter}</label>
                 </div>
                 <script>
                     $("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))

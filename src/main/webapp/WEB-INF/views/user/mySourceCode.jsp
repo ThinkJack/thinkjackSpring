@@ -52,6 +52,7 @@
         opacity: 0.5;
         cursor: pointer;
     }
+
 </style>
 <script>
     //필요한 댓글 개수 부분

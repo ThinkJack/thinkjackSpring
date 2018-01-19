@@ -54,6 +54,11 @@
         opacity: 0.5;
         cursor: pointer;
     }
+
+
+    body{
+        background-color: orange;
+    }
 </style>
 <script>
     var getPage = function (srcId) {
@@ -125,42 +130,26 @@
                         <div class="row">
                     </c:if>
                     <div class="col">
-                        <div class="card">
+                        <div class="card hn">
                                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
                             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                                 <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                                 </iframe>
                             </div>
 
-                            <div class="card-body">
-                                <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
-                                <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
+                                <%--<div class="card-body" style="overflow: auto">--%>
+                            <div  style="overflow-y:scroll; width:100%; height:20%;">
+                                    <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
+                                <h5 class="hn mb-0"   id="src-title1" data>${srcVo.srcTitle}</h5>
+                                <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body mb-0  pb-0" style="padding-left:10px;padding-right:7px;height:15%" >
+                                <div class="row removePadding ">
 
-
-                                <img class="src_icon" src="/resources/images/123.gif" style="width:20px; height:20px;" id="${srcVo.srcId}img"
-                                     onclick="location.href='/edit/editPage/${srcVo.srcId}';">
-                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link" id="src-writer2">${srcVo.srcWriterName}</a>
-
-                                <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
-                                     style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                   id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
-
-                                <img class="fl-right src_icon" src="/resources/images/reply24.png"
-                                     onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
-                                     style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
-                                    <script>getPage("${srcVo.srcId}")</script>
-                                </a>
-
-
-                                <img class="fl-right src_icon" src="/resources/images/view24.png"
-                                     onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                   id="src-viewcnt2">${srcVo.srcViewcnt}</a>
-
+                                    <img class="col-2 src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
+                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';">
+                                    <a href="/edit/editPage/${srcVo.srcId}" class="col-9 ml-3 card-link removePadding" id="src-writer2">${srcVo.srcWriterName}</a>
+                                </div>
                                 <script>
                                     <%--작성자 이미지 경로 작업--%>
                                     <c:if test="${srcVo.srcWriterImgPath ne null}">
@@ -201,6 +190,24 @@
                                         });
                                     });
                                 </script>
+                            </div>
+                            <div class="row fl-right ml-auto ">
+                                <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
+                                     style="width:20px; height:20px;">
+                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                   id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
+
+                                <img class="fl-right src_icon" src="/resources/images/reply24.png"
+                                     onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
+                                     style="width:20px; height:20px;">
+                                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
+                                    <script>getPage("${srcVo.srcId}")</script>
+                                </a>
+
+                                <img class="fl-right src_icon" src="/resources/images/view24.png"
+                                     onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
+                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                   id="src-viewcnt2">${srcVo.srcViewcnt}</a>
                             </div>
                         </div>
                     </div>
@@ -266,35 +273,6 @@
                 <c:if test="${status.count % 3 eq 0}">
             </div>
             </c:if>
-
-
-        </div>
-        <div class="text-center">
-            <ul class="pagination justify-content-center">
-                <c:if test="${pageMaker.prev}">
-                    <li class="page-item">
-                        <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
-                           aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                </c:if>
-                <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-                    <li
-                            <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
-                        <a class="page-link" href="srcList${pageMaker.makeSearch(idx)}">${idx}</a>
-                    </li>
-                </c:forEach>
-                <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                    <li class="page-item">
-                        <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.endPage + 1)}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </c:if>
-            </ul>
         </div>
         <script>
             $(document).ready(function () {
@@ -309,8 +287,36 @@
             });
         </script>
     </div>
-</div>
 
+</div>
+<div class="text-center">
+    <ul class="pagination justify-content-center">
+        <c:if test="${pageMaker.prev}">
+            <li class="page-item">
+                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.startPage - 1)}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+        </c:if>
+        <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+            <li
+                    <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
+                <a class="page-link" href="srcList${pageMaker.makeSearch(idx)}">${idx}</a>
+            </li>
+        </c:forEach>
+        <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+            <li class="page-item">
+                <a class="page-link" href="srcList${pageMaker.makeSearch(pageMaker.endPage + 1)}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</div>
+<div class="deaf2" ></div>
 <!--내용-->
 
 

@@ -359,17 +359,18 @@ section.d{
     border: 10px solid #fff;
 }
 /*페이지 네이션*/
-.pagination>li:last-child>a, .pagination>li:last-child>span {
-    border-radius: 0px;
+/*.pagination>li:last-child>a, .pagination>li:last-child>span {*/
+    /*border-radius: 0px;*/
 
-}
+/*}*/
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #000000;
-    border-color: #fff;
+    background-color: #333;
+    border-color: #333;
+
 }
 
 
@@ -522,3 +523,13 @@ a:hover {
 a {
 
     text-decoration: none; }
+
+.btn-outline-success {
+    color: #A0D468;
+    background-color: transparent;
+    background-image: none;
+    border-color: #A0D468;
+}
+input{
+    font-family: 'Hanna', serif;
+}
