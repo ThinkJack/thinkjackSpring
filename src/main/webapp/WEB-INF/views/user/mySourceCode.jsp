@@ -54,6 +54,19 @@
     }
 </style>
 <script>
+    //필요한 댓글 개수 부분
+    var getPage = function (srcId) {
+        // alert(srcId);
+        $.getJSON("/srcReply/" + srcId + "/" + 1, function (data) {
+
+            var srcReplyCnt = data.pageMaker.totalCount;
+
+            // document.getElementById("srcReply" + srcId).innerText = srcReplyCnt;
+            $('#src-replycnt' + srcId).html(srcReplyCnt);
+
+        });
+    };
+
     //필요한 변수 정의 부분
     var imgPath = "/resources/images/";
 
@@ -129,8 +142,8 @@
                                     <img class="fl-right src_icon" src="/resources/images/reply24.png"
                                          onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
                                          style="width:20px; height:20px;">
-                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right"
-                                       id="src-replycnt2">10</a>
+                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt${srcVo.srcId}">
+                                        <script> getPage("${srcVo.srcId}");</script></a>
 
                                     <img class="fl-right src_icon" src="/resources/images/view24.png"
                                          onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">

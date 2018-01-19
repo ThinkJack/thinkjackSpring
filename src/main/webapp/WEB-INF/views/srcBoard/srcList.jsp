@@ -57,7 +57,6 @@
 </style>
 <script>
     var getPage = function (srcId) {
-        // var pageInfo = "/srcReply/" + srcId + "/" + 1;
         // alert(srcId);
         $.getJSON("/srcReply/" + srcId + "/" + 1, function (data) {
 
