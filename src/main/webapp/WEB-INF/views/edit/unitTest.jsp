@@ -169,7 +169,7 @@
 
     });
     $(document).on("click", "#add-test-case", function () {
-        if($('#functions').val() == "------") {
+        if($('#functions').val() === "------") {
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
@@ -209,9 +209,9 @@
 
     $(document).on("click", ".test_one", function () {
         var inputs = $(this).parent().find(".inputs");
-        var testArguments = "";
-        for (var i = 0; i < inputs.length; i++) {
-            testArguments += ","+inputs[i].value;
+        var testArguments = inputs[0].value;
+        for (var i = 1; i < inputs.length; i++) {
+            testArguments += ","+inputs[i+1].value;
         }
         var outputs = $(this).parent().find(".output");
         var output = outputs[0].value;
