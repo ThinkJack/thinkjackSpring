@@ -29,8 +29,8 @@
         }
 
         .right_view {
-            height: calc(100% - 48px);
-            overflow: scroll;
+            height: calc(100% - 50px);
+            overflow: auto;
         }
 
         .input_box {
@@ -40,8 +40,8 @@
         /*.console_body{}*/
         .whole {
             height: 100%;
-            padding-top: 70px;
-            padding-bottom: 47px;
+            padding-top: 78px;
+            padding-bottom: 50px;
         }
 
         .right {
@@ -50,7 +50,7 @@
 
         #codeUnitTest {
             height: 100%;
-            padding-bottom: 44px;
+            padding-bottom: 40px;
         }
 
         #frameUnitTest {
@@ -170,6 +170,12 @@
             $("#functions").append("<option>" + functions[i] + "</option>");
 
     });
+
+    codeUnitTest.setValue(
+        "function test1(){\n" +
+        "   return 0;\n" +
+        "}");
+
     $(document).on("click", "#add-test-case", function () {
         if ($('#functions').val() === "------") {
             alert("테스트 코드를 작성, 선택 해주세요");
@@ -197,7 +203,7 @@
         try {
             var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
             $("#resultView").append(
-                "<div class='resultLog'> [ input : " + input + " / output : " + output + "/ result : ] " + (inputResult === output ? "성공" : "실패") + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
+                "<div class='resultLog'> [ input : " + input + " / output : " + output + " / result : " + inputResult + " ] " + (inputResult === output ? "성공" : "실패") + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
 
         } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>");
@@ -211,14 +217,21 @@
     $(document).on("click", ".test_one", function () {
         var inputs = $(this).parent().find(".inputs");
         var testArguments = "";
+
         for (var i = 0; i < inputs.length; i++) {
-            if (typeof inputs === 'string')
+            if (isNaN(inputs[i].value * 1))
                 testArguments += "\"" + inputs[i].value + "\"";
             else
                 testArguments += inputs[i].value;
+            if (inputs.length - 1 !== i)
+                testArguments += ",";
         }
         var outputs = $(this).parent().find(".output");
-        var output = outputs[0].value;
+        var output;
+        if (isNaN(outputs[0].value * 1))
+         output = outputs[0].value;
+        else
+            output = outputs[0].value * 1;
 
         codeTest(testArguments, output);
 
