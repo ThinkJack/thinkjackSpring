@@ -2,6 +2,8 @@ package common;
 
 import domain.SrcVO;
 import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -72,9 +74,18 @@ public class SrcFileSet{
 
     //실제 코드 파일 생성
     public void fileWriter(String filePath, String src) throws Exception {
-        File file = new File(filePath);
-        CharSequence cs = new StringBuffer(src);
-        FileUtils.write(file, cs);
+//        final DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
+//        Resource resource = defaultResourceLoader.getResource("classpath:resource/imsi/imsi.txt");
+        System.out.println(getClass().getResource("/imsi/imsi.txt").toURI());
+        File file = new File(getClass().getResource("/imsi/imsi.txt").toURI());
+//        File file = new File(filePath);
+        FileWriter fw = new FileWriter(file);
+        fw.write(src);
+        fw.flush();
+        fw.close();
+
+//        CharSequence cs = new StringBuffer(src);
+//        FileUtils.write(file, cs);
         byte[] filedata = FileUtils.readFileToByteArray(file);
         UploadFileUtils.srcUploadFile(filePath, filedata);
     }
