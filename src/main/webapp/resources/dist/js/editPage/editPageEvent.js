@@ -135,10 +135,7 @@ codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
-codeUnitTest.on("gutterClick", function (cm, n) {
-    var info = cm.lineInfo(n);
-    cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
-});
+
 
 //editHeader.jsp script
 //pencil 클릭시 input text 보이기
@@ -348,6 +345,8 @@ $(function () {
 $(function () {
     $("#setting").on("hide.bs.modal", function () {
 
+
+
         cdnCssJsValSet();
 
         updatePreview();
@@ -421,67 +420,67 @@ $(function () {
 
 
 //화면 영역 조절관련 function
-jQuery("#resize-code-1").mousedown(function (e) {
-    e.preventDefault();
-    dragging = true;
-    var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
-
-    $(window).mousemove(function (e) {
-
-        hcl = startP - e.pageX;
-
-        console.log(cssBuild.offsetWidth);
-        if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
-
-        } else {
-            htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
-            cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
-        }
-
-    });
-});
-
-jQuery("#resize-code-2").mousedown(function (e) {
-    e.preventDefault();
-    dragging = true;
-    var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
-
-    $(window).mousemove(function (e) {
-
-        cjl = startP - e.pageX;
-
-        if (-350 < cjl && cjl < 350) {
-            cssBuild.style = "width: calc(33.1% - " + cjl + "px);";
-            jsBuild.style = "width: calc(33.1% + " + cjl + "px);";
-        }
-
-    });
-});
-
-jQuery("#resize-view").mousedown(function (e) {
-    e.preventDefault();
-    dragging = true;
-    var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
-
-    $(window).mousemove(function (e) {
-        cifl = startP - e.pageY;
-//                if (-350 < cifl && cifl < 350) {
-        for (i in codeMLayout) {
-            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-        }
-
-        iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-    });
-
-    $('.iframeWrapper').mousemove(function (e) {
-        cifl = startP - e.pageY;
-        for (i in codeMLayout) {
-            codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-        }
-
-        iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-    });
-});
+// jQuery("#resize-code-1").mousedown(function (e) {
+//     e.preventDefault();
+//     dragging = true;
+//     var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
+//
+//     $(window).mousemove(function (e) {
+//
+//         hcl = startP - e.pageX;
+//
+//         console.log(cssBuild.offsetWidth);
+//         if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
+//
+//         } else {
+//             htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
+//             cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
+//         }
+//
+//     });
+// });
+//
+// jQuery("#resize-code-2").mousedown(function (e) {
+//     e.preventDefault();
+//     dragging = true;
+//     var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
+//
+//     $(window).mousemove(function (e) {
+//
+//         cjl = startP - e.pageX;
+//
+//         if (-350 < cjl && cjl < 350) {
+//             cssBuild.style = "width: calc(33.1% - " + cjl + "px);";
+//             jsBuild.style = "width: calc(33.1% + " + cjl + "px);";
+//         }
+//
+//     });
+// });
+//
+// jQuery("#resize-view").mousedown(function (e) {
+//     e.preventDefault();
+//     dragging = true;
+//     var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
+//
+//     $(window).mousemove(function (e) {
+//         cifl = startP - e.pageY;
+// //                if (-350 < cifl && cifl < 350) {
+//         for (i in codeMLayout) {
+//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
+//         }
+//
+//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
+//     });
+//
+//     $('.iframeWrapper').mousemove(function (e) {
+//         cifl = startP - e.pageY;
+//         for (i in codeMLayout) {
+//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
+//         }
+//
+//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
+//     });
+// });
 
 jQuery(window).mouseup(function (e) {
     $(window).unbind('mousemove');

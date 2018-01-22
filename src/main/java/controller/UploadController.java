@@ -1,6 +1,7 @@
 package controller;
 
 import common.MediaUtils;
+import common.S3Util;
 import common.UploadFileUtils;
 import domain.UserVO;
 import org.apache.commons.io.IOUtils;
@@ -17,19 +18,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import service.UserService;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.UUID;
 
 
 @Controller
 public class UploadController {
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+
+//    @Inject
+//    private ImageService service;
+
+    S3Util s3 = new S3Util();
+    String bucketName = "thinkjackbucket";
+
+    @Inject
+    private UserService userService;
 
     @Resource(name="uploadPath")
     private String uploadPath;
@@ -84,12 +98,15 @@ public class UploadController {
         FileCopyUtils.copy(fileData,target);
         return savedName;
     }
+
     @ResponseBody
     @RequestMapping("/displayFile")
     public ResponseEntity<byte[]> displayFile(String fileName)throws Exception{
 
         InputStream in = null;
         ResponseEntity<byte[]> entity = null;
+        HttpURLConnection uCon = null;
+        System.out.println("FILE NAME: " + fileName);
 
         //System.out.println("FileName : "+fileName);
 
@@ -99,16 +116,32 @@ public class UploadController {
             MediaType mType = MediaUtils.getMediaType(formatName);
             HttpHeaders headers = new HttpHeaders();
 
-            in = new FileInputStream(uploadPath+fileName);
-            //System.out.println("in : "+in);
-            if(mType != null){
-                headers.setContentType(mType);
-            }else{
+            String inputDirectory = "thinkjack";
+            URL url;
 
-                fileName = fileName.substring(fileName.indexOf("_")+1);
-                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-                headers.add("Content-Disposition","attachment; filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+            //in = new FileInputStream(uploadPath+fileName);
+            //System.out.println("in : "+in);
+//            if(mType != null){
+//                headers.setContentType(mType);
+//            }else{
+//
+//                fileName = fileName.substring(fileName.indexOf("_")+1);
+//                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//                headers.add("Content-Disposition","attachment; filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+//            }
+
+            try {
+                url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+                System.out.println(url);
+                uCon = (HttpURLConnection) url.openConnection();
+                in = uCon.getInputStream(); // 이미지를 불러옴
+            } catch (Exception e) {
+                url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+                uCon = (HttpURLConnection) url.openConnection();
+                in = uCon.getInputStream();
             }
+
+
             entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
             headers,
             HttpStatus.CREATED);
@@ -132,4 +165,28 @@ public class UploadController {
         }
         return entity;
     }
+    @ResponseBody
+    @RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
+    public ResponseEntity<String> deleteFile(String fileName, String userId)throws Exception {
+
+        //System.out.println("delete file: " + fileName);
+       // System.out.println("delete uid:"+userId);
+
+        String inputDirectory = userId;
+
+        URL url;
+        HttpURLConnection uCon = null;
+
+        try {
+            s3.fileDelete(bucketName, inputDirectory+fileName);
+        } catch (Exception e) {
+//	s3.fileDelete(bucketName, "s_user.jpg");
+            e.printStackTrace();
+        }
+        userService.deleteImage(fileName);
+        new File(inputDirectory + fileName.replace('/', File.separatorChar)).delete();
+
+        return new ResponseEntity<String>("deleted", HttpStatus.OK);
+    }
+
 }

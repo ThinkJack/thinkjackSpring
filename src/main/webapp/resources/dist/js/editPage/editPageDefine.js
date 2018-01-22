@@ -103,66 +103,6 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
 
-var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
-    mode: "javascript",
-    lineNumbers: true,
-    scrollbarStyle: "simple",    // 스크롤바 스타일
-    keyMap: "sublime",           // 키맵
-    matchBrackets: true,         // 괄호강조
-    theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
-    lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
-    highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
-    // extraKeys: { ".": "autocomplete" },
-    // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
-    indentUnit: 2,                //들여쓰기
-    // indentWithTabs: false,
-    electricChars: true,         //중괄호 정렬
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
-    styleActiveLine: true,
-
-    wordWrap: true,
-    autoCloseBrackets: true,
-    // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-
-    lineWrapping: true,           //Folding
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
-        },
-        "Shift-Tab": autoFormatSelection
-    },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
-});
-// editor.foldCode(CodeMirror.Pos(13, 0));
-codeUnitTest.setValue(
-    "function testFunction(){\n" +
-    "   return 0;\n" +
-    "}");
-
-var origin = codeUnitTest.getValue();
-var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
-testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
-
-var codePython = CodeMirror(document.getElementById("codePython"), {
-    mode: "python",
-    lineNumbers: true,
-    extraKeys: {
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
-        },
-        "Shift-Tab": autoFormatSelection
-    },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-});
-
 
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
@@ -224,7 +164,6 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
-//------------------------------------------------------//변수 설정
 var delay;
 var srcReplyCnt;
 
@@ -401,12 +340,23 @@ function makeMarker() {
 
 //------------------------------------------------------미리보기 기능
 function updatePreview() {
+
+    $("#resultView").remove();
+
+    var imsi = document.createElement("iframe");
+    imsi.setAttribute("class","col");
+    imsi.setAttribute("id","resultView");
+    imsi.setAttribute("scrolling","yes");
+    $("#iframe-body").html(imsi);
+
     var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
         return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
     });
 
     var previewFrame = document.getElementById('resultView');
     var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+
+    //초기화중
 
     emojify.run(out);
 
@@ -424,33 +374,56 @@ function updatePreview() {
         }
     }
 
-    clearTimeout(hashto);
+    // clearTimeout(hashto);
     // hashto = setTimeout(updateHash, 1000);
 
 
-    // -- mode 별 out(미리보기) 선택
-    out.open();
+    var cacheWhitelist = ['v2'];
+
+    caches.keys().then(function (keyList) {
+        return Promise.all(keyList.map(function (key) {
+            if (cacheWhitelist.indexOf(key) === -1) {
+                console.log(key);
+                return caches.delete(key);
+            }
+        }));
+    });
+
+
     var rlt = codeHtml.getOption("mode") === "gfm" ?
         md.render(val) : codeHtml.getValue(); //markdown : html
 
-
+    out.open();
     out.write(
 
         cssLnkSet
+        +
+        "<script>" + consoleString + "</script>"
         +
         "<style>" + codeCss.getValue() + "</style>"
         +
         rlt
         +
         jsLnkSet
+
         +
-        "<script>" + codeJavaScript.getValue() + "<\/script>"
+        "<script>"
+        // +
+        // consoleString
+        + codeJavaScript.getValue() + "<\/script>"
     );
 
-    editConsoleView.scrollTop = editConsoleView.scrollHeight;
-
     out.close();
+
+    consoleView("");
+    // editConsoleView.scrollTop = editConsoleView.scrollHeight;
 }
+
+// window.onload = function() {
+//     var previewFrame = document.getElementById('resultView');
+//     var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+//     out.location.reload();
+// };
 
 // var console=(function(oldCons){
 //     return {
@@ -481,15 +454,12 @@ function updatePreview() {
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
-
 function getSelectedRange1() {
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
-
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
-
 function getSelectedRange3() {
     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 }
@@ -505,7 +475,6 @@ function autoFormatSelection() {
     var range3 = getSelectedRange2();
     codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
-
 //--ctrl+/
 // function commentSelection(isComment) {
 //     var range = getSelectedRange();
@@ -532,7 +501,7 @@ function escapeHtml(text) {
 //코드 저장 로직
 function codeSave() {
     saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("https:/", "").replace("http:/", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
+    srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
 
     if (!saveStatus) {
         jQuery.ajaxSettings.traditional = true;
@@ -557,7 +526,7 @@ function codeSave() {
                 cdnJs: cdnJs
             }),
             success: function (getLink) {
-                if (srcId === "" && userId === "") {
+                if(srcId === "" && userId === ""){
                     document.cookie = getLink + "=";
                 }
 
@@ -591,46 +560,120 @@ function srcDelete() {
     });
 }
 
-
+var consoleCategory = [];
 var consoleView = function (str) {
     //console.log() 입력시 문자열 작업(정규식)
+    var previewFrame = document.getElementById('resultView');
 
+    var temp = consoleLogStr(str);
 
-    try {
-        editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-        consoleLogView(consoleLogStr(str));
-        editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
-                                    + document.getElementById("resultView").contentWindow.eval(str) + "</p>"
-    } catch (err) {
-        editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+    if(str !== ""){
+        try {
+            editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
+
+            consoleLogView(temp, consoleCategory);
+            editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
+                                        + previewFrame.contentWindow.eval(str) + "</p>";
+        } catch (err) {
+            editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
+        }
+
+        editConsoleView.scrollTop = editConsoleView.scrollHeight;
     }
-
-    editConsoleView.scrollTop = editConsoleView.scrollHeight;
 };
-function consoleLogView(temp){
+function consoleLogView(temp, consoleCategory){
+
+
     if (temp !== null) {
+
         for (i in temp) {
-            editConsoleView.innerHTML += "<p class='console-log' style='color:darkseagreen;'>\"" + temp[i] + "\"</p>"
+            var color = "";
+            if(consoleCategory[i] ==="log"){
+                color = "darkseagreen";
+            }else if(consoleCategory[i] ==="info"){
+                color = "dodgerblue";
+            }else if(consoleCategory[i] ==="warn"){
+                color = "yellow";
+            }else if(consoleCategory[i] ==="error"){
+                color = "red";
+            }
+            editConsoleView.innerHTML += "<p class='console-log' style='color:" + color + ";'>\"" + temp[i] + "\"</p>"
         }
     }
 }
+
 //
 function consoleLogStr(str) {
-    var reg = /console\.log\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.log\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
-    var temp = commandLineValue.match(reg);
-
+    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
+    var temp = str.match(reg);
+    var category = ["log", "info", "warn", "error"];
     for (i in temp) {
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("console.log(", "");
-        temp[i] = temp[i].replace("'", "");
-        temp[i] = temp[i].replace("\"", "");
-        temp[i] = temp[i].replace("')", "");
-        temp[i] = temp[i].replace("\")", "");
+
+        for(j in category){
+            if(temp[i].indexOf("console." + category[j] + "(") !== -1){
+                consoleCategory[i] = category[j];
+                temp[i] = temp[i].replace("console." + category[j] + "(", "");
+                temp[i] = temp[i].replace("'", "");
+                temp[i] = temp[i].replace("\"", "");
+                temp[i] = temp[i].replace("')", "");
+                temp[i] = temp[i].replace("\")", "");
+                break;
+            }
+        }
     }
     return temp;
 }
 
 
+var consoleString = "var console=(function(oldCons){\n" +
+    "        return {\n" +
+    "            log: function(text){\n" +
+    "                oldCons.log(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            info: function (text) {\n" +
+    "                oldCons.info(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:dodgerblue;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            warn: function (text) {\n" +
+    "                oldCons.warn(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:yellow;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            },\n" +
+    "            error: function (text) {\n" +
+    "                oldCons.error(text);\n" +
+    "                parent.document.getElementById(\"edit-console-view\").innerHTML += \"<p class='console-log' style='color:red;'>&nbsp;&nbsp;\\\"\" + text + \"\\\"</p>\";\n" +
+    "            }\n" +
+    "        };\n" +
+    "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
+
+$(function () {
+    var console=(function(oldCons){
+        return {
+            log: function(text){
+                oldCons.log(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            info: function (text) {
+                oldCons.info(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            warn: function (text) {
+                oldCons.warn(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            },
+            error: function (text) {
+                oldCons.error(text);
+                document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
+                // Your code
+            }
+        };
+    }(window.console));
+
+    window.console = console;
+});
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
@@ -657,25 +700,24 @@ var languageOverrides = {
     html: 'xml'
 };
 
-emojify.setConfig({img_dir: 'emoji'});
+// emojify.setConfig({img_dir: 'emoji'});
 
-var md = markdownit({
-    html: true,
-    linkify: true,
-    highlight: function (code, lang) {
-        if (languageOverrides[lang]) lang = languageOverrides[lang];
-        if (lang && hljs.getLanguage(lang)) {
-            try {
-                return hljs.highlight(lang, code).value;
-            } catch (e) {
-            }
-        }
-        return '';
-    }
-})
-    .use(markdownitFootnote);
-
-var hashto;
+// var md = markdownit({
+//     html: true,
+//     linkify: true,
+//     highlight: function (code, lang) {
+//         if (languageOverrides[lang]) lang = languageOverrides[lang];
+//         if (lang && hljs.getLanguage(lang)) {
+//             try {
+//                 return hljs.highlight(lang, code).value;
+//             } catch (e) { }
+//         }
+//         return '';
+//     }
+// })
+//     .use(markdownitFootnote);
+//
+// var hashto;
 
 // function update(e) {
 //     setOutput(e.getValue());
@@ -685,33 +727,33 @@ var hashto;
 // }
 
 // function setOutput(val) {
-// val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function(a, b){
-//     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-// });
-//
-// var out = document.getElementById('resultView');
-//
-// var old = out.cloneNode(true);
-// out.innerHTML = md.render(val);
-// return md.render(val);
+    // val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function(a, b){
+    //     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
+    // });
+    //
+    // var out = document.getElementById('resultView');
+    //
+    // var old = out.cloneNode(true);
+    // out.innerHTML = md.render(val);
+    // return md.render(val);
 
-// markDownUpdate();
-// emojify.run(out);
-// codeHtml.setValue(md.render(val));
+    // markDownUpdate();
+    // emojify.run(out);
+    // codeHtml.setValue(md.render(val));
 
 
-// var allold = old.getElementsByTagName("*");
-// if (allold === undefined) return;
-//
-// var allnew = out.getElementsByTagName("*");
-// if (allnew === undefined) return;
-//
-// for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
-//     if (!allold[i].isEqualNode(allnew[i])) {
-//         out.scrollTop = allnew[i].offsetTop;
-//         return;
-//     }
-// }
+    // var allold = old.getElementsByTagName("*");
+    // if (allold === undefined) return;
+    //
+    // var allnew = out.getElementsByTagName("*");
+    // if (allnew === undefined) return;
+    //
+    // for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
+    //     if (!allold[i].isEqualNode(allnew[i])) {
+    //         out.scrollTop = allnew[i].offsetTop;
+    //         return;
+    //     }
+    // }
 // }
 
 // codeHtml.on('change', update(codeHtml.getValue()));

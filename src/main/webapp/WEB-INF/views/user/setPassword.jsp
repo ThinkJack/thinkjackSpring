@@ -1,12 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CHIC
-  Date: 2017-12-22
-  Time: 오후 1:41
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%--<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">--%>
+<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
@@ -54,19 +49,28 @@
 
 
 </script>
-<jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 
-<div class="deaf"></div>
-<div class="col-sm-4"></div>
-<div class="col-sm-4">
-<h1>TJ 비밀번호 변경</h1>
-<form name="chpass"  method="post" action="/user/setPassword" onsubmit="return chpasschk(this)">
-            <input type="hidden" name="userId" id="userId" value="${userId}" >
-    <input type = "password" class="form-control" placeholder="패스워드를 입력해주세요"  name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
-    <input type = "password" class="form-control" placeholder="패스워드를 다시 입력해주세요"  name = "chkPassword" id="chkPassword" onkeyup="checkvalue()">
-        <p style="height:20px;" id="pwsame" name="pwsame" ></p>
-    <input  class="btn btn-primary" type="submit" value="패스워드 변경"/>
-</form>
+<link href="/resources/dist/css/login.css" rel="stylesheet">
+<div  id="Password2">
+<div class="wrapper fadeInDown text-center">
+
+    <div class="card border-secondary mb-3 bd " style="max-width: 20rem;" id="formContent">
+
+        <div class="card-header" style="background-color: black">
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img style="width: 200px " src="/resources/images/password2.svg">
+                <h1 class="hn text-white">비밀번호 변경</h1>
+            </div>
+        </div>
+        <div class="card-body text-secondary" id="formFooter">
+            <form name="chpass"  method="post" action="/user/setPassword" onsubmit="return chpasschk(this)">
+                <input type="hidden" name="userId" id="userId" value="${userId}" >
+                <input type = "password" class="form-control" placeholder="패스워드를 입력해주세요"  name = "userPassword" id="userPassword" onkeyup="checkvalue()" ><br>
+                <input type = "password" class="form-control" placeholder="패스워드를 다시 입력해주세요"  name = "chkPassword" id="chkPassword" onkeyup="checkvalue()">
+                <p style="height:20px;" id="pwsame" name="pwsame" ></p>
+                <input  class="btn btn-primary" type="submit" value="패스워드 변경"/>
+            </form>
+        </div>
+    </div>
 </div>
-</body>
-</html>

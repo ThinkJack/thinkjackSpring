@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -15,31 +14,44 @@
         border: solid 1px #c3c3c3;
     }
 
+    .boardheader {
+        display: inline-block;
+    }
+
     #panel {
         padding: 50px;
         display: none;
     }
+
     #heart {
         width: 25px;
         height: 25px;
     }
 
-    .reHeart{
+    .reHeart {
 
         width: 25px;
         height: 25px;
     }
 
-    .replyheart{
+    .replyheart {
         width: 25px;
         height: 25px;
     }
+
+    .card-header.text-white {
+        /*background-color: black;*/
+    }
+    textarea{
+        width: 100%;
+    }
+
+
 </style>
 
-<div class="deaf2 container-fluid"></div>
-<div class="row  removePadding " style="background-color:#000 ">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6 borderLB  widthFull5"  style="background-color:#fff " >
+<div class="row  removePadding " style="padding-top: 100px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 cardtext-white list-group ">
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -47,83 +59,99 @@
             <input type='hidden' name='searchType' value="${cri.searchType}">
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
-        <div class="box-body">
-            <div style="text-align: right;">
-                <a class="btn btn-outline-dark heart">
+        <div class="box-body m-3">
+            <div style="float:right;">
+
+                <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
+                <a class="btn heart">
                     <img id="heart" src="">
                 </a>
             </div>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" name='title' class="form-control inputC" value="${boardVO.boardTitle}"
-                       readonly="readonly">
+
+            <div class="form-group text-white bd" style="margin-top: 10px;">
+                <label  style="font-size:1.35rem;" >Title</label>
+                <input type="text" name='title' class="form-control inputC hn" value="${boardVO.boardTitle}"
+                       readonly="readonly" />
             </div>
-            <div class="form-group">
-                <label>Content</label>
-                <textarea type="text" name='content' class="form-control inputC" rows="20"
-                          readonly="readonly">${boardVO.boardContent}</textarea>
+            <div class="form-group text-white bd">
+                <label  style="font-size:1.35rem;">Content</label>
+                <textarea type="text" name='content' class="form-control inputC hn" rows="15"
+                          readonly="readonly" style="padding-top: 20px;">${boardVO.boardContent}</textarea>
             </div>
-            <div class="form-group">
-                <label>Writer</label>
-                <input type="text" name='writer' class="form-control inputC" value="${boardVO.boardWriter}"
-                       readonly="readonly">
+            <div class="form-group text-white bd">
+                <label  style="font-size:1.35rem;" >Writer</label>
+                <div class="form-control" style="background: white">
+                    <img id='writerProfile' class="rounded photo2">
+                    <label class="hn ml-3" style="color: black;">${boardVO.boardWriter}</label>
+                </div>
+                <script>
+                    $("#writerProfile").prop("src", getFileInfo("${boardVO.boardWriterProfile}"))
+                </script>
+
             </div>
         </div>
-        <div class="box-footer">
+        <div class="box-footer m-3 ">
             <c:if test="${login.userName == boardVO.boardWriter}">
-                <button type="submit" class="btn btn-warning modifyBtn">Modify</button>
-                <button type="submit" class="btn btn-danger removeBtn">REMOVE</button>
+                <button type="submit" class="btn btn-warning modifyBtn hn">수정</button>
+                <button type="submit" class="btn btn-danger removeBtn hn">삭제</button>
             </c:if>
-            <button type="submit" class="btn btn-primary goListBtn">GO LIST</button>
+            <button type="submit" class="btn btn-primary goListBtn pull-right bd">GO LIST</button>
         </div>
     </div>
-    <div class="col-xs-3 " ></div>
+    <div class="col-md-3"></div>
 </div>
-<div class="row removePadding "  style="background-color:#000000 ">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6 removePadding " >
+<div class="row removePadding ">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 removePadding ">
         <%--댓글 등록 부분 --%>
-        <div class="row removePadding" style="background-color:#fff">
-            <div class="col-xs-12  borderRTW  removePadding " style="background-color: #000">
-                <div class="deaf2"></div>
-                <div class="commentReply borderWidth" >
+        <div class="card border-primary ">
+            <h2 class="bd m-2"> Comment</h2>
+
+            <div class="row m-3">
+                <div class="col-md-10" >
                     <%--댓글 등록하는 아이디(--%>
-                    <input type="text" name='writer' class="form-control register" value="${login.userName}"  readonly="readonly">
+                    <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
+                           readonly="readonly">
                     <%--댓글 입력 부분--%>
-                    <div class="form-group">
-                        <textarea class="form-control replyTextReply" rows="3" >댓글 입력하세요</textarea>
-                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                        <button type="button"  class="btn btn-primary addBtn" >댓글등록 </button>
+                    <div class="form-group ">
+                        <textarea class="form-control replyTextReply hn" rows="3" placeholder="댓글 입력하세요"></textarea>
                     </div>
+                </div>
+                <div class="col-md-2  removePadding ">
+                    <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                    <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록</button>
                 </div>
             </div>
         </div>
-        <%--입력된 댓글 목록 나타나는 부분--%>
-        <ul class="replies"></ul>
-        <ul class="timeline">
-            <%--버튼을 클릭하면 댓글목록이 나온다--%>
-            <li class = "time-label repliesDiv"  >
-                <%--<button type="button" class=""> Replies List </button>--%>
-                <h2> Replies List</h2>
-            </li>
-            <%--페이지네이션 부분--%>
-            <div class ='text-center'>
-                <ul id="pagination" class="pagination"></ul>
-            </div>
-        </ul>
+
+
+        <div class="row m-3">
+            <%--입력된 댓글 목록 나타나는 부분--%>
+
+            <%--<ul class="replies"></ul>--%>
+            <ul class="timeline col-md-12">
+
+                <%--버튼을 클릭하면 댓글목록이 나온다--%>
+                <li class="time-label repliesDiv">
+
+                    <%--<button type="button" class=""> Replies List </button>--%>
+                </li>
+                <%--페이지네이션 부분--%>
+                <div class='text-center mb-5'>
+                    <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
+                </div>
+            </ul>
+        </div>
+
     </div>
-
-
-    <div class="col-xs-3 widthFull4" style="background-color: black" ></div>
-
-
+    <div class="col-md-2 widthFull4"></div>
 </div>
 <%--댓글 반복문 부분--%>
 <script>
     $(document).ready(function () {
 
-        Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-            if(v1 === v2) {
+        Handlebars.registerHelper('ifCond', function (v1, v2, options) {
+            if (v1 === v2) {
                 return options.fn(this);
             }
             return options.inverse(this);
@@ -134,175 +162,159 @@
 <script class="template" type="text/x-handlebars-template">
 
     {{#each .}}
-    <li class ="replyLi" data-replyId={{replyId}}>
-        <div class="timeline-item">
+    <li class="replyLi" data-replyId={{replyId}}>
+
+        <div class="timeline-item card border-light mb-3">
             <%--댓글이 삭제되었는지 확인--%>
-            {{#if replyVo.replyState}}
+            {{#if replyVO.replyState}}
             <%-- 조건문으로 parent값 있는것을 구분한다--%>
             <%--하트 버튼(좋아요)--%>
-            {{#if replyVo.replyParent}}
+            {{#if replyVO.replyParent}}
             <%--<div class="registerReply"  >--%>
+            <div class="row removePadding registerReply card-header text-white" style="background-color:gray">
 
-            <div class="row removePadding registerReply ">
-
-                <div class="col-xs-1">
+                <div class="col-md-1" style="background-color: white;">
+                    <i class="fa fa-reply fa-rotate-180" aria-hidden="true" style="color: grey"></i>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-md-2 mt-3 mb-3">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
+                    <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
                 </div>
 
-                <div class="col-xs-8 well">
+                <div class="col-md-9 mt-3 mb-3">
                     <strong class="title ">
-                        <span class="badge">대댓글</span>
+
                         <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <%--댓글의 replyId를 받아오기 위한 부분--%>
+                        <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                         <input type="hidden" class="reParent" value="{{replyParent}}">
+                        <%--replyId와 replyWriter 나타나는 부분--%>
+                        <span class="replyWriter register hn" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
 
-                        <span class="replyWriter register timeline-header">{{replyVo.replyWriter}}</span>
-                        <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                        <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
+                        <span style="float: right" class="bd">
+                            {{#if reHeart}}
+                            <%--reHeart값이 있을떄--%>
+                            <a class="replyHeartBtn btn" name=1>
+                                <img class="reHeart" src="/resources/images/like2.png">
+                            </a>
+                            <span> {{replyVO.replyLikeCnt}}</span>
+                            {{else}}
+                            <a class="replyHeartBtn btn" name=0>
+                                <img class="reHeart" src="/resources/images/like1.png">
+                            </a>
+                            <span>{{replyVO.replyLikeCnt}}</span>
+                            {{/if}}
+                        </span>
+                        <span class="time bd" style="float: right;margin-top: 10px;">{{prettifyDate  replyVO.replyRegdate}}</span>
                     </strong>
+                </div>
+                <div class="col-md-1" style="background-color: white;">
+                </div>
+                <div class="col-md-2 mt-3 mb-3"></div>
+                <div class="col-md-7 mt-3 mb-3">
 
-                    <div class="comment">
+                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
                         <%--입력된 댓글 text부분--%>
-                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
-                        <spna class="textSpan">{{replyVo.replyText}}</spna>
+
+                        <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
+                                  style="display: none">{{replyVO.replyText}}</textarea>
+                        <spna class="textSpan ">{{replyVO.replyText}}</spna>
+
                     </div>
                 </div>
 
-                <div class="col-xs-2">
+                <div class="col-md-2">
+                    {{#ifCond loginUser replyVO.replyWriter}}
 
-                    {{#if reHeart}}
-                    <%--reHeart값이 있을떄--%>
-                    <div style="text-align: right;">
-                        <a class="replyHeartBtn btn btn-outline-dark " name=1>
-                            <img class="reHeart" src="/resources/images/like2.png">
-                        </a>
-                        <span > {{replyVo.replyLikeCnt}}</span>
-                    </div>
-                    {{else}}
-                    <div >
-                        <a class="replyHeartBtn btn btn-outline-dark " name=0>
-                            <img class="reHeart" src="/resources/images/like1.png" >
-                        </a>
-                        <span >{{replyVo.replyLikeCnt}}</span>
-                    </div>
-                    {{/if}}
+                    <button type="button" class="btn btn-warning replyModBtn hn" style="width: 90%;">수정</button>
 
-                    <%--3.날짜부분--%>
-                    <span class="time">
-                            {{prettifyDate  replyVo.replyRegdate}}</span>
+                    <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
 
-                    {{#ifCond loginUser replyVo.replyWriter}}
-
-                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
-                    <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
                     {{/ifCond}}
-                    <%--{{/if}}--%>
                 </div>
             </div>
+
             {{else}}
             <%--댓글 부분--%>
-            <div class="row removePadding registerReply ">
-
-                <div class="col-xs-1">
+            <div class="row removePadding registerReply card-header   text-white" style="background-color:#2c2c2c">
+                <div class="col-md-2 mt-3 mb-3">
                     <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="http://localhost/displayFile?fileName={{replyVo.replyProfile}}" class="Poto ">
+                    <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
                 </div>
-                <div class="col-xs-9">
+                <div class="col-md-10 mt-3 mb-3">
                     <strong class="title">
-                        <span class="badge">댓글</span>
                         <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId" style="display: none">{{replyVo.replyId}}</span>
+                        <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                         <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register">{{replyVo.replyWriter}}</span>
-                        <%--<span class="replyWriter">{{replyVo.replyWriter}}</span>--%>
+                        <span class="replyWriter register hn"  style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
+
+                        <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
+                        <span style="float: right" class="bd">
+                            {{#if reHeart}}
+                            <%--reHeart값이 있을떄--%>
+                            <a class="replyHeartBtn btn" name=1>
+                                <img class="reHeart" src="/resources/images/like2.png">
+                            </a>
+                            <span> {{replyVO.replyLikeCnt}}</span>
+                            {{else}}
+                            <a class="replyHeartBtn btn" name=0>
+                                <img class="reHeart" src="/resources/images/like1.png">
+                            </a>
+                            <span>{{replyVO.replyLikeCnt}}</span>
+                            {{/if}}
+                        </span>
+                        <span class="time bd" style="float: right;margin-top: 10px;">{{prettifyDate  replyVO.replyRegdate}}</span>
                     </strong>
-
-                    <div class="comment">
-                        <%--입력된 댓글 text부분--%>
-                        <input class="replyText form-control" readonly value="{{replyVo.replyText}}" style="display: none"></input>
-                        <spna class="textSpan">{{replyVo.replyText}}</spna>
-                    </div>
-
                 </div>
-                <div class="col-xs-2">
+                <div class="col-md-2 mt-3 mb-3">
+                </div>
+                <div class="col-md-8 mt-3 mb-3">
 
-                    {{#if reHeart}}
-                    <%--reHeart값이 있을떄--%>
-                    <div style="text-align: right;">
-                        <a class="replyHeartBtn btn btn-outline-dark " name=1>
-                            <img class="reHeart" src="/resources/images/like2.png">
-                        </a>
-                        <span > {{replyVo.replyLikeCnt}}</span>
+                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
+                        <%--입력된 댓글 text부분--%>
+                        <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
+                        <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
+                                  style="display: none">{{replyVO.replyText}}</textarea>
+                        <spna class="textSpan ">{{replyVO.replyText}}</spna>
                     </div>
-                    {{else}}
-                    <div >
-                        <a class="replyHeartBtn btn btn-outline-dark " name=0>
-                            <img class="reHeart" src="/resources/images/like1.png">
-                        </a>
-                        <span >{{replyVo.replyLikeCnt}}</span>
-                    </div>
-                    {{/if}}
+                </div>
 
-                    <%--3.날짜부분--%>
-                    <span class="time">
-                    {{prettifyDate  replyVo.replyRegdate}}</span>
 
-                    {{#ifCond loginUser replyVo.replyWriter}}
+                <div class="col-md-2">
+                    {{#ifCond loginUser replyVO.replyWriter}}
 
-                    <button type="button"  class="btn btn-warning replyModBtn" ><span class="glyphicon glyphicon-collapse-down"></span> 수정하기</button>
-                    <button type="button" class="btn btn-danger replyDelBtn" >삭제</button>
+                    <button type="button" class="btn btn-warning replyModBtn hn" style="width: 90%;"> 수정</button>
+
+                    <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
 
                     {{/ifCond}}
-                    <button type="button" class="btn btn-info demoReply" ><span class="glyphicon glyphicon-collapse-down"></span> 답글</button>
+                    <button type="button" class="btn btn-info demoReply hn" style="width: 90%;">답글</button>
                 </div>
-
                 <%--버튼 누르면 나오게 하기--%>
+            </div>
+            <div class="demo row mt-3 " name="demo" style="display: none">
 
-                <div class="demo" name="demo" style="display: none">
-
-                    <div class="col-xs-1">
-
-                    </div>
-                    <div class="col-xs-9">
-
-                        <span  class="reRegister"></span>
-                        <%--<span  class="reRegister" >${boardVO.boardWriter}</span>--%>
-                        <textarea class="form-control replyTextReply" rows="3">대댓글 입력하세요</textarea>
-                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                    </div>
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-primary addBtn">등록</button>
-                        <%--등록을 누르면 replyParent값이 1이되는 조건문이 필요--%>
-                    </div>
+                <div class="col-md-10 removePadding " style="float: left">
+                    <textarea class="form-control replyTextReply hn" rows="3">대댓글 입력하세요</textarea>
                 </div>
-
+                <div class="col-md-2 removePadding " style="float:right;">
+                    <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">등록</button>
+                </div>
             </div>
 
-            {{/if}}
-
-            {{else}}
-            <div class="row removePadding ">
-
-                <strong class="title">
-
-                    <span class="badge">댓글</span>
-                    <%--replyId와 replyWriter 나타나는 부분--%>
-                    <span class="replyWriter">{{replyVo.replyWriter}}</span>
-                </strong>
-                <div class="comment"  >
-                    <span >삭제된 댓글입니다</span>
-                </div>
-
-            </div>
-
-            {{/if}}
         </div>
+
+        {{/if}}
+
+        {{else}}
+        <div class="card border-light mb-3 ">
+            <div class="card-header hn">
+                <span>삭제된 댓글입니다</span>
+            </div>
+        </div>
+        {{/if}}
     </li>
     {{/each}}
 </script>
@@ -311,18 +323,18 @@
     $(document).ready(function () {
         //하트
         var heartval = ${heart};
-        if(heartval>0) {
-            console.log(heartval);
+        if (heartval > 0) {
+            // console.log(heartval);
             $("#heart").prop("src", "/resources/images/like2.png");
-            $(".heart").prop('name',heartval)
+            $(".heart").prop('name', heartval)
         }
         else {
-            console.log(heartval);
+            // console.log(heartval);
             $("#heart").prop("src", "/resources/images/like1.png");
-            $(".heart").prop('name',heartval)
+            $(".heart").prop('name', heartval)
         }
         var formObj = $("form[role='form']");
-        var boardid =  "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
+        var boardid = "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
 
         $(".modifyBtn").on("click", function () {
             formObj.attr("action", "/board/modify");
@@ -344,18 +356,18 @@
 
         $(".heart").on("click", function () {
             var that = $(".heart");
-            var sendData = {'boardId' : '${boardVO.boardId}','heart' : that.prop('name')};
+            var sendData = {'boardId': '${boardVO.boardId}', 'heart': that.prop('name')};
             $.ajax({
-                url :'/board/heart',
-                type :'POST',
-                data : sendData,
-                success : function(data){
-                    that.prop('name',data);
-                    if(data==1) {
-                        $('#heart').prop("src","/resources/images/like2.png");
+                url: '/board/heart',
+                type: 'POST',
+                data: sendData,
+                success: function (data) {
+                    that.prop('name', data);
+                    if (data == 1) {
+                        $('#heart').prop("src", "/resources/images/like2.png");
                     }
-                    else{
-                        $('#heart').prop("src","/resources/images/like1.png");
+                    else {
+                        $('#heart').prop("src", "/resources/images/like1.png");
                     }
                 }
             });
@@ -365,7 +377,7 @@
 </script>
 <script>
     //대댓글 id는 replyParent에서 받아오고 댓글 id=replyId값에서 받아온다
-    $(document).on("click",".addBtn", function () {
+    $(document).on("click", ".addBtn", function () {
 
         var replyParent = $(this).parent().parent().parent().find('.replyId').text();
         // console.log("reParent 값?"+replyParent);
@@ -393,7 +405,7 @@
                     alert("등록");
                     replyPage = 1;
 
-                    getPage("/replies/" + boardId + "/" +replyPage);
+                    getPage("/replies/" + boardId + "/" + replyPage);
 
                     replyTextObj.val("댓글을 등록");
                 }
@@ -404,25 +416,27 @@
 </script>
 
 <script>
-    $(document).on("click",".demoReply", function () {
-        var demo= $(this).parent().siblings('.demo');
-        console.log(demo.css('display')+'ddd');
+    $(document).on("click", ".demoReply", function () {
+        var demo = $(this).parent().parent().siblings('.demo');
+        // console.log(demo.css('display') + 'ddd');
 
-        if ( demo.css('display')=='none') {
+        if (demo.css('display') == 'none') {
             demo.css("display", 'block');
             $(this).html('<span></span> 닫기');
-        }else if(demo.css('display')=='block'){
+        } else if (demo.css('display') == 'block') {
             demo.css("display", 'none');
             $(this).html('<span></span> 답글');
-        };
+        }
+        ;
 
     });
+
 </script>
 <script>
     <%--수정 삭제--%>
-    $(document).on("click",".replyModBtn", function () {
+    $(document).on("click", ".replyModBtn", function () {
         var replyId = $(this).parent().parent().parent().find('.replyId').text();
-        console.log("reParent 값?" + replyId);
+        // console.log("reParent 값?" + replyId);
         //각각의 id값을 받아온다
         //변경된 택스트
         var replyTextObj = $(this).parent().parent().find('.replyText');
@@ -432,22 +446,22 @@
         if (replyTextObj.prop('readonly') == true) {
 
             replyTextObj.prop('readonly', false);
-            $(this).html('<span></span> 수정등록');
+            $(this).html('<span></span> 등록');
 
-            textSpan .css('display', 'none');
+            textSpan.css('display', 'none');
             replyTextObj.css('display', 'block');
 
         }
-        else if(replyTextObj.prop('readonly')== false) {
+        else if (replyTextObj.prop('readonly') == false) {
 
             replyTextObj.prop('readonly', true);
-            $(this).html('<span></span> 수정하기');
+            $(this).html('<span></span> 수정');
 
             replyTextObj.css('display', 'none');
             textSpan.css('display', 'block');
         }
 
-        console.log(replyText + "보내지는 글");
+        // console.log(replyText + "보내지는 글");
 
         $.ajax({
             type: 'put',
@@ -459,7 +473,7 @@
             data: JSON.stringify({replyText: replyText}),
             dataType: 'text',
             success: function (result) {
-                console.log("수정완료?");
+                // console.log("수정완료?");
                 if (result == 'SUCCESS') {
                     textSpan.html(replyText);
                 }
@@ -467,8 +481,8 @@
         });
     });
 
-    $(document).on("click",".replyDelBtn", function () {
-        var replyId =$(this).parent().parent().parent().find('.replyId').text();
+    $(document).on("click", ".replyDelBtn", function () {
+        var replyId = $(this).parent().parent().parent().find('.replyId').text();
         var replyTextObj = $(this).parent().parent().find('.replyText');
         var replyText = replyTextObj.val();
 
@@ -492,23 +506,25 @@
 </script>
 <script>
     <%--3.날짜부분--%>
-    Handlebars.registerHelper("prettifyDate",function(timeValue){
+    Handlebars.registerHelper("prettifyDate", function (timeValue) {
         var dateObj = new Date(timeValue);
-
         var year = dateObj.getFullYear();
-        // console.log(year+"year");
-        var month = dateObj.getMonth()+1;
+        var month = dateObj.getMonth() + 1;
         var date = dateObj.getDate();
         var hour = dateObj.getHours();
         var minute = dateObj.getMinutes();
-        var second = dateObj.getSeconds();
-        var strDate = year+"-"+month+"-"+date+" "+hour+":"+minute+":"+second;
+        var strDate = year + "-" + month + "-" + date + " " + hour + ":" + minute;
         return strDate;
     });
+    Handlebars.registerHelper('profileImg', function (replyProfile) {
+        // console.log(replyProfile);
+        return getFileInfo(replyProfile);
+    });
+
 </script>
 <script>
     <%--페이지 연결부분--%>
-    var printData = function (replyArr,target,templateObject){
+    var printData = function (replyArr, target, templateObject) {
         var template = Handlebars.compile(templateObject.html());
         // console.log(template+">>>>>");
         var html = template(replyArr);
@@ -523,18 +539,18 @@
 <script>
     /*댓글 목록 보기*/
     //해당 게시물의 번호
-    var boardId=${boardVO.boardId};
-    var replyPage=1;
+    var boardId =${boardVO.boardId};
+    var replyPage = 1;
     //댓글목록 처리
     //getPage는 특정한 게시물에 대한 페이지 처리를 위해서 호출되는 함수
-    function getPage(pageInfo){
-        $.getJSON(pageInfo,function (data) {
+    function getPage(pageInfo) {
+        $.getJSON(pageInfo, function (data) {
             // console.log(data.list.length);
             // console.log(data.reHeart.length);
             var temp = data.list;
             var temp2 = new Array(data.list.length);
-            for(var i in temp){
-                temp2[i] = {replyVo: data.list[i], reHeart: data.reHeart[i],loginUser:data.loginUser[i]};
+            for (var i in temp) {
+                temp2[i] = {replyVO: data.list[i], reHeart: data.reHeart[i], loginUser: data.loginUser[i]};
             }
 
 
@@ -544,74 +560,78 @@
             printData(temp2, $(".repliesDiv"), $('.template'));
             // printData(data.list, $(".repliesDiv"), $('.template'), data.reHeart);
 
-            printPaging(data.pageMaker ,$("#pagination"));
+            printPaging(data.pageMaker, $("#pagination"));
         });
     }
+
     //페이지 네이션 부분
-    var printPaging = function(pageMaker,target){
-        var str="";
+    var printPaging = function (pageMaker, target) {
+        var str = "";
 
-        if(pageMaker.prev){
-            str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+        if (pageMaker.prev) {
+            str += "<li class='page-item'><a class='page-link' href='" + (pageMaker.startPage - 1) + "'> << </a></li>";
         }
 
-        for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len ; i++){
-            var strClass = pageMaker.cri.page == i?'class=active':'';
-            str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
+        for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+            var strClass = pageMaker.cri.page == i ? 'class=active page-item' : '';
+            str += "<li " + strClass + "><a class='page-link' href='" + i + "'>" + i + "</a></li>";
         }
 
-        if(pageMaker.next){
-            str += "<li><a href ='"+(pageMaker.endPage+1)+"'> >> </a></li>";
+        if (pageMaker.next) {
+            str += "<li class='page-item'><a class='page-link' href ='" + (pageMaker.endPage + 1) + "'> >> </a></li>";
         }
         target.html(str);
     };
     //최초로 댓글의 1페이지가져오는작업 (repliesList)버튼 클릭하면 작동
     $(".repliesDiv").ready(function () {
 
-        if($(".timeline li").resize()>1){
+        if ($(".timeline li").resize() > 1) {
             return;
         }
-        getPage("/replies/"+boardId+"/1");
+        getPage("/replies/" + boardId + "/1");
     });
     //페이지 네이션 부분
-    $("#pagination").on("click","li a", function(event){
+    $("#pagination").on("click", "li a", function (event) {
 
         event.preventDefault();
 
         replyPage = $(this).attr("href");
 
-        getPage("/replies/"+boardId+"/"+replyPage);
+
+
+        getPage("/replies/" + boardId + "/" + replyPage);
     });
 
 
 </script>
 <script>
     <%--하트버튼을 누르면 senddata로 heart컨트롤러로 ajax로 보낸다.--%>
-    $(document).on("click",".replyHeartBtn", function () {
+
+    $(document).on("click", ".replyHeartBtn", function () {
 //  자바스크립트 객체 형태로 전달
 
         var heart_replyid = $(this).parent().parent().parent().find('.replyId').text();
-        var heart =$(this).prop('name');
-        var sendLike ={'replyId':heart_replyid,'replyHeart':heart};
+        var heart = $(this).prop('name');
+        var sendLike = {'replyId': heart_replyid, 'replyHeart': heart};
 //
-        console.log('/replies/heart/'+heart_replyid+'/'+heart);
+//         console.log('/replies/heart/' + heart_replyid + '/' + heart);
 
         $.ajax({
-            url :'/replies/heart/'+heart_replyid+'/'+heart,
-            type :'POST',
-            data :sendLike,
-            contentType:"application/json",
-            success : function(data){
+            url: '/replies/heart/' + heart_replyid + '/' + heart,
+            type: 'POST',
+            data: sendLike,
+            contentType: "application/json",
+            success: function (data) {
                 // console.log("하트 전송?"+data);
-                $(this).prop('name',data);
-                if(data==1) {
+                $(this).prop('name', data);
+                if (data == 1) {
                     // console.log("전송되어온 하트"+data);
-                    $(this).children().prop("src","/resources/images/like2.png");
+                    $(this).children().prop("src", "/resources/images/like2.png");
                     getPage("/replies/" + boardId + "/" + replyPage);
                 }
-                else{
+                else {
                     // console.log("전송되어온 하트값 0일때"+data);
-                    $(this).children().prop("src","/resources/images/like1.png");
+                    $(this).children().prop("src", "/resources/images/like1.png");
                     getPage("/replies/" + boardId + "/" + replyPage);
                 }
             }

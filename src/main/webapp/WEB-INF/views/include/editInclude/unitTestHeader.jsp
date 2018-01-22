@@ -5,13 +5,13 @@
   Time: 오후 5:06
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- header 메뉴바 -->s
+<nav class="navbar  navbar-expand-lg navbar-light bg-light fixed-top">
 
-<!-- header 메뉴바 -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top">
-
-    <a class="navbar-brand" href="#"><img src="/resources/images/logo.png" style="width:30px;"></a>
+    <a class="navbar-brand" href="/"><img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,15 +23,15 @@
             <li class="nav-item active">
                 <!--href="" 는 현재 패이지 reload해줌 -->
                 <div class="page_title_view" id="page-title-view">
-                    <a class="page_title">
+                    <a class="page_title text-dark">
                         <span id="src-title"><c:out value="${SrcVO.srcTitle}" default="Untitled" /></span>
                     </a>
-                    <img class="pencil" id="pencil" src="/resources/images/pencil.png">
+                    <i class="fa fa-paint-brush" style="color: black"></i>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
                     <input type="text" name="page-title" id="src-title-input" value=""/>
                 </div>
-                <div class="row"><span style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer">
+                <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer">
                     <c:out value="${SrcVO.srcWriter}" default="CAPTAIN ANONYMOUS"/></span></div>
             </li>
             <li class="nav-item">
@@ -40,26 +40,26 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active run" id="run">
                 <div>
-                    <a class="btn btn-outline-dark" href="javascript:;">
+                    <a class="btn btn-primary" href="javascript:;">
                         <img src="/resources/images/reload.png"> Run
                     </a>`
                 </div>
             </li>
             <li class="nav-item active">
                 <div>
-                    <a class="btn btn-outline-dark" href="javascript:;" data-toggle="modal" data-target="#setting">
-                        <img src="/resources/images/setting.png"> Setting
+                    <a class="btn btn-primary" href="javascript:;" data-toggle="modal" data-target="#setting">
+                        <i class="fa fa-cog"></i> Setting
                     </a>
                 </div>
             </li>
             <%--<c:if test="${sessionScope.userVO eq null}">--%>
                 <li class="nav-item active login">
-                    <a class="btn btn-outline-dark" href="/user/login" >
+                    <a class="btn btn-primary" href="/user/login" >
                         Login
                     </a>
                 </li>
                 <li class="nav-item active sign_in">
-                    <a class="btn btn-outline-dark" href="/user/register">
+                    <a class="btn btn-primary" href="/user/register">
                         Sign in
                     </a>
                 </li>

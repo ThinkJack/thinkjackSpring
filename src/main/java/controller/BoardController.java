@@ -29,7 +29,6 @@ public class BoardController {
     public void registerGET(BoardVO board, Model model,
                             @ModelAttribute("category") String category) throws Exception {
 
-        logger.info("register GET ...........");
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -86,7 +85,6 @@ public class BoardController {
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
     public void modify(int boardId, Model model,
                        @ModelAttribute("category") String category) throws Exception {
-        System.out.println(boardId + "get");
         model.addAttribute(service.readBoard(boardId, category));
 
     }
@@ -94,8 +92,6 @@ public class BoardController {
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modifyPOST(BoardVO board, RedirectAttributes rttr,
                              @ModelAttribute("category") String category) throws Exception {
-
-        System.out.println(board + "Post");
 
         service.updateBoard(board, category);
 
@@ -109,7 +105,6 @@ public class BoardController {
                          @ModelAttribute("category") String category) throws Exception {
         service.deleteBoard(boardId, category);
 
-        System.out.println(category);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 

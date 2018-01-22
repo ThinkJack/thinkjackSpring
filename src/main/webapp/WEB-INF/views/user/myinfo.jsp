@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 <%--
   Created by IntelliJ IDEA.
   User: kwak
@@ -8,50 +9,100 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<head>
-    <title>myInfo</title>
-</head>
-<jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
-<div role="tabpanel" class="tab-pane fade active in" id="Account_information" aria-labelledby="home-tab">
-    <p style="text-align: left">사용자 프로필</p>
-    <div class="big-area">
-        <img id="profile" align="left" class="small-unit" style="width:200px;height:200px;" src=""
-             alt="Profile image example"/>
-        <div class="small-unit">
-            <h4>"${login.userName}"<p style="color:black;">님 반가워요</p></h4>
-            <br>
-            <p style="color:black;">${login.userEmail}</p><br>
-            <button class="btn btn-default" onclick="location.href='/user/modifyUser'">정보변경</button>
-            <br>
-            <button class="btn btn-default" onclick="location.href='/user/setPassAuthCheck'">패스워드 변경</button>
+
+<style>
+    /*body {*/
+    /*font-family: Arial;*/
+    /*}*/
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<div id="Account_information" class="tabcontent card mb-3 active">
+
+    <section class="grid-1 big-area " style="margin-left: 5%;width:100%;">
+
+        <div class="panel panel-title">
+            <h1 class="bd">MyProfile</h1>
+            <p>사용자 프로필을 수정하세요</p>
         </div>
-        <div class="small-unit"></div>
-        <div class="small-unit"></div>
-    </div>
 
-    <div class="big-area">
-        <div class="small-unit"></div>
-        <div class="small-unit"></div>
-        <div class="small-unit"></div>
-        <div class="small-unit"></div>
-    </div>
+
+        <div class="panel panel-8" style="background-color:orange">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="panel panel-7 ">
+                        <p class="hn" style="font-size: 30px">"${login.userName}"님 반가워요~</p>
+                    </div>
+                </div>
+                <div class="col-6 mb-2 " style="padding-left: 60px">
+                    <img id="profile" align="left" class="small-unit rounded-circle"
+                         style="width:12rem;height:12rem;" src="" alt="Profile image example">
+                </div>
+                <div class="col-6">
+                    <p  class=" mt-3 bd " style="font-size: 30px">Email:<a class="ml-3" style="font-size:20px">${login.userEmail}</a></p>
+                    <p  class=" mt-1 bd" style="font-size: 30px">Name:<a class="hn ml-3" style="font-size:20px">${login.userName}</a></p>
+
+                    <button class="btn btn-primary text-white" onclick="location.href='/user/modifyUser'">정보변경
+                    </button>
+                    <button class="btn btn-primary  text-white"
+                            onclick="location.href='/user/setPassAuthCheck'">패스워드 변경
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            $(".Account_information").addClass(" active");
+
+            $("#profile").attr("src", getFileInfo("${login.userProfile}"));
+        });
+    </script>
+</div>
+
 </div>
 </div>
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 
-<script src="/resources/dist/js/upload.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".Account_information").addClass(" active");
-        var imgtest;
-        var fullName = "${login.userProfile}";
-        if (fullName !== "") {
-            imgtest = getFileInfo(fullName);
-            console.log(imgtest);
-            str = imgtest;
-        } else {
-            str = "/resources/images/123.gif";
-        }
-        $("#profile").attr("src", str);
-    });
-</script>
+

@@ -19,35 +19,47 @@ public class UploadFileUtils {
 
 
     public static String uploadFile(String uploadPath, String originalName,byte[] fileData, String userId)throws Exception{
+        //S3 서버 관련 설정
+        S3Util s3 = new S3Util();
+        String bucketName = "thinkjackbucket";
+
         //UserVo 필요
         UUID uid = UUID.randomUUID();
 
-
+        //savedName : 570d570a-7af1-4afe-8ed5-391d660084b7_g.JPG 같은 형식으로 만들어준다.
         String savedName = uid.toString() +"_"+originalName;
 
-        String savedPath = calcPath(uploadPath,userId);
+        String imagepath = "profile/"+ uploadPath;
 
-        File target =new File(uploadPath +savedPath,savedName);
+        String savedPath = calcPath(imagepath,userId);
 
-        FileCopyUtils.copy(fileData,target);
+        //File target =new File(imagepath +savedPath,savedName);
+
+        //FileCopyUtils.copy(fileData,target);
 
         String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 
-        String uploadedFileName =null;
+        String uploadedFileName =(savedPath+savedName).replace(File.separatorChar, '/');
 
-        if(MediaUtils.getMediaType(formatName) !=null){
-            makeThumbnail(uploadPath,savedPath,savedName);
-                  String testupload=  savedPath+"/"+savedName;
-            uploadedFileName = testupload.replace('\\','/');
-                 // System.out.println("testupload: "+testupload);
-                 // System.out.println("testupload:replce "+testupload.replace('\\','/'));
-                  //System.out.println("thumbFile:"+uploadedFileName);
-                   // makeThumbnail(uploadPath,saveedPath,saveedName);
+//        if(MediaUtils.getMediaType(formatName) !=null){
+//            makeThumbnail(uploadPath,savedPath,savedName);
+//                  String testupload=  savedPath+"/"+savedName;
+//            uploadedFileName = testupload.replace('\\','/');
+//                 // System.out.println("testupload: "+testupload);
+//                 // System.out.println("testupload:replce "+testupload.replace('\\','/'));
+//                  //System.out.println("thumbFile:"+uploadedFileName);
+//                   // makeThumbnail(uploadPath,saveedPath,saveedName);
+//
+//        }else{
+//            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
+//        }
+        //System.out.println(uploadPath+uploadedFileName);
+        //S3Util 의 fileUpload 메서드로 파일을 업로드한다.
+        s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);
+        //makeThumbnail(uploadPath+uploadedFileName,savedPath,savedName);
 
-        }else{
-            uploadedFileName = makeIcon(uploadPath,savedPath,savedName);
-        }
-
+        //System.out.println(uploadedFileName);
+//	s3.fileUpload(bucketName, new File(fileName))
         return uploadedFileName;
 
     }
@@ -61,9 +73,13 @@ public class UploadFileUtils {
 
     private static  String calcPath(String uploadPath, String userId){
         Calendar cal =Calendar.getInstance();
-        String profilePath = "/"+userId;
+        String profilePath = "/profile/"+userId+"/";
 
-        makeDir(uploadPath, profilePath);
+        S3Util s3 = new S3Util();
+        String bucketName = "thinkjackbucket";
+
+        //s3.createFolder(bucketName,profilePath);
+        //makeDir(uploadPath, profilePath);
 
 //
 //        String  yearPath = File.separator+cal.get(Calendar.YEAR);
@@ -119,5 +135,12 @@ public class UploadFileUtils {
                 uploadPath.length()).replace(File.separatorChar,'/');
 
 
+    }
+
+    public static void srcUploadFile(String uploadPath, byte[] fileData)throws Exception{
+        //S3 서버 관련 설정
+        S3Util s3 = new S3Util();
+        String bucketName = "thinkjackbucket";
+        s3.fileUpload(bucketName, uploadPath, fileData);
     }
 }

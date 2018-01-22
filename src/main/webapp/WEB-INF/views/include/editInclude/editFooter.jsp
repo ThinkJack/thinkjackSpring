@@ -8,22 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <footer class="footer">
-    <nav class="navbar navbar-expand">
+    <nav class="navbar navbar-expand mp " >
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" id="console-button">
+                <a class="btn btn-secondary btn-sm bd modi" href="javascript:;" id="console-button">
                     Console
                 </a>
             </li>
             <c:if test="${SrcVO.srcId ne null}">
                 <li class="nav-item active">
-                    <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#reply-modal" id="reply-modal-bt">
+                    <a class="btn btn-secondary btn-sm bd modi" href="javascript:;" data-toggle="modal" data-target="#reply-modal" id="reply-modal-bt">
                         Reply
                     </a>
                 </li>
             </c:if>
             <li class="nav-item active">
-                <a class="btn btn-outline-secondary btn-sm" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
+                <a class="btn btn-secondary btn-sm bd modi" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts
                 </a>
             </li>

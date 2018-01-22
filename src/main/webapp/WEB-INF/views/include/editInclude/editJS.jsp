@@ -12,6 +12,7 @@
 <!-- script 단 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
 <!-- codemirror 기본 -->
 <script src="/resources/codemirror/lib/codemirror.js"></script>
 <!--edit-->
@@ -102,6 +103,6 @@
 <script src="/resources/dist/js/editPage/jquery.jscroll.js"></script>
 
 <script src="//d1l6p2sc9645hc.cloudfront.net/tracker.js" data-gs="GSN-265185-D" async></script>
-<script src="/resources/upload.js"></script>
+<script src="/resources/dist/js/upload.js"></script>
 
 

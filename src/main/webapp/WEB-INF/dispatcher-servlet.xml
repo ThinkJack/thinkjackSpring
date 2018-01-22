@@ -24,24 +24,53 @@
 
 
     <bean id="authInterceptor" class="interceptor.AuthInterceptor"></bean>
-    
+
     <bean id="loginInterceptor" class="interceptor.LoginInterceptor"></bean>
 
-    <bean id="editPageInterceptor" class="interceptor.EditPageInterceptor"></bean>
+    <bean id="DestInterceptor" class="interceptor.DestInterceptor"></bean>
 
     <bean id="naverLoginBo" class="naver.NaverLoginBo"></bean>
 
     <bean id="githubLoginBo" class="github.GithubLoginBo"></bean>
-	<beans:interceptors>
-		<beans:interceptor>
-			<beans:mapping path="/user/loginPost"/>
-			<ref bean="loginInterceptor"/>
-		</beans:interceptor>
+    <beans:interceptors>
+        <beans:interceptor>
+            <beans:mapping path="/user/loginPost"/>
+            <ref bean="loginInterceptor"/>
+        </beans:interceptor>
+
+        <!-- Dest 관련 인터셉터-->
+        <beans:interceptor>
+            <beans:mapping path="/**"/>
+            <beans:exclude-mapping path="/resources/**" />
+            <beans:exclude-mapping path="/user/loginPost" />
+            <beans:exclude-mapping path="/user/socialLoginPost" />
+            <beans:exclude-mapping path="/user/login" />
+            <beans:exclude-mapping path="/user/callback" />
+            <beans:exclude-mapping path="/user/setPassAuthCheck" />
+            <beans:exclude-mapping path="/user/modifyAuthCheck" />
+            <beans:exclude-mapping path="/user//naverLogin" />
+            <beans:exclude-mapping path="/user/googleLogin" />
+            <beans:exclude-mapping path="/user/githubLogin" />
+            <beans:exclude-mapping path="/user/githubcallback" />
+            <beans:exclude-mapping path="/user/emailConfirm" />
+            <beans:exclude-mapping path="/user/findPasswordConfirm" />
+            <beans:exclude-mapping path="/user/logout" />
+            <beans:exclude-mapping path="/user/register" />
+            <beans:exclude-mapping path="/srcReply/**" />
+            <beans:exclude-mapping path="/replies/**" />
+            <beans:exclude-mapping path="/displayFile" />
+            <ref bean="DestInterceptor"/>
+        </beans:interceptor>
+
+
 
         <beans:interceptor>
             <beans:mapping path="/board/*"/>
             <beans:mapping path="/user/modifyUser"/>
             <beans:mapping path="/user/delete"/>
+            <beans:mapping path="/user/myinfo"/>
+            <beans:mapping path="/user/MyBoard"/>
+            <beans:mapping path="/user/MySourceCode"/>
             <ref bean="authInterceptor"/>
         </beans:interceptor>
 
@@ -52,25 +81,20 @@
             <property name="useCacheControlHeader" value="true"/>
             <property name="useCacheControlNoStore" value="true"/>
         </bean>
-        <!--<beans:interceptor>-->
-            <!--<beans:mapping path="/edit/editPage"/>-->
-            <!--&lt;!&ndash;<beans:mapping path="/edit/editPage/*"/>&ndash;&gt;-->
-            <!--<ref bean="editPageInterceptor"/>-->
-        <!--</beans:interceptor>-->
+    </beans:interceptors>
 
-	</beans:interceptors>
+
 
     <!--파일 업로드 관련 설정 -->
     <bean id="multipartResolver"
-                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value ="10485760"></property>
     </bean>
     <!-- 파일 저장 관련 설정 -->
     <bean id="uploadPath" class="java.lang.String">
-        <constructor-arg value="c:\\zzz\\profile"></constructor-arg>
+        <constructor-arg value="thinkjack"></constructor-arg>
     </bean>
 </beans>
 
-    
-       
-    
+
+

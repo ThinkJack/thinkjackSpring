@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 import persistence.SrcDAO;
 import persistence.UserDAO;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -23,10 +25,10 @@ public class SrcServiceImpl implements SrcService {
     @Inject
     private UserDAO userdao;
 
+    SrcFileSet sfs = new SrcFileSet();
     @Override
     public Map readSrc(HttpServletRequest request) throws Exception {
 
-        SrcFileSet srcFileSet = new SrcFileSet();
         Map map = new HashMap();
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
@@ -66,16 +68,16 @@ public class SrcServiceImpl implements SrcService {
 
             }
 //            System.out.println(vo.getSrcPath() + "/html.txt");
-            vo.setSrcHtml(srcFileSet.readCodeSet(vo.getSrcPath() + "/html.txt"));
-            vo.setSrcCss(srcFileSet.readCodeSet(vo.getSrcPath() + "/css.txt"));
-            vo.setSrcJavaScript(srcFileSet.readCodeSet(vo.getSrcPath() + "/js.txt"));
+            vo.setSrcHtml(sfs.readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(sfs.readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(sfs.readCodeSet(vo.getSrcPath() + "/js.txt"));
 
             //cdn setting
             vo.setCdnCss(new ArrayList<String>
-                    (Arrays.asList(srcFileSet.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
                             .split(","))));
             vo.setCdnJs(new ArrayList<String>
-                    (Arrays.asList(srcFileSet.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
                             .split(","))));
 
             //사진경로 가져오기
@@ -95,8 +97,6 @@ public class SrcServiceImpl implements SrcService {
 
     @Override
     public String saveSrc(HttpServletRequest request, SrcVO vo) throws Exception {
-
-        SrcFileSet srcFileSet = new SrcFileSet();
         String srcId = vo.getSrcId();   //램덤하게 생성되는 id값
         boolean srcEmpty = false;
         String filePath;
@@ -118,30 +118,25 @@ public class SrcServiceImpl implements SrcService {
             srcEmpty = true;
 
             do {
-                srcId = srcFileSet.randomSrcId();
+                srcId = sfs.randomSrcId();
             } while (srcdao.selectSrcOne(srcId) != null);
         }
         System.out.println(srcId);
         //SrcFile 생성
-        filePath = "./srcCodeDir/" + srcId;
-        File fileDir = new File(filePath);
+        filePath = "thinkjack/srcCodeDir/" + srcId;
+
         try {
-            // 파일 경로 dir 생성
-            if (!fileDir.exists()) {
-                fileDir.mkdirs();
-                System.out.println("파일 디렉토리 생성");
-            }
             // true 지정시 파일의 기존 내용에 이어서 작성
-            srcFileSet.fileWriter(filePath + "/html.txt", vo.getSrcHtml());
-            srcFileSet.fileWriter(filePath + "/css.txt", vo.getSrcCss());
-            srcFileSet.fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
+            sfs.fileWriter(filePath + "/html.txt", vo.getSrcHtml());
+            sfs.fileWriter(filePath + "/css.txt", vo.getSrcCss());
+            sfs.fileWriter(filePath + "/js.txt", vo.getSrcJavaScript());
 
             List cdnCssList = vo.getCdnCss();
             List cdnJsList = vo.getCdnJs();
-            cdn = srcFileSet.cdnSet(cdnCssList);
-            srcFileSet.fileWriter(filePath + "/cdnCss.txt",cdn);
-            cdn = srcFileSet.cdnSet(cdnJsList);
-            srcFileSet.fileWriter(filePath + "/cdnJS.txt",cdn);
+            cdn = sfs.cdnSet(cdnCssList);
+            sfs.fileWriter(filePath + "/cdnCss.txt",cdn);
+            cdn = sfs.cdnSet(cdnJsList);
+            sfs.fileWriter(filePath + "/cdnJs.txt",cdn);
 
             // 파일안에 문자열 쓰기
             vo.setSrcPath(filePath);
@@ -206,21 +201,20 @@ public class SrcServiceImpl implements SrcService {
 //            //키워드에서 user검색시 name값 처리해서 id 가져오는 로직 추가필요
 //
 //        }
-        SrcFileSet srcFileSet = new SrcFileSet();
+
         List list = srcdao.selectSrcList(cri);
 
         for (int i = 0; i < list.size(); i++) {
             SrcVO vo = (SrcVO) list.get(i);
-
-            vo.setSrcHtml(srcFileSet.readCodeSet(vo.getSrcPath() + "/html.txt"));
-            vo.setSrcCss(srcFileSet.readCodeSet(vo.getSrcPath() + "/css.txt"));
-            vo.setSrcJavaScript(srcFileSet.readCodeSet(vo.getSrcPath() + "/js.txt"));
+            vo.setSrcHtml(sfs.readCodeSet(vo.getSrcPath() + "/html.txt"));
+            vo.setSrcCss(sfs.readCodeSet(vo.getSrcPath() + "/css.txt"));
+            vo.setSrcJavaScript(sfs.readCodeSet(vo.getSrcPath() + "/js.txt"));
             //cdn setting
             vo.setCdnCss(new ArrayList<String>
-                    (Arrays.asList(srcFileSet.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnCss.txt")
                             .split(","))));
             vo.setCdnJs(new ArrayList<String>
-                    (Arrays.asList(srcFileSet.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
+                    (Arrays.asList(sfs.readCodeSet(vo.getSrcPath() + "/cdnJs.txt")
                             .split(","))));
             list.set(i, vo);
         }
@@ -232,9 +226,5 @@ public class SrcServiceImpl implements SrcService {
     public int srcListSearchCount(SearchCriteria cri) throws Exception {
         return srcdao.srcListSearchCount(cri);
     }
-
-
-    ///////////////////////////////////////////////////////////////////////////////
-    //codeFile 읽어오는 작업
 
 }

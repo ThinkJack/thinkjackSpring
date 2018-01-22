@@ -6,28 +6,18 @@ function checkImageType(fileName) {
 }
 
 function getFileInfo(fullName) {
-
-    var fileName, imgsrc, getLink;
-
-    var fileLink;
-
-    if(checkImageType(fullName)){
-        imgsrc = "http://" + document.location.host + "/displayFile?fileName="+fullName;
-        fileLink = fullName.substr(14);
-
-        var front = fullName.substr(0,12); ///2015/00/00/
-        var end = fullName.substr(14);
-
-        getLink = "/displayFile?fileName="+front+end;
-    }else{
-        imgsrc="/resource/dist/img/file.png";
-        fileLink=fullName.substr(12);
-        getLink="/displayFile?fileName="+fullName;
+    try {
+        var imgsrc = "http://" + document.location.host;
+        if (checkImageType(fullName)) {
+            imgsrc = imgsrc + "/displayFile?fileName=" + fullName;
+        } else {
+            imgsrc ="/resources/images/123.gif";
+        }
+    }catch (Exception){
+        imgsrc = "/resources/images/123.gif";
     }
-    fileName= fullName.substr(fileLink.indexOf("_")+1);
-
-    //return {fileName:fileName,imgsrc:imgsrc,getLink:getLink,fullName:fullName}
     return imgsrc;
+
 }
 
 function filePathChange(path, thumbnail) {

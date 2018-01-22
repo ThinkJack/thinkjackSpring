@@ -19,7 +19,6 @@ import common.JsonStringParse;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.social.connect.Connection;
 
 import org.springframework.social.google.api.Google;
@@ -33,7 +32,6 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import dto.LoginDTO;
@@ -44,11 +42,9 @@ import org.springframework.web.util.WebUtils;
 import service.SrcService;
 import service.UserService;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
-import java.util.UUID;
 
 
 @Controller
@@ -153,7 +149,7 @@ public class UserController {
 			service.findPassword(user);
 			rttr.addFlashAttribute("msg" , "이메일 인증 후 비밀번호를 변경해 주세요");
 		}
-        return "redirect:/main";
+        return "redirect:/";
     }
     //비밀번호 찾기 이메일 인증 코드 검증
     @RequestMapping(value = "/findPasswordConfirm", method = RequestMethod.GET)
@@ -163,7 +159,7 @@ public class UserController {
         //System.out.println("controller 서비스에서 받은: "+vo);
 		if(vo == null) {
 			rttr.addFlashAttribute("msg" , "비정상적인 접근 입니다. 다시 인증해 주세요");
-			return "redirect:/main";
+			return "redirect:/";
 		}
 		int id=vo.getUserId();
         rttr.addFlashAttribute("setPassword",true);
@@ -213,7 +209,7 @@ public class UserController {
 		}catch (Exception e){
 			rttr.addFlashAttribute("msg" , "오류가 발생했습니다. 관리자에게 문의 주세요");
 		}
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -227,8 +223,22 @@ public class UserController {
 		UserVO vo = service.login(dto);
 		//System.out.println("usercontroller vo =" +vo);
 		if(vo == null) {
+			rttr.addFlashAttribute("msg" , "아이디 또는 비밀번호가 일치하지 않습니다.");
+			System.out.println("아이디 비밀번호 실패");
+			model.addAttribute("userVO",vo);
+			return;
+		}else if(vo.getUserState()==0){
+			rttr.addFlashAttribute("msg" , "인증 대기 중인 아이디 입니다.\n 메일에 접속해 인증해주세요");
+			System.out.println("인증대기");
+			model.addAttribute("userVO",vo);
+			return;
+		}else if(vo.getUserState()==2){
+			rttr.addFlashAttribute("msg" , "탈퇴된 회원입니다. \n 관리자에게 문의해주세요");
+			System.out.println("탈퇴");
+			model.addAttribute("userVO",vo);
 			return;
 		}
+
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
 		//rttr.addFlashAttribute("msg","로그인 되었습니다.");
@@ -239,7 +249,7 @@ public class UserController {
 	@RequestMapping(value = "/loginPost", method = RequestMethod.GET)
 	public void loginPOSTGet(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		//바로 login
-    	session.setAttribute("dest","/main");
+    	session.setAttribute("dest","/");
 	}
 
 	@RequestMapping(value = "/socialLoginPost", method = RequestMethod.GET)
@@ -268,7 +278,7 @@ public class UserController {
 
 			}
 		}
-		return "/main";
+		return "redirect:/";
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
@@ -351,6 +361,10 @@ public class UserController {
         String test=user.getUserProfile();
         //user 정보 저장
 		String userId= user.getUserId()+"";
+
+		String imagedefualt=user.getUserProfile();
+		System.out.println(imagedefualt);
+		String defualtprofile ="basic";
 		//file 업로드 여부 확인
 		if(!file.isEmpty()) {
             String uploadedFileName = UploadFileUtils.uploadFile(uploadPath,
@@ -360,10 +374,19 @@ public class UserController {
          //   System.out.println("파일 업로드 완료");
             user.setUserProfile(uploadedFileName);
         }else{
-			//프로필 업로드 하지 않을 때 원래 정보를 저장
-            UserVO vot =(UserVO) session.getAttribute("login");
-            user.setUserProfile(vot.getUserProfile());
+			System.out.println("imagedefualt: "+imagedefualt);
+			if(imagedefualt.equals("basic")){
+				user.setUserProfile(null);
+				System.out.println("basic"+user.getUserProfile());
+			}else {
+
+				//프로필 업로드 하지 않을 때 원래 정보를 저장
+				UserVO vot = (UserVO) session.getAttribute("login");
+				user.setUserProfile(vot.getUserProfile());
+				System.out.println("no basic"+user.getUserProfile());
+			}
 		    }
+
 
     	UserVO vo=service.modifyUser(user);
 
@@ -371,7 +394,7 @@ public class UserController {
 		session.setAttribute("login",vo);
 		//model.addAttribute("login",vo);
 		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
-		return "redirect:/main";
+		return "redirect:/";
 	}
 
 	//유저 탈퇴
@@ -441,7 +464,7 @@ public class UserController {
 		TempKey TK = new TempKey();
 
 
-		dto.setUserEmail("naver");
+		dto.setUserEmail("naver"+"#"+TK.generateNumber(6));
 		dto.setUserSocialId("n"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
 
@@ -541,7 +564,7 @@ public class UserController {
 		TempKey TK = new TempKey();
 
        // System.out.println(person.getDisplayName());
-        dto.setUserEmail("google");
+        dto.setUserEmail("google"+"#"+TK.generateNumber(6));
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
@@ -641,7 +664,7 @@ public class UserController {
 		LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
-		dto.setUserEmail("github");
+		dto.setUserEmail("github"+"#"+TK.generateNumber(6));
 		dto.setUserSocialId("git"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
 
@@ -676,4 +699,6 @@ public class UserController {
 		model.addAttribute("userVO",vo);
 		return new ModelAndView("redirect:/user/socialLoginPost", "result", vo);
 	}
+
+
 }
