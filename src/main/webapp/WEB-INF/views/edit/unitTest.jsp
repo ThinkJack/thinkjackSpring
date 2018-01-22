@@ -203,7 +203,12 @@
         try {
             var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
             $("#resultView").append(
-                "<div class='resultLog'> [ input : " + input + " / output : " + output + " / result : " + inputResult + " ] " + (inputResult === output ? "성공" : "실패") + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
+                "<div class='resultLog'> [ input : " + input
+                + " / output : " + output
+                + " / result : " + inputResult + " ] "
+                + (inputResult === output ? "성공" : "실패")
+                + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)"
+                + "</div>");
 
         } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>");
@@ -255,7 +260,9 @@
         var startTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
         testCase.trigger("click");
-        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
+        $("#resultView").append("<div class='resultLog'> "
+            + "모든 케이스를 모두 완료했습니다. (소요시간  : "
+            + (getTimeStamp() - startTime) + "ms)" + "</div>");
 
     });
     $(document).ready(function () {
