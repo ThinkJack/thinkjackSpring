@@ -10,8 +10,8 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
-        .resultLog{
-            color:#EFEFEF;
+        .resultLog {
+            color: #EFEFEF;
         }
 
         .col-6, .col-12 {
@@ -29,8 +29,8 @@
         }
 
         .right_view {
-            height: calc(100% - 48px);
-            overflow: scroll;
+            height: calc(100% - 50px);
+            overflow: auto;
         }
 
         .input_box {
@@ -40,8 +40,8 @@
         /*.console_body{}*/
         .whole {
             height: 100%;
-            padding-top: 70px;
-            padding-bottom: 47px;
+            padding-top: 78px;
+            padding-bottom: 50px;
         }
 
         .right {
@@ -50,7 +50,7 @@
 
         #codeUnitTest {
             height: 100%;
-            padding-bottom: 44px;
+            padding-bottom: 40px;
         }
 
         #frameUnitTest {
@@ -74,7 +74,7 @@
 <jsp:include page="../include/editInclude/unitTestHeader.jsp" flush="false"/>
 
 <div class="col-12 row justify-contents-center whole">
-    <div class="col-6 row justify-content-between" >
+    <div class="col-6 row justify-content-between">
         <div class="col-6 row justify-content-start modi4">
             <p class="h4 text-white code-name bd">JS</p>
         </div>
@@ -95,7 +95,8 @@
                 </div>
                 <div class="col-8 row justify-content-end my-1 ">
                     <select id="functions" class="mx-1 modi3"><
-                        <option>------</option></select>
+                        <option>------</option>
+                    </select>
                     <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
                     <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
                     <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
@@ -136,11 +137,12 @@
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
     var out = frame.contentDocument || frame.contentWindow.document;
-    var count;var functions;
+    var count;
+    var functions;
     codeUnitTest.on("change", function () {
         count = 0;
         var javascroptCode = codeUnitTest.getValue();
-        if($("#autoremove").prop("checked"))
+        if ($("#autoremove").prop("checked"))
             $("#test-case").empty();
 
 
@@ -148,35 +150,41 @@
             out.open();
             out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
             out.close();
-        }catch (err){
+        } catch (err) {
             // console.log(err);
         }
 
 
-        var pos =0;
+        var pos = 0;
         functions = new Array();
         while (pos !== -1) {
             count++;
             functioncode = javascroptCode.substring(pos);
-            functions.push(functioncode.substring(functioncode.indexOf('function')+8,functioncode.indexOf('(')));
-            pos = javascroptCode.indexOf('function', pos + 1 );
+            functions.push(functioncode.substring(functioncode.indexOf('function') + 8, functioncode.indexOf('(')));
+            pos = javascroptCode.indexOf('function', pos + 1);
         }
 
         $("#functions").empty();
-        $("#functions").append("<option>"+"------"+"</option>");
-        for(var i = 0; i < count ; i++)
-            $("#functions").append("<option>"+functions[i]+"</option>");
+        $("#functions").append("<option>" + "------" + "</option>");
+        for (var i = 0; i < count; i++)
+            $("#functions").append("<option>" + functions[i] + "</option>");
 
     });
+
+    codeUnitTest.setValue(
+        "function test1(){\n" +
+        "   return 0;\n" +
+        "}");
+
     $(document).on("click", "#add-test-case", function () {
-        if($('#functions').val() === "------") {
+        if ($('#functions').val() === "------") {
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
 
-        var funcationLength = frame.contentWindow.eval($('#functions').val()+".length");
+        var funcationLength = frame.contentWindow.eval($('#functions').val() + ".length");
         var inputbox = "";
-        for(var i = 0 ; i < funcationLength ; i++)
+        for (var i = 0; i < funcationLength; i++)
             inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
             "<div class='row case m-2'>" +
@@ -192,13 +200,12 @@
 
     function codeTest(input, output) {
         var startTime = getTimeStamp();
-        try{
-            var inputResult = frame.contentWindow.eval($('#functions').val()+"("+input+")");
-
+        try {
+            var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
             $("#resultView").append(
-                "<div class='resultLog'> [ input : "+ input + " / output : " + output + " ] " + (inputResult === output ? "성공" : "실패") +"( 경과시간 : "+ (getTimeStamp() - startTime)+ "ms)"+"</div>");
+                "<div class='resultLog'> [ input : " + input + " / output : " + output + " / result : " + inputResult + " ] " + (inputResult === output ? "성공" : "실패") + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
 
-        }catch(err){
+        } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>");
         }
     }
@@ -209,12 +216,22 @@
 
     $(document).on("click", ".test_one", function () {
         var inputs = $(this).parent().find(".inputs");
-        var testArguments = inputs[0].value;
-        for (var i = 1; i < inputs.length; i++) {
-            testArguments += ","+inputs[i+1].value;
+        var testArguments = "";
+
+        for (var i = 0; i < inputs.length; i++) {
+            if (isNaN(inputs[i].value * 1))
+                testArguments += "\"" + inputs[i].value + "\"";
+            else
+                testArguments += inputs[i].value;
+            if (inputs.length - 1 !== i)
+                testArguments += ",";
         }
         var outputs = $(this).parent().find(".output");
-        var output = outputs[0].value;
+        var output;
+        if (isNaN(outputs[0].value * 1))
+         output = outputs[0].value;
+        else
+            output = outputs[0].value * 1;
 
         codeTest(testArguments, output);
 
@@ -238,21 +255,20 @@
         var startTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
         testCase.trigger("click");
-        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp()-startTime) + "ms)"+"</div>");
+        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
 
     });
     $(document).ready(function () {
-        $("#test-case").bind('DOMNodeInserted',function () {
+        $("#test-case").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
 
         });
 
-        $("#resultView").bind('DOMNodeInserted',function () {
+        $("#resultView").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
 
         });
     });
-
 
 
 </script>
