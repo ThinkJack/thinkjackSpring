@@ -37,54 +37,47 @@
     <h1 class="bd " style="margin-left:10%; font-size: 4em;" >Service</h1>
 </div>
 <section class="b container-fluid removePadding">
-    <div class="row removePadding">
-        <div class="col-sm-2 removePadding">
-        </div>
-        <div class="col-sm-8 removePadding" >
-            <div class="row removePadding">
-                <div class="col-sm-6 removePadding borderLB " style="height:20%;margin-right: 50% ;margin-bottom: -11px;">
 
-                    <li class="tip"> <button class="btn btn-primary btn-lg btn-block bd pointerC"
-                                             style="margin-left:39%;width:70%;border:8pt solid #fff;height: 80px;margin-bottom: 10px;position:relative;top:60px;font-size: 28px" onclick="location.href='/edit/unitTest'">Unit Test</button>
-                        <strong class="tooltipB">Unit Test Play
-                            <%--<video width="320" height="176" controls autoplay>--%>
-                                <%--<source src="/resources/test.mp4" type="video/mp4">--%>
-                            <%--</video>--%>
-                            <iframe width="420" height="345"
-                                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
-                            </iframe>
-                            <a href="#">Unit Test</a>
-                        </strong>
-                    </li>
+    <div class="grid ">
 
-                </div>
-                <script>
-                    $(document).ready(function () {
-                        // var vid = document.getElementById("myVideo");
-                        //
-                        // $('.pointerC').mouseenter(function (){
-                        //     vid.autoplay = true;
-                        //     vid.load();
-                        //     console.log("sss")
-                        // });
-                    });
-                </script>
-                <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
-                <div class="col-sm-4 removePadding borderRB " style="height:40%;">
-                    <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
-                    <li class="tip">  <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height: 80px;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.href='/edit/editPage'">Edit</button>
-                        <strong class="tooltipA">Add images in the tooltip. <a href="http://codecanyon.net/item/portfolio-premium-wp-plugin/154612">
-                            <img class="ref" src="/resources/images/logo.png" height="150" width="150" alt="" /></a><a href="#"> You can even add links!</a></strong></li>
-                </div>
-                <div class=" removePadding borderRT " style="height:24%;width:13.33%;margin-top:139.781px; "></div>
-                <div class="col-sm-12 removePadding borderR " style="height:42%;">
-                </div>
+        <!--Left side-->
+        <div id="west" class=" column effect-hover ">
+            <div class="content pointAA">
+                <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'"></i>
+                <h2>Go <span >Edit Test</span></h2>
             </div>
         </div>
-        <div class="col-sm-2 removePadding"> </div>
+
+        <!--Right side-->
+
+        <div id="east" class="column effect-hover">
+            <div class="content pointBB">
+                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'"></i>
+                <h2>Go <span class="tip">Unit Test</span></h2>
+            </div>
+        </div>
+        <div class="pointA col-6 " >
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+            </iframe>
+        </div>
+
     </div>
+
 </section>
 
+<script type="text/javascript">
+    $(function(){
+        $('.pointAA').mouseenter(function(){
+            $('.pointA').css("opacity",1);
+            $('#east').css("display","none");
+        });
+        $('.pointAA').mouseleave(function(){
+            $('.pointA').css("opacity",0);
+            $('#east').css("display","block");
+        });
+    });
+</script>
 
 <div class="deaf" style="background-color:white">
     <h1 class="bd " style="margin-left: 78%; font-size: 4em;" >Board</h1>
@@ -123,7 +116,7 @@
                     <li>Lorem ipsum dolor</li>
                     <li>Set amet consecuter</li>
                 </ul>
-               <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
             </div>
         </div>
 
@@ -235,9 +228,9 @@
         if($(this).scrollTop() >=1300) $el.addClass('shown');
         else $el.removeClass('shown');
 
-        });
+    });
 
-        //sectionD
+    //sectionD
     $('.box').click(function() {
         $(this).toggleClass('selected');
 
