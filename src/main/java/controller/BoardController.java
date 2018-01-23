@@ -97,11 +97,8 @@ public class BoardController {
                              @ModelAttribute("category") String category,
                              HttpServletRequest httpRequest) throws Exception {
 
-        System.out.println(board.getBoardId());
-
         service.updateBoard(board, category);
         String msg = "SUCCESS";
-
 
         rttr.addFlashAttribute("msg", msg);
 
