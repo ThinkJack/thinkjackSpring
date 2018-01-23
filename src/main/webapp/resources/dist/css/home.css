@@ -1,31 +1,14 @@
-/*고정폭 만들기*/
-/*.container-fluid {*/
-/*width: 970px;*/
-/*max-width: none !important;*/
-/*min-width: 500px;*/
-/*}*/
 
-/*font*/
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 @import url(https://fonts.googleapis.com/css?family=Baloo+Da);
-@import url(https://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 @import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 .bd{
     font-family: 'Baloo Da', cursive;
 }
-.np { font-family: 'Nanum Pen Script', serif; }
 
-/*.form-control {*/
-/*border-radius: 0;*/
-/*}*/
 .hn{
     font-family: 'Hanna', serif;
 }
-
-/*.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {*/
-/*background-color: #fff;*/
-/*!*opacity: 1;*!*/
-/*}*/
 
 .row{
     margin-right: 0px;
@@ -42,28 +25,19 @@
 /*body부분*/
 .deaf{
     /*height: 180px;*/
+
     height: 80px;
 }
 
 .deaf2{
     height: 100px;
+
 }
 
 textarea{
     resize: none;
 }
 .selector {word-break:break-all;}
-
-
-/*section b 버튼 크기*/
-
-/*.bBtn{*/
-/*width: 86%;*/
-/*height: 95px;*/
-/*margin-left: 75px;*/
-/*position: relative;*/
-/*top: 10px;*/
-/*}*/
 
 .so{
     overflow-x: auto;
@@ -121,14 +95,13 @@ section.a{
     background-color: #00c4ff;
     background-position: bottom;
     background-size:contain;
-    height:80%;
+
 
 
 }
 section.b{
     background-image: url("/resources/images/main/mainB.png");
     background-color: #000;
-    height:70%;
     background-attachment: fixed;
     background-size:contain;
 
@@ -142,41 +115,13 @@ section.c{
     /*background-attachment:fixed;*/
     background-position: bottom;
     background-size:contain;
-    height:50%;
+
 }
 
 
-
-section.d{
-
-    /*background-image: url("/resources/images/main/mainD.png");*/
-    /*background-color:#da7908;*/
-    background-color: orange;
-    height:40%;
-}
 
 .di{display: inline-block}
 
-/*.e{*/
-/*background-image: url("/resources/images/main/mainA.png");*/
-/*background-size:contain;*/
-
-/*!*width:100%;*!*/
-
-/*background-repeat:no-repeat;*/
-/**/
-
-/*@media (min-width: 510px) and (max-width: 1300px) {*/
-/*!*section {*!*/
-/*!*background-size: 98% 476px;*!*/
-/*!*}*!*/
-/*section.a {*/
-/*height: 80%;*/
-/*}*/
-/*.animated img {*/
-/*height: 150px;*/
-/*}*/
-/*}*/
 
 .scroll-down {
     opacity: 1;
@@ -358,11 +303,7 @@ section.d{
 #updateicon{
     border: 10px solid #fff;
 }
-/*페이지 네이션*/
-/*.pagination>li:last-child>a, .pagination>li:last-child>span {*/
-    /*border-radius: 0px;*/
 
-/*}*/
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
