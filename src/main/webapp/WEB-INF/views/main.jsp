@@ -40,27 +40,41 @@
 
     <div class="grid ">
 
-        <!--Left side-->
-        <div id="west" class=" column effect-hover ">
-            <div class="content pointAA">
-                <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'"></i>
-                <h2>Go <span >Edit Test</span></h2>
-            </div>
-        </div>
-
-        <!--Right side-->
-
-        <div id="east" class="column effect-hover">
-            <div class="content pointBB">
-                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'"></i>
-                <h2>Go <span class="tip">Unit Test</span></h2>
-            </div>
-        </div>
-        <div class="pointA col-6 " >
+        <div class="pointB col-6 " style="display: none">
             <iframe width="100%" height="100%"
                     src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
             </iframe>
         </div>
+
+        <!--Left side-->
+        <div id="west" class=" column effect-hover ">
+            <div class="content ">
+                <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'">
+                    <br><p>Click</p>
+                </i>
+                <h2>Go <span >Edit Test</span></h2>
+            </div>
+        </div>
+
+
+        <!--Right side-->
+
+        <div id="east" class="column effect-hover">
+
+            <div class="content">
+                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'">
+                    <br> <p>Click</p>
+                </i>
+                <h2>Go <span class="tip">Unit Test</span></h2>
+            </div>
+
+        </div>
+        <div class="pointA col-6 " style="display: none" >
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+            </iframe>
+        </div>
+
 
     </div>
 
@@ -68,16 +82,35 @@
 
 <script type="text/javascript">
     $(function(){
-        $('.pointAA').mouseenter(function(){
-            $('.pointA').css("opacity",1);
+        $('#west').mouseenter(function(){
+
+            $('.pointA').css("display","block");
             $('#east').css("display","none");
+
         });
-        $('.pointAA').mouseleave(function(){
-            $('.pointA').css("opacity",0);
+        $('#west').mouseleave(function(){
+            $('.pointA').css("display","none");
             $('#east').css("display","block");
+
         });
     });
 </script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#east').mouseenter(function(){
+
+            $('.pointB').css("display","block");
+            $('#west').css("display","none");
+
+        });
+        $('#east').mouseleave(function(){
+            $('.pointB').css("display","none");
+            $('#west').css("display","block");
+        });
+    });
+</script>
+
 
 <div class="deaf" style="background-color:white">
     <h1 class="bd " style="margin-left: 78%; font-size: 4em;" >Board</h1>
@@ -98,11 +131,8 @@
 
             </div>
         </div>
-    </div>
-</section>
-<section class="d container-fluid removePadding " id="board" >
 
-    <div class="row removePadding">
+
         <div class="col-sm-2 removePadding"></div>
         <div class=" col-sm-2 ">
             <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=notice'">Notice</button>
@@ -116,7 +146,7 @@
                     <li>Lorem ipsum dolor</li>
                     <li>Set amet consecuter</li>
                 </ul>
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+
             </div>
         </div>
 
@@ -135,7 +165,6 @@
                     <li>Set amet consecuter</li>
                 </ul>
 
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
             </div>
 
         </div>
@@ -155,7 +184,7 @@
                     <li>Set amet consecuter</li>
                 </ul>
 
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+
             </div>
         </div>
 
@@ -172,11 +201,15 @@
                     <li>Set amet consecuter</li>
                 </ul>
 
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
+
             </div>
         </div>
+
     </div>
 </section>
+
+
+
 <div class="deaf" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
@@ -205,13 +238,13 @@
     $(window).scroll(function() {
         var el = $('.ani1');
 
-        if($(this).scrollTop() >=1300) el.addClass('animated slideInRight');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInRight');
         else el.removeClass('animated slideInRight');
     });
     $(window).scroll(function() {
         var el = $('.ani2');
 
-        if($(this).scrollTop() >=1300) el.addClass('animated slideInLeft');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInLeft');
         else el.removeClass('animated slideInLeft');
     });
 
@@ -225,7 +258,7 @@
     $(window).scroll(function() {
         var $el = $('.show-on-scroll');
 
-        if($(this).scrollTop() >=1300) $el.addClass('shown');
+        if($(this).scrollTop() >=1700) $el.addClass('shown');
         else $el.removeClass('shown');
 
     });
