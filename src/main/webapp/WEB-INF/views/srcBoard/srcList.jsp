@@ -79,6 +79,8 @@
     function likeImgChange(elId, num) {
         $(elId).attr("src", imgPath + "like" + num + ".png");
     }
+
+
 </script>
 <div class="deaf2"></div>
 <div class="container-fluid removePadding text-center">
@@ -109,7 +111,7 @@
                             </option>
                             <option value="tw"
                                     <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                                Title OR Content
+                                Title OR Writer
                             </option>
 
                         </select>
@@ -283,6 +285,12 @@
                         + '&searchType='
                         + $('select option:selected').val()
                         + '&keyword=' + encodeURIComponent($('#keywordInput').val());
+                });
+
+                $("#keywordInput").keydown(function (e) {
+                    if (e.keyCode === 13) {
+                        $("#search-btn").click();
+                    }
                 });
             });
         </script>

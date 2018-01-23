@@ -3,7 +3,7 @@
 var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 
     mode: "htmlmixed",
-    profile: 'xhtml',
+    profile: "xhtml",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
@@ -90,8 +90,6 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     wordWrap: true,
     autoCloseBrackets: true,
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-
-    lineWrapping: true,           //Folding
     extraKeys: {
         "Ctrl-Space": "autocomplete",
         "Ctrl-Q": function (cm) {
@@ -167,7 +165,7 @@ var ExcludedIntelliSenseTriggerKeys =
 var delay;
 var srcReplyCnt;
 
-var saveStatus = true //저장 유도관련 변수
+var saveStatus = true; //저장 유도관련 변수
 var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
 var imgPath = "/resources/images/";
 //---------console관련 변수

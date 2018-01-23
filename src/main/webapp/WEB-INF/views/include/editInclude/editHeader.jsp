@@ -14,13 +14,10 @@
 
     <a class="navbar-brand" href="/">  <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto page_info">
-            <li class="nav-item active">
+    <div>
+    <%--<div class="collapse navbar-collapse" id="navbarsExampleDefault">--%>
+        <%--<ul class="navbar-nav mr-auto page_info">--%>
+            <%--<li class="nav-item active">--%>
                 <!--href="" 는 현재 패이지 reload해줌 -->
                 <div class="page_title_view" id="page-title-view">
                     <a class="page_title text-dark" >
@@ -37,10 +34,17 @@
                     <input type="text" name="page-title" id="src-title-input" value=""/>
                 </div>
                 <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer" style="color:#000000;"></span></div>
-            </li>
-            <li class="nav-item">
-            </li>
-        </ul>
+            <%--</li>--%>
+            <%--<li class="nav-item">--%>
+            <%--</li>--%>
+        <%--</ul>--%>
+    </div>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item active run" id="run">
                 <div>
@@ -107,11 +111,4 @@
             </c:if>
         </ul>
     </div>
-    <br>
-    <div>
-        <!--autoFormatSelection & commentSelection-->
-        <%--<input type="button" onclick="autoFormatSelection()" value="autoFormatSelection">--%>
-        <%--<input type="button" onclick="commentSelection(true)" value="commentSelection">--%>
-    </div>
-
 </nav>
