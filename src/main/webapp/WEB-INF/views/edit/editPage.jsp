@@ -165,6 +165,10 @@
         $("#user-img").attr("src", filePathChange("${SrcVO.srcWriterImgPath}"));
         </c:if>
 
+        <c:if test="${login ne null}">
+            $("#profileHeader").attr("src",filePathChange("${login.userProfile}"));
+        </c:if>
+
         <c:if test="${param.reply eq 'show'}">
         if($("#reply-modal") !== null){
             $("#reply-modal-bt").trigger('click');
