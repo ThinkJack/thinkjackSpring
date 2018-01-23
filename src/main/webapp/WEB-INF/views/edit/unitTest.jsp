@@ -162,7 +162,7 @@
         while (pos !== -1) {
             count++;
             javascriptCode = javascriptCode.substring(pos);
-            functions.push(functioncode.substring(functioncode.indexOf('function') + 8, functioncode.indexOf('(')));
+            functions.push(javascriptCode.substring(javascriptCode.indexOf('function') + 8, javascriptCode.indexOf('(')));
             pos = javascriptCode.indexOf('function', pos + 1);
         }
 
