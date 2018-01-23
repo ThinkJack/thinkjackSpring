@@ -79,14 +79,15 @@
     function likeImgChange(elId, num) {
         $(elId).attr("src", imgPath + "like" + num + ".png");
     }
-
-
 </script>
 <div class="deaf2"></div>
 <div class="container-fluid removePadding text-center">
     <div class="row">
-        <div class="col-sm-2 removePadding"></div>
-        <div class="col-sm-8 removePadding" >
+        <div class="col-sm-3 removePadding"></div>
+        <div class="col-sm-6 removePadding" >
+            <label class="control-label">
+                <h1 class="bd" id="titleList" style="text-align: center;">코드 게시판</h1>
+            </label>
             <div class="deaf2 ">
                 <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
             </div>

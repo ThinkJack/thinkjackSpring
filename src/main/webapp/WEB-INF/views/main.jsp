@@ -51,7 +51,7 @@
             <div class="content ">
                 <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'">
                 </i>
-                <h2>Go <span >Edit Test</span></h2>
+                <h2>Go <span >Edit</span></h2>
             </div>
         </div>
 
