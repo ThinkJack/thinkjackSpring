@@ -59,6 +59,8 @@
             <beans:exclude-mapping path="/srcReply/**" />
             <beans:exclude-mapping path="/replies/**" />
             <beans:exclude-mapping path="/displayFile" />
+            <beans:exclude-mapping path="/common/error/**" />
+
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 
