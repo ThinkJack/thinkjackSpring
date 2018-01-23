@@ -143,7 +143,7 @@
     var functions;
     codeUnitTest.on("change", function () {
         count = 0;
-        var javascroptCode = codeUnitTest.getValue();
+        var javascriptCode = codeUnitTest.getValue();
         if ($("#autoremove").prop("checked"))
             $("#test-case").empty();
 
@@ -161,9 +161,9 @@
         functions = new Array();
         while (pos !== -1) {
             count++;
-            functioncode = javascroptCode.substring(pos);
+            javascriptCode = javascriptCode.substring(pos);
             functions.push(functioncode.substring(functioncode.indexOf('function') + 8, functioncode.indexOf('(')));
-            pos = javascroptCode.indexOf('function', pos + 1);
+            pos = javascriptCode.indexOf('function', pos + 1);
         }
 
         $("#functions").empty();
@@ -184,15 +184,15 @@
             return;
         }
 
-        var funcationLength = frame.contentWindow.eval($('#functions').val() + ".length");
+        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length");
         var inputbox = "";
-        for (var i = 0; i < funcationLength; i++)
+        for (var i = 0; i < functionLength; i++)
             inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
             "<div class='row case m-2 text-white'>" +
             "<span class='input-group-addon'>input : </span>" +
             inputbox +
-            "<span  class='input-group-addon'>ouput : </span>" +
+            "<span  class='input-group-addon'>output : </span>" +
             "<input type='text' class='form-control input_box output' />" +
             "<button class='btn btn-outline-info test_one'>TEST</button>" +
             "<button class='btn btn-outline-danger delete_case'>DELETE</button>" +
