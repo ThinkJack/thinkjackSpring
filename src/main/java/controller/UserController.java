@@ -361,7 +361,14 @@ public class UserController {
         String test=user.getUserProfile();
         //user 정보 저장
 		String userId= user.getUserId()+"";
+		String ssuserId =session.getId()+"";
+		if(!userId.equals(ssuserId)){
+			rttr.addFlashAttribute("msg","비정상적인 접근입니다. 경고");
+			System.out.println("uid 다름");
+			return "redirect:/user/modifyAuthCheck";
+		}
 
+		if(userId.equals(ssuserId)){
 		String imagedefualt=user.getUserProfile();
 		System.out.println(imagedefualt);
 		String defualtprofile ="basic";
@@ -394,6 +401,7 @@ public class UserController {
 		session.setAttribute("login",vo);
 		//model.addAttribute("login",vo);
 		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
+		}
 		return "redirect:/";
 	}
 

@@ -33,7 +33,7 @@
 
 
                     <input type="text" class="form-control" id="userEmail" name="userEmail" value="${login.userEmail}" readonly autofocus>
-                    <input type="text" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" autofocus >
+                    <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" autofocus >
                     <input type="submit" class="form-control btn btn-primary" value="로그인"/>
 
                 </form>
