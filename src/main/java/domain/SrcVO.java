@@ -1,5 +1,6 @@
 package domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class SrcVO {
     private Date srcRegdate;
     private Date srcUpdate;
     private String srcTitle;
-//  private int recnt; // **소스게시글 댓글의 수
+    //  private int recnt; // **소스게시글 댓글의 수
     private int srclikeCli;
     private int srcLikecnt;
     private int srcViewcnt;
@@ -122,16 +123,24 @@ public class SrcVO {
         this.srcComments = srcComments;
     }
 
-    public Date getSrcRegdate() {
-        return srcRegdate;
+    public String getSrcRegdate() {
+        if (srcRegdate != null) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(srcRegdate);
+        } else {
+            return "";
+        }
     }
 
     public void setSrcRegdate(Date srcRegdate) {
         this.srcRegdate = srcRegdate;
     }
 
-    public Date getSrcUpdate() {
-        return srcUpdate;
+    public String getSrcUpdate() {
+        if (srcUpdate != null) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(srcUpdate);
+        } else {
+            return "";
+        }
     }
 
     public void setSrcUpdate(Date srcUpdate) {
