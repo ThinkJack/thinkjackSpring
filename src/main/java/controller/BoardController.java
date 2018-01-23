@@ -97,15 +97,11 @@ public class BoardController {
                              @ModelAttribute("category") String category,
                              HttpServletRequest httpRequest) throws Exception {
 
-        String userName = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserName();
+        System.out.println(board.getBoardId());
 
-        String msg= "잘못된 접근입니다.";
+        service.updateBoard(board, category);
+        String msg = "SUCCESS";
 
-        if (board.getBoardWriter().equals(userName)) {
-            service.updateBoard(board, category);
-            msg = "SUCCESS";
-
-        }
 
         rttr.addFlashAttribute("msg", msg);
 
