@@ -33,7 +33,7 @@
     </div>
     <div class="col-sm-2 removePadding "> </div>
 </section>
-<div  id="editor">
+<div >
     <h1 class="bd " style="margin-left:10%; font-size: 4em;" >Service</h1>
 </div>
 <section class="b container-fluid removePadding">
@@ -50,7 +50,6 @@
         <div id="west" class=" column effect-hover ">
             <div class="content ">
                 <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'">
-                    <br><p>Click</p>
                 </i>
                 <h2>Go <span >Edit Test</span></h2>
             </div>
@@ -63,7 +62,6 @@
 
             <div class="content">
                 <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'">
-                    <br> <p>Click</p>
                 </i>
                 <h2>Go <span class="tip">Unit Test</span></h2>
             </div>
@@ -110,107 +108,93 @@
         });
     });
 </script>
-
-
-<div class="deaf" style="background-color:white">
-    <h1 class="bd " style="margin-left: 78%; font-size: 4em;" >Board</h1>
+<div style="background-color:white">
+    <h1 class="bd " style="margin-left:70%; font-size: 4em;" >Board</h1>
 </div>
-
 
 <section class="c container-fluid removePadding">
     <div class="row removePadding" >
-        <div class="col-sm-3 " >
-
-        </div>
+        <div class="col-sm-3 " ></div>
         <div class="col-sm-9 removePadding lampContainer ">
             <div class="lamp-container " style="display:inline-block">
                 <div class="lamp show-on-scroll">
                     <h1 class="bd ani1" style=" font-size: 4em;" >Masterpiece </h1>
                     <h1 class="bd ml-5 ani2" style=" font-size: 4em;" >Masterpiece </h1>
                 </div>
-
             </div>
         </div>
 
 
-        <div class="col-sm-2 removePadding"></div>
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=notice'">Notice</button>
-            <div class="col-sm-12 box first">
-                <span class="icon-cont"><i class="fa fa-rocket"></i>
+        <div class=" col-sm-2"></div>
+
+        <div class=" col-sm-2 box">
+            <h2 class="hn text-white text-center">공지사항</h2>
+            <span class="icon-cont"><i class="fa fa-rocket"></i>
+
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
+            <ul class="hidden">
+                <h6 class="text-center hn">새로운 공지사항을 확인하세요</h6>
+                <li >
+                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=notice'">Go</button>
+                </li>
 
-            </div>
+
+
+            </ul>
+
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/srcBoard/srcList'">소스 게시판</button>
 
-            <div class="col-sm-12 box second">
-                <span class="icon-cont"><i class="fa fa-edit"></i>
+        <div class="col-sm-2 box">
+            <h2 class="hn text-white text-center">코드 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-edit"></i>
                       <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
-
-            </div>
+            <ul class="hidden">
+                <h6 class="text-center hn">자신의 코드를 올려보세요</h6>
+                <li >
+                    <button type="button " class="btn  btn-primary hn alignCenter" onclick="location.href='/srcBoard/srcList'">Go</button>
+                </li>
+            </ul>
 
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=free'">자유 게시판</button>
-            <div class=" col-sm-12 box third">
-                <span class="icon-cont"><i class="fa fa-desktop"></i>
+
+        <div class="col-sm-2 box">
+            <h2 class="hn text-white text-center">자유 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-desktop"></i>
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
+            <ul class="hidden">
+                <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
+                <li >
+                <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
+                </li>
+            </ul>
 
-
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
-
-
-            </div>
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=qna'">질문 게시판</button>
-            <div class="col-sm-12 box fourth">
-                <span class="icon-cont"><i class="fa fa-coffee"></i>
-                 <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
+        <div class="col-sm-2 box ">
+            <h2 class="hn text-white text-center">질문 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-coffee"></i>
+                 <h1 class="bd text-white  " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
+            <ul class="hidden ">
+                <h6 class="text-center hn">질문하세요</h6>
+                <li >
+                    <button type="button" class="btn  btn-primary hn alignCenter " onclick="location.href='/board/list?category=qna'">Go </button>
+                </li>
+            </ul>
 
-
-            </div>
         </div>
-
     </div>
+
 </section>
 
 
 
-<div class="deaf" style="background-color: orange"></div>
+<div class="deaf2" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
     $(function() {

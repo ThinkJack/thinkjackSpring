@@ -121,7 +121,7 @@ size:auto;
     text-indent: 14px;
     margin: 25px;
     margin-top: 380px;
-    list-style-type: disc;
+    /*list-style-type: disc;*/
 }
 .box ul.hidden {
     opacity: 0;
@@ -198,10 +198,13 @@ size:auto;
 }
 .box.selected ul.hidden {
     opacity: 1;
-    margin-top: 95px;
+    /*margin-top: 95px;*/
+    margin: auto;
+    margin-top: 70px;
+    padding: 0;
 }
 
-/**/
+
 
 
 /* Layout */
@@ -345,7 +348,7 @@ size:auto;
 
 .effect-hover p,
 .effect-hover h3{
-    opacity: 0;
+    opacity: 1;
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
     transition: opacity 0.35s, transform 0.35s;
 }
@@ -358,7 +361,7 @@ size:auto;
 
 
 .effect-hover:hover h2 {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform:  scale3d(0.8,0.8,1);
     transform: scale3d(0.8,0.8,1);
 }
@@ -495,6 +498,7 @@ size:auto;
     transform: scaleX(1);
 }
 
+.alignCenter {width: 400px; position: absolute; left: 50%; margin-left: -200px;
 
-
+    }
 

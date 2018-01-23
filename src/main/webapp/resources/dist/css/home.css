@@ -1,31 +1,14 @@
-/*고정폭 만들기*/
-/*.container-fluid {*/
-/*width: 970px;*/
-/*max-width: none !important;*/
-/*min-width: 500px;*/
-/*}*/
 
-/*font*/
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 @import url(https://fonts.googleapis.com/css?family=Baloo+Da);
-@import url(https://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 @import url(https://fonts.googleapis.com/earlyaccess/hanna.css);
 .bd{
     font-family: 'Baloo Da', cursive;
 }
-.np { font-family: 'Nanum Pen Script', serif; }
 
-/*.form-control {*/
-/*border-radius: 0;*/
-/*}*/
 .hn{
     font-family: 'Hanna', serif;
 }
-
-/*.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {*/
-/*background-color: #fff;*/
-/*!*opacity: 1;*!*/
-/*}*/
 
 .row{
     margin-right: 0px;
@@ -42,28 +25,19 @@
 /*body부분*/
 .deaf{
     /*height: 180px;*/
+
     height: 80px;
 }
 
 .deaf2{
     height: 100px;
+
 }
 
 textarea{
     resize: none;
 }
 .selector {word-break:break-all;}
-
-
-/*section b 버튼 크기*/
-
-/*.bBtn{*/
-/*width: 86%;*/
-/*height: 95px;*/
-/*margin-left: 75px;*/
-/*position: relative;*/
-/*top: 10px;*/
-/*}*/
 
 .so{
     overflow-x: auto;
@@ -148,26 +122,6 @@ section.c{
 
 .di{display: inline-block}
 
-/*.e{*/
-/*background-image: url("/resources/images/main/mainA.png");*/
-/*background-size:contain;*/
-
-/*!*width:100%;*!*/
-
-/*background-repeat:no-repeat;*/
-/**/
-
-/*@media (min-width: 510px) and (max-width: 1300px) {*/
-/*!*section {*!*/
-/*!*background-size: 98% 476px;*!*/
-/*!*}*!*/
-/*section.a {*/
-/*height: 80%;*/
-/*}*/
-/*.animated img {*/
-/*height: 150px;*/
-/*}*/
-/*}*/
 
 .scroll-down {
     opacity: 1;
@@ -349,11 +303,7 @@ section.c{
 #updateicon{
     border: 10px solid #fff;
 }
-/*페이지 네이션*/
-/*.pagination>li:last-child>a, .pagination>li:last-child>span {*/
-    /*border-radius: 0px;*/
 
-/*}*/
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 3;
