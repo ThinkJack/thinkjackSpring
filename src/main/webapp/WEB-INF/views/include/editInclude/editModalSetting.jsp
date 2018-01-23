@@ -52,7 +52,7 @@
                                 <label>Code Title</label>
                                 <div>
                                     <label class="form-check-label setting_info">
-                                        <input class="form-control" type="text" id="src-title-modal">
+                                        <input class="form-control" type="text" id="src-title-modal" maxlength="50">
                                     </label>
                                 </div>
                             </div>
