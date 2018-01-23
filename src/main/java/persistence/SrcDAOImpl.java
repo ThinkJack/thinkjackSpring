@@ -24,6 +24,11 @@ public class SrcDAOImpl implements SrcDAO {
 
     @Override
     public void insertSrc(SrcVO vo) {
+//        if(vo.getSrcWriter() != 0){
+//            sqlSession.insert(srcMapper + ".insertSrcWriter", vo);
+//        }else{
+//            sqlSession.insert(srcMapper + ".insertSrcWriterX", vo);
+//        }
         sqlSession.insert(srcMapper + ".insertSrc", vo);
     }
 

@@ -138,7 +138,7 @@
                             </div>
 
                                 <%--<div class="card-body" style="overflow: auto">--%>
-                            <div  style="overflow-y:scroll; width:100%; height:20%;">
+                            <div  style="overflow-y:scroll; width:100%; height:45px;">
                                     <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
                                 <h5 class="hn mb-0"   id="src-title1" data>${srcVo.srcTitle}</h5>
                                 <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>

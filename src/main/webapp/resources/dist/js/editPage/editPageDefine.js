@@ -25,7 +25,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
@@ -460,9 +460,9 @@ function getSelectedRange1() {
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
-function getSelectedRange3() {
-    return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
-}
+// function getSelectedRange3() {
+//     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+// }
 
 //--shift+tab
 function autoFormatSelection() {
@@ -472,9 +472,10 @@ function autoFormatSelection() {
     codeCss.autoFormatRange(range1.from, range1.to);
     var range2 = getSelectedRange2();
     codeJavaScript.autoFormatRange(range2.from, range2.to);
-    var range3 = getSelectedRange2();
-    codeUnitTest.autoFormatRange(range3.from, range3.to);
+    // var range3 = getSelectedRange3();
+    // codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
+
 //--ctrl+/
 // function commentSelection(isComment) {
 //     var range = getSelectedRange();

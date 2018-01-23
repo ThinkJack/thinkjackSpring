@@ -575,7 +575,9 @@ $(function () {
 
     //댓글등록 회원권한
     replyPage = 1;
-    getPage("/srcReply/" + srcId + "/" + replyPage);
+    if(srcId !== ""){
+        getPage("/srcReply/" + srcId + "/" + replyPage);
+    }
 
 
     if (userId == "") {

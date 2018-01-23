@@ -17,6 +17,15 @@
         <if test="srcWriter != 0">#{srcWriter},</if>
         #{srcComments}, #{srcTitle}, #{srcStatus})
     </insert>
+    <!--<insert id="insertSrcWriterX">-->
+        <!--insert into tbl_src (src_id, src_path, src_comments, src_title, src_status)-->
+        <!--values(#{srcId}, #{srcPath}, #{srcComments}, #{srcTitle}, #{srcStatus})-->
+    <!--</insert>-->
+
+    <!--<insert id="insertSrcWriter">-->
+        <!--insert into tbl_src (src_id, src_path, src_writer, src_comments, src_title, src_status)-->
+        <!--values(#{srcId}, #{srcPath}, #{srcWriter}, #{srcComments}, #{srcTitle}, #{srcStatus})-->
+    <!--</insert>-->
 
     <select id="selectSrcOne" resultType="SrcVO">
         SELECT
