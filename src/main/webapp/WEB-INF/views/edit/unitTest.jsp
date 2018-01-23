@@ -10,18 +10,20 @@
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 
     <style>
-        .resultLog {
-            color: #EFEFEF;
+        .mx-1 {
+            height: 28px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .input-group-addon{
+            font-size: 20px;
+            line-height: 2;
         }
 
         .col-6, .col-12 {
             padding-right: 0px;
             padding-left: 0px;
-        }
-
-        intext {
-            color: #FFFFFF;
-
         }
 
         .err {
@@ -31,7 +33,7 @@
         .right_view {
             height: calc(100% - 50px);
             overflow: auto;
-        }
+    }
 
         .input_box {
             width: 80px;
@@ -75,11 +77,11 @@
 
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6 row justify-content-between">
-        <div class="col-6 row justify-content-start modi4">
+        <div class="col-6 row justify-content-start">
             <p class="h4 text-white code-name bd">JS</p>
         </div>
-        <div class="col-6 row justify-content-end modi4">
-            <div class="custom-control custom-checkbox">
+        <div class="col-6 row justify-content-end">
+            <div class="custom-control custom-checkbox mx-1">
                 <input type="checkbox" class="custom-control-input" id="autoremove" checked="">
                 <label class="custom-control-label text-white" for="autoremove">테스트 케이스 자동 삭제</label>
             </div>
@@ -90,16 +92,16 @@
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-4 row justify-content-start modi4">
+                <div class="col-4 row justify-content-start">
                     <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
                 <div class="col-8 row justify-content-end my-1 ">
-                    <select id="functions" class="mx-1 modi3"><
+                    <select id="functions" class="mx-1"><
                         <option>------</option>
                     </select>
-                    <button id="delete-all" class="unit-header btn btn-outline-dark mx-1 modi3">Clear</button>
-                    <button id="add-test-case" class="unit-header  btn btn-outline-dark mx-1 modi3">AddTestCase</button>
-                    <button id="test-all" class="unit-header  btn btn-outline-dark mx-1 modi3">TestAll</button>
+                    <button id="delete-all" class="btn btn-outline-danger mx-1">DELETE ALL</button>
+                    <button id="add-test-case" class="btn btn-outline-info mx-1">AddTestCase</button>
+                    <button id="test-all" class="btn btn-outline-success mx-1">TestAll</button>
                 </div>
             </div>
             <div class="right_view" id="test-case"></div>
@@ -110,7 +112,7 @@
                     <p class="h4 text-white code-name bd ">Result</p>
                 </div>
                 <div class="col-6 row justify-content-end my-1 ">
-                    <button id="clear-result-view" class="unit-header btn btn-outline-dark mx-1 modi3">Clear
+                    <button id="clear-result-view" class="btn btn-outline-danger mx-1">Clear
                     </button>
                 </div>
             </div>
@@ -141,7 +143,7 @@
     var functions;
     codeUnitTest.on("change", function () {
         count = 0;
-        var javascroptCode = codeUnitTest.getValue();
+        var javascriptCode = codeUnitTest.getValue();
         if ($("#autoremove").prop("checked"))
             $("#test-case").empty();
 
@@ -159,9 +161,9 @@
         functions = new Array();
         while (pos !== -1) {
             count++;
-            functioncode = javascroptCode.substring(pos);
+            javascriptCode = javascriptCode.substring(pos);
             functions.push(functioncode.substring(functioncode.indexOf('function') + 8, functioncode.indexOf('(')));
-            pos = javascroptCode.indexOf('function', pos + 1);
+            pos = javascriptCode.indexOf('function', pos + 1);
         }
 
         $("#functions").empty();
@@ -182,18 +184,18 @@
             return;
         }
 
-        var funcationLength = frame.contentWindow.eval($('#functions').val() + ".length");
+        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length");
         var inputbox = "";
-        for (var i = 0; i < funcationLength; i++)
+        for (var i = 0; i < functionLength; i++)
             inputbox += "<input type='text' class='form-control input_box inputs' />";
         var testCases =
-            "<div class='row case m-2'>" +
+            "<div class='row case m-2 text-white'>" +
             "<span class='input-group-addon'>input : </span>" +
             inputbox +
-            "<span  class='input-group-addon'>ouput : </span>" +
+            "<span  class='input-group-addon'>output : </span>" +
             "<input type='text' class='form-control input_box output' />" +
-            "<button class='btn btn-outline-dark test_one' >TEST</button>" +
-            "<button class='btn btn-outline-dark delete_case'>DELETE</button>" +
+            "<button class='btn btn-outline-info test_one'>TEST</button>" +
+            "<button class='btn btn-outline-danger delete_case'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
     });
@@ -203,7 +205,12 @@
         try {
             var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
             $("#resultView").append(
-                "<div class='resultLog'> [ input : " + input + " / output : " + output + " / result : " + inputResult + " ] " + (inputResult === output ? "성공" : "실패") + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
+                "<div class='text-white'> [ input : " + input
+                + " / output : " + output
+                + " / result : " + inputResult + " ] "
+                + (inputResult === output ? "성공" : "실패")
+                + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)"
+                + "</div>");
 
         } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>");
@@ -255,7 +262,9 @@
         var startTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
         testCase.trigger("click");
-        $("#resultView").append("<div class='resultLog'> 모든 케이스를 모두 완료했습니다. (소요시간  : " + (getTimeStamp() - startTime) + "ms)" + "</div>");
+        $("#resultView").append("<div class='resultLog'> "
+            + "모든 케이스를 모두 완료했습니다. (소요시간  : "
+            + (getTimeStamp() - startTime) + "ms)" + "</div>");
 
     });
     $(document).ready(function () {
