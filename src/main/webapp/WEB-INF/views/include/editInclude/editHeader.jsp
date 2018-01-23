@@ -41,7 +41,7 @@
             <li class="nav-item">
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right ">
             <li class="nav-item active run" id="run">
                 <div>
                     <a class="btn btn-primary" href="javascript:;">
@@ -81,11 +81,7 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item active">
-                <a class="btn  btn-primary" href="javascript:;" data-toggle="modal" data-target="#changeView">
-                    <img src="/resources/images/browser-visualization.png"> Change View
-                </a>
-            </li>
+
             <c:if test="${login eq null}">
                 <li class="nav-item active login">
                     <a class="btn  btn-primary" href="javascript:;" id="login">
@@ -97,15 +93,32 @@
                         Sign in
                     </a>
                 </li>
+
+
             </c:if>
             <c:if test="${login ne null}">
-                <li class="nav-item active sign_in">
-                    <a class="btn  btn-primary" href="/user/logout">
-                        Logout
-                    </a>
+                <%--<li class="nav-item active sign_in">--%>
+                <%--<a class="btn  btn-primary" href="/user/logout">--%>
+                <%--Logout--%>
+                <%--</a>--%>
+                <%--</li>--%>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img  class="rounded-circle Photo " id="profileHeader" src="" ></a>
+
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-100px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item hn">${login.userName}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
+                        <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
+                    </div>
                 </li>
+
+
             </c:if>
         </ul>
+
     </div>
     <br>
     <div>
@@ -113,5 +126,7 @@
         <%--<input type="button" onclick="autoFormatSelection()" value="autoFormatSelection">--%>
         <%--<input type="button" onclick="commentSelection(true)" value="commentSelection">--%>
     </div>
+
+
 
 </nav>

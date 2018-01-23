@@ -133,7 +133,7 @@
                                 <div class="input-group-prepend hn">
                                     <span class="input-group-text input-group-height" class="input-group-addon">user name</span>
                                 </div>
-                                <input type="text" class="col-4 input-group-text input-group-height " aria-label="Amount (to the nearest dollar)"
+                                <input type="text" maxlength="20" class="col-4 input-group-text input-group-height " aria-label="Amount (to the nearest dollar)"
                                        name="userName" id="userName" value="${login.userName}" onkeyup="checkvalue()"/>
                                 <div class="input-group-append">
                                     <%--<button type="button" class="input-group-text input-group-height" id="authenticateName">중복체크</button>--%>
