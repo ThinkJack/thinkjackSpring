@@ -108,13 +108,13 @@
                 <li class="nav-item dropdown pointer2" >
                     <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Board</a>
                     <div class="dropdown-menu pointerB  hn" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 50px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
+                        <a class="dropdown-item " href='/board/list?category=notice'>공지사항</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href='/board/list?category=notice'>Notice</a>
+                        <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
                     </div>
                 </li>
             </ul>

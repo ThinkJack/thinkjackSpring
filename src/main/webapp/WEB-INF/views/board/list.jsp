@@ -6,14 +6,28 @@
 <style>
     td, th {
         text-align: center;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
 
     }
-    td{
-        padding-top: 2%;
-    }
+
     body{
         background-color: orange;
     }
+
+    .table th, .table td {
+        vertical-align: inherit;
+    }
+
+    table {
+
+        table-layout:fixed;
+
+
+    }
+
+
 
 </style>
 <div class="deaf2"></div>
@@ -25,7 +39,20 @@
 
 
             <%--<div class="form-group">--%>
-            <label class="control-label">   <h1 class="bd" style="text-align: center;"> ${category}</h1> </label>
+            <label class="control-label">
+
+                <c:set var="name" value="${category}" />
+                <c:if test="${name eq 'qna'}">
+                    <h1 class="bd" id="titleList" style="text-align: center;">질문 게시판</h1>
+                </c:if>
+                <c:if test="${name eq 'free'}">
+                    <h1 class="bd" id="titleList" style="text-align: center;">자유 게시판</h1>
+                </c:if>
+                <c:if test="${name eq 'notice'}">
+                    <h1 class="bd" id="titleList" style="text-align: center;">공지사항</h1>
+                </c:if>
+
+            </label>
 
             <div class="deaf2">
                 <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
@@ -60,7 +87,7 @@
                         </select>
                         <%--</div>--%>
 
-                        <input type="text" class="form-control bd" placeholder="Search" name="keyword" id="keywordInput"
+                        <input type="text" class="form-control hn" placeholder="Search" name="keyword" id="keywordInput"
                                value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary bd" id="searchBtn">Search</button>
@@ -81,90 +108,98 @@
 
                 <%--게시글 목록--%>
 
-                <table class="table " >
-                    <thead>
-                    <tr class="table-dark text-white bd">
-                        <th style="width:10px;">boardId</th>
-                        <th >TITLE</th>
-                        <th >WRITER</th>
-                        <th >REGDATE</th>
-                        <th  style="width:40px;">VIEWCNT</th>
-                        <th  style="width:40px;">HEART</th>
-                    </tr>
-                    </thead>
-
-                    <c:forEach items="${list}" var="boardVO">
-
-                        <tr >
-                            <td >${boardVO.boardId}</td>
-                            <td class="hn" style="padding-top:2.5%; word-break:break-all;"><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
-                                    ${boardVO.boardTitle}</a> </td>
-                            <td  class="hn" style="padding-top:1%;padding-bottom:1%"><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
-                                <script>
-                                    $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
-                                </script>${boardVO.boardWriter}</td>
-                            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-                                                value="${boardVO.boardRegdate}"/></td>
-                            <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
-                            <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                    <table class="table " >
+                        <thead>
+                        <tr class="table-dark text-white bd">
+                            <th width="15%" >boardId</th>
+                            <th width="20%">TITLE</th>
+                            <th width="20%">WRITER</th>
+                            <th width="20%" style="   text-align: center;" >REGDATE</th>
+                            <th width="15%" >VIEWCNT</th>
+                            <th width="10%" >HEART</th>
                         </tr>
+                        </thead>
 
-                    </c:forEach>
+                        <c:forEach items="${list}" var="boardVO">
 
-                </table>
-                <%--게시글 pagination --%>
+                            <tr class="hn" >
+                                <td >${boardVO.boardId}</td>
+                                <td ><a href='/board/read${pageMaker.makeSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${category}'>
+                                        ${boardVO.boardTitle}</a> </td>
+                                <td ><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
+                                    <script>
+                                        $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
+                                    </script>${boardVO.boardWriter}</td>
+                                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+                                                    value="${boardVO.boardRegdate}"/></td>
+                                <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
+                                <td><span class="badge bg-red">${boardVO.boardLikecnt}</span></td>
+                            </tr>
 
-                <ul class = "pagination pagination-sm justify-content-center">
+                        </c:forEach>
 
-                    <c:if test="${pageMaker.prev}">
-                        <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&category=${category}">&laquo;</a></li>
-                    </c:if>
+                    </table>
+                    <%--게시글 pagination --%>
 
-                    <c:forEach begin="${pageMaker.startPage}"
-                               end = "${pageMaker.endPage}" var="idx">
-                        <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
-                            <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
-                        </li   >
-                    </c:forEach>
+                    <ul class = "pagination pagination-sm justify-content-center">
 
-                    <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
-                        <li class="page-item">
-                            <a class="page-link" href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
-                                &raquo;
-                            </a>
-                        </li>
-                    </c:if>
-                </ul>
+                        <c:if test="${pageMaker.prev}">
+                            <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&category=${category}">&laquo;</a></li>
+                        </c:if>
+
+                        <c:forEach begin="${pageMaker.startPage}"
+                                   end = "${pageMaker.endPage}" var="idx">
+                            <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
+                                <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
+                            </li   >
+                        </c:forEach>
+
+                        <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
+                            <li class="page-item">
+                                <a class="page-link" href = "list${pageMaker.makeSearch(pageMaker.endPage + 1)}&category=${category}">
+                                    &raquo;
+                                </a>
+                            </li>
+                        </c:if>
+                    </ul>
+
             </div>
         </div>
     </div>
 </div>
 <div class="deaf2"></div>
-    <script>
-        $(document).ready(
-            function () {
-                console.log("ggg");
-                $('#searchBtn').on(
-                    "click",
-                    function (event) {
-                        self.location = "list"
-                            +'${pageMaker.makeQuery(1)}'
-                            +"&searchType="
-                            +$("select option:selected").val()
-                            +"&keyword=" + encodeURIComponent($('#keywordInput').val())
-                            +"&category=" + '${category}';
-                    }
-                );
+<script>
+    $(document).ready(
 
-                $('#newBtn').on(
-                    "click",
-                    function (evt) {
-                        self.location = "register?category="+'${category}';
-                    }
-                );
-            }
-        );
 
-    </script>
+        function () {
+            // console.log("ggg");
+            $('#searchBtn').on(
+                "click",
+                function (event) {
+                    self.location = "list"
+                        +'${pageMaker.makeQuery(1)}'
+                        +"&searchType="
+                        +$("select option:selected").val()
+                        +"&keyword=" + encodeURIComponent($('#keywordInput').val())
+                        +"&category=" + '${category}';
+                }
+            );
+
+            $('#newBtn').on(
+                "click",
+                function (evt) {
+                    self.location = "register?category="+'${category}';
+                }
+            );
+        }
+
+
+    );
+
+
+
+
+</script>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
