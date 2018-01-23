@@ -33,8 +33,11 @@ public class BoardController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerPOST(BoardVO board, RedirectAttributes rttr,
-                               @ModelAttribute("category") String category) throws Exception {
+                               @ModelAttribute("category") String category,
+                               HttpServletRequest httpRequest) throws Exception {
 
+        String userName = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserName();
+        board.setBoardWriter(userName);
 
         service.insertBoard(board, category);
 
@@ -91,11 +94,20 @@ public class BoardController {
 
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modifyPOST(BoardVO board, RedirectAttributes rttr,
-                             @ModelAttribute("category") String category) throws Exception {
+                             @ModelAttribute("category") String category,
+                             HttpServletRequest httpRequest) throws Exception {
 
-        service.updateBoard(board, category);
+        String userName = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserName();
 
-        rttr.addFlashAttribute("msg", "SUCCESS");
+        String msg= "잘못된 접근입니다.";
+
+        if (board.getBoardWriter().equals(userName)) {
+            service.updateBoard(board, category);
+            msg = "SUCCESS";
+
+        }
+
+        rttr.addFlashAttribute("msg", msg);
 
         return "redirect:/board/list?category=" + category;
     }
