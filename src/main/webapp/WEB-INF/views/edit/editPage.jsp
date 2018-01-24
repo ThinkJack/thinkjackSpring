@@ -8,23 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--<%--%>
-    <%--response.setHeader("Pragma","no-cache");--%>
-    <%--response.setHeader("Pragma","no-store");--%>
-    <%--response.setHeader("Cache-Control","no-cache");--%>
-    <%--response.setDateHeader("Expires",0);--%>
-<%--%>--%>
-
 <html>
 <head>
     <title>EditPage</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <%--<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">--%>
-    <%--<meta http-equiv="Expires" content="-1">--%>
-    <%--<meta http-equiv="Pragma" content="no-cache">--%>
-    <%--<meta http-equiv="Cache-Control" content="no-cache">--%>
 
     <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
 </head>
@@ -175,6 +163,10 @@
 
         <c:if test="${SrcVO.srcWriterImgPath ne null}">
         $("#user-img").attr("src", filePathChange("${SrcVO.srcWriterImgPath}"));
+        </c:if>
+
+        <c:if test="${login ne null}">
+            $("#profileHeader").attr("src",filePathChange("${login.userProfile}"));
         </c:if>
 
         <c:if test="${param.reply eq 'show'}">

@@ -40,6 +40,7 @@
             reply_text,
             reply_writer,
             user_name AS userName,
+            user_profile AS userProfile,
             r.reply_regdate,
             r.reply_update
         FROM tbl_src_reply r, tbl_user m

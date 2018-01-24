@@ -34,14 +34,14 @@
                     </c:if>
                 </div>
                 <div class="page_title_text"  id="page-title-text">
-                    <input type="text" name="page-title" id="src-title-input" value=""/>
+                    <input type="text" name="page-title" id="src-title-input" value="" maxlength="50"/>
                 </div>
                 <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer" style="color:#000000;"></span></div>
             </li>
             <li class="nav-item">
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right ">
             <li class="nav-item active run" id="run">
                 <div>
                     <a class="btn btn-primary" href="javascript:;">
@@ -56,23 +56,23 @@
                         ((login ne null) and (SrcVO.srcId eq null)) or
                         ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
                         ((login eq null) and (SrcVO.srcId eq null))}">
-            <li class="nav-item active">
-                <div>
-                    <a class="btn  btn-primary" href="javascript:;" id="saveCode">
-                        <img src="/resources/images/cloud1.png" id="save-img"> Save
-                    </a>
-                </div>
-            </li>
+                <li class="nav-item active">
+                    <div>
+                        <a class="btn  btn-primary" href="javascript:;" id="saveCode">
+                            <img src="/resources/images/cloud1.png" id="save-img"> Save
+                        </a>
+                    </div>
+                </li>
             </c:if>
             <c:if test="${(login.userId ne SrcVO.srcWriter) and (login ne null)}">
-            <li class="nav-item active">
-                <div>
-                    <!-- 좋아요 버튼 -->
-                    <a class="btn  btn-primary" href="javascript:;" id="like">
-                        <img src="/resources/images/like1.png" id="likebt"> Like
-                    </a>
-                </div>
-            </li>
+                <li class="nav-item active">
+                    <div>
+                        <!-- 좋아요 버튼 -->
+                        <a class="btn  btn-primary" href="javascript:;" id="like">
+                            <img src="/resources/images/like1.png" id="likebt"> Like
+                        </a>
+                    </div>
+                </li>
             </c:if>
             <li class="nav-item active">
                 <div>
@@ -81,11 +81,7 @@
                     </a>
                 </div>
             </li>
-            <li class="nav-item active">
-                <a class="btn  btn-primary" href="javascript:;" data-toggle="modal" data-target="#changeView">
-                    <img src="/resources/images/browser-visualization.png"> Change View
-                </a>
-            </li>
+
             <c:if test="${login eq null}">
                 <li class="nav-item active login">
                     <a class="btn  btn-primary" href="javascript:;" id="login">
@@ -97,15 +93,32 @@
                         Sign in
                     </a>
                 </li>
+
+
             </c:if>
             <c:if test="${login ne null}">
-                <li class="nav-item active sign_in">
-                    <a class="btn  btn-primary" href="/user/logout">
-                        Logout
-                    </a>
+                <%--<li class="nav-item active sign_in">--%>
+                <%--<a class="btn  btn-primary" href="/user/logout">--%>
+                <%--Logout--%>
+                <%--</a>--%>
+                <%--</li>--%>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img  class="rounded-circle Photo " id="profileHeader" src="" ></a>
+
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-100px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item hn">${login.userName}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
+                        <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
+                    </div>
                 </li>
+
+
             </c:if>
         </ul>
+
     </div>
     <br>
     <div>
@@ -113,5 +126,7 @@
         <%--<input type="button" onclick="autoFormatSelection()" value="autoFormatSelection">--%>
         <%--<input type="button" onclick="commentSelection(true)" value="commentSelection">--%>
     </div>
+
+
 
 </nav>

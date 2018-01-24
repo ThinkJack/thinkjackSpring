@@ -11,8 +11,16 @@ public class SrcReplyVO {
     private Date replyUpdate;
     private int replyStatus;
 //    private int replyParent;
+    private String replyWriterImgPath;
+    //삭제부분 0,1
 
+    public String getReplyWriterImgPath() {
+        return replyWriterImgPath;
+    }
 
+    public void setReplyWriterImgPath(String replyWriterImgPath) {
+        this.replyWriterImgPath = replyWriterImgPath;
+    }
 
     public int getReplyId() {
         return replyId;
@@ -81,6 +89,7 @@ public class SrcReplyVO {
                 ", replyRegdate=" + replyRegdate +
                 ", replyUpdate=" + replyUpdate +
                 ", replyStatus=" + replyStatus +
+                ", replyWriterImgPath='" + replyWriterImgPath + '\'' +
                 '}';
     }
 }

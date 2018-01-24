@@ -19,7 +19,7 @@
 
                 <div class="form-group text-white bd" style="margin-top: 10px;">
                     <label  style="font-size:1.35rem;" >Title</label>
-                    <input type="text" name='boardTitle' class="form-control inputC hn" placeholder="Enter Title" required>
+                    <input type="text" maxlength="25" name='boardTitle' class="form-control inputC hn" placeholder="Enter Title" required>
                 </div>
                 <div class="form-group text-white bd">
                     <label  style="font-size:1.35rem;">Content</label>

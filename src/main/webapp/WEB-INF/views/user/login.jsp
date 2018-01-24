@@ -32,7 +32,7 @@
                     <%--<div class="panel-title"><h1>Log in</h1></div>--%>
                     <%--</div>--%>
                     <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="가입한 Email을 입력해주세요" autofocus>
-                    <input type="text" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" >
+                    <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password를 입력해주세요" >
                     <input type="submit" class="form-control btn btn-primary" value="로그인"/>
 
                     <%--<a href="/user/naverLogin"><img width="100%" height="50" src="/resources/images/20171227_094328214.jpg"/></a>--%>

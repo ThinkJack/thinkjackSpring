@@ -82,17 +82,18 @@
     <div class="container-fluid removePadding text-center">
         <div class="row">
             <div class="col-sm-1 removePadding"></div>
-            <div class="col-sm-10 removePadding" >
+            <div class="col-sm-10 removePadding">
 
                 <div class="deaf2 ">
-                    <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
+                    <img class=" widthFull float-right" src="/resources/images/main/mainA.png"
+                         style="  background-size:contain;width:auto">
                 </div>
                 <div class="form-group ">
                     <div class="input-group bd">
                         <div class="input-group-prepend" style="width: 100%;">
                             <%--<div class="form-group ">--%>
                             <label class="mr-1 mt-2" for="sel1">Select list:</label>
-                            <select  class="custom-select bd" name="searchType" id="sel1">
+                            <select class="custom-select bd" name="searchType" id="sel1">
                                 <option value="n"
                                         <c:out value="${cri.searchType == null?'selected':''}"/> >
                                     ---
@@ -102,7 +103,8 @@
                                     Title
                                 </option>
                             </select>
-                            <input type="text" class="form-control bd" placeholder="Search" name="keyword" id="keywordInput"
+                            <input type="text" class="form-control bd" placeholder="Search" name="keyword"
+                                   id="keywordInput"
                                    value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary bd " id="search-btn">Search</button>
@@ -123,19 +125,33 @@
                                     </iframe>
                                 </div>
 
-                                <div class="card-body">
-                                    <h5 class="card-title" id="src-title1" data>${srcVo.srcTitle}</h5>
-                                    <p class="card-text" id="src-comments1">${srcVo.srcComments}</p>
+                                <div class="card-body" style="overflow-y:scroll; width:100%; height:45px; ">
+                                        <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
+                                    <h5 class="hn mb-0" id="src-title1" data>${srcVo.srcTitle}</h5>
+                                    <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>
+                                </div>
+                                <div class="card-body mb-0  pb-0"
+                                     style="padding-left:10px; padding-right:7px; height:70px; overflow-y:scroll;">
+                                    <div class="row removePadding ">
+                                        <img class="col-2 src_icon removePadding rounded-circle"
+                                             src="/resources/images/123.gif" style="width:44.5px; height:44.5px;  "
+                                             id="${srcVo.srcId}img"
+                                             onclick="location.href='/edit/editPage/${srcVo.srcId}';">
+                                        <a href="/edit/editPage/${srcVo.srcId}"
+                                           class="col-9 ml-3 card-link removePadding hn"
+                                           id="src-writer2">${srcVo.srcWriterName}</a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
 
 
-                                    <img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';">
-                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link"
-                                       id="src-writer2">${srcVo.srcWriterName}</a>
+                                        <%--<img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"--%>
+                                        <%--onclick="location.href='/edit/editPage/${srcVo.srcId}';">--%>
+                                        <%--<a href="/edit/editPage/${srcVo.srcId}" class="card-link"--%>
+                                        <%--id="src-writer2">${srcVo.srcWriterName}</a>--%>
 
-                                    <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
+                                    <img class="fl-right src_icon" src="/resources/images/like24-1.png"
+                                         id="${srcVo.srcId}like"
                                          style="width:20px; height:20px;">
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
                                        id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
@@ -143,11 +159,14 @@
                                     <img class="fl-right src_icon" src="/resources/images/reply24.png"
                                          onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
                                          style="width:20px; height:20px;">
-                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="src-replycnt${srcVo.srcId}">
-                                        <script> getPage("${srcVo.srcId}");</script></a>
+                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right"
+                                       id="src-replycnt${srcVo.srcId}">
+                                        <script> getPage("${srcVo.srcId}");</script>
+                                    </a>
 
                                     <img class="fl-right src_icon" src="/resources/images/view24.png"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
+                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';"
+                                         style="width:20px; height:20px;">
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
                                        id="src-viewcnt2">${srcVo.srcViewcnt}</a>
 
@@ -257,56 +276,56 @@
                     <c:if test="${status.count % 3 eq 0}">
                 </div>
                 </c:if>
-
-
-            </div>
-            <div class="text-center">
-                <ul class="pagination justify-content-center">
-                    <c:if test="${pageMaker.prev}">
-                        <li class="page-item">
-                            <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.startPage - 1)}"
-                               aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                    </c:if>
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-                        <%--<script>alert("${pageMaker.makeSearch(idx)}"); console.log("??");</script>--%>
-                        <li
-                                <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
-                            <a class="page-link" href="srcList${pageMaker.makeUserSearch(idx)}">${idx}</a>
-                        </li>
-                    </c:forEach>
-                    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                        <li class="page-item">
-                            <a class="page-link" href="srcList${pageMaker.makeUserSearch(pageMaker.endPage + 1)}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </c:if>
-                </ul>
-            </div>
-            <script>
-                $(document).ready(function () {
-                    $('#search-btn').click(function (e) {
-
-                        self.location = "mySourceCode"
-                            + '${pageMaker.makeQuery(1)}'
-                            + '&searchType='
-                            + $('select option:selected').val()
-                            + '&keyword=' + encodeURIComponent($('#keywordInput').val());
-                    });
-                });
-                $(document).ready(function () {
-                    $(".Source_code").addClass(" active");
-
-                })
-            </script>
+            <%--</div>--%>
         </div>
     </div>
+    <div class="text-center">
+        <ul class="pagination justify-content-center">
+            <c:if test="${pageMaker.prev}">
+                <li class="page-item">
+                    <a class="page-link" href="mySourceCode${pageMaker.makeUserSearch(pageMaker.startPage - 1)}"
+                       aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            </c:if>
+            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+                <%--<script>alert("${pageMaker.makeSearch(idx)}"); console.log("??");</script>--%>
+                <li
+                        <c:out value="${pageMaker.cri.page == idx?'class=active page-item':'page-item'}"/>>
+                    <a class="page-link" href="mySourceCode${pageMaker.makeUserSearch(idx)}">${idx}</a>
+                </li>
+            </c:forEach>
+            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                <li class="page-item">
+                    <a class="page-link" href="mySourceCode${pageMaker.makeUserSearch(pageMaker.endPage + 1)}"
+                       aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#search-btn').click(function (e) {
+
+                self.location = "mySourceCode"
+                    + '${pageMaker.makeQuery(1)}'
+                    + '&searchType='
+                    + $('select option:selected').val()
+                    + '&keyword=' + encodeURIComponent($('#keywordInput').val());
+            });
+        });
+        $(document).ready(function () {
+            $(".Source_code").addClass(" active");
+
+        })
+    </script>
+</div>
+<div class="deaf2"></div>
 </div>
 </div>
-</div>
-<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+<jsp:include page="/WEB-INF/views/include/footer.jsp"/>

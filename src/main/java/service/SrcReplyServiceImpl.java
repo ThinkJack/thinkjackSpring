@@ -17,6 +17,7 @@ public class SrcReplyServiceImpl implements SrcReplyService {
     // 댓글 목록
     @Override
     public List<SrcReplyVO> list(String srcId, Criteria cri) throws Exception{
+
         return srcReplyDao.list(srcId, cri);
     }
 

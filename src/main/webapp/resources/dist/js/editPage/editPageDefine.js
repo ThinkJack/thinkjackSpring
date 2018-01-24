@@ -1,10 +1,9 @@
 //코드미러 객체
 
-
 var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
-    mode: "htmlmixed",
 
-    profile: 'xhtml',
+    mode: "htmlmixed",
+    profile: "xhtml",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
@@ -26,7 +25,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
@@ -35,7 +34,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 
 
 var codeCss = CodeMirror(document.getElementById("codeCss"), {
-    mode: "text/x-scss",
+    mode: "css",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 괄호강조
@@ -91,8 +90,6 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     wordWrap: true,
     autoCloseBrackets: true,
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-
-    lineWrapping: true,           //Folding
     extraKeys: {
         "Ctrl-Space": "autocomplete",
         "Ctrl-Q": function (cm) {
@@ -193,7 +190,7 @@ var ExcludedIntelliSenseTriggerKeys =
 var delay;
 var srcReplyCnt;
 
-var saveStatus = true //저장 유도관련 변수
+var saveStatus = true; //저장 유도관련 변수
 var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
 var imgPath = "/resources/images/";
 //---------console관련 변수
@@ -486,9 +483,9 @@ function getSelectedRange1() {
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
-function getSelectedRange3() {
-    return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
-}
+// function getSelectedRange3() {
+//     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+// }
 
 //--shift+tab
 function autoFormatSelection() {
@@ -498,9 +495,10 @@ function autoFormatSelection() {
     codeCss.autoFormatRange(range1.from, range1.to);
     var range2 = getSelectedRange2();
     codeJavaScript.autoFormatRange(range2.from, range2.to);
-    var range3 = getSelectedRange2();
-    codeUnitTest.autoFormatRange(range3.from, range3.to);
+    // var range3 = getSelectedRange3();
+    // codeUnitTest.autoFormatRange(range3.from, range3.to);
 }
+
 //--ctrl+/
 // function commentSelection(isComment) {
 //     var range = getSelectedRange();
@@ -712,6 +710,7 @@ function changeSaveImg(idx) {
 //이미지 색상 체크
 function likeImgChange(num) {
     likebt.src = imgPath + "like" + num + ".png";
+    $("#modalSrcLikeImg").attr("src", imgPath + "like24-" + num + ".png");
 }
 
 //==========================================GFM setting
@@ -937,7 +936,7 @@ function getPageList(pageInfo) {
                 // alert(userId);
                 output += "<div class=\"row reply_list\" id=\"reply-list-view\" data-rno= "+result.list[i].reply_id+">";
                 output += "<div class=\"col-2 no_padding\">";
-                output += "<img class=\"user_img\" src=\"/resources/images/logo.png\" id=\"reply-list-user-img\">";
+                output += "<img class=\"user_img\" src=\"" + filePathChange(result.list[i].userProfile) + "\" id=\"reply-list-user-img\">";
                 output += "</div>";
                 output += "<div class=\"col\">";
                 output += "<div style=\"display: block;\" class=\"row reply_user_data_view\" id=\"reply-user-id\">";

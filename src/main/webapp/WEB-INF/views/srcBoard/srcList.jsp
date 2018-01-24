@@ -85,6 +85,9 @@
     <div class="row">
         <div class="col-sm-3 removePadding"></div>
         <div class="col-sm-6 removePadding" >
+            <label class="control-label">
+                <h1 class="bd" id="titleList" style="text-align: center;">코드 게시판</h1>
+            </label>
             <div class="deaf2 ">
                 <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
             </div>
@@ -109,7 +112,7 @@
                             </option>
                             <option value="tw"
                                     <c:out value="${cri.searchType eq 'tw'?'selected':''}"/> >
-                                Title OR Content
+                                Title OR Writer
                             </option>
 
                         </select>
@@ -138,12 +141,12 @@
                             </div>
 
                                 <%--<div class="card-body" style="overflow: auto">--%>
-                            <div  style="overflow-y:scroll; width:100%; height:20%;">
+                            <div class="card-body" style="overflow-y:scroll; width:100%; height:45px; ">
                                     <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
                                 <h5 class="hn mb-0"   id="src-title1" data>${srcVo.srcTitle}</h5>
                                 <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>
                             </div>
-                            <div class="card-body mb-0  pb-0" style="padding-left:10px;padding-right:7px;height:15%" >
+                            <div class="card-body mb-0  pb-0" style="padding-left:10px; padding-right:7px; height: 70px; overflow-y:scroll;" >
                                 <div class="row removePadding ">
 
                                     <img class="col-2 src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
@@ -191,23 +194,32 @@
                                     });
                                 </script>
                             </div>
-                            <div class="row fl-right ml-auto ">
-                                <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
-                                     style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                   id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
+                            <div class="card-body">
+                                <div class="row fl-right ml-auto ">
+                                    <c:if test="${srcVo.srclikeCli eq '1'}">
+                                        <img class="fl-right src_icon" src="/resources/images/like24-2.png" id="${srcVo.srcId}like"
+                                             style="width:20px; height:20px;">
+                                    </c:if>
+                                    <c:if test="${srcVo.srclikeCli eq '0'}">
+                                        <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
+                                             style="width:20px; height:20px;">
+                                    </c:if>
 
-                                <img class="fl-right src_icon" src="/resources/images/reply24.png"
-                                     onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
-                                     style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
-                                    <script>getPage("${srcVo.srcId}")</script>
-                                </a>
+                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                       id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
 
-                                <img class="fl-right src_icon" src="/resources/images/view24.png"
-                                     onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
-                                <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                   id="src-viewcnt2">${srcVo.srcViewcnt}</a>
+                                    <img class="fl-right src_icon" src="/resources/images/reply24.png"
+                                         onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
+                                         style="width:20px; height:20px;">
+                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
+                                        <script>getPage("${srcVo.srcId}")</script>
+                                    </a>
+
+                                    <img class="fl-right src_icon" src="/resources/images/view24.png"
+                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
+                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                       id="src-viewcnt2">${srcVo.srcViewcnt}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -241,6 +253,7 @@
                             </c:forEach>
                             </c:if>
 
+
                             preview.write(
                                 tempCdnCss
                                 +
@@ -250,9 +263,18 @@
                                 +
                                 tempCdnJs
                                 +
-                                "<script>" + tempJs + "<\/script>"
+                                "<script>"
+                                +
+                                "try{"
+                                +
+                                tempJs
+                                +
+                                "}catch(err){}"
+                                +
+                                "<\/script>"
                             );
                             preview.close();
+
                         });
 
                         function escapeHtml(text) {
@@ -283,6 +305,12 @@
                         + '&searchType='
                         + $('select option:selected').val()
                         + '&keyword=' + encodeURIComponent($('#keywordInput').val());
+                });
+
+                $("#keywordInput").keydown(function (e) {
+                    if (e.keyCode === 13) {
+                        $("#search-btn").click();
+                    }
                 });
             });
         </script>

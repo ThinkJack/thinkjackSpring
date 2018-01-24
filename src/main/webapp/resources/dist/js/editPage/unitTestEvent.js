@@ -39,10 +39,7 @@ var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
 });
 // editor.foldCode(CodeMirror.Pos(13, 0));
-codeUnitTest.setValue(
-    "function testFunction(){\n" +
-    "   return 0;\n" +
-    "}");
+
 
 var origin = codeUnitTest.getValue();
 var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);

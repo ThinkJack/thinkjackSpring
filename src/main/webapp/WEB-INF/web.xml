@@ -56,7 +56,7 @@
 
     <error-page>
         <error-code>400</error-code>
-        <location>/common/error/throwable</location>
+        <location>/common/error/400</location>
     </error-page>
     <error-page>
         <error-code>403</error-code>

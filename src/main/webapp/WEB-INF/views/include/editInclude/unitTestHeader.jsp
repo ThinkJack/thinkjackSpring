@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- header 메뉴바 -->s
+<!-- header 메뉴바 -->
 <nav class="navbar  navbar-expand-lg navbar-light bg-light fixed-top">
 
     <a class="navbar-brand" href="/"><img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>

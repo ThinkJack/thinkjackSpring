@@ -33,158 +33,168 @@
     </div>
     <div class="col-sm-2 removePadding "> </div>
 </section>
-<div  id="editor">
+<div >
     <h1 class="bd " style="margin-left:10%; font-size: 4em;" >Service</h1>
 </div>
 <section class="b container-fluid removePadding">
-    <div class="row removePadding">
-        <div class="col-sm-2 removePadding">
+
+    <div class="grid ">
+
+        <div class="pointB col-6 " style="display: none">
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+            </iframe>
         </div>
-        <div class="col-sm-8 removePadding" >
-            <div class="row removePadding">
-                <div class="col-sm-6 removePadding borderLB " style="height:20%;margin-right: 50% ;margin-bottom: -11px;">
 
-                    <li class="tip"> <button class="btn btn-primary btn-lg btn-block bd pointerC"
-                                             style="margin-left:39%;width:70%;border:8pt solid #fff;height: 80px;margin-bottom: 10px;position:relative;top:60px;font-size: 28px" onclick="location.href='/edit/unitTest'">Unit Test</button>
-                        <strong class="tooltipB">Unit Test Play
-                            <%--<video width="320" height="176" controls autoplay>--%>
-                                <%--<source src="/resources/test.mp4" type="video/mp4">--%>
-                            <%--</video>--%>
-                            <iframe width="420" height="345"
-                                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
-                            </iframe>
-                            <a href="#">Unit Test</a>
-                        </strong>
-                    </li>
-
-                </div>
-                <script>
-                    $(document).ready(function () {
-                        // var vid = document.getElementById("myVideo");
-                        //
-                        // $('.pointerC').mouseenter(function (){
-                        //     vid.autoplay = true;
-                        //     vid.load();
-                        //     console.log("sss")
-                        // });
-                    });
-                </script>
-                <div class="col-sm-4 removePadding borderLB " style="height:40%;margin-left: 20%;"></div>
-                <div class="col-sm-4 removePadding borderRB " style="height:40%;">
-                    <%--<button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height:55%;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" href ="/edit/editPage">Edit</button>--%>
-                    <li class="tip">  <button class="btn btn-primary btn-lg btn-block bd" style="width:102.5%;border:8pt solid #fff;height: 80px;margin-bottom: 10px;position:relative;top:-45%;font-size: 28px;" onclick="location.href='/edit/editPage'">Edit</button>
-                        <strong class="tooltipA">Add images in the tooltip. <a href="http://codecanyon.net/item/portfolio-premium-wp-plugin/154612">
-                            <img class="ref" src="/resources/images/logo.png" height="150" width="150" alt="" /></a><a href="#"> You can even add links!</a></strong></li>
-                </div>
-                <div class=" removePadding borderRT " style="height:24%;width:13.33%;margin-top:139.781px; "></div>
-                <div class="col-sm-12 removePadding borderR " style="height:42%;">
-                </div>
+        <!--Left side-->
+        <div id="west" class=" column effect-hover ">
+            <div class="content ">
+                <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'">
+                </i>
+                <h2>Go <span >Edit</span></h2>
             </div>
         </div>
-        <div class="col-sm-2 removePadding"> </div>
+
+
+        <!--Right side-->
+
+        <div id="east" class="column effect-hover">
+
+            <div class="content">
+                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'">
+                </i>
+                <h2>Go <span class="tip">Unit Test</span></h2>
+            </div>
+
+        </div>
+        <div class="pointA col-6 " style="display: none" >
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+            </iframe>
+        </div>
+
+
     </div>
+
 </section>
 
+<script type="text/javascript">
+    $(function(){
+        $('#west').mouseenter(function(){
 
-<div class="deaf" style="background-color:white">
-    <h1 class="bd " style="margin-left: 78%; font-size: 4em;" >Board</h1>
+            $('.pointA').css("display","block");
+            $('#east').css("display","none");
+
+        });
+        $('#west').mouseleave(function(){
+            $('.pointA').css("display","none");
+            $('#east').css("display","block");
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#east').mouseenter(function(){
+
+            $('.pointB').css("display","block");
+            $('#west').css("display","none");
+
+        });
+        $('#east').mouseleave(function(){
+            $('.pointB').css("display","none");
+            $('#west').css("display","block");
+        });
+    });
+</script>
+<div style="background-color:white">
+    <h1 class="bd " style="margin-left:70%; font-size: 4em;" >Board</h1>
 </div>
-
 
 <section class="c container-fluid removePadding">
     <div class="row removePadding" >
-        <div class="col-sm-3 " >
-
-        </div>
+        <div class="col-sm-3 " ></div>
         <div class="col-sm-9 removePadding lampContainer ">
             <div class="lamp-container " style="display:inline-block">
                 <div class="lamp show-on-scroll">
                     <h1 class="bd ani1" style=" font-size: 4em;" >Masterpiece </h1>
                     <h1 class="bd ml-5 ani2" style=" font-size: 4em;" >Masterpiece </h1>
                 </div>
-
             </div>
         </div>
-    </div>
-</section>
-<section class="d container-fluid removePadding " id="board" >
 
-    <div class="row removePadding">
-        <div class="col-sm-2 removePadding"></div>
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=notice'">Notice</button>
-            <div class="col-sm-12 box first">
-                <span class="icon-cont"><i class="fa fa-rocket"></i>
+
+        <div class=" col-sm-2"></div>
+
+        <div class=" col-sm-2 box">
+            <h2 class="hn text-white text-center">공지사항</h2>
+            <span class="icon-cont"><i class="fa fa-rocket"></i>
+
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
-               <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
-            </div>
+            <ul class="hidden">
+                <h6 class="text-center hn">새로운 공지사항을 확인하세요</h6>
+                <li >
+                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=notice'">Go</button>
+                </li>
+
+
+
+            </ul>
+
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/srcBoard/srcList'">소스 게시판</button>
 
-            <div class="col-sm-12 box second">
-                <span class="icon-cont"><i class="fa fa-edit"></i>
+        <div class="col-sm-2 box">
+            <h2 class="hn text-white text-center">코드 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-edit"></i>
                       <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
-
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
-            </div>
+            <ul class="hidden">
+                <h6 class="text-center hn">자신의 코드를 올려보세요</h6>
+                <li >
+                    <button type="button " class="btn  btn-primary hn alignCenter" onclick="location.href='/srcBoard/srcList'">Go</button>
+                </li>
+            </ul>
 
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=free'">자유 게시판</button>
-            <div class=" col-sm-12 box third">
-                <span class="icon-cont"><i class="fa fa-desktop"></i>
+
+        <div class="col-sm-2 box">
+            <h2 class="hn text-white text-center">자유 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-desktop"></i>
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
+            <ul class="hidden">
+                <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
+                <li >
+                <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
+                </li>
+            </ul>
 
-
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
-
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
-            </div>
         </div>
 
-        <div class=" col-sm-2 ">
-            <button type="button" class="btn  btn-primary border col-sm-12" onclick="location.href='/board/list?category=qna'">질문 게시판</button>
-            <div class="col-sm-12 box fourth">
-                <span class="icon-cont"><i class="fa fa-coffee"></i>
-                 <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
+        <div class="col-sm-2 box ">
+            <h2 class="hn text-white text-center">질문 게시판</h2>
+            <span class="icon-cont"><i class="fa fa-coffee"></i>
+                 <h1 class="bd text-white  " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-                <ul class="hidden">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Set amet consecuter</li>
-                </ul>
+            <ul class="hidden ">
+                <h6 class="text-center hn">질문하세요</h6>
+                <li >
+                    <button type="button" class="btn  btn-primary hn alignCenter " onclick="location.href='/board/list?category=qna'">Go </button>
+                </li>
+            </ul>
 
-                <%--<a class="expand"><span class="plus">?</span><span class="minus">!</span></a>--%>
-            </div>
         </div>
     </div>
+
 </section>
-<div class="deaf" style="background-color: orange"></div>
+
+
+
+<div class="deaf2" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
     $(function() {
@@ -212,13 +222,13 @@
     $(window).scroll(function() {
         var el = $('.ani1');
 
-        if($(this).scrollTop() >=1300) el.addClass('animated slideInRight');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInRight');
         else el.removeClass('animated slideInRight');
     });
     $(window).scroll(function() {
         var el = $('.ani2');
 
-        if($(this).scrollTop() >=1300) el.addClass('animated slideInLeft');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInLeft');
         else el.removeClass('animated slideInLeft');
     });
 
@@ -232,12 +242,12 @@
     $(window).scroll(function() {
         var $el = $('.show-on-scroll');
 
-        if($(this).scrollTop() >=1300) $el.addClass('shown');
+        if($(this).scrollTop() >=1700) $el.addClass('shown');
         else $el.removeClass('shown');
 
-        });
+    });
 
-        //sectionD
+    //sectionD
     $('.box').click(function() {
         $(this).toggleClass('selected');
 

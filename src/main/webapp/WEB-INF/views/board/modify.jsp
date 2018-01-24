@@ -19,6 +19,7 @@
 
                     <label  style="font-size:1.35rem;" >Title</label>
                     <input type="text"
+                           maxlength="25"
                            name='boardTitle'
                            class="form-control inputC hn"
                            placeholder="Enter Title"
