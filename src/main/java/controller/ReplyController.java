@@ -34,13 +34,13 @@ public class ReplyController {
     //    새로운 댓글을 등록하는데 성공,실패
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<String> register(@RequestBody ReplyVO vo) {
-        if(session.getAttribute("login")==null){
-            // logger.info("current user is not logined");
-            // System.out.println("current user is not logined");
-            ResponseEntity<String> entity = null;
-
-            return entity;
-        }
+//        if(session.getAttribute("login")==null){
+//            // logger.info("current user is not logined");
+//            // System.out.println("current user is not logined");
+//            ResponseEntity<String> entity = null;
+//
+//            return entity;
+//        }
         ResponseEntity<String> entity = null;
         try {
             //생성
