@@ -40,32 +40,36 @@
 
         <!-- Dest 관련 인터셉터-->
         <beans:interceptor>
-            <beans:mapping path="/**"/>
-            <beans:exclude-mapping path="/resources/**" />
-            <beans:exclude-mapping path="/user/loginPost" />
-            <beans:exclude-mapping path="/user/socialLoginPost" />
-            <beans:exclude-mapping path="/user/login" />
-            <beans:exclude-mapping path="/user/callback" />
-            <beans:exclude-mapping path="/user/setPassAuthCheck" />
-            <beans:exclude-mapping path="/user/modifyAuthCheck" />
-            <beans:exclude-mapping path="/user//naverLogin" />
-            <beans:exclude-mapping path="/user/googleLogin" />
-            <beans:exclude-mapping path="/user/githubLogin" />
-            <beans:exclude-mapping path="/user/githubcallback" />
-            <beans:exclude-mapping path="/user/emailConfirm" />
-            <beans:exclude-mapping path="/user/findPasswordConfirm" />
-            <beans:exclude-mapping path="/user/logout" />
-            <beans:exclude-mapping path="/user/register" />
-            <beans:exclude-mapping path="/srcReply/**" />
-            <beans:exclude-mapping path="/replies/**" />
-            <beans:exclude-mapping path="/displayFile" />
+            <beans:mapping path="/board/*"/>
+            <beans:mapping path="/srcboard/*"/>
+            <beans:mapping path="/edit/*"/>
+            <!--<beans:mapping path="/**"/>-->
+            <!--<beans:exclude-mapping path="/resources/**" />-->
+            <!--<beans:exclude-mapping path="/user/loginPost" />-->
+            <!--<beans:exclude-mapping path="/user/socialLoginPost" />-->
+            <!--<beans:exclude-mapping path="/user/login" />-->
+            <!--<beans:exclude-mapping path="/user/callback" />-->
+            <!--<beans:exclude-mapping path="/user/setPassAuthCheck" />-->
+            <!--<beans:exclude-mapping path="/user/modifyAuthCheck" />-->
+            <!--<beans:exclude-mapping path="/user//naverLogin" />-->
+            <!--<beans:exclude-mapping path="/user/googleLogin" />-->
+            <!--<beans:exclude-mapping path="/user/githubLogin" />-->
+            <!--<beans:exclude-mapping path="/user/githubcallback" />-->
+            <!--<beans:exclude-mapping path="/user/emailConfirm" />-->
+            <!--<beans:exclude-mapping path="/user/findPasswordConfirm" />-->
+            <!--<beans:exclude-mapping path="/user/logout" />-->
+            <!--<beans:exclude-mapping path="/user/register" />-->
+            <!--<beans:exclude-mapping path="/srcReply/**" />-->
+            <!--<beans:exclude-mapping path="/replies/**" />-->
+            <!--<beans:exclude-mapping path="/displayFile" />-->
             <ref bean="DestInterceptor"/>
         </beans:interceptor>
 
 
 
         <beans:interceptor>
-            <beans:mapping path="/board/*"/>
+            <beans:mapping path="/replies"/>
+            <beans:mapping path="/board/register"/>
             <beans:mapping path="/user/modifyUser"/>
             <beans:mapping path="/user/delete"/>
             <beans:mapping path="/user/myinfo"/>
