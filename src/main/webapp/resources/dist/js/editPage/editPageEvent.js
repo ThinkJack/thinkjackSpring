@@ -2,6 +2,9 @@
 //------------------------------------------------------코드 자동 적용 기능
 
 codeHtml.on("change", function () {
+    // $('#codeHtml').css("font-family", "Consolas");
+
+
     changeSaveImg(2);
     clearTimeout(delay);
 
@@ -807,4 +810,13 @@ $(function () {
     $("#console-clear").click(function () {
         editConsoleView.innerHTML = "";
     });
+});
+
+
+$(function () {
+    // $("#codeHtml").attr('style', 'font-family: Consolas, monospace'  font-size: 16px;')
+    // font-size: 16px;)
+    $('#codeHtml').css("font-family", "Consolas");
+    $('#codeHtml').css("font-size", "16");
+
 });

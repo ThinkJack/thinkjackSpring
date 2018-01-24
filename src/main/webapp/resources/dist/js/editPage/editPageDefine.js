@@ -1,8 +1,9 @@
 //코드미러 객체
 
-var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 
+var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     mode: "htmlmixed",
+
     profile: 'xhtml',
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
@@ -34,7 +35,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 
 
 var codeCss = CodeMirror(document.getElementById("codeCss"), {
-    mode: "css",
+    mode: "text/x-scss",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 괄호강조
@@ -107,6 +108,31 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
     {
+        "21": "한/영",
+        "65": "A",
+        "66": "B",
+        // "67": "C",
+        "68": "D",
+        "69": "E",
+        // "70": "F",
+        "71": "G",
+        // "72": "H",
+        "73": "I",
+        "74": "J",
+        "75": "K",
+        "76": "L",
+        "77": "M",
+        // "78": "N",
+        "79": "O",
+        // "80": "P",
+        "81": "Q",
+        "82": "R",
+        "83": "S",
+        "84": "T",
+        // "85": "U",
+        "87": "W",
+        "89": "Y",
+        "90": "Z",
         "8": "backspace",
         "9": "tab",
         "13": "enter",

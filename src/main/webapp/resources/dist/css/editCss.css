@@ -1,10 +1,15 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(https://fonts.googleapis.com/css?family=Baloo+Da);
 
+
+
+
 .bd{
     font-family: 'Baloo Da', cursive;
 }
-html, body, div, span, applet, object, iframe,
+
+html, body, div:not(#codeHtml), span,
+applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -19,6 +24,9 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
     font-family: 'Hanna', serif;
 }
+
+
+
 
 .mp{
     margin-bottom: 0;
@@ -365,6 +373,8 @@ p.err {
     height: calc(100% - 753px);
 }
 
+
+
 /* 같은단어강조 */
 .cm-matchhighlight {
     background-color: #64837e;
@@ -469,6 +479,10 @@ p.err {
     margin: 0;
 }
 
+div #codeHtml {
+    font-family: 'Consolas', monospace;
+    font-size: 16px;
+}
 /*#menu>span {*/
 /*display: block;*/
 /*font-size: 1.5em;*/

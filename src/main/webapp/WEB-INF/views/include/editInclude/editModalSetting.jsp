@@ -116,19 +116,19 @@
                         <%--</div>--%>
                         <%--<div class="tab-pane container" id="settingCss">--%>
                             <div class="row">
-                                <%--<label for="cssPreprocessor">CSS Preprocessor</label>--%>
+                                <label for="cssPreprocessor">CSS Preprocessor</label>
                                 <label >CSS Preprocessor</label>
                             </div>
-                            <%--<div class="row">--%>
-                                <%--<select id="cssPreprocessor" class="form-control">--%>
-                                    <%--<option selected>None</option>--%>
+                            <div class="row">
+                                <select id="cssPreprocessor" class="form-control">
+                                    <option selected>None</option>
                                     <%--<option>LESS</option>--%>
-                                    <%--<option>SCSS</option>--%>
+                                    <option>SCSS</option>
                                     <%--<option>Sass</option>--%>
                                     <%--<option>Stylus</option>--%>
                                     <%--<option>PostCSS</option>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
+                                </select>
+                            </div>
                             <div class="row">
                                 <label>Add External Stylesheets/Masterpieces</label>
                             </div>
