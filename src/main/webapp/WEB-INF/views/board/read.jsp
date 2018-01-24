@@ -64,7 +64,7 @@
 
                 <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
                 <a class="btn heart">
-                    <img id="heart" src="">
+                    <i id='heart' class="fa" style="color: red; font-size: 26px"></i>
                 </a>
             </div>
 
@@ -324,14 +324,12 @@
         //하트
         var heartval = ${heart};
         if (heartval > 0) {
-            // console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like2.png");
-            $(".heart").prop('name', heartval)
+            $("#heart").addClass("fa-heart");
+            $("#heart").css("color","red");
         }
         else {
-            // console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like1.png");
-            $(".heart").prop('name', heartval)
+            $("#heart").addClass("fa-heart-o");
+            $("#heart").css("color","gray");
         }
         var formObj = $("form[role='form']");
         var boardid = "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
@@ -355,19 +353,26 @@
         });
 
         $(".heart").on("click", function () {
-            var that = $(".heart");
-            var sendData = {'boardId': '${boardVO.boardId}', 'heart': that.prop('name')};
+            var heart;
+            if($("#heart").hasClass("fa-heart"))
+                heart = 1;
+            else
+                heart = 0;
+            var sendData = {'boardId': '${boardVO.boardId}','heart' :heart };
             $.ajax({
                 url: '/board/heart',
                 type: 'POST',
                 data: sendData,
                 success: function (data) {
-                    that.prop('name', data);
                     if (data == 1) {
-                        $('#heart').prop("src", "/resources/images/like2.png");
+                        $("#heart").addClass("fa-heart");
+                        $("#heart").removeClass("fa-heart-o");
+                        $("#heart").css("color","red");
                     }
                     else {
-                        $('#heart').prop("src", "/resources/images/like1.png");
+                        $("#heart").removeClass("fa-heart");
+                        $("#heart").addClass("fa-heart-o");
+                        $("#heart").css("color","gray");
                     }
                 }
             });
@@ -639,4 +644,3 @@
     });
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
-<%--<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>--%>
