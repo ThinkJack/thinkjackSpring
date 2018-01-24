@@ -199,7 +199,7 @@
     <%--슬라이드--%>
     $(function() {
         $('.scroll-down').click (function() {
-            $('html, body').animate({scrollTop: $('section.d').offset().top }, 'slow');
+            $('html, body').animate({scrollTop: $('section.c').offset().top }, 'slow');
             return false;
         });
     });
