@@ -42,7 +42,7 @@
                             <span id="reply-couont"></span>
                             <img src="/resources/images/reply24.png">
                             <span id="like-couont"></span>
-                            <img src="/resources/images/like24-2.png">
+                            <img src="/resources/images/like24-1.png" id="modalSrcLikeImg">
                         </div>
                     </div>
                     <%--설명부분(comment 가져와서 찍기)--%>

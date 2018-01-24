@@ -276,7 +276,7 @@
                     <c:if test="${status.count % 3 eq 0}">
                 </div>
                 </c:if>
-            </div>
+            <%--</div>--%>
         </div>
     </div>
     <div class="text-center">

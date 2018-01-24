@@ -24,7 +24,7 @@ public class ReplyVO {
 	private int replyLikeCnt;
 //좋아요수
 	private int replyState;
-	//삭제부분 0,1
+
 
 
     public Integer getReplyId() {

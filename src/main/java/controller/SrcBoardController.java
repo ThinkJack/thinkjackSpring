@@ -30,7 +30,7 @@ public class SrcBoardController {
             cri.setPerPageNum(6);
         }
 
-        List<SrcVO> list = srcProfileSet(request, service.srcList(cri));
+        List<SrcVO> list = srcLikeSet(request, service.srcList(cri));
         model.addAttribute("list", list);
         PageMaker pageMaker = new PageMaker();
         pageMaker.setCri(cri);
@@ -40,7 +40,7 @@ public class SrcBoardController {
     }
 
     //공통작업 메서드
-    public List<SrcVO> srcProfileSet (HttpServletRequest request, List<SrcVO> list) throws Exception{
+    public List<SrcVO> srcLikeSet (HttpServletRequest request, List<SrcVO> list) throws Exception{
         for (int i = 0; i < list.size(); i++) {
             SrcVO imsi = list.get(i);
             SrcLikeVO likeVO = new SrcLikeVO();
