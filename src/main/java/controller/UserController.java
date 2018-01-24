@@ -361,7 +361,13 @@ public class UserController {
         String test=user.getUserProfile();
         //user 정보 저장
 		String userId= user.getUserId()+"";
-		String ssuserId =session.getId()+"";
+		UserVO ssvo = (UserVO)session.getAttribute("login");
+
+		String ssuserId =ssvo.getUserId()+"";
+
+
+		//System.out.println("userId"+userId);
+		//System.out.println("ssuserId"+ssuserId);
 		if(!userId.equals(ssuserId)){
 			rttr.addFlashAttribute("msg","비정상적인 접근입니다. 경고");
 			System.out.println("uid 다름");
