@@ -149,7 +149,7 @@
 
                 success:function(data){
                     console.log("success")
-                    // alert(decodeURIComponent(data.msg))
+                    alert(decodeURIComponent(data.msg))
                     if(data.chk == "T"){
                         //alert('사용 가능한 이름입니다.' );
                         chkName=true;
