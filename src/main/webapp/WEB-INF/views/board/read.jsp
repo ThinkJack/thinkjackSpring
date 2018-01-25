@@ -194,7 +194,7 @@
                                 <a class="replyHeartBtn btn">
                                     <i class="fa  {{replyLikeIcon reHeart}}" style="font-size: 26px; {{replyLikeStyle reHeart}}"></i>
                                 </a>
-                                {{replyVO.replyLikeCnt}}k
+                                {{replyVO.replyLikecnt}}
                             </div>
                         </div>
 
