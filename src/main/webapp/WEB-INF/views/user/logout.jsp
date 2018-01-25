@@ -5,7 +5,7 @@
   <body>
   
 <script type="text/javascript">
-self.location = "/"
+self.location =window.history.go(-1);
 </script>
   
   </body>

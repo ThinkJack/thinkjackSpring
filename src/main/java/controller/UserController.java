@@ -278,7 +278,7 @@ public class UserController {
 
 			}
 		}
-		return "redirect:/";
+		return "/user/logout";
 	}
 	//mypage 페이지
     @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
