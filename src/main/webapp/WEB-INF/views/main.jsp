@@ -131,7 +131,8 @@
             <h2 class="hn text-white text-center">공지사항</h2>
             <span class="icon-cont"><i class="fa fa-rocket"></i>
 
-                 <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
+                 <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1>
+            </span>
 
             <ul class="hidden">
                 <h6 class="text-center hn">새로운 공지사항을 확인하세요</h6>
@@ -154,7 +155,7 @@
             <ul class="hidden">
                 <h6 class="text-center hn">자신의 코드를 올려보세요</h6>
                 <li >
-                    <button type="button " class="btn  btn-primary hn alignCenter" onclick="location.href='/srcBoard/srcList'">Go</button>
+                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/srcBoard/srcList'">Go</button>
                 </li>
             </ul>
 
@@ -199,7 +200,7 @@
     <%--슬라이드--%>
     $(function() {
         $('.scroll-down').click (function() {
-            $('html, body').animate({scrollTop: $('section.d').offset().top }, 'slow');
+            $('html, body').animate({scrollTop: $('section.c').offset().top }, 'slow');
             return false;
         });
     });

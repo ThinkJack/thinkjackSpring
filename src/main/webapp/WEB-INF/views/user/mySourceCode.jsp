@@ -53,6 +53,13 @@
         cursor: pointer;
     }
 
+    .ellipsis{
+        /*text-align: center;*/
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+
 </style>
 <script>
     //필요한 댓글 개수 부분
@@ -93,7 +100,7 @@
                         <div class="input-group-prepend" style="width: 100%;">
                             <%--<div class="form-group ">--%>
                             <label class="mr-1 mt-2" for="sel1">Select list:</label>
-                            <select class="custom-select bd" name="searchType" id="sel1">
+                            <select class="custom-select  col-2" name="searchType" id="sel1">
                                 <option value="n"
                                         <c:out value="${cri.searchType == null?'selected':''}"/> >
                                     ---
@@ -103,7 +110,7 @@
                                     Title
                                 </option>
                             </select>
-                            <input type="text" class="form-control bd" placeholder="Search" name="keyword"
+                            <input type="text" class="form-control bd col-10" placeholder="Search" name="keyword"
                                    id="keywordInput"
                                    value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-append">
@@ -112,38 +119,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="row search_div bd">
+                <div class=" search_div bd">
                     <c:forEach var="srcVo" items="${list}" varStatus="status">
                         <c:if test="${status.count % 3 eq 1}">
                             <div class="row">
                         </c:if>
                         <div class="col">
-                            <div class="card">
+                            <div class="card hn">
                                     <%--<img class="card-img-top" src="" alt="Card image cap">--%>
                                 <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                                     <iframe class="card-img-top" frameborder="0" scrolling="no" id="${srcVo.srcId}">
                                     </iframe>
                                 </div>
 
-                                <div class="card-body" style="overflow-y:scroll; width:100%; height:45px; ">
+                                <div class="card-body" style=" width:100%; height:45px; ">
                                         <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
-                                    <h5 class="hn mb-0" id="src-title1" data>${srcVo.srcTitle}</h5>
-                                    <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>
+                                    <h5 class="hn mb-0 ellipsis"   id="src-title1" data>${srcVo.srcTitle}</h5>
+                                    <p class="card-text hn ellipsis" id="src-comments1">${srcVo.srcComments}</p>
                                 </div>
-                                <div class="card-body mb-0  pb-0"
-                                     style="padding-left:10px; padding-right:7px; height:70px; overflow-y:scroll;">
+                                <div class="card-body mb-0  pb-0" style="padding-left:10px; padding-right:7px; height: 70px;" >
                                     <div class="row removePadding ">
-                                        <img class="col-2 src_icon removePadding rounded-circle"
-                                             src="/resources/images/123.gif" style="width:44.5px; height:44.5px;  "
-                                             id="${srcVo.srcId}img"
-                                             onclick="location.href='/edit/editPage/${srcVo.srcId}';">
-                                        <a href="/edit/editPage/${srcVo.srcId}"
-                                           class="col-9 ml-3 card-link removePadding hn"
-                                           id="src-writer2">${srcVo.srcWriterName}</a>
+                                        <div class="col-4">
+                                            <img class=" src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
+                                                 onclick="location.href='/edit/editPage/${srcVo.srcId}';">
+                                        </div>
+                                        <a href="/edit/editPage/${srcVo.srcId}" class=" ml-3 card-link removePadding ellipsis" id="src-writer2">${srcVo.srcWriterName}</a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-
 
                                         <%--<img class="src_icon" src="" style="width:20px; height:20px;" id="${srcVo.srcId}img"--%>
                                         <%--onclick="location.href='/edit/editPage/${srcVo.srcId}';">--%>
@@ -276,6 +279,7 @@
                     <c:if test="${status.count % 3 eq 0}">
                 </div>
                 </c:if>
+                <%--</div>--%>
             </div>
         </div>
     </div>
@@ -308,6 +312,7 @@
             </c:if>
         </ul>
     </div>
+
     <script>
         $(document).ready(function () {
             $('#search-btn').click(function (e) {
@@ -324,8 +329,12 @@
 
         })
     </script>
+
+    <div class="deaf2"></div>
+
 </div>
-<div class="deaf2"></div>
 </div>
 </div>
+</div>
+
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>

@@ -197,10 +197,6 @@ public class SrcServiceImpl implements SrcService {
     @Override
     public List<SrcVO> srcList(SearchCriteria cri) throws Exception {
 
-//        if(cri.getSearchType().equals("w") || cri.getSearchType().equals("tw")){
-//            //키워드에서 user검색시 name값 처리해서 id 가져오는 로직 추가필요
-//
-//        }
 
         List list = srcdao.selectSrcList(cri);
 

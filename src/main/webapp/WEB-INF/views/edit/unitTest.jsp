@@ -16,55 +16,43 @@
             margin-bottom: auto;
             line-height: 1;
         }
-
         .col-6, .col-12 {
             padding-right: 0px;
             padding-left: 0px;
         }
-
         .err {
             color: red;
         }
-
         .right_view {
             height: calc(100% - 50px);
             overflow: auto;
-    }
-
+        }
         .input_box {
             width: 80px;
         }
-
         /*.console_body{}*/
         .whole {
             height: 100%;
             padding-top: 78px;
             padding-bottom: 50px;
         }
-
         .right {
             height: 50%;
         }
-
         #codeUnitTest {
             height: 100%;
             padding-bottom: 40px;
         }
-
         #frameUnitTest {
             height: 0px;
             width: 0px;
-
         }
-
         .CodeMirror {
             height: 100%;
         }
-
         .container-fluid {
             overflow: hidden;
         }
-
     </style>
 </head>
 <body class="container-fluid">
@@ -142,8 +130,6 @@
         var javascriptCode = codeUnitTest.getValue();
         if ($("#autoremove").prop("checked"))
             $("#test-case").empty();
-
-
         try {
             out.open();
             out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
@@ -151,8 +137,6 @@
         } catch (err) {
             console.log(err);
         }
-
-
         var pos = 0;
         functions = new Array();
         while (pos !== -1) {
@@ -161,14 +145,11 @@
             functions.push(javascriptCode.substring(javascriptCode.indexOf('function') + 8, javascriptCode.indexOf('(')));
             pos = javascriptCode.indexOf('function', pos + 1);
         }
-
         $("#functions").empty();
         $("#functions").append("<option>" + "------" + "</option>");
         for (var i = 0; i < count; i++)
             $("#functions").append("<option>" + functions[i] + "</option>");
-
     });
-
     codeUnitTest.setValue(
         "function test1(){\n" +
         "   return 0;\n" +
@@ -180,7 +161,6 @@
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
-
         var functionLength = frame.contentWindow.eval($('#functions').val() + ".length");
         var inputbox = "";
         for (var i = 0; i < functionLength; i++)
@@ -196,13 +176,9 @@
             "<button class='btn btn-outline-danger delete_case mx-1'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
-
         $("#case").width(400 +(functionLength * 90));
         $("#case").prop("id","case"+caseNum);
-
-
     });
-
     function codeTest(input, output) {
         var startTime = getTimeStamp();
         try {
@@ -214,20 +190,16 @@
                 + (inputResult === output ? "성공" : "실패")
                 + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)"
                 + "</div>");
-
         } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>");
         }
     }
-
     function getTimeStamp() {
         return new Date().getMilliseconds();
     }
-
     $(document).on("click", ".test_one", function () {
         var inputs = $(this).parent().find(".inputs");
         var testArguments = "";
-
         for (var i = 0; i < inputs.length; i++) {
             try{
                 frame.contentWindow.eval(inputs[i].value);
@@ -248,20 +220,14 @@
             output += "\"" + outputs[0].value + "\""
         }
         codeTest(testArguments, output);
-
     });
-
-
     $(document).on("click", ".delete_case", function () {
         $(this).parent().remove();
-
     });
-
     $(document).on("click", "#delete-all", function () {
         // $("#resultView").empty();
         $("#test-case").empty();
     });
-
     $(document).on("click", "#clear-result-view", function () {
         $("#resultView").empty();
     });
@@ -272,21 +238,15 @@
         $("#resultView").append("<div class='resultLog'> "
             + "모든 케이스를 모두 완료했습니다. (소요시간  : "
             + (getTimeStamp() - startTime) + "ms)" + "</div>");
-
     });
     $(document).ready(function () {
         $("#test-case").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
-
         });
-
         $("#resultView").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
-
         });
     });
-
-
 </script>
 </body>
 </html>
