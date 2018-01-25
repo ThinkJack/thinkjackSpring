@@ -42,16 +42,14 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right ">
+            <%--코드 실행 버튼--%>
             <li class="nav-item active run" id="run">
                 <div>
                     <a class="btn btn-primary" href="javascript:;">
-                        <img src="/resources/images/reload.png"> Run
-                    </a>`
+                        <i class="fa fa-refresh" style="color: gray; font-size: 20px;"></i> Run
+                    </a>
                 </div>
             </li>
-            <script>
-                <%--alert('${(SrcVO.srcId eq '')}' !== '');--%>
-            </script>
             <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
                         ((login ne null) and (SrcVO.srcId eq null)) or
                         ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
@@ -59,7 +57,8 @@
                 <li class="nav-item active">
                     <div>
                         <a class="btn  btn-primary" href="javascript:;" id="saveCode">
-                            <img src="/resources/images/cloud1.png" id="save-img"> Save
+                            <i class="fa fa-cloud" style="color: gray; font-size: 20px;" id="save-img"></i> Save
+                            <%--<img src="/resources/images/cloud1.png" > --%>
                         </a>
                     </div>
                 </li>
@@ -69,7 +68,8 @@
                     <div>
                         <!-- 좋아요 버튼 -->
                         <a class="btn  btn-primary" href="javascript:;" id="like">
-                            <img src="/resources/images/like1.png" id="likebt"> Like
+                            <i class="fa fa-heart" style="color: gray; font-size: 20px;" id="likebt"></i> Like
+                            <%--<img src="/resources/images/like1.png" > --%>
                         </a>
                     </div>
                 </li>
@@ -77,7 +77,8 @@
             <li class="nav-item active">
                 <div>
                     <a class="btn btn-primary" href="javascript:;" data-toggle="modal" data-target="#setting">
-                        <img src="/resources/images/setting.png"> Setting
+                        <i class="fa fa-cog" style="color: gray; font-size: 20px;"></i>Setting
+                        <%--<img src="/resources/images/setting.png"> --%>
                     </a>
                 </div>
             </li>
@@ -105,7 +106,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img  class="rounded-circle Photo " id="profileHeader" src="" ></a>
+                        <img  class="rounded-circle Photo " id="profileHeader" src="" style="width:38px; height:38px;"></a>
 
                     <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-100px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item hn">${login.userName}</a>

@@ -40,10 +40,9 @@ public class SrcFileSet{
         while (true) {
             String line = reader.readLine();
             if(line == null) {
-                str += "\\n";
                 break;
             }
-            str += line;
+            str += line + "\\n";
         }
         return str;
     }

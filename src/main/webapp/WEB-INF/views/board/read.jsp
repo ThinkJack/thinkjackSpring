@@ -196,12 +196,14 @@
                             {{#if reHeart}}
                             <%--reHeart값이 있을떄--%>
                             <a class="replyHeartBtn btn" name=1>
-                                <img class="reHeart" src="/resources/images/like2.png">
+                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
                             </a>
                             <span> {{replyVO.replyLikeCnt}}</span>
                             {{else}}
                             <a class="replyHeartBtn btn" name=0>
-                                <img class="reHeart" src="/resources/images/like1.png">
+                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
                             </a>
                             <span>{{replyVO.replyLikeCnt}}</span>
                             {{/if}}
@@ -255,12 +257,14 @@
                             {{#if reHeart}}
                             <%--reHeart값이 있을떄--%>
                             <a class="replyHeartBtn btn" name=1>
-                                <img class="reHeart" src="/resources/images/like2.png">
+                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
                             </a>
                             <span> {{replyVO.replyLikeCnt}}</span>
                             {{else}}
                             <a class="replyHeartBtn btn" name=0>
-                                <img class="reHeart" src="/resources/images/like1.png">
+                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
                             </a>
                             <span>{{replyVO.replyLikeCnt}}</span>
                             {{/if}}
@@ -297,7 +301,7 @@
             <div class="demo row mt-3 " name="demo" style="display: none">
 
                 <div class="col-md-10 removePadding " style="float: left">
-                    <textarea class="form-control replyTextReply hn" rows="3">대댓글 입력하세요</textarea>
+                    <textarea class="form-control replyTextReply hn" rows="3" placeholder="대댓글 입력하세요"></textarea>
                 </div>
                 <div class="col-md-2 removePadding " style="float:right;">
                     <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">등록</button>

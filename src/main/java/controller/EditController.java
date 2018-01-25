@@ -30,8 +30,6 @@ public class EditController {
     @Inject
     private SrcService service;
 
-    @Inject
-    private UserService userService;
     //----------------------------------------------------------------------src 부분
     @RequestMapping(value = "/editPage", method = RequestMethod.GET)
     public void newEditView(HttpSession session, Model model)throws Exception {

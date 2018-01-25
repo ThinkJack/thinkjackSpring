@@ -73,11 +73,11 @@
         });
     };
     //필요한 변수 정의 부분
-    var imgPath = "/resources/images/";
 
     //필요한 함수 정의 부분
-    function likeImgChange(elId, num) {
-        $(elId).attr("src", imgPath + "like" + num + ".png");
+    function likeImgChange(elId, kinds, color) {
+        $(elId).addClass(kinds);
+        $(elId).css("color", color);
     }
 </script>
 <div class="deaf2"></div>
@@ -159,9 +159,9 @@
                                     $("#${srcVo.srcId}img").attr("src", filePathChange("${srcVo.srcWriterImgPath}", true));
                                     </c:if>
                                     //                        좋아요 이미지 작업
-                                    <c:if test="${srcVo.srclikeCli eq 1}">
-                                    $("#${srcVo.srcId}like").attr("src", "/resources/images/like24-2.png");
-                                    </c:if>
+                                    <%--<c:if test="${srcVo.srclikeCli eq 1}">--%>
+                                    <%--$("#${srcVo.srcId}like").attr("src", "/resources/images/like24-2.png");--%>
+                                    <%--</c:if>--%>
 
                                     $(function () {
                                         $("#${srcVo.srcId}like").click(function (e) {
@@ -180,10 +180,10 @@
                                                 success: function (success) {
                                                     if (success.result === 0) {
                                                         //좋아요 추가시
-                                                        likeImgChange("#${srcVo.srcId}like", 2);
+                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart", "red");
                                                     } else {
                                                         //좋아요 취소시
-                                                        likeImgChange("#${srcVo.srcId}like", 1);
+                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart-0", "gray");
                                                     }
 
                                                     document.getElementById("${srcVo.srcId}likecnt").innerHTML = success.srcLikeCnt;
@@ -197,28 +197,23 @@
                             <div class="card-body">
                                 <div class="row fl-right ml-auto ">
                                     <c:if test="${srcVo.srclikeCli eq '1'}">
-                                        <img class="fl-right src_icon" src="/resources/images/like24-2.png" id="${srcVo.srcId}like"
-                                             style="width:20px; height:20px;">
+                                        <i class="fa fa-heart" style="color: red; font-size: 20px;" id="${srcVo.srcId}like"></i>
                                     </c:if>
                                     <c:if test="${srcVo.srclikeCli eq '0'}">
-                                        <img class="fl-right src_icon" src="/resources/images/like24-1.png" id="${srcVo.srcId}like"
-                                             style="width:20px; height:20px;">
+                                        <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="${srcVo.srcId}like"></i>
                                     </c:if>
 
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                       id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
+                                       id="${srcVo.srcId}likecnt"> ${srcVo.srcLikecnt}</a>
 
-                                    <img class="fl-right src_icon" src="/resources/images/reply24.png"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
-                                         style="width:20px; height:20px;">
+                                    <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
                                     <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
                                         <script>getPage("${srcVo.srcId}")</script>
                                     </a>
 
-                                    <img class="fl-right src_icon" src="/resources/images/view24.png"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';" style="width:20px; height:20px;">
+                                    <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                       id="src-viewcnt2">${srcVo.srcViewcnt}</a>
+                                       id="src-viewcnt2"> ${srcVo.srcViewcnt}</a>
                                 </div>
                             </div>
                         </div>

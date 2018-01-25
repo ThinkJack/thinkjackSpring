@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/resources/dist/css/_bootswatch.scss">
 <link rel="stylesheet" href="/resources/dist/css/_variables.scss">
 <link rel="stylesheet" href="/resources/dist/css/tether.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.css" />--%>
 <!-- 코드미러 -->
