@@ -41,7 +41,7 @@
         <!-- Dest 관련 인터셉터-->
         <beans:interceptor>
             <beans:mapping path="/board/*"/>
-            <beans:mapping path="/srcboard/*"/>
+            <beans:mapping path="/srcBoard/*"/>
             <beans:mapping path="/edit/*"/>
             <!--<beans:mapping path="/**"/>-->
             <!--<beans:exclude-mapping path="/resources/**" />-->
