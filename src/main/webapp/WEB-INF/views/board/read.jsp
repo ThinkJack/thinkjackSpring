@@ -103,7 +103,7 @@
     <div class="col-md-3"></div>
 </div>
 <div class="row removePadding ">
-<div class="col-md-3"></div>
+<div class="col-md-3" style="margin: 0px"></div>
 <c:set var="name" value="${category}"/>
 <c:if test="${name ne 'notice'}">
 
@@ -119,20 +119,18 @@
                         <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
                                readonly="readonly">
                             <%--댓글 입력 부분--%>
-                        <div class="form-group ">
-                            <textarea class="form-control replyTextReply hn" rows="3" placeholder="댓글 입력하세요"></textarea>
-                        </div>
+                        <textarea class="form-control replyTextReply hn" rows="4" placeholder="댓글 입력하세요"></textarea>
                     </div>
                     <div class="col-md-2  removePadding ">
                             <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록
+                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:150px;">등록
                         </button>
                     </div>
                 </div>
             </div>
 
         </c:if>
-        <div class="row m-3">
+        <div class="row mt-3">
                 <%--입력된 댓글 목록 나타나는 부분--%>
 
                 <%--<ul class="replies"></ul>--%>
@@ -151,7 +149,7 @@
         </div>
 
     </div>
-    <div class="col-md-2 widthFull4"></div>
+    <div class="col-md-2"></div>
     </div>
     <%--댓글 반복문 부분--%>
     <script>
@@ -178,49 +176,42 @@
                 <%--하트 버튼(좋아요)--%>
                 <%--댓글 부분--%>
             <div class="row removePadding registerReply card-header   text-white" style="background-color:#2c2c2c">
-                <div class="col-md-2 mt-3 mb-3">
+                <div class="row col-md-10 removePadding">
                         <%--사진--%>
-                    <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
-                </div>
-                <div class="col-md-10 mt-3 mb-3">
-                    <strong class="title">
+                    <div class="col-12 removePadding">
+                        <div style="display :flex; float:left">
+                            <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
+
+                        </div>
+
+
                             <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
-                            <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register hn" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
+                        <div style="display :flex; float: right;">
+                                <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
+                            <div style="text-align: right">
+                                <span class="time bd">{{prettifyDate  replyVO.replyRegdate}}</span>
+                                <a class="replyHeartBtn btn">
+                                    <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                </a>
+                            </div>
+                        </div>
 
-                            <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
-                        <span style="float: right" class="bd">
-                            {{#if reHeart}}
-                            <%--reHeart값이 있을떄--%>
-                            <a class="replyHeartBtn btn" name=1>
-                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
-                            </a>
-                            <span> {{replyVO.replyLikeCnt}}</span>
-                            {{else}}
-                            <a class="replyHeartBtn btn" name=0>
-                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
-                            </a>
-                            <span>{{replyVO.replyLikeCnt}}</span>
-                            {{/if}}
-                        </span>
-                        <span class="time bd" style="float: right;margin-top: 10px;">{{prettifyDate  replyVO.replyRegdate}}</span>
-                    </strong>
-                </div>
-                <div class="col-md-2 mt-3 mb-3">
-                </div>
-                <div class="col-md-8 mt-3 mb-3">
-
-                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
+                        <div style="display: flex; align-items: center; height: 100px;">
+                            <div style="text-align: left">
+                                <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
+                                    <%--replyId와 replyWriter 나타나는 부분--%>
+                                <span class="replyWriter register hn">{{replyVO.replyWriter}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment" style="overflow:auto; width:100%; height:150px; padding:14px">
                             <%--입력된 댓글 text부분--%>
                             <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
                         <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
                                   style="display: none">{{replyVO.replyText}}</textarea>
-                        <spna class="textSpan ">{{replyVO.replyText}}</spna>
+                        <spna class="textSpan form-control" style="height: 100%;">{{replyVO.replyText}}</spna>
                     </div>
                 </div>
-
 
                 <div class="col-md-2">
                     {{#ifCond loginUser replyVO.replyWriter}}
@@ -230,7 +221,9 @@
                     <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
 
                     {{/ifCond}}
-                    <button type="button" class="btn btn-info demoReply hn" style="width: 90%;">답글</button>
+                    <button type="button" class="btn btn-info demoReply hn m3"
+                            style="width: 90%; ">답글
+                    </button>
                 </div>
                     <%--버튼 누르면 나오게 하기--%>
             </div>
@@ -556,7 +549,13 @@
 //  자바스크립트 객체 형태로 전달
 
         var heart_replyid = $(this).parent().parent().parent().find('.replyId').text();
-        var heart = $(this).prop('name');
+        var heart;
+        var that = $(this).find("i");
+        if($(this).find("i").hasClass("fa-heart"))
+            heart = 1;
+        else
+            heart = 0;
+
         var sendLike = {'replyId': heart_replyid, 'replyHeart': heart};
 //
 //         console.log('/replies/heart/' + heart_replyid + '/' + heart);
@@ -568,16 +567,15 @@
             contentType: "application/json",
             success: function (data) {
                 // console.log("하트 전송?"+data);
-                $(this).prop('name', data);
                 if (data == 1) {
-                    // console.log("전송되어온 하트"+data);
-                    $(this).children().prop("src", "/resources/images/like2.png");
-                    getPage("/replies/" + boardId + "/" + replyPage);
+                    that.addClass("fa-heart");
+                    that.removeClass("fa-heart-o");
+                    that.css("color", "red");
                 }
                 else {
-                    // console.log("전송되어온 하트값 0일때"+data);
-                    $(this).children().prop("src", "/resources/images/like1.png");
-                    getPage("/replies/" + boardId + "/" + replyPage);
+                    that.removeClass("fa-heart");
+                    that.addClass("fa-heart-o");
+                    that.css("color", "gray");
                 }
             }
         });

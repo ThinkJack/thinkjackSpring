@@ -87,7 +87,6 @@ public class ReplyController {
                           @PathVariable int replyId,
                           @PathVariable int replyHeart) throws Exception {
 
-        System.out.println(replyHeart);
         int reHeart= replyHeart;
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
