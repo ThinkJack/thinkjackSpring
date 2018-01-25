@@ -40,9 +40,9 @@
 
     <div class="grid ">
 
-        <div class="pointB col-6 " style="display: none">
+        <div class="pointB col-6 " style="display: none ;margin-top: 15%;height:45%;">
             <iframe width="100%" height="100%"
-                    src="/resources/test1.mp4">
+                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%;padding-left: 10%">
             </iframe>
         </div>
 
@@ -67,9 +67,9 @@
             </div>
 
         </div>
-        <div class="pointA col-6 " style="display: none" >
+        <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;" >
             <iframe width="100%" height="100%"
-                    src="/resources/test1.mp4">
+                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%" >
             </iframe>
         </div>
 
