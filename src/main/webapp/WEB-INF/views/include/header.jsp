@@ -3,6 +3,10 @@
 
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="http://
+    /resources/images/favicon/idea.ico" type="image/x-icon" />
+    <link rel="icon"  href="http:///resources/images/favicon/idea.ico"  type="image/x-icon"  />
+        <title>rnasterpiece</title>
     <!--필수 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
