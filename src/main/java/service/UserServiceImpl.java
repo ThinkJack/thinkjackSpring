@@ -92,9 +92,9 @@ public class UserServiceImpl implements UserService {
 		try {
 			String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
 			String rawPw = dto.getUserPassword();
-			System.out.println("db pW  : "+pw);
-			System.out.println("입렵Pw:"+rawPw);
-			System.out.println(passwordEncoder.matches(rawPw, pw));
+			//System.out.println("db pW  : "+pw);
+			//System.out.println("입렵Pw:"+rawPw);
+			//System.out.println(passwordEncoder.matches(rawPw, pw));
 			if(passwordEncoder.matches(rawPw, pw)) {
 				System.out.println("비밀번호 일치");
 				dto.setUserPassword(pw);

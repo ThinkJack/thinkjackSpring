@@ -57,7 +57,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			return;
 		}
 
-		if(vo.getUserState()==1) {
+		if(vo.getUserState()==1||vo.getUserState()==9) {
 			session.setAttribute(LOGIN, userVO);
 			//response.sendRedirect("/");
 			//System.out.println(userVO);

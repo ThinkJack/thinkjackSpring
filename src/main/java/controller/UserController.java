@@ -237,10 +237,15 @@ public class UserController {
 			System.out.println("탈퇴");
 			model.addAttribute("userVO",vo);
 			return;
+		}else if(vo.getUserState()==9) {
+			rttr.addFlashAttribute("msg", "관리자 계정입니다. \n 환영합니다.");
+			System.out.println("관리자 로그인");
+			model.addAttribute("userVO", vo);
+			return;
 		}
-
 		//System.out.println("usercontroller vo =" +vo);
 		model.addAttribute("userVO",vo);
+
 		//rttr.addFlashAttribute("msg","로그인 되었습니다.");
 		//System.out.println(vo);
 
