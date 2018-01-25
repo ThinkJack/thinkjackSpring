@@ -98,9 +98,9 @@
                 <li class="nav-item dropdown pointer ">
                     <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">  Service</a>
                     <div class="dropdown-menu pointerA hn" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 50px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href="/edit/editPage">Edit</a>
+                        <a class="dropdown-item" href="/edit/editPage">Editor</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/edit/unitTest">Unit Test</a>
+                        <a class="dropdown-item" href="/edit/unitTest">UnitTest</a>
                     </div>
                 </li>
 

@@ -14,11 +14,7 @@
             height: 28px;
             margin-top: auto;
             margin-bottom: auto;
-        }
-
-        .input-group-addon{
-            font-size: 20px;
-            line-height: 2;
+            line-height: 1;
         }
 
         .col-6, .col-12 {
@@ -92,10 +88,10 @@
     <div class="col-6">
         <div class="col unit_test right">
             <div class="col-12 row justify-content-between">
-                <div class="col-4 row justify-content-start">
+                <div class="col-3 row justify-content-start">
                     <p class="h4 text-white code-name bd">TestCase</p>
                 </div>
-                <div class="col-8 row justify-content-end my-1 ">
+                <div class="col-9 row justify-content-end my-1" style="padding: 0px">
                     <select id="functions" class="mx-1"><
                         <option>------</option>
                     </select>
@@ -153,7 +149,7 @@
             out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
             out.close();
         } catch (err) {
-            // console.log(err);
+            console.log(err);
         }
 
 
@@ -177,8 +173,9 @@
         "function test1(){\n" +
         "   return 0;\n" +
         "}");
-
+    var caseNum = 0;
     $(document).on("click", "#add-test-case", function () {
+        caseNum++;
         if ($('#functions').val() === "------") {
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
@@ -187,17 +184,23 @@
         var functionLength = frame.contentWindow.eval($('#functions').val() + ".length");
         var inputbox = "";
         for (var i = 0; i < functionLength; i++)
-            inputbox += "<input type='text' class='form-control input_box inputs' />";
+            inputbox += "<input type='text' class='form-control input_box inputs mx-1' />";
         var testCases =
-            "<div class='row case m-2 text-white'>" +
-            "<span class='input-group-addon'>input : </span>" +
+            "<div id='case' class='row case m-2 text-white'>" +
+            "<span class='input-group-addon mx-1' style='line-height: 1.5'>[ input : </span>" +
             inputbox +
-            "<span  class='input-group-addon'>output : </span>" +
-            "<input type='text' class='form-control input_box output' />" +
-            "<button class='btn btn-outline-info test_one'>TEST</button>" +
-            "<button class='btn btn-outline-danger delete_case'>DELETE</button>" +
+            "<span  class='input-group-addon mx-1' style='line-height: 1.5'>] [ output : </span>" +
+            "<input type='text' class='form-control input_box output mx-1' />" +
+            "<span  class='input-group-addon mx-1' style='line-height: 1.5'> ]</span>" +
+            "<button class='btn btn-outline-info test_one mx-1'>TEST</button>" +
+            "<button class='btn btn-outline-danger delete_case mx-1'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
+
+        $("#case").width(400 +(functionLength * 90));
+        $("#case").prop("id","case"+caseNum);
+
+
     });
 
     function codeTest(input, output) {
@@ -226,20 +229,24 @@
         var testArguments = "";
 
         for (var i = 0; i < inputs.length; i++) {
-            if (isNaN(inputs[i].value * 1))
-                testArguments += "\"" + inputs[i].value + "\"";
-            else
+            try{
+                frame.contentWindow.eval(inputs[i].value);
                 testArguments += inputs[i].value;
-            if (inputs.length - 1 !== i)
-                testArguments += ",";
+            }catch (notDefind){
+                testArguments += "\"" + inputs[i].value + "\""
+            }finally {
+                if (inputs.length - 1 !== i)
+                    testArguments += ",";
+            }
         }
         var outputs = $(this).parent().find(".output");
         var output;
-        if (isNaN(outputs[0].value * 1))
-         output = outputs[0].value;
-        else
-            output = outputs[0].value * 1;
-
+        try{
+            frame.contentWindow.eval(outputs[0].value);
+            output = outputs[0].value;
+        }catch (notDefind){
+            output += "\"" + outputs[0].value + "\""
+        }
         codeTest(testArguments, output);
 
     });
