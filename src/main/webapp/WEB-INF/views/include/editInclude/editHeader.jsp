@@ -111,8 +111,10 @@
                     <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <img  class="rounded-circle Photo " id="profileHeader" src="" style="width:38px; height:38px;"></a>
 
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-100px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item hn">${login.userName}</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-60px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="eclipsis pl-4" style="width:70% ">
+                            <a class=" hn " >${login.userName}</a>
+                        </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
                         <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
