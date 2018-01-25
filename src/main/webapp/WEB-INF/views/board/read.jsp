@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -42,7 +42,8 @@
     .card-header.text-white {
         /*background-color: black;*/
     }
-    textarea{
+
+    textarea {
         width: 100%;
     }
 
@@ -62,24 +63,25 @@
         <div class="box-body m-3">
             <div style="float:right;">
 
-                <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
+                <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+                                                              value="${boardVO.boardRegdate}"/> </label>
                 <a class="btn heart">
                     <i id='heart' class="fa" style="color: red; font-size: 26px"></i>
                 </a>
             </div>
 
             <div class="form-group text-white bd" style="margin-top: 10px;">
-                <label  style="font-size:1.35rem;" >Title</label>
+                <label style="font-size:1.35rem;">Title</label>
                 <input type="text" name='title' class="form-control inputC hn" value="${boardVO.boardTitle}"
-                       readonly="readonly" />
+                       readonly="readonly"/>
             </div>
             <div class="form-group text-white bd">
-                <label  style="font-size:1.35rem;">Content</label>
+                <label style="font-size:1.35rem;">Content</label>
                 <textarea type="text" name='content' class="form-control inputC hn" rows="12"
                           readonly="readonly" style="padding-top: 20px;">${boardVO.boardContent}</textarea>
             </div>
             <div class="form-group text-white bd">
-                <label  style="font-size:1.35rem;" >Writer</label>
+                <label style="font-size:1.35rem;">Writer</label>
                 <div class="form-control" style="background: white">
                     <img id='writerProfile' class="rounded photo2">
                     <label class="hn ml-3" style="color: black;">${boardVO.boardWriter}</label>
@@ -101,9 +103,9 @@
     <div class="col-md-3"></div>
 </div>
 <div class="row removePadding ">
-    <div class="col-md-3"></div>
-    <c:set var="name" value="${category}" />
-    <c:if test="${name ne 'notice'}">
+<div class="col-md-3"></div>
+<c:set var="name" value="${category}"/>
+<c:if test="${name ne 'notice'}">
 
     <div class="col-md-6 removePadding ">
         <c:if test="${login.userName != null}">
@@ -112,7 +114,7 @@
                 <h2 class="bd m-2"> Comment</h2>
 
                 <div class="row m-3">
-                    <div class="col-md-10" >
+                    <div class="col-md-10">
                             <%--댓글 등록하는 아이디(--%>
                         <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
                                readonly="readonly">
@@ -123,24 +125,25 @@
                     </div>
                     <div class="col-md-2  removePadding ">
                             <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록</button>
+                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록
+                        </button>
                     </div>
                 </div>
             </div>
 
         </c:if>
         <div class="row m-3">
-            <%--입력된 댓글 목록 나타나는 부분--%>
+                <%--입력된 댓글 목록 나타나는 부분--%>
 
-            <%--<ul class="replies"></ul>--%>
+                <%--<ul class="replies"></ul>--%>
             <ul class="timeline col-md-12">
 
-                <%--버튼을 클릭하면 댓글목록이 나온다--%>
+                    <%--버튼을 클릭하면 댓글목록이 나온다--%>
                 <li class="time-label repliesDiv">
 
-                    <%--<button type="button" class=""> Replies List </button>--%>
+                        <%--<button type="button" class=""> Replies List </button>--%>
                 </li>
-                <%--페이지네이션 부분--%>
+                    <%--페이지네이션 부분--%>
                 <div class='text-center mb-5'>
                     <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
                 </div>
@@ -149,126 +152,55 @@
 
     </div>
     <div class="col-md-2 widthFull4"></div>
-</div>
-<%--댓글 반복문 부분--%>
-<script>
-    $(document).ready(function () {
+    </div>
+    <%--댓글 반복문 부분--%>
+    <script>
+        $(document).ready(function () {
 
-        Handlebars.registerHelper('ifCond', function (v1, v2, options) {
-            if (v1 === v2) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
+            Handlebars.registerHelper('ifCond', function (v1, v2, options) {
+                if (v1 === v2) {
+                    return options.fn(this);
+                }
+                return options.inverse(this);
+            });
+
         });
-
-    });
-</script>
-<script class="template" type="text/x-handlebars-template">
+    </script>
+    <script class="template" type="text/x-handlebars-template">
 
     {{#each .}}
     <li class="replyLi" data-replyId={{replyId}}>
 
         <div class="timeline-item card border-light mb-3">
-            <%--댓글이 삭제되었는지 확인--%>
+                <%--댓글이 삭제되었는지 확인--%>
             {{#if replyVO.replyState}}
-            <%-- 조건문으로 parent값 있는것을 구분한다--%>
-            <%--하트 버튼(좋아요)--%>
-            {{#if replyVO.replyParent}}
-            <%--<div class="registerReply"  >--%>
-            <div class="row removePadding registerReply card-header text-white" style="background-color:gray">
-
-                <div class="col-md-1" style="background-color: white;">
-                    <i class="fa fa-reply fa-rotate-180" aria-hidden="true" style="color: grey"></i>
-                </div>
-                <div class="col-md-2 mt-3 mb-3">
-                    <%--사진--%>
-                    <input type="hidden" class="replyHeart" value="{{reHeart}}">
-                    <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
-                </div>
-
-                <div class="col-md-9 mt-3 mb-3">
-                    <strong class="title ">
-
-                        <%--replyId 불러오기 위해 필요한 부분--%>
-                        <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
-                        <input type="hidden" class="reParent" value="{{replyParent}}">
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register hn" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
-
-                        <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
-                        <span style="float: right" class="bd">
-                            {{#if reHeart}}
-                            <%--reHeart값이 있을떄--%>
-                            <a class="replyHeartBtn btn" name=1>
-                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
-                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
-                            </a>
-                            <span> {{replyVO.replyLikeCnt}}</span>
-                            {{else}}
-                            <a class="replyHeartBtn btn" name=0>
-                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
-                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
-                            </a>
-                            <span>{{replyVO.replyLikeCnt}}</span>
-                            {{/if}}
-                        </span>
-                        <span class="time bd" style="float: right;margin-top: 10px;">{{prettifyDate  replyVO.replyRegdate}}</span>
-                    </strong>
-                </div>
-                <div class="col-md-1" style="background-color: white;">
-                </div>
-                <div class="col-md-2 mt-3 mb-3"></div>
-                <div class="col-md-7 mt-3 mb-3">
-
-                    <div class="comment" style="overflow:auto; width:100%; height:150px;">
-                        <%--입력된 댓글 text부분--%>
-
-                        <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
-                                  style="display: none">{{replyVO.replyText}}</textarea>
-                        <spna class="textSpan ">{{replyVO.replyText}}</spna>
-
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    {{#ifCond loginUser replyVO.replyWriter}}
-
-                    <button type="button" class="btn btn-warning replyModBtn hn" style="width: 90%;">수정</button>
-
-                    <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
-
-                    {{/ifCond}}
-                </div>
-            </div>
-
-            {{else}}
-            <%--댓글 부분--%>
+                <%-- 조건문으로 parent값 있는것을 구분한다--%>
+                <%--하트 버튼(좋아요)--%>
+                <%--댓글 부분--%>
             <div class="row removePadding registerReply card-header   text-white" style="background-color:#2c2c2c">
                 <div class="col-md-2 mt-3 mb-3">
-                    <%--사진--%>
+                        <%--사진--%>
                     <input type="hidden" class="replyHeart" value="{{reHeart}}">
                     <img src="{{profileImg replyVO.replyProfile}}" class="photo2 rounded">
                 </div>
                 <div class="col-md-10 mt-3 mb-3">
                     <strong class="title">
-                        <%--replyId 불러오기 위해 필요한 부분--%>
+                            <%--replyId 불러오기 위해 필요한 부분--%>
                         <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
-                        <%--replyId와 replyWriter 나타나는 부분--%>
-                        <span class="replyWriter register hn"  style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
+                            <%--replyId와 replyWriter 나타나는 부분--%>
+                        <span class="replyWriter register hn" style="font-size:1.35rem;">{{replyVO.replyWriter}}</span>
 
-                        <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
+                            <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
                         <span style="float: right" class="bd">
                             {{#if reHeart}}
                             <%--reHeart값이 있을떄--%>
                             <a class="replyHeartBtn btn" name=1>
                                 <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
-                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
                             </a>
                             <span> {{replyVO.replyLikeCnt}}</span>
                             {{else}}
                             <a class="replyHeartBtn btn" name=0>
                                 <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
-                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
                             </a>
                             <span>{{replyVO.replyLikeCnt}}</span>
                             {{/if}}
@@ -281,8 +213,8 @@
                 <div class="col-md-8 mt-3 mb-3">
 
                     <div class="comment" style="overflow:auto; width:100%; height:150px;">
-                        <%--입력된 댓글 text부분--%>
-                        <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
+                            <%--입력된 댓글 text부분--%>
+                            <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
                         <textarea class="replyText form-control" readonly value="{{replyVO.replyText}}"
                                   style="display: none">{{replyVO.replyText}}</textarea>
                         <spna class="textSpan ">{{replyVO.replyText}}</spna>
@@ -300,7 +232,7 @@
                     {{/ifCond}}
                     <button type="button" class="btn btn-info demoReply hn" style="width: 90%;">답글</button>
                 </div>
-                <%--버튼 누르면 나오게 하기--%>
+                    <%--버튼 누르면 나오게 하기--%>
             </div>
             <div class="demo row mt-3 " name="demo" style="display: none">
 
@@ -308,13 +240,13 @@
                     <textarea class="form-control replyTextReply hn" rows="3" placeholder="대댓글 입력하세요"></textarea>
                 </div>
                 <div class="col-md-2 removePadding " style="float:right;">
-                    <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">등록</button>
+                    <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">
+                        등록
+                    </button>
                 </div>
             </div>
 
         </div>
-
-        {{/if}}
 
         {{else}}
         <div class="card border-light mb-3 ">
@@ -325,7 +257,7 @@
         {{/if}}
     </li>
     {{/each}}
-    </c:if>
+</c:if>
 </script>
 
 <script>
@@ -334,11 +266,11 @@
         var heartval = ${heart};
         if (heartval > 0) {
             $("#heart").addClass("fa-heart");
-            $("#heart").css("color","red");
+            $("#heart").css("color", "red");
         }
         else {
             $("#heart").addClass("fa-heart-o");
-            $("#heart").css("color","gray");
+            $("#heart").css("color", "gray");
         }
         var formObj = $("form[role='form']");
         var boardid = "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
@@ -363,11 +295,11 @@
 
         $(".heart").on("click", function () {
             var heart;
-            if($("#heart").hasClass("fa-heart"))
+            if ($("#heart").hasClass("fa-heart"))
                 heart = 1;
             else
                 heart = 0;
-            var sendData = {'boardId': '${boardVO.boardId}','heart' :heart };
+            var sendData = {'boardId': '${boardVO.boardId}', 'heart': heart};
             $.ajax({
                 url: '/board/heart',
                 type: 'POST',
@@ -376,12 +308,12 @@
                     if (data == 1) {
                         $("#heart").addClass("fa-heart");
                         $("#heart").removeClass("fa-heart-o");
-                        $("#heart").css("color","red");
+                        $("#heart").css("color", "red");
                     }
                     else {
                         $("#heart").removeClass("fa-heart");
                         $("#heart").addClass("fa-heart-o");
-                        $("#heart").css("color","gray");
+                        $("#heart").css("color", "gray");
                     }
                 }
             });
@@ -610,7 +542,6 @@
         event.preventDefault();
 
         replyPage = $(this).attr("href");
-
 
 
         getPage("/replies/" + boardId + "/" + replyPage);
