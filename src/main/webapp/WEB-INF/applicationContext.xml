@@ -49,7 +49,7 @@
         <property name="scope"
                   value="https://www.googleapis.com/auth/plus.login" />
         <property name="redirectUri"
-                  value="http://localhost:8080/user/googleLogincallback" />
+                  value="http://rnasterpiece.pro/user/googleLogincallback" />
     </bean>
 
     <context:property-placeholder location="classpath:/application.properties" />

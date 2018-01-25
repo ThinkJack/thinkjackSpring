@@ -48,8 +48,9 @@ public class CommonErrorController {
 
     @RequestMapping(value = "/404")
     public String pageError404(HttpServletRequest request, Model model){
-        logger.info("page error code 404");
+        System.out.println("page error code 404");
         pageErrorLog(request);
+        System.out.println("404 Dest: "+request.getSession().getAttribute("dest"));
         model.addAttribute("title","404");
         model.addAttribute("msg","요청하신 페이지는 존재하지 않습니다.");
         return "common/error";

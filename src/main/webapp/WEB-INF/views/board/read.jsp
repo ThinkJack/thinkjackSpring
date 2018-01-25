@@ -60,13 +60,13 @@
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
         <div class="box-body m-3">
+            <div style="float:right;">
 
-                <div style="float:right;">
-                    <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
-                    <a class="btn heart">
-                        <i id='heart' class="fa" style="color: red; font-size: 26px"></i>
-                    </a>
-                </div>
+                <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
+                <a class="btn heart">
+                    <i id='heart' class="fa" style="color: red; font-size: 26px"></i>
+                </a>
+            </div>
 
             <div class="form-group text-white bd" style="margin-top: 10px;">
                 <label  style="font-size:1.35rem;" >Title</label>
@@ -160,7 +160,6 @@
 
     });
 </script>
-
 <script class="template" type="text/x-handlebars-template">
 
     {{#each .}}
@@ -198,12 +197,14 @@
                             {{#if reHeart}}
                             <%--reHeart값이 있을떄--%>
                             <a class="replyHeartBtn btn" name=1>
-                                <img class="reHeart" src="/resources/images/like2.png">
+                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
                             </a>
                             <span> {{replyVO.replyLikeCnt}}</span>
                             {{else}}
                             <a class="replyHeartBtn btn" name=0>
-                                <img class="reHeart" src="/resources/images/like1.png">
+                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
                             </a>
                             <span>{{replyVO.replyLikeCnt}}</span>
                             {{/if}}
@@ -257,12 +258,14 @@
                             {{#if reHeart}}
                             <%--reHeart값이 있을떄--%>
                             <a class="replyHeartBtn btn" name=1>
-                                <img class="reHeart" src="/resources/images/like2.png">
+                                <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like2.png">--%>
                             </a>
                             <span> {{replyVO.replyLikeCnt}}</span>
                             {{else}}
                             <a class="replyHeartBtn btn" name=0>
-                                <img class="reHeart" src="/resources/images/like1.png">
+                                <i class="fa fa-heart-o" style="color: gray; font-size: 26px"></i>
+                                <%--<img class="reHeart" src="/resources/images/like1.png">--%>
                             </a>
                             <span>{{replyVO.replyLikeCnt}}</span>
                             {{/if}}
@@ -292,17 +295,14 @@
                     <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
 
                     {{/ifCond}}
-
                     <button type="button" class="btn btn-info demoReply hn" style="width: 90%;">답글</button>
-
-
                 </div>
                 <%--버튼 누르면 나오게 하기--%>
             </div>
             <div class="demo row mt-3 " name="demo" style="display: none">
 
                 <div class="col-md-10 removePadding " style="float: left">
-                    <textarea class="form-control replyTextReply hn" rows="3">대댓글 입력하세요</textarea>
+                    <textarea class="form-control replyTextReply hn" rows="3" placeholder="대댓글 입력하세요"></textarea>
                 </div>
                 <div class="col-md-2 removePadding " style="float:right;">
                     <button type="button" class="btn btn-primary addBtn hn ml-2 mt-1  " style="width:90%; height: 10%;">등록</button>
@@ -328,7 +328,6 @@
     $(document).ready(function () {
         //하트
         var heartval = ${heart};
-        console.log(heartval);
         if (heartval > 0) {
             $("#heart").addClass("fa-heart");
             $("#heart").css("color","red");

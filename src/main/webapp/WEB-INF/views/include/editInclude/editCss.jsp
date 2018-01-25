@@ -10,6 +10,7 @@
 <%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">--%>
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/sketchy/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/resources/dist/css/tether.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.css" />--%>
 <!-- 코드미러 -->

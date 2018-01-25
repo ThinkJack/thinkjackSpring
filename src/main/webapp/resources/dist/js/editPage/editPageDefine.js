@@ -166,7 +166,7 @@ var delay;
 var srcReplyCnt;
 
 var saveStatus = true; //저장 유도관련 변수
-var saveImg = document.getElementById("save-img"); //save 이미지 변경 관련 변수
+var saveImg = $("#save-img"); //save 이미지 변경 관련 변수
 var imgPath = "/resources/images/";
 //---------console관련 변수
 var editConsoleView = document.getElementById("edit-console-view");
@@ -209,19 +209,19 @@ var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
 var layoutMode = 0; //0 - top, 1 - left 2 - right
 var dragging = false;
 // var session = session.getAttribute("login");
-var likebt = document.getElementById("likebt");
+var likebt = $("#likebt");
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
 
 //cdn추가 삭제 관련 함수
-function cdnCssAdd (str) {
+function cdnCssAdd(str) {
     $("#cdn-css").append("<div class=\"row\" id='cdn-add-css" + cdnCssidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
         "<img src=\"/resources/images/positionChange.png\">\n" +
         "<input class=\"form-control cdn_input\" type=\"text\" id=\"css-cdn" + cdnCssidx + "\"\n" +
-        "placeholder=\"CDN을 추가해 주세요\" value='"+ str + "'>\n" +
+        "placeholder=\"CDN을 추가해 주세요\" value='" + str + "'>\n" +
         "<button type=\"button\" class=\"close cdn_close\" aria-label=\"Close\"" +
         "onclick='cdnCssDelete(" + cdnCssidx + ");'>\n" +
         "<span aria-hidden=\"true\">&times;</span>\n" +
@@ -235,22 +235,22 @@ function cdnCssAdd (str) {
 }
 
 function cdnCssDelete(idx) {
-    if(cdnCssCnt > 2) {
-        $("#cdn-add-css"+ idx).remove();
+    if (cdnCssCnt > 2) {
+        $("#cdn-add-css" + idx).remove();
         --cdnCssCnt;
         cdnChangeCss("cdn-css", cdnCssCnt);
-    }else{
-        $("#css-cdn"+ idx).val("");
+    } else {
+        $("#css-cdn" + idx).val("");
     }
 }
 
-function cdnJsAdd (str) {
+function cdnJsAdd(str) {
     $("#cdn-js").append("<div class=\"row\" id='cdn-add-Js" + cdnJsidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
         "<img src=\"/resources/images/positionChange.png\">\n" +
         "<input class=\"form-control cdn_input\" type=\"text\" id=\"js-cdn" + cdnJsidx + "\"\n" +
-        "placeholder=\"CDN을 추가해 주세요\" value='"+ str +"'>\n" +
+        "placeholder=\"CDN을 추가해 주세요\" value='" + str + "'>\n" +
         "<button type=\"button\" class=\"close cdn_close\" aria-label=\"Close\"" +
         "onclick='cdnJsDelete(" + cdnJsidx + ");'>\n" +
         "<span aria-hidden=\"true\">&times;</span>\n" +
@@ -264,62 +264,62 @@ function cdnJsAdd (str) {
 }
 
 function cdnJsDelete(idx) {
-    if(cdnJsCnt > 2){
-        $("#cdn-add-Js"+ idx).remove();
+    if (cdnJsCnt > 2) {
+        $("#cdn-add-Js" + idx).remove();
         --cdnJsCnt;
         cdnChangeCss("cdn-js", cdnJsCnt);
-    }else{
-        $("#js-cdn"+ idx).val("");
+    } else {
+        $("#js-cdn" + idx).val("");
     }
 }
 
-function cdnChangeCss (id, idx){
-    if(idx > 4){
+function cdnChangeCss(id, idx) {
+    if (idx > 4) {
         $("#" + id).css("overflow-y", "scroll");
-    }else {
+    } else {
         $("#" + id).css("overflow-y", "auto");
     }
 }
 
 function cdnCssJsViewSet(arr, kind) {
     var arrlen = arr.length < 2 ? 2 : arr.length;
-    if(kind === "css"){
-        for(var i=1; i<=arrlen; i++){
-            if(arr[i-1]){
-                cdnCssAdd(arr[i-1]);
-            }else{
+    if (kind === "css") {
+        for (var i = 1; i <= arrlen; i++) {
+            if (arr[i - 1]) {
+                cdnCssAdd(arr[i - 1]);
+            } else {
                 cdnCssAdd("");
             }
         }
-    }else{
-        for(var i=1; i<=arrlen; i++){
-            if(arr[i-1]){
-                cdnJsAdd(arr[i-1]);
-            }else{
+    } else {
+        for (var i = 1; i <= arrlen; i++) {
+            if (arr[i - 1]) {
+                cdnJsAdd(arr[i - 1]);
+            } else {
                 cdnJsAdd("");
             }
         }
     }
 }
 
-function cdnCssJsValSet(){
+function cdnCssJsValSet() {
     cdnCss = new Array();
     cdnJs = new Array();
     cssLnkSet = "";
     jsLnkSet = "";
 
-    for(var i=1; i<=cdnCssCnt; i++){
-        if($("#css-cdn" + i).length){
-            if($("#css-cdn" + i).val()){
+    for (var i = 1; i <= cdnCssCnt; i++) {
+        if ($("#css-cdn" + i).length) {
+            if ($("#css-cdn" + i).val()) {
                 cdnCss.push($("#css-cdn" + i).val());
                 cssLnkSet += "<link rel='stylesheet' href='" + $("#css-cdn" + i).val() + "'\/>";
                 changeSaveImg(2);
             }
         }
     }
-    for(var i=1; i<=cdnJsCnt; i++){
-        if($("#js-cdn" + i).length) {
-            if($("#js-cdn" + i).val()) {
+    for (var i = 1; i <= cdnJsCnt; i++) {
+        if ($("#js-cdn" + i).length) {
+            if ($("#js-cdn" + i).val()) {
                 cdnJs.push($("#js-cdn" + i).val());
                 jsLnkSet += "<script src='" + $("#js-cdn" + i).val() + "'><\/script>";
                 changeSaveImg(2);
@@ -342,9 +342,9 @@ function updatePreview() {
     $("#resultView").remove();
 
     var imsi = document.createElement("iframe");
-    imsi.setAttribute("class","col");
-    imsi.setAttribute("id","resultView");
-    imsi.setAttribute("scrolling","yes");
+    imsi.setAttribute("class", "col");
+    imsi.setAttribute("id", "resultView");
+    imsi.setAttribute("scrolling", "yes");
     $("#iframe-body").html(imsi);
 
     var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
@@ -393,7 +393,6 @@ function updatePreview() {
 
     out.open();
     out.write(
-
         cssLnkSet
         +
         "<script>" + consoleString + "</script>"
@@ -452,12 +451,15 @@ function updatePreview() {
 function getSelectedRange() {
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
+
 function getSelectedRange1() {
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
+
 function getSelectedRange2() {
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
+
 // function getSelectedRange3() {
 //     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 // }
@@ -499,43 +501,46 @@ function escapeHtml(text) {
 
 //코드 저장 로직
 function codeSave() {
-    saveImg.src = "/resources/images/cloud1.png";
-    srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
-
     if (!saveStatus) {
-        jQuery.ajaxSettings.traditional = true;
-        $.ajax({
-            type: "post",
-            url: "/edit/save",
-            headers: {
-                "Content-Type": "application/json",
-                "X-HTTP-Method-Override": "POST"
-            },
-            dataType: 'text',
-            data: JSON.stringify({
-                srcId: srcId,
-                srcComments: srcComments,
-                srcWriter: srcWriter,
-                srcTitle: srcTitle,
-                srcHtml: codeHtml.getValue(),
-                srcCss: codeCss.getValue(),
-                srcJavaScript: codeJavaScript.getValue(),
-                srcStatus: srcStatus,
-                cdnCss: cdnCss,
-                cdnJs: cdnJs
-            }),
-            success: function (getLink) {
-                if(srcId === "" && userId === ""){
-                    document.cookie = getLink + "=";
-                }
+        srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
 
-                if (srcId === "" || (srcWriter === "0" && "${login.userId}" !== "")) {
-                    location.replace("/edit/editPage/" + getLink);
-                }
-                saveStatus = true;
+        if (!saveStatus) {
+            jQuery.ajaxSettings.traditional = true;
+            $.ajax({
+                type: "post",
+                url: "/edit/save",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-HTTP-Method-Override": "POST"
+                },
+                dataType: 'text',
+                data: JSON.stringify({
+                    srcId: srcId,
+                    srcComments: srcComments,
+                    srcWriter: srcWriter,
+                    srcTitle: srcTitle,
+                    srcHtml: codeHtml.getValue(),
+                    srcCss: codeCss.getValue(),
+                    srcJavaScript: codeJavaScript.getValue(),
+                    srcStatus: srcStatus,
+                    cdnCss: cdnCss,
+                    cdnJs: cdnJs
+                }),
+                success: function (getLink) {
+                    alert("저장 되었습니다.");
+                    if (srcId === "" && userId === "") {
+                        document.cookie = getLink + "=";
+                    }
 
-            }
-        });
+                    if (srcId === "" || (srcWriter === "0" && userId !== "")) {
+                        location.replace("/edit/editPage/" + getLink);
+                    }
+                    changeSaveImg(1)
+                }
+            });
+        }
+    }else{
+        alert("변경된 사항이 없습니다.");
     }
 }
 
@@ -566,13 +571,13 @@ var consoleView = function (str) {
 
     var temp = consoleLogStr(str);
 
-    if(str !== ""){
+    if (str !== "") {
         try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
 
             consoleLogView(temp, consoleCategory);
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
-                                        + previewFrame.contentWindow.eval(str) + "</p>";
+                + previewFrame.contentWindow.eval(str) + "</p>";
         } catch (err) {
             editConsoleView.innerHTML += "<p class='console-log' style='color:red;'> &nbsp;<· " + "Uncaught " + err.name + " : " + err.message + "</p>"
         }
@@ -580,20 +585,21 @@ var consoleView = function (str) {
         editConsoleView.scrollTop = editConsoleView.scrollHeight;
     }
 };
-function consoleLogView(temp, consoleCategory){
+
+function consoleLogView(temp, consoleCategory) {
 
 
     if (temp !== null) {
 
         for (i in temp) {
             var color = "";
-            if(consoleCategory[i] ==="log"){
+            if (consoleCategory[i] === "log") {
                 color = "darkseagreen";
-            }else if(consoleCategory[i] ==="info"){
+            } else if (consoleCategory[i] === "info") {
                 color = "dodgerblue";
-            }else if(consoleCategory[i] ==="warn"){
+            } else if (consoleCategory[i] === "warn") {
                 color = "yellow";
-            }else if(consoleCategory[i] ==="error"){
+            } else if (consoleCategory[i] === "error") {
                 color = "red";
             }
             editConsoleView.innerHTML += "<p class='console-log' style='color:" + color + ";'>\"" + temp[i] + "\"</p>"
@@ -608,8 +614,8 @@ function consoleLogStr(str) {
     var category = ["log", "info", "warn", "error"];
     for (i in temp) {
 
-        for(j in category){
-            if(temp[i].indexOf("console." + category[j] + "(") !== -1){
+        for (j in category) {
+            if (temp[i].indexOf("console." + category[j] + "(") !== -1) {
                 consoleCategory[i] = category[j];
                 temp[i] = temp[i].replace("console." + category[j] + "(", "");
                 temp[i] = temp[i].replace("'", "");
@@ -646,9 +652,9 @@ var consoleString = "var console=(function(oldCons){\n" +
     "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
 
 $(function () {
-    var console=(function(oldCons){
+    var console = (function (oldCons) {
         return {
-            log: function(text){
+            log: function (text) {
                 oldCons.log(text);
                 document.getElementById("edit-console-view").innerHTML += "<p class='console-log' style='color:darkseagreen;'>&nbsp;&nbsp;\"" + text + "\"</p>";
                 // Your code
@@ -677,15 +683,23 @@ $(function () {
 //저장 이미지 변경
 function changeSaveImg(idx) {
     if (saveImg !== null) {
-        saveImg.src = "/resources/images/cloud" + idx + ".png";
-        saveStatus = false;
+        if (idx === 2) {
+            saveImg.css("color", "#00c4ff");
+            saveStatus = false;
+        } else {
+            saveImg.css("color", "gray");
+            saveStatus = true;
+        }
+
     }
 }
 
 //이미지 색상 체크
-function likeImgChange(num) {
-    likebt.src = imgPath + "like" + num + ".png";
-    $("#modalSrcLikeImg").attr("src", imgPath + "like24-" + num + ".png");
+function likeImgChange(kinds, color) {
+    likebt.addClass(kinds);
+    likebt.css("color", color);
+    $("#modalSrcLikeImg").addClass(kinds);
+    $("#modalSrcLikeImg").css("color", color);
 }
 
 //==========================================GFM setting
@@ -727,33 +741,33 @@ var languageOverrides = {
 // }
 
 // function setOutput(val) {
-    // val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function(a, b){
-    //     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-    // });
-    //
-    // var out = document.getElementById('resultView');
-    //
-    // var old = out.cloneNode(true);
-    // out.innerHTML = md.render(val);
-    // return md.render(val);
+// val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function(a, b){
+//     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
+// });
+//
+// var out = document.getElementById('resultView');
+//
+// var old = out.cloneNode(true);
+// out.innerHTML = md.render(val);
+// return md.render(val);
 
-    // markDownUpdate();
-    // emojify.run(out);
-    // codeHtml.setValue(md.render(val));
+// markDownUpdate();
+// emojify.run(out);
+// codeHtml.setValue(md.render(val));
 
 
-    // var allold = old.getElementsByTagName("*");
-    // if (allold === undefined) return;
-    //
-    // var allnew = out.getElementsByTagName("*");
-    // if (allnew === undefined) return;
-    //
-    // for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
-    //     if (!allold[i].isEqualNode(allnew[i])) {
-    //         out.scrollTop = allnew[i].offsetTop;
-    //         return;
-    //     }
-    // }
+// var allold = old.getElementsByTagName("*");
+// if (allold === undefined) return;
+//
+// var allnew = out.getElementsByTagName("*");
+// if (allnew === undefined) return;
+//
+// for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
+//     if (!allold[i].isEqualNode(allnew[i])) {
+//         out.scrollTop = allnew[i].offsetTop;
+//         return;
+//     }
+// }
 // }
 
 // codeHtml.on('change', update(codeHtml.getValue()));
@@ -883,7 +897,6 @@ function getPageList(pageInfo) {
     // alert(pageInfo);
 
 
-
     $.getJSON({
         type: 'get',
         dataType: "json",
@@ -892,7 +905,6 @@ function getPageList(pageInfo) {
         // url: "/srcReply/srcListJson.do?srcId=" + srcId,
         // url: "/srcReply/"+srcId+"/"+page,
         url: pageInfo,
-
 
 
         error: function () {
@@ -909,7 +921,7 @@ function getPageList(pageInfo) {
             for (var i in result.list) {
                 // alert(result.list[i].reply_writer + ":" + userId);
                 // alert(userId);
-                output += "<div class=\"row reply_list\" id=\"reply-list-view\" data-rno= "+result.list[i].reply_id+">";
+                output += "<div class=\"row reply_list\" id=\"reply-list-view\" data-rno= " + result.list[i].reply_id + ">";
                 output += "<div class=\"col-2 no_padding\">";
                 output += "<img class=\"user_img\" src=\"" + filePathChange(result.list[i].userProfile) + "\" id=\"reply-list-user-img\">";
                 output += "</div>";
@@ -917,7 +929,7 @@ function getPageList(pageInfo) {
                 output += "<div style=\"display: block;\" class=\"row reply_user_data_view\" id=\"reply-user-id\">";
                 output += "<span class=\"reply_user_name\" id=\"reply-user-name\">" + result.list[i].userName + "</span>";
 
-                if (result.list[i].reply_writer  != userId) {
+                if (result.list[i].reply_writer != userId) {
                     output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
                         "                                       style =\"visibility: hidden;\"\n" +
                         "                                       id=\"reply-modify-button\" data-rno= " + result.list[i].reply_id + ">\n" +
@@ -926,10 +938,10 @@ function getPageList(pageInfo) {
 
                     output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
                         "                                       style =\"visibility: hidden;\"\n" +
-                        "                                       id=\"reply-delete-button\" data-rno= "+result.list[i].reply_id+">\n" +
+                        "                                       id=\"reply-delete-button\" data-rno= " + result.list[i].reply_id + ">\n" +
                         "                                        Delete\n" +
                         "                                    </a>";
-                } else if (result.list[i].reply_writer  == userId) {
+                } else if (result.list[i].reply_writer == userId) {
                     // alert('bbb');
                     output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
                         "                                       style =\"visibility: visible;\"\n" +
@@ -939,14 +951,14 @@ function getPageList(pageInfo) {
 
                     output += "<a class=\"btn btn-outline-secondary btn-sm\" href=\"javascript:;\"\n" +
                         "                                       style =\"visibility: visible;\"\n" +
-                        "                                       id=\"reply-delete-button\" data-rno= "+result.list[i].reply_id+">\n" +
+                        "                                       id=\"reply-delete-button\" data-rno= " + result.list[i].reply_id + ">\n" +
                         "                                        Delete\n" +
                         "                                    </a>";
                 }
-                output += "<div style =\"float: right\" class=\"right\">"+changeDate(result.list[i].reply_update)+ "</div>";
+                output += "<div style =\"float: right\" class=\"right\">" + changeDate(result.list[i].reply_update) + "</div>";
                 output += "</div>";
 
-                if (result.list[i].reply_writer  != userId) {
+                if (result.list[i].reply_writer != userId) {
                     output += "<textarea readonly  class=\"form-control reply_content\"" +
                         " id=" + result.list[i].reply_id + " data-rno= " + result.list[i].reply_id + ">"
                         + result.list[i].reply_text + "</textarea>";
@@ -970,7 +982,7 @@ function getPageList(pageInfo) {
 
 function getPage(pageInfo) {
 
-    $.getJSON(pageInfo, function(data) {
+    $.getJSON(pageInfo, function (data) {
         // printData(data.list, $("#repliesDiv"), $('#template'));
         getPageList(pageInfo);
         printPaging(data.pageMaker, $(".pagination"));
@@ -983,7 +995,7 @@ function getPage(pageInfo) {
     });
 }
 
-var printPaging = function(pageMaker, target) {
+var printPaging = function (pageMaker, target) {
 
     var str = "";
 
@@ -994,7 +1006,7 @@ var printPaging = function(pageMaker, target) {
 
     for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
         var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-        str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
+        str += "<li " + strClass + "><a href='" + i + "'>" + i + "</a></li>";
     }
 
     if (pageMaker.next) {
