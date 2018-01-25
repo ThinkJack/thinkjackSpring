@@ -3,9 +3,9 @@
 
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="http://
+    <link rel="shortcut icon" href="
     /resources/images/favicon/idea.ico" type="image/x-icon" />
-    <link rel="icon"  href="http:///resources/images/favicon/idea.ico"  type="image/x-icon"  />
+    <link rel="icon"  href="/resources/images/favicon/idea.ico"  type="image/x-icon"  />
         <title>rnasterpiece</title>
     <!--필수 -->
     <meta charset="utf-8">
