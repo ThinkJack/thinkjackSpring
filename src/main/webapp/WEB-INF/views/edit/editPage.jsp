@@ -150,10 +150,10 @@
         if(document.getElementById("like") !== null) {
             if(Heart === "0") {
                 //없을때
-                likeImgChange("fa fa-heart", "gray");
+                likeImgChange("fa-heart", "fa-heart-o", "gray");
             } else {
                 //있을때
-                likeImgChange("fa fa-heart-0", "red");
+                likeImgChange("fa-heart-o", "fa-heart", "red");
             }
         }
 
