@@ -9,6 +9,29 @@
 
 <jsp:include page="/WEB-INF/views/include/myinfoTab.jsp" flush="false"/>
 
+<style>
+    td, th {
+        text-align: center;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+
+    }
+
+
+
+    .table th, .table td {
+        vertical-align: inherit;
+    }
+
+    table {
+
+        table-layout:fixed;
+
+
+    }
+
+</style>
 
 <div id="Board" class="tabcontent card mb-3 active">
     <div class="container-fluid removePadding text-center ">
@@ -20,10 +43,10 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group bd">
-                        <div class="input-group-prepend" style="width: 100%;">
+                        <div class="input-group-prepend " style="width: 100%;">
                             <%--<div class="form-group ">--%>
                             <label class="mr-1 mt-2 " for="sel1">Select list:</label>
-                            <select class="custom-select bd " name="searchType" id="sel1">
+                            <select class="custom-select bd col-3" name="searchType" id="sel1">
                                 <option value="n"
                                         <c:out value="${cri.searchType == null?'selected':''}"/> >
                                     ---
@@ -42,7 +65,7 @@
                                 </option>
                             </select>
 
-                            <input type="text" class="form-control bd" placeholder="Search" name="keyword" id="keywordInput"
+                            <input type="text" class="form-control bd col-8" placeholder="Search" name="keyword" id="keywordInput"
                                    value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary bd" id="searchBtn">Search</button>
@@ -53,15 +76,16 @@
 
                 <div class="list-group mb-5 bd" >
                     <table class="table">
-                        <tr>
-                            <th style="width: 30px;">Category</th>
-                            <th style="width:10px;">boardId</th>
-                            <th>TITLE</th>
-                            <th>WRITER</th>
-                            <th>REGDATE</th>
-                            <th style="width:40px;">VIEWCNT</th>
-                            <th style="width:40px;">HEART</th>
+                        <thead>
+                        <tr class="table-dark text-white bd">
+                            <th width="15%" >boardId</th>
+                            <th width="20%">TITLE</th>
+                            <th width="20%">WRITER</th>
+                            <th width="20%" style="   text-align: center;" >REGDATE</th>
+                            <th width="15%" >VIEWCNT</th>
+                            <th width="10%" >HEART</th>
                         </tr>
+                        </thead>
                         <c:forEach items="${list}" var="boardVO">
                             <tr>
                                 <td>${boardVO.boardCategoryName}</td>
