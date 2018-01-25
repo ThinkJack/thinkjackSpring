@@ -78,7 +78,7 @@
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6 row justify-content-between">
         <div class="col-6 row justify-content-start">
-            <p class="h4 text-white code-name bd">JS</p>
+            <p class="h4 text-white code-name bd">TestCode(JS)</p>
         </div>
         <div class="col-6 row justify-content-end">
             <div class="custom-control custom-checkbox mx-1">
@@ -124,9 +124,8 @@
 <iframe id="frameUnitTest"></iframe>
 
 <!--modal 창-->
-<jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/editModalReply.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/editKeyMapModal.jsp" flush="false"/>
+<jsp:include page="../include/editInclude/unitTestHowtoModal.jsp" flush="false"/>
 <!--footer-->
 <jsp:include page="../include/editInclude/unitTestFooter.jsp" flush="false"/>
 
