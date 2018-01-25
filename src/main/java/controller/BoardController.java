@@ -68,18 +68,34 @@ public class BoardController {
         service.increaseViewcnt(boardId, category);
 
         model.addAttribute(service.readBoard(boardId, category));
+        //true null 확인
+//        System.out.println( httpRequest.getAttribute("login")==null);
 
-        int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
+        if(httpRequest.getAttribute("login") == null) {
+            BoardLikeVO vo = new BoardLikeVO();
+            vo.setBoardId(boardId);
+            vo.getUserId();
+            System.out.println(vo.getUserId() + "userId??");
+            int boardlike = service.getBoardLike(vo);
+//            System.out.println(boardlike + "boardLike숫자");
 
-        BoardLikeVO vo = new BoardLikeVO();
-        vo.setBoardId(boardId);
-        vo.setUserId(userid);
-        System.out.println(vo.getUserId() + "userId??");
+            model.addAttribute("heart", boardlike);
 
-        int boardlike = service.getBoardLike(vo);
-        System.out.println(boardlike + "boardLike숫자");
+        }else{
+            int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
-        model.addAttribute("heart", boardlike);
+            System.out.println("userid" + userid);
+
+
+            BoardLikeVO vo = new BoardLikeVO();
+            vo.setBoardId(boardId);
+            vo.setUserId(userid);
+//            System.out.println(vo.getUserId() + "userId??");
+            int boardlike = service.getBoardLike(vo);
+//            System.out.println(boardlike + "boardLike숫자");
+
+            model.addAttribute("heart", boardlike);
+        }
     }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)

@@ -60,13 +60,13 @@
             <input type='hidden' name='keyword' value="${cri.keyword}">
         </form>
         <div class="box-body m-3">
-            <div style="float:right;">
 
-                <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
-                <a class="btn heart">
-                    <img id="heart" src="">
-                </a>
-            </div>
+                <div style="float:right;">
+                    <label class=" text-white bd"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.boardRegdate}"/> </label>
+                    <a class="btn heart">
+                        <i id='heart' class="fa" style="color: red; font-size: 26px"></i>
+                    </a>
+                </div>
 
             <div class="form-group text-white bd" style="margin-top: 10px;">
                 <label  style="font-size:1.35rem;" >Title</label>
@@ -103,28 +103,29 @@
 <div class="row removePadding ">
     <div class="col-md-3"></div>
     <div class="col-md-6 removePadding ">
-        <%--댓글 등록 부분 --%>
-        <div class="card border-primary ">
-            <h2 class="bd m-2"> Comment</h2>
+        <c:if test="${login.userName != null}">
+            <%--댓글 등록 부분 --%>
+            <div class="card border-primary ">
+                <h2 class="bd m-2"> Comment</h2>
 
-            <div class="row m-3">
-                <div class="col-md-10" >
-                    <%--댓글 등록하는 아이디(--%>
-                    <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
-                           readonly="readonly">
-                    <%--댓글 입력 부분--%>
-                    <div class="form-group ">
-                        <textarea class="form-control replyTextReply hn" rows="3" placeholder="댓글 입력하세요"></textarea>
+                <div class="row m-3">
+                    <div class="col-md-10" >
+                            <%--댓글 등록하는 아이디(--%>
+                        <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
+                               readonly="readonly">
+                            <%--댓글 입력 부분--%>
+                        <div class="form-group ">
+                            <textarea class="form-control replyTextReply hn" rows="3" placeholder="댓글 입력하세요"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-2  removePadding ">
+                            <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록</button>
                     </div>
                 </div>
-                <div class="col-md-2  removePadding ">
-                    <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                    <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:160px;">등록</button>
-                </div>
             </div>
-        </div>
 
-
+        </c:if>
         <div class="row m-3">
             <%--입력된 댓글 목록 나타나는 부분--%>
 
@@ -159,6 +160,7 @@
 
     });
 </script>
+
 <script class="template" type="text/x-handlebars-template">
 
     {{#each .}}
@@ -290,7 +292,10 @@
                     <button type="button" class="btn btn-danger replyDelBtn hn" style="width: 90%;">삭제</button>
 
                     {{/ifCond}}
+
                     <button type="button" class="btn btn-info demoReply hn" style="width: 90%;">답글</button>
+
+
                 </div>
                 <%--버튼 누르면 나오게 하기--%>
             </div>
@@ -323,15 +328,14 @@
     $(document).ready(function () {
         //하트
         var heartval = ${heart};
+        console.log(heartval);
         if (heartval > 0) {
-            // console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like2.png");
-            $(".heart").prop('name', heartval)
+            $("#heart").addClass("fa-heart");
+            $("#heart").css("color","red");
         }
         else {
-            // console.log(heartval);
-            $("#heart").prop("src", "/resources/images/like1.png");
-            $(".heart").prop('name', heartval)
+            $("#heart").addClass("fa-heart-o");
+            $("#heart").css("color","gray");
         }
         var formObj = $("form[role='form']");
         var boardid = "<input type='hidden' name='boardId' value='${boardVO.boardId}'>";
@@ -355,19 +359,26 @@
         });
 
         $(".heart").on("click", function () {
-            var that = $(".heart");
-            var sendData = {'boardId': '${boardVO.boardId}', 'heart': that.prop('name')};
+            var heart;
+            if($("#heart").hasClass("fa-heart"))
+                heart = 1;
+            else
+                heart = 0;
+            var sendData = {'boardId': '${boardVO.boardId}','heart' :heart };
             $.ajax({
                 url: '/board/heart',
                 type: 'POST',
                 data: sendData,
                 success: function (data) {
-                    that.prop('name', data);
                     if (data == 1) {
-                        $('#heart').prop("src", "/resources/images/like2.png");
+                        $("#heart").addClass("fa-heart");
+                        $("#heart").removeClass("fa-heart-o");
+                        $("#heart").css("color","red");
                     }
                     else {
-                        $('#heart').prop("src", "/resources/images/like1.png");
+                        $("#heart").removeClass("fa-heart");
+                        $("#heart").addClass("fa-heart-o");
+                        $("#heart").css("color","gray");
                     }
                 }
             });
@@ -639,4 +650,3 @@
     });
 </script>
 <jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>
-<%--<jsp:include page="/WEB-INF/views/include/footer.jsp" flush="false"/>--%>

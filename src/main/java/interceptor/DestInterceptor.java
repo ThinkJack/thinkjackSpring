@@ -27,10 +27,18 @@ public class DestInterceptor extends HandlerInterceptorAdapter{
     private void saveSrcDest(HttpServletRequest req){
         System.out.println("DestInterceptor saveSrcDest 진입");
         String uri = req.getRequestURI();
+        String query = req.getQueryString();
+
+        if(query == null||query.equals("null")){
+            query="";
+
+        }else{
+            query="?" + query;
+        }
 
         if(req.getMethod().equals("GET")){
-            System.out.println("dest: "+ uri);
-            req.getSession().setAttribute("dest",uri);
+            System.out.println("dest: "+ uri+ query);
+            req.getSession().setAttribute("dest",uri+ query);
         }
         //System.out.println("dest: " + uri);
     }

@@ -59,6 +59,13 @@
     body{
         background-color: orange;
     }
+
+    .ellipsis{
+        /*text-align: center;*/
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
 </style>
 <script>
     var getPage = function (srcId) {
@@ -127,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row search_div bd">
+            <div class=" search_div bd">
                 <c:forEach var="srcVo" items="${list}" varStatus="status">
                     <c:if test="${status.count % 3 eq 1}">
                         <div class="row">
@@ -141,17 +148,18 @@
                             </div>
 
                                 <%--<div class="card-body" style="overflow: auto">--%>
-                            <div class="card-body" style="overflow-y:scroll; width:100%; height:45px; ">
+                            <div class="card-body" style=" width:100%; height:45px; ">
                                     <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
-                                <h5 class="hn mb-0"   id="src-title1" data>${srcVo.srcTitle}</h5>
-                                <p class="card-text hn" id="src-comments1">${srcVo.srcComments}</p>
+                                <h5 class="hn mb-0 ellipsis"   id="src-title1" data>${srcVo.srcTitle}</h5>
+                                <p class="card-text hn ellipsis" id="src-comments1">${srcVo.srcComments}</p>
                             </div>
-                            <div class="card-body mb-0  pb-0" style="padding-left:10px; padding-right:7px; height: 70px; overflow-y:scroll;" >
+                            <div class="card-body mb-0  pb-0" style="padding-left:10px; padding-right:7px; height: 70px;" >
                                 <div class="row removePadding ">
-
-                                    <img class="col-2 src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';">
-                                    <a href="/edit/editPage/${srcVo.srcId}" class="col-9 ml-3 card-link removePadding" id="src-writer2">${srcVo.srcWriterName}</a>
+                                    <div class="col-4">
+                                        <img class=" src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
+                                             onclick="location.href='/edit/editPage/${srcVo.srcId}';">
+                                    </div>
+                                    <a href="/edit/editPage/${srcVo.srcId}" class=" ml-3 card-link removePadding ellipsis" id="src-writer2">${srcVo.srcWriterName}</a>
                                 </div>
                                 <script>
                                     <%--작성자 이미지 경로 작업--%>

@@ -17,6 +17,8 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+    /*font-family: 'Baloo Da', cursive;*/
+
     font-family: 'Hanna', serif;
 }
 
@@ -249,9 +251,10 @@ p.err {
     overflow: auto;
 }
 
-/*.iframeWrapper iframe{*/
-/*pointer-events: none; !* let any clicks go trough me *!*/
-/*}*/
+.CodeMirror-line span, .cm-matchhighlight, .CodeMirror-linenumber {
+    font-family: "Consolas", monospace;
+    font-size: 13px;
+}
 
 .main_view .iframe_body {
     height: calc(100% - 488px);

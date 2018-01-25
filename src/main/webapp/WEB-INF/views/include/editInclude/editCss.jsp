@@ -6,10 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="/resources/dist/css/bootstrap.css">
-<link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/dist/css/_bootswatch.scss">
-<link rel="stylesheet" href="/resources/dist/css/_variables.scss">
+<%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.css">--%>
+<%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">--%>
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/sketchy/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/resources/dist/css/tether.min.css">
 
 <%--<link rel="stylesheet" href="/resources/dist/css/bootstrap.css" />--%>
@@ -37,3 +36,4 @@
 <link rel="stylesheet" href="/resources/codemirror/addon/display/fullscreen.css">
 <!-- addon\dialog :good looking input dialogs -->
 <link rel="stylesheet" href="/resources/dist/css/editCss.css">
+
