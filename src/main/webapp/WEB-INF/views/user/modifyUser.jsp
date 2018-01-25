@@ -369,8 +369,7 @@
             </div>
 
             <div class="profile-name hn">
-                <h2  class="bd">Profile Image<span class="hn" > 사용자 프로필을 수정하세요<br>
-
+                <h2  class="bd">Profile Image<span class="hn" ><span style="color:darkslategray">Drag&Drop</span> 사용자 프로필을 수정하세요<br>
             </span>
                 </h2>
                 <span class="row" style="color:mediumseagreen">

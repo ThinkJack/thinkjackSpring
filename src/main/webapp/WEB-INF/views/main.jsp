@@ -42,7 +42,7 @@
 
         <div class="pointB col-6 " style="display: none">
             <iframe width="100%" height="100%"
-                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+                    src="/resources/test1.mp4">
             </iframe>
         </div>
 
@@ -69,7 +69,7 @@
         </div>
         <div class="pointA col-6 " style="display: none" >
             <iframe width="100%" height="100%"
-                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+                    src="/resources/test1.mp4">
             </iframe>
         </div>
 
