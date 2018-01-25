@@ -92,9 +92,19 @@
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary bd" id="searchBtn">Search</button>
                         </div>
+                            <input type='hidden' name='keyword' value="${login.userState}">
+                            <c:set var="state" value="${login.userState}" />
+                            <c:if test="${name ne 'notice'}">
                         <div class="input-group-append " >
                             <button class="btn btn-primary bd" id="newBtn">new Board</button>
                         </div>
+                            </c:if>
+                            <c:if test="${state eq 9}">
+                                <div class="input-group-append " >
+                                    <button class="btn btn-primary bd" id="newBtn">new Board</button>
+                                </div>
+                            </c:if>
+
                     </div>
 
                 </div>

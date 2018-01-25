@@ -3,6 +3,10 @@
 
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="http://
+    /resources/images/favicon/idea.ico" type="image/x-icon" />
+    <link rel="icon"  href="http:///resources/images/favicon/idea.ico"  type="image/x-icon"  />
+        <title>rnasterpiece</title>
     <!--필수 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
@@ -139,7 +143,9 @@
                         <a class="nav-link dropdown-toggle  " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             <img  class="rounded-circle Photo profileHeader" src="" ></a>
                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            <a class="dropdown-item hn">${login.userName}</a>
+                            <div class="eclipsis pl-4" style="width:70% ">
+                                <a class=" hn " >${login.userName}</a>
+                            </div>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
                             <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>

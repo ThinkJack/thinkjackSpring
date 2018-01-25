@@ -75,7 +75,7 @@
             </div>
             <div class="form-group text-white bd">
                 <label  style="font-size:1.35rem;">Content</label>
-                <textarea type="text" name='content' class="form-control inputC hn" rows="15"
+                <textarea type="text" name='content' class="form-control inputC hn" rows="12"
                           readonly="readonly" style="padding-top: 20px;">${boardVO.boardContent}</textarea>
             </div>
             <div class="form-group text-white bd">
@@ -102,6 +102,9 @@
 </div>
 <div class="row removePadding ">
     <div class="col-md-3"></div>
+    <c:set var="name" value="${category}" />
+    <c:if test="${name ne 'notice'}">
+
     <div class="col-md-6 removePadding ">
         <c:if test="${login.userName != null}">
             <%--댓글 등록 부분 --%>
@@ -322,6 +325,7 @@
         {{/if}}
     </li>
     {{/each}}
+    </c:if>
 </script>
 
 <script>

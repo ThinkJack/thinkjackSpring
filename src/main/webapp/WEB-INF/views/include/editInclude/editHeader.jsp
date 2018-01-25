@@ -10,10 +10,27 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header 메뉴바 -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
     <a class="navbar-brand" href="/">  <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
-
+    <div>
+        <div class="page_title_view" id="page-title-view">
+            <a class="page_title text-dark" >
+                <span id="src-title"></span>
+            </a>
+            <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
+                        ((login ne null) and (SrcVO.srcId eq null)) or
+                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                        ((login eq null) and (SrcVO.srcId eq null))}">
+                <i class="fa fa-paint-brush pencil" id="pencil" style="color: black"></i>
+            </c:if>
+        </div>
+        <div class="page_title_text"  id="page-title-text">
+            <input type="text" name="page-title" id="src-title-input" value="" maxlength="50"/>
+        </div>
+        <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer" style="color:#000000;"></span></div>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,21 +39,7 @@
         <ul class="navbar-nav mr-auto page_info">
             <li class="nav-item active">
                 <!--href="" 는 현재 패이지 reload해줌 -->
-                <div class="page_title_view" id="page-title-view">
-                    <a class="page_title text-dark" >
-                        <span id="src-title"></span>
-                    </a>
-                    <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
-                        ((login ne null) and (SrcVO.srcId eq null)) or
-                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
-                        ((login eq null) and (SrcVO.srcId eq null))}">
-                        <i class="fa fa-paint-brush pencil" id="pencil" style="color: black"></i>
-                    </c:if>
-                </div>
-                <div class="page_title_text"  id="page-title-text">
-                    <input type="text" name="page-title" id="src-title-input" value="" maxlength="50"/>
-                </div>
-                <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer" style="color:#000000;"></span></div>
+
             </li>
             <li class="nav-item">
             </li>
@@ -108,8 +111,10 @@
                     <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <img  class="rounded-circle Photo " id="profileHeader" src="" style="width:38px; height:38px;"></a>
 
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-100px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item hn">${login.userName}</a>
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-60px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <div class="eclipsis pl-4" style="width:70% ">
+                            <a class=" hn " >${login.userName}</a>
+                        </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
                         <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>

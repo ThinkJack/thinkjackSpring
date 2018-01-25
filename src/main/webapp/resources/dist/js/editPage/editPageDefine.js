@@ -211,6 +211,8 @@ var dragging = false;
 // var session = session.getAttribute("login");
 var likebt = $("#likebt");
 
+
+
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
 
@@ -695,10 +697,12 @@ function changeSaveImg(idx) {
 }
 
 //이미지 색상 체크
-function likeImgChange(kinds, color) {
+function likeImgChange(remove, kinds, color) {
     likebt.addClass(kinds);
+    likebt.removeClass(remove);
     likebt.css("color", color);
     $("#modalSrcLikeImg").addClass(kinds);
+    $("#modalSrcLikeImg").removeClass(remove);
     $("#modalSrcLikeImg").css("color", color);
 }
 

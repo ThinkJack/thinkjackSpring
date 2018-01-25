@@ -38,11 +38,11 @@
                     <div class="row count_img_view">
                         <div class="col-md-auto count_img_view_inner">
                             <span id="view-count"></span>
-                            <img src="/resources/images/view24.png">
+                            <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
                             <span id="reply-couont"></span>
-                            <img src="/resources/images/reply24.png">
+                            <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
                             <span id="like-couont"></span>
-                            <img src="/resources/images/like24-1.png" id="modalSrcLikeImg">
+                            <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="modalSrcLikeImg"></i>
                         </div>
                     </div>
                     <%--설명부분(comment 가져와서 찍기)--%>
