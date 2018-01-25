@@ -7,11 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="footer">
-    <nav class="navbar">
+    <nav class="navbar navbar-expand mp " style=" height: 100%;" >
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-secondary btn-sm bd modi2 " href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
+                <a class="btn btn-secondary btn-sm bd" href="javascript:;" data-toggle="modal" data-target="#keymap-modal">
                     Shortcuts
+                </a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="btn btn-secondary btn-sm bd" href="javascript:;" data-toggle="modal" data-target="#howto-modal">
+                    How To
                 </a>
             </li>
         </ul>

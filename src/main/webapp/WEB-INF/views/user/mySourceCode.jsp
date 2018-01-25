@@ -79,8 +79,9 @@
     var imgPath = "/resources/images/";
 
     //필요한 함수 정의 부분
-    function likeImgChange(elId, num) {
-        $(elId).attr("src", imgPath + "like" + num + ".png");
+    function likeImgChange(elId, kinds, color) {
+        $(elId).addClass(kinds);
+        $(elId).css("color", color);
     }
 </script>
 
@@ -153,23 +154,17 @@
                                         <%--<a href="/edit/editPage/${srcVo.srcId}" class="card-link"--%>
                                         <%--id="src-writer2">${srcVo.srcWriterName}</a>--%>
 
-                                    <img class="fl-right src_icon" src="/resources/images/like24-1.png"
-                                         id="${srcVo.srcId}like"
-                                         style="width:20px; height:20px;">
+                                    <i class="fl-right fa fa-heart-o" style="color: gray; font-size: 20px;"></i>
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
                                        id="${srcVo.srcId}likecnt">${srcVo.srcLikecnt}</a>
 
-                                    <img class="fl-right src_icon" src="/resources/images/reply24.png"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}?reply=show';"
-                                         style="width:20px; height:20px;">
+                                    <i class="fl-right fa fa-comments" style="color: gray; font-size: 20px;"></i>
                                     <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right"
                                        id="src-replycnt${srcVo.srcId}">
                                         <script> getPage("${srcVo.srcId}");</script>
                                     </a>
 
-                                    <img class="fl-right src_icon" src="/resources/images/view24.png"
-                                         onclick="location.href='/edit/editPage/${srcVo.srcId}';"
-                                         style="width:20px; height:20px;">
+                                    <i class="fl-right fa fa-eye" style="color: gray; font-size: 20px;"></i>
                                     <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
                                        id="src-viewcnt2">${srcVo.srcViewcnt}</a>
 
@@ -201,10 +196,10 @@
                                                     success: function (success) {
                                                         if (success.result === 0) {
                                                             //좋아요 추가시
-                                                            likeImgChange("#${srcVo.srcId}like", 2);
+                                                            likeImgChange("#${srcVo.srcId}like", "fa-heart-0", "gray");
                                                         } else {
                                                             //좋아요 취소시
-                                                            likeImgChange("#${srcVo.srcId}like", 1);
+                                                            likeImgChange("#${srcVo.srcId}like", "fa-heart", "red");
                                                         }
 
                                                         document.getElementById("${srcVo.srcId}likecnt").innerHTML = success.srcLikeCnt;
@@ -317,15 +312,15 @@
         $(document).ready(function () {
             $('#search-btn').click(function (e) {
 
-                self.location = "mySourceCode"
-                    + '${pageMaker.makeQuery(1)}'
-                    + '&searchType='
-                    + $('select option:selected').val()
-                    + '&keyword=' + encodeURIComponent($('#keywordInput').val());
+                    self.location = "mySourceCode"
+                        + '${pageMaker.makeQuery(1)}'
+                        + '&searchType='
+                        + $('select option:selected').val()
+                        + '&keyword=' + encodeURIComponent($('#keywordInput').val());
+                });
             });
-        });
-        $(document).ready(function () {
-            $(".Source_code").addClass(" active");
+            $(document).ready(function () {
+                $(".Source_code").addClass(" active");
 
         })
     </script>
@@ -336,5 +331,4 @@
 </div>
 </div>
 </div>
-
 <jsp:include page="/WEB-INF/views/include/footer.jsp"/>
