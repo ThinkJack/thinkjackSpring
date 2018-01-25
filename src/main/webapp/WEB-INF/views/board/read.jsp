@@ -190,8 +190,9 @@
                                 <%--<span class="replyWriter">{{replyVO.replyWriter}}</span>--%>
                             <div style="text-align: right">
                                 <span class="time bd">{{prettifyDate  replyVO.replyRegdate}}</span>
+
                                 <a class="replyHeartBtn btn">
-                                    <i class="fa fa-heart" style="color: red; font-size: 26px"></i>
+                                    <i class="fa  {{replyLikeIcon reHeart}}" style="font-size: 26px; {{replyLikeStyle reHeart}}"></i>
                                 </a>
                             </div>
                         </div>
@@ -459,6 +460,20 @@
         // console.log(replyProfile);
         return getFileInfo(replyProfile);
     });
+
+    Handlebars.registerHelper('replyLikeIcon', function (replyLike) {
+        console.log(replyLike);
+        if(replyLike > 0 )
+            return "fa-heart";
+        else
+            return "fa-heart-o";
+    })
+    Handlebars.registerHelper('replyLikeStyle', function (replyLike) {
+        if(replyLike > 0 )
+            return "color: red;";
+        else
+            return "color: grey;";
+    })
 
 </script>
 <script>
