@@ -75,8 +75,10 @@
     //필요한 변수 정의 부분
 
     //필요한 함수 정의 부분
-    function likeImgChange(elId, kinds, color) {
+    function likeImgChange(elId, remove, kinds, color) {
+
         $(elId).addClass(kinds);
+        $(elId).removeClass(remove);
         $(elId).css("color", color);
     }
 </script>
@@ -180,10 +182,10 @@
                                                 success: function (success) {
                                                     if (success.result === 0) {
                                                         //좋아요 추가시
-                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart", "red");
+                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart-o", "fa-heart", "red");
                                                     } else {
                                                         //좋아요 취소시
-                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart-0", "gray");
+                                                        likeImgChange("#${srcVo.srcId}like", "fa-heart", "fa fa-heart-o", "gray");
                                                     }
 
                                                     document.getElementById("${srcVo.srcId}likecnt").innerHTML = success.srcLikeCnt;
