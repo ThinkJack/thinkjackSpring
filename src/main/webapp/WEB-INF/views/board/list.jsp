@@ -92,9 +92,11 @@
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary bd" id="searchBtn">Search</button>
                         </div>
+                            <c:if test="${name ne 'notice'}">
                         <div class="input-group-append " >
                             <button class="btn btn-primary bd" id="newBtn">new Board</button>
                         </div>
+                            </c:if>
                     </div>
 
                 </div>
