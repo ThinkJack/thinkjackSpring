@@ -46,10 +46,10 @@ public class UserServiceImpl implements UserService {
 		dao.createAuthKey(user.getUserEmail(),key); //인증키 db 저장
 		//메일 전송
 		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[Thinkjack 서비스 이메일 인증]");
+		sendMail.setSubject("[rnasterpiece 서비스 이메일 인증]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://http://rnasterpiece.pro/user/emailConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
-		sendMail.setFrom("testmailsender1122@gmail.com", "Thinkjack 개발자");
+				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://rnasterpiece.pro/user/emailConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
+		sendMail.setFrom("testmailsender1122@gmail.com", "rnasterpiece");
 		//System.out.println("getEmail"+user.getUserEmail());
 		sendMail.setTo(user.getUserEmail());
 		sendMail.send();
@@ -187,10 +187,10 @@ public class UserServiceImpl implements UserService {
 		dao.updateAuthKey(user.getUserEmail(),key); //인증키 db 저장
 
 		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[Thinkjack 서비스 패스워드 찾기]");
+		sendMail.setSubject("[rnasterpiece 서비스 패스워드 찾기]");
 		sendMail.setText(
 				new StringBuffer().append("<h1>아래 주소로 접속하여 패스워드를 변경해주세요</h1>").append("<a href='http://rnasterpiece.pro/user/findPasswordConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
-		sendMail.setFrom("testmailsender1122@gmail.com", "Thinkjack 개발자");
+		sendMail.setFrom("testmailsender1122@gmail.com", "rnasterpiece 개발자");
 		//System.out.println("getEmail"+user.getUserEmail());
 		sendMail.setTo(user.getUserEmail());
 		sendMail.send();

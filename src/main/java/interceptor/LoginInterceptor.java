@@ -76,7 +76,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		// TODO Auto-generated method stub
 
 		System.out.println("Logininterceptor preHandle 진입");
 		HttpSession session = request.getSession();
