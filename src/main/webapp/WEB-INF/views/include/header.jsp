@@ -101,7 +101,7 @@
 
                 <li class="nav-item dropdown pointer " >
                     <a class="nav-link dropdown-toggle " id="Service" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Service</a>
-                    <div class="dropdown-menu pointerA hn" aria-labelledby="Service" style="position: absolute; transform: translate3d(0px, 45px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <div class="dropdown-menu pointerA hn" aria-labelledby="Service" style="position: absolute; transform: translate3d(0px, 35%, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item" href="/edit/editPage">Editor</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/edit/unitTest">UnitTest</a>
@@ -109,7 +109,7 @@
                 </li>
                 <li class="nav-item dropdown pointer2" >
                     <a class="nav-link dropdown-toggle "  id="Board"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
-                    <div class="dropdown-menu pointerB  hn" aria-labelledby="Board" style="position: absolute; transform: translate3d(0px, 45px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <div class="dropdown-menu pointerB  hn" aria-labelledby="Board" style="position: absolute; transform: translate3d(0px, 17%, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item " href='/board/list?category=notice'>공지사항</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>

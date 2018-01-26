@@ -535,14 +535,6 @@ $(function () {
 });
 
 //창 크기조절 관련
-$(function () {
-    $(window).resize(function () {
-        //            창크기 width 제한
-        if (this.outerWidth <= 450) {
-            this.outerWidth = 450;
-        }
-    });
-});
 
 // save & update
 $("#saveCode").click(function (e) {
