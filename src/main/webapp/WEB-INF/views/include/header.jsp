@@ -3,16 +3,12 @@
 
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="
-    /resources/images/favicon/idea.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/resources/images/favicon/idea.ico" type="image/x-icon" />
     <link rel="icon"  href="/resources/images/favicon/idea.ico"  type="image/x-icon"  />
         <title>rnasterpiece</title>
     <!--필수 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1, user-scalable=no">
-    <%--반응형 웹디자인 아닌 조정폭--%>
-    <%--<meta name="viewport" content="width=device-width, initial-scale=1">--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
 
     <%--애니메이션 효과--%>
     <link rel="stylesheet" href="/resources/dist/css/animate.min.css">
