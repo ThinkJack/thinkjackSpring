@@ -184,17 +184,20 @@ $(function () {
 });
 
 //window resize변경 막기
-// $(function () {
-//     $(window).resize(function () {
-//         var widthSize = this.innerWidth;
-//         console.log(widthSize);
-//         if(widthSize <= 1000){
-//             console.log("들어감");
-//             window.focus();
-//             window.resizeTo(window.outerWidth - window.innerWidth + 1000, this.outerHeight);
-//         }
-//     });
+// $(window).load(function () {
+//     window.resizeTo(window.outerWidth - window.innerWidth + 1000, this.outerHeight);
 // });
+
+$(function () {
+    $(window).resize(function () {
+        var widthSize = this.innerWidth;
+        console.log(widthSize);
+        if(widthSize <= 1000){
+            console.log("들어감");
+            window.resizeTo(1010, this.outerHeight);
+        }
+    });
+});
 // HTML Preprocessor 설정
 $(function () {
 
