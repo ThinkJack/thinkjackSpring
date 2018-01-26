@@ -64,7 +64,7 @@
         /*text-align: center;*/
         overflow:hidden;
         white-space:nowrap;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
     }
 </style>
 <script>
@@ -92,8 +92,8 @@
 <div class="deaf2"></div>
 <div class="container-fluid removePadding text-center">
     <div class="row">
-        <div class="col-sm-3 removePadding"></div>
-        <div class="col-sm-6 removePadding" >
+        <div class="col-sm-2 removePadding"></div>
+        <div class="col-sm-8 removePadding" >
             <label class="control-label">
                 <h1 class="bd" id="titleList" style="text-align: center;">코드 게시판</h1>
             </label>
@@ -131,6 +131,9 @@
                                value="${cri.keyword}" aria-label="Amount (to the nearest dollar)">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary bd " id="search-btn">Search</button>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-primary bd" onclick="location.href='/edit/editPage'">EditPage</button>
                         </div>
 
                     </div>
