@@ -75,21 +75,33 @@
                     <div class="row reply_list_view" id="list_view_all">
 
                     </div>
-                    <div class='text-center'>
-                        <ul id="pagination" class="pagination pagination-sm no-margin ">
+
+                    <%--<div  class='text-xs-center' style="text-align: center">--%>
+                        <%--<ul id="pagination" class="pagination pagination-sm no-margin " style="display:inline-flex">--%>
+
+                        <%--</ul>--%>
+                    <%--</div>--%>
+                    <%--<div  class='text-xs-center'>--%>
+                        <%--<ul id="pagination" class="pagination justify-content-center">--%>
+
+                        <%--</ul>--%>
+                    <%--</div>--%>
+                    <p></p>
+                    <div  class='text-center'>
+                        <ul id="pagination" class="pagination justify-content-center">
 
                         </ul>
                     </div>
 
-                    <%--<div class="row reply_list load_view" id="reply-more-list">--%>
-                    <%--<div class="load">--%>
-                    <%--<div class="line"></div>--%>
-                    <%--<div class="line"></div>--%>
-                    <%--<div class="line"></div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
+
 
                 </div>
+                <%--<div  class='text-center'>--%>
+                    <%--<ul id="pagination" class="pagination justify-content-center">--%>
+
+                    <%--</ul>--%>
+                <%--</div>--%>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>

@@ -1,5 +1,7 @@
 //코드미러 객체
 
+
+
 var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
 
     mode: "htmlmixed",
@@ -9,9 +11,12 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     keyMap: "sublime",           // 키맵
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
+
     tabSize: 4,                  // 탭키 간격
+    // indentWithSpaces: true,
+    // indentWithTabs: true,
+
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},//단어강조
-    indentWithTabs: true,
     electricChars: true,
     resetSelectionOnContextMenu: false,
     smartIndent: true,
@@ -20,12 +25,18 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
     styleActiveLine: true,
     autoCloseTags: true,
     lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
+    indentUnit: 1,   //들여스기 단위
     extraKeys: {
         "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
+            "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
         "Ctrl-Alt-F": autoFormatSelection
+
+        // "Space": function(cm){
+        //     cm.replaceSelection(" " , "end");
+        // }
+
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
@@ -43,14 +54,14 @@ var codeCss = CodeMirror(document.getElementById("codeCss"), {
     tabSize: 4,                  // 탭키 간격
     lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}, // 같은단어강조
+    indentUnit: 1, //들여스기 단위
     extraKeys: {
         "Ctrl-Space": "autocomplete",
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection
     },
-    indentUnit: 2,
     indentWithTabs: true,
     electricChars: true,
     resetSelectionOnContextMenu: false,
@@ -77,25 +88,26 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
     // extraKeys: { ".": "autocomplete" },
     // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
-    indentUnit: 2,                //들여쓰기
     // indentWithTabs: false,
     electricChars: true,         //중괄호 정렬
     resetSelectionOnContextMenu: false,
     smartIndent: true,
     lineWiseCopyCut: true,
     pasteLinesPerSelection: true,
-    tabindex: 2,
+    tabindex: 4,
     styleActiveLine: true,
 
     wordWrap: true,
     autoCloseBrackets: true,
+
+    indentUnit: 1,                //들여쓰기 단위
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
     extraKeys: {
         "Ctrl-Space": "autocomplete",
         "Ctrl-Q": function (cm) {
             cm.foldCode(cm.getCursor());
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection
     },
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
@@ -105,6 +117,29 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
     {
+        //num
+        "49": "1",
+        "50": "2",
+        "51": "3",
+        "52": "4",
+        "53": "5",
+        "54": "6",
+        "55": "7",
+        "56": "8",
+
+        //key-pad
+        "96": "0",
+        "97": "1",
+        "98": "2",
+        "99": "3",
+        "100": "4",
+        "101": "5",
+        "102": "6",
+        "103": "7",
+        "104": "8",
+        "105": "9",
+
+
         "21": "한/영",
         "65": "A",
         "66": "B",
@@ -212,7 +247,7 @@ var resizeCode1 = document.getElementById("resize-code-1");
 var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus;
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus, srcReplyRegdate, srcReplyUpdate;
 var userId;
 var Heart;
 var strHtml, strCss, strJs;
@@ -968,7 +1003,10 @@ function getPageList(pageInfo) {
                         "                                        Delete\n" +
                         "                                    </a>";
                 }
+                // output += "<div style =\"float: right\" class=\"right\">"+changeDate(result.list[i].reply_update)+ "</div>";
                 output += "<div style =\"float: right\" class=\"right\">"+changeDate(result.list[i].reply_update)+ "</div>";
+
+
                 output += "</div>";
 
                 if (result.list[i].reply_writer  != userId) {
@@ -1250,10 +1288,26 @@ var changeDate = function (date) {
     date = new Date(parseInt(date));
     year = date.getFullYear();
     month = date.getMonth() + 1;
+    if (month < 10) {
+        month = '0'+month;
+    }
+
     day = date.getDate();
+    if (day < 10) {
+        day = '0'+day;
+    }
+
     hour = date.getHours();
+    // if (hour > 12) {
+    //     hour -= 12;
+    // } else if (hour === 0) {
+    //     hour = 12;
+    // }
+
     minute = date.getMinutes();
+
     second = date.getSeconds();
     strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     return strDate;
 };
+

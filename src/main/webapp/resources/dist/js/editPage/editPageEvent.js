@@ -240,7 +240,11 @@ $(function () {//---------------------------- tab-size 변경시
         // alert(111);
         var st = $(":input:radio[name=gridRadios]:checked").val();
         var sp = this.value;
+        // alert(st);
+        // alert(sp);
+
         if (st === "option1") {
+            // alert('tab-click1');
 
             codeHtml.setOption("extraKeys", {
                 Tab: function (cm) {
@@ -249,28 +253,49 @@ $(function () {//---------------------------- tab-size 변경시
                     cm.replaceSelection(spaces);
                 }
             });
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(sp)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
+            codeJavaScript.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(sp)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
         } else if (st === "option2") {
+            // alert('tab-click2');
 
-            // $("#gridRadios1").prop("checked", true);
-            codeHtml.setOption("tabSize", this.value);
-            codeCss.setOption("tabSize", this.value);
-            codeJavaScript.setOption("tabSize", this.value);
+            // codeHtml.setOption("indentWithTabs", true);
+            codeHtml.setOption("tabSize", sp);
+            codeCss.setOption("tabSize", sp);
+            codeJavaScript.setOption("tabSize", sp);
+
         }
     });
 });
 
+
 //Setting Behavior부분 함수
 $(function () {//---------------------------- option button 변경시
+
+
     $('input[type=radio][name=gridRadios]').change(function () {
         // alert('gridRadios');
 
         //현재 리스트박스의 탭사이즈 값 가져오기.
         var e = document.getElementById("tab-size");
         var strUser = e.options[e.selectedIndex].value;
+        // alert (this.value);
 
         // var sp = this.value;
         if (this.value === "option1") {
             // alert('a');
+
 
             codeHtml.setOption("extraKeys", {
                 Tab: function (cm) {
@@ -279,17 +304,100 @@ $(function () {//---------------------------- option button 변경시
                     cm.replaceSelection(spaces);
                 }
             });
-        } else if (this.value === "option2") { // have to: option1 갖다오면 백탭안됨
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(strUser)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
+
+
+            codeJavaScript.setOption("extraKeys", {
+
+
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                },
+                "Ctrl-Alt-F": autoFormatSelection,
+
+
+                Tab: function (cm) {
+
+                    // cm.execCommand("insertSoftTab");
+
+                    // var spaces = Array(cm.getOption("indentUnit") +
+                    //     parseInt(strUser)).join(" ");
+                    // cm.replaceSelection(spaces);
+                    // cm.execCommand("defaultTab");
+                    // cm.execCommand("indentMore");
+                    // cm.execCommand("newlineAndIndent")
+
+                }
+
+
+
+            });
+
+
+        } else if (this.value === "option2") {
             // alert('b');
-            // codeHtml.setOption("indentWithTabs", true);
-            codeHtml.setOption("tabSize", strUser);
-            codeCss.setOption("tabSize", strUser);
-            codeJavaScript.setOption("tabSize", strUser);
-            console.log(strUser);
+            // codeHtml("tabSize", strUser);
+            codeHtml.setOption("extraKeys", {
+                Tab: function (cm) {
+                    cm.execCommand("defaultTab");
+
+
+                },
+
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                },
+                "Ctrl-Alt-F": autoFormatSelection
+            });
+
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    cm.execCommand("defaultTab");
+                },
+
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                },
+                "Ctrl-Alt-F": autoFormatSelection
+            });
+
+
+            codeJavaScript.setOption("extraKeys", {
+
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                },
+                "Ctrl-Alt-F": autoFormatSelection,
+
+
+                "Tab": function (cm) {
+
+                    cm.execCommand("defaultTab");
+
+                },
+                "Shift-Tab": function (cm) {
+                    cm.indentSelection("subtract");
+                }
+            });
+
+
+
 
         }
     });
+
 });
+
 
 $(function () {
     $("#run").click(function () { // run button 실행
@@ -347,7 +455,6 @@ $(function () {
 //setting 모달 닫힐때 이벤트
 $(function () {
     $("#setting").on("hide.bs.modal", function () {
-
 
 
         cdnCssJsValSet();
@@ -578,7 +685,7 @@ $(function () {
 
     //댓글등록 회원권한
     replyPage = 1;
-    if(srcId !== ""){
+    if (srcId !== "") {
         getPage("/srcReply/" + srcId + "/" + replyPage);
     }
 
@@ -728,18 +835,19 @@ $(function () {
             })
         });
 
-
-        $(".pagination").on("click", "li a", function (event) {
-
-            event.preventDefault();
-
-            replyPage = $(this).attr("href");
-
-            getPage("/srcReply/" + srcId + "/" + replyPage);
-            // getPageList("/srcReply/"+srcId+"/"+replyPage);
-
-        }); //else
     }//if
+
+    $(".pagination").on("click", "li a", function (event) {
+
+        event.preventDefault();
+
+        replyPage = $(this).attr("href");
+
+        getPage("/srcReply/" + srcId + "/" + replyPage);
+        // getPageList("/srcReply/"+srcId+"/"+replyPage);
+
+    }); //else
+
 
 });
 
@@ -815,10 +923,10 @@ $(function () {
 });
 
 
-$(function () {
-    // $("#codeHtml").attr('style', 'font-family: Consolas, monospace'  font-size: 16px;')
-    // font-size: 16px;)
-    $('#codeHtml').css("font-family", "Consolas");
-    $('#codeHtml').css("font-size", "16");
-
-});
+// $(function () {
+//     // $("#codeHtml").attr('style', 'font-family: Consolas, monospace'  font-size: 16px;')
+//     // font-size: 16px;)
+//     $('#codeHtml').css("font-family", "Consolas");
+//     $('#codeHtml').css("font-size", "16");
+//
+// });

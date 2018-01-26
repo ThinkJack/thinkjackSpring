@@ -1,5 +1,6 @@
 package domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SrcReplyVO {
@@ -55,17 +56,33 @@ public class SrcReplyVO {
     }
 
 
-    public Date getReplyRegdate() {
-        return replyRegdate;
+//    public Date getReplyRegdate() {
+//        return replyRegdate;
+//    }
+    public String getReplyRegdate() {
+            if (replyRegdate != null) {
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(replyRegdate);
+            } else {
+                return "";
+            }
     }
+
 
     public void setReplyRegdate(Date replyRegdate) {
         this.replyRegdate = replyRegdate;
     }
 
-    public Date getReplyUpdate() {
-        return replyUpdate;
+//    public Date getReplyUpdate() {
+//        return replyUpdate;
+//    }
+    public String getReplyUpdate() {
+        if (replyUpdate != null) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(replyUpdate);
+        } else {
+            return "";
+        }
     }
+
 
     public void setReplyUpdate(Date replyUpdate) {
         this.replyUpdate = replyUpdate;

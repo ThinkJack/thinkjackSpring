@@ -186,12 +186,12 @@
                             </div>
                             <div class="row">
                                 <div class="form-check">
+                                    <%--<label class="form-check-label">--%>
+                                        <%--<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>--%>
+                                        <%--SPACES--%>
+                                    <%--</label>--%>
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                        SPACES
-                                    </label>
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                        <input checked class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
                                         TABS
                                     </label>
                                     <label class="form-check-label" for="tab-size">
