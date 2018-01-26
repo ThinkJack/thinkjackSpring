@@ -140,11 +140,12 @@
                 </div>
             </div>
             <div class=" search_div bd">
+                <div class="row">
                 <c:forEach var="srcVo" items="${list}" varStatus="status">
-                    <c:if test="${status.count % 3 eq 1}">
-                        <div class="row">
-                    </c:if>
-                    <div class="col">
+                    <%--<c:if test="${status.count % 3 eq 1}">--%>
+                        <%--<div class="row">--%>
+                    <%--</c:if>--%>
+                    <div class="col-4">
                         <div class="card hn">
                                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
                             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
@@ -231,9 +232,9 @@
                             </div>
                         </div>
                     </div>
-                    <c:if test="${status.count % 3 eq 0}">
-                        </div>
-                    </c:if>
+                    <%--<c:if test="${status.count % 3 eq 0}">--%>
+                        <%--</div>--%>
+                    <%--</c:if>--%>
                     <!-- jQuery library -->
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                     <script>
@@ -300,9 +301,10 @@
                         }
                     </script>
                 </c:forEach>
-                <c:if test="${status.count % 3 eq 0}">
-            </div>
-            </c:if>
+                </div>
+                <%--<c:if test="${status.count % 3 eq 0}">--%>
+            <%--</div>--%>
+            <%--</c:if>--%>
         </div>
         <script>
             $(document).ready(function () {
