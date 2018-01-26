@@ -170,7 +170,7 @@
             <ul class="hidden">
                 <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
                 <li >
-                <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
+                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
                 </li>
             </ul>
 
