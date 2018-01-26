@@ -66,6 +66,37 @@
         white-space:nowrap;
         text-overflow: ellipsis;
     }
+
+    /*소스게시판 미디어 쿼리*/
+
+    @media only screen and (min-width: 760px) {
+        .col-md-6{
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .col-md-6 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 33.3333333333%;
+            flex: 0 0 33.3333333333%;
+            max-width: 33.3333333333%;
+        }
+        /*.col-lg-2{*/
+            /*-webkit-box-flex: 0;*/
+            /*-ms-flex: 0 0 0%;*/
+            /*flex: 0 0 0%;*/
+            /*max-width: 0%;*/
+            /*margin: auto;*/
+
+    /*}*/
+
+    }
+
+
 </style>
 <script>
     var getPage = function (srcId) {
@@ -92,8 +123,8 @@
 <div class="deaf2"></div>
 <div class="container-fluid removePadding text-center">
     <div class="row">
-        <div class="col-sm-2 removePadding"></div>
-        <div class="col-sm-8 removePadding" >
+        <div class="col-lg-2  removePadding"></div>
+        <div class="col-lg-8  removePadding" >
             <label class="control-label">
                 <h1 class="bd" id="titleList" style="text-align: center;">코드 게시판</h1>
             </label>
@@ -145,7 +176,7 @@
                     <%--<c:if test="${status.count % 3 eq 1}">--%>
                         <%--<div class="row">--%>
                     <%--</c:if>--%>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-6 col-xs-12">
                         <div class="card hn">
                                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
                             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
@@ -325,6 +356,7 @@
             });
         </script>
     </div>
+        <div class="col-lg-2  removePadding"></div>
 
 </div>
 <div class="text-center">

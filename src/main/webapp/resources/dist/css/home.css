@@ -323,7 +323,9 @@ ul, menu, dir {
     list-style-type: none;
 
 }
-
+li{
+    list-style-type: none;
+}
 .commentReply{
 
     height: 200px;

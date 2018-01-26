@@ -183,21 +183,6 @@ $(function () {
     });
 });
 
-//window resize변경 막기
-// $(window).load(function () {
-//     window.resizeTo(window.outerWidth - window.innerWidth + 1000, this.outerHeight);
-// });
-
-$(function () {
-    $(window).resize(function () {
-        var widthSize = this.innerWidth;
-        console.log(widthSize);
-        if(widthSize <= 1000){
-            console.log("들어감");
-            window.resizeTo(1010, this.outerHeight);
-        }
-    });
-});
 // HTML Preprocessor 설정
 $(function () {
 
@@ -546,6 +531,16 @@ $(function () {
                 document.getElementById("like-couont").innerHTML = success.srcLikeCnt;
             }
         });
+    });
+});
+
+//창 크기조절 관련
+$(function () {
+    $(window).resize(function () {
+        //            창크기 width 제한
+        if (this.outerWidth <= 450) {
+            this.outerWidth = 450;
+        }
     });
 });
 
