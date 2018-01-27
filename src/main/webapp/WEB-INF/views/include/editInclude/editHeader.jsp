@@ -61,7 +61,7 @@
                     <div>
                         <a class="btn  btn-primary" href="javascript:;" id="saveCode">
                             <i class="fa fa-cloud" style="color: gray; font-size: 20px;" id="save-img"></i> Save
-                            <%--<img src="/resources/images/cloud1.png" > --%>
+                                <%--<img src="/resources/images/cloud1.png" > --%>
                         </a>
                     </div>
                 </li>
@@ -72,7 +72,7 @@
                         <!-- 좋아요 버튼 -->
                         <a class="btn  btn-primary" href="javascript:;" id="like">
                             <i class="fa fa-heart" style="color: gray; font-size: 20px;" id="likebt"></i> Like
-                            <%--<img src="/resources/images/like1.png" > --%>
+                                <%--<img src="/resources/images/like1.png" > --%>
                         </a>
                     </div>
                 </li>
