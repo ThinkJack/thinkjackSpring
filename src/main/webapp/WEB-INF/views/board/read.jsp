@@ -43,7 +43,7 @@
 </style>
 
 <div class="row  removePadding justify-content-center" style="padding-top: 100px;">
-    <div class="col-md-8 col-lg-6 col-xl-5 cardtext-white list-group ">
+    <div class="col-md-10 col-lg-7 col-xl-6 cardtext-white list-group ">
         <form role="form" method="post">
             <input type="hidden" name='category' value="${category}">
             <input type='hidden' name='page' value="${cri.page}">
@@ -96,7 +96,7 @@
 <c:set var="name" value="${category}"/>
 <c:if test="${name ne 'notice'}">
 
-    <div class="col-md-8 col-lg-6 col-xl-5 removePadding ">
+    <div class="col-md-10 col-lg-7 col-xl-6 removePadding ">
             <%--댓글 등록 부분 --%>
             <div class="card border-primary ">
                 <h2 class="bd m-2"> Comment</h2>

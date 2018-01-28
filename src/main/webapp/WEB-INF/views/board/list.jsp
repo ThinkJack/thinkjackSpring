@@ -36,9 +36,8 @@
 </style>
 
 <div class="container-fluid removePadding text-center">
-    <div class="row">
-        <div class="col-sm-3 removePadding"></div>
-        <div class="col-sm-6 removePadding" >
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 removePadding" >
 
 
             <%--<div class="form-group">--%>
@@ -164,7 +163,7 @@
                         </c:if>
                         <c:forEach begin="${pageMaker.startPage}"
                                    end = "${pageMaker.endPage}" var="idx">
-                            <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active page-item' : ' ' }"/>>
+                            <li <c:out value="${pageMaker.cri.page == idx ? ' class = active page-item' : ' ' }"/>>
                                 <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
                             </li>
                         </c:forEach>
