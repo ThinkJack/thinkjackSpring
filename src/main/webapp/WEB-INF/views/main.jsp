@@ -8,7 +8,7 @@
         width:100%;
         /*padding:56.6% 0 6px;*/
         padding:auto;
-        margin-left: 15%;
+        /*margin-left: 15%;*/
     }
     .movbx iframe{
         position:absolute;
@@ -129,7 +129,7 @@
     });
 </script>
 <div style="background-color:white">
-    <h1 class="bd " style="margin-left:70%; font-size: 4em;">Board</h1>
+    <h1 class="bd " style="margin-left:10%; font-size: 4em;">Board</h1>
 </div>
 
 <section class="c container-fluid removePadding">
