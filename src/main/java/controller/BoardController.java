@@ -71,24 +71,17 @@ public class BoardController {
         service.increaseViewcnt(boardId, category);
 
         model.addAttribute(service.readBoard(boardId, category));
-        //true null 확인
-//        System.out.println( httpRequest.getAttribute("login")==null);
 
-        if(httpRequest.getAttribute("login") == null) {
+        if(null == httpRequest.getSession().getAttribute("login") ) {
             BoardLikeVO vo = new BoardLikeVO();
             vo.setBoardId(boardId);
             vo.getUserId();
-            System.out.println(vo.getUserId() + "userId??");
             int boardlike = service.getBoardLike(vo);
-//            System.out.println(boardlike + "boardLike숫자");
 
             model.addAttribute("heart", boardlike);
 
         }else{
             int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
-
-            System.out.println("userid" + userid);
-
 
             BoardLikeVO vo = new BoardLikeVO();
             vo.setBoardId(boardId);
@@ -100,6 +93,7 @@ public class BoardController {
             model.addAttribute("heart", boardlike);
         }
     }
+
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET)
     public void modify(int boardId, Model model,
@@ -138,6 +132,7 @@ public class BoardController {
 
         int heart = Integer.parseInt(httpRequest.getParameter("heart"));
         int boardId = Integer.parseInt(httpRequest.getParameter("boardId"));
+
         int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
 
         BoardLikeVO boardLikeVO = new BoardLikeVO();
