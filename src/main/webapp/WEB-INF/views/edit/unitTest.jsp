@@ -125,53 +125,51 @@
     var errors = false;
     var frame = document.getElementById("frameUnitTest");
     var out = frame.contentDocument || frame.contentWindow.document;
-    var count;
     var functions;
-    codeUnitTest.on("change", function () {
-        count = 0;
-        var javascriptCode = codeUnitTest.getValue();
-        if ($("#autoremove").prop("checked"))
-            $("#test-case").empty();
+    codeUnitTest.on("change", function () { // js code 가 변경될때,
+        var javascriptCode = codeUnitTest.getValue(); // 문자열을 가져옴
+        if ($("#autoremove").prop("checked")) // 테스트 케이스 자동삭제가 켜져있는지 확인
+            $("#test-case").empty(); // 켜져있으면 비워줌
         try {
-            out.open();
-            out.write("<script>" + codeUnitTest.getValue() + "<\/script>");
-            out.close();
+            out.open(); // out 객체를연다.
+            out.write("<script>" + javascriptCode + "<\/script>"); // out 객체에 javascript의 값을 주입한다.
+            out.close(); // out 객체를 닫는다.
         } catch (err) {
-            console.log(err);
+            $("#resultView").append(err); // 에러를 reultView 찍어줌
         }
 
-        functions = new Array();
-        pos = javascriptCode.indexOf('function', 0);
+        functions = new Array(); // 빈배열을 생성 여기에 function에 이름만 담는다.
+        pos = javascriptCode.indexOf('function', 0); // 첫번째 function을 찾는다.
         var count = 0;
-        while (pos !== -1) {
-            count++;
-            javascriptCode = javascriptCode.substring(pos);
+        while (pos !== -1) {  // indexOf로 찾았을때 다음값이 없을때까지
+            count++; //함수의 갯수를 담아둠
+            javascriptCode = javascriptCode.substring(pos); // javascript코드를 자름
             functions.push(javascriptCode.substring(javascriptCode.indexOf('function') +8, javascriptCode.indexOf('(')));
+            // 자른 Javascropt 코드중에서 function의 이름만 가져와서 배열에 추가
 
-            pos = javascriptCode.indexOf('function',count);
+            pos = javascriptCode.indexOf('function',count); //계속해서 function 을 찾는다.
 
-            console.log(javascriptCode);
 
         }
-        $("#functions").empty();
-        $("#functions").append("<option>" + "------" + "</option>");
-        for (var i = 0; i < functions.length; i++)
+        $("#functions").empty(); // 셀렉트 박스를 비우고
+        $("#functions").append("<option>" + "------" + "</option>"); // 기본셋팅
+        for (var i = 0; i < functions.length; i++) // 반복문으로 function의 이름만 출력해준다.
             $("#functions").append("<option>" + functions[i] + "</option>");
     });
-    codeUnitTest.setValue(
+    codeUnitTest.setValue( // 처음에 페이지가 열리면 기본적으로 이값이 써있다.
         "function test1(){\n" +
         "   return 0;\n" +
         "}");
     var caseNum = 0;
-    $(document).on("click", "#add-test-case", function () {
+    $(document).on("click", "#add-test-case", function () { // add-test-case 버튼을 눌럿을때,
         caseNum++;
-        if ($('#functions').val() === "------") {
+        if ($('#functions').val() === "------") { // 셀렉트 박스가 선택 되어있어야 한다.
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
-        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length");
+        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length"); // function의 배개변수의 갯수를 알아낸다.
         var inputbox = "";
-        for (var i = 0; i < functionLength; i++)
+        for (var i = 0; i < functionLength; i++) //매개변수 만큼의 input box를 생성한다.
             inputbox += "<input type='text' class='form-control input_box inputs mx-1' />";
         var testCases =
             "<div id='case' class='row case m-2 text-white'>" +
@@ -184,38 +182,39 @@
             "<button class='btn btn-outline-danger delete_case mx-1'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
-        $("#case").width(400 +(functionLength * 90));
-        $("#case").prop("id","case"+caseNum);
+        $("#case").width(400 +(functionLength * 90)); // testcase 의 길이를 조정해서 한 라인에 모두들어가게 만들어준다.
+        $("#case").prop("id","case"+caseNum); // 헷깔리지 않게 id를 구분해준다.
     });
     function codeTest(input, output) {
         var startTime = getTimeStamp();
         try {
             var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
+            // function의 결과값을 저장한다.
             $("#resultView").append(
-                "<div class='text-white'> [ input : " + input
-                + " / output : " + output
-                + " / result : " + inputResult + " ] "
-                + (inputResult == output ? "성공" : "실패")
-                + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)"
+                "<div class='text-white'> [ input : " + input // input값을 찍어줌
+                + " / output : " + output // output값을 찍어줌
+                + " / result : " + inputResult + " ] " // 결과값을찍어줌
+                + (inputResult == output ? "성공" : "실패") // 두 값이 맞는지 판별함
+                + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" // 경과시간을 알려줌
                 + "</div>");
         } catch (err) {
-            $("#resultView").append("<div class='err'>" + err + "</div>");
+            $("#resultView").append("<div class='err'>" + err + "</div>"); // err발생시 err를 찍어줌
         }
     }
     function getTimeStamp() {
         return new Date().getMilliseconds();
     }
-    $(document).on("click", ".test_one", function () {
-        var inputs = $(this).parent().find(".inputs");
+    $(document).on("click", ".test_one", function () { // test-one 을 클릭했을때, 개별테스트 진행
+        var inputs = $(this).parent().find(".inputs"); // input 값을 찾아서
         var testArguments = "";
         for (var i = 0; i < inputs.length; i++) {
             try{
-                frame.contentWindow.eval(inputs[i].value);
+                frame.contentWindow.eval(inputs[i].value); //
                 testArguments += inputs[i].value;
-            }catch (notDefind){
+            }catch (notDefind){ // input 값이 notdefind 애러가 난다면, 문자열로 치환해준다.
                 testArguments += "\"" + inputs[i].value + "\""
             }finally {
-                if (inputs.length - 1 !== i)
+                if (inputs.length - 1 !== i) // 끝의 값이 아니라면 ,를 붙여줌
                     testArguments += ",";
             }
         }
@@ -239,15 +238,15 @@
     $(document).on("click", "#clear-result-view", function () {
         $("#resultView").empty();
     });
-    $(document).on("click", "#test-all", function () {
-        var startTime = getTimeStamp();
+    $(document).on("click", "#test-all", function () { // 모든 case 를 한번에 측정한다.
+        var ALLCaseStartTime = getTimeStamp();
         var testCase = $("#test-case").find(".test_one");
-        testCase.trigger("click");
-        $("#resultView").append("<div class='resultLog'> "
+        testCase.trigger("click"); // testcase를 모두 가져와서 test_one버튼을 클릭하게 함.
+        $("#resultView").append("<div class='text-white '> "
             + "모든 케이스를 모두 완료했습니다. (소요시간  : "
-            + (getTimeStamp() - startTime) + "ms)" + "</div>");
+            + (getTimeStamp() - ALLCaseStartTime) + "ms)" + "</div>");
     });
-    $(document).ready(function () {
+    $(document).ready(function () { // 변경이 감지되면 자동으로 스크롤을 최하위로 내려주는 함수들
         $("#test-case").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
         });
