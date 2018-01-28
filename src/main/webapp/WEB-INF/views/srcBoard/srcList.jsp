@@ -122,9 +122,9 @@
 </script>
 <div class="deaf2"></div>
 <div class="container-fluid removePadding text-center">
-    <div class="row">
-        <div class="col-lg-2  removePadding"></div>
-        <div class="col-lg-8  removePadding" >
+    <div class="row justfy-contents-center">
+        <%--<div class="col-lg-2  removePadding"></div>--%>
+        <div class="col-lg-10  removePadding" >
             <label class="control-label">
                 <h1 class="bd" id="titleList" style="text-align: center;">코드 게시판</h1>
             </label>
@@ -171,12 +171,12 @@
                 </div>
             </div>
             <div class=" search_div bd">
-                <div class="row">
+                <div class="row justfy-contents-center">
                 <c:forEach var="srcVo" items="${list}" varStatus="status">
                     <%--<c:if test="${status.count % 3 eq 1}">--%>
                         <%--<div class="row">--%>
                     <%--</c:if>--%>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-lg-3 col-md-4 col-xs-12">
                         <div class="card hn">
                                 <%--<img class="card-img-top" src="" alt="Card image cap">--%>
                             <div class="iframe_wrap" onclick="location.href='/edit/editPage/${srcVo.srcId}';">
@@ -185,18 +185,39 @@
                             </div>
 
                                 <%--<div class="card-body" style="overflow: auto">--%>
-                            <div class="card-body" style=" width:100%; height:45px; ">
+                            <div class="card-body removePadding align-items-center" style=" width:100%; height:45px; ">
                                     <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
-                                <h5 class="hn mb-0 ellipsis"   id="src-title1" data>${srcVo.srcTitle}</h5>
+                                <div class="ellipsis"   id="src-title1" data>${srcVo.srcTitle}</div>
+                                        <div class="row fl-right ml-auto ">
+                                            <c:if test="${srcVo.srclikeCli eq '1'}">
+                                                <i class="fa fa-heart" style="color: red; font-size: 20px;" id="${srcVo.srcId}like"></i>
+                                            </c:if>
+                                            <c:if test="${srcVo.srclikeCli eq '0'}">
+                                                <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="${srcVo.srcId}like"></i>
+                                            </c:if>
+
+                                            <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                               id="${srcVo.srcId}likecnt"> ${srcVo.srcLikecnt}</a>
+
+                                            <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
+                                            <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
+                                                <script>getPage("${srcVo.srcId}")</script>
+                                            </a>
+
+                                            <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
+                                            <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
+                                               id="src-viewcnt2"> ${srcVo.srcViewcnt}</a>
+                                        </div>
                                 <p class="card-text hn ellipsis" id="src-comments1">${srcVo.srcComments}</p>
                             </div>
-                            <div class="card-body mb-0  pb-0" style="padding-left:10px; padding-right:7px; height: 70px;" >
-                                <div class="row removePadding ">
-                                    <div class="col-4">
+                            <div class="card-body mb-0  pb-0 removePadding" style="padding-left:10px; padding-right:7px; height: 70px;" >
+                                <div class="row removePadding align-items-center ">
+                                    <div class="col-4 removePadding">
                                         <img class=" src_icon removePadding rounded-circle" src="/resources/images/123.gif" style="width:44.5px; height:44.5px;" id="${srcVo.srcId}img"
                                              onclick="location.href='/edit/editPage/${srcVo.srcId}';">
                                     </div>
-                                    <a href="/edit/editPage/${srcVo.srcId}" class=" ml-3 card-link removePadding ellipsis" id="src-writer2">${srcVo.srcWriterName}</a>
+                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link removePadding ellipsis" id="src-writer2">${srcVo.srcWriterName}</a>
+
                                 </div>
                                 <script>
                                     <%--작성자 이미지 경로 작업--%>
@@ -238,28 +259,6 @@
                                         });
                                     });
                                 </script>
-                            </div>
-                            <div class="card-body">
-                                <div class="row fl-right ml-auto ">
-                                    <c:if test="${srcVo.srclikeCli eq '1'}">
-                                        <i class="fa fa-heart" style="color: red; font-size: 20px;" id="${srcVo.srcId}like"></i>
-                                    </c:if>
-                                    <c:if test="${srcVo.srclikeCli eq '0'}">
-                                        <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="${srcVo.srcId}like"></i>
-                                    </c:if>
-
-                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                       id="${srcVo.srcId}likecnt"> ${srcVo.srcLikecnt}</a>
-
-                                    <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
-                                    <a href="/edit/editPage/${srcVo.srcId}?reply=show" class="card-link fl-right" id="srcReply${srcVo.srcId}">
-                                        <script>getPage("${srcVo.srcId}")</script>
-                                    </a>
-
-                                    <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
-                                    <a href="/edit/editPage/${srcVo.srcId}" class="card-link fl-right"
-                                       id="src-viewcnt2"> ${srcVo.srcViewcnt}</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -356,7 +355,6 @@
             });
         </script>
     </div>
-        <div class="col-lg-2  removePadding"></div>
 
 </div>
 <div class="text-center">
