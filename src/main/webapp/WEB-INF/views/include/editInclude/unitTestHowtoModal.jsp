@@ -18,9 +18,9 @@
                     <%--&lt;%&ndash;<span aria-hidden="true">&times;</span>&ndash;%&gt;--%>
                 <%--</button>--%>
             </div>
-            <div class="modal-body hn">
+            <div class="modal-body hn" style="background: black">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 text-white" >
 
                         <div class="row">
                             <div class="col-12 removePadding ">
@@ -29,12 +29,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12 removePadding">
-                                <p>1. 왼쪽에 테스트 코드 작성란에 테스트 할 코드를 작성합니다.
+                                <p>1. 왼쪽에 <span class="h4 text-white bd border-white">TestCode(JS)</span> 에 테스트 할 코드를 작성합니다.
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 removePadding">
-                                <p>2. 그 다음에 TestCase 창의 셀렉트 박스에서 테스트할 함수를 선택합니다.
+                                <p>2. 그 다음에 <span class="h4 text-white bd">TestCase</span> 창의 셀렉트 박스에서 테스트할 함수를 선택합니다.
                             </div>
                         </div>
                         <div class="row">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 removePadding">
-                                <p>5. 테스트에 대한 결과가 Result 창에 나타납니다.
+                                <p>5. 테스트에 대한 결과가 <span class="h4 text-white bd">Restult</span> 창에 나타납니다.
                             </div>
                         </div>
                         <div class="row">
