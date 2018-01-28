@@ -188,7 +188,7 @@
                                 <%--<div class="card-body" style="overflow: auto">--%>
                             <div class="row removePadding align-items-center" style=" width:100%; height:45px; ">
                                     <%--제목 길면 스크롤 생기고 옆으로 늘어나게--%>
-                                <div class="ellipsis col-6"   id="src-title1" data>${srcVo.srcTitle}</div>
+                                <span class="ellipsis col-6 hn"   id="src-title1" ><c:out value="${srcVo.srcTitle}" /></span>
                                         <div class="row fl-right ml-auto ">
                                             <c:if test="${srcVo.srclikeCli eq '1'}">
                                                 <i class="fa fa-heart" style="color: red; font-size: 20px;" id="${srcVo.srcId}like"></i>
@@ -221,6 +221,8 @@
 
                                 </div>
                                 <script>
+
+
                                     <%--작성자 이미지 경로 작업--%>
                                     <c:if test="${srcVo.srcWriterImgPath ne null}">
                                     $("#${srcVo.srcId}img").attr("src", filePathChange("${srcVo.srcWriterImgPath}", true));
