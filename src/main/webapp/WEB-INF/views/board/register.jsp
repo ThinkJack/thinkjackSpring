@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/board.css" rel="stylesheet">
@@ -10,10 +11,23 @@
 </style>
 
 
-<div class="row  removePadding " style="padding-top: 100px;">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 cardtext-white list-group ">
+<div class="row  removePadding justify-content-center" style="padding-top: 100px;">
 
+    <div class="col-md-10 col-lg-7 col-xl-6 cardtext-white list-group ">
+        <label class="control-label">
+
+            <c:set var="name" value="${category}" />
+            <c:if test="${name eq 'qna'}">
+                <h1 class="bd" id="titleList" style="text-align: center;">질문 게시판</h1>
+            </c:if>
+            <c:if test="${name eq 'free'}">
+                <h1 class="bd" id="titleList" style="text-align: center;">자유 게시판</h1>
+            </c:if>
+            <c:if test="${name eq 'notice'}">
+                <h1 class="bd" id="titleList" style="text-align: center;">공지사항</h1>
+            </c:if>
+
+        </label>
         <form role="form" method="post" id="registerForm">
             <div class="box-body m-3">
 
@@ -47,5 +61,4 @@
             </div>
         </form>
     </div>
-    <div class="col-md-3"></div>
 </div>
