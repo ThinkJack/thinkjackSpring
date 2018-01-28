@@ -139,17 +139,23 @@
         } catch (err) {
             console.log(err);
         }
-        var pos = 0;
+
         functions = new Array();
+        pos = javascriptCode.indexOf('function', 0);
+        var count = 0;
         while (pos !== -1) {
             count++;
             javascriptCode = javascriptCode.substring(pos);
-            functions.push(javascriptCode.substring(javascriptCode.indexOf('function') + 8, javascriptCode.indexOf('(')));
-            pos = javascriptCode.indexOf('function', pos + 1);
+            functions.push(javascriptCode.substring(javascriptCode.indexOf('function') +8, javascriptCode.indexOf('(')));
+
+            pos = javascriptCode.indexOf('function',count);
+
+            console.log(javascriptCode);
+
         }
         $("#functions").empty();
         $("#functions").append("<option>" + "------" + "</option>");
-        for (var i = 0; i < count; i++)
+        for (var i = 0; i < functions.length; i++)
             $("#functions").append("<option>" + functions[i] + "</option>");
     });
     codeUnitTest.setValue(
@@ -189,7 +195,7 @@
                 "<div class='text-white'> [ input : " + input
                 + " / output : " + output
                 + " / result : " + inputResult + " ] "
-                + (inputResult === output ? "성공" : "실패")
+                + (inputResult == output ? "성공" : "실패")
                 + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)"
                 + "</div>");
         } catch (err) {
