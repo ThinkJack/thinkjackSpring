@@ -5,46 +5,49 @@
   Time: 오후 5:06
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header 메뉴바 -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
-    <a class="navbar-brand" href="/">  <img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png" ></a>
-    <div>
+    <%--<div class="row">--%>
+
+    <a class="navbar-brand" href="/"><img class="rounded-circle" style=" height:50px;" src="/resources/images/idea.png"></a>
+    <div class="col justify-content-start align-items-center">
         <div class="page_title_view" id="page-title-view">
-            <a class="page_title text-dark" >
+            <a class="page_title text-dark">
                 <span id="src-title"></span>
             </a>
+
             <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
-                        ((login ne null) and (SrcVO.srcId eq null)) or
-                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
-                        ((login eq null) and (SrcVO.srcId eq null))}">
+                            ((login ne null) and (SrcVO.srcId eq null)) or
+                            ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                            ((login eq null) and (SrcVO.srcId eq null))}">
                 <i class="fa fa-paint-brush pencil" id="pencil" style="color: black"></i>
             </c:if>
         </div>
-        <div class="page_title_text"  id="page-title-text">
+        <div class="page_title_text" id="page-title-text">
             <input type="text" name="page-title" id="src-title-input" value="" maxlength="50"/>
         </div>
-        <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer" style="color:#000000;"></span></div>
+        <div class="row"><span class="bd" style="color: #9c9c9c;">A masterpiece by &nbsp;</span><span id="src-writer"
+                                                                                                      style="color:#000000;"></span>
+        </div>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="offset">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto page_info">
-            <li class="nav-item active">
-                <!--href="" 는 현재 패이지 reload해줌 -->
+    <%--<div class="offset">--%>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
 
-            </li>
-            <li class="nav-item">
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right ">
+        <ul class="nav navbar-right float-right">
             <%--코드 실행 버튼--%>
             <li class="nav-item active run" id="run">
                 <div>
@@ -54,9 +57,9 @@
                 </div>
             </li>
             <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
-                        ((login ne null) and (SrcVO.srcId eq null)) or
-                        ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
-                        ((login eq null) and (SrcVO.srcId eq null))}">
+                            ((login ne null) and (SrcVO.srcId eq null)) or
+                            ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
+                            ((login eq null) and (SrcVO.srcId eq null))}">
                 <li class="nav-item active">
                     <div>
                         <a class="btn  btn-primary" href="javascript:;" id="saveCode">
@@ -108,12 +111,15 @@
                 <%--</li>--%>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img  class="rounded-circle Photo " id="profileHeader" src="" style="width:38px; height:38px;"></a>
+                    <a class="nav-link dropdown-toggle  pt-0" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle Photo " id="profileHeader" src=""
+                             style="width:38px; height:38px;"></a>
 
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(-60px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                    <div class="dropdown-menu" x-placement="bottom-start"
+                         style="position: absolute; transform: translate3d(-60px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
                         <div class="eclipsis pl-4" style="width:70% ">
-                            <a class=" hn " >${login.userName}</a>
+                            <a class=" hn ">${login.userName}</a>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
@@ -121,18 +127,13 @@
                     </div>
                 </li>
 
-
             </c:if>
         </ul>
-
+        <%--</div>--%>
     </div>
-    <br>
-    <div>
-        <!--autoFormatSelection & commentSelection-->
-        <%--<input type="button" onclick="autoFormatSelection()" value="autoFormatSelection">--%>
-        <%--<input type="button" onclick="commentSelection(true)" value="commentSelection">--%>
-    </div>
-
+    <%--</div>--%>
+    <%----%>
+    <%--<br>--%>
 
 
 </nav>

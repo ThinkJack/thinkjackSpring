@@ -183,18 +183,6 @@ $(function () {
     });
 });
 
-//window resize변경 막기
-// $(function () {
-//     $(window).resize(function () {
-//         var widthSize = this.innerWidth;
-//         console.log(widthSize);
-//         if(widthSize <= 1000){
-//             console.log("들어감");
-//             window.focus();
-//             window.resizeTo(window.outerWidth - window.innerWidth + 1000, this.outerHeight);
-//         }
-//     });
-// });
 // HTML Preprocessor 설정
 $(function () {
 
@@ -547,14 +535,6 @@ $(function () {
 });
 
 //창 크기조절 관련
-$(function () {
-    $(window).resize(function () {
-        //            창크기 width 제한
-        if (this.outerWidth <= 450) {
-            this.outerWidth = 450;
-        }
-    });
-});
 
 // save & update
 $("#saveCode").click(function (e) {
