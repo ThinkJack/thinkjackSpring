@@ -12,19 +12,19 @@
 <div class="modal fade" id="howto-modal" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title bd">How To Use?!</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-header" style="background-color: #FF9D00">
+                <h3 class="modal-title bd text-white">How To Use?!</h3>
+                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding-right:45px">--%>
+                    <%--&lt;%&ndash;<span aria-hidden="true">&times;</span>&ndash;%&gt;--%>
+                <%--</button>--%>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body hn">
                 <div class="row">
                     <div class="col-12">
 
                         <div class="row">
-                            <div class="col-12 removePadding">
-                              <p>아래 순서대로 테스트 하실수 있습니다.</p>
+                            <div class="col-12 removePadding ">
+                              <h3 >아래 순서대로 테스트 하실수 있습니다.</h3>
                             </div>
                         </div>
                         <div class="row">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 removePadding">
-                                <p> 3. add case 버튼을 눌러서 테스트할 케이스를 추가합니다.
+                                <p> 3.<button class="btn btn-outline-info mx-1">AddTestCase</button> 버튼을 눌러서 테스트할 케이스를 추가합니다.
                             </div>
                         </div>
                         <div class="row">
@@ -60,14 +60,14 @@
                         </div>
                         <div class="row">
                             <div class="col-12 removePadding">
-                                <p>7. 여러 케이스를 모두 확인하고 싶을 때, TestAll 버튼으로 모든 케이스를 테스트 할 수 있습니다.
+                                <p>7. 여러 케이스를 모두 확인하고 싶을 때,<button class="btn btn-outline-success mx-1">TestAll</button> 버튼으로 모든 케이스를 테스트 할 수 있습니다.
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="background-color: #FF9D00">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

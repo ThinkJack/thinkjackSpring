@@ -17,6 +17,45 @@
         width:100%;
         height: 100%;
     }
+    .title{
+        font-size: 4rem;
+    }
+    .title2{
+        font-size:6rem
+    }
+
+    @media screen and (max-width: 1040px) {
+
+        .title{
+            font-size: 2rem;
+        }
+        .title2{
+            font-size:4rem
+        }
+        .text-center{
+            font-size: 1.5rem;
+        }
+
+        .b {
+            height: 60%;
+        }
+
+    }
+    @media screen and (max-width: 570px) {
+
+        .title{
+            font-size: 1.2rem;
+        }
+        .title2{
+            font-size:3rem
+        }
+        .b {
+            height: 50%;
+        }
+
+
+    }
+
 </style>
 <section class="a container-fluid" >
     <%--Main--%>
@@ -26,18 +65,16 @@
         <div class="col-sm-8 removePadding">
             <div class="row removePadding">
                 <div class="col-sm-6 removePadding borderRB "
-                     style="height: 30%;margin-left: 50% ;margin-bottom: -11px">
+                     style="height: 30%;margin-left: 50% ;margin-bottom: -11px;z-index: 10">
                     <br>
-                    <p class="bd aniB mt-5" style=" font-size: 4em;"><a style="font-size:6rem">rn</a>asterpiece</p>
+                    <p class="bd aniB mt-5 title"><a class="title2" >rn</a>asterpiece</p>
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-5">
-                        <div class=" aniA ">
-                            <h1 class=" bd">Website</h1>
-                            <h1 class="bd">Interactions</h1>
-                            <h1 class="text-white bd">without</h1>
-                            <h1 class="text-white bd">code</h1>
+                    <div class="row">
+                        <div class=" aniA  " style="padding-left: 100px">
+                            <h1 class=" bd title" >Talk is cheap.</h1>
+                            <h1 class=" bd text-white title" >I Show me the code.</h1>
+
                         </div>
                     </div>
                     <a href="#" class="scroll-down" address="true"></a>
@@ -50,7 +87,7 @@
     <div class="col-sm-2 removePadding "></div>
 </section>
 <div>
-    <h1 class="bd " style="margin-left:10%; font-size: 4em;">Service</h1>
+    <h1 class="bd title" style="margin-left:10%;z-index:5; ">Service</h1>
 </div>
 <section class="b container-fluid removePadding">
 
@@ -58,9 +95,9 @@
 
         <div class="pointB col-6 " style="display: none ;margin-top: 15%;height:45%;">
             <div class=" movbx" style="padding-top: 100%" >
-            <iframe width="100%" height="100%"
-                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;">
-            </iframe>
+                <iframe width="100%" height="100%"
+                        src="/resources/test1.gif" frameborder="0" style="overflow:hidden;">
+                </iframe>
             </div>
 
         </div>
@@ -87,11 +124,11 @@
 
         </div>
         <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;">
-        <div class=" movbx" style="padding-top: 100%" >
-            <iframe width="100%" height="100%"
-                    src="/resources/editgif.gif" style="overflow:hidden;" frameborder="0" >
-            </iframe>
-        </div>
+            <div class=" movbx" style="padding-top: 100%" >
+                <iframe width="100%" height="100%"
+                        src="/resources/editgif.gif" style="overflow:hidden;" frameborder="0" >
+                </iframe>
+            </div>
         </div>
 
     </div>
@@ -129,7 +166,7 @@
     });
 </script>
 <div style="background-color:white">
-    <h1 class="bd " style="margin-left:10%; font-size: 4em;">Board</h1>
+    <h1 class="bd title ">Board</h1>
 </div>
 
 <section class="c container-fluid removePadding">
@@ -138,8 +175,8 @@
         <div class="col-sm-9 removePadding lampContainer ">
             <div class="lamp-container " style="display:inline-block">
                 <div class="lamp show-on-scroll">
-                    <h1 class="bd ani1" style=" font-size: 4em;">Masterpiece </h1>
-                    <h1 class="bd ml-5 ani2" style=" font-size: 4em;">Masterpiece </h1>
+                    <h1 class="bd ani1 title">Masterpiece </h1>
+                    <h1 class="bd ml-5 ani2 title">Masterpiece </h1>
                 </div>
             </div>
         </div>
@@ -229,14 +266,13 @@
     //전구
     $(window).scroll(function() {
         var $el = $('.show-on-scroll');
-        if (matchMedia("screen and (min-width: 780px)").matches) {
+        if (matchMedia("screen and (min-width: 1100px)").matches) {
 
-        if($(this).scrollTop() >=1700) $el.addClass('shown');
-        else $el.removeClass('shown');
+            if($(this).scrollTop() >=1700) $el.addClass('shown');
+            else $el.removeClass('shown');
 
         } else {
-
-            if($(this).scrollTop() >=1500) $el.addClass('shown');
+            if($(this).scrollTop() >=1000) $el.addClass('shown');
             else $el.removeClass('shown');
         }
     });
