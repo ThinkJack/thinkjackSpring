@@ -2,7 +2,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/main.css" rel="stylesheet">
-
+<style>
+    .movbx{
+        position: relative;
+        width:100%;
+        /*padding:56.6% 0 6px;*/
+        padding:auto;
+        margin-left: 15%;
+    }
+    .movbx iframe{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+    }
+</style>
 <section class="a container-fluid" >
     <%--Main--%>
     <div class="deaf" id="main" ></div>
@@ -41,9 +56,12 @@
     <div class="grid ">
 
         <div class="pointB col-6 " style="display: none ;margin-top: 15%;height:45%;">
+            <div class=" movbx" style="padding-top: 100%" >
             <iframe width="100%" height="100%"
-                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%;padding-left:30%">
+                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;">
             </iframe>
+            </div>
+
         </div>
 
         <!--Left side-->
@@ -67,12 +85,13 @@
             </div>
 
         </div>
-        <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;" >
+        <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;">
+        <div class=" movbx" style="padding-top: 100%" >
             <iframe width="100%" height="100%"
-                    src="/resources/editgif.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%" >
+                    src="/resources/editgif.gif" style="overflow:hidden;" frameborder="0" >
             </iframe>
         </div>
-
+        </div>
 
     </div>
 
@@ -125,68 +144,35 @@
         </div>
 
 
-        <div class=" col-sm-2"></div>
+        <div class=" col-sm-2" ></div>
 
-        <div class=" col-sm-2 box">
+        <div class=" col-sm-2 box" onclick="location.href='/board/list?category=notice'">
             <h2 class="hn text-white text-center">공지사항</h2>
             <span class="icon-cont"><i class="fa fa-rocket"></i>
-
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1>
             </span>
-
-            <ul class="hidden">
-                <h6 class="text-center hn">새로운 공지사항을 확인하세요</h6>
-                <li >
-                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=notice'">Go</button>
-                </li>
-
-
-
-            </ul>
-
         </div>
 
 
-        <div class="col-sm-2 box">
+        <div class="col-sm-2 box" onclick="location.href='/srcBoard/srcList'">
             <h2 class="hn text-white text-center">코드 게시판</h2>
             <span class="icon-cont"><i class="fa fa-edit"></i>
                       <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-            <ul class="hidden">
-                <h6 class="text-center hn">자신의 코드를 올려보세요</h6>
-                <li >
-                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/srcBoard/srcList'">Go</button>
-                </li>
-            </ul>
-
         </div>
 
 
-        <div class="col-sm-2 box">
+        <div class="col-sm-2 box" onclick="location.href='/board/list?category=free'">
             <h2 class="hn text-white text-center">자유 게시판</h2>
             <span class="icon-cont"><i class="fa fa-desktop"></i>
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-            <ul class="hidden">
-                <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
-                <li >
-                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
-                </li>
-            </ul>
-
         </div>
 
-        <div class="col-sm-2 box ">
+        <div class="col-sm-2 box " onclick="location.href='/board/list?category=qna'">
             <h2 class="hn text-white text-center">질문 게시판</h2>
             <span class="icon-cont"><i class="fa fa-coffee"></i>
                  <h1 class="bd text-white  " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
-
-            <ul class="hidden ">
-                <h6 class="text-center hn">질문하세요</h6>
-                <li >
-                    <button type="button" class="btn  btn-primary hn alignCenter " onclick="location.href='/board/list?category=qna'">Go </button>
-                </li>
-            </ul>
 
         </div>
     </div>
@@ -242,11 +228,20 @@
     //전구
     $(window).scroll(function() {
         var $el = $('.show-on-scroll');
+        if (matchMedia("screen and (min-width: 780px)").matches) {
 
         if($(this).scrollTop() >=1700) $el.addClass('shown');
         else $el.removeClass('shown');
 
+        } else {
+
+            if($(this).scrollTop() >=1500) $el.addClass('shown');
+            else $el.removeClass('shown');
+        }
     });
+
+
+
 
     //sectionD
     $('.box').click(function() {
