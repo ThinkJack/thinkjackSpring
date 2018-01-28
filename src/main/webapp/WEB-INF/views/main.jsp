@@ -1,8 +1,24 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/include/header.jsp" flush="false"/>
 <link href="/resources/dist/css/main.css" rel="stylesheet">
-
-<section class="a container-fluid">
+<style>
+    .movbx{
+        position: relative;
+        width:100%;
+        /*padding:56.6% 0 6px;*/
+        padding:auto;
+        margin-left: 15%;
+    }
+    .movbx iframe{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+    }
+</style>
+<section class="a container-fluid" >
     <%--Main--%>
     <div class="deaf" id="main"></div>
     <div class="row removePadding">
@@ -41,10 +57,12 @@
     <div class="grid ">
 
         <div class="pointB col-6 " style="display: none ;margin-top: 15%;height:45%;">
+            <div class=" movbx" style="padding-top: 100%" >
             <iframe width="100%" height="100%"
-                    src="/resources/test1.gif" frameborder="0"
-                    style="overflow:hidden;height:100%;width:100%;padding-top:12%;">
+                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;">
             </iframe>
+            </div>
+
         </div>
 
         <!--Left side-->
@@ -69,12 +87,12 @@
 
         </div>
         <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;">
+        <div class=" movbx" style="padding-top: 100%" >
             <iframe width="100%" height="100%"
-                    src="/resources/editgif.gif" frameborder="0"
-                    style="overflow:hidden;height:100%;width:100%;padding-left:10%;padding-top: 12%;">
+                    src="/resources/editgif.gif" style="overflow:hidden;" frameborder="0" >
             </iframe>
         </div>
-
+        </div>
 
     </div>
 
@@ -97,16 +115,16 @@
 </script>
 
 <script type="text/javascript">
-    $(function () {
-        $('#east').mouseenter(function () {
+    $(function(){
+        $('#east').mouseenter(function(){
 
-            $('.pointB').css("display", "block");
-            $('#west').css("display", "none");
+            $('.pointB').css("display","block");
+            $('#west').css("display","none");
 
         });
-        $('#east').mouseleave(function () {
-            $('.pointB').css("display", "none");
-            $('#west').css("display", "block");
+        $('#east').mouseleave(function(){
+            $('.pointB').css("display","none");
+            $('#west').css("display","block");
         });
     });
 </script>
@@ -129,72 +147,33 @@
 
         <div class=" col-sm-2"></div>
 
-        <div class=" col-sm-2 box">
+        <div class=" col-sm-2 box" onclick="location.href='/board/list?category=notice'">
             <h2 class="hn text-white text-center">공지사항</h2>
             <span class="icon-cont"><i class="fa fa-rocket"></i>
-
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1>
             </span>
-
-            <ul class="hidden">
-                <h6 class="text-center hn">새로운 공지사항을 확인하세요</h6>
-                <li>
-                    <button type="button" class="btn  btn-primary hn alignCenter"
-                            onclick="location.href='/board/list?category=notice'">Go
-                    </button>
-                </li>
-
-
-            </ul>
-
         </div>
 
 
-        <div class="col-sm-2 box">
+        <div class="col-sm-2 box" onclick="location.href='/srcBoard/srcList'">
             <h2 class="hn text-white text-center">코드 게시판</h2>
-            <span class="icon-cont"><i class="fa fa-edit" style="position: relative; margin-left: 5px; top: -3px;"></i>
-            <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
-            <ul class="hidden">
-                <h6 class="text-center hn">자신의 코드를 올려보세요</h6>
-                <li>
-                    <button type="button" class="btn  btn-primary hn alignCenter"
-                            onclick="location.href='/srcBoard/srcList'">Go
-                    </button>
-                </li>
-            </ul>
+            <span class="icon-cont"><i class="fa fa-edit"></i>
+                      <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
         </div>
 
 
-        <div class="col-sm-2 box">
+        <div class="col-sm-2 box" onclick="location.href='/board/list?category=free'">
             <h2 class="hn text-white text-center">자유 게시판</h2>
             <span class="icon-cont"><i class="fa fa-desktop"></i>
                  <h1 class="bd text-white " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
 
-            <ul class="hidden">
-                <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
-                <li>
-                    <button type="button" class="btn  btn-primary hn alignCenter"
-                            onclick="location.href='/board/list?category=free'">Go
-                    </button>
-                </li>
-            </ul>
-
         </div>
 
-        <div class="col-sm-2 box ">
+        <div class="col-sm-2 box " onclick="location.href='/board/list?category=qna'">
             <h2 class="hn text-white text-center">질문 게시판</h2>
             <span class="icon-cont"><i class="fa fa-coffee"></i>
                  <h1 class="bd text-white  " style=" font-size: 1em;opacity: 0.5;">Click</h1></span>
-
-            <ul class="hidden ">
-                <h6 class="text-center hn">질문하세요</h6>
-                <li>
-                    <button type="button" class="btn  btn-primary hn alignCenter "
-                            onclick="location.href='/board/list?category=qna'">Go
-                    </button>
-                </li>
-            </ul>
 
         </div>
     </div>
@@ -202,12 +181,13 @@
 </section>
 
 
+
 <div class="deaf2" style="background-color: orange"></div>
 <script>
     <%--슬라이드--%>
-    $(function () {
-        $('.scroll-down').click(function () {
-            $('html, body').animate({scrollTop: $('section.c').offset().top}, 'slow');
+    $(function() {
+        $('.scroll-down').click (function() {
+            $('html, body').animate({scrollTop: $('section.c').offset().top }, 'slow');
             return false;
         });
     });
@@ -226,36 +206,46 @@
     el.addClass('animated slideInDown');
 
 
-    $(window).scroll(function () {
+
+    $(window).scroll(function() {
         var el = $('.ani1');
 
-        if ($(this).scrollTop() >= 1700) el.addClass('animated slideInRight');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInRight');
         else el.removeClass('animated slideInRight');
     });
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         var el = $('.ani2');
 
-        if ($(this).scrollTop() >= 1700) el.addClass('animated slideInLeft');
+        if($(this).scrollTop() >=1700) el.addClass('animated slideInLeft');
         else el.removeClass('animated slideInLeft');
     });
 
 
     //나타나는 글
-    window.sr = ScrollReveal({reset: true});
+    window.sr = ScrollReveal({ reset: true });
     sr.reveal('.foo1');
 
 
     //전구
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         var $el = $('.show-on-scroll');
+        if (matchMedia("screen and (min-width: 780px)").matches) {
 
-        if ($(this).scrollTop() >= 1700) $el.addClass('shown');
+        if($(this).scrollTop() >=1700) $el.addClass('shown');
         else $el.removeClass('shown');
 
+        } else {
+
+            if($(this).scrollTop() >=1500) $el.addClass('shown');
+            else $el.removeClass('shown');
+        }
     });
 
+
+
+
     //sectionD
-    $('.box').click(function () {
+    $('.box').click(function() {
         $(this).toggleClass('selected');
 
     });
