@@ -7,18 +7,31 @@
     .title{
         font-size: 4rem;
     }
-    .title2{
-        font-size:6rem
-    }
 
-    @media screen and (max-width: 1090px) {
+    .borderLT{
+        height: 62%;
+    }
+    .mainTitle{;
+        font-size:6rem;
+        margin-top: 3rem ;
+    }
+    .mainTitle2{
+        font-size:8rem;
+        margin-top: 3rem ;
+    }
+    @media screen and (max-width: 1190px) {
 
         .title{
             font-size: 2rem;
         }
-        .title2{
-            font-size:4rem
+        .mainTitle{
+            font-size:4rem;
+
         }
+        .mainTitle2{
+            font-size:6rem;
+        }
+
         .text-center{
             font-size: 1rem;
         }
@@ -26,21 +39,67 @@
         .b {
             height: 60%;
         }
+        .borderLT{
+            height: 58%;!important;
+        }
+    }
+    @media screen and (max-width: 880px) {
+        .mainTitle{
+            font-size:2rem;
 
+        }
+        .mainTitle2{
+            font-size:4rem;
+        }
+    }
+    @media screen and (max-width: 780px) {
+        .mainTitle{
+            font-size:1.5rem;
+
+        }
+        .mainTitle2{
+            font-size:3rem;
+        }
     }
     @media screen and (max-width: 570px) {
 
         .title{
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
-        .title2{
-            font-size:3rem
+        .mainTitle{
+            font-size:1rem;
+
+        }
+        .mainTitle2{
+            font-size:2rem;
         }
         .b {
             height: 50%;
         }
 
 
+    }
+    
+    @media screen and (max-width:  1500px) {
+        .mainTitle{
+            font-size:5rem;
+            margin-top: 0 ;
+        }
+        .mainTitle2{
+            font-size:7rem;
+            margin-top: 0 ;
+
+        }
+    }
+
+
+    @media screen and (max-width:  1270px) {
+        .mainTitle{
+            font-size:3rem
+        }
+        .mainTitle2{
+            font-size:5rem
+        }
     }
     img { max-width: 100%; }
 </style>
@@ -54,9 +113,9 @@
                 <div class="col-sm-6 removePadding borderRB "
                      style="height: 30%;margin-left: 50% ;margin-bottom: -11px;z-index: 10">
                     <br>
-                    <p class="bd aniB mt-5 title"><a class="title2" >rn</a>asterpiece</p>
+                    <p class="bd aniB  mainTitle"><a class="mainTitle2" >rn</a>asterpiece</p>
                 </div>
-                <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
+                <div class="col-sm-8 removePadding borderLT" style=" margin-right:30%;">
                     <div class="row">
                         <div class=" aniA  " style="padding-left: 100px">
                             <h1 class=" bd title" >Talk is cheap.</h1>
@@ -128,7 +187,7 @@
     });
 </script>
 <div style="background-color:white">
-    <h1 class="bd title ">Board</h1>
+    <h1 class="bd title" style="margin-left:10%;z-index:5;">Board</h1>
 </div>
 <section class="c container-fluid removePadding">
     <div class="row removePadding">
