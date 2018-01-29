@@ -640,10 +640,10 @@ $(function () {
             success: function (success) {
                 if (success.result === 0) {
                     //좋아요 추가시
-                    likeImgChange(2);
+                    likeImgChange("fa-heart-o", "fa-heart", "red");
                 } else {
                     //좋아요 취소시
-                    likeImgChange(1);
+                    likeImgChange("fa-heart", "fa-heart-o", "gray");
                 }
 
                 document.getElementById("like-couont").innerHTML = success.srcLikeCnt;

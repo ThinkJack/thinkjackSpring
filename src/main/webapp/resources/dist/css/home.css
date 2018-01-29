@@ -323,7 +323,9 @@ ul, menu, dir {
     list-style-type: none;
 
 }
-
+li{
+    list-style-type: none;
+}
 .commentReply{
 
     height: 200px;
@@ -338,16 +340,16 @@ a:hover {
 
 /* the grid */
 .grid-1 {
-    display: grid;
-    width: 100%;
-    max-width: 770px;
-    margin: 10% auto;
-    grid-template-columns: 1fr;
+    /*display: grid;*/
+    /*width: 100%;*/
+    /*max-width: 770px;*/
+    /*margin: 10% auto;*/
+    /*grid-template-columns: 1fr;*/
     /*grid-template-rows: auto 200px 200px auto 200px 200px 200px auto 200px 200px auto;*/
-    grid-gap: 25px;
+    /*grid-gap: 25px;*/
     margin-top: 50px;
     margin-bottom: 80px;
-    margin-left: 200px;
+    /*margin-left: 200px;*/
 
 }
 
@@ -357,7 +359,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position:  center center;
     background-size: cover;
-    box-shadow: 0 0px 0px 5px #251b19;
+    /*box-shadow: 0 0px 0px 5px #251b19;*/
 }
 
 /* individual panels */
@@ -429,9 +431,10 @@ a:hover {
     }
 
     .panel-7 p {
-        background: #f8f7f2;
-        box-shadow: 0 0px 0px 5px #251b19;
+        background: #FFAA3E;
+        /*box-shadow: 0 0px 0px 5px #6A6A6A;*/
         text-align: left;
+        margin-bottom: 50px;
     }
 
     .panel-8 {
@@ -478,4 +481,11 @@ input{
 #titleList{
     font-family: 'Hanna', serif;
     color: white;
+}
+
+.eclipsis{
+    width: 100%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }

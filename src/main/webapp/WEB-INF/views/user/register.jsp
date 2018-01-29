@@ -22,6 +22,14 @@
         // console.log('3번째: '+signup.userPassword.value);
         // console.log('4번째: '+signup.chkPassword.value);
         if(signup.userPassword.value && signup.chkPassword.value) {
+            if(signup.userPassword.value.trim().length >40){
+                alert("비밀번호는 40자 이내로 입력해 주세요.");
+                return false;
+            }
+            if(signup.chkPassword.value.trim().length >40){
+                alert("비밀번호 확인 40자 이내로 입력해 주세요.");
+                return false;
+            }
             if(signup.userPassword.value!=signup.chkPassword.value){
                 $('#pwsame').text('비밀번호가 일치하지 않습니다.');
                 $('#pwsame').css("color","red");
@@ -85,11 +93,14 @@
             alert("이메일이 입력되지 않았습니다.");
             return false;
         }
+        if(userEmail.trim().length >40){
+            alert("E-mail은 40자 이내로 입력해 주세요.");
+            return false;
+        }
         if(regex.test(userEmail) === false) {
             alert("잘못된 이메일 형식입니다.");
             return false;
         } else {
-
 
             $.ajax({
                 url:'/user/authenticate',
@@ -120,8 +131,8 @@
         //     alert("username이 입력되지 않았습니다.");
         //     return false;
         // }
-        if(userName.trim().length >10){
-            alert("이름을 10자 이내로 입력해 주세요.");
+        if(userName.trim().length >20){
+            alert("이름을 20자 이내로 입력해 주세요.");
             return false;
         }
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[Thinkjack 서비스 이메일 인증]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost:8081/user/emailConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://http://rnasterpiece.pro/user/emailConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("testmailsender1122@gmail.com", "Thinkjack 개발자");
 		//System.out.println("getEmail"+user.getUserEmail());
 		sendMail.setTo(user.getUserEmail());
@@ -92,9 +92,9 @@ public class UserServiceImpl implements UserService {
 		try {
 			String pw = dao.getUserPw(dto.getUserEmail()).getUserPassword();
 			String rawPw = dto.getUserPassword();
-			System.out.println("db pW  : "+pw);
-			System.out.println("입렵Pw:"+rawPw);
-			System.out.println(passwordEncoder.matches(rawPw, pw));
+			//System.out.println("db pW  : "+pw);
+			//System.out.println("입렵Pw:"+rawPw);
+			//System.out.println(passwordEncoder.matches(rawPw, pw));
 			if(passwordEncoder.matches(rawPw, pw)) {
 				System.out.println("비밀번호 일치");
 				dto.setUserPassword(pw);
@@ -189,7 +189,7 @@ public class UserServiceImpl implements UserService {
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[Thinkjack 서비스 패스워드 찾기]");
 		sendMail.setText(
-				new StringBuffer().append("<h1>아래 주소로 접속하여 패스워드를 변경해주세요</h1>").append("<a href='http://localhost:8081/user/findPasswordConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
+				new StringBuffer().append("<h1>아래 주소로 접속하여 패스워드를 변경해주세요</h1>").append("<a href='http://rnasterpiece.pro/user/findPasswordConfirm?userEmail=").append(user.getUserEmail()).append("&userAuthCode=").append(key).append("' target='_blank'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("testmailsender1122@gmail.com", "Thinkjack 개발자");
 		//System.out.println("getEmail"+user.getUserEmail());
 		sendMail.setTo(user.getUserEmail());

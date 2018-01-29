@@ -40,9 +40,9 @@
 
     <div class="grid ">
 
-        <div class="pointB col-6 " style="display: none">
+        <div class="pointB col-6 " style="display: none ;margin-top: 15%;height:45%;">
             <iframe width="100%" height="100%"
-                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+                    src="/resources/test1.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%;padding-left:30%">
             </iframe>
         </div>
 
@@ -51,7 +51,7 @@
             <div class="content ">
                 <i class="fa fa-edit" aria-hidden="true" onclick="location.href='/edit/editPage'">
                 </i>
-                <h2>Go <span >Edit</span></h2>
+                <h2>Go <span >Editor</span></h2>
             </div>
         </div>
 
@@ -67,9 +67,9 @@
             </div>
 
         </div>
-        <div class="pointA col-6 " style="display: none" >
+        <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;" >
             <iframe width="100%" height="100%"
-                    src="https://www.youtube.com/embed/PzBrwCGbTJ4?controls=0&autoplay=1&loop=1&playlist=PzBrwCGbTJ4&showinfo=0">
+                    src="/resources/editgif.gif" frameborder="0" style="overflow:hidden;height:100%;width:100%" >
             </iframe>
         </div>
 
@@ -170,7 +170,7 @@
             <ul class="hidden">
                 <h6 class="text-center hn">자유롭게 의견을 올려보세요</h6>
                 <li >
-                <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
+                    <button type="button" class="btn  btn-primary hn alignCenter" onclick="location.href='/board/list?category=free'">Go</button>
                 </li>
             </ul>
 

@@ -18,9 +18,9 @@ public class NaverLoginBo {
 
     PrivateKey key=new PrivateKey();
 
-    private final String CLIENT_ID = key.getNavClientId();
-    private final String CLIENT_SECRET = key.getNavClientSecret();
-    private final String REDIRECT_URI = key.getNavRedirectUri();
+    private final String CLIENT_ID = key.getAwsNavClientId();
+    private final String CLIENT_SECRET = key.getAwsNavClientSecret();
+    private final String REDIRECT_URI = key.getAwsNavRedirectUri();
     private final String SESSION_STATE = key.getNavSessionState();
     /* 프로필 조회 API URL */
     private final String PROFILE_API_URL = key.getNavProfileApiUrl();

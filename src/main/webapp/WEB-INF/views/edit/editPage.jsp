@@ -10,6 +10,9 @@
 
 <html>
 <head>
+    <link rel="shortcut icon" href="
+    /resources/images/favicon/idea.ico" type="image/x-icon" />
+    <link rel="icon"  href="/resources/images/favicon/idea.ico"  type="image/x-icon"  />
     <title>EditPage</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,10 +156,10 @@
         if(document.getElementById("like") !== null) {
             if(Heart === "0") {
                 //없을때
-                likeImgChange(1);
+                likeImgChange("fa-heart", "fa-heart-o", "gray");
             } else {
                 //있을때
-                likeImgChange(2);
+                likeImgChange("fa-heart-o", "fa-heart", "red");
             }
         }
 
