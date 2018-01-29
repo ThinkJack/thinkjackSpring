@@ -558,7 +558,7 @@ public class UserController {
 
     @RequestMapping(value = "/googleLogincallback")
     public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
-       // System.out.println("/user/googleLogincallback");
+        System.out.println("/user/googleLogincallback");
         String code = request.getParameter("code");
 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -577,7 +577,7 @@ public class UserController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
-		//System.out.println("UserVO 전");
+		System.out.println("UserVO 전");
 
         LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
@@ -587,7 +587,7 @@ public class UserController {
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
-		//System.out.println("controller dto: "+dto);
+		System.out.println("controller dto: "+dto);
 
 		UserVO vo = new UserVO();
 
