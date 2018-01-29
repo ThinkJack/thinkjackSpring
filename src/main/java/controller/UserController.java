@@ -381,7 +381,7 @@ public class UserController {
 
 		if(userId.equals(ssuserId)){
 		String imagedefualt=user.getUserProfile();
-		System.out.println(imagedefualt);
+		//System.out.println(imagedefualt);
 		String defualtprofile ="basic";
 		//file 업로드 여부 확인
 		if(!file.isEmpty()) {
@@ -389,19 +389,19 @@ public class UserController {
                     file.getOriginalFilename(),
                     file.getBytes(),
                     userId);
-         //   System.out.println("파일 업로드 완료");
+           System.out.println("파일 업로드 완료");
             user.setUserProfile(uploadedFileName);
         }else{
-			System.out.println("imagedefualt: "+imagedefualt);
+			//System.out.println("imagedefualt: "+imagedefualt);
 			if(imagedefualt.equals("basic")){
 				user.setUserProfile(null);
-				System.out.println("basic"+user.getUserProfile());
+				//System.out.println("basic"+user.getUserProfile());
 			}else {
 
 				//프로필 업로드 하지 않을 때 원래 정보를 저장
 				UserVO vot = (UserVO) session.getAttribute("login");
 				user.setUserProfile(vot.getUserProfile());
-				System.out.println("no basic"+user.getUserProfile());
+				//System.out.println("no basic"+user.getUserProfile());
 			}
 		    }
 
@@ -413,7 +413,7 @@ public class UserController {
 		//model.addAttribute("login",vo);
 		rttr.addFlashAttribute("msg" , "회원 정보가 변경되었습니다.");
 		}
-		return "redirect:/";
+		return "redirect:/user/myinfo";
 	}
 
 	//유저 탈퇴
