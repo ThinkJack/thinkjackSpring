@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 			}else {
 				//============System.out.println("비밀번호 불일치");=======================
 				//주석 해제 시 비 암호화 설정된 db Pw  값으로  로그인 되지 않음
-				//dto.setUserPassword(pw);
+				dto.setUserPassword(pw);
 			}
 		}catch(NullPointerException npe){
 			UserVO vo=new UserVO();
