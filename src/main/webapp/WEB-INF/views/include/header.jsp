@@ -98,59 +98,58 @@
         <%--<ul class="nav nav-pills mx-auto ">--%>
         <ul class="nav nav-pills col-12 row justify-content-between align-items-center">
             <div class="row col-6 justify-content-start align-items-center">
-            <li class="nav-item dropdown pointer ">
-                <a class="nav-link dropdown-toggle " id="Service" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Service</a>
-                <div class="dropdown-menu pointerA hn" aria-labelledby="Service" >
-                    <a class="dropdown-item" href="/edit/editPage">Editor</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/edit/unitTest">UnitTest</a>
-                </div>
-            </li>
 
-
-            <li class="nav-item dropdown pointer2" >
-                <a class="nav-link dropdown-toggle "  id="Board"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
-                <div class="dropdown-menu pointerB  hn" aria-labelledby="Board">
-                    <a class="dropdown-item " href='/board/list?category=notice'>공지사항</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
-                </div>
-            </li>
+                <li class="nav-item dropdown pointer " >
+                    <a class="nav-link dropdown-toggle " id="Service" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Service</a>
+                    <div class="dropdown-menu pointerA hn" aria-labelledby="Service" style="position: absolute; transform: translate3d(0px, 35%, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item" href="/edit/editPage">Editor</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/edit/unitTest">UnitTest</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown pointer2" >
+                    <a class="nav-link dropdown-toggle "  id="Board"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
+                    <div class="dropdown-menu pointerB  hn" aria-labelledby="Board" style="position: absolute; transform: translate3d(0px, 17%, 0px); top: 0px; left: 0px; will-change: transform;">
+                        <a class="dropdown-item " href='/board/list?category=notice'>공지사항</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
+                    </div>
+                </li>
             </div>
 
             <div class="row col-6 justify-content-end align-items-center">
-            <%--로그아웃 상태--%>
-            <c:if test="${login eq null}">
+                <%--로그아웃 상태--%>
+                <c:if test="${login eq null}">
 
-                <li class="nav-item">
-                    <button  class="btn btn-outline-primary hn " onclick="location.href='/user/login'" style="font-size: 20px ;height:50px;">로그인</button>
-                </li>
-                <li class="nav-item">
-                    <a  class="nav-link"><img class="rounded-circle Photo" src="/resources/images/123.gif"></a>
-                </li>
-                <%--</ul>--%>
-            </c:if>
-            <%--로그인 상태--%>
-            <c:if test="${login ne null}">
-                <%--<ul class="nav nav-pills ml-auto w-100 justify-content-end ". style="float: right;margin-right: 10%;">--%>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle  " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img  class="rounded-circle Photo profileHeader" src="" ></a>
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <div class="eclipsis pl-4" style="width:70% ">
-                            <a class=" hn " >${login.userName}</a>
+                    <li class="nav-item">
+                        <button  class="btn btn-outline-primary hn " onclick="location.href='/user/login'" style="font-size: 20px ;height:50px;">로그인</button>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link"><img class="rounded-circle Photo" src="/resources/images/123.gif"></a>
+                    </li>
+                    <%--</ul>--%>
+                </c:if>
+                <%--로그인 상태--%>
+                <c:if test="${login ne null}">
+                    <%--<ul class="nav nav-pills ml-auto w-100 justify-content-end ". style="float: right;margin-right: 10%;">--%>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle  " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img  class="rounded-circle Photo profileHeader" src="" ></a>
+                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 65px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <div class="eclipsis pl-4" style="width:70% ">
+                                <a class=" hn " >${login.userName}</a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
+                            <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
-                        <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
-                    </div>
-                </li>
-                <%--</ul>--%>
-            </c:if>
+                    </li>
+                    <%--</ul>--%>
+                </c:if>
             </div>
             <%--</ul>--%>
         </ul>

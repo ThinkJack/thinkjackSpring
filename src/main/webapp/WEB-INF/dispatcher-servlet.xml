@@ -43,6 +43,7 @@
             <beans:mapping path="/board/*"/>
             <beans:mapping path="/srcBoard/*"/>
             <beans:mapping path="/edit/**"/>
+            <beans:mapping path="/"/>
             <!--<beans:mapping path="/**"/>-->
             <!--<beans:exclude-mapping path="/resources/**" />-->
             <!--<beans:exclude-mapping path="/user/loginPost" />-->

@@ -287,9 +287,7 @@
                     </div>
                 </div>
 
-                <div class="col-6" >
-
-
+                <div class="col-12" style="height: 340px;">
                     <div id="profile-wrap">
                         <div class="pulse1"></div>
                         <div class="pulse2"></div>
@@ -301,7 +299,7 @@
                     </div>
 
                 </div>
-                <div class="col-6 mt-5">
+                <div class="col-12 align-content-center" style="height: 340px;">
                     <p  class=" mt-3 bd " style="font-size: 30px">Email:<a class="ml-3" style="font-size:20px;">${login.userEmail}</a></p>
                     <p  class=" mt-1 bd" style="font-size: 30px">Name:<a class="hn ml-3" style="font-size:20px;">${login.userName}</a></p>
                     <div class="row">
