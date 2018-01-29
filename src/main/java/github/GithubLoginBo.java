@@ -17,9 +17,9 @@ public class GithubLoginBo {
 
     PrivateKey key=new PrivateKey();
 
-    private String CLIENT_ID = key.getGitClientId();
-    private String CLIENT_SECRET = key.getGitClientSecret();
-    private String REDIRECT_URI = key.getGitRedirectUri();
+    private String CLIENT_ID = key.getAwsGitClientId();
+    private String CLIENT_SECRET = key.getAwsGitClientSecret();
+    private String REDIRECT_URI = key.getAwsGitRedirectUri();
     private String SESSION_STATE = key.getGitSessionState();
     /* 프로필 조회 API URL */
     private String PROFILE_API_URL = key.getGitProfileApiUrl();
