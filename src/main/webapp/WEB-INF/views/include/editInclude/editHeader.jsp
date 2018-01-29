@@ -56,6 +56,7 @@
                     </a>
                 </div>
             </li>
+
             <c:if test="${((login ne null)) and (SrcVO.srcWriter eq login.userId) or
                             ((login ne null) and (SrcVO.srcId eq null)) or
                             ((login eq null) and (SrcVO.srcId ne null) and !(empty cookie.get(SrcVO.srcId))) or
@@ -95,16 +96,16 @@
                         Login
                     </a>
                 </li>
-                <li class="nav-item active sign_in">
+                <li class="nav-item active sign_up">
                     <a class="btn  btn-primary" href="/user/register">
-                        Sign in
+                        Sign up
                     </a>
                 </li>
 
 
             </c:if>
             <c:if test="${login ne null}">
-                <%--<li class="nav-item active sign_in">--%>
+                <%--<li class="nav-item active sign_up">--%>
                 <%--<a class="btn  btn-primary" href="/user/logout">--%>
                 <%--Logout--%>
                 <%--</a>--%>

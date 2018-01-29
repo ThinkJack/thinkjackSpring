@@ -40,8 +40,8 @@
     <bean id="googleConnectionFactory"
           class="org.springframework.social.google.connect.GoogleConnectionFactory">
         <constructor-arg
-                value="${spring.social.google.appId}" />
-        <constructor-arg value="${spring.social.google.appSecret}" />
+                value="${spring.social.google.tjappId}" />
+        <constructor-arg value="${spring.social.google.tjappSecret}" />
     </bean>
     <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
     <bean id="googleOAuth2Parameters"
@@ -49,7 +49,7 @@
         <property name="scope"
                   value="https://www.googleapis.com/auth/plus.login" />
         <property name="redirectUri"
-                  value="http://rnasterpiece.pro/user/googleLogincallback" />
+                  value="http://localhost:8081/user/googleLogincallback" />
     </bean>
 
     <context:property-placeholder location="classpath:/application.properties" />

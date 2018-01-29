@@ -406,11 +406,11 @@
                     <div class="row" style="width:100%">
                         <div class="col-2"></div>
                         <input type="submit" class="col-4 btn btn-primary " value="정보변경"/>
-                        <button class="col-4 btn btn-primary text-white"  onclick="location.href='/' ">취소</button>
+                        <button type="button" class="col-4 btn btn-primary text-white"  onclick="location.href='/user/myinfo' ">취소</button>
                         <div class="col-2"></div>
                     </div>
                 </div>
-                <input type="hidden" name="test" value="${login.userProfile}"/><br>
+                <%--<input type="hidden" name="test" value="${login.userProfile}"/><br>--%>
                 <input type="hidden" id="userProfile" name="userProfile">
             </div>
         </form>

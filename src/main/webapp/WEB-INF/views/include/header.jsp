@@ -36,6 +36,8 @@
 
 
     <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--jquery--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%--스크롤 애니메이션--%>
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <%--첨부파일--%>
@@ -114,7 +116,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
+                        <a class="dropdown-item " href='/srcBoard/srcList'>코드 게시판</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
                     </div>

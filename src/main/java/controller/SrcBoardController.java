@@ -26,7 +26,7 @@ public class SrcBoardController {
     @RequestMapping(value = "/srcList", method = RequestMethod.GET)
     public void srcList(@ModelAttribute("cri") SearchCriteria cri, HttpServletRequest request, Model model) throws Exception {
 
-        if (cri.getPerPageNum() == 10) {
+        if (cri.getPerPageNum() == 10) {    //페이지 세팅
             cri.setPerPageNum(6);
         }
 

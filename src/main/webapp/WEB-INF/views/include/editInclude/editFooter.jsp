@@ -27,6 +27,16 @@
                     Shortcuts
                 </a>
             </li>
+            <li class="nav-item active">
+                <a class="btn btn-warning btn-sm bd modi" href="/edit/unitTest">
+                    UnitTest
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="btn btn-success btn-sm bd modi" href="/edit/editPage">
+                    new Edit
+                </a>
+            </li>
         </ul>
     </nav>
 </footer>

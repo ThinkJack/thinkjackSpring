@@ -179,15 +179,6 @@ public class SrcVO {
         this.srcStatus = srcStatus;
     }
 
-//    public int getRecnt() {
-//        return recnt;
-//    }
-//
-//    public void setRecnt(int recnt) {
-//        this.recnt = recnt;
-//    }
-
-
     @Override
     public String toString() {
         return "SrcVO{" +

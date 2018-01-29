@@ -20,7 +20,7 @@
         ]]>
         <include refid="search"></include>
         <![CDATA[
-        ORDER BY src.src_likecnt DESC, src.src_id ASC
+        ORDER BY src.src_regdate DESC, src.src_id ASC
         LIMIT #{pageStart}, #{perPageNum}
         ]]>
     </select>
