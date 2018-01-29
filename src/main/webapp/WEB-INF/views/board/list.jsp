@@ -26,16 +26,18 @@
 
 
     }
+    .container-fluid{
+        padding-bottom: 100px;
+        padding-top: 100px;
+    }
 
 
 
 </style>
-<div class="deaf2"></div>
 
 <div class="container-fluid removePadding text-center">
-    <div class="row">
-        <div class="col-sm-3 removePadding"></div>
-        <div class="col-sm-6 removePadding" >
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 removePadding" >
 
 
             <%--<div class="form-group">--%>
@@ -154,14 +156,16 @@
                     <ul class = "pagination pagination-sm justify-content-center">
 
                         <c:if test="${pageMaker.prev}">
-                            <li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&category=${category}">&laquo;</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }&category=${category}">
+                                &laquo;
+                            </a></li>
                         </c:if>
-
                         <c:forEach begin="${pageMaker.startPage}"
                                    end = "${pageMaker.endPage}" var="idx">
-                            <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
+                            <li <c:out value="${pageMaker.cri.page == idx ? ' class = active page-item' : ' ' }"/>>
                                 <a class="page-link" href="list${pageMaker.makeSearch(idx)}&category=${category}">${idx}</a>
-                            </li   >
+                            </li>
                         </c:forEach>
 
                         <c:if test="${pageMaker.next&&pageMaker.endPage > 0}">
@@ -177,8 +181,8 @@
         </div>
     </div>
 </div>
-<div class="deaf2"></div>
 <script>
+
     $(document).ready(
 
 

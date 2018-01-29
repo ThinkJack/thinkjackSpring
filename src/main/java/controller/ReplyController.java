@@ -34,13 +34,7 @@ public class ReplyController {
     //    새로운 댓글을 등록하는데 성공,실패
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<String> register(@RequestBody ReplyVO vo) {
-//        if(session.getAttribute("login")==null){
-//            // logger.info("current user is not logined");
-//            // System.out.println("current user is not logined");
-//            ResponseEntity<String> entity = null;
-//
-//            return entity;
-//        }
+
         ResponseEntity<String> entity = null;
         try {
             //생성
@@ -177,42 +171,23 @@ public class ReplyController {
             Map<String, Object> map = new HashMap<String, Object>();
             List<ReplyVO> list = service.listReplyPage(boarId, cri);
 
-            ArrayList loginUser = new ArrayList(list.size());
-            if(httpRequest.getAttribute("login") != null) {
-                for( int i = 0 ; i < list.size() ; i++) {
 
-                    String userName = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserName();
-                    loginUser.add(userName);
-
-                }
-            }
             ArrayList replyList = new ArrayList(list.size());
             for( int i = 0 ; i < list.size() ; i++) {
-//                list의 replyId 값을 받아온다
-                //list.get(i).getReplyId();
-                //   System.out.println( list.get(i).toString()+"하트의 list의 toString");
                 reHeart.setReplyId(list.get(i).getReplyId());
-                if(httpRequest.getAttribute("login") != null) {
-//                userId 값을 받아와야 한다.
+                int replyLikeCnt;
+                if(null == ((UserVO) httpRequest.getSession().getAttribute("login")))
+                    replyLikeCnt = 0;
+                else {
                     int userid = ((UserVO) httpRequest.getSession().getAttribute("login")).getUserId();
                     reHeart.setUserId(userid);
-                    // System.out.println( reHeart.getUserId() +"하트의  userid");
-
-                    //  System.out.println(  reHeart.toString() +"하트의  toString");
-                    int replyLikeCnt = service.getReplyLike(reHeart);
-                    replyList.add(replyLikeCnt);
-                    //reheart 리스트 배열 보내기
+                    replyLikeCnt = service.getReplyLike(reHeart);
                 }
+                replyList.add(replyLikeCnt);
             }
-//                  System.out.println(replyList.toString());
-//            System.out.println(list.toString());
             map.put("reHeart",replyList);
             map.put("list", list);
-            map.put("loginUser",loginUser);
 
-//            for(Map.Entry<String, Object> entry:map.entrySet()){
-//                System.out.println("key"+entry.getKey()+"value"+entry.getValue());
-//            }
             int replyCount = service.count(boarId);
             pageMaker.setTotalCount(replyCount);
 
