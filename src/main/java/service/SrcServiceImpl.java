@@ -40,6 +40,11 @@ public class SrcServiceImpl implements SrcService {
         String srcId = uri.replace("/edit/editPage", "");
         srcId = srcId.replace("/", "");
 
+        if(!(srcId.equals(""))){
+            //view cnt관련 코드
+            srcdao.updateSrcViewCnt(srcId);
+        }
+
         try {
             vo = srcdao.selectSrcOne(srcId);
             srcLikeVo.setSrcId(vo.getSrcId());
@@ -53,9 +58,6 @@ public class SrcServiceImpl implements SrcService {
 
                 if (chk == 0) {
                     srcdao.updateSrcWriter(userVo.getUserId(), srcId);
-                } else if (chk != userVo.getUserId()) {
-                    //view cnt관련 코드
-                    srcdao.updateSrcViewCnt(srcId);
                 }
                 vo = srcdao.selectSrcOne(srcId);
             }

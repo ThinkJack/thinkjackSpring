@@ -33,13 +33,16 @@ public class EditController {
     //----------------------------------------------------------------------src 부분
     @RequestMapping(value = "/editPage", method = RequestMethod.GET)
     public void newEditView(HttpSession session, Model model)throws Exception {
+
         SrcVO srcVO = new SrcVO();
+
         if(session.getAttribute("login") instanceof UserVO){
-            UserVO userVO =(UserVO) session.getAttribute("login");
-            if (userVO != null) {
+            UserVO userVO =(UserVO) session.getAttribute("login"); //로그인 했는지 비교 위해 session 가져옴
+
+            if (userVO != null) { //로그인 되었을때 계정 이름 및 아이디 가져오기
                 srcVO.setSrcWriterName(userVO.getUserName());
                 srcVO.setSrcWriter(userVO.getUserId());
-                srcVO.setSrcStatus(1);
+                srcVO.setSrcStatus(1); //로그인 되었을때 소스 공개를 기본값으로 넘김
             }
         }
 
@@ -48,9 +51,10 @@ public class EditController {
 
     @RequestMapping(value = "/editPage/*", method = RequestMethod.GET)
     public String editView(HttpServletRequest request, Model model)throws Exception {
-        Map map = service.readSrc(request);
-        model.addAttribute("SrcVO", map.get("vo"));
-        model.addAttribute("like", map.get("like"));
+        Map map = service.readSrc(request); //요청값 넘겨서 해당 소스 파일들 가져오기
+        //화면에서 값 뿌려주기 편하게 나눠서 보내기
+        model.addAttribute("SrcVO", map.get("vo")); //소스코드
+        model.addAttribute("like", map.get("like")); //유저가 좋아요 누른 값 가져오기
         return "/edit/editPage";
     }
 
@@ -58,32 +62,25 @@ public class EditController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public @ResponseBody String srcSave(HttpServletRequest request,
                                         @RequestBody SrcVO vo) throws Exception{
-        return service.saveSrc(request, vo);
+        return service.saveSrc(request, vo); //코드 저장
 
     }
 
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public @ResponseBody Map srcLike(HttpServletRequest request, @RequestBody SrcLikeVO vo) {
-        return service.srcLike(request, vo);
+        return service.srcLike(request, vo); //좋아요 저장 및 삭제
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public @ResponseBody String srcDelete(@RequestBody SrcVO vo) throws Exception{
-        service.srcDelete(vo);
+        service.srcDelete(vo); //소스코드 삭제
         return "삭제 되었습니다.";
     }
-    //----------------------------------------------------------------------
-
-
-
-
-    //----------------------------------------------------------------------
 
     //----------------------------------------------------------------------unitTest 부분
     @RequestMapping(value = "/unitTest", method = RequestMethod.GET)
     public void unitTestView(){
 
     }
-    //----------------------------------------------------------------------
 }

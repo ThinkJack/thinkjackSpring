@@ -36,6 +36,8 @@
 
 
     <link href="/resources/dist/css/home.css" rel="stylesheet">
+    <%--jquery--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%--스크롤 애니메이션--%>
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <%--첨부파일--%>

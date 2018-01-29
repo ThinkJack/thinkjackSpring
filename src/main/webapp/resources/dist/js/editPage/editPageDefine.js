@@ -192,7 +192,7 @@ var userId;
 var Heart;
 var strHtml, strCss, strJs;
 var curhref = location.href;
-
+var saving = false;
 //cdn관련 변수
 var cdnCssidx = 1;// 무조건 증가
 var cdnCssCnt = 0;
@@ -210,7 +210,6 @@ var layoutMode = 0; //0 - top, 1 - left 2 - right
 var dragging = false;
 // var session = session.getAttribute("login");
 var likebt = $("#likebt");
-
 
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
@@ -503,12 +502,13 @@ function escapeHtml(text) {
 
 //코드 저장 로직
 function codeSave() {
-    if (!saveStatus) {
-        srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", "");
 
+    if(!saving) {
         if (!saveStatus) {
-            jQuery.ajaxSettings.traditional = true;
-            $.ajax({
+            saving = true; //저장중으로 변경
+            srcId = curhref.replace("https://", "").replace("http://", "").replace(document.location.host + "/edit/editPage", "").replace("/", ""); //srcId 가져오기
+
+            $.ajax({ //코드저장
                 type: "post",
                 url: "/edit/save",
                 headers: {
@@ -530,19 +530,23 @@ function codeSave() {
                 }),
                 success: function (getLink) {
                     alert("저장 되었습니다.");
+
                     if (srcId === "" && userId === "") {
-                        document.cookie = getLink + "=";
+                        document.cookie = getLink + "=";    //익명으로 저장시 해당 쿠키 저장
                     }
 
                     if (srcId === "" || (srcWriter === "0" && userId !== "")) {
                         location.replace("/edit/editPage/" + getLink);
                     }
-                    changeSaveImg(1)
+                    changeSaveImg(1); //저장 이미지 변경
+                    saving = false;
                 }
             });
+        } else {
+            alert("변경된 사항이 없습니다.");
         }
     }else{
-        alert("변경된 사항이 없습니다.");
+        alert("저장중입니다.");
     }
 }
 
@@ -560,7 +564,7 @@ function srcDelete() {
             srcStatus: srcStatus
         }),
         success: function (result) {
-            alert(result);
+            alert("삭제되었습니다.");
             location.replace("/");
         }
     });
