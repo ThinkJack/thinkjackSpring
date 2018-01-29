@@ -558,7 +558,7 @@ public class UserController {
 
     @RequestMapping(value = "/googleLogincallback")
     public String doSessionAssignActionPage(HttpServletRequest request, Model model)throws Exception{
-        System.out.println("/user/googleLogincallback");
+        //System.out.println("/user/googleLogincallback");
         String code = request.getParameter("code");
 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -577,17 +577,19 @@ public class UserController {
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
 
-		System.out.println("UserVO 전");
+//		System.out.println("UserVO 전");
+//		System.out.println("person getId: "+person.getId());
+
 
         LoginDTO dto = new LoginDTO();
 		TempKey TK = new TempKey();
 
-       // System.out.println(person.getDisplayName());
+  //      System.out.println(person.getDisplayName());
         dto.setUserEmail("google"+"#"+TK.generateNumber(6));
         dto.setUserName(person.getDisplayName()+"#"+TK.generateNumber(5));
         dto.setUserSocialId("g"+person.getId());
         HttpSession session = request.getSession();
-		System.out.println("controller dto: "+dto);
+//		System.out.println("controller dto: "+dto);
 
 		UserVO vo = new UserVO();
 
@@ -595,7 +597,6 @@ public class UserController {
 			vo = service.googleLogin(dto);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//username이 겹칠 시 userName 변경 페이지로 이동하는 기능 필요
 		}
@@ -642,8 +643,8 @@ public class UserController {
 	public ModelAndView githublogin(HttpSession session) {
 		/* github 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String githubAuthUrl = githubLoginBo.getAuthorizationUrl(session);
-		System.out.println("github Login controller 호출");
-		System.out.println(githubAuthUrl);
+	//	System.out.println("github Login controller 호출");
+	//	System.out.println(githubAuthUrl);
 		return new ModelAndView("user/githubLogin", "url", githubAuthUrl);
 	}
 
@@ -674,7 +675,7 @@ public class UserController {
 		//JSON 객체 생성
 		JSONObject jsonobj = (JSONObject) obj;
 
-		//System.out.println(jsonobj);
+		System.out.println(jsonobj);
 		String name = (String) jsonparse.JsonToString(jsonobj, "login");
 		String userSocialId = (String) (jsonparse.JsonToString(jsonobj, "id")+"");
 
@@ -687,11 +688,11 @@ public class UserController {
 		dto.setUserSocialId("git"+userSocialId);
 		dto.setUserName(name+"#"+TK.generateNumber(5));
 
-//		System.out.println("======================JSON 파싱값================");
-//		System.out.println("name: "+name);
-//		System.out.println("id: "+userSocialId );
-//		System.out.println("UserVO "+vo);
-//		System.out.println("UserVO "+dto);
+		System.out.println("======================JSON 파싱값================");
+		System.out.println("name: "+name);
+		System.out.println("id: "+userSocialId );
+		System.out.println("UserVO "+vo);
+		System.out.println("UserVO "+dto);
 		try {
 			vo = service.naverLogin(dto);
 
