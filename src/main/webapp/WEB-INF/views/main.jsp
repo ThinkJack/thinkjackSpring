@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class=" aniA  " style="padding-left: 100px">
                             <h1 class=" bd title" >Talk is cheap.</h1>
-                            <h1 class=" bd text-white title" >I Show me the code.</h1>
+                            <h1 class=" bd text-white title" >Show me the code.</h1>
                         </div>
                     </div>
                     <a href="#" class="scroll-down" address="true"></a>
