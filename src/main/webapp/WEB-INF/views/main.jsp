@@ -12,12 +12,24 @@
         height: 62%;
     }
     .mainTitle{;
-        font-size:6rem;
+        font-size:5rem;
         margin-top: 3rem ;
     }
     .mainTitle2{
-        font-size:8rem;
+        font-size:7rem;
         margin-top: 3rem ;
+    }
+
+
+    @media screen and (max-width:  1270px) {
+    .mainTitle{
+    font-size:4rem;
+    margin-top: 3rem ;
+    }
+    .mainTitle2{
+    font-size:6rem;
+    margin-top: 3rem ;
+    }
     }
     @media screen and (max-width: 1190px) {
 
@@ -25,11 +37,11 @@
             font-size: 2rem;
         }
         .mainTitle{
-            font-size:4rem;
+            font-size:2rem;
 
         }
         .mainTitle2{
-            font-size:6rem;
+            font-size:4rem;
         }
 
         .text-center{
@@ -43,16 +55,12 @@
             height: 58%;!important;
         }
     }
-    @media screen and (max-width: 880px) {
-        .mainTitle{
-            font-size:2rem;
 
+    @media screen and (max-width: 570px) {
+
+        .title{
+            font-size: 1.4rem;
         }
-        .mainTitle2{
-            font-size:4rem;
-        }
-    }
-    @media screen and (max-width: 780px) {
         .mainTitle{
             font-size:1.5rem;
 
@@ -60,12 +68,15 @@
         .mainTitle2{
             font-size:3rem;
         }
-    }
-    @media screen and (max-width: 570px) {
-
-        .title{
-            font-size: 1.4rem;
+        .b {
+            height: 50%;
         }
+
+
+    }
+    @media screen and (max-width: 390px) {
+
+
         .mainTitle{
             font-size:1rem;
 
@@ -73,34 +84,11 @@
         .mainTitle2{
             font-size:2rem;
         }
-        .b {
-            height: 50%;
-        }
+
 
 
     }
-    
-    @media screen and (max-width:  1500px) {
-        .mainTitle{
-            font-size:5rem;
-            margin-top: 0 ;
-        }
-        .mainTitle2{
-            font-size:7rem;
-            margin-top: 0 ;
 
-        }
-    }
-
-
-    @media screen and (max-width:  1270px) {
-        .mainTitle{
-            font-size:3rem
-        }
-        .mainTitle2{
-            font-size:5rem
-        }
-    }
     img { max-width: 100%; }
 </style>
 <section class="a container-fluid" >
@@ -118,8 +106,8 @@
                 <div class="col-sm-8 removePadding borderLT" style=" margin-right:30%;">
                     <div class="row">
                         <div class=" aniA  " style="padding-left: 100px">
-                            <h1 class=" bd title" >Talk is cheap.</h1>
-                            <h1 class=" bd text-white title" >Show me the code.</h1>
+                            <h1 class=" bd title row" >Talk is cheap.</h1>
+                            <h1 class=" bd text-white title row" >Show me the code!</h1>
                         </div>
                     </div>
                     <a href="#" class="scroll-down" address="true"></a>
@@ -267,7 +255,7 @@
             else $el.removeClass('shown');
 
         } else {
-            if($(this).scrollTop() >=1000) $el.addClass('shown');
+            if($(this).scrollTop() >=900) $el.addClass('shown');
             else $el.removeClass('shown');
         }
     });
