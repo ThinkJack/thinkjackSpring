@@ -74,8 +74,8 @@ public class S3Util {
     public S3ObjectInputStream getSrcFile(String bucketName, String fileName) throws IOException{
         System.out.println("넘어오는 파일명 : "+fileName);
         fileName = (fileName).replace(File.separatorChar, '/');
-        S3Object s3object = conn.getObject(new GetObjectRequest(bucketName, fileName));
-        S3ObjectInputStream objectInputStream = s3object.getObjectContent();
+        S3Object s3object = conn.getObject(new GetObjectRequest(bucketName, fileName)); //해당 파일 s3객체에 담기
+        S3ObjectInputStream objectInputStream = s3object.getObjectContent();    //s3객체를 스트림으로 변환
 
         return objectInputStream;
     }

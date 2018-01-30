@@ -162,61 +162,45 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
-var delay;
-var srcReplyCnt;
 
-var saveStatus = true; //저장 유도관련 변수
+var delay; //setTimeout 함수 저장변수
+var saveStatus = true; //저장 유도 변수(코드 변경시 저장상태 변경)
 var saveImg = $("#save-img"); //save 이미지 변경 관련 변수
-var imgPath = "/resources/images/";
+var srcReplyCnt; //src 댓글 카운트
 //---------console관련 변수
-var editConsoleView = document.getElementById("edit-console-view");
-var editConsole = document.getElementById("edit-console");
-var commandLine = document.getElementById("command-line-view");
+var editConsoleView = document.getElementById("edit-console-view"); //실제 결과값이 찍히는 콘솔화면 div태그
+var editConsole = document.getElementById("edit-console");  //콘솔전체를 감싸는 div태그
+var commandLine = document.getElementById("command-line-view"); //명령어 작성하는 input태그
 
-var htmlBuild = document.getElementById("htmlBuild");
-var cssBuild = document.getElementById("cssBuild");
-var jsBuild = document.getElementById("jsBuild");
-var codeMLayout = document.getElementsByClassName("CodeMirror");
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus, userId, Heart;
+var strHtml, strCss, strJs; //코드미러 객체에서 string 값 받아올 변수
+var curhref = location.href; //현재 주소 받아오는 변수
+var saving = false; //저장중에 여러번 누르는 경우 막기 위한 변수
 
-var codeMain = document.getElementById("code-main");
-var resizeView = document.getElementById("resize-view");
-var iframeBody = document.getElementById("iframe-body");
-var layout1 = document.getElementById("layout1");
-var layout2 = document.getElementById("layout2");
-var resizeCode1 = document.getElementById("resize-code-1");
-var resizeCode2 = document.getElementById("resize-code-2");
-var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
-var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus;
-var userId;
-var Heart;
-var strHtml, strCss, strJs;
-var curhref = location.href;
-var saving = false;
 //cdn관련 변수
-var cdnCssidx = 1;// 무조건 증가
-var cdnCssCnt = 0;
-var cdnJsidx = 1;// 무조건 증가
-var cdnJsCnt = 0;
+var cdnCssidx = 1;// csscdn id값 변경
+var cdnCssCnt = 0;//csscdn 갯수
+var cdnJsidx = 1;// jscdn id값 변경
+var cdnJsCnt = 0;//jscdn 갯수
 var cdnCss = new Array();
 var cdnJs = new Array();
+//cdn 문자열 임시저장변수
 var cssLnkSet = "";
 var jsLnkSet = "";
-var consoleSerchLog = [];
-var consoleCur = -1;
 
-var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
-var layoutMode = 0; //0 - top, 1 - left 2 - right
-var dragging = false;
-// var session = session.getAttribute("login");
-var likebt = $("#likebt");
+var consoleCategory = []; // 콘솔 함수 문자열 배열
+var consoleSearchLog = []; //검색한 로그들 저장해두는 배열
+var consoleCur = -1; //현재 검색한 로그 위치값 저장변수
+
+// var dragging = false;
+
+var likebt = $("#likebt"); //e좋아요 버튼
 
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
-
 //cdn추가 삭제 관련 함수
-function cdnCssAdd(str) {
+function cdnCssAdd(str) { //cdn 추가시 화면에 찍어주는 함수
     $("#cdn-css").append("<div class=\"row\" id='cdn-add-css" + cdnCssidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
@@ -230,22 +214,12 @@ function cdnCssAdd(str) {
         "</div>\n" +
         "</div>" +
         "</div>");
-    ++cdnCssidx;
-    ++cdnCssCnt;
-    cdnChangeCss("cdn-css", cdnCssCnt);
+    ++cdnCssidx; //cdn id값
+    ++cdnCssCnt; //cdn 갯수 증가
+    cdnChangeCss("cdn-css", cdnCssCnt); //cdn 갯수에 따라 overflow변경 함수
 }
 
-function cdnCssDelete(idx) {
-    if (cdnCssCnt > 2) {
-        $("#cdn-add-css" + idx).remove();
-        --cdnCssCnt;
-        cdnChangeCss("cdn-css", cdnCssCnt);
-    } else {
-        $("#css-cdn" + idx).val("");
-    }
-}
-
-function cdnJsAdd(str) {
+function cdnJsAdd(str) { //cdn 추가시 화면에 찍어주는 함수
     $("#cdn-js").append("<div class=\"row\" id='cdn-add-Js" + cdnJsidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
@@ -259,22 +233,32 @@ function cdnJsAdd(str) {
         "</div>\n" +
         "</div>" +
         "</div>");
-    ++cdnJsidx;
-    ++cdnJsCnt;
-    cdnChangeCss("cdn-js", cdnJsCnt);
+    ++cdnJsidx;//cdn id값
+    ++cdnJsCnt;//cdn 갯수 증가
+    cdnChangeCss("cdn-js", cdnJsCnt); //cdn 갯수에 따라 overflow변경 함수
 }
 
-function cdnJsDelete(idx) {
-    if (cdnJsCnt > 2) {
-        $("#cdn-add-Js" + idx).remove();
-        --cdnJsCnt;
-        cdnChangeCss("cdn-js", cdnJsCnt);
+function cdnCssDelete(idx) { //css cdn 삭제 함수
+    if (cdnCssCnt > 2) { //화면에 기본으로 보여지는 갯수(2개) 보다 많을 경우
+        $("#cdn-add-css" + idx).remove(); //해당 태그 삭제
+        --cdnCssCnt; //cdn 갯수 감소
+        cdnChangeCss("cdn-css", cdnCssCnt); //cdn 갯수에 따라 overflow변경 함수
     } else {
-        $("#js-cdn" + idx).val("");
+        $("#css-cdn" + idx).val(""); //문자열 값만 비우기
     }
 }
 
-function cdnChangeCss(id, idx) {
+function cdnJsDelete(idx) { //js cdn 삭제 함수
+    if (cdnJsCnt > 2) { //화면에 기본으로 보여지는 갯수(2개) 보다 많을 경우
+        $("#cdn-add-Js" + idx).remove(); //해당 태그 삭제
+        --cdnJsCnt; //cdn 갯수 감소
+        cdnChangeCss("cdn-js", cdnJsCnt); //cdn 갯수에 따라 overflow변경 함수
+    } else {
+        $("#js-cdn" + idx).val(""); //문자열 값만 비우기
+    }
+}
+
+function cdnChangeCss(id, idx) { //cdn 갯수에 따라 overflow변경 함수
     if (idx > 4) {
         $("#" + id).css("overflow-y", "scroll");
     } else {
@@ -282,9 +266,9 @@ function cdnChangeCss(id, idx) {
     }
 }
 
-function cdnCssJsViewSet(arr, kind) {
-    var arrlen = arr.length < 2 ? 2 : arr.length;
-    if (kind === "css") {
+function cdnCssJsViewSet(arr, kind) { // Setting모달에 cdn 소스를 찍어주는 함수
+    var arrlen = arr.length < 2 ? 2 : arr.length; //2개 이상일 경우 배열 갯수로
+    if (kind === "css") { //css일때
         for (var i = 1; i <= arrlen; i++) {
             if (arr[i - 1]) {
                 cdnCssAdd(arr[i - 1]);
@@ -292,7 +276,7 @@ function cdnCssJsViewSet(arr, kind) {
                 cdnCssAdd("");
             }
         }
-    } else {
+    } else { //js일때
         for (var i = 1; i <= arrlen; i++) {
             if (arr[i - 1]) {
                 cdnJsAdd(arr[i - 1]);
@@ -303,12 +287,12 @@ function cdnCssJsViewSet(arr, kind) {
     }
 }
 
-function cdnCssJsValSet() {
+function cdnCssJsValSet() {//iframe에 넣을 cdn 문자열 값 작업
     cdnCss = new Array();
     cdnJs = new Array();
     cssLnkSet = "";
     jsLnkSet = "";
-
+    //cdn 갯수만큼 for문 돌리기
     for (var i = 1; i <= cdnCssCnt; i++) {
         if ($("#css-cdn" + i).length) {
             if ($("#css-cdn" + i).val()) {
@@ -329,68 +313,88 @@ function cdnCssJsValSet() {
     }
 }
 
-//break point
-function makeMarker() {
-    var marker = document.createElement("div");
-    marker.style.color = "#822";
-    marker.innerHTML = "●";
-    return marker;
+function codeChangeEvent(){ //코드변환 이벤트시 작용할 작업들
+    changeSaveImg(2); //저장 이미지 변경(저장유도)
+    clearTimeout(delay); //기존 setTimeout 초기화
+
+    if ($('#autoPreview').is(':checked')) { //자동 미리보기 (3초 딜레이)
+        delay = setTimeout(updatePreview, 2000);
+    }
+
+    if ($('#autoSave').is(':checked')) { // 자동 저장기능
+        // clearTimeout(delay);
+        if (srcId !== "") { //srcId가 없을 경우 저장 안함
+            delay = setTimeout(codeSave, 30000); // 3초 딜레이
+        }
+    }
 }
 
-//------------------------------------------------------미리보기 기능
-function updatePreview() {
+var changeTitle = function (el) { //타이틀 찍어주는 함수 (이벤트 발생한 객체 받아옴)
+    changeSaveImg(2);
+    srcTitle = el.value;
+    document.getElementById("src-title").innerHTML = srcTitle;
+    if (el.id === "src-title-modal") {
+        document.getElementById("src-title-input").value = srcTitle;
+    } else {
+        document.getElementById("src-title-modal").value = srcTitle;
+    }
+    pageTitleView.style = "display: block;";
+    pageTitleText.style = "display: none;";
+}
 
-    $("#resultView").remove();
+function updatePreview() { //작성된 코드 미리보기
 
-    var imsi = document.createElement("iframe");
-    imsi.setAttribute("class", "col");
+    $("#resultView").remove(); //iframe 삭제
+
+    var imsi = document.createElement("iframe"); //iframe 생성
+    imsi.setAttribute("class", "col"); 
     imsi.setAttribute("id", "resultView");
     imsi.setAttribute("scrolling", "yes");
-    $("#iframe-body").html(imsi);
+    $("#iframe-body").html(imsi); //생성된 iframe 화면에 직접 대입
 
-    var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
-        return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-    });
+    // var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
+    //     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
+    // });
 
-    var previewFrame = document.getElementById('resultView');
-    var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    var previewFrame = document.getElementById('resultView'); // iframe 객체
+    var out = previewFrame.contentDocument || previewFrame.contentWindow.document; //iframe document 객체 받기
 
     //초기화중
 
-    emojify.run(out);
-
-    var old = out.cloneNode(true);
-    var allold = old.getElementsByTagName("*");
-    if (allold === undefined) return;
-
-    var allnew = out.getElementsByTagName("*");
-    if (allnew === undefined) return;
-
-    for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
-        if (!allold[i].isEqualNode(allnew[i])) {
-            out.scrollTop = allnew[i].offsetTop;
-            return;
-        }
-    }
+    // emojify.run(out);
+    //
+    // var old = out.cloneNode(true);
+    // var allold = old.getElementsByTagName("*");
+    // if (allold === undefined) return;
+    //
+    // var allnew = out.getElementsByTagName("*");
+    // if (allnew === undefined) return;
+    //
+    // for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
+    //     if (!allold[i].isEqualNode(allnew[i])) {
+    //         out.scrollTop = allnew[i].offsetTop;
+    //         return;
+    //     }
+    // }
 
     // clearTimeout(hashto);
     // hashto = setTimeout(updateHash, 1000);
 
 
-    var cacheWhitelist = ['v2'];
+    // var cacheWhitelist = ['v2'];
 
-    caches.keys().then(function (keyList) {
-        return Promise.all(keyList.map(function (key) {
-            if (cacheWhitelist.indexOf(key) === -1) {
-                console.log(key);
-                return caches.delete(key);
-            }
-        }));
-    });
+    // caches.keys().then(function (keyList) {
+    //     return Promise.all(keyList.map(function (key) {
+    //         if (cacheWhitelist.indexOf(key) === -1) {
+    //             console.log(key);
+    //             return caches.delete(key);
+    //         }
+    //     }));
+    // });
 
 
-    var rlt = codeHtml.getOption("mode") === "gfm" ?
-        md.render(val) : codeHtml.getValue(); //markdown : html
+    // var rlt = codeHtml.getOption("mode") === "gfm" ?
+    //     md.render(val) : codeHtml.getValue(); //markdown : html
 
     out.open();
     out.write(
@@ -400,10 +404,9 @@ function updatePreview() {
         +
         "<style>" + codeCss.getValue() + "</style>"
         +
-        rlt
+        codeHtml.getValue()
         +
         jsLnkSet
-
         +
         "<script>"
         // +
@@ -413,7 +416,7 @@ function updatePreview() {
 
     out.close();
 
-    consoleView("");
+    // consoleView("");
     // editConsoleView.scrollTop = editConsoleView.scrollHeight;
 }
 
@@ -449,33 +452,11 @@ function updatePreview() {
 // }(window.console));
 
 
-function getSelectedRange() {
-    return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
-}
-
-function getSelectedRange1() {
-    return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
-}
-
-function getSelectedRange2() {
-    return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
-}
 
 // function getSelectedRange3() {
 //     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 // }
 
-//--shift+tab
-function autoFormatSelection() {
-    var range = getSelectedRange();
-    codeHtml.autoFormatRange(range.from, range.to);
-    var range1 = getSelectedRange1();
-    codeCss.autoFormatRange(range1.from, range1.to);
-    var range2 = getSelectedRange2();
-    codeJavaScript.autoFormatRange(range2.from, range2.to);
-    // var range3 = getSelectedRange3();
-    // codeUnitTest.autoFormatRange(range3.from, range3.to);
-}
 
 //--ctrl+/
 // function commentSelection(isComment) {
@@ -485,8 +466,7 @@ function autoFormatSelection() {
 // codeJavaScript.autoFormatRange(range.from, range.to);
 // }
 
-// 문자치환
-function escapeHtml(text) {
+function escapeHtml(text) {// 문자치환
     return text
         .replace(/&lt;/gi, "<")
         .replace(/&gt;/gi, ">")
@@ -500,8 +480,8 @@ function escapeHtml(text) {
         .replace(/&#039;/gi, "'");
 }
 
-//코드 저장 로직
-function codeSave() {
+
+function codeSave() {//코드 저장 로직
 
     if(!saving) {
         if (!saveStatus) {
@@ -536,7 +516,7 @@ function codeSave() {
                     }
 
                     if (srcId === "" || (srcWriter === "0" && userId !== "")) {
-                        location.replace("/edit/editPage/" + getLink);
+                        location.replace("/edit/editPage/" + getLink); // 반환된 링크로 화면 갱신
                     }
                     changeSaveImg(1); //저장 이미지 변경
                     saving = false;
@@ -550,7 +530,7 @@ function codeSave() {
     }
 }
 
-function srcDelete() {
+function srcDelete() { //소스코드 삭제
     $.ajax({
         type: "post",
         url: "/edit/delete",
@@ -565,15 +545,16 @@ function srcDelete() {
         }),
         success: function (result) {
             alert("삭제되었습니다.");
-            location.replace("/");
+            location.replace("/"); //메인 화면으로 이동
         }
     });
 }
 
-var consoleCategory = [];
+
+
 var consoleView = function (str) {
     //console.log() 입력시 문자열 작업(정규식)
-    var previewFrame = document.getElementById('resultView');
+    var previewFrame = document.getElementById('resultView'); //iframe 객체
 
     var temp = consoleLogStr(str);
 
@@ -581,7 +562,7 @@ var consoleView = function (str) {
         try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
 
-            consoleLogView(temp, consoleCategory);
+            consoleLogView(temp, consoleCategory); //콘솔 로그관련
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
                 + previewFrame.contentWindow.eval(str) + "</p>";
         } catch (err) {
@@ -593,10 +574,7 @@ var consoleView = function (str) {
 };
 
 function consoleLogView(temp, consoleCategory) {
-
-
     if (temp !== null) {
-
         for (i in temp) {
             var color = "";
             if (consoleCategory[i] === "log") {
@@ -614,8 +592,8 @@ function consoleLogView(temp, consoleCategory) {
 }
 
 //
-function consoleLogStr(str) {
-    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
+function consoleLogStr(str) { //콘솔 요청함수 문자열로 자르기
+    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g; //정규식
     var temp = str.match(reg);
     var category = ["log", "info", "warn", "error"];
     for (i in temp) {
@@ -635,7 +613,7 @@ function consoleLogStr(str) {
     return temp;
 }
 
-
+//콘솔객체 재정의 (커스텀 콘솔에 값 같이 찍기 위해서 정의함)  iframe 내부에서 사용
 var consoleString = "var console=(function(oldCons){\n" +
     "        return {\n" +
     "            log: function(text){\n" +
@@ -657,7 +635,7 @@ var consoleString = "var console=(function(oldCons){\n" +
     "        };\n" +
     "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
 
-$(function () {
+$(function () { //콘솔객체 재정의 (커스텀 콘솔에 값 같이 찍기 위해서 정의함)
     var console = (function (oldCons) {
         return {
             log: function (text) {
@@ -688,11 +666,11 @@ $(function () {
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
-    if (saveImg !== null) {
-        if (idx === 2) {
+    if (saveImg !== null) { //저장버튼 활성화 됐을때
+        if (idx === 2) {  //저장유도
             saveImg.css("color", "#00c4ff");
             saveStatus = false;
-        } else {
+        } else { //저장유도 X
             saveImg.css("color", "gray");
             saveStatus = true;
         }
@@ -1252,3 +1230,39 @@ var changeDate = function (date) {
     strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     return strDate;
 };
+
+
+
+function getSelectedRange() {
+    return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
+}
+
+function getSelectedRange1() {
+    return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
+}
+
+function getSelectedRange2() {
+    return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
+}
+
+
+//--shift+tab
+function autoFormatSelection() {
+    var range = getSelectedRange();
+    codeHtml.autoFormatRange(range.from, range.to);
+    var range1 = getSelectedRange1();
+    codeCss.autoFormatRange(range1.from, range1.to);
+    var range2 = getSelectedRange2();
+    codeJavaScript.autoFormatRange(range2.from, range2.to);
+    // var range3 = getSelectedRange3();
+    // codeUnitTest.autoFormatRange(range3.from, range3.to);
+}
+
+
+//break point UnitTest부분
+function makeMarker() {
+    var marker = document.createElement("div");
+    marker.style.color = "#822";
+    marker.innerHTML = "●";
+    return marker;
+}

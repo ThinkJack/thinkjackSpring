@@ -17,11 +17,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
+    <jsp:include page="../edit/editInclude/editCss.jsp" flush="false"/>
 </head>
 <body>
 <%--header--%>
-<jsp:include page="../include/editInclude/editHeader.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editHeader.jsp" flush="false"/>
 
 <!-- main 코드 작성 페이지 -->
 <main role="main" class="main" id="code-main">
@@ -75,16 +75,16 @@
 
 
 <!--modal 창-->
-<jsp:include page="../include/editInclude/editModalSetting.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/editModalChangeView.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/editModalReply.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/editKeyMapModal.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editModalSetting.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editModalChangeView.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editModalReply.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editKeyMapModal.jsp" flush="false"/>
 <!--footer-->
-<jsp:include page="../include/editInclude/editFooter.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editFooter.jsp" flush="false"/>
 
 <%--script단--%>
 
-<jsp:include page="../include/editInclude/editJS.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editJS.jsp" flush="false"/>
 
 
 <script>
@@ -132,7 +132,7 @@
         document.getElementById("src-title-reply-modal").innerHTML = "\<h4\>" + srcWriterName + "\</h4\>";
         document.getElementById("comment-view").value = srcComments;
         document.getElementById("view-count").innerHTML = viewCnt;
-        document.getElementById("like-couont").innerHTML = likeCnt;
+        document.getElementById("like-count").innerHTML = likeCnt;
         if(document.getElementById("visibility" + srcStatus) !== null){
             document.getElementById("visibility" + srcStatus).checked = true;
         }

@@ -1,68 +1,4 @@
-//var allEditValue;//html, javascript, css 모두 합친 문자열
-//------------------------------------------------------코드 자동 적용 기능
 
-codeHtml.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-
-    if ($('#autoPreview').is(':checked')) {
-        //setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
-        // clearTimeout(delay);
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay);
-            delay = setTimeout(codeSave, 3000);
-        }
-
-    }
-
-});
-
-codeCss.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-    if ($('#autoPreview').is(':checked')) {
-        // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
-        }
-    }
-
-
-});
-
-codeJavaScript.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-    if ($('#autoPreview').is(':checked')) {
-        // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
-        }
-    }
-});
 
 
 //키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
@@ -134,53 +70,6 @@ codeJavaScript.on("keyup", function (cm, event) {
 codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
-});
-
-
-//editHeader.jsp script
-//pencil 클릭시 input text 보이기
-$(function () {
-    var pageTitleView = document.getElementById("page-title-view");
-    var pageTitleText = document.getElementById("page-title-text");
-
-    $("#pencil").click(function () {
-        pageTitleView.style = "display: none;";
-        pageTitleText.style = "display: block;";
-        document.getElementById("src-title-input").focus();
-    });
-    //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
-    $("#src-title-input").keydown(function (key) {
-        if (key.keyCode == 13) {
-            changeTitle(this);
-        }
-    });
-    $("#src-title-input").focusout(function (e) {
-        changeTitle(this);
-    });
-    $("#src-title-modal").keydown(function () {
-        changeTitle(this);
-    })
-
-    var changeTitle = function (el) {
-        changeSaveImg(2);
-        srcTitle = el.value;
-        document.getElementById("src-title").innerHTML = srcTitle;
-        if (el.id === "src-title-modal") {
-            document.getElementById("src-title-input").value = srcTitle;
-        } else {
-            document.getElementById("src-title-modal").value = srcTitle;
-        }
-        pageTitleView.style = "display: block;";
-        pageTitleText.style = "display: none;";
-    }
-});
-//comments 변경시 등록
-$(function () {
-    $("#modal-comment").on("change", function (e) {
-        changeSaveImg(2);
-        srcComments = this.value;
-        document.getElementById("comment-view").value = srcComments;
-    });
 });
 
 // HTML Preprocessor 설정
@@ -288,27 +177,79 @@ $(function () {//---------------------------- option button 변경시
     });
 });
 
+//editHeader.jsp script
+
 $(function () {
+
+    if ($('#autoPreview').is(':checked')) { //첫 로딩시 상태
+    } else {
+        var runstyle = document.getElementById("run");
+        runstyle.style = "visibility: visible;"
+    }
+
+    //처음 문서 로드시 콘솔창 숨기기
+    editConsole.style.display = "none";
+    commandLine.style.display = "none";
+
+    var pageTitleView = document.getElementById("page-title-view"); //div
+    var pageTitleText = document.getElementById("page-title-text"); //input
+
+    //pencil 클릭시 input text 보이기
+    $("#pencil").click(function () { //붓 클릭시 input박스 활성화
+        pageTitleView.style = "display: none;";
+        pageTitleText.style = "display: block;";
+        document.getElementById("src-title-input").focus();
+    });
+    //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
+    $("#src-title-input").keydown(function (key) {
+        if (key.keyCode == 13) { //enter
+            changeTitle(this); //타이들 관련 부분 모두 변경
+        }
+    });
+    $("#src-title-input").focusout(function (e) { //focus에서 나갔을때
+        changeTitle(this); //타이들 관련 부분 모두 변경
+    });
+
+    $("#src-title-modal").keydown(function () { //모달창에서 title 입력시
+        changeTitle(this); //타이들 관련 부분 모두 변경
+    });
+
+
+
+    $("#autoPreview").click(function () { //클릭시 상태
+        var runstyle = document.getElementById("run");
+        if (this.checked) {
+            runstyle.style = "visibility: hidden;"
+        } else {
+            runstyle.style = "visibility: visible;"
+        }
+    });
+
+    //------------------------------------------------------코드 입력시 변화 이벤트 받기
+    codeHtml.on("change", function () {
+        codeChangeEvent();
+    });
+
+    codeCss.on("change", function () {
+        codeChangeEvent();
+    });
+
+    codeJavaScript.on("change", function () {
+        codeChangeEvent();
+    });
+
     $("#run").click(function () { // run button 실행
         updatePreview();
     });
-});
 
-
-$(function () {
-    $("#command-line").keyup(function (e) {
-        if (e.keyCode === 13) {
+    $("#command-line").keyup(function (e) { //커멘드 라인에서 키 입력시
+        if (e.keyCode === 13) { //enter
             consoleView(this.value);
             this.value = "";
         }
     });
-});
 
-
-//footer
-//console 버튼 누를때
-$(function () {
-    $("#console-button").click(function () {
+    $("#console-button").click(function () { //footer에 있는 콘솔버튼 눌렀을때
         if (editConsole.style.display === "none") {
             editConsole.style.display = "block";
             commandLine.style.display = "block";
@@ -322,192 +263,19 @@ $(function () {
 
         }
     });
-});
-//처음 문서 로드시 콘솔창 숨기기
-$(function () {
-    editConsole.style.display = "none";
-    commandLine.style.display = "none";
 
-});
-//--------------------
+    $("#modal-comment").on("change", function (e) { //comments 변경시 등록
+        changeSaveImg(2);
+        srcComments = this.value;
+        document.getElementById("comment-view").value = srcComments;
+    });
 
-
-
-//setting 모달 닫힐때 이벤트
-$(function () {
-    $("#setting").on("hide.bs.modal", function () {
-
-
-
+    $("#setting").on("hide.bs.modal", function () { //setting 모달 닫힐때 이벤트
         cdnCssJsValSet();
-
         updatePreview();
     });
-});
-
-//layout 관련 script
-// $(function () {
-//
-//
-//     $("#left-layout").click(function () {
-//         codeMain.style = "height: calc(100% - 9px);";
-//         iframeBody.style = "height: calc(100% - 50px);";
-//         layout2.style = "height: 100%;";
-//         layout1.className = "col-4 layout";
-//         resizeView.className = "col resize_view";
-//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-//         layout2.className = "col main_view layout";
-//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 100%;";
-//         }
-//     });
-//
-//     $("#top-layout").click(function () {
-//         codeMain.style = "height: 100%;";
-//         iframeBody.style = "height: calc(100% - 417px);";
-//         layout2.style = "height: calc(100% - 417px);";
-//         layout1.className = "row layout";
-//         resizeView.className = "row resize_view";
-//         resizeView.style = "height:5px; max-width: 100%; cursor: row-resize;";
-//         layout2.className = "row main_view layout";
-//         resizeCode1.style = "max-width: 5px; height: ; cursor: col-resize;";
-//         resizeCode2.style = "max-width: 5px; height: ; cursor: col-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: 300px";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 33.1%;";
-//         }
-//     });
-//
-//     $("#right-layout").click(function () {
-//         codeMain.style = "height: calc(100% - 9px);";
-//         iframeBody.style = "height: calc(100% - 50px);";
-//         layout2.style = "height: 100%;";
-//         layout1.className = "col-4 order-12 layout";
-//         resizeView.className = "col order-6 resize_view";
-//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-//         layout2.className = "col order-1 main_view layout";
-//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 100%;";
-//         }
-//     });
-// });
-
-
-//화면 영역 조절관련 function
-// jQuery("#resize-code-1").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
-//
-//     $(window).mousemove(function (e) {
-//
-//         hcl = startP - e.pageX;
-//
-//         console.log(cssBuild.offsetWidth);
-//         if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
-//
-//         } else {
-//             htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
-//             cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
-//         }
-//
-//     });
-// });
-//
-// jQuery("#resize-code-2").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
-//
-//     $(window).mousemove(function (e) {
-//
-//         cjl = startP - e.pageX;
-//
-//         if (-350 < cjl && cjl < 350) {
-//             cssBuild.style = "width: calc(33.1% - " + cjl + "px);";
-//             jsBuild.style = "width: calc(33.1% + " + cjl + "px);";
-//         }
-//
-//     });
-// });
-//
-// jQuery("#resize-view").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
-//
-//     $(window).mousemove(function (e) {
-//         cifl = startP - e.pageY;
-// //                if (-350 < cifl && cifl < 350) {
-//         for (i in codeMLayout) {
-//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-//         }
-//
-//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-//     });
-//
-//     $('.iframeWrapper').mousemove(function (e) {
-//         cifl = startP - e.pageY;
-//         for (i in codeMLayout) {
-//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-//         }
-//
-//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-//     });
-// });
-
-jQuery(window).mouseup(function (e) {
-    $(window).unbind('mousemove');
-    $('.iframeWrapper').unbind('mousemove');
-    dragging = false;
-});
-
-jQuery('.iframeWrapper').mouseup(function (e) {
-    $(window).unbind('mousemove');
-    $('.iframeWrapper').unbind('mousemove');
-    dragging = false;
-});
-
-
-$(function () {
-    if ($('#autoPreview').is(':checked')) { //첫 로딩시 상태
-    } else {
-        var runstyle = document.getElementById("run");
-        runstyle.style = "visibility: visible;"
-    }
-
-    $("#autoPreview").click(function () { //클릭시 상태
-        var runstyle = document.getElementById("run");
-        if (this.checked) {
-            runstyle.style = "visibility: hidden;"
-        } else {
-            runstyle.style = "visibility: visible;"
-        }
-    });
-});
-
-
-//좋아요 버튼 이미지 변경
-$(function () {
-    $("#like").click(function (e) {
+    
+    $("#like").click(function (e) { //좋아요 버튼 클릭시
         $.ajax({
             type: "post",
             url: "/edit/like",
@@ -532,33 +300,49 @@ $(function () {
             }
         });
     });
+
+    $("#saveCode").click(function (e) { //저장버튼 클릭시
+        codeSave();
+    });
+
+    $("#login").click(function (e) { //로그인 버튼 클릭시
+        if (window.sessionStorage) {
+            if (srcId !== "") {
+                sessionStorage.setItem('srcId', srcId);
+            }
+        }
+        self.location = '/user/login'
+    });
+
+    $('input[name="visibility"]').on("change", function (e) {
+        srcStatus = this.value;
+    });
+
+    $("#src-delete").click(function (e) { //삭제버튼 클릭시(setting 모달)
+        srcDelete();
+    });
 });
 
-//창 크기조절 관련
+
+// jQuery(window).mouseup(function (e) {
+//     $(window).unbind('mousemove');
+//     $('.iframeWrapper').unbind('mousemove');
+//     dragging = false;
+// });
+//
+// jQuery('.iframeWrapper').mouseup(function (e) {
+//     $(window).unbind('mousemove');
+//     $('.iframeWrapper').unbind('mousemove');
+//     dragging = false;
+// });
 
 // save & update
-$("#saveCode").click(function (e) {
-    codeSave();
-
-});
 
 
-$("#login").click(function (e) {
-    if (window.sessionStorage) {
-        if (srcId !== "") {
-            sessionStorage.setItem('srcId', srcId);
-        }
-    }
-    self.location = '/user/login'
-});
 
-$('input[name="visibility"]').on("change", function (e) {
-    srcStatus = this.value;
-});
 
-$("#src-delete").click(function (e) {
-    srcDelete();
-});
+
+
 // $('input[name="genderS"]:checked')
 
 //=================SrcReply===============================================
@@ -764,36 +548,26 @@ $(function () {
 
 
 $(function () {
-
-    $("#reply-scroll").scroll(function () {
-        console.log($("#reply-scroll").height());
-        console.log(this.scroll);
-        console.log(this.scrollTop);
-    });
-});
-
-
-$(function () {
     $("#command-line").keydown(function (e) {
 
-        if (e.keyCode === 13) {
-            consoleSerchLog.unshift(this.value);// 배열 앞에 추가
-            consoleCur = -1;
-        } else if (e.keyCode === 38) {
-            if (consoleSerchLog.length - 1 !== consoleCur) {
-                consoleCur++;
-                this.value = consoleSerchLog[consoleCur];
+        if (e.keyCode === 13) { //enter
+            consoleSearchLog.unshift(this.value);// 배열 앞에 추가
+            consoleCur = -1; //현제 겸색로그 위치 초기화
+        } else if (e.keyCode === 38) { //화살표키 위
+            if (consoleSearchLog.length - 1 !== consoleCur) { //현제 위치가 끝이 아닐때
+                consoleCur++; //위치값 증가
+                this.value = consoleSearchLog[consoleCur]; //배열값 가져와 커멘드라인에 찍기
             }
 
-        } else if (e.keyCode === 40) {
-            if (consoleCur > 0) {
-                consoleCur--;
-                this.value = consoleSerchLog[consoleCur];
+        } else if (e.keyCode === 40) { //화살표키 아래
+            if (consoleCur > 0) { //현재 위치가 처음이 아닐때
+                consoleCur--; //위치값 감소
+                this.value = consoleSearchLog[consoleCur];
             } else {
-                if (consoleCur === 0) {
+                if (consoleCur === 0) { //배열위치 값은 -1이 없으므로 현재 위치가 0이고 화살표 아래키를 눌렀기 때문에 현재위치 감소
                     consoleCur--;
                 }
-                this.value = ""
+                this.value = "" //커맨드 라인 value값 빈문자열로 찍기
             }
         }
     });
@@ -801,6 +575,6 @@ $(function () {
 
 $(function () {
     $("#console-clear").click(function () {
-        editConsoleView.innerHTML = "";
+        editConsoleView.innerHTML = ""; //콘솔 비우기
     });
 });

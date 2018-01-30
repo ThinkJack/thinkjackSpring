@@ -11,7 +11,13 @@ public class UserVO {
 	private String userAuthCode;
 	private String userProfile;
 
+	public UserVO() {
 
+	}
+
+	public UserVO(int userId) {
+		this.userId = userId;
+	}
 
 	public int getUserId() {
 		return userId;

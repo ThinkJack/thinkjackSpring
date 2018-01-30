@@ -15,7 +15,7 @@ public interface SrcDAO {
 
     void updateSrc(SrcVO vo);
 
-    void updateSrcWriter(int srcWriter, String srcId);
+    void updateSrcWriter(Map map);
 
     void updateSrcStatus(String srcId);
 

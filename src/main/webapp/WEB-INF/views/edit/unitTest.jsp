@@ -10,7 +10,7 @@
     <title>unitTest</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <jsp:include page="../include/editInclude/editCss.jsp" flush="false"/>
+    <jsp:include page="../edit/editInclude/editCss.jsp" flush="false"/>
 
     <style>
         .mx-1 {
@@ -60,7 +60,7 @@
 </head>
 <body class="container-fluid">
 <%--header--%>
-<jsp:include page="../include/editInclude/unitTestHeader.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/unitTestHeader.jsp" flush="false"/>
 
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6 row justify-content-between">
@@ -111,14 +111,14 @@
 <iframe id="frameUnitTest"></iframe>
 
 <!--modal 창-->
-<jsp:include page="../include/editInclude/editKeyMapModal.jsp" flush="false"/>
-<jsp:include page="../include/editInclude/unitTestHowtoModal.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/editKeyMapModal.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/unitTestHowtoModal.jsp" flush="false"/>
 <!--footer-->
-<jsp:include page="../include/editInclude/unitTestFooter.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/unitTestFooter.jsp" flush="false"/>
 
 
 <%--script단--%>
-<jsp:include page="../include/editInclude/untitJS.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/untitJS.jsp" flush="false"/>
 
 
 <script>

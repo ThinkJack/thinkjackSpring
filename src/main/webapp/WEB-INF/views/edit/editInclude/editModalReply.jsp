@@ -39,9 +39,9 @@
                         <div class="col-md-auto count_img_view_inner">
                             <span id="view-count"></span>
                             <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
-                            <span id="reply-couont"></span>
+                            <span id="reply-count"></span>
                             <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
-                            <span id="like-couont"></span>
+                            <span id="like-count"></span>
                             <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="modalSrcLikeImg"></i>
                         </div>
                     </div>
