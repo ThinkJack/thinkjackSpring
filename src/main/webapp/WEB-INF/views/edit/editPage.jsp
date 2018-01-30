@@ -104,6 +104,9 @@
     strJs = escapeHtml('<c:out value="${SrcVO.srcJavaScript}" default=""/>');
     Heart = "<c:out value="${like}" default="0"/>";
     userId = "<c:out value="${login.userId}" default=""/>";
+    replyRegdate = '<c:out value="${SrcReplyVO.replyRegdate}" default=""/>';
+    replyUpdate = '<c:out value="${SrcReplyVO.replyUpdate}" default=""/>';
+
 
     <c:if test="${SrcVO.cdnCss ne null}">
     <c:forEach items="${SrcVO.cdnCss}" var="item">

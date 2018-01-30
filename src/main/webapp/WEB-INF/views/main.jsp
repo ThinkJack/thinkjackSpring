@@ -24,7 +24,7 @@
         font-size:6rem
     }
 
-    @media screen and (max-width: 1040px) {
+    @media screen and (max-width: 1090px) {
 
         .title{
             font-size: 2rem;
@@ -33,7 +33,7 @@
             font-size:4rem
         }
         .text-center{
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
 
         .b {
@@ -176,7 +176,7 @@
             <div class="lamp-container " style="display:inline-block">
                 <div class="lamp show-on-scroll">
                     <h1 class="bd ani1 title">Masterpiece </h1>
-                    <h1 class="bd ml-5 ani2 title">Masterpiece </h1>
+                    <h1 class="bd ml-5 ani2 title">Boards</h1>
                 </div>
             </div>
         </div>

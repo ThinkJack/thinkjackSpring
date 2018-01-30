@@ -118,7 +118,7 @@
 
 
 <%--script단--%>
-<jsp:include page="../edit/editInclude/untitJS.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/unitJS.jsp" flush="false"/>
 
 
 <script>
@@ -126,14 +126,26 @@
     var frame = document.getElementById("frameUnitTest");
     var out = frame.contentDocument || frame.contentWindow.document;
     var functions;
+
+
+
     codeUnitTest.on("change", function () { // js code 가 변경될때,
+        // clearTimeout(delay);
+        // delay = setTimeout(codeUnitTest, 3000);
+
         var javascriptCode = codeUnitTest.getValue(); // 문자열을 가져옴
         if ($("#autoremove").prop("checked")) // 테스트 케이스 자동삭제가 켜져있는지 확인
             $("#test-case").empty(); // 켜져있으면 비워줌
         try {
-            out.open(); // out 객체를연다.
-            out.write("<script>" + javascriptCode + "<\/script>"); // out 객체에 javascript의 값을 주입한다.
-            out.close(); // out 객체를 닫는다.
+
+             delay = setTimeout(Preview, 3000); //3초지연 미리보기
+
+             function Preview(){
+                out.open(); // out 객체를연다.
+                out.write("<script>" + javascriptCode + "<\/script>"); // out 객체에 javascript의 값을 주입한다.
+                out.close(); // out 객체를 닫는다.
+             }
+
         } catch (err) {
             $("#resultView").append(err); // 에러를 reultView 찍어줌
         }
@@ -167,7 +179,7 @@
             alert("테스트 코드를 작성, 선택 해주세요");
             return;
         }
-        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length"); // function의 배개변수의 갯수를 알아낸다.
+        var functionLength = frame.contentWindow.eval($('#functions').val() + ".length"); // function의 매개변수의 갯수를 알아낸다.
         var inputbox = "";
         for (var i = 0; i < functionLength; i++) //매개변수 만큼의 input box를 생성한다.
             inputbox += "<input type='text' class='form-control input_box inputs mx-1' />";
@@ -248,6 +260,7 @@
     });
     $(document).ready(function () { // 변경이 감지되면 자동으로 스크롤을 최하위로 내려주는 함수들
         $("#test-case").bind('DOMNodeInserted', function () {
+
             $(this).scrollTop($(document).height());
         });
         $("#resultView").bind('DOMNodeInserted', function () {
