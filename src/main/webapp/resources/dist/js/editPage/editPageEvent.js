@@ -1,77 +1,65 @@
 //var allEditValue;//html, javascript, css 모두 합친 문자열
 //------------------------------------------------------코드 자동 적용 기능
 
-codeHtml.on("change", function () {
+codeHtml.on("change", function () {  //codeHtml에 변동됬을때
     // $('#codeHtml').css("font-family", "Consolas");
 
 
-    changeSaveImg(2);
-    clearTimeout(delay);
+    changeSaveImg(2); //save 이미지 파란색을 변경
+    clearTimeout(delay); //시간 초기화
 
-    if ($('#autoPreview').is(':checked')) {
+    if ($('#autoPreview').is(':checked')) { //미리보기에 체크되있을때
         //setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
+        delay = setTimeout(updatePreview, 3000); //3초뒤에 미리보기 호출
     }
 
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
+    if ($('#autoSave').is(':checked')) { //자동저장에 체크되있을때
         // clearTimeout(delay);
         if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay);
-            delay = setTimeout(codeSave, 3000);
+        } else { //srcId가 공백이 아닐시
+            delay = setTimeout(codeSave, 3000); //3초뒤 코드 저장
         }
-
     }
 
 });
 
 codeCss.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
+    changeSaveImg(2); //css 펜에 변화발생시 save이미지 파랑색으로 바꿈
+    clearTimeout(delay); //delay 시간 초기화
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
+        delay = setTimeout(updatePreview, 3000); //3초뒤 미리보기 실행
     }
 
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
+    if ($('#autoSave').is(':checked')) { //자동저장에 체크되있을시
         if (srcId === "") {
-            // alert(111)
         } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
+            delay = setTimeout(codeSave, 3000); //3초뒤 코드저장
         }
     }
-
-
 });
 
 codeJavaScript.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
+    changeSaveImg(2); //script펜에 변화발생시 save이미지 파랑색으로 바꿈
+    clearTimeout(delay); //delay 시간 초기화
     if ($('#autoPreview').is(':checked')) {
         // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
+        delay = setTimeout(updatePreview, 3000);  //3초뒤 코드저장
     }
 
     if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
         if (srcId === "") {
-            // alert(111)
         } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
+            delay = setTimeout(codeSave, 3000); //3초뒤 코드저장
         }
     }
 });
 
 
-//키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
+//codeHtml펜에 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
+        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {   /*Enter - do not open autocomplete list just after item has been selected in it*/
         var scope = {};
         var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
         for (var i in window) {
@@ -83,13 +71,13 @@ codeHtml.on("keyup", function (cm, event) {
     }
 });
 
-//번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
+//codeHtml펜에 번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
 codeHtml.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
-
+//codeCss펜에 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeCss.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
@@ -108,6 +96,7 @@ codeCss.on("keyup", function (cm, event) {
 //     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 // });
 
+//codeJavaScript 펜 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeJavaScript.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
@@ -134,6 +123,8 @@ codeJavaScript.on("keyup", function (cm, event) {
 //         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
 //     }
 // });
+
+//codeJavaScript 펜에 번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
 codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
@@ -162,7 +153,7 @@ $(function () {
     });
     $("#src-title-modal").keydown(function () {
         changeTitle(this);
-    })
+    });
 
     var changeTitle = function (el) {
         changeSaveImg(2);
@@ -186,7 +177,7 @@ $(function () {
     });
 });
 
-// HTML Preprocessor 설정
+// HTML Preprocessor 설정  처리제외
 $(function () {
 
     $("#htmlPreprocessor").change(function () {
@@ -207,17 +198,21 @@ $(function () {
             // alert(this.text);
             // document.write("<script src=" +
             //     "'/resources/dist/js/editPage/markDown.js'></script>");
-            codeHtml.setValue("");
-            codeHtml.clearHistory();
-            codeHtml.setOption("mode", 'gfm');
-            codeHtml.setOption("lineNumbers", false);
-            codeHtml.setOption("matchBrackets", 'true');
-            codeHtml.setOption("lineWrapping", 'true');
-            codeHtml.setOption("theme", 'base16-light');
-            codeHtml.setOption("extraKeys", {
-                "Enter":
-                    "newlineAndIndentContinueMarkdownList"
-            });
+
+
+            // codeHtml.setValue("");
+            // codeHtml.clearHistory();
+            // codeHtml.setOption("mode", 'gfm');
+            // codeHtml.setOption("lineNumbers", false);
+            // codeHtml.setOption("matchBrackets", 'true');
+            // codeHtml.setOption("lineWrapping", 'true');
+            // codeHtml.setOption("theme", 'base16-light');
+            // codeHtml.setOption("extraKeys", {
+            //     "Enter":
+            //         "newlineAndIndentContinueMarkdownList"
+            // });
+
+
             // alert(codeHtml.getOption("mode"));
 
 
@@ -238,12 +233,12 @@ $(function () {
 $(function () {//---------------------------- tab-size 변경시
     $("#tab-size").change(function () {
         // alert(111);
-        var st = $(":input:radio[name=gridRadios]:checked").val();
-        var sp = this.value;
+        var st = $(":input:radio[name=gridRadios]:checked").val(); //라디오버튼 name= gridRadios 선택
+        var sp = this.value; // sp변수에 값 저장
         // alert(st);
         // alert(sp);
 
-        if (st === "option1") {
+        if (st === "option1") {  // option1 제외
             // alert('tab-click1');
 
             codeHtml.setOption("extraKeys", {
@@ -268,9 +263,10 @@ $(function () {//---------------------------- tab-size 변경시
                 }
             });
         } else if (st === "option2") {
-            // alert('tab-click2');
 
             // codeHtml.setOption("indentWithTabs", true);
+
+            //지정된 크기의 탭사이즈로 변경
             codeHtml.setOption("tabSize", sp);
             codeCss.setOption("tabSize", sp);
             codeJavaScript.setOption("tabSize", sp);
@@ -284,16 +280,17 @@ $(function () {//---------------------------- tab-size 변경시
 $(function () {//---------------------------- option button 변경시
 
 
-    $('input[type=radio][name=gridRadios]').change(function () {
+    $('input[type=radio][name=gridRadios]').change(function () { //라디오버튼 name= gridRadios 선택
         // alert('gridRadios');
 
-        //현재 리스트박스의 탭사이즈 값 가져오기.
+        //id: tab-size요소 선택
         var e = document.getElementById("tab-size");
+        //현재 리스트박스의 탭사이즈 값 가져오기.
         var strUser = e.options[e.selectedIndex].value;
         // alert (this.value);
 
         // var sp = this.value;
-        if (this.value === "option1") {
+        if (this.value === "option1") { //option1일때 제외
             // alert('a');
 
 
@@ -325,7 +322,7 @@ $(function () {//---------------------------- option button 변경시
 
                 Tab: function (cm) {
 
-                    // cm.execCommand("insertSoftTab");
+                    cm.execCommand("insertSoftTab"); //백탭을 스페이스로
 
                     // var spaces = Array(cm.getOption("indentUnit") +
                     //     parseInt(strUser)).join(" ");
@@ -346,48 +343,50 @@ $(function () {//---------------------------- option button 변경시
             // codeHtml("tabSize", strUser);
             codeHtml.setOption("extraKeys", {
                 Tab: function (cm) {
-                    cm.execCommand("defaultTab");
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
 
 
-                },
+                }
+                // ,
 
-                "Ctrl-Space": "autocomplete",
-                "Ctrl-Q": function (cm) {
-                    cm.foldCode(cm.getCursor());
-                },
-                "Ctrl-Alt-F": autoFormatSelection
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection
             });
 
             codeCss.setOption("extraKeys", {
                 Tab: function (cm) {
-                    cm.execCommand("defaultTab");
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
                 },
 
-                "Ctrl-Space": "autocomplete",
-                "Ctrl-Q": function (cm) {
-                    cm.foldCode(cm.getCursor());
-                },
-                "Ctrl-Alt-F": autoFormatSelection
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection
             });
 
 
             codeJavaScript.setOption("extraKeys", {
 
-                "Ctrl-Space": "autocomplete",
-                "Ctrl-Q": function (cm) {
-                    cm.foldCode(cm.getCursor());
-                },
-                "Ctrl-Alt-F": autoFormatSelection,
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection,
 
 
                 "Tab": function (cm) {
 
-                    cm.execCommand("defaultTab");
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
 
-                },
-                "Shift-Tab": function (cm) {
-                    cm.indentSelection("subtract");
                 }
+                // ,
+                // "Shift-Tab": function (cm) {
+                //     cm.indentSelection("subtract");
+                // }
             });
 
 
@@ -678,13 +677,13 @@ $(function () {
     // var replyTotCnt = pageMaker.getTotalCount();
 
     //댓글등록 회원권한
-    replyPage = 1;
-    if (srcId !== "") {
-        getPage("/srcReply/" + srcId + "/" + replyPage);
+    replyPage = 1; //기본리스트페이지 1페이지 지정
+    if (srcId !== "") {  //저장됬을때
+        getPage("/srcReply/" + srcId + "/" + replyPage); //rest 호출
     }
 
 
-    if (userId == "") {
+    if (userId == "") { //비회원일시
         $("#textarea").val("로그인 하세요!");
         $("#textarea").click(function () {
             alert("로그인 후 이용가능합니다!");
@@ -695,22 +694,22 @@ $(function () {
 
 
     } else {
-        $("#textarea").removeAttr('readonly').val("");
+        $("#textarea").removeAttr('readonly').val("");//로그인시 readonly속성제거
 
         //등록 & 전체목록
         $("#post").click(function (e) {
-            var replyText = $("#textarea").val();
-            if (replyText !== "") {
+            var replyText = $("#textarea").val(); //id textarea초기화
+            if (replyText !== "") { //댓글내용이 있을때
                 $.ajax({
                     type: "post",
-                    url: "/srcReply/srcInsert.do",
+                    url: "/srcReply/srcInsert.do",// srcReply콘트롤러 srcInsert.do메서드 호출"
                     headers: {
                         "Content-Type": "application/json",
                         "X-HTTP-Method-Override": "POST"
                     },
-                    dataType: 'text',
+                    dataType: 'text', //응답타입
 
-                    data: JSON.stringify({
+                    data: JSON.stringify({ //요청 내용
                         srcId: srcId,
                         replyText: replyText,
                         replyWriter: userId,
@@ -724,19 +723,19 @@ $(function () {
                     },
 
                     success: function (result) {
-                        console.log("result:" + result);
+                        // console.log("result:" + result);
                         alert("등록 되었습니다.");
                         // getPageList(); //전체목록
-                        replyPage = 1;
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
-                        $("#textarea").val("");
+                        replyPage = 1; //보여줄페이지 1페이지 지정
+                        getPage("/srcReply/" + srcId + "/" + replyPage); //rest
+                        $("#textarea").val(""); //textarea 초기화
 
 
                     }
                 });
             } else {
                 alert("내용을 입력하세요!");
-                $("#textarea").focus();
+                $("#textarea").focus(); //포커스 지정
             }
 
         });
@@ -747,18 +746,18 @@ $(function () {
 
 
             var reply = $(this);
-            var replyId = reply.attr("data-rno");
+            var replyId = reply.attr("data-rno"); //#reply-delete-button data-rno추가
 
 
             $.ajax({
                 type: 'delete',
-                url: '/srcReply/srcDelete.do/' + replyId,
+                url: '/srcReply/srcDelete.do/' + replyId, //rest
 
                 headers: {
                     "Content-Type": "application/json",
                     "X-HTTP-Method-Override": "DELETE"
                 },
-                dataType: 'text',
+                dataType: 'text', //리턴타입
 
                 error: function () {
                     // if (userId == " ") then
@@ -772,7 +771,7 @@ $(function () {
                     if (result === 'SUCCESS') {
                         alert("삭제 되었습니다");
                         // getPageList();
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                        getPage("/srcReply/" + srcId + "/" + replyPage); // rest
 
 
                     }
@@ -798,19 +797,19 @@ $(function () {
 
             $.ajax({
                 type: 'put',
-                url: '/srcReply/srcUpdate.do/' + rno,
+                url: '/srcReply/srcUpdate.do/' + rno, //reset
 
-                headers: {
+                headers: { //요청데이터타입: json , 수정: PUT
                     "Content-Type": "application/json",
                     "X-HTTP-Method-Override": "PUT"
                 },
-                data: JSON.stringify({
+                data: JSON.stringify({ // 요청내용
                     srcId: srcId,
                     replyText: replytext,
                     replyId: rno
                 }),
 
-                dataType: 'text',
+                dataType: 'text', //응답데이터 :text
 
                 error: function () {
                     // if (userId == " ") then
@@ -823,7 +822,7 @@ $(function () {
                     if (result === 'SUCCESS') {
                         alert("수정 되었습니다");
                         // getPageList();
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                        getPage("/srcReply/" + srcId + "/" + replyPage);//rest호출
                     }
                 }
             })
@@ -831,13 +830,13 @@ $(function () {
 
     }//if
 
-    $(".pagination").on("click", "li a", function (event) {
+    $(".pagination").on("click", "li a", function (event) {//페이지네이션
 
         event.preventDefault();
 
-        replyPage = $(this).attr("href");
+        replyPage = $(this).attr("href"); //li태그 href속성값 읽어오기
 
-        getPage("/srcReply/" + srcId + "/" + replyPage);
+        getPage("/srcReply/" + srcId + "/" + replyPage); //rest호출
         // getPageList("/srcReply/"+srcId+"/"+replyPage);
 
     }); //else

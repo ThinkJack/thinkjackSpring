@@ -1,116 +1,113 @@
-//코드미러 객체
 
+var codeHtml = CodeMirror(document.getElementById("codeHtml"), {  //코드미러  codeHtml객체
 
-
-var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
-
-    mode: "htmlmixed",
-    profile: "xhtml",
-    lineNumbers: true,
+    mode: "htmlmixed", //codeHtml 펜에서 html.css,js 혼합모드 가능
+    // profile: "xhtml",
+    lineNumbers: true, // 줄번호
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},//단어강조
-    indentWithTabs: true,
-    electricChars: true,
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    styleActiveLine: true,
-    autoCloseTags: true,
-    lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
+    indentWithTabs: true, //탭크기 들여쓰기
+    electricChars: true,  //현재 줄을 다시 들여야하는지 여부(true기본)
+    // resetSelectionOnContextMenu: false, //컨텍스트 메뉴가 현재 선택 영역 바깥 쪽을 클릭하여 열릴 때 커서가 클릭 지점으로 이동하는지 여부(true기본)
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true, //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true, //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // styleActiveLine: true,
+    autoCloseTags: true, //자동 태그 닫기
+    lineWrapping: true,   // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     indentUnit: 1,   //들여스기 단위
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Ctrl-Alt-F": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
-    autofocus: true
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"], //거터옵션  줄번호, 중단점, 코드접기
+    autofocus: true //자동초점 사용
 });
 
 
-var codeCss = CodeMirror(document.getElementById("codeCss"), {
-    mode: "css",
-    lineNumbers: true,
+var codeCss = CodeMirror(document.getElementById("codeCss"), { //코드미러  codeCss 객체
+    mode: "css", //  css 모드
+    lineNumbers: true, //줄번호 사용
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 괄호강조
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}, // 같은단어강조
     indentUnit: 1, //들여스기 단위
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Ctrl-Alt-F": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    indentWithTabs: true,
-    electricChars: true,
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
-    styleActiveLine: true,
+    indentWithTabs: true, //탭인덴트 사용
+    electricChars: true, //현재 줄을 다시 들여야하는지 여부(true기본)
+    // resetSelectionOnContextMenu: false,  //컨텍스트 메뉴가 현재 선택 영역 바깥 쪽을 클릭하여 열릴 때 커서가 클릭 지점으로 이동하는지 여부(true기본)
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true,  //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true,  //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // tabindex: 4,  // 탭인덱스
+    // styleActiveLine: true,
 
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"] //거터옵션 줄번호, 중단점, 코드접기 이용함
 });
 
 
-var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
-    mode: "javascript",
-    lineNumbers: true,
+var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), { //코드미러  codeJavaScript 객체
+    mode: "javascript", // js펜 모드
+    lineNumbers: true, //줄 번호 사용
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
     // extraKeys: { ".": "autocomplete" },
     // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
     // indentWithTabs: false,
     electricChars: true,         //중괄호 정렬
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 4,
-    styleActiveLine: true,
+    // resetSelectionOnContextMenu: false,
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true,  //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true,  //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // tabindex: 4,
+    // styleActiveLine: true,
 
     wordWrap: true,
     autoCloseBrackets: true,
 
     indentUnit: 1,                //들여쓰기 단위
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Ctrl-Alt-F": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"] //거터에서 줄번호, 중단점, 코드접기 이용함
 });
 
 
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
     {
-        //num
-        "49": "1",
+        //num 자동완성에서 제외할 키코드와 키
+        "49": "1", //번호 1 제외
         "50": "2",
         "51": "3",
         "52": "4",
@@ -120,7 +117,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "56": "8",
 
         //key-pad
-        "96": "0",
+        "96": "0", //키패드 0 제외
         "97": "1",
         "98": "2",
         "99": "3",
@@ -132,8 +129,8 @@ var ExcludedIntelliSenseTriggerKeys =
         "105": "9",
 
 
-        "21": "한/영",
-        "65": "A",
+        "21": "한/영", //한영키 제외
+        "65": "A", // 알파벳 A제외
         "66": "B",
         // "67": "C",
         "68": "D",
@@ -161,7 +158,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "9": "tab",
         "13": "enter",
         "16": "shift",
-        "17": "ctrl",
+        // "17": "ctrl",
         "18": "alt",
         "19": "pause",
         "20": "capslock",
@@ -214,8 +211,9 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
-var delay;
-var srcReplyCnt;
+
+var delay; //시간지연 변수;
+var srcReplyCnt; //리플 카운트 변수
 
 var saveStatus = true; //저장 유도관련 변수
 var saveImg = $("#save-img"); //save 이미지 변경 관련 변수
@@ -382,7 +380,7 @@ function cdnCssJsValSet() {
     }
 }
 
-//break point
+//브레이크 포인트
 function makeMarker() {
     var marker = document.createElement("div");
     marker.style.color = "#822";
@@ -401,59 +399,57 @@ function updatePreview() {
     imsi.setAttribute("scrolling", "yes");
     $("#iframe-body").html(imsi);
 
-    var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
-        return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-    });
+    // var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
+    //     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
+    // });
 
-    var previewFrame = document.getElementById('resultView');
-    var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    var previewFrame = document.getElementById('resultView'); //resultView ID값 가져오기
+    var out = previewFrame.contentDocument || previewFrame.contentWindow.document; // previewFrame 객체 지정
 
-    //초기화중
+    // emojify.run(out);
 
-    emojify.run(out);
-
-    var old = out.cloneNode(true);
-    var allold = old.getElementsByTagName("*");
-    if (allold === undefined) return;
-
-    var allnew = out.getElementsByTagName("*");
-    if (allnew === undefined) return;
-
-    for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
-        if (!allold[i].isEqualNode(allnew[i])) {
-            out.scrollTop = allnew[i].offsetTop;
-            return;
-        }
-    }
+    // var old = out.cloneNode(true);
+    //     var allold = old.getElementsByTagName("*");
+    //     if (allold === undefined) return;
+    //
+    //     var allnew = out.getElementsByTagName("*");
+    //     if (allnew === undefined) return;
+    //
+    //     for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
+    //         if (!allold[i].isEqualNode(allnew[i])) {
+    //             out.scrollTop = allnew[i].offsetTop;
+    //             return;
+    //         }
+    // }
 
     // clearTimeout(hashto);
     // hashto = setTimeout(updateHash, 1000);
 
 
-    var cacheWhitelist = ['v2'];
+    // var cacheWhitelist = ['v2'];
+    //
+    // caches.keys().then(function (keyList) {
+    //     return Promise.all(keyList.map(function (key) {
+    //         if (cacheWhitelist.indexOf(key) === -1) {
+    //             console.log(key);
+    //             return caches.delete(key);
+    //         }
+    //     }));
+    // });
 
-    caches.keys().then(function (keyList) {
-        return Promise.all(keyList.map(function (key) {
-            if (cacheWhitelist.indexOf(key) === -1) {
-                console.log(key);
-                return caches.delete(key);
-            }
-        }));
-    });
 
+    // var rlt = codeHtml.getOption("mode") === "gfm" ?
+    //     md.render(val) : codeHtml.getValue(); //markdown : html
 
-    var rlt = codeHtml.getOption("mode") === "gfm" ?
-        md.render(val) : codeHtml.getValue(); //markdown : html
-
-    out.open();
-    out.write(
+    out.open(); //out 객체 오픈
+    out.write(  // out 객체 코드작성
         cssLnkSet
         +
         "<script>" + consoleString + "</script>"
         +
         "<style>" + codeCss.getValue() + "</style>"
         +
-        rlt
+        codeHtml.getValue()
         +
         jsLnkSet
 
@@ -502,15 +498,15 @@ function updatePreview() {
 // }(window.console));
 
 
-function getSelectedRange() {
+function getSelectedRange() {  //선택영역 autoFormatSelection
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
 
-function getSelectedRange1() {
+function getSelectedRange1() { //autoFormatSelection
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
 
-function getSelectedRange2() {
+function getSelectedRange2() { //autoFormatSelection
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
 
@@ -518,7 +514,7 @@ function getSelectedRange2() {
 //     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
 // }
 
-//--shift+tab
+//--Ctrl-Alt-F
 function autoFormatSelection() {
     var range = getSelectedRange();
     codeHtml.autoFormatRange(range.from, range.to);
@@ -841,13 +837,13 @@ document.addEventListener('drop', function (e) {
 }, false);
 
 
-function saveAsMarkdown() {
-    save(codeHtml.getValue(), "untitled.md");
-}
+// function saveAsMarkdown() {
+//     save(codeHtml.getValue(), "untitled.md");
+// }
 
-function saveAsHtml() {
-    save(document.getElementById('resultView').innerHTML, "untitled.html");
-}
+// function saveAsHtml() {
+//     save(document.getElementById('resultView').innerHTML, "untitled.html");
+// }
 
 // document.getElementById('saveas-markdown').addEventListener('click', function () {
 //     saveAsMarkdown();
@@ -859,36 +855,36 @@ function saveAsHtml() {
 //     hideMenu();
 // });
 
-function save(code, name) {
-    var blob = new Blob([code], {type: 'text/plain'});
-    if (window.saveAs) {
-        window.saveAs(blob, name);
-    } else if (navigator.saveBlob) {
-        navigator.saveBlob(blob, name);
-    } else {
-        url = URL.createObjectURL(blob);
-        var link = document.createElement("a");
-        link.setAttribute("href", url);
-        link.setAttribute("download", name);
-        var event = document.createEvent('MouseEvents');
-        event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-        link.dispatchEvent(event);
-    }
-}
+// function save(code, name) {
+//     var blob = new Blob([code], {type: 'text/plain'});
+//     if (window.saveAs) {
+//         window.saveAs(blob, name);
+//     } else if (navigator.saveBlob) {
+//         navigator.saveBlob(blob, name);
+//     } else {
+//         url = URL.createObjectURL(blob);
+//         var link = document.createElement("a");
+//         link.setAttribute("href", url);
+//         link.setAttribute("download", name);
+//         var event = document.createEvent('MouseEvents');
+//         event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+//         link.dispatchEvent(event);
+//     }
+// }
 
 
-var menuVisible = false;
-var menu = document.getElementById('menu');
-
-function showMenu() {
-    menuVisible = true;
-    menu.style.display = 'block';
-}
-
-function hideMenu() {
-    menuVisible = false;
-    menu.style.display = 'none';
-}
+// var menuVisible = false;
+// var menu = document.getElementById('menu');
+//
+// function showMenu() {
+//     menuVisible = true;
+//     menu.style.display = 'block';
+// }
+//
+// function hideMenu() {
+//     menuVisible = false;
+//     menu.style.display = 'none';
+// }
 
 // document.getElementById('close-menu').addEventListener('click', function () {
 //     hideMenu();
