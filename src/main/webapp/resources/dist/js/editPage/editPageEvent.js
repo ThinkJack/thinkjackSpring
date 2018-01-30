@@ -716,6 +716,7 @@ $(function () {
                         replyStatus: srcStatus
                     }),
 
+
                     error: function () {
                         alert("등록에러");
                         // if (userId == "") then
