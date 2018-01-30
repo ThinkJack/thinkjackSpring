@@ -9,36 +9,12 @@
     body{
         word-break:break-all;
     }
-    #panel, #flip {
-        padding: 5px;
-        text-align: center;
-        background-color: #e5eecc;
-        border: solid 1px #c3c3c3;
-    }
 
-    .boardheader {
-        display: inline-block;
-    }
-
-    #panel {
-        padding: 50px;
-        display: none;
-    }
-
-    #heart {
-        width: 25px;
-        height: 25px;
-    }
-
-    .reHeart {
-
-        width: 25px;
-        height: 25px;
-    }
-
-    .replyheart {
-        width: 25px;
-        height: 25px;
+    .textSpan {
+        white-space:pre-wrap;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
 
@@ -220,8 +196,8 @@
                     <div class="comment col-10 p-3" style="overflow:auto; width:100%; height:150px;">
                             <%--입력된 댓글 text부분--%>
                             <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
-                        <textarea id="reply{{replyVO.replyId}}" class="form-control d-none">{{replyVO.replyText}}</textarea>
-                        <spna class="textSpan form-control " >{{replyVO.replyText}}</spna>
+                        <textarea id="reply{{replyVO.replyId}}" class="form-control d-none" style="height: 100%;">{{replyVO.replyText}}</textarea>
+                        <spna class="textSpan form-control" >{{replyVO.replyText}}</spna>
                     </div>
                     <div class="col-2 row align-items-end pb-2">
                         {{#ifCond replyVO.replyWriter}}
