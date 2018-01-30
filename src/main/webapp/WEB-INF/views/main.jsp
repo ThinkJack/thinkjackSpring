@@ -12,14 +12,16 @@
         height: 62%;
     }
     .mainTitle{;
-        font-size:5rem;
+        font-size:4rem;
         margin-top: 3rem ;
     }
     .mainTitle2{
-        font-size:7rem;
+        font-size:6rem;
         margin-top: 3rem ;
     }
-
+.aniA{
+    padding-left: 100px;
+}
 
     @media screen and (max-width:  1270px) {
     .mainTitle{
@@ -85,7 +87,9 @@
             font-size:2rem;
         }
 
-
+        .aniA{
+            padding-left: 40px;
+        }
 
     }
 
@@ -105,7 +109,7 @@
                 </div>
                 <div class="col-sm-8 removePadding borderLT" style=" margin-right:30%;">
                     <div class="row">
-                        <div class=" aniA  " style="padding-left: 100px">
+                        <div class=" aniA  " >
                             <h1 class=" bd title row" >Talk is cheap.</h1>
                             <h1 class=" bd text-white title row" >Show me the code!</h1>
                         </div>

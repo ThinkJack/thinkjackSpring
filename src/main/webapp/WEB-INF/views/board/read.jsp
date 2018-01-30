@@ -6,7 +6,9 @@
 
 <%--하트 스타일부분--%>
 <style>
-
+    body{
+        word-break:break-all;
+    }
     #panel, #flip {
         padding: 5px;
         text-align: center;
@@ -114,24 +116,24 @@
 
     <div class="col-md-10 col-lg-7 col-xl-6 removePadding ">
             <%--댓글 등록 부분 --%>
-            <div class="card border-primary ">
-                <h2 class="bd m-2"> Comment</h2>
+        <div class="card border-primary ">
+            <h2 class="bd m-2"> Comment</h2>
 
-                <div class="row m-3">
-                    <div class="col-md-10">
-                            <%--댓글 등록하는 아이디(--%>
-                        <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
-                               readonly="readonly">
-                            <%--댓글 입력 부분--%>
-                        <textarea class="form-control replyTextReply hn" rows="4" placeholder="댓글 입력하세요"></textarea>
-                    </div>
-                    <div class="col-md-2  removePadding ">
-                            <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
-                        <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:150px;">등록
-                        </button>
-                    </div>
+            <div class="row m-3">
+                <div class="col-md-10">
+                        <%--댓글 등록하는 아이디(--%>
+                    <input type="text" name='writer' class="form-control register hn" value="${login.userName}"
+                           readonly="readonly">
+                        <%--댓글 입력 부분--%>
+                    <textarea class="form-control replyTextReply hn" rows="4" placeholder="댓글 입력하세요"></textarea>
+                </div>
+                <div class="col-md-2  removePadding ">
+                        <%--1.등록 버튼을 누르면 새로운 댓글 추가된다--%>
+                    <button type="button" class="btn btn-primary addBtn  hn" style="width:100%;height:150px;">등록
+                    </button>
                 </div>
             </div>
+        </div>
         <div class="row mt-3">
                 <%--입력된 댓글 목록 나타나는 부분--%>
 
@@ -177,11 +179,11 @@
                 <%-- 조건문으로 parent값 있는것을 구분한다--%>
                 <%--하트 버튼(좋아요)--%>
                 <%--댓글 부분--%>
-                    {{#if replyVO.replyParent}}
-                    <div class="col-2 row removePadding justify-content-center align-items-center">
-                        <i class="fa fa-reply fa-2x fa-rotate-180" aria-hidden="true"></i>
-                    </div>
-                    {{/if}}
+            {{#if replyVO.replyParent}}
+            <div class="col-2 row removePadding justify-content-center align-items-center">
+                <i class="fa fa-reply fa-2x fa-rotate-180" aria-hidden="true"></i>
+            </div>
+            {{/if}}
 
             <div class="{{isRereply replyVO.replyParent}} removePadding registerReply card-header text-white" style="background-color:#2c2c2c">
 
@@ -207,7 +209,7 @@
                             </div>
                         </div>
 
-                        <div style="display: flex; align-items: center; height: 100px;">
+                        <div style="display: flex; align-items: center;">
                             <div style="text-align: left">
                                 <span class="replyId" style="display: none">{{replyVO.replyId}}</span>
                                     <%--replyId와 replyWriter 나타나는 부분--%>
@@ -218,8 +220,8 @@
                     <div class="comment col-10 p-3" style="overflow:auto; width:100%; height:150px;">
                             <%--입력된 댓글 text부분--%>
                             <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
-                        <textarea id="reply{{replyVO.replyId}}" class="form-control d-none" style="height: 100%"></textarea>
-                        <spna class="textSpan form-control " style="height: 100%;">{{replyVO.replyText}}</spna>
+                        <textarea id="reply{{replyVO.replyId}}" class="form-control d-none"></textarea>
+                        <spna class="textSpan form-control " >{{replyVO.replyText}}</spna>
                     </div>
                     <div class="col-2 row align-items-end pb-2">
                         {{#ifCond replyVO.replyWriter}}
@@ -238,10 +240,10 @@
             </div>
             <div class="reReply col-12 row mt-3 d-none">
 
-                    <textarea class="col-md-10 removePadding form-control replyTextReply hn" rows="3" placeholder="대댓글 입력하세요"></textarea>
-                    <button class="col-md-2 removePadding p-2 btn btn-primary addBtn hn" type="button" >
-                        등록
-                    </button>
+                <textarea class="col-md-10 removePadding form-control replyTextReply hn" rows="3" placeholder="대댓글 입력하세요"></textarea>
+                <button class="col-md-2 removePadding p-2 btn btn-primary addBtn hn" type="button" >
+                    등록
+                </button>
             </div>
 
         </div>
