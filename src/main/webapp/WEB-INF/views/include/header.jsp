@@ -116,7 +116,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=qna'>질문 게시판</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href='/srcBoard/srcList'>소스 게시판</a>
+                        <a class="dropdown-item " href='/srcBoard/srcList'>코드 게시판</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item " href='/board/list?category=free'>자유 게시판</a>
                     </div>

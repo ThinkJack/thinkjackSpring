@@ -200,14 +200,22 @@
     function codeTest(input, output) {
         var startTime = getTimeStamp();
         try {
+            var result;
             var inputResult = frame.contentWindow.eval($('#functions').val() + "(" + input + ")");
+            try{
+                result = frame.contentWindow.eval(inputResult);
+            }catch (notDefind){
+                result = "\"" + inputResult + "\"";
+            }
+            console.log(output);
+            console.log(result);
             // function의 결과값을 저장한다.
             $("#resultView").append(
                 "<div class='text-white'> [ input : " + input // input값을 찍어줌
                 + " / output : " + output // output값을 찍어줌
-                + " / result : " + inputResult + " ] " // 결과값을찍어줌
-                + (inputResult == output ? "성공" : "실패") // 두 값이 맞는지 판별함
-                + "( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" // 경과시간을 알려줌
+                + " / result : " + result + " ] " // 결과값을찍어줌
+                + ((result == output ) || ( JSON.stringify(result) === JSON.stringify(output) ) ? "성공" : "실패")// 두 값이 맞는지 판별함
+                + " ( 경과시간 : " + (getTimeStamp() - startTime) + "ms)" // 경과시간을 알려줌
                 + "</div>");
         } catch (err) {
             $("#resultView").append("<div class='err'>" + err + "</div>"); // err발생시 err를 찍어줌
@@ -221,8 +229,7 @@
         var testArguments = "";
         for (var i = 0; i < inputs.length; i++) {
             try{
-                frame.contentWindow.eval(inputs[i].value); //
-                testArguments += inputs[i].value;
+                testArguments += frame.contentWindow.eval(inputs[i].value); //
             }catch (notDefind){ // input 값이 notdefind 애러가 난다면, 문자열로 치환해준다.
                 testArguments += "\"" + inputs[i].value + "\""
             }finally {
@@ -230,13 +237,14 @@
                     testArguments += ",";
             }
         }
+
+        var output= "";
         var outputs = $(this).parent().find(".output");
-        var output;
+        console.log(frame.contentWindow.eval(outputs[0].value));
         try{
-            frame.contentWindow.eval(outputs[0].value);
-            output = outputs[0].value;
+            output = frame.contentWindow.eval(outputs[0].value);
         }catch (notDefind){
-            output += "\"" + outputs[0].value + "\""
+            output = "\"" + outputs[0].value + "\"";
         }
         codeTest(testArguments, output);
     });
