@@ -78,9 +78,9 @@ public class EditController {
         return "삭제 되었습니다.";
     }
 
-    //----------------------------------------------------------------------unitTest 부분
-    @RequestMapping(value = "/unitTest", method = RequestMethod.GET)
-    public void unitTestView(){
+    //----------------------------------------------------------------------JSAlgorithm 부분
+    @RequestMapping(value = "/JSAlgorithm", method = RequestMethod.GET)
+    public void JSAlgorithmView(){
 
     }
 }

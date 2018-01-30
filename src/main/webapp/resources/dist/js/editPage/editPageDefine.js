@@ -529,7 +529,7 @@ function getSelectedRange2() { //autoFormatSelection
 }
 
 // function getSelectedRange3() {
-//     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+//     return {from: codeJSAlgorithm.getCursor(true), to: codeJSAlgorithm.getCursor(false)};
 // }
 
 //--Ctrl-Alt-F
@@ -541,7 +541,7 @@ function autoFormatSelection() {
     var range2 = getSelectedRange2();
     codeJavaScript.autoFormatRange(range2.from, range2.to);
     // var range3 = getSelectedRange3();
-    // codeUnitTest.autoFormatRange(range3.from, range3.to);
+    // codeJSAlgorithm.autoFormatRange(range3.from, range3.to);
 }
 
 //--ctrl+/

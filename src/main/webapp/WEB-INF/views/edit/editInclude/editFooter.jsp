@@ -28,8 +28,8 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="btn btn-warning btn-sm bd modi" href="/edit/unitTest">
-                    UnitTest
+                <a class="btn btn-warning btn-sm bd modi" href="/edit/JSAlgorithm">
+                    <i class="fa fa-flask" style="color: white"></i>  JSAlgorithm
                 </a>
             </li>
             <li class="nav-item active">

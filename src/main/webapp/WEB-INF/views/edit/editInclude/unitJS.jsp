@@ -72,5 +72,5 @@
 
 <!--스크립트 define & event 분리참조-->
 <!-- script src="/resources/dist/js/editPage/editPageDefine.js"></script -->
-<script src="/resources/dist/js/editPage/unitTestEvent.js"></script> <!--  유닛테스트 이벤트 js모음  -->
+<script src="/resources/dist/js/editPage/JSAlgorithmEvent.js"></script> <!--  유닛테스트 이벤트 js모음  -->
 

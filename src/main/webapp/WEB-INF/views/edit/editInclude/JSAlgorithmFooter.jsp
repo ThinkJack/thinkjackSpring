@@ -20,6 +20,11 @@
                     How To
                 </a>
             </li>
+            <li class="nav-item active">
+                <a class="btn btn-warning btn-sm bd" href="/edit/editPage">
+                    <i class="fa fa-paint-brush" style="color: white"></i>  Editor
+                </a>
+            </li>
         </ul>
     </nav>
 </footer>

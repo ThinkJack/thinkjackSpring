@@ -143,9 +143,9 @@
         <!--Right side-->
         <div id="east" class="column effect-hover">
             <div class="content">
-                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'">
+                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/JSAlgorithm'">
                 </i>
-                <h2>Go <span class="tip">Unit Test</span></h2>
+                <h2>Go <span class="tip">JS-Algorithm</span></h2>
             </div>
         </div>
         <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;">

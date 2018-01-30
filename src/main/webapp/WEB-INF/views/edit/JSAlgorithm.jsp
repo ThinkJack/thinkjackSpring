@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="
     /resources/images/favicon/idea.ico" type="image/x-icon" />
     <link rel="icon"  href="/resources/images/favicon/idea.ico"  type="image/x-icon"  />
-    <title>unitTest</title>
+    <title>JSAlgorithm</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:include page="../edit/editInclude/editCss.jsp" flush="false"/>
@@ -42,11 +42,11 @@
         .right {
             height: 50%;
         }
-        #codeUnitTest {
+        #codeJSAlgorithm {
             height: 100%;
             padding-bottom: 40px;
         }
-        #frameUnitTest {
+        #frameJSAlgorithm {
             height: 0px;
             width: 0px;
         }
@@ -60,7 +60,7 @@
 </head>
 <body class="container-fluid">
 <%--header--%>
-<jsp:include page="../edit/editInclude/unitTestHeader.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/JSAlgorithmHeader.jsp" flush="false"/>
 
 <div class="col-12 row justify-contents-center whole">
     <div class="col-6 row justify-content-between">
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="col" id="codeUnitTest"></div>
+        <div class="col" id="codeJSAlgorithm"></div>
     </div>
     <div class="col-6">
         <div class="col unit_test right">
@@ -108,13 +108,13 @@
     </div>
 </div>
 
-<iframe id="frameUnitTest"></iframe>
+<iframe id="frameJSAlgorithm"></iframe>
 
 <!--modal 창-->
 <jsp:include page="../edit/editInclude/editKeyMapModal.jsp" flush="false"/>
-<jsp:include page="../edit/editInclude/unitTestHowtoModal.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/JSAlgorithmHowtoModal.jsp" flush="false"/>
 <!--footer-->
-<jsp:include page="../edit/editInclude/unitTestFooter.jsp" flush="false"/>
+<jsp:include page="../edit/editInclude/JSAlgorithmFooter.jsp" flush="false"/>
 
 
 <%--script단--%>
@@ -122,18 +122,17 @@
 
 
 <script>
-    var errors = false;
-    var frame = document.getElementById("frameUnitTest");
+    var frame = document.getElementById("frameJSAlgorithm");
     var out = frame.contentDocument || frame.contentWindow.document;
     var functions;
 
 
 
-    codeUnitTest.on("change", function () { // js code 가 변경될때,
+    codeJSAlgorithm.on("change", function () { // js code 가 변경될때,
         // clearTimeout(delay);
-        // delay = setTimeout(codeUnitTest, 3000);
+        // delay = setTimeout(codeJSAlgorithm, 3000);
 
-        var javascriptCode = codeUnitTest.getValue(); // 문자열을 가져옴
+        var javascriptCode = codeJSAlgorithm.getValue(); // 문자열을 가져옴
         if ($("#autoremove").prop("checked")) // 테스트 케이스 자동삭제가 켜져있는지 확인
             $("#test-case").empty(); // 켜져있으면 비워줌
         try {
@@ -152,15 +151,16 @@
 
         functions = new Array(); // 빈배열을 생성 여기에 function에 이름만 담는다.
         pos = javascriptCode.indexOf('function', 0); // 첫번째 function을 찾는다.
-        var count = 0;
+        var count = 1;
         while (pos !== -1) {  // indexOf로 찾았을때 다음값이 없을때까지
-            count++; //함수의 갯수를 담아둠
+
             javascriptCode = javascriptCode.substring(pos); // javascript코드를 자름
-            functions.push(javascriptCode.substring(javascriptCode.indexOf('function') +8, javascriptCode.indexOf('(')));
-            // 자른 Javascropt 코드중에서 function의 이름만 가져와서 배열에 추가
-
+            if(javascriptCode.substring(javascriptCode.indexOf('function') +8   , javascriptCode.indexOf('(')).trim() !== "") {
+                functions.push(javascriptCode.substring(javascriptCode.indexOf('function') +8, javascriptCode.indexOf('(')));
+            }
+            count++; //함수의 갯수를 담아둠
             pos = javascriptCode.indexOf('function',count); //계속해서 function 을 찾는다.
-
+            // 자른 Javascropt 코드중에서 function의 이름만 가져와서 배열에 추가
 
         }
         $("#functions").empty(); // 셀렉트 박스를 비우고
@@ -168,7 +168,7 @@
         for (var i = 0; i < functions.length; i++) // 반복문으로 function의 이름만 출력해준다.
             $("#functions").append("<option>" + functions[i] + "</option>");
     });
-    codeUnitTest.setValue( // 처음에 페이지가 열리면 기본적으로 이값이 써있다.
+    codeJSAlgorithm.setValue( // 처음에 페이지가 열리면 기본적으로 이값이 써있다.
         "function test1(){\n" +
         "   return 0;\n" +
         "}");

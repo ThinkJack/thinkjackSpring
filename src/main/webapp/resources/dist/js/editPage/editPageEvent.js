@@ -55,7 +55,7 @@ codeJavaScript.on("keyup", function (cm, event) {
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
     }
 });
-// codeUnitTest.on("keyup", function (cm, event) {
+// codeJSAlgorithm.on("keyup", function (cm, event) {
 //     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
 //         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
 //         var scope = {};

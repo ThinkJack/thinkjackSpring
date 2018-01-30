@@ -1,7 +1,7 @@
 //var allEditValue;//html, javascript, css 모두 합친 문자열
 //------------------------------------------------------코드 자동 적용 기능
 
-var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
+var codeJSAlgorithm = CodeMirror(document.getElementById("codeJSAlgorithm"), {
     mode: "javascript",
     lineNumbers: true,
     scrollbarStyle: "simple",    // 스크롤바 스타일
@@ -43,22 +43,22 @@ var codeUnitTest = CodeMirror(document.getElementById("codeUnitTest"), {
 // editor.foldCode(CodeMirror.Pos(13, 0));
 
 function getSelectedRange3() { //자동완성 영역지정
-    return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+    return {from: codeJSAlgorithm.getCursor(true), to: codeJSAlgorithm.getCursor(false)};
 }
 
 function autoFormatSelection() {  //자동선택 범위지정
     var range3 = getSelectedRange3();
-    codeUnitTest.autoFormatRange(range3.from, range3.to);
+    codeJSAlgorithm.autoFormatRange(range3.from, range3.to);
 }
 
 
 
-var origin = codeUnitTest.getValue();
+var origin = codeJSAlgorithm.getValue();
 var declaration = origin.substr(origin.indexOf("(")+1,origin.indexOf("{")-origin.indexOf("(")-2);
 testFunc = new Function(declaration,origin.substr(origin.indexOf("{")+1,origin.lastIndexOf(";")-origin.indexOf("{")));
 
 //키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
-codeUnitTest.on("keyup", function (cm, event) {
+codeJSAlgorithm.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys2[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
         var scope = {};
@@ -190,7 +190,7 @@ var ExcludedIntelliSenseTriggerKeys2 =
 // });
 //
 
-codeUnitTest.on("gutterClick", function (cm, n) { //거터클릭시 중단점표시
+codeJSAlgorithm.on("gutterClick", function (cm, n) { //거터클릭시 중단점표시
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });

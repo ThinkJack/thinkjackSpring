@@ -102,7 +102,7 @@ template FormatString(const(char)[] F, A...)
     }
 }
 
-unittest
+JSAlgorithm
 {
     auto s = Format!("hel%slo", "world", -138, 'c', true);
     assert(s == "helworldlo-138ctrue", "[" ~ s ~ "]");
@@ -120,7 +120,7 @@ template toStringNow(ulong v)
         enum toStringNow = toStringNow!(v / 10) ~ toStringNow!(v % 10);
 }
 
-unittest
+JSAlgorithm
 {
     static assert(toStringNow!(1uL << 62) == "4611686018427387904");
 }
@@ -134,7 +134,7 @@ template toStringNow(long v)
         enum toStringNow = toStringNow!(cast(ulong) v);
 }
 
-unittest
+JSAlgorithm
 {
     static assert(toStringNow!(0x100000000) == "4294967296");
     static assert(toStringNow!(-138L) == "-138");
@@ -238,7 +238,7 @@ template parseInteger(const(char)[] s)
     }
 }
 
-unittest
+JSAlgorithm
 {
     assert(parseUinteger!("1234abc").value == "1234");
     assert(parseUinteger!("1234abc").rest == "abc");
