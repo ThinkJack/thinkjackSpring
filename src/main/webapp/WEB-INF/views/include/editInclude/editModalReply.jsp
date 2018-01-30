@@ -63,6 +63,7 @@
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-user-img">
                             </div>
                             <div class="col">
+                                <%--초기값 readonly--%>
                                 <textarea readonly id="textarea" class="form-control"></textarea>
                             </div>
                         </div>
