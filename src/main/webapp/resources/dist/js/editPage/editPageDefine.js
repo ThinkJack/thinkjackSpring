@@ -256,6 +256,8 @@ var consoleCur = -1; //현재 검색한 로그 위치값 저장변수
 
 var likebt = $("#likebt"); //e좋아요 버튼
 
+var pageTitleView = document.getElementById("page-title-view"); //div
+var pageTitleText = document.getElementById("page-title-text"); //input
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
@@ -647,7 +649,7 @@ var consoleView = function (str) {
     if (str !== "") {
         try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-
+a
             consoleLogView(temp, consoleCategory); //콘솔 로그관련
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
                 + previewFrame.contentWindow.eval(str) + "</p>";

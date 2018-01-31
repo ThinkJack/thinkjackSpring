@@ -308,8 +308,7 @@ $(function () {
     editConsole.style.display = "none";
     commandLine.style.display = "none";
 
-    var pageTitleView = document.getElementById("page-title-view"); //div
-    var pageTitleText = document.getElementById("page-title-text"); //input
+
 
     //pencil 클릭시 input text 보이기
     $("#pencil").click(function () { //붓 클릭시 input박스 활성화
