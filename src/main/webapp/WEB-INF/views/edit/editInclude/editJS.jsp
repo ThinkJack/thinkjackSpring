@@ -18,7 +18,7 @@
 <!--edit-->
 <script src="/resources/codemirror/addon/edit/closetag.js"></script><!-- 코드편집시 /div>, /p> 등 자동 닫힘    -->
 <script src="/resources/codemirror/addon/edit/closebrackets.js"></script><!--코드편집시 ')', '}' 자동 닫힘    -->
-<%--<script src="/resources/codemirror/addon/edit/continuelist.js"></script>--%> <!-- Markdown specific    -->--%>
+<%--<script src="/resources/codemirror/addon/edit/continuelist.js"></script>--%> <!-- Markdown specific    -->
 <script src="/resources/codemirror/addon/edit/matchbrackets.js"></script> <!--(, { 입력시 ), } 자동완성    -->
 <script src="/resources/codemirror/addon/edit/matchtags.js"></script> <!-- <div , <p 등 태그 입력시 /div>, /p> 매칭    -->
 <script src="/resources/codemirror/addon/edit/trailingspace.js"></script> <!-- CSS 클래스 cm-trailingspace를 줄 끝의 공백 뻗기에 추가   -->
