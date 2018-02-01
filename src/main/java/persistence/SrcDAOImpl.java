@@ -48,10 +48,7 @@ public class SrcDAOImpl implements SrcDAO {
     }
 
     @Override
-    public void updateSrcWriter(int srcWriter, String srcId) {
-        Map map = new HashMap<>();
-        map.put("srcWriter", srcWriter);
-        map.put("srcId", srcId);
+    public void updateSrcWriter(Map map) {
         sqlSession.update(srcMapper + ".updateSrcWriter", map);
     }
 

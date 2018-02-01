@@ -35,9 +35,8 @@
 
 <div id="Board" class="tabcontent card mb-3 active">
     <div class="container-fluid removePadding text-center ">
-        <div class="row">
-            <div class="col-sm-1 removePadding" ></div>
-            <div class="col-sm-10 removePadding" >
+        <div class="row justify-content-center">
+            <div class="col-sm-11 removePadding" >
                 <div class="deaf2">
                     <img class=" widthFull float-right"  src="/resources/images/main/mainA.png" style="  background-size:contain;width:auto" >
                 </div>
@@ -78,12 +77,12 @@
                     <table class="table">
                         <thead>
                         <tr class="table-dark text-white bd">
-                            <th width="15%" >boardId</th>
+                            <th width="15%">Category</th>
+                            <th width="15%">boardId</th>
                             <th width="20%">TITLE</th>
-                            <th width="20%">WRITER</th>
                             <th width="20%" style="   text-align: center;" >REGDATE</th>
                             <th width="15%" >VIEWCNT</th>
-                            <th width="10%" >HEART</th>
+                            <th width="15%" >HEART</th>
                         </tr>
                         </thead>
                         <c:forEach items="${list}" var="boardVO">
@@ -93,10 +92,6 @@
                                 <td class="hn">
                                     <a href='/board/read${pageMaker.makeUserSearch(pageMaker.cri.page) }&boardId=${boardVO.boardId}&category=${boardVO.boardCategoryName}'>
                                             ${boardVO.boardTitle}</a></td>
-                                <td><img id="profile${boardVO.boardId}" class="Photo rounded-circle"/>
-                                    <script>
-                                        $("#profile${boardVO.boardId}").prop("src",getFileInfo("${boardVO.boardWriterProfile}"))
-                                    </script>${boardVO.boardWriter}</td>
                                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
                                                     value="${boardVO.boardRegdate}"/></td>
                                 <td><span class="badge bg-red">${boardVO.boardViewcnt}</span></td>
@@ -115,8 +110,8 @@
 
                         <c:forEach begin="${pageMaker.startPage}"
                                    end="${pageMaker.endPage}" var="idx">
-                            <li class="page-item" <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
-                                <a class="page-link" href="myBoard${pageMaker.makeUserSearch(idx)}">${idx}</a>
+                            <li <c:out value="${pageMaker.cri.page == idx? 'class=active':'' }"/>>
+                                <a href="myBoard${pageMaker.makeUserSearch(idx)}">${idx}</a>
                             </li>
                         </c:forEach>
 

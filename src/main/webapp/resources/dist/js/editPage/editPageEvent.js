@@ -1,74 +1,10 @@
-//var allEditValue;//html, javascript, css 모두 합친 문자열
-//------------------------------------------------------코드 자동 적용 기능
-
-codeHtml.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-
-    if ($('#autoPreview').is(':checked')) {
-        //setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.  수정: cleartimeout 공통으로 뺌
-        // clearTimeout(delay);
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay);
-            delay = setTimeout(codeSave, 3000);
-        }
-
-    }
-
-});
-
-codeCss.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-    if ($('#autoPreview').is(':checked')) {
-        // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
-        }
-    }
 
 
-});
 
-codeJavaScript.on("change", function () {
-    changeSaveImg(2);
-    clearTimeout(delay);
-    if ($('#autoPreview').is(':checked')) {
-        // clearTimeout(delay);//setTimeout()에 지정된 함수 실행을 중지
-        delay = setTimeout(updatePreview, 3000);
-    }
-
-    if ($('#autoSave').is(':checked')) { //이슈: 자동저장된 url은 미리보기 안됨.
-        if (srcId === "") {
-            // alert(111)
-        } else {
-            // alert(srcId);
-            // clearTimeout(delay); //setTimeout()에 지정된 함수 실행을 중지
-            delay = setTimeout(codeSave, 3000);
-        }
-    }
-});
-
-
-//키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
+//codeHtml펜에 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeHtml.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
+        !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {   /*Enter - do not open autocomplete list just after item has been selected in it*/
         var scope = {};
         var preventList = ['StyleFix', 'PrefixFree', 'Html2Jade', 'alert'];
         for (var i in window) {
@@ -80,13 +16,13 @@ codeHtml.on("keyup", function (cm, event) {
     }
 });
 
-//번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
+//codeHtml펜에 번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
 codeHtml.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
-
+//codeCss펜에 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeCss.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
@@ -105,6 +41,7 @@ codeCss.on("keyup", function (cm, event) {
 //     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 // });
 
+//codeJavaScript 펜 키업 이벤트 발생시 마다 위 이벤트키를 제외하고 자동으로 힌트창 보여준다. 수동키인 ctrl+ Space 와 병행사용 가능
 codeJavaScript.on("keyup", function (cm, event) {
     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
@@ -118,7 +55,7 @@ codeJavaScript.on("keyup", function (cm, event) {
         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
     }
 });
-// codeUnitTest.on("keyup", function (cm, event) {
+// codeJSAlgorithm.on("keyup", function (cm, event) {
 //     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
 //         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/
 //         var scope = {};
@@ -131,56 +68,11 @@ codeJavaScript.on("keyup", function (cm, event) {
 //         CodeMirror.commands.autocomplete(cm, null, {completeSingle: false, globalScope: scope});
 //     }
 // });
+
+//codeJavaScript 펜에 번호표 옆에 빈칸을 클릭시 codeEdit.js의 makeMarker 를 호출해서 마크 뿌려줌
 codeJavaScript.on("gutterClick", function (cm, n) {
     var info = cm.lineInfo(n);
     cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
-});
-
-
-//editHeader.jsp script
-//pencil 클릭시 input text 보이기
-$(function () {
-    var pageTitleView = document.getElementById("page-title-view");
-    var pageTitleText = document.getElementById("page-title-text");
-
-    $("#pencil").click(function () {
-        pageTitleView.style = "display: none;";
-        pageTitleText.style = "display: block;";
-        document.getElementById("src-title-input").focus();
-    });
-    //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
-    $("#src-title-input").keydown(function (key) {
-        if (key.keyCode == 13) {
-            changeTitle(this);
-        }
-    });
-    $("#src-title-input").focusout(function (e) {
-        changeTitle(this);
-    });
-    $("#src-title-modal").keydown(function () {
-        changeTitle(this);
-    })
-
-    var changeTitle = function (el) {
-        changeSaveImg(2);
-        srcTitle = el.value;
-        document.getElementById("src-title").innerHTML = srcTitle;
-        if (el.id === "src-title-modal") {
-            document.getElementById("src-title-input").value = srcTitle;
-        } else {
-            document.getElementById("src-title-modal").value = srcTitle;
-        }
-        pageTitleView.style = "display: block;";
-        pageTitleText.style = "display: none;";
-    }
-});
-//comments 변경시 등록
-$(function () {
-    $("#modal-comment").on("change", function (e) {
-        changeSaveImg(2);
-        srcComments = this.value;
-        document.getElementById("comment-view").value = srcComments;
-    });
 });
 
 // HTML Preprocessor 설정
@@ -204,17 +96,21 @@ $(function () {
             // alert(this.text);
             // document.write("<script src=" +
             //     "'/resources/dist/js/editPage/markDown.js'></script>");
-            codeHtml.setValue("");
-            codeHtml.clearHistory();
-            codeHtml.setOption("mode", 'gfm');
-            codeHtml.setOption("lineNumbers", false);
-            codeHtml.setOption("matchBrackets", 'true');
-            codeHtml.setOption("lineWrapping", 'true');
-            codeHtml.setOption("theme", 'base16-light');
-            codeHtml.setOption("extraKeys", {
-                "Enter":
-                    "newlineAndIndentContinueMarkdownList"
-            });
+
+
+            // codeHtml.setValue("");
+            // codeHtml.clearHistory();
+            // codeHtml.setOption("mode", 'gfm');
+            // codeHtml.setOption("lineNumbers", false);
+            // codeHtml.setOption("matchBrackets", 'true');
+            // codeHtml.setOption("lineWrapping", 'true');
+            // codeHtml.setOption("theme", 'base16-light');
+            // codeHtml.setOption("extraKeys", {
+            //     "Enter":
+            //         "newlineAndIndentContinueMarkdownList"
+            // });
+
+
             // alert(codeHtml.getOption("mode"));
 
 
@@ -235,9 +131,13 @@ $(function () {
 $(function () {//---------------------------- tab-size 변경시
     $("#tab-size").change(function () {
         // alert(111);
-        var st = $(":input:radio[name=gridRadios]:checked").val();
-        var sp = this.value;
-        if (st === "option1") {
+        var st = $(":input:radio[name=gridRadios]:checked").val(); //라디오버튼 name= gridRadios 선택
+        var sp = this.value; // sp변수에 값 저장
+        // alert(st);
+        // alert(sp);
+
+        if (st === "option1") {  // option1 제외
+            // alert('tab-click1');
 
             codeHtml.setOption("extraKeys", {
                 Tab: function (cm) {
@@ -246,28 +146,51 @@ $(function () {//---------------------------- tab-size 변경시
                     cm.replaceSelection(spaces);
                 }
             });
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(sp)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
+            codeJavaScript.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(sp)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
         } else if (st === "option2") {
 
-            // $("#gridRadios1").prop("checked", true);
-            codeHtml.setOption("tabSize", this.value);
-            codeCss.setOption("tabSize", this.value);
-            codeJavaScript.setOption("tabSize", this.value);
+            // codeHtml.setOption("indentWithTabs", true);
+
+            //지정된 크기의 탭사이즈로 변경
+            codeHtml.setOption("tabSize", sp);
+            codeCss.setOption("tabSize", sp);
+            codeJavaScript.setOption("tabSize", sp);
+
         }
     });
 });
 
+
 //Setting Behavior부분 함수
 $(function () {//---------------------------- option button 변경시
-    $('input[type=radio][name=gridRadios]').change(function () {
+
+
+    $('input[type=radio][name=gridRadios]').change(function () { //라디오버튼 name= gridRadios 선택
         // alert('gridRadios');
 
-        //현재 리스트박스의 탭사이즈 값 가져오기.
+        //id: tab-size요소 선택
         var e = document.getElementById("tab-size");
+        //현재 리스트박스의 탭사이즈 값 가져오기.
         var strUser = e.options[e.selectedIndex].value;
+        // alert (this.value);
 
         // var sp = this.value;
-        if (this.value === "option1") {
+        if (this.value === "option1") { //option1일때 제외
             // alert('a');
+
 
             codeHtml.setOption("extraKeys", {
                 Tab: function (cm) {
@@ -276,39 +199,173 @@ $(function () {//---------------------------- option button 변경시
                     cm.replaceSelection(spaces);
                 }
             });
-        } else if (this.value === "option2") { // have to: option1 갖다오면 백탭안됨
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    var spaces = Array(cm.getOption("indentUnit") +
+                        parseInt(strUser)).join(" ");
+                    cm.replaceSelection(spaces);
+                }
+            });
+
+
+            codeJavaScript.setOption("extraKeys", {
+
+
+                "Ctrl-Space": "autocomplete",
+                "Ctrl-Q": function (cm) {
+                    cm.foldCode(cm.getCursor());
+                },
+                "Ctrl-Alt-F": autoFormatSelection,
+
+
+                Tab: function (cm) {
+
+                    cm.execCommand("insertSoftTab"); //백탭을 스페이스로
+
+                    // var spaces = Array(cm.getOption("indentUnit") +
+                    //     parseInt(strUser)).join(" ");
+                    // cm.replaceSelection(spaces);
+                    // cm.execCommand("defaultTab");
+                    // cm.execCommand("indentMore");
+                    // cm.execCommand("newlineAndIndent")
+
+                }
+
+
+
+            });
+
+
+        } else if (this.value === "option2") {
             // alert('b');
-            // codeHtml.setOption("indentWithTabs", true);
-            codeHtml.setOption("tabSize", strUser);
-            codeCss.setOption("tabSize", strUser);
-            codeJavaScript.setOption("tabSize", strUser);
-            console.log(strUser);
+            // codeHtml("tabSize", strUser);
+            codeHtml.setOption("extraKeys", {
+                Tab: function (cm) {
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
+
+
+                }
+                // ,
+
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection
+            });
+
+            codeCss.setOption("extraKeys", {
+                Tab: function (cm) {
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
+                },
+
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection
+            });
+
+
+            codeJavaScript.setOption("extraKeys", {
+
+                // "Ctrl-Space": "autocomplete",
+                // "Ctrl-Q": function (cm) {
+                //     cm.foldCode(cm.getCursor());
+                // },
+                // "Ctrl-Alt-F": autoFormatSelection,
+
+
+                "Tab": function (cm) {
+
+                    cm.execCommand("defaultTab"); //indent tab키로 설정시 백스페이스를 기본탭으로
+
+                }
+                // ,
+                // "Shift-Tab": function (cm) {
+                //     cm.indentSelection("subtract");
+                // }
+            });
+
+
+
 
         }
     });
 });
 
+//editHeader.jsp script
+
 $(function () {
+
+    if ($('#autoPreview').is(':checked')) { //첫 로딩시 상태
+    } else {
+        var runstyle = document.getElementById("run");
+        runstyle.style = "visibility: visible;"
+    }
+
+    //처음 문서 로드시 콘솔창 숨기기
+    editConsole.style.display = "none";
+    commandLine.style.display = "none";
+
+
+
+    //pencil 클릭시 input text 보이기
+    $("#pencil").click(function () { //붓 클릭시 input박스 활성화
+        pageTitleView.style = "display: none;";
+        pageTitleText.style = "display: block;";
+        document.getElementById("src-title-input").focus();
+    });
+    //pageTitle input작성 완료후 focus 똔는 enter를 쳤을때
+    $("#src-title-input").keydown(function (key) {
+        if (key.keyCode == 13) { //enter
+            changeTitle(this); //타이들 관련 부분 모두 변경
+        }
+    });
+    $("#src-title-input").focusout(function (e) { //focus에서 나갔을때
+        changeTitle(this); //타이들 관련 부분 모두 변경
+    });
+
+    $("#src-title-modal").keydown(function () { //모달창에서 title 입력시
+        changeTitle(this); //타이들 관련 부분 모두 변경
+    });
+
+
+
+    $("#autoPreview").click(function () { //클릭시 상태
+        var runstyle = document.getElementById("run");
+        if (this.checked) {
+            runstyle.style = "visibility: hidden;"
+        } else {
+            runstyle.style = "visibility: visible;"
+        }
+    });
+
+    //------------------------------------------------------코드 입력시 변화 이벤트 받기
+    codeHtml.on("change", function () {
+        codeChangeEvent();
+    });
+
+    codeCss.on("change", function () {
+        codeChangeEvent();
+    });
+
+    codeJavaScript.on("change", function () {
+        codeChangeEvent();
+    });
+
     $("#run").click(function () { // run button 실행
         updatePreview();
     });
-});
 
-
-$(function () {
-    $("#command-line").keyup(function (e) {
-        if (e.keyCode === 13) {
+    $("#command-line").keyup(function (e) { //커멘드 라인에서 키 입력시
+        if (e.keyCode === 13) { //enter
             consoleView(this.value);
             this.value = "";
         }
     });
-});
 
-
-//footer
-//console 버튼 누를때
-$(function () {
-    $("#console-button").click(function () {
+    $("#console-button").click(function () { //footer에 있는 콘솔버튼 눌렀을때
         if (editConsole.style.display === "none") {
             editConsole.style.display = "block";
             commandLine.style.display = "block";
@@ -322,192 +379,19 @@ $(function () {
 
         }
     });
-});
-//처음 문서 로드시 콘솔창 숨기기
-$(function () {
-    editConsole.style.display = "none";
-    commandLine.style.display = "none";
 
-});
-//--------------------
+    $("#modal-comment").on("change", function (e) { //comments 변경시 등록
+        changeSaveImg(2);
+        srcComments = this.value;
+        document.getElementById("comment-view").value = srcComments;
+    });
 
-
-
-//setting 모달 닫힐때 이벤트
-$(function () {
-    $("#setting").on("hide.bs.modal", function () {
-
-
-
+    $("#setting").on("hide.bs.modal", function () { //setting 모달 닫힐때 이벤트
         cdnCssJsValSet();
-
         updatePreview();
     });
-});
 
-//layout 관련 script
-// $(function () {
-//
-//
-//     $("#left-layout").click(function () {
-//         codeMain.style = "height: calc(100% - 9px);";
-//         iframeBody.style = "height: calc(100% - 50px);";
-//         layout2.style = "height: 100%;";
-//         layout1.className = "col-4 layout";
-//         resizeView.className = "col resize_view";
-//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-//         layout2.className = "col main_view layout";
-//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 100%;";
-//         }
-//     });
-//
-//     $("#top-layout").click(function () {
-//         codeMain.style = "height: 100%;";
-//         iframeBody.style = "height: calc(100% - 417px);";
-//         layout2.style = "height: calc(100% - 417px);";
-//         layout1.className = "row layout";
-//         resizeView.className = "row resize_view";
-//         resizeView.style = "height:5px; max-width: 100%; cursor: row-resize;";
-//         layout2.className = "row main_view layout";
-//         resizeCode1.style = "max-width: 5px; height: ; cursor: col-resize;";
-//         resizeCode2.style = "max-width: 5px; height: ; cursor: col-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: 300px";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 33.1%;";
-//         }
-//     });
-//
-//     $("#right-layout").click(function () {
-//         codeMain.style = "height: calc(100% - 9px);";
-//         iframeBody.style = "height: calc(100% - 50px);";
-//         layout2.style = "height: 100%;";
-//         layout1.className = "col-4 order-12 layout";
-//         resizeView.className = "col order-6 resize_view";
-//         resizeView.style = "height:100%; max-width: 5px; cursor: col-resize;";
-//         layout2.className = "col order-1 main_view layout";
-//         resizeCode1.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//         resizeCode2.style = "max-width: 100%; height: 5px; cursor: row-resize;";
-//
-//         for (i in codeMirrorLayout) {
-//             codeMirrorLayout[i].style = "height: calc(30% - 52px);";
-//         }
-//
-//         for (i in codeLayout) {
-//             codeLayout[i].style = "width: 100%;";
-//         }
-//     });
-// });
-
-
-//화면 영역 조절관련 function
-// jQuery("#resize-code-1").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (hcl !== 0 ? hcl + e.pageX : e.pageX);
-//
-//     $(window).mousemove(function (e) {
-//
-//         hcl = startP - e.pageX;
-//
-//         console.log(cssBuild.offsetWidth);
-//         if (htmlBuild.offsetWidth < 80 || cssBuild.offsetWidth < 80) {
-//
-//         } else {
-//             htmlBuild.style = "width: calc(33.1% - " + hcl + "px);";
-//             cssBuild.style = "width: calc(33.1% + " + hcl + "px);";
-//         }
-//
-//     });
-// });
-//
-// jQuery("#resize-code-2").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (cjl !== 0 ? cjl + e.pageX : e.pageX);
-//
-//     $(window).mousemove(function (e) {
-//
-//         cjl = startP - e.pageX;
-//
-//         if (-350 < cjl && cjl < 350) {
-//             cssBuild.style = "width: calc(33.1% - " + cjl + "px);";
-//             jsBuild.style = "width: calc(33.1% + " + cjl + "px);";
-//         }
-//
-//     });
-// });
-//
-// jQuery("#resize-view").mousedown(function (e) {
-//     e.preventDefault();
-//     dragging = true;
-//     var startP = (cifl !== 0 ? cifl + e.pageY : e.pageY);
-//
-//     $(window).mousemove(function (e) {
-//         cifl = startP - e.pageY;
-// //                if (-350 < cifl && cifl < 350) {
-//         for (i in codeMLayout) {
-//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-//         }
-//
-//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-//     });
-//
-//     $('.iframeWrapper').mousemove(function (e) {
-//         cifl = startP - e.pageY;
-//         for (i in codeMLayout) {
-//             codeMLayout[i].style = "height: calc(100% - " + (753 + cifl) + "px);";
-//         }
-//
-//         iframeBody.style = "height: calc(100% - " + (488 - cifl) + "px);"
-//     });
-// });
-
-jQuery(window).mouseup(function (e) {
-    $(window).unbind('mousemove');
-    $('.iframeWrapper').unbind('mousemove');
-    dragging = false;
-});
-
-jQuery('.iframeWrapper').mouseup(function (e) {
-    $(window).unbind('mousemove');
-    $('.iframeWrapper').unbind('mousemove');
-    dragging = false;
-});
-
-
-$(function () {
-    if ($('#autoPreview').is(':checked')) { //첫 로딩시 상태
-    } else {
-        var runstyle = document.getElementById("run");
-        runstyle.style = "visibility: visible;"
-    }
-
-    $("#autoPreview").click(function () { //클릭시 상태
-        var runstyle = document.getElementById("run");
-        if (this.checked) {
-            runstyle.style = "visibility: hidden;"
-        } else {
-            runstyle.style = "visibility: visible;"
-        }
-    });
-});
-
-
-//좋아요 버튼 이미지 변경
-$(function () {
-    $("#like").click(function (e) {
+    $("#like").click(function (e) { //좋아요 버튼 클릭시
         $.ajax({
             type: "post",
             url: "/edit/like",
@@ -532,33 +416,49 @@ $(function () {
             }
         });
     });
+
+    $("#saveCode").click(function (e) { //저장버튼 클릭시
+        codeSave();
+    });
+
+    $("#login").click(function (e) { //로그인 버튼 클릭시
+        if (window.sessionStorage) {
+            if (srcId !== "") {
+                sessionStorage.setItem('srcId', srcId);
+            }
+        }
+        self.location = '/user/login'
+    });
+
+    $('input[name="visibility"]').on("change", function (e) {
+        srcStatus = this.value;
+    });
+
+    $("#src-delete").click(function (e) { //삭제버튼 클릭시(setting 모달)
+        srcDelete();
+    });
 });
 
-//창 크기조절 관련
+
+// jQuery(window).mouseup(function (e) {
+//     $(window).unbind('mousemove');
+//     $('.iframeWrapper').unbind('mousemove');
+//     dragging = false;
+// });
+//
+// jQuery('.iframeWrapper').mouseup(function (e) {
+//     $(window).unbind('mousemove');
+//     $('.iframeWrapper').unbind('mousemove');
+//     dragging = false;
+// });
 
 // save & update
-$("#saveCode").click(function (e) {
-    codeSave();
-
-});
 
 
-$("#login").click(function (e) {
-    if (window.sessionStorage) {
-        if (srcId !== "") {
-            sessionStorage.setItem('srcId', srcId);
-        }
-    }
-    self.location = '/user/login'
-});
 
-$('input[name="visibility"]').on("change", function (e) {
-    srcStatus = this.value;
-});
 
-$("#src-delete").click(function (e) {
-    srcDelete();
-});
+
+
 // $('input[name="genderS"]:checked')
 
 //=================SrcReply===============================================
@@ -568,13 +468,13 @@ $(function () {
     // var replyTotCnt = pageMaker.getTotalCount();
 
     //댓글등록 회원권한
-    replyPage = 1;
-    if(srcId !== ""){
-        getPage("/srcReply/" + srcId + "/" + replyPage);
+    replyPage = 1; //기본리스트페이지 1페이지 지정
+    if (srcId !== "") {  //저장됬을때
+        getPage("/srcReply/" + srcId + "/" + replyPage); //rest 호출
     }
 
 
-    if (userId == "") {
+    if (userId == "") { //비회원일시
         $("#textarea").val("로그인 하세요!");
         $("#textarea").click(function () {
             alert("로그인 후 이용가능합니다!");
@@ -585,27 +485,28 @@ $(function () {
 
 
     } else {
-        $("#textarea").removeAttr('readonly').val("");
+        $("#textarea").removeAttr('readonly').val("");//로그인시 readonly속성제거
 
         //등록 & 전체목록
         $("#post").click(function (e) {
-            var replyText = $("#textarea").val();
-            if (replyText !== "") {
+            var replyText = $("#textarea").val(); //id textarea초기화
+            if (replyText !== "") { //댓글내용이 있을때
                 $.ajax({
                     type: "post",
-                    url: "/srcReply/srcInsert.do",
+                    url: "/srcReply/srcInsert.do",// srcReply콘트롤러 srcInsert.do메서드 호출"
                     headers: {
                         "Content-Type": "application/json",
                         "X-HTTP-Method-Override": "POST"
                     },
-                    dataType: 'text',
+                    dataType: 'text', //응답타입
 
-                    data: JSON.stringify({
+                    data: JSON.stringify({ //요청 내용
                         srcId: srcId,
                         replyText: replyText,
                         replyWriter: userId,
                         replyStatus: srcStatus
                     }),
+
 
                     error: function () {
                         alert("등록에러");
@@ -614,19 +515,19 @@ $(function () {
                     },
 
                     success: function (result) {
-                        console.log("result:" + result);
+                        // console.log("result:" + result);
                         alert("등록 되었습니다.");
                         // getPageList(); //전체목록
-                        replyPage = 1;
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
-                        $("#textarea").val("");
+                        replyPage = 1; //보여줄페이지 1페이지 지정
+                        getPage("/srcReply/" + srcId + "/" + replyPage); //rest
+                        $("#textarea").val(""); //textarea 초기화
 
 
                     }
                 });
             } else {
                 alert("내용을 입력하세요!");
-                $("#textarea").focus();
+                $("#textarea").focus(); //포커스 지정
             }
 
         });
@@ -637,18 +538,18 @@ $(function () {
 
 
             var reply = $(this);
-            var replyId = reply.attr("data-rno");
+            var replyId = reply.attr("data-rno"); //#reply-delete-button data-rno추가
 
 
             $.ajax({
                 type: 'delete',
-                url: '/srcReply/srcDelete.do/' + replyId,
+                url: '/srcReply/srcDelete.do/' + replyId, //rest
 
                 headers: {
                     "Content-Type": "application/json",
                     "X-HTTP-Method-Override": "DELETE"
                 },
-                dataType: 'text',
+                dataType: 'text', //리턴타입
 
                 error: function () {
                     // if (userId == " ") then
@@ -662,7 +563,7 @@ $(function () {
                     if (result === 'SUCCESS') {
                         alert("삭제 되었습니다");
                         // getPageList();
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                        getPage("/srcReply/" + srcId + "/" + replyPage); // rest
 
 
                     }
@@ -688,19 +589,19 @@ $(function () {
 
             $.ajax({
                 type: 'put',
-                url: '/srcReply/srcUpdate.do/' + rno,
+                url: '/srcReply/srcUpdate.do/' + rno, //reset
 
-                headers: {
+                headers: { //요청데이터타입: json , 수정: PUT
                     "Content-Type": "application/json",
                     "X-HTTP-Method-Override": "PUT"
                 },
-                data: JSON.stringify({
+                data: JSON.stringify({ // 요청내용
                     srcId: srcId,
                     replyText: replytext,
                     replyId: rno
                 }),
 
-                dataType: 'text',
+                dataType: 'text', //응답데이터 :text
 
                 error: function () {
                     // if (userId == " ") then
@@ -713,24 +614,25 @@ $(function () {
                     if (result === 'SUCCESS') {
                         alert("수정 되었습니다");
                         // getPageList();
-                        getPage("/srcReply/" + srcId + "/" + replyPage);
+                        getPage("/srcReply/" + srcId + "/" + replyPage);//rest호출
                     }
                 }
             })
         });
 
-
-        $(".pagination").on("click", "li a", function (event) {
-
-            event.preventDefault();
-
-            replyPage = $(this).attr("href");
-
-            getPage("/srcReply/" + srcId + "/" + replyPage);
-            // getPageList("/srcReply/"+srcId+"/"+replyPage);
-
-        }); //else
     }//if
+
+    $(".pagination").on("click", "li a", function (event) {//페이지네이션
+
+        event.preventDefault();
+
+        replyPage = $(this).attr("href"); //li태그 href속성값 읽어오기
+
+        getPage("/srcReply/" + srcId + "/" + replyPage); //rest호출
+        // getPageList("/srcReply/"+srcId+"/"+replyPage);
+
+    }); //else
+
 
 });
 
@@ -764,36 +666,26 @@ $(function () {
 
 
 $(function () {
-
-    $("#reply-scroll").scroll(function () {
-        console.log($("#reply-scroll").height());
-        console.log(this.scroll);
-        console.log(this.scrollTop);
-    });
-});
-
-
-$(function () {
     $("#command-line").keydown(function (e) {
 
-        if (e.keyCode === 13) {
-            consoleSerchLog.unshift(this.value);// 배열 앞에 추가
-            consoleCur = -1;
-        } else if (e.keyCode === 38) {
-            if (consoleSerchLog.length - 1 !== consoleCur) {
-                consoleCur++;
-                this.value = consoleSerchLog[consoleCur];
+        if (e.keyCode === 13) { //enter
+            consoleSearchLog.unshift(this.value);// 배열 앞에 추가
+            consoleCur = -1; //현제 겸색로그 위치 초기화
+        } else if (e.keyCode === 38) { //화살표키 위
+            if (consoleSearchLog.length - 1 !== consoleCur) { //현제 위치가 끝이 아닐때
+                consoleCur++; //위치값 증가
+                this.value = consoleSearchLog[consoleCur]; //배열값 가져와 커멘드라인에 찍기
             }
 
-        } else if (e.keyCode === 40) {
-            if (consoleCur > 0) {
-                consoleCur--;
-                this.value = consoleSerchLog[consoleCur];
+        } else if (e.keyCode === 40) { //화살표키 아래
+            if (consoleCur > 0) { //현재 위치가 처음이 아닐때
+                consoleCur--; //위치값 감소
+                this.value = consoleSearchLog[consoleCur];
             } else {
-                if (consoleCur === 0) {
+                if (consoleCur === 0) { //배열위치 값은 -1이 없으므로 현재 위치가 0이고 화살표 아래키를 눌렀기 때문에 현재위치 감소
                     consoleCur--;
                 }
-                this.value = ""
+                this.value = "" //커맨드 라인 value값 빈문자열로 찍기
             }
         }
     });
@@ -801,6 +693,6 @@ $(function () {
 
 $(function () {
     $("#console-clear").click(function () {
-        editConsoleView.innerHTML = "";
+        editConsoleView.innerHTML = ""; //콘솔 비우기
     });
 });

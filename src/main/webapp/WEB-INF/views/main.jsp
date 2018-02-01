@@ -7,18 +7,45 @@
     .title{
         font-size: 4rem;
     }
-    .title2{
-        font-size:6rem
-    }
 
-    @media screen and (max-width: 1090px) {
+    .borderLT{
+        height: 62%;
+    }
+    .mainTitle{;
+        font-size:4rem;
+        margin-top: 3rem ;
+    }
+    .mainTitle2{
+        font-size:6rem;
+        margin-top: 3rem ;
+    }
+.aniA{
+    padding-left: 100px;
+}
+
+    @media screen and (max-width:  1270px) {
+    .mainTitle{
+    font-size:4rem;
+    margin-top: 3rem ;
+    }
+    .mainTitle2{
+    font-size:6rem;
+    margin-top: 3rem ;
+    }
+    }
+    @media screen and (max-width: 1190px) {
 
         .title{
             font-size: 2rem;
         }
-        .title2{
-            font-size:4rem
+        .mainTitle{
+            font-size:2rem;
+
         }
+        .mainTitle2{
+            font-size:4rem;
+        }
+
         .text-center{
             font-size: 1rem;
         }
@@ -26,15 +53,22 @@
         .b {
             height: 60%;
         }
-
+        .borderLT{
+            height: 58%;!important;
+        }
     }
+
     @media screen and (max-width: 570px) {
 
         .title{
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
-        .title2{
-            font-size:3rem
+        .mainTitle{
+            font-size:1.5rem;
+
+        }
+        .mainTitle2{
+            font-size:3rem;
         }
         .b {
             height: 50%;
@@ -42,6 +76,23 @@
 
 
     }
+    @media screen and (max-width: 390px) {
+
+
+        .mainTitle{
+            font-size:1rem;
+
+        }
+        .mainTitle2{
+            font-size:2rem;
+        }
+
+        .aniA{
+            padding-left: 40px;
+        }
+
+    }
+
     img { max-width: 100%; }
 </style>
 <section class="a container-fluid" >
@@ -54,13 +105,13 @@
                 <div class="col-sm-6 removePadding borderRB "
                      style="height: 30%;margin-left: 50% ;margin-bottom: -11px;z-index: 10">
                     <br>
-                    <p class="bd aniB mt-5 title"><a class="title2" >rn</a>asterpiece</p>
+                    <p class="bd aniB  mainTitle"><a class="mainTitle2" >rn</a>asterpiece</p>
                 </div>
-                <div class="col-sm-8 removePadding borderLT" style="height: 62%; margin-right:30%;">
+                <div class="col-sm-8 removePadding borderLT" style=" margin-right:30%;">
                     <div class="row">
-                        <div class=" aniA  " style="padding-left: 100px">
-                            <h1 class=" bd title" >Talk is cheap.</h1>
-                            <h1 class=" bd text-white title" >Show me the code.</h1>
+                        <div class=" aniA  " >
+                            <h1 class=" bd title row" >Talk is cheap.</h1>
+                            <h1 class=" bd text-white title row" >Show me the code!</h1>
                         </div>
                     </div>
                     <a href="#" class="scroll-down" address="true"></a>
@@ -92,9 +143,9 @@
         <!--Right side-->
         <div id="east" class="column effect-hover">
             <div class="content">
-                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/unitTest'">
+                <i class="fa fa-keyboard-o" aria-hidden="true" onclick="location.href='/edit/JSAlgorithm'">
                 </i>
-                <h2>Go <span class="tip">Unit Test</span></h2>
+                <h2>Go <span class="tip">JS-Algorithm</span></h2>
             </div>
         </div>
         <div class="pointA col-6 " style="display: none ;margin-top: 15%;height:45%;">
@@ -128,7 +179,7 @@
     });
 </script>
 <div style="background-color:white">
-    <h1 class="bd title ">Board</h1>
+    <h1 class="bd title" style="margin-left:10%;z-index:5;">Board</h1>
 </div>
 <section class="c container-fluid removePadding">
     <div class="row removePadding">
@@ -208,7 +259,7 @@
             else $el.removeClass('shown');
 
         } else {
-            if($(this).scrollTop() >=1000) $el.addClass('shown');
+            if($(this).scrollTop() >=900) $el.addClass('shown');
             else $el.removeClass('shown');
         }
     });

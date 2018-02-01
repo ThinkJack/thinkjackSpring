@@ -222,9 +222,9 @@ public class UserServiceImpl implements UserService {
 	public List<SrcVO> selectSrcList(UserCriteria cri) throws Exception{
 
 		SrcFileSet srcFileSet = new SrcFileSet();
-		List list = dao.selectSrcList(cri);
+		List list = dao.selectSrcList(cri); //소스 리스트 가져오기
 
-		list = srcFileSet.setList(list);
+		list = srcFileSet.setList(list); //리스트에 각각 소스파일 가져오기
 
 		return list;
 	}

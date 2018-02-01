@@ -39,9 +39,9 @@
                         <div class="col-md-auto count_img_view_inner">
                             <span id="view-count"></span>
                             <i class="fa fa-eye" style="color: gray; font-size: 20px;"></i>
-                            <span id="reply-couont"></span>
+                            <span id="reply-count"></span>
                             <i class="fa fa-comments" style="color: gray; font-size: 20px;"></i>
-                            <span id="like-couont"></span>
+                            <span id="like-count"></span>
                             <i class="fa fa-heart-o" style="color: gray; font-size: 20px;" id="modalSrcLikeImg"></i>
                         </div>
                     </div>
@@ -63,6 +63,7 @@
                                 <img class="user_img" src="/resources/images/logo.png" id="reply-user-img">
                             </div>
                             <div class="col">
+                                <%--초기값 readonly--%>
                                 <textarea readonly id="textarea" class="form-control"></textarea>
                             </div>
                         </div>
@@ -75,21 +76,33 @@
                     <div class="row reply_list_view" id="list_view_all">
 
                     </div>
-                    <div class='text-center'>
-                        <ul id="pagination" class="pagination pagination-sm no-margin ">
+
+                    <%--<div  class='text-xs-center' style="text-align: center">--%>
+                        <%--<ul id="pagination" class="pagination pagination-sm no-margin " style="display:inline-flex">--%>
+
+                        <%--</ul>--%>
+                    <%--</div>--%>
+                    <%--<div  class='text-xs-center'>--%>
+                        <%--<ul id="pagination" class="pagination justify-content-center">--%>
+
+                        <%--</ul>--%>
+                    <%--</div>--%>
+                    <p></p>
+                    <div  class='text-center'>
+                        <ul id="pagination" class="pagination justify-content-center">
 
                         </ul>
                     </div>
 
-                    <%--<div class="row reply_list load_view" id="reply-more-list">--%>
-                    <%--<div class="load">--%>
-                    <%--<div class="line"></div>--%>
-                    <%--<div class="line"></div>--%>
-                    <%--<div class="line"></div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
+
 
                 </div>
+                <%--<div  class='text-center'>--%>
+                    <%--<ul id="pagination" class="pagination justify-content-center">--%>
+
+                    <%--</ul>--%>
+                <%--</div>--%>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>

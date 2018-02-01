@@ -106,7 +106,7 @@
                     <div class="dropdown-menu pointerA hn" aria-labelledby="Service" style="position: absolute; transform: translate3d(0px, 35%, 0px); top: 0px; left: 0px; will-change: transform;">
                         <a class="dropdown-item" href="/edit/editPage">Editor</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/edit/unitTest">UnitTest</a>
+                        <a class="dropdown-item" href="/edit/JSAlgorithm">JSAlgorithm</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown pointer2" >

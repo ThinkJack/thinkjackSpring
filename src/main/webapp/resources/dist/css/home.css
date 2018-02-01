@@ -5,35 +5,23 @@
 .bd{
     font-family: 'Baloo Da', cursive;
 }
-
 .hn{
     font-family: 'Hanna', serif;
 }
-
 .row{
     margin-right: 0px;
     margin-left: 0px;
 }
-
 .removePadding{
-    /*padding-left: 0;*/
-    /*padding-right: 0;*/
     padding:0;
-
 }
-
 /*body부분*/
 .deaf{
-    /*height: 180px;*/
-
     height: 80px;
 }
-
 .deaf2{
     height: 100px;
-
 }
-
 textarea{
     resize: none;
 }

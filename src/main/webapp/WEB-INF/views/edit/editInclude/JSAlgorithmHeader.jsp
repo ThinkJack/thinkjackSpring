@@ -17,7 +17,7 @@
 
                 <div class="page_title_view justify-content-start" id="page-title-view">
                     <a class="page_title text-dark">
-                        <span id="src-title">Unit Test</span>
+                        <span id="src-title">JS-Algorithm</span>
                     </a>
                     <i class="fa fa-flask" style="color: black"></i>
                 </div>

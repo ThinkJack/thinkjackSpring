@@ -1,115 +1,164 @@
-//코드미러 객체
 
-var codeHtml = CodeMirror(document.getElementById("codeHtml"), {
+var codeHtml = CodeMirror(document.getElementById("codeHtml"), {  //코드미러  codeHtml객체
 
-    mode: "htmlmixed",
-    profile: "xhtml",
-    lineNumbers: true,
+    mode: "htmlmixed", //codeHtml 펜에서 html.css,js 혼합모드 가능
+    // profile: "xhtml",
+    lineNumbers: true, // 줄번호
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},//단어강조
-    indentWithTabs: true,
-    electricChars: true,
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    styleActiveLine: true,
-    autoCloseTags: true,
-    lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    indentWithTabs: true, //탭크기 들여쓰기
+    electricChars: true,  //현재 줄을 다시 들여야하는지 여부(true기본)
+    // resetSelectionOnContextMenu: false, //컨텍스트 메뉴가 현재 선택 영역 바깥 쪽을 클릭하여 열릴 때 커서가 클릭 지점으로 이동하는지 여부(true기본)
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true, //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true, //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // styleActiveLine: true,
+    autoCloseTags: true, //자동 태그 닫기
+    lineWrapping: true,   // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
+    indentUnit: 1,   //들여스기 단위
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Ctrl-Alt-F": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"],
-    autofocus: true
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"], //거터옵션  줄번호, 중단점, 코드접기
+    autofocus: true //자동초점 사용
 });
 
 
-var codeCss = CodeMirror(document.getElementById("codeCss"), {
-    mode: "css",
-    lineNumbers: true,
+var codeCss = CodeMirror(document.getElementById("codeCss"), { //코드미러  codeCss 객체
+    mode: "css", //  css 모드
+    lineNumbers: true, //줄번호 사용
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 괄호강조
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}, // 같은단어강조
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    indentUnit: 1, //들여스기 단위
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    indentUnit: 2,
-    indentWithTabs: true,
-    electricChars: true,
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
-    styleActiveLine: true,
+    indentWithTabs: true, //탭인덴트 사용
+    electricChars: true, //현재 줄을 다시 들여야하는지 여부(true기본)
+    // resetSelectionOnContextMenu: false,  //컨텍스트 메뉴가 현재 선택 영역 바깥 쪽을 클릭하여 열릴 때 커서가 클릭 지점으로 이동하는지 여부(true기본)
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true,  //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true,  //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // tabindex: 4,  // 탭인덱스
+    // styleActiveLine: true,
 
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"] //거터옵션 줄번호, 중단점, 코드접기 이용함
 });
 
 
-var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), {
-    mode: "javascript",
-    lineNumbers: true,
+var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), { //코드미러  codeJavaScript 객체
+    mode: "javascript", // js펜 모드
+    lineNumbers: true, //줄 번호 사용
     scrollbarStyle: "simple",    // 스크롤바 스타일
     keyMap: "sublime",           // 키맵
     matchBrackets: true,         // 괄호강조
     theme: "dracula",            // 테마
-    tabSize: 4,                  // 탭키 간격
+    tabSize: 4,                  // 탭사이즈
     lineWrapping: true,          // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},   // 같은단어강조
     // extraKeys: { ".": "autocomplete" },
     // extraKeys: { "Ctrl-Space": "autocomplete" }, //힌트
-    indentUnit: 2,                //들여쓰기
     // indentWithTabs: false,
     electricChars: true,         //중괄호 정렬
-    resetSelectionOnContextMenu: false,
-    smartIndent: true,
-    lineWiseCopyCut: true,
-    pasteLinesPerSelection: true,
-    tabindex: 2,
-    styleActiveLine: true,
+    // resetSelectionOnContextMenu: false,
+    smartIndent: true, //스마트 들여쓰기
+    lineWiseCopyCut: true,  //커서기준 라인 전체 카피 또는 잘라내기
+    pasteLinesPerSelection: true,  //행 수가 선택 수와 일치하면 선택 항목 당 한 행을 삽입합니다
+    // tabindex: 4,
+    // styleActiveLine: true,
 
     wordWrap: true,
     autoCloseBrackets: true,
+
+    indentUnit: 1,                //들여쓰기 단위
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
-    extraKeys: {
-        "Ctrl-Space": "autocomplete",
-        "Ctrl-Q": function (cm) {
-            cm.foldCode(cm.getCursor());
+    extraKeys: { //외부(사용자)키 정의
+        "Ctrl-Space": "autocomplete",  //자동완성
+        "Ctrl-Q": function (cm) { //
+            cm.foldCode(cm.getCursor()); //폴더코드 접기
         },
-        "Shift-Tab": autoFormatSelection
+        "Ctrl-Alt-F": autoFormatSelection //자동 포메이션
     },
-    foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"]
+    foldGutter: true, //접히는 기능 사용여부
+    gutters: ["CodeMirror-linenumbers", "breakpoints", "CodeMirror-foldgutter"] //거터에서 줄번호, 중단점, 코드접기 이용함
 });
 
 
 // 아래 keyup 이벤트 발생시 제외할  키코드 아스키값
 var ExcludedIntelliSenseTriggerKeys =
     {
+        //num 자동완성에서 제외할 키코드와 키
+        "49": "1", //번호 1 제외
+        "50": "2",
+        "51": "3",
+        "52": "4",
+        "53": "5",
+        "54": "6",
+        "55": "7",
+        "56": "8",
+
+        //key-pad
+        "96": "0", //키패드 0 제외
+        "97": "1",
+        "98": "2",
+        "99": "3",
+        "100": "4",
+        "101": "5",
+        "102": "6",
+        "103": "7",
+        "104": "8",
+        "105": "9",
+
+
+        "21": "한/영", //한영키 제외
+        "65": "A", // 알파벳 A제외
+        "66": "B",
+        // "67": "C",
+        "68": "D",
+        "69": "E",
+        // "70": "F",
+        "71": "G",
+        // "72": "H",
+        "73": "I",
+        "74": "J",
+        "75": "K",
+        "76": "L",
+        "77": "M",
+        // "78": "N",
+        "79": "O",
+        // "80": "P",
+        "81": "Q",
+        "82": "R",
+        "83": "S",
+        "84": "T",
+        // "85": "U",
+        "87": "W",
+        "89": "Y",
+        "90": "Z",
         "8": "backspace",
         "9": "tab",
         "13": "enter",
         "16": "shift",
-        "17": "ctrl",
+        // "17": "ctrl",
         "18": "alt",
         "19": "pause",
         "20": "capslock",
@@ -162,61 +211,58 @@ var ExcludedIntelliSenseTriggerKeys =
         "221": "}",
         "222": "quote"
     };
-var delay;
-var srcReplyCnt;
 
-var saveStatus = true; //저장 유도관련 변수
+var delay; //setTimeout 함수 저장변수
+var saveStatus = true; //저장 유도 변수(코드 변경시 저장상태 변경)
 var saveImg = $("#save-img"); //save 이미지 변경 관련 변수
-var imgPath = "/resources/images/";
+var srcReplyCnt; //src 댓글 카운트
 //---------console관련 변수
-var editConsoleView = document.getElementById("edit-console-view");
-var editConsole = document.getElementById("edit-console");
-var commandLine = document.getElementById("command-line-view");
+var editConsoleView = document.getElementById("edit-console-view"); //실제 결과값이 찍히는 콘솔화면 div태그
+var editConsole = document.getElementById("edit-console");  //콘솔전체를 감싸는 div태그
+var commandLine = document.getElementById("command-line-view"); //명령어 작성하는 input태그
 
-var htmlBuild = document.getElementById("htmlBuild");
-var cssBuild = document.getElementById("cssBuild");
-var jsBuild = document.getElementById("jsBuild");
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus, userId, Heart;
+var strHtml, strCss, strJs; //코드미러 객체에서 string 값 받아올 변수
+var curhref = location.href; //현재 주소 받아오는 변수
+var saving = false; //저장중에 여러번 누르는 경우 막기 위한 변수
+
 var codeMLayout = document.getElementsByClassName("CodeMirror");
 
 var codeMain = document.getElementById("code-main");
-var resizeView = document.getElementById("resize-view");
-var iframeBody = document.getElementById("iframe-body");
-var layout1 = document.getElementById("layout1");
-var layout2 = document.getElementById("layout2");
-var resizeCode1 = document.getElementById("resize-code-1");
-var resizeCode2 = document.getElementById("resize-code-2");
 var codeMirrorLayout = document.getElementsByClassName("CodeMirror");
 var codeLayout = document.getElementsByClassName("code_layout");
-var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus;
+var srcId, srcWriter, srcComments, srcTitle, srcWriterName, srcRegdate, srcUpdate, viewCnt, likeCnt, srcStatus, srcReplyRegdate, srcReplyUpdate;
 var userId;
 var Heart;
 var strHtml, strCss, strJs;
 var curhref = location.href;
-var saving = false;
+
 //cdn관련 변수
-var cdnCssidx = 1;// 무조건 증가
-var cdnCssCnt = 0;
-var cdnJsidx = 1;// 무조건 증가
-var cdnJsCnt = 0;
+var cdnCssidx = 1;// csscdn id값 변경
+var cdnCssCnt = 0;//csscdn 갯수
+var cdnJsidx = 1;// jscdn id값 변경
+var cdnJsCnt = 0;//jscdn 갯수
 var cdnCss = new Array();
 var cdnJs = new Array();
+//cdn 문자열 임시저장변수
 var cssLnkSet = "";
 var jsLnkSet = "";
-var consoleSerchLog = [];
-var consoleCur = -1;
 
-var hcl = 0, cjl = 0, cifl = 0; //크기조절 변수
-var layoutMode = 0; //0 - top, 1 - left 2 - right
-var dragging = false;
-// var session = session.getAttribute("login");
-var likebt = $("#likebt");
+var consoleCategory = []; // 콘솔 함수 문자열 배열
+var consoleSearchLog = []; //검색한 로그들 저장해두는 배열
+var consoleCur = -1; //현재 검색한 로그 위치값 저장변수
 
+// var dragging = false;
+
+var likebt = $("#likebt"); //e좋아요 버튼
+
+var pageTitleView = document.getElementById("page-title-view"); //div
+var pageTitleText = document.getElementById("page-title-text"); //input
 
 //--------------------------------------------------------------------------------------------------------------------함수정의부분
 
-
 //cdn추가 삭제 관련 함수
-function cdnCssAdd(str) {
+function cdnCssAdd(str) { //cdn 추가시 화면에 찍어주는 함수
     $("#cdn-css").append("<div class=\"row\" id='cdn-add-css" + cdnCssidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
@@ -230,22 +276,12 @@ function cdnCssAdd(str) {
         "</div>\n" +
         "</div>" +
         "</div>");
-    ++cdnCssidx;
-    ++cdnCssCnt;
-    cdnChangeCss("cdn-css", cdnCssCnt);
+    ++cdnCssidx; //cdn id값
+    ++cdnCssCnt; //cdn 갯수 증가
+    cdnChangeCss("cdn-css", cdnCssCnt); //cdn 갯수에 따라 overflow변경 함수
 }
 
-function cdnCssDelete(idx) {
-    if (cdnCssCnt > 2) {
-        $("#cdn-add-css" + idx).remove();
-        --cdnCssCnt;
-        cdnChangeCss("cdn-css", cdnCssCnt);
-    } else {
-        $("#css-cdn" + idx).val("");
-    }
-}
-
-function cdnJsAdd(str) {
+function cdnJsAdd(str) { //cdn 추가시 화면에 찍어주는 함수
     $("#cdn-js").append("<div class=\"row\" id='cdn-add-Js" + cdnJsidx + "'>" +
         "<div class=\"col cdn_div\">\n" +
         "<div class=\"col\">\n" +
@@ -259,22 +295,32 @@ function cdnJsAdd(str) {
         "</div>\n" +
         "</div>" +
         "</div>");
-    ++cdnJsidx;
-    ++cdnJsCnt;
-    cdnChangeCss("cdn-js", cdnJsCnt);
+    ++cdnJsidx;//cdn id값
+    ++cdnJsCnt;//cdn 갯수 증가
+    cdnChangeCss("cdn-js", cdnJsCnt); //cdn 갯수에 따라 overflow변경 함수
 }
 
-function cdnJsDelete(idx) {
-    if (cdnJsCnt > 2) {
-        $("#cdn-add-Js" + idx).remove();
-        --cdnJsCnt;
-        cdnChangeCss("cdn-js", cdnJsCnt);
+function cdnCssDelete(idx) { //css cdn 삭제 함수
+    if (cdnCssCnt > 2) { //화면에 기본으로 보여지는 갯수(2개) 보다 많을 경우
+        $("#cdn-add-css" + idx).remove(); //해당 태그 삭제
+        --cdnCssCnt; //cdn 갯수 감소
+        cdnChangeCss("cdn-css", cdnCssCnt); //cdn 갯수에 따라 overflow변경 함수
     } else {
-        $("#js-cdn" + idx).val("");
+        $("#css-cdn" + idx).val(""); //문자열 값만 비우기
     }
 }
 
-function cdnChangeCss(id, idx) {
+function cdnJsDelete(idx) { //js cdn 삭제 함수
+    if (cdnJsCnt > 2) { //화면에 기본으로 보여지는 갯수(2개) 보다 많을 경우
+        $("#cdn-add-Js" + idx).remove(); //해당 태그 삭제
+        --cdnJsCnt; //cdn 갯수 감소
+        cdnChangeCss("cdn-js", cdnJsCnt); //cdn 갯수에 따라 overflow변경 함수
+    } else {
+        $("#js-cdn" + idx).val(""); //문자열 값만 비우기
+    }
+}
+
+function cdnChangeCss(id, idx) { //cdn 갯수에 따라 overflow변경 함수
     if (idx > 4) {
         $("#" + id).css("overflow-y", "scroll");
     } else {
@@ -282,9 +328,9 @@ function cdnChangeCss(id, idx) {
     }
 }
 
-function cdnCssJsViewSet(arr, kind) {
-    var arrlen = arr.length < 2 ? 2 : arr.length;
-    if (kind === "css") {
+function cdnCssJsViewSet(arr, kind) { // Setting모달에 cdn 소스를 찍어주는 함수
+    var arrlen = arr.length < 2 ? 2 : arr.length; //2개 이상일 경우 배열 갯수로
+    if (kind === "css") { //css일때
         for (var i = 1; i <= arrlen; i++) {
             if (arr[i - 1]) {
                 cdnCssAdd(arr[i - 1]);
@@ -292,7 +338,7 @@ function cdnCssJsViewSet(arr, kind) {
                 cdnCssAdd("");
             }
         }
-    } else {
+    } else { //js일때
         for (var i = 1; i <= arrlen; i++) {
             if (arr[i - 1]) {
                 cdnJsAdd(arr[i - 1]);
@@ -303,12 +349,12 @@ function cdnCssJsViewSet(arr, kind) {
     }
 }
 
-function cdnCssJsValSet() {
+function cdnCssJsValSet() {//iframe에 넣을 cdn 문자열 값 작업
     cdnCss = new Array();
     cdnJs = new Array();
     cssLnkSet = "";
     jsLnkSet = "";
-
+    //cdn 갯수만큼 for문 돌리기
     for (var i = 1; i <= cdnCssCnt; i++) {
         if ($("#css-cdn" + i).length) {
             if ($("#css-cdn" + i).val()) {
@@ -329,81 +375,104 @@ function cdnCssJsValSet() {
     }
 }
 
-//break point
+//브레이크 포인트
 function makeMarker() {
     var marker = document.createElement("div");
     marker.style.color = "#822";
     marker.innerHTML = "●";
     return marker;
 }
+function codeChangeEvent(){ //코드변환 이벤트시 작용할 작업들
+    changeSaveImg(2); //저장 이미지 변경(저장유도)
+    clearTimeout(delay); //기존 setTimeout 초기화
 
-//------------------------------------------------------미리보기 기능
-function updatePreview() {
+    if ($('#autoPreview').is(':checked')) { //자동 미리보기 (3초 딜레이)
+        delay = setTimeout(updatePreview, 2000);
+    }
 
-    $("#resultView").remove();
+    if ($('#autoSave').is(':checked')) { // 자동 저장기능
+        // clearTimeout(delay);
+        if (srcId !== "") { //srcId가 없을 경우 저장 안함
+            delay = setTimeout(codeSave, 30000); // 3초 딜레이
+        }
+    }
+}
 
-    var imsi = document.createElement("iframe");
+var changeTitle = function (el) { //타이틀 찍어주는 함수 (이벤트 발생한 객체 받아옴)
+    changeSaveImg(2);
+    srcTitle = el.value;
+    document.getElementById("src-title").innerHTML = srcTitle;
+    if (el.id === "src-title-modal") {
+        document.getElementById("src-title-input").value = srcTitle;
+    } else {
+        document.getElementById("src-title-modal").value = srcTitle;
+    }
+    pageTitleView.style = "display: block;";
+    pageTitleText.style = "display: none;";
+}
+
+function updatePreview() { //작성된 코드 미리보기
+
+    $("#resultView").remove(); //iframe 삭제
+
+    var imsi = document.createElement("iframe"); //iframe 생성
     imsi.setAttribute("class", "col");
     imsi.setAttribute("id", "resultView");
     imsi.setAttribute("scrolling", "yes");
-    $("#iframe-body").html(imsi);
+    $("#iframe-body").html(imsi); //생성된 iframe 화면에 직접 대입
 
-    var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
-        return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-    });
+    // var val = codeHtml.getValue().replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function (a, b) {
+    //     return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
+    // });
 
-    var previewFrame = document.getElementById('resultView');
-    var out = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    var previewFrame = document.getElementById('resultView'); // iframe 객체
+    var out = previewFrame.contentDocument || previewFrame.contentWindow.document; //iframe document 객체 받기
 
     //초기화중
 
-    emojify.run(out);
-
-    var old = out.cloneNode(true);
-    var allold = old.getElementsByTagName("*");
-    if (allold === undefined) return;
-
-    var allnew = out.getElementsByTagName("*");
-    if (allnew === undefined) return;
-
-    for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
-        if (!allold[i].isEqualNode(allnew[i])) {
-            out.scrollTop = allnew[i].offsetTop;
-            return;
-        }
-    }
+    // emojify.run(out);
+    //
+    // var old = out.cloneNode(true);
+    // var allold = old.getElementsByTagName("*");
+    // if (allold === undefined) return;
+    //
+    // var allnew = out.getElementsByTagName("*");
+    // if (allnew === undefined) return;
+    //
+    // for (var i = 0, max = Math.min(allold.length, allnew.length); i < max; i++) {
+    //     if (!allold[i].isEqualNode(allnew[i])) {
+    //         out.scrollTop = allnew[i].offsetTop;
+    //         return;
+    //     }
+    // }
 
     // clearTimeout(hashto);
     // hashto = setTimeout(updateHash, 1000);
 
 
-    var cacheWhitelist = ['v2'];
+    // var cacheWhitelist = ['v2'];
 
-    caches.keys().then(function (keyList) {
-        return Promise.all(keyList.map(function (key) {
-            if (cacheWhitelist.indexOf(key) === -1) {
-                console.log(key);
-                return caches.delete(key);
-            }
-        }));
-    });
+    // caches.keys().then(function (keyList) {
+    //     return Promise.all(keyList.map(function (key) {
+    //         if (cacheWhitelist.indexOf(key) === -1) {
+    //             console.log(key);
+    //             return caches.delete(key);
+    //         }
+    //     }));
+    // });
 
 
-    var rlt = codeHtml.getOption("mode") === "gfm" ?
-        md.render(val) : codeHtml.getValue(); //markdown : html
-
-    out.open();
-    out.write(
+    out.open(); //out 객체 오픈
+    out.write(  // out 객체 코드작성
         cssLnkSet
         +
         "<script>" + consoleString + "</script>"
         +
         "<style>" + codeCss.getValue() + "</style>"
         +
-        rlt
+        codeHtml.getValue()
         +
         jsLnkSet
-
         +
         "<script>"
         // +
@@ -413,7 +482,7 @@ function updatePreview() {
 
     out.close();
 
-    consoleView("");
+    // consoleView("");
     // editConsoleView.scrollTop = editConsoleView.scrollHeight;
 }
 
@@ -449,23 +518,23 @@ function updatePreview() {
 // }(window.console));
 
 
-function getSelectedRange() {
+function getSelectedRange() {  //선택영역 autoFormatSelection
     return {from: codeHtml.getCursor(true), to: codeHtml.getCursor(false)};
 }
 
-function getSelectedRange1() {
+function getSelectedRange1() { //autoFormatSelection
     return {from: codeCss.getCursor(true), to: codeCss.getCursor(false)};
 }
 
-function getSelectedRange2() {
+function getSelectedRange2() { //autoFormatSelection
     return {from: codeJavaScript.getCursor(true), to: codeJavaScript.getCursor(false)};
 }
 
 // function getSelectedRange3() {
-//     return {from: codeUnitTest.getCursor(true), to: codeUnitTest.getCursor(false)};
+//     return {from: codeJSAlgorithm.getCursor(true), to: codeJSAlgorithm.getCursor(false)};
 // }
 
-//--shift+tab
+//--Ctrl-Alt-F
 function autoFormatSelection() {
     var range = getSelectedRange();
     codeHtml.autoFormatRange(range.from, range.to);
@@ -474,7 +543,7 @@ function autoFormatSelection() {
     var range2 = getSelectedRange2();
     codeJavaScript.autoFormatRange(range2.from, range2.to);
     // var range3 = getSelectedRange3();
-    // codeUnitTest.autoFormatRange(range3.from, range3.to);
+    // codeJSAlgorithm.autoFormatRange(range3.from, range3.to);
 }
 
 //--ctrl+/
@@ -485,8 +554,7 @@ function autoFormatSelection() {
 // codeJavaScript.autoFormatRange(range.from, range.to);
 // }
 
-// 문자치환
-function escapeHtml(text) {
+function escapeHtml(text) {// 문자치환
     return text
         .replace(/&lt;/gi, "<")
         .replace(/&gt;/gi, ">")
@@ -500,8 +568,8 @@ function escapeHtml(text) {
         .replace(/&#039;/gi, "'");
 }
 
-//코드 저장 로직
-function codeSave() {
+
+function codeSave() {//코드 저장 로직
 
     if(!saving) {
         if (!saveStatus) {
@@ -536,7 +604,7 @@ function codeSave() {
                     }
 
                     if (srcId === "" || (srcWriter === "0" && userId !== "")) {
-                        location.replace("/edit/editPage/" + getLink);
+                        location.replace("/edit/editPage/" + getLink); // 반환된 링크로 화면 갱신
                     }
                     changeSaveImg(1); //저장 이미지 변경
                     saving = false;
@@ -550,7 +618,7 @@ function codeSave() {
     }
 }
 
-function srcDelete() {
+function srcDelete() { //소스코드 삭제
     $.ajax({
         type: "post",
         url: "/edit/delete",
@@ -565,23 +633,24 @@ function srcDelete() {
         }),
         success: function (result) {
             alert("삭제되었습니다.");
-            location.replace("/");
+            location.replace("/"); //메인 화면으로 이동
         }
     });
 }
 
-var consoleCategory = [];
+
+
 var consoleView = function (str) {
     //console.log() 입력시 문자열 작업(정규식)
-    var previewFrame = document.getElementById('resultView');
+    var previewFrame = document.getElementById('resultView'); //iframe 객체
 
     var temp = consoleLogStr(str);
 
     if (str !== "") {
         try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-
-            consoleLogView(temp, consoleCategory);
+a
+            consoleLogView(temp, consoleCategory); //콘솔 로그관련
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
                 + previewFrame.contentWindow.eval(str) + "</p>";
         } catch (err) {
@@ -593,10 +662,7 @@ var consoleView = function (str) {
 };
 
 function consoleLogView(temp, consoleCategory) {
-
-
     if (temp !== null) {
-
         for (i in temp) {
             var color = "";
             if (consoleCategory[i] === "log") {
@@ -614,8 +680,8 @@ function consoleLogView(temp, consoleCategory) {
 }
 
 //
-function consoleLogStr(str) {
-    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g;
+function consoleLogStr(str) { //콘솔 요청함수 문자열로 자르기
+    var reg = /console\.(log|info|warn|error)\(\"([\w|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*)\"\)|console\.(log|info|warn|error)\(\'([ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]*)\'\)/g; //정규식
     var temp = str.match(reg);
     var category = ["log", "info", "warn", "error"];
     for (i in temp) {
@@ -635,7 +701,7 @@ function consoleLogStr(str) {
     return temp;
 }
 
-
+//콘솔객체 재정의 (커스텀 콘솔에 값 같이 찍기 위해서 정의함)  iframe 내부에서 사용
 var consoleString = "var console=(function(oldCons){\n" +
     "        return {\n" +
     "            log: function(text){\n" +
@@ -657,7 +723,7 @@ var consoleString = "var console=(function(oldCons){\n" +
     "        };\n" +
     "    }(parent.document.getElementById('resultView').contentWindow.console));\n";
 
-$(function () {
+$(function () { //콘솔객체 재정의 (커스텀 콘솔에 값 같이 찍기 위해서 정의함)
     var console = (function (oldCons) {
         return {
             log: function (text) {
@@ -688,11 +754,11 @@ $(function () {
 
 //저장 이미지 변경
 function changeSaveImg(idx) {
-    if (saveImg !== null) {
-        if (idx === 2) {
+    if (saveImg !== null) { //저장버튼 활성화 됐을때
+        if (idx === 2) {  //저장유도
             saveImg.css("color", "#00c4ff");
             saveStatus = false;
-        } else {
+        } else { //저장유도 X
             saveImg.css("color", "gray");
             saveStatus = true;
         }
@@ -793,13 +859,13 @@ document.addEventListener('drop', function (e) {
 }, false);
 
 
-function saveAsMarkdown() {
-    save(codeHtml.getValue(), "untitled.md");
-}
+// function saveAsMarkdown() {
+//     save(codeHtml.getValue(), "untitled.md");
+// }
 
-function saveAsHtml() {
-    save(document.getElementById('resultView').innerHTML, "untitled.html");
-}
+// function saveAsHtml() {
+//     save(document.getElementById('resultView').innerHTML, "untitled.html");
+// }
 
 // document.getElementById('saveas-markdown').addEventListener('click', function () {
 //     saveAsMarkdown();
@@ -811,36 +877,36 @@ function saveAsHtml() {
 //     hideMenu();
 // });
 
-function save(code, name) {
-    var blob = new Blob([code], {type: 'text/plain'});
-    if (window.saveAs) {
-        window.saveAs(blob, name);
-    } else if (navigator.saveBlob) {
-        navigator.saveBlob(blob, name);
-    } else {
-        url = URL.createObjectURL(blob);
-        var link = document.createElement("a");
-        link.setAttribute("href", url);
-        link.setAttribute("download", name);
-        var event = document.createEvent('MouseEvents');
-        event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-        link.dispatchEvent(event);
-    }
-}
+// function save(code, name) {
+//     var blob = new Blob([code], {type: 'text/plain'});
+//     if (window.saveAs) {
+//         window.saveAs(blob, name);
+//     } else if (navigator.saveBlob) {
+//         navigator.saveBlob(blob, name);
+//     } else {
+//         url = URL.createObjectURL(blob);
+//         var link = document.createElement("a");
+//         link.setAttribute("href", url);
+//         link.setAttribute("download", name);
+//         var event = document.createEvent('MouseEvents');
+//         event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+//         link.dispatchEvent(event);
+//     }
+// }
 
 
-var menuVisible = false;
-var menu = document.getElementById('menu');
-
-function showMenu() {
-    menuVisible = true;
-    menu.style.display = 'block';
-}
-
-function hideMenu() {
-    menuVisible = false;
-    menu.style.display = 'none';
-}
+// var menuVisible = false;
+// var menu = document.getElementById('menu');
+//
+// function showMenu() {
+//     menuVisible = true;
+//     menu.style.display = 'block';
+// }
+//
+// function hideMenu() {
+//     menuVisible = false;
+//     menu.style.display = 'none';
+// }
 
 // document.getElementById('close-menu').addEventListener('click', function () {
 //     hideMenu();
@@ -1245,10 +1311,19 @@ var changeDate = function (date) {
     date = new Date(parseInt(date));
     year = date.getFullYear();
     month = date.getMonth() + 1;
+    if (month < 10) {
+        month = '0'+month;
+    }
+
     day = date.getDate();
+    if (day < 10) {
+        day = '0'+day;
+    }
+
     hour = date.getHours();
     minute = date.getMinutes();
     second = date.getSeconds();
     strDate = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     return strDate;
 };
+

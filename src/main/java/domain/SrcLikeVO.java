@@ -5,6 +5,12 @@ public class SrcLikeVO {
     private String srcId;
     private int userId;
 
+    public SrcLikeVO(){}
+
+    public SrcLikeVO(String srcId) {
+        this.srcId = srcId;
+    }
+
     public int getSrcLikeId() {
         return srcLikeId;
     }
