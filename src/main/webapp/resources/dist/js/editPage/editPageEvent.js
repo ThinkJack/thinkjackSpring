@@ -788,7 +788,7 @@ $(function () {
 
 
         //수정
-        $("#list_view_all").on("click", "#reply-modify-button", function (e) { //동적생성된 선택자에게 위임처리
+        $("#list_view_all").on("click", "#reply-modify-button", function (e) { //동적생성된  선택자 #reply-modify-button에게 위임처리
             var reply = $(this);  // #reply-modify-button의 현재값 저장
             var rno; //리플게시글 번호(Reply_id)
             rno = reply.attr("data-rno");  // data-rno 속성 값 저장
@@ -916,11 +916,3 @@ $(function () {
     });
 });
 
-
-// $(function () {
-//     // $("#codeHtml").attr('style', 'font-family: Consolas, monospace'  font-size: 16px;')
-//     // font-size: 16px;)
-//     $('#codeHtml').css("font-family", "Consolas");
-//     $('#codeHtml').css("font-size", "16");
-//
-// });

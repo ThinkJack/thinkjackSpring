@@ -85,7 +85,7 @@
 <script src="codemirror/mode/javascript/javascript.js"></script>
 <script src="codemirror/mode/css/css.js"></script>
 <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-<script src="codemirror/addon/edit/continuelist.js"></script>
+<%--<script src="codemirror/addon/edit/continuelist.js"></script>--%>
 <script src="/resources/codemirror/gfm/rawinflate.js"></script>
 <script src="/resources/codemirror/gfm/rawdeflate.js"></script>
 <link rel="stylesheet" href="codemirror/theme/base16-light.css">

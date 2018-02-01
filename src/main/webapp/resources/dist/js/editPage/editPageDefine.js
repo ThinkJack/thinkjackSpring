@@ -133,7 +133,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "65": "A", // 알파벳 A제외
         "66": "B",
         // "67": "C",
-        "68": "D",
+        // "68": "D",
         "69": "E",
         // "70": "F",
         "71": "G",
