@@ -13,9 +13,6 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #FF9D00">
                 <h3 class="modal-title bd text-white" >Shoutcuts!!</h3>
-                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-                    <%--<span aria-hidden="true">&times;</span>--%>
-                <%--</button>--%>
             </div>
             <div class="modal-body ">
                 <div class="row">

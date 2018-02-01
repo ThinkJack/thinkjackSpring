@@ -77,16 +77,6 @@
 
                     </div>
 
-                    <%--<div  class='text-xs-center' style="text-align: center">--%>
-                        <%--<ul id="pagination" class="pagination pagination-sm no-margin " style="display:inline-flex">--%>
-
-                        <%--</ul>--%>
-                    <%--</div>--%>
-                    <%--<div  class='text-xs-center'>--%>
-                        <%--<ul id="pagination" class="pagination justify-content-center">--%>
-
-                        <%--</ul>--%>
-                    <%--</div>--%>
                     <p></p>
                     <div  class='text-center'>
                         <ul id="pagination" class="pagination justify-content-center">
@@ -97,11 +87,6 @@
 
 
                 </div>
-                <%--<div  class='text-center'>--%>
-                    <%--<ul id="pagination" class="pagination justify-content-center">--%>
-
-                    <%--</ul>--%>
-                <%--</div>--%>
 
             </div>
             <div class="modal-footer">
