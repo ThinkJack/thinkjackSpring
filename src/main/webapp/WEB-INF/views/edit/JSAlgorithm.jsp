@@ -191,7 +191,7 @@
             "<input type='text' class='form-control input_box output mx-1' />" +
             "<span  class='input-group-addon mx-1' style='line-height: 1.5'> ]</span>" +
             "<button class='btn btn-outline-info test_one mx-1'>TEST</button>" +
-            "<button class='btn btn-outline-danger delete_case'>DELETE</button>" +
+            "<button class='btn btn-outline-danger delete_case mx-1'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
         $("#case").width(420 + (functionLength * 90)); // testcase 의 길이를 조정해서 한 라인에 모두들어가게 만들어준다.
