@@ -253,7 +253,7 @@ p.err {
 
 .CodeMirror-line span, .cm-matchhighlight, .CodeMirror-linenumber {
     font-family: "Consolas", monospace;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .main_view .iframe_body {
