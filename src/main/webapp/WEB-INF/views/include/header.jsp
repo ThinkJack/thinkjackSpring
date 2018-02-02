@@ -130,9 +130,9 @@
                     <li class="nav-item">
                         <button  class="btn btn-outline-primary hn " onclick="location.href='/user/login'" style="font-size: 20px ;height:50px;">로그인</button>
                     </li>
-                    <li class="nav-item">
-                        <a  class="nav-link"><img class="rounded-circle Photo" src="/resources/images/123.gif"></a>
-                    </li>
+                    <%--<li class="nav-item">--%>
+                        <%--<a  class="nav-link"><img class="rounded-circle Photo" src="/resources/images/123.png"></a>--%>
+                    <%--</li>--%>
                     <%--</ul>--%>
                 </c:if>
                 <%--로그인 상태--%>

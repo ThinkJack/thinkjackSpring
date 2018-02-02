@@ -276,5 +276,14 @@
         });
     });
 </script>
+<script>
+    var msg=Boolean("${msg}");
+    if(msg){
+        alert("${msg}");
+    }
+    $(document).ready(function() {
+        $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
+    });
+</script>
 </body>
 </html>
