@@ -194,7 +194,7 @@
             "<button class='btn btn-outline-danger delete_case mx-1'>DELETE</button>" +
             "</div>";
         $("#test-case").append(testCases);
-        $("#case").width(400 +(functionLength * 90)); // testcase 의 길이를 조정해서 한 라인에 모두들어가게 만들어준다.
+        $("#case").width(420 + (functionLength * 90)); // testcase 의 길이를 조정해서 한 라인에 모두들어가게 만들어준다.
         $("#case").prop("id","case"+caseNum); // 헷깔리지 않게 id를 구분해준다.
     });
     function codeTest(input, output) {
@@ -274,6 +274,15 @@
         $("#resultView").bind('DOMNodeInserted', function () {
             $(this).scrollTop($(document).height());
         });
+    });
+</script>
+<script>
+    var msg=Boolean("${msg}");
+    if(msg){
+        alert("${msg}");
+    }
+    $(document).ready(function() {
+        $("#profileHeader").attr("src",getFileInfo("${login.userProfile}"));
     });
 </script>
 </body>

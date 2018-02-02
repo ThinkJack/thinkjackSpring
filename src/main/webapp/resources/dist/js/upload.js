@@ -11,10 +11,10 @@ function getFileInfo(fullName) {
         if (checkImageType(fullName)) {
             imgsrc = imgsrc + "/displayFile?fileName=" + fullName;
         } else {
-            imgsrc ="/resources/images/123.gif";
+            imgsrc ="/resources/images/123.png";
         }
     }catch (Exception){
-        imgsrc = "/resources/images/123.gif";
+        imgsrc = "/resources/images/123.png";
     }
     return imgsrc;
 

@@ -640,6 +640,7 @@ function srcDelete() { //소스코드 삭제
 
 
 
+
 var consoleView = function (str) {
     //console.log() 입력시 문자열 작업(정규식)
     var previewFrame = document.getElementById('resultView'); //iframe 객체
@@ -649,7 +650,7 @@ var consoleView = function (str) {
     if (str !== "") {
         try {
             editConsoleView.innerHTML += "<p class='console-log'> &nbsp;> " + str + "</p>";
-a
+
             consoleLogView(temp, consoleCategory); //콘솔 로그관련
             editConsoleView.innerHTML += "<p class='console-log' style='color:darkorange;'> &nbsp;<· "
                 + previewFrame.contentWindow.eval(str) + "</p>";
