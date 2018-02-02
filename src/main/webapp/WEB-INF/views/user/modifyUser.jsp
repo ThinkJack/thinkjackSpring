@@ -283,7 +283,7 @@
             console.log(imgtest);
             str = "<div>" + "<img id='profileimg' class='img-responsive' src='" + imgtest + "'/>" + "</div>";
         } else {
-            str = "<div>" + "<img id='profileimg' class='img-responsive ' src='/resources/images/123.gif'/>" + "</div>";
+            str = "<div>" + "<img id='profileimg' class='img-responsive ' src='/resources/images/123.png'/>" + "</div>";
         }
         $(".uploadedList").append(str);
     });
@@ -466,7 +466,7 @@
     $('#filecancle').click(function() {   //취소버튼눌렀을때 파일업로드칸 선택한거 비우기
         $('#userProfile').val('basic');
         // 파일컴포넌트에 변경 이벤트 바인딩
-        str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.gif'/>" + "</div>";
+        str = "<div>" + "<img id='profileimg' class='img-responsive' src='/resources/images/123.png'/>" + "</div>";
         $(".uploadedList").empty();
         $(".uploadedList").append(str);
         // $("#imgInp").change(function(){
