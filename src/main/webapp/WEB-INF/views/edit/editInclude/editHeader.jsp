@@ -123,7 +123,7 @@
                             <a class=" hn ">${login.userName}</a>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item hn" href="/user/myinfo">회원정보 수정</a>
+                        <a class="dropdown-item hn" href="/user/myinfo">마이페이지</a>
                         <a class="dropdown-item hn" href='/user/logout'>로그아웃</a>
                     </div>
                 </li>
