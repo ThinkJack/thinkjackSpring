@@ -356,7 +356,6 @@ p.err {
 .CodeMirror {
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
-    height: calc(100% - 753px);
 }
 
 /* 같은단어강조 */
