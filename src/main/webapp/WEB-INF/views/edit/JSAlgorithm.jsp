@@ -122,6 +122,7 @@
 
 
 <script>
+
     var frame = document.getElementById("frameJSAlgorithm");
     var out = frame.contentDocument || frame.contentWindow.document;
     var functions;
@@ -136,14 +137,9 @@
         if ($("#autoremove").prop("checked")) // 테스트 케이스 자동삭제가 켜져있는지 확인
             $("#test-case").empty(); // 켜져있으면 비워줌
         try {
-
-             delay = setTimeout(Preview, 3000); //3초지연 미리보기
-
-             function Preview(){
                 out.open(); // out 객체를연다.
                 out.write("<script>" + javascriptCode + "<\/script>"); // out 객체에 javascript의 값을 주입한다.
                 out.close(); // out 객체를 닫는다.
-             }
 
         } catch (err) {
             $("#resultView").append(err); // 에러를 reultView 찍어줌
