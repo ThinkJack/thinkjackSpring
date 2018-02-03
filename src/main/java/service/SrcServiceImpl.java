@@ -10,10 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -34,6 +31,7 @@ public class SrcServiceImpl implements SrcService {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
         SrcVO vo = new SrcVO();
+        String imsiStr = "";
 
         SrcLikeVO srcLikeVo = new SrcLikeVO();
         int like = 0;
@@ -90,6 +88,13 @@ public class SrcServiceImpl implements SrcService {
             if (vo.getSrcWriter() != 0) {
                 vo.setSrcWriterImgPath(userdao.getUserProfile(vo.getSrcWriter()));
             }
+
+            BufferedReader reader = new BufferedReader(new StringReader(vo.getSrcComments()));
+            String read = "";
+            while((read = reader.readLine()) != null){
+                imsiStr += read + "\\n";
+            }
+            vo.setSrcComments(imsiStr);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -227,5 +232,4 @@ public class SrcServiceImpl implements SrcService {
     public int srcListSearchCount(SearchCriteria cri) throws Exception {
         return srcdao.srcListSearchCount(cri); //검색한 소스 데이터 전체 갯수
     }
-
 }
