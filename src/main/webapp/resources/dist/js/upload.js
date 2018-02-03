@@ -41,7 +41,7 @@ function filePathChange(path, thumbnail) {
         // console.log(headerimg);
         hstr = headerimg;
     }else{
-        hstr = "/resources/images/like1.png";
+        hstr = "/resources/images/123.png";
     }
     return hstr;
 }
