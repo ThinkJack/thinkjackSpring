@@ -19,7 +19,7 @@ var codeHtml = CodeMirror(document.getElementById("codeHtml"), {  //코드미러
     // styleActiveLine: true,
     autoCloseTags: true, //자동 태그 닫기
     lineWrapping: true,   // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
-    indentUnit: 1,   //들여스기 단위
+    indentUnit: 4,   //들여스기 단위
     extraKeys: { //외부(사용자)키 정의
         "Ctrl-Space": "autocomplete",  //자동완성
         "Ctrl-Q": function (cm) { //
@@ -43,7 +43,7 @@ var codeCss = CodeMirror(document.getElementById("codeCss"), { //코드미러  c
     tabSize: 4,                  // 탭사이즈
     lineWrapping: true,           // 가로 스크롤바 숨김, 너비에 맞게 줄바꿈.
     highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true}, // 같은단어강조
-    indentUnit: 1, //들여스기 단위
+    indentUnit: 4, //들여스기 단위
     extraKeys: { //외부(사용자)키 정의
         "Ctrl-Space": "autocomplete",  //자동완성
         "Ctrl-Q": function (cm) { //
@@ -89,7 +89,7 @@ var codeJavaScript = CodeMirror(document.getElementById("codeJavaScript"), { //�
     wordWrap: true,
     autoCloseBrackets: true,
 
-    indentUnit: 1,                //들여쓰기 단위
+    indentUnit: 4,                //들여쓰기 단위
     // gutters: ["CodeMirror-linenumbers", "breakpoints"],
     extraKeys: { //외부(사용자)키 정의
         "Ctrl-Space": "autocomplete",  //자동완성
@@ -133,7 +133,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "65": "A", // 알파벳 A제외
         "66": "B",
         // "67": "C",
-        "68": "D",
+        // "68": "D",
         "69": "E",
         // "70": "F",
         "71": "G",
@@ -158,7 +158,7 @@ var ExcludedIntelliSenseTriggerKeys =
         "9": "tab",
         "13": "enter",
         "16": "shift",
-        // "17": "ctrl",
+        "17": "ctrl",
         "18": "alt",
         "19": "pause",
         "20": "capslock",
@@ -1064,7 +1064,11 @@ function getPage(pageInfo) {
 
         // alert(111);
         srcReplyCnt = data.pageMaker.totalCount;
-        $("#reply-couont").html(srcReplyCnt);
+        if (srcReplyCnt !== null ) {
+             $("#reply-count").html(srcReplyCnt);}
+        else {
+             srcReplyCnt = 0;
+        }
 
 
     });

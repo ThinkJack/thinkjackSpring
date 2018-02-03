@@ -195,7 +195,7 @@
                     </div>
                     <div class="comment col-10 p-3" style="overflow:auto; width:100%; height:150px;">
                             <%--입력된 댓글 text부분--%>
-                            <%--<input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>--%>
+                            <input class="replyText form-control" readonly value="{{replyVO.replyText}}" style="display: none"></input>
                         <textarea id="reply{{replyVO.replyId}}" class="form-control d-none" style="height: 100%;">{{replyVO.replyText}}</textarea>
                         <spna class="textSpan form-control" >{{replyVO.replyText}}</spna>
                     </div>
