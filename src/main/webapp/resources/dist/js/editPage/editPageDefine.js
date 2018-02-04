@@ -998,7 +998,7 @@ function getPageList(pageInfo) {
                 // alert(userId);
                 output += "<div class=\"row reply_list\" id=\"reply-list-view\" data-rno= " + result.list[i].reply_id + ">";
                 output += "<div class=\"col-2 no_padding\">";
-                output += "<img class=\"user_img\" src=\"" + filePathChange(result.list[i].userProfile) + "\" id=\"reply-list-user-img\">";
+                output += "<img class=\"user_img\" src=\"" + getFileInfo(result.list[i].userProfile) + "\" id=\"reply-list-user-img\">";
                 output += "</div>";
                 output += "<div class=\"col\">";
                 output += "<div style=\"display: block;\" class=\"row reply_user_data_view\" id=\"reply-user-id\">";
